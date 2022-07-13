@@ -17,7 +17,7 @@ struct BottomLinePlaceholder: View {
         ZStack(alignment: .leading) {
             if text.isEmpty {
                 placeholder
-                    .foregroundColor(.GrayView)
+                    .foregroundColor(.Gray_ADB5BD)
                     .font(.system(size: 14))
             }
             
@@ -28,7 +28,7 @@ struct BottomLinePlaceholder: View {
                 Spacer()
                 Rectangle()
                     .frame(height: 1)
-                    .foregroundColor(.GrayView)
+                    .foregroundColor(text.isEmpty ? .Gray_ADB5BD : .NavyView)
             }
         )
     }

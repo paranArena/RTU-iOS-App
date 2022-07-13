@@ -11,6 +11,7 @@
 		152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */; };
 		152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */; };
 		152C3E87287E7750000BFC97 /* Certification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E86287E7750000BFC97 /* Certification.swift */; };
+		1586873A287EBB3F0003C2DC /* CertificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationViewModel.swift */; };
 		15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF133287D5DFF00B35570 /* Ren2UApp.swift */; };
 		15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF135287D5DFF00B35570 /* ContentView.swift */; };
 		15FAF138287D5E0000B35570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FAF137287D5E0000B35570 /* Assets.xcassets */; };
@@ -19,7 +20,7 @@
 		15FAF14F287D5E0000B35570 /* Ren2UUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF14E287D5E0000B35570 /* Ren2UUITests.swift */; };
 		15FAF151287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF150287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift */; };
 		15FAF15F287D5E1800B35570 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF15E287D5E1800B35570 /* Login.swift */; };
-		15FAF163287D5F0300B35570 /* CapsuleBorderPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF162287D5F0300B35570 /* CapsuleBorderPlaceholder.swift */; };
+		15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */; };
 		15FAF165287D5FFD00B35570 /* CapsuleBorderSecurePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF164287D5FFD00B35570 /* CapsuleBorderSecurePlaceholder.swift */; };
 		15FAF169287D607800B35570 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF168287D607800B35570 /* Extension.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLineTextField.swift; sourceTree = "<group>"; };
 		152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLinePlaceholder.swift; sourceTree = "<group>"; };
 		152C3E86287E7750000BFC97 /* Certification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certification.swift; sourceTree = "<group>"; };
+		15868739287EBB3F0003C2DC /* CertificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationViewModel.swift; sourceTree = "<group>"; };
 		15FAF130287D5DFF00B35570 /* Ren2U.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ren2U.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15FAF133287D5DFF00B35570 /* Ren2UApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UApp.swift; sourceTree = "<group>"; };
 		15FAF135287D5DFF00B35570 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,7 +59,7 @@
 		15FAF14E287D5E0000B35570 /* Ren2UUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UUITests.swift; sourceTree = "<group>"; };
 		15FAF150287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		15FAF15E287D5E1800B35570 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		15FAF162287D5F0300B35570 /* CapsuleBorderPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleBorderPlaceholder.swift; sourceTree = "<group>"; };
+		15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsulePlaceholder.swift; sourceTree = "<group>"; };
 		15FAF164287D5FFD00B35570 /* CapsuleBorderSecurePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleBorderSecurePlaceholder.swift; sourceTree = "<group>"; };
 		15FAF168287D607800B35570 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15868738287EBB270003C2DC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				15868739287EBB3F0003C2DC /* CertificationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		15FAF127287D5DFF00B35570 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +158,7 @@
 		15FAF15D287D5E0E00B35570 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				15868738287EBB270003C2DC /* ViewModel */,
 				15FAF15E287D5E1800B35570 /* Login.swift */,
 				152C3E80287E5E84000BFC97 /* SignUp.swift */,
 				152C3E86287E7750000BFC97 /* Certification.swift */,
@@ -170,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				15FAF164287D5FFD00B35570 /* CapsuleBorderSecurePlaceholder.swift */,
-				15FAF162287D5F0300B35570 /* CapsuleBorderPlaceholder.swift */,
+				15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -306,8 +317,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
-				15FAF163287D5F0300B35570 /* CapsuleBorderPlaceholder.swift in Sources */,
+				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
+				1586873A287EBB3F0003C2DC /* CertificationViewModel.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleBorderSecurePlaceholder.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,

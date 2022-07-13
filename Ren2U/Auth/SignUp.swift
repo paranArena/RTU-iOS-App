@@ -16,76 +16,105 @@ struct SignUp: View {
     
     let password: [String] = ["Password", "Password 확인"]
     let type: [String] = ["이름", "학과", "학번"]
+    
+    @State private var isConfirmed = [Bool](repeating: false, count: 7)
     @State private var passwordText: [String] = ["", ""]
+    @State private var isShowingPassword = [Bool](repeating: false, count: 2)
     @State private var typeText: [String] = ["", "", ""]
     @State private var phoneNumber: String = ""
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
-    
-            Text("아주대학교 이메일")
-                .font(.system(size: 12))
-
-            HStack {
-                BottomLineTextfield(placeholder: "", placeholderLocation: .none, text: $email)
-
-                Text("@ajou.ac.kr")
-                    .font(.system(size: 16))
-
-                Text("중복확인")
-                    .padding(5)
-                    .font(.system(size: 12))
-                    .overlay(Capsule().stroke(email.isEmpty ? Color.GrayView : Color.NavyView, lineWidth: 1))
-                    .foregroundColor(email.isEmpty ? .GrayView : .NavyView)
-                    .padding(.leading, 19)
-            }
-            
-            ForEach(password.indices) { index in
-                Text(password[index])
-                    .font(.system(size: 12))
-                BottomLineTextfield(placeholder: "보기", placeholderLocation: .trailing, text: $passwordText[index])
-            }
-            
-            ForEach(type.indices) { index in
-                Text(type[index])
-                    .font(.system(size: 12))
-                BottomLineTextfield(placeholder: "", placeholderLocation: .trailing, text: $typeText[index])
-            }
-            
-            Text("휴대폰 번호")
-                .font(.system(size: 12))
-            BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $phoneNumber)
-            
-            
-            HStack {
-                Spacer()
-                NavigationLink {
-                    Certification()
-                } label: {
-                    Image(systemName: "arrow.right.circle.fill")
-                        .resizable()
-                        .frame(width: 86, height: 86)
-                        .padding(.top, 49)
-                        .foregroundColor(isAllEntered() ? Color.NavyView : Color.GrayView)
-                }
-
-                Spacer()
-            }
-            
-            Spacer()
-        }
-        .navigationTitle("회원가입")
-        .padding(.horizontal, 28)
-    }
-    
-    func isAllEntered() -> Bool {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 15) {
         
-        return true
+                Text("아주대학교 이메일")
+                    .font(.system(size: 12))
+
+                HStack {
+                    BottomLineTextfield(placeholder: "", placeholderLocation: .none, isConfirmed: $isConfirmed[0], text: $email)
+
+                    Text("@ajou.ac.kr")
+                        .font(.system(size: 16))
+                    
+                    Button {
+                        isConfirmed[0].toggle()
+                    } label: {
+                        Text("중복확인")
+                            .padding(5)
+                            .font(.system(size: 12))
+                            .overlay(Capsule().stroke(email.isEmpty ? Color.Gray_ADB5BD : Color.NavyView, lineWidth: 1))
+                            .foregroundColor(email.isEmpty ? .Gray_ADB5BD : .NavyView)
+                            .padding(.leading, 19)
+                    }
+                }
+                
+                ForEach(password.indices) { index in
+                    Text(password[index])
+                        .font(.system(size: 12))
+                    
+                    Group {
+                        if isShowingPassword[index] {
+                            TextField("", text: $passwordText[index])
+                        } else {
+                            SecureField("", text: $passwordText[index])
+                        }
+                    }
+                    .font(.system(size: 16))
+                    .overlay(
+                        VStack {
+                            Spacer()
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(!passwordText[0].isEmpty && passwordText[0] == passwordText[1] ? .NavyView : .Gray_ADB5BD)
+                        }
+                    )
+                    .overlay(
+                        HStack {
+                            Spacer()
+                            Button {
+                                isShowingPassword[index].toggle()
+                            } label: {
+                                Text("보기").font(.system(size: 14)).foregroundColor(.Gray_ADB5BD)
+                            }
+                        }
+                    )
+                }
+                
+                ForEach(type.indices) { index in
+                    Text(type[index])
+                        .font(.system(size: 12))
+                    BottomLinePlaceholder(placeholder: Text(""), text: $typeText[index])
+                }
+                
+                Text("휴대폰 번호")
+                    .font(.system(size: 12))
+                BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $phoneNumber)
+                
+                
+                HStack {
+                    Spacer()
+                    NavigationLink {
+                        Certification()
+                    } label: {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .resizable()
+                            .frame(width: 86, height: 86)
+                            .padding(.top, 49)
+                    }
+
+                    Spacer()
+                }
+                
+                Spacer()
+            }
+            .navigationTitle("회원가입")
+        .padding(.horizontal, 28)
+        }
     }
 }
 
-struct SignUp_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUp()
-    }
-}
+//struct SignUp_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignUp()
+//    }
+//}

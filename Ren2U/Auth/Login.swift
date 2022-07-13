@@ -28,7 +28,7 @@ struct Auth: View {
                     Spacer()
                 }
                 
-                CapsuleBorderPlaceholder(text: $email, placeholder: Text("Email"))
+                CapsulePlaceholder(text: $email, placeholder: Text("Email"))
                     .padding(.top, 46)
                 CapsuleBorderSecurePlaceholder(text: $password, placeholder: Text("Password"))
                     .padding(.top, 19)
@@ -56,7 +56,7 @@ struct Auth: View {
                 HStack {
                     Text("비밀번호 찾기")
                         .font(.system(size: 16))
-                        .foregroundColor(Color.GrayText)
+                        .foregroundColor(Color.Gray_495057)
                     
                     Text("|")
                         .foregroundColor(Color.GrayDivider)
@@ -66,7 +66,7 @@ struct Auth: View {
                     } label: {
                         Text("회원 가입")
                             .font(.system(size: 16))
-                            .foregroundColor(Color.GrayText)
+                            .foregroundColor(Color.Gray_495057)
                     }
                 }
                 .padding(.top, 21)

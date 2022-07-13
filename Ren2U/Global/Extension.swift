@@ -22,8 +22,8 @@ extension Color {
        self.init(red: r, green: g, blue: b)
      }
     
-    static let GrayView = Color(hex: "ADB5BD")
-    static let GrayText = Color(hex: "495057")
+    static let Gray_ADB5BD = Color(hex: "ADB5BD")
+    static let Gray_495057 = Color(hex: "495057")
     static let GrayDivider = Color(hex: "E9ECEF")
     static let NavyView = Color(hex: "1E2F97")
     static let RedText = Color(hex: "EB1808")

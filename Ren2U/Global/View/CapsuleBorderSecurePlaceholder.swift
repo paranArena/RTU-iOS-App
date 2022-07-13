@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CapsuleBorderSecurePlaceholder: View {
+    
     @Binding var text: String
     let placeholder: Text
     
@@ -16,7 +17,7 @@ struct CapsuleBorderSecurePlaceholder: View {
             if text.isEmpty {
                 placeholder
                     .padding()
-                    .foregroundColor(.GrayView)
+                    .foregroundColor(.Gray_ADB5BD)
             }
             
             SecureField("", text: $text)
@@ -24,7 +25,7 @@ struct CapsuleBorderSecurePlaceholder: View {
         }
         .overlay(
             Capsule()
-                .stroke(Color.GrayView, lineWidth: 1)
+                .stroke(Color.Gray_ADB5BD, lineWidth: 1)
         )
     }
 }

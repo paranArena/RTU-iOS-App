@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CapsuleBorderPlaceholder: View {
+struct CapsulePlaceholder: View {
     
     
     @Binding var text: String
@@ -18,7 +18,7 @@ struct CapsuleBorderPlaceholder: View {
             if text.isEmpty {
                 placeholder
                     .padding()
-                    .foregroundColor(.GrayView)
+                    .foregroundColor(.Gray_ADB5BD)
             }
             
             TextField("", text: $text)
@@ -26,7 +26,7 @@ struct CapsuleBorderPlaceholder: View {
         }
         .overlay(
             Capsule()
-                .stroke(Color.GrayView, lineWidth: 1)
+                .stroke(Color.Gray_ADB5BD, lineWidth: 1)
         )
     }
 }
