@@ -41,6 +41,7 @@ struct Certification: View {
                 
                 Button {
                     viewModel.isWroungNum.toggle()
+                    viewModel.certificationNum = ""
                 } label: {
                     Image(systemName: "arrow.right.circle.fill")
                         .resizable()    .frame(width: 86, height: 86)
