@@ -28,7 +28,7 @@ struct BottomLinePlaceholder: View {
                 Spacer()
                 Rectangle()
                     .frame(height: 1)
-                    .foregroundColor(text.isEmpty ? .Gray_ADB5BD : .NavyView)
+                    .foregroundColor(text.isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
             }
         )
     }

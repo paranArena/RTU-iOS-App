@@ -16,44 +16,40 @@ struct Certification: View {
         ScrollView {
             VStack {
                 Text("이메일로\n인증번호가 발송되었습니다.")
-                    .multilineTextAlignment(.center)
-                    .font(.system(size: 20, weight: .medium))
+                    .multilineTextAlignment(.center) .font(.system(size: 20, weight: .medium))
                 
                 Text("4자리 숫자를 입력해주세요.")
-                    .foregroundColor(.Gray_ADB5BD)
-                    .padding(.top, 50)
+                    .foregroundColor(.Gray_495057) .padding(.top, 50)
                 
                 CapsulePlaceholder(text: $viewModel.certificationNum, placeholder: Text(""))
-                    .font(.system(size: 36))
-                    .multilineTextAlignment(.center)
-                    .overlay(TimerOverlay)
-                    .onReceive(viewModel.certificationNum.publisher.collect()) {
-                        let result = String($0.prefix(viewModel.certificationNumLengthLimit))
-                        if viewModel.certificationNum != result {
-                            viewModel.isReachedLengthLimit = true
-                            viewModel.certificationNum = result
-                        }
+                    .keyboardType(.numberPad)   .font(.system(size: 36))
+                    .multilineTextAlignment(.center)    .overlay(TimerOverlay)
+                    .onTapGesture { viewModel.certificationNum = "" }
+                    .onReceive(viewModel.certificationNum.publisher.collect()) { _ in
+                        viewModel.endEditing()
                     }
                 
-                Text(viewModel.isWrongInput ? "인증번호가 일치하지 않습니다." : " ")
+                Text(viewModel.isWroungNum ? "인증번호가 일치하지 않습니다." : " ")
                     .font(.system(size: 14))
-                    .foregroundColor(.RedText)
-                
-                
-                Text("인증번호 재발송")
-                    .padding(.top, 50)
+                    .foregroundColor(.Red_EB1808)
                 
                 Button {
-                    viewModel.isWrongInput.toggle()
+                    viewModel.resetTimer()
+                } label: {Text("인증번호 재발송")}
+                    .foregroundColor(.Gray_495057) .padding(.top, 50)
+                
+                Button {
+                    viewModel.isWroungNum.toggle()
                 } label: {
                     Image(systemName: "arrow.right.circle.fill")
-                        .resizable()
-                        .frame(width: 86, height: 86)
+                        .resizable()    .frame(width: 86, height: 86)
                         .padding(.top, 49)
                         .foregroundColor(viewModel.changeColor(num: viewModel.certificationNum)
-                                         ? .NavyView : .GrayDivider)
+                                         ? .Navy_1E2F97 : .Gray_E9ECEF)
                         .padding(.top, 50)
                 }
+                .disabled(!viewModel.changeColor(num: viewModel.certificationNum))
+                
             }
             .padding(.horizontal, 28)
         }
@@ -63,9 +59,8 @@ struct Certification: View {
         HStack {
             Spacer()
             Text("\(viewModel.timeString(time:viewModel.timeRemaining))")
-                .font(.system(size: 16))
-                .padding(.trailing, 10)
-                .foregroundColor(.RedText)
+                .font(.system(size: 16)) .padding(.trailing, 10)
+                .foregroundColor(.Red_EB1808)
                 .onReceive(timer) { _ in
                     if viewModel.timeRemaining > 0 {
                         viewModel.timeRemaining -= 1

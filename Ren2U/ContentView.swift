@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        Theme.navigationBarColors(tintColor: .label)
+    }
+    
     var body: some View {
-        Auth()
+        Login()
     }
 }
 

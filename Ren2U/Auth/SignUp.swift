@@ -42,8 +42,8 @@ struct SignUp: View {
                         Text("중복확인")
                             .padding(5)
                             .font(.system(size: 12))
-                            .overlay(Capsule().stroke(email.isEmpty ? Color.Gray_ADB5BD : Color.NavyView, lineWidth: 1))
-                            .foregroundColor(email.isEmpty ? .Gray_ADB5BD : .NavyView)
+                            .overlay(Capsule().stroke(email.isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
+                            .foregroundColor(email.isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
                             .padding(.leading, 19)
                     }
                 }
@@ -65,7 +65,7 @@ struct SignUp: View {
                             Spacer()
                             Rectangle()
                                 .frame(height: 1)
-                                .foregroundColor(!passwordText[0].isEmpty && passwordText[0] == passwordText[1] ? .NavyView : .Gray_ADB5BD)
+                                .foregroundColor(!passwordText[0].isEmpty && passwordText[0] == passwordText[1] ? .Navy_1E2F97 : .Gray_ADB5BD)
                         }
                     )
                     .overlay(
@@ -107,7 +107,6 @@ struct SignUp: View {
                 
                 Spacer()
             }
-            .navigationTitle("회원가입")
         .padding(.horizontal, 28)
         }
     }

@@ -24,7 +24,29 @@ extension Color {
     
     static let Gray_ADB5BD = Color(hex: "ADB5BD")
     static let Gray_495057 = Color(hex: "495057")
-    static let GrayDivider = Color(hex: "E9ECEF")
-    static let NavyView = Color(hex: "1E2F97")
-    static let RedText = Color(hex: "EB1808")
+    static let Gray_E9ECEF = Color(hex: "E9ECEF")
+    static let Navy_1E2F97 = Color(hex: "1E2F97")
+    static let Red_EB1808 = Color(hex: "EB1808")
+}
+
+extension UIApplication {
+    
+    func endEditing() {
+            sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    func hideKeyboard() {
+        guard let window = windows.first else { return }
+        let tapRecognizer = UITapGestureRecognizer(target: window, action: #selector(UIView.endEditing))
+        tapRecognizer.cancelsTouchesInView = false
+        tapRecognizer.delegate = self
+        window.addGestureRecognizer(tapRecognizer)
+    }
+}
+
+extension UIApplication: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                                  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
 }

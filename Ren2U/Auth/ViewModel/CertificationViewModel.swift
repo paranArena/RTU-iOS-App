@@ -11,10 +11,18 @@ class CertificationViewModel: ObservableObject {
     
     let certificationNumLengthLimit = 4
     
-    @Published var isReachedLengthLimit = false
     @Published var timeRemaining = 5*60
-    @Published var isWrongInput = false
+    @Published var isWroungNum = false
     @Published var certificationNum = ""
+    
+    
+    func resetTimer() {
+        self.timeRemaining = 5*60
+    }
+    
+    func endEditing() {
+        if self.certificationNum.count == self.certificationNumLengthLimit { UIApplication.shared.endEditing() }
+    }
     
     func changeColor(num: String) -> Bool {
         guard num.count == certificationNumLengthLimit else { return false }

@@ -29,7 +29,7 @@ struct BottomLineTextfield: View {
                     Spacer()
                     Rectangle()
                         .frame(height: 1)
-                        .foregroundColor(isConfirmed ? .NavyView : .Gray_ADB5BD)
+                        .foregroundColor(isConfirmed ? .Navy_1E2F97 : .Gray_ADB5BD)
                 }
             )
             .overlay(
