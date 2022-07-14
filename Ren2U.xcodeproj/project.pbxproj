@@ -1,0 +1,676 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E80287E5E84000BFC97 /* SignUp.swift */; };
+		152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */; };
+		152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */; };
+		152C3E87287E7750000BFC97 /* Certification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E86287E7750000BFC97 /* Certification.swift */; };
+		1586873A287EBB3F0003C2DC /* CertificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationViewModel.swift */; };
+		15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C580287FF15A008BB89B /* NavigationBarColor.swift */; };
+		15D4C583287FF7C0008BB89B /* SingUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C582287FF7C0008BB89B /* SingUpViewModel.swift */; };
+		15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C58428800AB4008BB89B /* PasswordTextField.swift */; };
+		15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF133287D5DFF00B35570 /* Ren2UApp.swift */; };
+		15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF135287D5DFF00B35570 /* ContentView.swift */; };
+		15FAF138287D5E0000B35570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FAF137287D5E0000B35570 /* Assets.xcassets */; };
+		15FAF13B287D5E0000B35570 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FAF13A287D5E0000B35570 /* Preview Assets.xcassets */; };
+		15FAF145287D5E0000B35570 /* Ren2UTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF144287D5E0000B35570 /* Ren2UTests.swift */; };
+		15FAF14F287D5E0000B35570 /* Ren2UUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF14E287D5E0000B35570 /* Ren2UUITests.swift */; };
+		15FAF151287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF150287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift */; };
+		15FAF15F287D5E1800B35570 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF15E287D5E1800B35570 /* Login.swift */; };
+		15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */; };
+		15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF164287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift */; };
+		15FAF169287D607800B35570 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF168287D607800B35570 /* Extension.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		15FAF141287D5E0000B35570 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15FAF128287D5DFF00B35570 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 15FAF12F287D5DFF00B35570;
+			remoteInfo = Ren2U;
+		};
+		15FAF14B287D5E0000B35570 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15FAF128287D5DFF00B35570 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 15FAF12F287D5DFF00B35570;
+			remoteInfo = Ren2U;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		152C3E80287E5E84000BFC97 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLineTextField.swift; sourceTree = "<group>"; };
+		152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLinePlaceholder.swift; sourceTree = "<group>"; };
+		152C3E86287E7750000BFC97 /* Certification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certification.swift; sourceTree = "<group>"; };
+		15868739287EBB3F0003C2DC /* CertificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationViewModel.swift; sourceTree = "<group>"; };
+		15D4C580287FF15A008BB89B /* NavigationBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColor.swift; sourceTree = "<group>"; };
+		15D4C582287FF7C0008BB89B /* SingUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewModel.swift; sourceTree = "<group>"; };
+		15D4C58428800AB4008BB89B /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		15FAF130287D5DFF00B35570 /* Ren2U.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ren2U.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15FAF133287D5DFF00B35570 /* Ren2UApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UApp.swift; sourceTree = "<group>"; };
+		15FAF135287D5DFF00B35570 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		15FAF137287D5E0000B35570 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		15FAF13A287D5E0000B35570 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		15FAF140287D5E0000B35570 /* Ren2UTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ren2UTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15FAF144287D5E0000B35570 /* Ren2UTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTests.swift; sourceTree = "<group>"; };
+		15FAF14A287D5E0000B35570 /* Ren2UUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ren2UUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15FAF14E287D5E0000B35570 /* Ren2UUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UUITests.swift; sourceTree = "<group>"; };
+		15FAF150287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		15FAF15E287D5E1800B35570 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsulePlaceholder.swift; sourceTree = "<group>"; };
+		15FAF164287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSecurePlaceholder.swift; sourceTree = "<group>"; };
+		15FAF168287D607800B35570 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		15FAF12D287D5DFF00B35570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15FAF13D287D5E0000B35570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15FAF147287D5E0000B35570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15868738287EBB270003C2DC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				15D4C582287FF7C0008BB89B /* SingUpViewModel.swift */,
+				15868739287EBB3F0003C2DC /* CertificationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		15D4C57F287FD4CF008BB89B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */,
+				152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */,
+				15D4C58428800AB4008BB89B /* PasswordTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		15FAF127287D5DFF00B35570 = {
+			isa = PBXGroup;
+			children = (
+				15FAF132287D5DFF00B35570 /* Ren2U */,
+				15FAF143287D5E0000B35570 /* Ren2UTests */,
+				15FAF14D287D5E0000B35570 /* Ren2UUITests */,
+				15FAF131287D5DFF00B35570 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		15FAF131287D5DFF00B35570 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15FAF130287D5DFF00B35570 /* Ren2U.app */,
+				15FAF140287D5E0000B35570 /* Ren2UTests.xctest */,
+				15FAF14A287D5E0000B35570 /* Ren2UUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15FAF132287D5DFF00B35570 /* Ren2U */ = {
+			isa = PBXGroup;
+			children = (
+				15FAF160287D5EC100B35570 /* Global */,
+				15FAF15D287D5E0E00B35570 /* Auth */,
+				15FAF133287D5DFF00B35570 /* Ren2UApp.swift */,
+				15FAF135287D5DFF00B35570 /* ContentView.swift */,
+				15FAF137287D5E0000B35570 /* Assets.xcassets */,
+				15FAF139287D5E0000B35570 /* Preview Content */,
+			);
+			path = Ren2U;
+			sourceTree = "<group>";
+		};
+		15FAF139287D5E0000B35570 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				15FAF13A287D5E0000B35570 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		15FAF143287D5E0000B35570 /* Ren2UTests */ = {
+			isa = PBXGroup;
+			children = (
+				15FAF144287D5E0000B35570 /* Ren2UTests.swift */,
+			);
+			path = Ren2UTests;
+			sourceTree = "<group>";
+		};
+		15FAF14D287D5E0000B35570 /* Ren2UUITests */ = {
+			isa = PBXGroup;
+			children = (
+				15FAF14E287D5E0000B35570 /* Ren2UUITests.swift */,
+				15FAF150287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift */,
+			);
+			path = Ren2UUITests;
+			sourceTree = "<group>";
+		};
+		15FAF15D287D5E0E00B35570 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				15D4C57F287FD4CF008BB89B /* View */,
+				15868738287EBB270003C2DC /* ViewModel */,
+				15FAF15E287D5E1800B35570 /* Login.swift */,
+				152C3E80287E5E84000BFC97 /* SignUp.swift */,
+				152C3E86287E7750000BFC97 /* Certification.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		15FAF160287D5EC100B35570 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				15FAF166287D606700B35570 /* View */,
+				15FAF168287D607800B35570 /* Extension.swift */,
+				15D4C580287FF15A008BB89B /* NavigationBarColor.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		15FAF166287D606700B35570 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				15FAF164287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift */,
+				15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		15FAF12F287D5DFF00B35570 /* Ren2U */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15FAF154287D5E0000B35570 /* Build configuration list for PBXNativeTarget "Ren2U" */;
+			buildPhases = (
+				15FAF12C287D5DFF00B35570 /* Sources */,
+				15FAF12D287D5DFF00B35570 /* Frameworks */,
+				15FAF12E287D5DFF00B35570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ren2U;
+			productName = Ren2U;
+			productReference = 15FAF130287D5DFF00B35570 /* Ren2U.app */;
+			productType = "com.apple.product-type.application";
+		};
+		15FAF13F287D5E0000B35570 /* Ren2UTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15FAF157287D5E0000B35570 /* Build configuration list for PBXNativeTarget "Ren2UTests" */;
+			buildPhases = (
+				15FAF13C287D5E0000B35570 /* Sources */,
+				15FAF13D287D5E0000B35570 /* Frameworks */,
+				15FAF13E287D5E0000B35570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15FAF142287D5E0000B35570 /* PBXTargetDependency */,
+			);
+			name = Ren2UTests;
+			productName = Ren2UTests;
+			productReference = 15FAF140287D5E0000B35570 /* Ren2UTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		15FAF149287D5E0000B35570 /* Ren2UUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15FAF15A287D5E0000B35570 /* Build configuration list for PBXNativeTarget "Ren2UUITests" */;
+			buildPhases = (
+				15FAF146287D5E0000B35570 /* Sources */,
+				15FAF147287D5E0000B35570 /* Frameworks */,
+				15FAF148287D5E0000B35570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15FAF14C287D5E0000B35570 /* PBXTargetDependency */,
+			);
+			name = Ren2UUITests;
+			productName = Ren2UUITests;
+			productReference = 15FAF14A287D5E0000B35570 /* Ren2UUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		15FAF128287D5DFF00B35570 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					15FAF12F287D5DFF00B35570 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					15FAF13F287D5E0000B35570 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 15FAF12F287D5DFF00B35570;
+					};
+					15FAF149287D5E0000B35570 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 15FAF12F287D5DFF00B35570;
+					};
+				};
+			};
+			buildConfigurationList = 15FAF12B287D5DFF00B35570 /* Build configuration list for PBXProject "Ren2U" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 15FAF127287D5DFF00B35570;
+			productRefGroup = 15FAF131287D5DFF00B35570 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				15FAF12F287D5DFF00B35570 /* Ren2U */,
+				15FAF13F287D5E0000B35570 /* Ren2UTests */,
+				15FAF149287D5E0000B35570 /* Ren2UUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		15FAF12E287D5DFF00B35570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15FAF13B287D5E0000B35570 /* Preview Assets.xcassets in Resources */,
+				15FAF138287D5E0000B35570 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15FAF13E287D5E0000B35570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15FAF148287D5E0000B35570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15FAF12C287D5DFF00B35570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
+				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
+				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
+				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
+				1586873A287EBB3F0003C2DC /* CertificationViewModel.swift in Sources */,
+				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
+				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
+				15FAF169287D607800B35570 /* Extension.swift in Sources */,
+				15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */,
+				15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */,
+				15FAF15F287D5E1800B35570 /* Login.swift in Sources */,
+				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
+				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
+				15D4C583287FF7C0008BB89B /* SingUpViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15FAF13C287D5E0000B35570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15FAF145287D5E0000B35570 /* Ren2UTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15FAF146287D5E0000B35570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15FAF14F287D5E0000B35570 /* Ren2UUITests.swift in Sources */,
+				15FAF151287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		15FAF142287D5E0000B35570 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 15FAF12F287D5DFF00B35570 /* Ren2U */;
+			targetProxy = 15FAF141287D5E0000B35570 /* PBXContainerItemProxy */;
+		};
+		15FAF14C287D5E0000B35570 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 15FAF12F287D5DFF00B35570 /* Ren2U */;
+			targetProxy = 15FAF14B287D5E0000B35570 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		15FAF152287D5E0000B35570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		15FAF153287D5E0000B35570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		15FAF155287D5E0000B35570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Ren2U/Preview Content\"";
+				DEVELOPMENT_TEAM = MAU8HFALP8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.page.Ren2U;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		15FAF156287D5E0000B35570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Ren2U/Preview Content\"";
+				DEVELOPMENT_TEAM = MAU8HFALP8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.page.Ren2U;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		15FAF158287D5E0000B35570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MAU8HFALP8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.page.Ren2UTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ren2U.app/Ren2U";
+			};
+			name = Debug;
+		};
+		15FAF159287D5E0000B35570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MAU8HFALP8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.page.Ren2UTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ren2U.app/Ren2U";
+			};
+			name = Release;
+		};
+		15FAF15B287D5E0000B35570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MAU8HFALP8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.page.Ren2UUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Ren2U;
+			};
+			name = Debug;
+		};
+		15FAF15C287D5E0000B35570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MAU8HFALP8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.page.Ren2UUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Ren2U;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		15FAF12B287D5DFF00B35570 /* Build configuration list for PBXProject "Ren2U" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15FAF152287D5E0000B35570 /* Debug */,
+				15FAF153287D5E0000B35570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15FAF154287D5E0000B35570 /* Build configuration list for PBXNativeTarget "Ren2U" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15FAF155287D5E0000B35570 /* Debug */,
+				15FAF156287D5E0000B35570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15FAF157287D5E0000B35570 /* Build configuration list for PBXNativeTarget "Ren2UTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15FAF158287D5E0000B35570 /* Debug */,
+				15FAF159287D5E0000B35570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15FAF15A287D5E0000B35570 /* Build configuration list for PBXNativeTarget "Ren2UUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15FAF15B287D5E0000B35570 /* Debug */,
+				15FAF15C287D5E0000B35570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 15FAF128287D5DFF00B35570 /* Project object */;
+}
