@@ -35,6 +35,7 @@ struct Certification: View {
                 
                 Button {
                     viewModel.resetTimer()
+                    viewModel.certificationNum = ""
                 } label: {Text("인증번호 재발송")}
                     .foregroundColor(.Gray_495057) .padding(.top, 50)
                 

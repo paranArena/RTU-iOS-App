@@ -41,6 +41,7 @@ struct Login: View {
                         .padding(.top, 21)
                         .foregroundColor(!email.isEmpty && !password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
                 }
+                
                 AuthHelp()
             }
             .navigationTitle(" ")

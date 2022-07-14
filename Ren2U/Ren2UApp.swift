@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct Ren2UApp: App {
+    
+    init() {
+        Theme.navigationBarColors(tintColor: .label)
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

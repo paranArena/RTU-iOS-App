@@ -27,12 +27,13 @@ extension Color {
     static let Gray_E9ECEF = Color(hex: "E9ECEF")
     static let Navy_1E2F97 = Color(hex: "1E2F97")
     static let Red_EB1808 = Color(hex: "EB1808")
+    static let Green_2CA900 = Color(hex: "2CA900")
 }
 
 extension UIApplication {
     
     func endEditing() {
-            sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
     func hideKeyboard() {

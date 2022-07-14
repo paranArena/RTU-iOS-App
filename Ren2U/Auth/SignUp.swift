@@ -12,102 +12,123 @@ import SwiftUI
 
 struct SignUp: View {
     
-    @State private var email: String = ""
-    
+    @StateObject var viewModel = SignUpViewModel()
     let password: [String] = ["Password", "Password 확인"]
-    let type: [String] = ["이름", "학과", "학번"]
-    
-    @State private var isConfirmed = [Bool](repeating: false, count: 7)
-    @State private var passwordText: [String] = ["", ""]
-    @State private var isShowingPassword = [Bool](repeating: false, count: 2)
-    @State private var typeText: [String] = ["", "", ""]
-    @State private var phoneNumber: String = ""
+    let normalKeyboard: [String] = ["이름", "학과"]
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 15) {
-        
-                Text("아주대학교 이메일")
+                email
+                
+                PasswordTextField(textType: password[0], text: $viewModel.text[SignUpTextField.password.rawValue],
+                                  isShowingPassword: $viewModel.isShowingPassword[0])
+                .overlay(bottomLine)
+                
+                PasswordTextField(textType: password[1], text: $viewModel.text[SignUpTextField.passwordCheck.rawValue],
+                                  isShowingPassword: $viewModel.isShowingPassword[1])
+                .overlay(bottomLine)
+                .overlay(message)
+                .padding(.bottom, 30)
+                
+                
+                ForEach(normalKeyboard.indices) { index in
+                    Text(normalKeyboard[index])
+                        .font(.system(size: 12))
+                    BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[index + 3])
+                }
+                
+                Text("학번")
                     .font(.system(size: 12))
-
-                HStack {
-                    BottomLineTextfield(placeholder: "", placeholderLocation: .none, isConfirmed: $isConfirmed[0], text: $email)
-
-                    Text("@ajou.ac.kr")
-                        .font(.system(size: 16))
-                    
-                    Button {
-                        isConfirmed[0].toggle()
-                    } label: {
-                        Text("중복확인")
-                            .padding(5)
-                            .font(.system(size: 12))
-                            .overlay(Capsule().stroke(email.isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
-                            .foregroundColor(email.isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
-                            .padding(.leading, 19)
-                    }
-                }
-                
-                ForEach(password.indices) { index in
-                    Text(password[index])
-                        .font(.system(size: 12))
-                    
-                    Group {
-                        if isShowingPassword[index] {
-                            TextField("", text: $passwordText[index])
-                        } else {
-                            SecureField("", text: $passwordText[index])
-                        }
-                    }
-                    .font(.system(size: 16))
-                    .overlay(
-                        VStack {
-                            Spacer()
-                            Rectangle()
-                                .frame(height: 1)
-                                .foregroundColor(!passwordText[0].isEmpty && passwordText[0] == passwordText[1] ? .Navy_1E2F97 : .Gray_ADB5BD)
-                        }
-                    )
-                    .overlay(
-                        HStack {
-                            Spacer()
-                            Button {
-                                isShowingPassword[index].toggle()
-                            } label: {
-                                Text("보기").font(.system(size: 14)).foregroundColor(.Gray_ADB5BD)
-                            }
-                        }
-                    )
-                }
-                
-                ForEach(type.indices) { index in
-                    Text(type[index])
-                        .font(.system(size: 12))
-                    BottomLinePlaceholder(placeholder: Text(""), text: $typeText[index])
-                }
+                BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
+                    .keyboardType(.numberPad)
                 
                 Text("휴대폰 번호")
                     .font(.system(size: 12))
-                BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $phoneNumber)
+                BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[6])
+                    .keyboardType(.numberPad)
                 
                 
-                HStack {
-                    Spacer()
-                    NavigationLink {
-                        Certification()
-                    } label: {
-                        Image(systemName: "arrow.right.circle.fill")
-                            .resizable()
-                            .frame(width: 86, height: 86)
-                            .padding(.top, 49)
-                    }
-
-                    Spacer()
-                }
-                
+                nextViewButton
                 Spacer()
             }
         .padding(.horizontal, 28)
+        }
+    }
+    
+    var email: some View {
+        VStack(alignment: .leading) {
+            Text("아주대학교 이메일")
+                .font(.system(size: 12))
+
+            HStack {
+                BottomLineTextfield(placeholder: "", placeholderLocation: .none, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[0])
+
+                Text("@ajou.ac.kr")
+                    .font(.system(size: 16))
+                
+                Button {
+                    viewModel.isOverlappedEmail.toggle()
+                } label: {
+                    Text("중복확인")
+                        .padding(5)
+                        .font(.system(size: 12))
+                        .overlay(Capsule().stroke(viewModel.text[0].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
+                        .foregroundColor(viewModel.text[0].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
+                        .padding(.leading, 19)
+                }
+            }
+        }
+    }
+    
+    var nextViewButton: some View {
+        HStack {
+            Spacer()
+            NavigationLink {
+                Certification()
+                    .toolbar {
+                        ToolbarItemGroup(placement: .principal) {
+                            Text("이메일 인증")
+                                .font(.system(size: 20, weight: .medium))
+                        }
+                    }
+            } label: {
+                Image(systemName: "arrow.right.circle.fill")
+                    .resizable() .frame(width: 86, height: 86)
+                    .padding(.top, 49)
+                    .foregroundColor(viewModel.isFilledAll(textArray: viewModel.text) ? .Navy_1E2F97 : .Gray_E9ECEF)
+                    .padding(.top, 50)
+            }
+            .disabled(!viewModel.isFilledAll(textArray: viewModel.text))
+            
+            Spacer()
+        }
+    }
+    
+    var bottomLine: some View {
+        VStack {
+            Spacer()
+            Rectangle()
+                .frame(height: 1)
+                .foregroundColor(!viewModel.text[1].isEmpty && viewModel.text[1] == viewModel.text[2]
+                                 ? .Navy_1E2F97 : .Gray_ADB5BD)
+        }
+    }
+    
+    var message: some View {
+        HStack {
+            if viewModel.isFilledAny(text1: viewModel.text[SignUpTextField.password.rawValue],
+                                     text2: viewModel.text[SignUpTextField.passwordCheck.rawValue]) {
+                Text(viewModel.isEqualText(text1: viewModel.text[SignUpTextField.password.rawValue],
+                                           text2: viewModel.text[SignUpTextField.passwordCheck.rawValue])
+                     ? "비밀번호가 일치합니다" : "비밀번호가 일치하지 않습니다.")
+                .foregroundColor(viewModel.isEqualText(text1: viewModel.text[SignUpTextField.password.rawValue],
+                                                       text2: viewModel.text[SignUpTextField.passwordCheck.rawValue])
+                                 ? Color.Green_2CA900 : Color.Red_EB1808)
+                .font(.system(size: 12))
+                .offset(y: 30)
+            }
+            Spacer()
         }
     }
 }
