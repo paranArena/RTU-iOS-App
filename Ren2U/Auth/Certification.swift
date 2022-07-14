@@ -27,6 +27,13 @@ struct Certification: View {
                     .font(.system(size: 36))
                     .multilineTextAlignment(.center)
                     .overlay(TimerOverlay)
+                    .onReceive(viewModel.certificationNum.publisher.collect()) {
+                        let result = String($0.prefix(viewModel.certificationNumLengthLimit))
+                        if viewModel.certificationNum != result {
+                            viewModel.isReachedLengthLimit = true
+                            viewModel.certificationNum = result
+                        }
+                    }
                 
                 Text(viewModel.isWrongInput ? "인증번호가 일치하지 않습니다." : " ")
                     .font(.system(size: 14))
@@ -43,7 +50,8 @@ struct Certification: View {
                         .resizable()
                         .frame(width: 86, height: 86)
                         .padding(.top, 49)
-                        .foregroundColor(viewModel.certificationNum.isEmpty ? .GrayDivider : .NavyView)
+                        .foregroundColor(viewModel.changeColor(num: viewModel.certificationNum)
+                                         ? .NavyView : .GrayDivider)
                         .padding(.top, 50)
                 }
             }

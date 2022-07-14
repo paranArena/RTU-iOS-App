@@ -30,14 +30,14 @@ struct Auth: View {
                 
                 CapsulePlaceholder(text: $email, placeholder: Text("Email"))
                     .padding(.top, 46)
-                CapsuleBorderSecurePlaceholder(text: $password, placeholder: Text("Password"))
+                CapsuleSecurePlaceholder(text: $password, placeholder: Text("Password"))
                     .padding(.top, 19)
                 
                 HStack {
                     
-                    Text("이메일 또는 비밀번호를 잘못 입력했습니다")
+                    Text(isWrong ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
                         .font(.system(size: 10))
-                        .foregroundColor(isWrong ? .RedText : .white)
+                        .foregroundColor(.RedText)
                     Spacer()
                 }
                 .padding(.leading)

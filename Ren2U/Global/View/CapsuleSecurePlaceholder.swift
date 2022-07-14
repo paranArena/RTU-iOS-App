@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CapsuleBorderSecurePlaceholder: View {
+struct CapsuleSecurePlaceholder: View {
     
     @Binding var text: String
     let placeholder: Text
