@@ -9,8 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     var body: some View {
-        Login()
+        if viewModel.jwt == nil {
+            Login()
+        } else {
+            Text("Login Success")
+        }
     }
 }
 

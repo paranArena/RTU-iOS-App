@@ -25,7 +25,6 @@ struct PasswordTextField: View {
                     SecureField("", text: $text)
                 }
             }
-            
             .font(.system(size: 16))
             .overlay(
                 HStack {

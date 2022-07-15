@@ -17,6 +17,7 @@ struct Ren2UApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(AuthViewModel())
         }
     }
 }

@@ -13,7 +13,7 @@ struct Certification: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 Text("이메일로\n인증번호가 발송되었습니다.")
                     .multilineTextAlignment(.center) .font(.system(size: 20, weight: .medium))
@@ -46,11 +46,11 @@ struct Certification: View {
                     Image(systemName: "arrow.right.circle.fill")
                         .resizable()    .frame(width: 86, height: 86)
                         .padding(.top, 49)
-                        .foregroundColor(viewModel.changeColor(num: viewModel.certificationNum)
+                        .foregroundColor(viewModel.isReachedMaxLength(num: viewModel.certificationNum)
                                          ? .Navy_1E2F97 : .Gray_E9ECEF)
                         .padding(.top, 50)
                 }
-                .disabled(!viewModel.changeColor(num: viewModel.certificationNum))
+                .disabled(!viewModel.isReachedMaxLength(num: viewModel.certificationNum))
                 
             }
             .padding(.horizontal, 28)
@@ -60,7 +60,7 @@ struct Certification: View {
     var TimerOverlay: some View {
         HStack {
             Spacer()
-            Text("\(viewModel.timeString(time:viewModel.timeRemaining))")
+            Text("\(viewModel.getTimeString(time:viewModel.timeRemaining))")
                 .font(.system(size: 16)) .padding(.trailing, 10)
                 .foregroundColor(.Red_EB1808)
                 .onReceive(timer) { _ in
