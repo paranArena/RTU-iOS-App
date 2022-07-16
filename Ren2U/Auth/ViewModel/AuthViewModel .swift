@@ -24,13 +24,12 @@ class AuthViewModel: ObservableObject {
     
     init() {
         self.jwt = UserDefaults.standard.value(forKey: "jwt") as? String
+        self.hello()
     }
     
     func testGet() {
         let url = ""
-        
         let headers: HTTPHeaders = [.authorization(bearerToken: jwt!)]
-        
         let param: [String: Any] = [
             "key1" : "123",
             "key2" : "123"
@@ -38,7 +37,19 @@ class AuthViewModel: ObservableObject {
         
         AF.request(url, method: .get, parameters: param, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: User.self) { response in
-                //
+            }
+    }
+    
+    func hello() {
+        let url = "http://localhost:8080/api/hello"
+        AF.request(url, method: .get, encoding: JSONEncoding.default)
+            .responseString { res in
+                switch res.result {
+                case .success(let value):
+                    print(value)
+                case .failure(let err):
+                    print(err)
+                }
             }
     }
     
