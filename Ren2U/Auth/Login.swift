@@ -9,8 +9,8 @@ import SwiftUI
 
 struct Login: View {
     
-    @State var email = ""
-    @State var password = ""
+    @EnvironmentObject var viewModel: AuthViewModel
+    @State var account = Account(email: "", password: "")
     @State var isWrong = false
     
     var body: some View {
@@ -18,9 +18,10 @@ struct Login: View {
             VStack {
                 
                 GreetingText()
-                CapsulePlaceholder(text: $email, placeholder: Text("Email"))
+                CapsulePlaceholder(text: $account.email, placeholder: Text("Email"))
                     .padding(.top, 46)
-                CapsuleSecurePlaceholder(text: $password, placeholder: Text("Password"))
+                
+                CapsuleSecurePlaceholder(text: $account.password, placeholder: Text("Password"))
                     .padding(.top, 19)
                 
                 HStack {
@@ -33,14 +34,15 @@ struct Login: View {
                 .padding(.top, 0)
                 
                 Button {
-                    isWrong.toggle()
+                    viewModel.login(account: account)
                 } label: {
                     Image(systemName: "arrow.right.circle.fill")
                         .resizable()
                         .frame(width: 86, height: 86)
                         .padding(.top, 21)
-                        .foregroundColor(!email.isEmpty && !password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
+                        .foregroundColor(!account.email.isEmpty && !account.password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
                 }
+                .disabled(account.email.isEmpty || account.password.isEmpty)
                 
                 AuthHelp()
             }

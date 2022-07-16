@@ -28,6 +28,9 @@ extension Color {
     static let Navy_1E2F97 = Color(hex: "1E2F97")
     static let Red_EB1808 = Color(hex: "EB1808")
     static let Green_2CA900 = Color(hex: "2CA900")
+    
+    static let BackgroundColor = Color("BackgroundColor")
+    static let LabelColor = Color("LabelColor")
 }
 
 extension UIApplication {

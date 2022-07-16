@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 class CertificationViewModel: ObservableObject {
     
     let certificationNumLengthLimit = 4
@@ -24,14 +25,16 @@ class CertificationViewModel: ObservableObject {
         if self.certificationNum.count == self.certificationNumLengthLimit { UIApplication.shared.endEditing() }
     }
     
-    func changeColor(num: String) -> Bool {
+    func isReachedMaxLength(num: String) -> Bool {
         guard num.count == certificationNumLengthLimit else { return false }
         return true
     }
     
-    func timeString(time: Int) -> String {
+    func getTimeString(time: Int) -> String {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i", minutes, seconds)
     }
 }
+
+// MARK : MARK TEST

@@ -17,20 +17,23 @@ struct SignUp: View {
     let normalKeyboard: [String] = ["이름", "학과"]
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 15) {
-                email
                 
-                PasswordTextField(textType: password[0], text: $viewModel.text[SignUpTextField.password.rawValue],
-                                  isShowingPassword: $viewModel.isShowingPassword[0])
-                .overlay(bottomLine)
-                
-                PasswordTextField(textType: password[1], text: $viewModel.text[SignUpTextField.passwordCheck.rawValue],
-                                  isShowingPassword: $viewModel.isShowingPassword[1])
-                .overlay(bottomLine)
-                .overlay(message)
-                .padding(.bottom, 30)
-                
+                Group {
+                    email
+                        .padding(.bottom, 0)
+                    
+                    PasswordTextField(textType: password[0], text: $viewModel.text[SignUpTextField.password.rawValue],
+                                      isShowingPassword: $viewModel.isShowingPassword[0])
+                    .overlay(bottomLine)
+                    
+                    PasswordTextField(textType: password[1], text: $viewModel.text[SignUpTextField.passwordCheck.rawValue],
+                                      isShowingPassword: $viewModel.isShowingPassword[1])
+                    .overlay(bottomLine)
+                    .overlay(message)
+                    
+                }
                 
                 ForEach(normalKeyboard.indices) { index in
                     Text(normalKeyboard[index])
