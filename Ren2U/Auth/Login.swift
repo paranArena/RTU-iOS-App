@@ -9,23 +9,32 @@ import SwiftUI
 
 struct Login: View {
     
+    private enum Field: Int, Hashable {
+        case email
+        case password
+    }
+    
+    
     @EnvironmentObject var viewModel: AuthViewModel
-    @State var account = Account(email: "", password: "")
-    @State var isWrong = false
+    @State private var account = Account(email: "", password: "")
+    @FocusState private var focusedField: Field?
     
     var body: some View {
         NavigationView {
             VStack {
+
+                GreetingText
                 
-                GreetingText()
                 CapsulePlaceholder(text: $account.email, placeholder: Text("Email"))
                     .padding(.top, 46)
+                    .onSubmit { focusedField = .password }
                 
-                CapsuleSecurePlaceholder(text: $account.password, placeholder: Text("Password"))
-                    .padding(.top, 19)
+                passwordTextFiled
+                    .focused($focusedField, equals: .password)
+                    
                 
                 HStack {
-                    Text(isWrong ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
+                    Text(viewModel.isWrong ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
                         .font(.system(size: 10))
                         .foregroundColor(.Red_EB1808)
                     Spacer()
@@ -50,16 +59,13 @@ struct Login: View {
             .padding(.horizontal, 40)
         }
     }
-}
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        Login()
+    
+    var passwordTextFiled: some View {
+        CapsuleSecurePlaceholder(text: $account.password, placeholder: Text("Password"))
+            .padding(.top, 19)
     }
-}
-
-struct GreetingText: View {
-    var body: some View {
+    
+    var GreetingText: some View {
         VStack {
             HStack {
                 Text("Welcome!")
@@ -73,6 +79,12 @@ struct GreetingText: View {
                 Spacer()
             }
         }
+    }
+}
+
+struct SwiftUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        Login()
     }
 }
 

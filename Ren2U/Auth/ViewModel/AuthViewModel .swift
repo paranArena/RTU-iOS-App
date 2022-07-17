@@ -21,6 +21,7 @@ struct User: Codable {
 class AuthViewModel: ObservableObject {
     
     @Published var jwt: String?
+    @Published var isWrong = false
     
     init() {
         self.jwt = UserDefaults.standard.value(forKey: "jwt") as? String
@@ -89,6 +90,7 @@ class AuthViewModel: ObservableObject {
                     self.jwt = defaults.value(forKey: "jwt") as? String
                 case .failure(let err):
                     print("[\(self)] login Error : \(err.localizedDescription)")
+                    self.isWrong.toggle()
                 }
             }
     }

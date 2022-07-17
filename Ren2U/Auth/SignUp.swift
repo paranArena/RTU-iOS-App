@@ -11,44 +11,78 @@ import Combine
 struct SignUp: View {
     
     @StateObject var viewModel = SignUpViewModel()
+    @FocusState private var filed: SignUpTextField?
+    
     let password: [String] = ["Password", "Password 확인"]
-    let normalKeyboard: [String] = ["이름", "학과"]
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading, spacing: 25) {
 
                 Group {
                     email
-                        .padding(.bottom, 0)
+                        .onSubmit { filed = .password }
                     
+            
                     PasswordTextField(textType: password[0], text: $viewModel.text[SignUpTextField.password.rawValue],
                                       isShowingPassword: $viewModel.isShowingPassword[0])
                     .overlay(bottomLine)
+                    .onSubmit { filed = .passwordCheck }
+                    .focused($filed, equals: .password)
                     
                     PasswordTextField(textType: password[1], text: $viewModel.text[SignUpTextField.passwordCheck.rawValue],
                                       isShowingPassword: $viewModel.isShowingPassword[1])
                     .overlay(bottomLine)
                     .overlay(message)
-                    
+                    .onSubmit { filed = .name }
+                    .focused($filed, equals: .passwordCheck)
                 }
                 
-                ForEach(normalKeyboard.indices) { index in
-                    Text(normalKeyboard[index])
-                        .font(.system(size: 12))
-                    BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[index + 3])
+                VStack(alignment: .leading) {
+                    Section {
+                        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[3])
+                            .onSubmit { filed = .department }
+                            .focused($filed, equals: .name)
+                    } header: {
+                        Text("이름")
+                            .font(.system(size: 12))
+                    }
                 }
                 
-                Text("학번")
-                    .font(.system(size: 12))
-                BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
-                    .keyboardType(.numberPad)
+                VStack(alignment: .leading) {
+                    Section {
+                        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[4])
+                            .onSubmit { filed = .studentId }
+                            .focused($filed, equals: .department)
+                        
+                    } header: {
+                        Text("학과")
+                            .font(.system(size: 12))
+                    }
+                }
                 
-                Text("휴대폰 번호")
-                    .font(.system(size: 12))
-                BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[6])
-                    .keyboardType(.numberPad)
+                VStack(alignment: .leading) {
+                    Section {
+                        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
+                            .keyboardType(.numbersAndPunctuation)
+                            .onSubmit { filed = .phoneNumber}
+                            .focused($filed, equals: .studentId)
+                    } header: {
+                        Text("학번")
+                            .font(.system(size: 12))
+                    }
+                }
                 
+                VStack(alignment: .leading) {
+                    Section {
+                        BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[6])
+                            .keyboardType(.numbersAndPunctuation)
+                            .focused($filed, equals: .phoneNumber)
+                    } header: {
+                        Text("휴대폰 번호")
+                            .font(.system(size: 12))
+                    }
+                }
                 
                 nextViewButton
                 Spacer()
@@ -60,26 +94,28 @@ struct SignUp: View {
     var email: some View {
         
         VStack(alignment: .leading) {
-            Text("아주대학교 이메일")
-                .font(.system(size: 12))
+            Section {
+                HStack {
+                    BottomLineTextfield(placeholder: "", placeholderLocation: .none, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[0])
+                        .onChange(of: viewModel.text[0]) { _ in viewModel.isOverlappedEmail = false }
 
-            HStack {
-                BottomLineTextfield(placeholder: "", placeholderLocation: .none, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[0])
-                    .onChange(of: viewModel.text[0]) { _ in viewModel.isOverlappedEmail = false }
-
-                Text("@ajou.ac.kr")
-                    .font(.system(size: 16))
-                
-                Button {
-                    viewModel.isOverlappedEmail.toggle()
-                } label: {
-                    Text("중복확인")
-                        .padding(5)
-                        .font(.system(size: 12))
-                        .overlay(Capsule().stroke(viewModel.text[0].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
-                        .foregroundColor(viewModel.text[0].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
-                        .padding(.leading, 19)
+                    Text("@ajou.ac.kr")
+                        .font(.system(size: 16))
+                    
+                    Button {
+                        viewModel.isOverlappedEmail.toggle()
+                    } label: {
+                        Text("중복확인")
+                            .padding(5)
+                            .font(.system(size: 12))
+                            .overlay(Capsule().stroke(viewModel.text[0].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
+                            .foregroundColor(viewModel.text[0].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
+                            .padding(.leading, 19)
+                    }
                 }
+            } header: {
+                Text("아주대학교 이메일")
+                    .font(.system(size: 12))
             }
         }
     }
@@ -100,7 +136,7 @@ struct SignUp: View {
                     .resizable() .frame(width: 86, height: 86)
                     .padding(.top, 49)
                     .foregroundColor(viewModel.isFilledAll(textArray: viewModel.text) ? .Navy_1E2F97 : .Gray_E9ECEF)
-                    .padding(.top, 50)
+                    .padding(.top, 20)
             }
             .disabled(!viewModel.isFilledAll(textArray: viewModel.text))
             
