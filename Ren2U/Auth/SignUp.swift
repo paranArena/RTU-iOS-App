@@ -11,7 +11,7 @@ import Combine
 struct SignUp: View {
     
     @StateObject var viewModel = SignUpViewModel()
-    @FocusState private var filed: SignUpTextField?
+    @FocusState private var foucesField: SignUpTextField?
     
     let password: [String] = ["Password", "Password 확인"]
     
@@ -21,28 +21,28 @@ struct SignUp: View {
 
                 Group {
                     email
-                        .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.email.rawValue) { filed = .password } }
-                    
+                        .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.email.rawValue) { foucesField = .password } }
+
             
                     PasswordTextField(textType: password[0], text: $viewModel.text[SignUpTextField.password.rawValue],
                                       isShowingPassword: $viewModel.isShowingPassword[0])
                     .overlay(bottomLine)
-                    .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.password.rawValue) { filed = .passwordCheck } }
-                    .focused($filed, equals: .password)
+                    .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.password.rawValue) { foucesField = .passwordCheck } }
+                    .focused($foucesField, equals: .password)
                     
                     PasswordTextField(textType: password[1], text: $viewModel.text[SignUpTextField.passwordCheck.rawValue],
                                       isShowingPassword: $viewModel.isShowingPassword[1])
                     .overlay(bottomLine)
                     .overlay(message)
-                    .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.passwordCheck.rawValue) { filed = .name } }
-                    .focused($filed, equals: .passwordCheck)
+                    .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.passwordCheck.rawValue) { foucesField = .name } }
+                    .focused($foucesField, equals: .passwordCheck)
                 }
                 
                 VStack(alignment: .leading) {
                     Section {
                         BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[3])
-                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.name.rawValue) { filed = .department } }
-                            .focused($filed, equals: .name)
+                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.name.rawValue) { foucesField = .department } }
+                            .focused($foucesField, equals: .name)
                     } header: {
                         Text("이름")
                             .font(.system(size: 12))
@@ -52,8 +52,8 @@ struct SignUp: View {
                 VStack(alignment: .leading) {
                     Section {
                         BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[4])
-                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.department.rawValue) { filed = .studentId }}
-                            .focused($filed, equals: .department)
+                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.department.rawValue) { foucesField = .studentId }}
+                            .focused($foucesField, equals: .department)
                         
                     } header: {
                         Text("학과")
@@ -65,8 +65,8 @@ struct SignUp: View {
                     Section {
                         BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
                             .keyboardType(.numbersAndPunctuation)
-                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.studentId.rawValue) { filed = .phoneNumber }}
-                            .focused($filed, equals: .studentId)
+                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.studentId.rawValue) { foucesField = .phoneNumber }}
+                            .focused($foucesField, equals: .studentId)
                     } header: {
                         Text("학번")
                             .font(.system(size: 12))
@@ -77,7 +77,7 @@ struct SignUp: View {
                     Section {
                         BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[6])
                             .keyboardType(.numbersAndPunctuation)
-                            .focused($filed, equals: .phoneNumber)
+                            .focused($foucesField, equals: .phoneNumber)
                     } header: {
                         Text("휴대폰 번호")
                             .font(.system(size: 12))
@@ -87,9 +87,10 @@ struct SignUp: View {
                 nextViewButton
                 Spacer()
             }
-        .padding(.horizontal, 28)
+            .padding(.horizontal, 28)
+            .offset(y: CGFloat(foucesField?.rawValue ?? 0) * -30)
+            .animation(.spring(), value: foucesField)
         }
-        .offset()
     }
     
     var email: some View {
