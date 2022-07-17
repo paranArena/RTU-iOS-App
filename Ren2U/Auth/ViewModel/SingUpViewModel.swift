@@ -42,9 +42,8 @@ class SignUpViewModel: ObservableObject {
         return true 
     }
     
-    func isEqualText(text1: String, text2: String) -> Bool {
-        guard !text1.isEmpty else { return false }
-        guard text1 == text2 else { return false }
+    func isFilledAnyAndEqualText(text1: String, text2: String) -> Bool {
+        guard isFilledAny(text1: text1, text2: text2) && text1 == text2 else { return false }
         return true
     }
 }

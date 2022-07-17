@@ -24,7 +24,8 @@ class AuthViewModel: ObservableObject {
     
     init() {
         self.jwt = UserDefaults.standard.value(forKey: "jwt") as? String
-        self.hello()
+//        self.hello()
+//        self.testSignup()
     }
     
     func testGet() {
@@ -46,9 +47,28 @@ class AuthViewModel: ObservableObject {
             .responseString { res in
                 switch res.result {
                 case .success(let value):
-                    print(value)
+                    print("[\(self)] : \(value)")
                 case .failure(let err):
-                    print(err)
+                    print("[\(self)] : \(err)")
+                }
+            }
+    }
+    
+    func testSignup() {
+        let url = "http://localhost:8080/api/signup"
+        let param: [String: Any] = [
+            "username" : "123",
+            "password" : "123",
+            "nickname" : "123"
+        ]
+        
+        AF.request(url, method: .post, encoding: JSONEncoding.default)
+            .responseString { res in
+                switch res.result {
+                case .success(let value):
+                    print("[\(self)] : \(value)")
+                case .failure(let err):
+                    print("[\(self)] : \(err)")
                 }
             }
     }
@@ -68,7 +88,7 @@ class AuthViewModel: ObservableObject {
                     defaults.setValue(value, forKey: "jwt")
                     self.jwt = defaults.value(forKey: "jwt") as? String
                 case .failure(let err):
-                    print("[AuthViewModel] login Error : \(err.localizedDescription)")
+                    print("[\(self)] login Error : \(err.localizedDescription)")
                 }
             }
     }

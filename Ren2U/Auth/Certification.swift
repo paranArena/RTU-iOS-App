@@ -25,8 +25,8 @@ struct Certification: View {
                     .keyboardType(.numberPad)   .font(.system(size: 36))
                     .multilineTextAlignment(.center)    .overlay(TimerOverlay)
                     .onTapGesture { viewModel.certificationNum = "" }
-                    .onReceive(viewModel.certificationNum.publisher.collect()) { _ in
-                        viewModel.endEditing()
+                    .onChange(of: viewModel.certificationNum) { _ in
+                        viewModel.endEditingIfLengthLimitReached()
                     }
                 
                 Text(viewModel.isWroungNum ? "인증번호가 일치하지 않습니다." : " ")

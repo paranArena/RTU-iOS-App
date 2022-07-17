@@ -21,7 +21,7 @@ class CertificationViewModel: ObservableObject {
         self.timeRemaining = 5*60
     }
     
-    func endEditing() {
+    func endEditingIfLengthLimitReached() {
         if self.certificationNum.count == self.certificationNumLengthLimit { UIApplication.shared.endEditing() }
     }
     

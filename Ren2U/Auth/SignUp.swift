@@ -6,9 +6,7 @@
 //
 
 import SwiftUI
-
-
-
+import Combine
 
 struct SignUp: View {
     
@@ -19,7 +17,7 @@ struct SignUp: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 15) {
-                
+
                 Group {
                     email
                         .padding(.bottom, 0)
@@ -60,12 +58,14 @@ struct SignUp: View {
     }
     
     var email: some View {
+        
         VStack(alignment: .leading) {
             Text("아주대학교 이메일")
                 .font(.system(size: 12))
 
             HStack {
                 BottomLineTextfield(placeholder: "", placeholderLocation: .none, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[0])
+                    .onChange(of: viewModel.text[0]) { _ in viewModel.isOverlappedEmail = false }
 
                 Text("@ajou.ac.kr")
                     .font(.system(size: 16))
@@ -122,10 +122,10 @@ struct SignUp: View {
         HStack {
             if viewModel.isFilledAny(text1: viewModel.text[SignUpTextField.password.rawValue],
                                      text2: viewModel.text[SignUpTextField.passwordCheck.rawValue]) {
-                Text(viewModel.isEqualText(text1: viewModel.text[SignUpTextField.password.rawValue],
+                Text(viewModel.isFilledAnyAndEqualText(text1: viewModel.text[SignUpTextField.password.rawValue],
                                            text2: viewModel.text[SignUpTextField.passwordCheck.rawValue])
                      ? "비밀번호가 일치합니다" : "비밀번호가 일치하지 않습니다.")
-                .foregroundColor(viewModel.isEqualText(text1: viewModel.text[SignUpTextField.password.rawValue],
+                .foregroundColor(viewModel.isFilledAnyAndEqualText(text1: viewModel.text[SignUpTextField.password.rawValue],
                                                        text2: viewModel.text[SignUpTextField.passwordCheck.rawValue])
                                  ? Color.Green_2CA900 : Color.Red_EB1808)
                 .font(.system(size: 12))
