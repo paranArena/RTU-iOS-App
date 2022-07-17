@@ -21,27 +21,27 @@ struct SignUp: View {
 
                 Group {
                     email
-                        .onSubmit { filed = .password }
+                        .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.email.rawValue) { filed = .password } }
                     
             
                     PasswordTextField(textType: password[0], text: $viewModel.text[SignUpTextField.password.rawValue],
                                       isShowingPassword: $viewModel.isShowingPassword[0])
                     .overlay(bottomLine)
-                    .onSubmit { filed = .passwordCheck }
+                    .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.password.rawValue) { filed = .passwordCheck } }
                     .focused($filed, equals: .password)
                     
                     PasswordTextField(textType: password[1], text: $viewModel.text[SignUpTextField.passwordCheck.rawValue],
                                       isShowingPassword: $viewModel.isShowingPassword[1])
                     .overlay(bottomLine)
                     .overlay(message)
-                    .onSubmit { filed = .name }
+                    .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.passwordCheck.rawValue) { filed = .name } }
                     .focused($filed, equals: .passwordCheck)
                 }
                 
                 VStack(alignment: .leading) {
                     Section {
                         BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[3])
-                            .onSubmit { filed = .department }
+                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.name.rawValue) { filed = .department } }
                             .focused($filed, equals: .name)
                     } header: {
                         Text("이름")
@@ -52,7 +52,7 @@ struct SignUp: View {
                 VStack(alignment: .leading) {
                     Section {
                         BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[4])
-                            .onSubmit { filed = .studentId }
+                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.department.rawValue) { filed = .studentId }}
                             .focused($filed, equals: .department)
                         
                     } header: {
@@ -65,7 +65,7 @@ struct SignUp: View {
                     Section {
                         BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
                             .keyboardType(.numbersAndPunctuation)
-                            .onSubmit { filed = .phoneNumber}
+                            .onSubmit { if viewModel.isNextFieldIsEmpty(curIndex: SignUpTextField.studentId.rawValue) { filed = .phoneNumber }}
                             .focused($filed, equals: .studentId)
                     } header: {
                         Text("학번")
@@ -89,6 +89,7 @@ struct SignUp: View {
             }
         .padding(.horizontal, 28)
         }
+        .offset()
     }
     
     var email: some View {
@@ -112,6 +113,8 @@ struct SignUp: View {
                             .foregroundColor(viewModel.text[0].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
                             .padding(.leading, 19)
                     }
+                    
+                    .disabled(viewModel.isOverlappedEmail || viewModel.text[0].isEmpty)
                 }
             } header: {
                 Text("아주대학교 이메일")

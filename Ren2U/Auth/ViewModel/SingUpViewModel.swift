@@ -46,4 +46,9 @@ class SignUpViewModel: ObservableObject {
         guard isFilledAny(text1: text1, text2: text2) && text1 == text2 else { return false }
         return true
     }
+    
+    func isNextFieldIsEmpty(curIndex: Int) -> Bool {
+        guard self.text[curIndex + 1].isEmpty else { return false }
+        return true 
+    }
 }
