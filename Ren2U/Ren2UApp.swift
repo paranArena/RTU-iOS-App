@@ -11,13 +11,14 @@ import SwiftUI
 struct Ren2UApp: App {
     
     init() {
+        // 네비게이션 바 틴트 컬러 변경 
         Theme.navigationBarColors(tintColor: .label)
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(AuthViewModel())
+                .environmentObject(AuthModel())
         }
     }
 }

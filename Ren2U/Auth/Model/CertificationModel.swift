@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
+import Alamofire
 
-
-class CertificationViewModel: ObservableObject {
+class CertificationModel: ObservableObject {
     
     let certificationNumLengthLimit = 4
     
     @Published var timeRemaining = 5*60
-    @Published var isWroungNum = false
+    @Published var isConfirmed = false
     @Published var certificationNum = ""
-    
     
     func resetTimer() {
         self.timeRemaining = 5*60

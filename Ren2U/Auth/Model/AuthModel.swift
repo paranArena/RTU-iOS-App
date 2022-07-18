@@ -15,18 +15,60 @@ struct Account: Codable {
 }
 
 struct User: Codable {
+    var email: String
+    var password: String
     var name: String
+    var department: String
+    var studentId: String
+    var phoneNumber: String
+    var deviceToken: String
+    
+    static let `default` = User(email: "temp@ajou.ac.kr", password: "12345", name: "Page",
+                                department: "소프트웨어학과", studentId: "1234567", phoneNumber: "01012345678",
+                                deviceToken: "")
 }
 
-class AuthViewModel: ObservableObject {
+class AuthModel: ObservableObject {
     
     @Published var jwt: String?
-    @Published var isWrong = false
+    @Published var user: User?
     
     init() {
         self.jwt = UserDefaults.standard.value(forKey: "jwt") as? String
 //        self.hello()
 //        self.testSignup()
+    }
+    
+    
+    func sendCertificationNum() {
+        let random = Int.random(in: 0000...9999)
+        let randomGenerateNum = String(random)
+    }
+    
+    func checkCertificationNum(num: String, user: User) -> Bool{
+        print("\(self) : check!")
+        let num = Int(num)
+        guard num == 1234 else { return false }
+        return true
+    }
+    
+    func signUp(user: User) {
+        let url = "http://localhost:8080/api/signup"
+        let param: [String: Any] = [
+            "username" : "123",
+            "password" : "123",
+            "nickname" : "123"
+        ]
+        
+        AF.request(url, method: .post, encoding: JSONEncoding.default)
+            .responseString { res in
+                switch res.result {
+                case .success(let value):
+                    print("[\(self)] : \(value)")
+                case .failure(let err):
+                    print("[\(self)] : \(err)")
+                }
+            }
     }
     
     func testGet() {
@@ -55,25 +97,6 @@ class AuthViewModel: ObservableObject {
             }
     }
     
-    func testSignup() {
-        let url = "http://localhost:8080/api/signup"
-        let param: [String: Any] = [
-            "username" : "123",
-            "password" : "123",
-            "nickname" : "123"
-        ]
-        
-        AF.request(url, method: .post, encoding: JSONEncoding.default)
-            .responseString { res in
-                switch res.result {
-                case .success(let value):
-                    print("[\(self)] : \(value)")
-                case .failure(let err):
-                    print("[\(self)] : \(err)")
-                }
-            }
-    }
-    
     func login(account: Account) {
         let defaults = UserDefaults.standard
         let url = ""
@@ -90,7 +113,6 @@ class AuthViewModel: ObservableObject {
                     self.jwt = defaults.value(forKey: "jwt") as? String
                 case .failure(let err):
                     print("[\(self)] login Error : \(err.localizedDescription)")
-                    self.isWrong.toggle()
                 }
             }
     }
