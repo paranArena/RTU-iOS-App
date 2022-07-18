@@ -15,7 +15,7 @@
 		15BDC4222881218500514EF1 /* AuthViewModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel .swift */; };
 		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
 		15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C580287FF15A008BB89B /* NavigationBarColor.swift */; };
-		15D4C583287FF7C0008BB89B /* SingUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C582287FF7C0008BB89B /* SingUpViewModel.swift */; };
+		15D4C583287FF7C0008BB89B /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C582287FF7C0008BB89B /* SignUpModel.swift */; };
 		15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C58428800AB4008BB89B /* PasswordTextField.swift */; };
 		15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF133287D5DFF00B35570 /* Ren2UApp.swift */; };
 		15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF135287D5DFF00B35570 /* ContentView.swift */; };
@@ -55,7 +55,7 @@
 		15868739287EBB3F0003C2DC /* CertificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationViewModel.swift; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthViewModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewModel .swift"; sourceTree = "<group>"; };
 		15D4C580287FF15A008BB89B /* NavigationBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColor.swift; sourceTree = "<group>"; };
-		15D4C582287FF7C0008BB89B /* SingUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewModel.swift; sourceTree = "<group>"; };
+		15D4C582287FF7C0008BB89B /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		15D4C58428800AB4008BB89B /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		15FAF130287D5DFF00B35570 /* Ren2U.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ren2U.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15FAF133287D5DFF00B35570 /* Ren2UApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UApp.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				15BDC4212881218500514EF1 /* AuthViewModel .swift */,
-				15D4C582287FF7C0008BB89B /* SingUpViewModel.swift */,
+				15D4C582287FF7C0008BB89B /* SignUpModel.swift */,
 				15868739287EBB3F0003C2DC /* CertificationViewModel.swift */,
 			);
 			path = ViewModel;
@@ -358,7 +358,7 @@
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15BDC4222881218500514EF1 /* AuthViewModel .swift in Sources */,
-				15D4C583287FF7C0008BB89B /* SingUpViewModel.swift in Sources */,
+				15D4C583287FF7C0008BB89B /* SignUpModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

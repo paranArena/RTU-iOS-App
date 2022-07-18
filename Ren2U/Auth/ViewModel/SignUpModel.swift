@@ -17,7 +17,7 @@ enum SignUpTextField: Int, CaseIterable {
     case phoneNumber
 }
 
-class SignUpViewModel: ObservableObject {
+class SignUpModel: ObservableObject {
     
     @Published var isOverlappedEmail = false
     @Published var text = [String] (repeating: "", count: 7)

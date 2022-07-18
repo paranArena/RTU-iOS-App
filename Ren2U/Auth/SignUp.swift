@@ -10,7 +10,7 @@ import Combine
 
 struct SignUp: View {
     
-    @StateObject var viewModel = SignUpViewModel()
+    @StateObject var viewModel = SignUpModel()
     @FocusState private var foucesField: SignUpTextField?
     
     let password: [String] = ["Password", "Password 확인"]
