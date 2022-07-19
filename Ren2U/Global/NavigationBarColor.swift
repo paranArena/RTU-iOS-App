@@ -10,8 +10,6 @@ import UIKit
 
 class Theme {
     static func navigationBarColors(tintColor: UIColor? = nil) {
-        let navigationAppearance = UINavigationBarAppearance()
-        navigationAppearance.configureWithOpaqueBackground()
         UINavigationBar.appearance().tintColor = tintColor ?? .clear
     }
 }

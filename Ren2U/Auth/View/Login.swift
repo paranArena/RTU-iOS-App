@@ -9,23 +9,25 @@ import SwiftUI
 
 struct Login: View {
     
-    @EnvironmentObject var viewModel: AuthViewModel
-    @State var account = Account(email: "", password: "")
-    @State var isWrong = false
+    @EnvironmentObject var authModel: AuthModel
+    @StateObject var loginModel = LoginModel()
+    @FocusState var focus: LoginField?
     
     var body: some View {
         NavigationView {
             VStack {
-                
-                GreetingText()
-                CapsulePlaceholder(text: $account.email, placeholder: Text("Email"))
+
+                GreetingText
+                CapsulePlaceholder(text: $loginModel.account.email, placeholder: Text("Email"))
                     .padding(.top, 46)
+                    .onSubmit { focus = .password }
                 
-                CapsuleSecurePlaceholder(text: $account.password, placeholder: Text("Password"))
-                    .padding(.top, 19)
+                passwordTextFiled
+                    .focused($focus, equals: .password)
+                    
                 
                 HStack {
-                    Text(isWrong ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
+                    Text(loginModel.isWroungAccount ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
                         .font(.system(size: 10))
                         .foregroundColor(.Red_EB1808)
                     Spacer()
@@ -34,32 +36,33 @@ struct Login: View {
                 .padding(.top, 0)
                 
                 Button {
-                    viewModel.login(account: account)
+                    authModel.login(account: loginModel.account)
                 } label: {
                     Image(systemName: "arrow.right.circle.fill")
                         .resizable()
                         .frame(width: 86, height: 86)
                         .padding(.top, 21)
-                        .foregroundColor(!account.email.isEmpty && !account.password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
+                        .foregroundColor(!loginModel.account.email.isEmpty && !loginModel.account.password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
                 }
-                .disabled(account.email.isEmpty || account.password.isEmpty)
+                .disabled(loginModel.account.email.isEmpty || loginModel.account.password.isEmpty)
                 
                 AuthHelp()
             }
             .navigationTitle(" ")
+            .navigationBarTitleDisplayMode(.inline)
             .padding(.horizontal, 40)
+            .onAppear {
+                loginModel.initTextFields()
+            }
         }
     }
-}
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        Login()
+    
+    var passwordTextFiled: some View {
+        CapsuleSecurePlaceholder(text: $loginModel.account.password, placeholder: Text("Password"))
+            .padding(.top, 19)
     }
-}
-
-struct GreetingText: View {
-    var body: some View {
+    
+    var GreetingText: some View {
         VStack {
             HStack {
                 Text("Welcome!")
@@ -76,6 +79,12 @@ struct GreetingText: View {
     }
 }
 
+struct SwiftUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        Login()
+    }
+}
+
 struct AuthHelp: View {
     var body: some View {
         HStack {
@@ -88,13 +97,6 @@ struct AuthHelp: View {
             
             NavigationLink {
                 SignUp()
-                    .navigationTitle("")
-                    .toolbar {
-                        ToolbarItemGroup(placement: .principal) {
-                            Text("회원가입")
-                                .font(.system(size: 20, weight: .medium))
-                        }
-                    }
             } label: {
                 Text("회원 가입")
                     .font(.system(size: 16))

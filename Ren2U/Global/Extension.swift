@@ -35,6 +35,7 @@ extension Color {
 
 extension UIApplication {
     
+    // 키보드 종료 
     func endEditing() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
