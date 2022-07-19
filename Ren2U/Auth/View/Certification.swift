@@ -59,7 +59,9 @@ struct Certification: View {
                 .disabled(!model.isReachedMaxLength(num: model.certificationNum))
             }
             .padding(.horizontal, 28)
+            .padding(.top, 40)
         }
+        .navigationTitle(" ")
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 if model.timeRemaining > 0 {

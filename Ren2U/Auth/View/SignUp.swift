@@ -16,19 +16,25 @@ struct SignUp: View {
     let password: [String] = ["Password", "Password 확인"]
     
     var body: some View {
-        ZStack(alignment: .top ) {
+        
+        VStack(alignment: .leading) {
+            Rectangle()
+                .frame(width: UIScreen.main.bounds.width, height: 1)
+                .foregroundColor(.gray)
+                .background(.background)
+            
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 25) {
 
                     Group {
                         email
-                        
+
                         PasswordTextField(textType: password[0], text: $signUpModel.text[SignUpField.password.rawValue],
                                           isShowingPassword: $signUpModel.isShowingPassword)
                         .overlay(bottomLine)
                         .focused($focusedField, equals: .password)
                         .id(SignUpField.password.rawValue)
-                        
+
                         PasswordTextField(textType: password[1], text: $signUpModel.text[SignUpField.passwordCheck.rawValue],
                                           isShowingPassword: $signUpModel.isShowingPasswordCheck)
                         .overlay(bottomLine)
@@ -36,7 +42,7 @@ struct SignUp: View {
                         .focused($focusedField, equals: .passwordCheck)
                         .id(SignUpField.passwordCheck.rawValue)
                     }
-                    
+
                     VStack(alignment: .leading) {
                         Section {
                             BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[3])
@@ -47,19 +53,19 @@ struct SignUp: View {
                                 .font(.system(size: 12))
                         }
                     }
-                    
+
                     VStack(alignment: .leading) {
                         Section {
                             BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[4])
                                 .focused($focusedField, equals: .department)
                                 .id(SignUpField.department.rawValue)
-                            
+
                         } header: {
                             Text("학과")
                                 .font(.system(size: 12))
                         }
                     }
-                    
+
                     VStack(alignment: .leading) {
                         Section {
                             BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[5])
@@ -71,7 +77,7 @@ struct SignUp: View {
                                 .font(.system(size: 12))
                         }
                     }
-                    
+
                     VStack(alignment: .leading) {
                         Section {
                             BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $signUpModel.text[6])
@@ -83,7 +89,7 @@ struct SignUp: View {
                                 .font(.system(size: 12))
                         }
                     }
-                    
+
                     btnGoCertification
                     Spacer()
                 } // vstack
@@ -96,19 +102,11 @@ struct SignUp: View {
                     print(focusedField?.rawValue)
                 }
             } // scroll
-            .navigationTitle("")
-            .toolbar {
-                ToolbarItemGroup(placement: .principal) {
-                Text("회원가입").font(.system(size: 20, weight: .medium))}}
-            
-            if focusedField != nil {
-                Rectangle()
-                    .frame(width: UIScreen.main.bounds.width, height: 1)
-                    .foregroundColor(.BackgroundColor)
-                    .background(.background)
-                    .offset(y: -40)
-            }
-        } //ZStack
+        } //VStack
+        .navigationTitle(" ")
+        .toolbar {
+            ToolbarItemGroup(placement: .principal) {
+            Text("회원가입").font(.system(size: 20, weight: .medium))}}
     } // body
     
     var email: some View {

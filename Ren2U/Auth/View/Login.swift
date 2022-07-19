@@ -49,6 +49,7 @@ struct Login: View {
                 AuthHelp()
             }
             .navigationTitle(" ")
+            .navigationBarTitleDisplayMode(.inline)
             .padding(.horizontal, 40)
             .onAppear {
                 loginModel.initTextFields()
