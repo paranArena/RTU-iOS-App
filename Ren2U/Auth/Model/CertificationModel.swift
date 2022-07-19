@@ -13,7 +13,7 @@ class CertificationModel: ObservableObject {
     let certificationNumLengthLimit = 4
     
     @Published var timeRemaining = 5*60
-    @Published var isConfirmed = false
+    @Published var isConfirmed = true 
     @Published var certificationNum = ""
     @Published var timer = Timer()
 

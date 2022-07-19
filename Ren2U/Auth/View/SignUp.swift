@@ -20,7 +20,7 @@ struct SignUp: View {
         VStack(alignment: .leading) {
             Rectangle()
                 .frame(width: UIScreen.main.bounds.width, height: 1)
-                .foregroundColor(.gray)
+                .foregroundColor(Color.BackgroundColor)
                 .background(.background)
             
             ScrollView(showsIndicators: false) {
@@ -138,6 +138,7 @@ struct SignUp: View {
                     .font(.system(size: 12))
             }
         }
+        .padding(.top, 30)
     }
     
     var btnGoCertification: some View {

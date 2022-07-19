@@ -32,7 +32,7 @@ struct Certification: View {
                         model.endEditingIfLengthLimitReached()
                     }
                 
-                Text(model.isConfirmed ? "인증번호가 일치하지 않습니다." : " ")
+                Text(model.isConfirmed ? " " : "인증번호가 일치하지 않습니다.")
                     .font(.system(size: 14))
                     .foregroundColor(.Red_EB1808)
                 
