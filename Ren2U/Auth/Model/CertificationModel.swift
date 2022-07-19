@@ -15,6 +15,17 @@ class CertificationModel: ObservableObject {
     @Published var timeRemaining = 5*60
     @Published var isConfirmed = false
     @Published var certificationNum = ""
+    @Published var timer = Timer()
+
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { Timer in
+            if self.timeRemaining > 0 {
+                self.timeRemaining -= 1
+            } else {
+                self.timer.invalidate()
+            }
+        })
+    }
     
     func resetTimer() {
         self.timeRemaining = 5*60

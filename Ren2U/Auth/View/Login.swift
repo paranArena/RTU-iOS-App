@@ -96,13 +96,6 @@ struct AuthHelp: View {
             
             NavigationLink {
                 SignUp()
-                    .navigationTitle("")
-                    .toolbar {
-                        ToolbarItemGroup(placement: .principal) {
-                            Text("회원가입")
-                                .font(.system(size: 20, weight: .medium))
-                        }
-                    }
             } label: {
                 Text("회원 가입")
                     .font(.system(size: 16))

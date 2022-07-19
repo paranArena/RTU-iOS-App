@@ -17,6 +17,7 @@ enum SignUpField: Int, CaseIterable {
     case phoneNumber
 }
 
+
 class SignUpModel: ObservableObject {
     
     @Published var isOverlappedEmail = false
@@ -84,4 +85,5 @@ class SignUpModel: ObservableObject {
                     studentId: text[SignUpField.studentId.rawValue], phoneNumber: text[SignUpField.studentId.rawValue],
                     deviceToken: "")
     }
+
 }

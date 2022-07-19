@@ -10,10 +10,10 @@ import SwiftUI
 struct Certification: View {
     
     @EnvironmentObject var authModel: AuthModel
-    @ObservedObject var model = CertificationModel()
+    @StateObject var model = CertificationModel()
     let user: User
     
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+//    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -60,6 +60,21 @@ struct Certification: View {
             }
             .padding(.horizontal, 28)
         }
+        .onAppear {
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                if model.timeRemaining > 0 {
+                    model.timeRemaining -= 1
+                } else {
+                    timer.invalidate()
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .principal) {
+                Text("이메일 인증")
+                    .font(.system(size: 20, weight: .medium))
+            }
+        }
     }
     
     var TimerOverlay: some View {
@@ -68,13 +83,6 @@ struct Certification: View {
             Text("\(model.getTimeString(time:model.timeRemaining))")
                 .font(.system(size: 16)) .padding(.trailing, 10)
                 .foregroundColor(.Red_EB1808)
-                .onReceive(timer) { _ in
-                    if model.timeRemaining > 0 {
-                        model.timeRemaining -= 1
-                    } else {
-                        self.timer.upstream.connect().cancel()
-                    }
-                }
         }
     }
 }

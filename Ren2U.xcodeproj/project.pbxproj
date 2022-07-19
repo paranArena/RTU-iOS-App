@@ -125,10 +125,10 @@
 		15D4C57F287FD4CF008BB89B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				15246BDE28851550000BDFC8 /* SubView */,
 				15FAF15E287D5E1800B35570 /* Login.swift */,
 				152C3E80287E5E84000BFC97 /* SignUp.swift */,
 				152C3E86287E7750000BFC97 /* Certification.swift */,
-				15246BDE28851550000BDFC8 /* SubView */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -11,86 +11,105 @@ import Combine
 struct SignUp: View {
     
     @StateObject var signUpModel = SignUpModel()
-    @FocusState private var foucesField: SignUpField?
+    @FocusState private var focusedField: SignUpField?
+
     let password: [String] = ["Password", "Password 확인"]
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 25) {
+        ZStack(alignment: .top ) {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 25) {
 
-                Group {
-                    email
-                        .onSubmit { foucesField = signUpModel.foucsChange(curIndex: SignUpField.email.rawValue)}
-
-            
-                    PasswordTextField(textType: password[0], text: $signUpModel.text[SignUpField.password.rawValue],
-                                      isShowingPassword: $signUpModel.isShowingPassword)
-                    .overlay(bottomLine)
-                    .onSubmit { foucesField = signUpModel.foucsChange(curIndex: SignUpField.password.rawValue)}
-                    .focused($foucesField, equals: .password)
-                    
-                    PasswordTextField(textType: password[1], text: $signUpModel.text[SignUpField.passwordCheck.rawValue],
-                                      isShowingPassword: $signUpModel.isShowingPasswordCheck)
-                    .overlay(bottomLine)
-                    .overlay(message)
-                    .onSubmit { foucesField = signUpModel.foucsChange(curIndex: SignUpField.passwordCheck.rawValue)}
-                    .focused($foucesField, equals: .passwordCheck)
-                }
-                
-                VStack(alignment: .leading) {
-                    Section {
-                        BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[3])
-                            .onSubmit { foucesField = signUpModel.foucsChange(curIndex: SignUpField.name.rawValue)}
-                            .focused($foucesField, equals: .name)
-                    } header: {
-                        Text("이름")
-                            .font(.system(size: 12))
-                    }
-                }
-                
-                VStack(alignment: .leading) {
-                    Section {
-                        BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[4])
-                            .onSubmit { foucesField = signUpModel.foucsChange(curIndex: SignUpField.department.rawValue)}
-                            .focused($foucesField, equals: .department)
+                    Group {
+                        email
                         
-                    } header: {
-                        Text("학과")
-                            .font(.system(size: 12))
+                        PasswordTextField(textType: password[0], text: $signUpModel.text[SignUpField.password.rawValue],
+                                          isShowingPassword: $signUpModel.isShowingPassword)
+                        .overlay(bottomLine)
+                        .focused($focusedField, equals: .password)
+                        .id(SignUpField.password.rawValue)
+                        
+                        PasswordTextField(textType: password[1], text: $signUpModel.text[SignUpField.passwordCheck.rawValue],
+                                          isShowingPassword: $signUpModel.isShowingPasswordCheck)
+                        .overlay(bottomLine)
+                        .overlay(message)
+                        .focused($focusedField, equals: .passwordCheck)
+                        .id(SignUpField.passwordCheck.rawValue)
                     }
-                }
-                
-                VStack(alignment: .leading) {
-                    Section {
-                        BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[5])
-                            .keyboardType(.numbersAndPunctuation)
-                            .onSubmit { foucesField = signUpModel.foucsChange(curIndex: SignUpField.studentId.rawValue)}
-                            .focused($foucesField, equals: .studentId)
-                    } header: {
-                        Text("학번")
-                            .font(.system(size: 12))
+                    
+                    VStack(alignment: .leading) {
+                        Section {
+                            BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[3])
+                                .focused($focusedField, equals: .name)
+                                .id(SignUpField.name.rawValue)
+                        } header: {
+                            Text("이름")
+                                .font(.system(size: 12))
+                        }
                     }
-                }
-                
-                VStack(alignment: .leading) {
-                    Section {
-                        BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $signUpModel.text[6])
-                            .keyboardType(.numbersAndPunctuation)
-                            .focused($foucesField, equals: .phoneNumber)
-                    } header: {
-                        Text("휴대폰 번호")
-                            .font(.system(size: 12))
+                    
+                    VStack(alignment: .leading) {
+                        Section {
+                            BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[4])
+                                .focused($focusedField, equals: .department)
+                                .id(SignUpField.department.rawValue)
+                            
+                        } header: {
+                            Text("학과")
+                                .font(.system(size: 12))
+                        }
                     }
+                    
+                    VStack(alignment: .leading) {
+                        Section {
+                            BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[5])
+                                .keyboardType(.numbersAndPunctuation)
+                                .focused($focusedField, equals: .studentId)
+                                .id(SignUpField.studentId.rawValue)
+                        } header: {
+                            Text("학번")
+                                .font(.system(size: 12))
+                        }
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Section {
+                            BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $signUpModel.text[6])
+                                .keyboardType(.numbersAndPunctuation)
+                                .focused($focusedField, equals: .phoneNumber)
+                                .id(SignUpField.phoneNumber.rawValue)
+                        } header: {
+                            Text("휴대폰 번호")
+                                .font(.system(size: 12))
+                        }
+                    }
+                    
+                    btnGoCertification
+                    Spacer()
+                } // vstack
+                .padding(.horizontal, 28)
+                .offset(y : CGFloat(focusedField?.rawValue ?? 0) * -40)
+                .padding(.bottom, CGFloat(focusedField?.rawValue ?? 0) * -40)
+                .animation(.spring(), value: focusedField)
+                .onSubmit {
+                    focusedField = signUpModel.foucsChange(curIndex: focusedField?.rawValue ?? 0)
+                    print(focusedField?.rawValue)
                 }
-                
-                nextViewButton
-                Spacer()
+            } // scroll
+            .navigationTitle("")
+            .toolbar {
+                ToolbarItemGroup(placement: .principal) {
+                Text("회원가입").font(.system(size: 20, weight: .medium))}}
+            
+            if focusedField != nil {
+                Rectangle()
+                    .frame(width: UIScreen.main.bounds.width, height: 1)
+                    .foregroundColor(.BackgroundColor)
+                    .background(.background)
+                    .offset(y: -40)
             }
-            .padding(.horizontal, 28)
-            .offset(y: CGFloat(foucesField?.rawValue ?? 0) * -40)
-            .animation(.spring(), value: foucesField)
-        }
-    }
+        } //ZStack
+    } // body
     
     var email: some View {
         
@@ -123,17 +142,11 @@ struct SignUp: View {
         }
     }
     
-    var nextViewButton: some View {
+    var btnGoCertification: some View {
         HStack {
             Spacer()
             NavigationLink {
                 Certification(user: signUpModel.getUserInfo())
-                    .toolbar {
-                        ToolbarItemGroup(placement: .principal) {
-                            Text("이메일 인증")
-                                .font(.system(size: 20, weight: .medium))
-                        }
-                    }
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)
