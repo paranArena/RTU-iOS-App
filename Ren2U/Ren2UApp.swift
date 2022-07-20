@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct Ren2UApp: App {
     
+    @StateObject var authModel = AuthModel()
+    
     init() {
         // 네비게이션 바 틴트 컬러 변경 
         Theme.navigationBarColors(tintColor: .label)
@@ -18,7 +20,7 @@ struct Ren2UApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(AuthModel())
+                .environmentObject(authModel)
         }
     }
 }

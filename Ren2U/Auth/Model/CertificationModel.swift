@@ -12,11 +12,16 @@ class CertificationModel: ObservableObject {
     
     let certificationNumLengthLimit = 4
     
+    @Published var startTime: Date
     @Published var timeRemaining = 5*60
     @Published var isConfirmed = true 
     @Published var certificationNum = ""
     @Published var timer = Timer()
-
+    
+    init() {
+        startTime = Date.now
+    }
+    
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { Timer in
             if self.timeRemaining > 0 {
@@ -29,6 +34,7 @@ class CertificationModel: ObservableObject {
     
     func resetTimer() {
         self.timeRemaining = 5*60
+        self.startTime = Date.now
     }
     
     func endEditingIfLengthLimitReached() {
@@ -45,6 +51,20 @@ class CertificationModel: ObservableObject {
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i", minutes, seconds)
     }
+    
+    func setTimeRemaining() {
+        let curTime = Date.now
+        let diffTime = curTime.distance(to: startTime)
+        let result = Int(Double(diffTime.formatted())!)
+        startTime = curTime
+        timeRemaining += result
+        
+        if timeRemaining < 0 {
+            timeRemaining = 0
+        }
+    }
+    
+    
 }
 
 // MARK : MARK TEST
