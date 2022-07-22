@@ -11,6 +11,7 @@ import SwiftUI
 struct Ren2UApp: App {
     
     @StateObject var authModel = AuthModel()
+    @StateObject var groupModel = GroupModel()
     
     init() {
         // 네비게이션 바 틴트 컬러 변경 
@@ -21,6 +22,7 @@ struct Ren2UApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(authModel)
+                .environmentObject(groupModel)
         }
     }
 }

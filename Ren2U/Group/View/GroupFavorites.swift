@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct GroupFavorites: View {
+    
+    @EnvironmentObject var groupModel: GroupModel
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                
+            HStack(spacing: 15) {
+                ForEach(0..<5, id: \.self) { index in
+                    VGroupFavoriteCell(info: GroupInfo.dummyGroup())
+                }
             }
         }
     }

@@ -18,13 +18,7 @@ struct GroupSelected: View {
                         .font(.system(size: 16, weight: .medium))
                 }
                 
-                Section {
-                    JoinedGroup()
-                } header: {
-                    Text("가입된 그룹 목록")
-                        .font(.system(size: 16, weight: .medium))
-                }
-
+                JoinedGroup()
             }
             .frame(width: UIScreen.main.bounds.width)
         }

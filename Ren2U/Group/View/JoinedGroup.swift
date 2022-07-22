@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct JoinedGroup: View {
+    
     var body: some View {
-        Text("JoinedGroup")
+        
+        VStack {
+            Text("가입된 그룹 목록")
+                .font(.system(size: 16, weight: .medium))
+            ForEach(0..<10) { index in
+                HGroupCell(info: GroupInfo.dummyGroup())
+            }
+        }
     }
 }
 
-struct JoinedGroup_Previews: PreviewProvider {
-    static var previews: some View {
-        JoinedGroup()
-    }
-}
+//struct JoinedGroup_Previews: PreviewProvider {
+//    static var previews: some View {
+//        JoinedGroup()
+//    }
+//}

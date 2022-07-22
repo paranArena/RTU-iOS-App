@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct GroupFavoriteCell: View {
+struct VGroupFavoriteCell: View {
     
     let info: GroupInfo
     
@@ -18,6 +18,9 @@ struct GroupFavoriteCell: View {
                 .onFailure { err in
                     print(err.errorDescription)
                 }
+                .resizable()
+                .frame(width: 130, height: 130)
+                .cornerRadius(20)
             
             Text(info.groupName)
                 .font(.system(size: 16, weight: .medium))
@@ -33,7 +36,15 @@ struct GroupFavoriteCell: View {
         .overlay {
             VStack {
                 HStack {
-                    
+                    Spacer()
+                    Button {
+                        print("Star clicked!")
+                    } label: {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                    }
+                    .padding(5)
+
                 }
                 Spacer()
             }
@@ -41,8 +52,8 @@ struct GroupFavoriteCell: View {
     }
 }
 
-//struct GroupFavoriteCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GroupFavoriteCell()
-//    }
-//}
+struct GroupFavoriteCell_Previews: PreviewProvider {
+    static var previews: some View {
+        VGroupFavoriteCell(info: GroupInfo.dummyGroup())
+    }
+}

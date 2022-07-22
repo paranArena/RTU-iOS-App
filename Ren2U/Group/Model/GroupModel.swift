@@ -12,7 +12,16 @@ struct GroupInfo: Identifiable, Codable {
     let id = UUID()
     let imageSource: String
     let groupName: String
+    let groupId: String
     let tags: [Tag]
+    
+    static func dummyGroup() -> GroupInfo {
+        return GroupInfo(imageSource: "https://picsum.photos/200", groupName: "그룹이름", groupId: "12345", tags: [Tag]() )
+    }
+}
+
+struct LikeGroup: Codable {
+    let groupId: String
 }
 
 struct Tag: Codable, Hashable {
@@ -21,12 +30,9 @@ struct Tag: Codable, Hashable {
 
 class GroupModel: ObservableObject {
     @Published var groups = [GroupInfo]()
+    @Published var likesGroups = [LikeGroup]()
     
     func fetchGroups() {
         
     }
-    
-//    func dummyGroups() -> [GroupInfo] {
-//        
-//    }
 }

@@ -24,6 +24,7 @@ enum GroupSelection: Int, CaseIterable {
 struct GroupMain: View {
     
     @State var groupSelection: GroupSelection = .group
+    @EnvironmentObject var groupModel: GroupModel
     
     var body: some View {
         VStack {
@@ -48,6 +49,7 @@ struct GroupMain: View {
                 }
             }
         }
+        .padding(.horizontal, 20)
     }
 }
 
