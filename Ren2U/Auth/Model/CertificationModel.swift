@@ -13,7 +13,7 @@ class CertificationModel: ObservableObject {
     let certificationNumLengthLimit = 4
     
     @Published var startTime: Date
-    @Published var timeRemaining = 5*60
+    @Published var timeRemaining: Double = 5*60
     @Published var isConfirmed = true 
     @Published var certificationNum = ""
     @Published var timer = Timer()
@@ -26,6 +26,7 @@ class CertificationModel: ObservableObject {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { Timer in
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
+                print("남은 시간 : \(self.timeRemaining)")
             } else {
                 self.timer.invalidate()
             }
@@ -46,7 +47,7 @@ class CertificationModel: ObservableObject {
         return true
     }
     
-    func getTimeString(time: Int) -> String {
+    func getTimeString(time: Double) -> String {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i", minutes, seconds)
@@ -55,9 +56,8 @@ class CertificationModel: ObservableObject {
     func setTimeRemaining() {
         let curTime = Date.now
         let diffTime = curTime.distance(to: startTime)
-        let result = Int(Double(diffTime.formatted())!)
-        startTime = curTime
-        timeRemaining += result
+        let result = Double(diffTime.formatted())!
+        timeRemaining = 5*60 + result
         
         if timeRemaining < 0 {
             timeRemaining = 0

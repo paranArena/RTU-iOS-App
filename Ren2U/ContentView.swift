@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var viewModel: AuthModel
+    @EnvironmentObject var authModel: AuthModel
     
     var body: some View {
-        if viewModel.jwt == nil {
-            Login()
+        if authModel.jwt != nil {
+            Ren2UTab()
         } else {
-            Text("Login Success")
+            Login()
         }
     }
 }

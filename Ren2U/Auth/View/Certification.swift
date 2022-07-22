@@ -65,11 +65,10 @@ struct Certification: View {
             switch scenePhsae {
             case .active:
                 model.setTimeRemaining()
-                model.startTimer()
+            case .inactive:
+                break
             case .background:
                 break
-            case .inactive:
-                model.timer.invalidate()
             @unknown default:
                 break
             }
