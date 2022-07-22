@@ -12,11 +12,21 @@ struct GroupFavorites: View {
     @EnvironmentObject var groupModel: GroupModel
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 15) {
-                ForEach(0..<5, id: \.self) { index in
-                    VGroupFavoriteCell(info: GroupInfo.dummyGroup())
+        VStack(alignment: .leading) {
+            Text("즐겨찾기")
+                .font(.system(size: 16, weight: .medium))
+                .padding(.horizontal, 20)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 15) {
+                    ForEach(0..<5, id: \.self) { index in
+                        NavigationLink {
+                            Text("Group!")
+                        } label: {
+                            VGroupFavoriteCell(info: GroupInfo.dummyGroup())
+                        }
+                    }
                 }
+                .padding(.leading, 20)
             }
         }
     }

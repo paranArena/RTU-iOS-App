@@ -16,7 +16,7 @@ struct GroupInfo: Identifiable, Codable {
     let tags: [Tag]
     
     static func dummyGroup() -> GroupInfo {
-        return GroupInfo(imageSource: "https://picsum.photos/200", groupName: "그룹이름", groupId: "12345", tags: [Tag]() )
+        return GroupInfo(imageSource: "https://picsum.photos/200", groupName: "그룹이름", groupId: "12345", tags: [Tag(tag: "tag1"), Tag(tag: "tag2")] )
     }
 }
 

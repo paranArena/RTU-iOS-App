@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Ren2UTab: View {
+    
     var body: some View {
         TabView {
             Home()
@@ -15,6 +16,7 @@ struct Ren2UTab: View {
                     Image(systemName: "house")
                     Text("홈")
                 }
+                .foregroundColor(.Navy_1E2F97)
             GroupMain()
                 .tabItem {
                     Image(systemName: "person.2")
@@ -31,7 +33,6 @@ struct Ren2UTab: View {
                     Text("마이페이지")
                 }
         }
-        .accentColor(.Navy_1E2F97)
     }
 }
 

@@ -27,29 +27,43 @@ struct GroupMain: View {
     @EnvironmentObject var groupModel: GroupModel
     
     var body: some View {
-        VStack {
-            GroupSelectionButton(selectionOption: $groupSelection)
-            
-            if groupSelection == GroupSelection.group {
-                GroupSelected()
-            } else {
-                NoticeSelected() 
-            }
-        }
-        .overlay {
+        NavigationView {
             VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Image(systemName: "plus.circle")
-                        .resizable()
-                        .foregroundColor(.Navy_1E2F97)
-                        .frame(width: 60, height: 60)
-                        .padding(10)
+                GroupSelectionButton(selectionOption: $groupSelection)
+                
+                TabView(selection: $groupSelection) {
+                    GroupSelected()
+                        .tag(GroupSelection.group)
+                        .gesture(DragGesture()) // Swipe로 페이지 전환 막기
+                    
+                    NoticeSelected()
+                        .tag(GroupSelection.notice)
+                        .gesture(DragGesture())
+                    
                 }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+            }
+            .navigationBarTitleDisplayMode(.large)
+            .navigationBarHidden(true)
+            .overlay { CreateGroupButton() }
+            // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
+        }
+    }
+    
+    @ViewBuilder
+    func CreateGroupButton() -> some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Image(systemName: "plus.circle")
+                    .resizable()
+                    .foregroundColor(.Navy_1E2F97)
+                    .frame(width: 60, height: 60)
+                    .padding(10)
             }
         }
-        .padding(.horizontal, 20)
     }
 }
 

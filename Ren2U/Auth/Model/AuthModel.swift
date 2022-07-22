@@ -14,17 +14,27 @@ struct Account: Codable {
     var password: String
 }
 
+struct LoginResponse: Codable {
+    var statusCode: Int
+    var responseMessage: String
+    var data: UserToken
+    
+    struct UserToken: Codable {
+        var token: String
+    }
+}
+
 struct User: Codable {
     var email: String
     var password: String
     var name: String
-    var department: String
+    var major: String
     var studentId: String
     var phoneNumber: String
     var deviceToken: String
     
-    static let `default` = User(email: "temp@ajou.ac.kr", password: "12345", name: "Page",
-                                department: "소프트웨어학과", studentId: "1234567", phoneNumber: "01012345678",
+    static let `default` = User(email: "temp", password: "12345", name: "Page",
+                                major: "소프트웨어학과", studentId: "12345678", phoneNumber: "01012345678",
                                 deviceToken: "")
 }
 
@@ -51,22 +61,49 @@ class AuthModel: ObservableObject {
         guard num == 1234 else { return false }
         return true
     }
-    
+
     func signUp(user: User) {
-        let url = "http://localhost:8080/api/signup"
+        
+        let url = "http://localhost:8080/signup"
+        
         let param: [String: Any] = [
-            "username" : "123",
-            "password" : "123",
-            "nickname" : "123"
+            "email" : "\(user.email)@ajou.ac.kr",
+            "password" : user.password,
+            "name" : user.name,
+            "phoneNumber" : user.phoneNumber,
+            "studentId" : user.studentId,
+            "major" : user.major
         ]
         
-        AF.request(url, method: .post, encoding: JSONEncoding.default)
+        
+        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default)
             .responseString { res in
                 switch res.result {
                 case .success(let value):
-                    print("[\(self)] : \(value)")
+                    print("\(self) : \(value)")
                 case .failure(let err):
-                    print("[\(self)] : \(err)")
+                    print("\(self) : \(err)")
+                }
+            }
+    }
+    
+    func login(account: Account) {
+        self.jwt = "123"
+        let defaults = UserDefaults.standard
+        let url = "http://localhost:8080/authenticate"
+        let param: [String: Any] = [
+            "email" : account.email,
+            "password" : account.password
+        ]
+        
+        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default)
+            .responseDecodable(of: LoginResponse.self) { res in
+                switch res.result {
+                case .success(let value):
+                    print(value)
+                    break
+                case .failure(let err):
+                    print(err)
                 }
             }
     }
@@ -95,27 +132,6 @@ class AuthModel: ObservableObject {
                     print("[\(self)] : \(err)")
                 }
             }
-    }
-    
-    func login(account: Account) {
-        self.jwt = "123"
-//        let defaults = UserDefaults.standard
-//        let url = ""
-//        let param: [String: Any] = [
-//            "email" : account.email,
-//            "password" : account.password
-//        ]
-//
-//        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default)
-//            .responseDecodable(of: Account.self) { response in
-//                switch response.result {
-//                case .success(let value):
-//                    defaults.setValue(value, forKey: "jwt")
-//                    self.jwt = defaults.value(forKey: "jwt") as? String
-//                case .failure(let err):
-//                    print("[\(self)] login Error : \(err.localizedDescription)")
-//                }
-//            }
     }
     
     func logout() {

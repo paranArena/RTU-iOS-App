@@ -9,18 +9,14 @@ import SwiftUI
 
 struct GroupSelected: View {
     var body: some View {
-        ScrollView {
+        
+        ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading) {
-                Section {
-                    GroupFavorites()
-                } header: {
-                    Text("즐겨찾기")
-                        .font(.system(size: 16, weight: .medium))
-                }
-                
+                GroupFavorites()
                 JoinedGroup()
+                    .padding(.top, 30)
+                    .padding(.horizontal, 20)
             }
-            .frame(width: UIScreen.main.bounds.width)
         }
     }
 }

@@ -53,6 +53,7 @@ struct Login: View {
             .padding(.horizontal, 40)
             .onAppear {
                 loginModel.initTextFields()
+                authModel.hello()
             }
         }
     }

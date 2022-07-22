@@ -16,7 +16,9 @@ struct GroupSelectionButton: View {
         HStack {
             ForEach(GroupSelection.allCases, id: \.self) {  option in
                 Button {
-                    self.selectionOption = option
+                    withAnimation {
+                        self.selectionOption = option
+                    }
                 } label: {
                     Text(option.title)
                         .frame(width: selectionWidth)

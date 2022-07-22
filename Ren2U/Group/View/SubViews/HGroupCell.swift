@@ -22,7 +22,7 @@ struct HGroupCell: View {
                 .frame(width: 100, height: 100)
                 .cornerRadius(20)
             
-            VStack {
+            VStack(alignment: .leading) {
                 Text(info.groupName)
                     .font(.system(size: 16, weight: .medium))
                 
@@ -34,6 +34,7 @@ struct HGroupCell: View {
                     }
                 }
             }
+            .padding(.horizontal, 10)
         }
     }
 }

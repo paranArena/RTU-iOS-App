@@ -81,7 +81,7 @@ class SignUpModel: ObservableObject {
     
     func getUserInfo() -> User {
         return User(email: text[SignUpField.email.rawValue], password: text[SignUpField.password.rawValue],
-                    name: text[SignUpField.name.rawValue], department: text[SignUpField.department.rawValue],
+                    name: text[SignUpField.name.rawValue], major: text[SignUpField.department.rawValue],
                     studentId: text[SignUpField.studentId.rawValue], phoneNumber: text[SignUpField.studentId.rawValue],
                     deviceToken: "")
     }

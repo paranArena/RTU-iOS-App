@@ -26,7 +26,6 @@ class CertificationModel: ObservableObject {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { Timer in
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
-                print("남은 시간 : \(self.timeRemaining)")
             } else {
                 self.timer.invalidate()
             }

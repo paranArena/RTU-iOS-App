@@ -11,11 +11,18 @@ struct JoinedGroup: View {
     
     var body: some View {
         
-        VStack {
+        VStack(alignment: .leading) {
             Text("가입된 그룹 목록")
-                .font(.system(size: 16, weight: .medium))
-            ForEach(0..<10) { index in
-                HGroupCell(info: GroupInfo.dummyGroup())
+                .foregroundColor(.LabelColor)
+                .font(.system(size: 16, weight: .medium)) 
+            VStack {
+                ForEach(0..<10) { index in
+                    NavigationLink {
+                        Text("가입된 그룹 정보!")
+                    } label: {
+                        HGroupCell(info: GroupInfo.dummyGroup())
+                    }
+                }
             }
         }
     }
