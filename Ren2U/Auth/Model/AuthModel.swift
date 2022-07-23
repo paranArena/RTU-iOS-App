@@ -98,23 +98,24 @@ class AuthModel: ObservableObject {
     }
     
     func login(account: Account) {
-        let defaults = UserDefaults.standard
-        let url = ""
-        let param: [String: Any] = [
-            "email" : account.email,
-            "password" : account.password
-        ]
-        
-        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default)
-            .responseDecodable(of: Account.self) { response in
-                switch response.result {
-                case .success(let value):
-                    defaults.setValue(value, forKey: "jwt")
-                    self.jwt = defaults.value(forKey: "jwt") as? String
-                case .failure(let err):
-                    print("[\(self)] login Error : \(err.localizedDescription)")
-                }
-            }
+        self.jwt = "123"
+//        let defaults = UserDefaults.standard
+//        let url = ""
+//        let param: [String: Any] = [
+//            "email" : account.email,
+//            "password" : account.password
+//        ]
+//
+//        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default)
+//            .responseDecodable(of: Account.self) { response in
+//                switch response.result {
+//                case .success(let value):
+//                    defaults.setValue(value, forKey: "jwt")
+//                    self.jwt = defaults.value(forKey: "jwt") as? String
+//                case .failure(let err):
+//                    print("[\(self)] login Error : \(err.localizedDescription)")
+//                }
+//            }
     }
     
     func logout() {

@@ -12,6 +12,19 @@
 		152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */; };
 		152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */; };
 		152C3E87287E7750000BFC97 /* Certification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E86287E7750000BFC97 /* Certification.swift */; };
+		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
+		156386C0288A5249006653E8 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* Home.swift */; };
+		156386C2288A5252006653E8 /* GroupMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C1288A5252006653E8 /* GroupMain.swift */; };
+		156386C4288A525C006653E8 /* Rent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C3288A525C006653E8 /* Rent.swift */; };
+		156386C6288A5263006653E8 /* MyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C5288A5263006653E8 /* MyPage.swift */; };
+		156386C9288A58A0006653E8 /* GroupSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C8288A58A0006653E8 /* GroupSelectionButton.swift */; };
+		156386CB288A5B2F006653E8 /* GroupSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CA288A5B2F006653E8 /* GroupSelected.swift */; };
+		156386CD288A5B7B006653E8 /* NoticeSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CC288A5B7B006653E8 /* NoticeSelected.swift */; };
+		156386CF288A5C5B006653E8 /* GroupFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CE288A5C5B006653E8 /* GroupFavorites.swift */; };
+		156386D2288A5D1A006653E8 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D1288A5D1A006653E8 /* GroupModel.swift */; };
+		156386D4288A5D84006653E8 /* GroupFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D3288A5D84006653E8 /* GroupFavoriteCell.swift */; };
+		156386D7288A5E58006653E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 156386D6288A5E58006653E8 /* Kingfisher */; };
+		156386D9288A62DB006653E8 /* JoinedGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D8288A62DB006653E8 /* JoinedGroup.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationModel.swift */; };
 		15BDC4222881218500514EF1 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthModel.swift */; };
 		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
@@ -54,6 +67,18 @@
 		152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLineTextField.swift; sourceTree = "<group>"; };
 		152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLinePlaceholder.swift; sourceTree = "<group>"; };
 		152C3E86287E7750000BFC97 /* Certification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certification.swift; sourceTree = "<group>"; };
+		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
+		156386BF288A5249006653E8 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		156386C1288A5252006653E8 /* GroupMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMain.swift; sourceTree = "<group>"; };
+		156386C3288A525C006653E8 /* Rent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rent.swift; sourceTree = "<group>"; };
+		156386C5288A5263006653E8 /* MyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPage.swift; sourceTree = "<group>"; };
+		156386C8288A58A0006653E8 /* GroupSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSelectionButton.swift; sourceTree = "<group>"; };
+		156386CA288A5B2F006653E8 /* GroupSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSelected.swift; sourceTree = "<group>"; };
+		156386CC288A5B7B006653E8 /* NoticeSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSelected.swift; sourceTree = "<group>"; };
+		156386CE288A5C5B006653E8 /* GroupFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupFavorites.swift; sourceTree = "<group>"; };
+		156386D1288A5D1A006653E8 /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
+		156386D3288A5D84006653E8 /* GroupFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupFavoriteCell.swift; sourceTree = "<group>"; };
+		156386D8288A62DB006653E8 /* JoinedGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedGroup.swift; sourceTree = "<group>"; };
 		15868739287EBB3F0003C2DC /* CertificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationModel.swift; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		15D4C580287FF15A008BB89B /* NavigationBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColor.swift; sourceTree = "<group>"; };
@@ -80,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				156386D7288A5E58006653E8 /* Kingfisher in Frameworks */,
 				15BDC4252881225100514EF1 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +135,69 @@
 				152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */,
 			);
 			path = SubView;
+			sourceTree = "<group>";
+		};
+		156386BA288A51CF006653E8 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				156386D0288A5D06006653E8 /* Model */,
+				156386DA288A6523006653E8 /* View */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		156386BB288A51EE006653E8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				156386BF288A5249006653E8 /* Home.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		156386BC288A51F5006653E8 /* Rent */ = {
+			isa = PBXGroup;
+			children = (
+				156386C3288A525C006653E8 /* Rent.swift */,
+			);
+			path = Rent;
+			sourceTree = "<group>";
+		};
+		156386BD288A5201006653E8 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				156386C5288A5263006653E8 /* MyPage.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		156386C7288A588D006653E8 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				156386C8288A58A0006653E8 /* GroupSelectionButton.swift */,
+				156386D3288A5D84006653E8 /* GroupFavoriteCell.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		156386D0288A5D06006653E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				156386D1288A5D1A006653E8 /* GroupModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		156386DA288A6523006653E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				156386C7288A588D006653E8 /* SubViews */,
+				156386C1288A5252006653E8 /* GroupMain.swift */,
+				156386CA288A5B2F006653E8 /* GroupSelected.swift */,
+				156386CC288A5B7B006653E8 /* NoticeSelected.swift */,
+				156386CE288A5C5B006653E8 /* GroupFavorites.swift */,
+				156386D8288A62DB006653E8 /* JoinedGroup.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		15868738287EBB270003C2DC /* Model */ = {
@@ -158,8 +247,13 @@
 			children = (
 				15FAF160287D5EC100B35570 /* Global */,
 				15FAF15D287D5E0E00B35570 /* Auth */,
+				156386BB288A51EE006653E8 /* Home */,
+				156386BA288A51CF006653E8 /* Group */,
+				156386BC288A51F5006653E8 /* Rent */,
+				156386BD288A5201006653E8 /* MyPage */,
 				15FAF133287D5DFF00B35570 /* Ren2UApp.swift */,
 				15FAF135287D5DFF00B35570 /* ContentView.swift */,
+				156386B8288A513B006653E8 /* Ren2UTab.swift */,
 				15FAF137287D5E0000B35570 /* Assets.xcassets */,
 				15FAF139287D5E0000B35570 /* Preview Content */,
 			);
@@ -237,6 +331,7 @@
 			name = Ren2U;
 			packageProductDependencies = (
 				15BDC4242881225100514EF1 /* Alamofire */,
+				156386D6288A5E58006653E8 /* Kingfisher */,
 			);
 			productName = Ren2U;
 			productReference = 15FAF130287D5DFF00B35570 /* Ren2U.app */;
@@ -312,6 +407,7 @@
 			mainGroup = 15FAF127287D5DFF00B35570;
 			packageReferences = (
 				15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 15FAF131287D5DFF00B35570 /* Products */;
 			projectDirPath = "";
@@ -357,20 +453,32 @@
 			files = (
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
+				156386CD288A5B7B006653E8 /* NoticeSelected.swift in Sources */,
+				156386CF288A5C5B006653E8 /* GroupFavorites.swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
+				156386C0288A5249006653E8 /* Home.swift in Sources */,
 				1586873A287EBB3F0003C2DC /* CertificationModel.swift in Sources */,
+				156386C2288A5252006653E8 /* GroupMain.swift in Sources */,
+				156386D2288A5D1A006653E8 /* GroupModel.swift in Sources */,
+				156386D9288A62DB006653E8 /* JoinedGroup.swift in Sources */,
 				15246BD92884FD9A000BDFC8 /* LoginModel.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
+				156386D4288A5D84006653E8 /* GroupFavoriteCell.swift in Sources */,
+				156386C9288A58A0006653E8 /* GroupSelectionButton.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
+				156386CB288A5B2F006653E8 /* GroupSelected.swift in Sources */,
 				15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */,
 				15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */,
 				15FAF15F287D5E1800B35570 /* Login.swift in Sources */,
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15BDC4222881218500514EF1 /* AuthModel.swift in Sources */,
+				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
+				156386C4288A525C006653E8 /* Rent.swift in Sources */,
 				15D4C583287FF7C0008BB89B /* SignUpModel.swift in Sources */,
+				156386C6288A5263006653E8 /* MyPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +805,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -708,6 +824,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		156386D6288A5E58006653E8 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		15BDC4242881225100514EF1 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */;

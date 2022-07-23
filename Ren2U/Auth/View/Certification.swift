@@ -9,11 +9,10 @@ import SwiftUI
 
 struct Certification: View {
     
+    @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var authModel: AuthModel
     @StateObject var model = CertificationModel()
     let user: User
-    
-//    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -62,14 +61,20 @@ struct Certification: View {
             .padding(.top, 40)
         }
         .navigationTitle(" ")
-        .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                if model.timeRemaining > 0 {
-                    model.timeRemaining -= 1
-                } else {
-                    timer.invalidate()
-                }
+        .onChange(of: scenePhase, perform: { scenePhsae in
+            switch scenePhsae {
+            case .active:
+                model.setTimeRemaining()
+            case .inactive:
+                break
+            case .background:
+                break
+            @unknown default:
+                break
             }
+        })
+        .onAppear {
+            model.startTimer()
         }
         .toolbar {
             ToolbarItemGroup(placement: .principal) {

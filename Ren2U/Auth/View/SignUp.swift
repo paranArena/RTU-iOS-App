@@ -99,7 +99,6 @@ struct SignUp: View {
                 .animation(.spring(), value: focusedField)
                 .onSubmit {
                     focusedField = signUpModel.foucsChange(curIndex: focusedField?.rawValue ?? 0)
-                    print(focusedField?.rawValue)
                 }
             } // scroll
         } //VStack
