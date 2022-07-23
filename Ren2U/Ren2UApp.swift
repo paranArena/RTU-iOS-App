@@ -16,6 +16,9 @@ struct Ren2UApp: App {
     init() {
         // 네비게이션 바 틴트 컬러 변경 
         Theme.navigationBarColors(tintColor: .label)
+        
+        // 폰트 이름 출력
+         FontName.printPontNames()
     }
     
     var body: some Scene {

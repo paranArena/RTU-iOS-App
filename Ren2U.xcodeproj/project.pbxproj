@@ -22,11 +22,14 @@
 		156386CD288A5B7B006653E8 /* NoticeSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CC288A5B7B006653E8 /* NoticeSelected.swift */; };
 		156386CF288A5C5B006653E8 /* GroupFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CE288A5C5B006653E8 /* GroupFavorites.swift */; };
 		156386D2288A5D1A006653E8 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D1288A5D1A006653E8 /* GroupModel.swift */; };
-		156386D4288A5D84006653E8 /* VGroupFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D3288A5D84006653E8 /* VGroupFavoriteCell.swift */; };
+		156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */; };
 		156386D7288A5E58006653E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 156386D6288A5E58006653E8 /* Kingfisher */; };
 		156386D9288A62DB006653E8 /* JoinedGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D8288A62DB006653E8 /* JoinedGroup.swift */; };
-		156386DC288A6E0B006653E8 /* HGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386DB288A6E0B006653E8 /* HGroupCell.swift */; };
+		156386DC288A6E0B006653E8 /* JoinedGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386DB288A6E0B006653E8 /* JoinedGroupCell.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationModel.swift */; };
+		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
+		159F1B26288BA16000012113 /* AboutFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* AboutFont.swift */; };
+		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
 		15BDC4222881218500514EF1 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthModel.swift */; };
 		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
 		15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C580287FF15A008BB89B /* NavigationBarColor.swift */; };
@@ -78,10 +81,14 @@
 		156386CC288A5B7B006653E8 /* NoticeSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSelected.swift; sourceTree = "<group>"; };
 		156386CE288A5C5B006653E8 /* GroupFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupFavorites.swift; sourceTree = "<group>"; };
 		156386D1288A5D1A006653E8 /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
-		156386D3288A5D84006653E8 /* VGroupFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGroupFavoriteCell.swift; sourceTree = "<group>"; };
+		156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGroupCell.swift; sourceTree = "<group>"; };
 		156386D8288A62DB006653E8 /* JoinedGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedGroup.swift; sourceTree = "<group>"; };
-		156386DB288A6E0B006653E8 /* HGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HGroupCell.swift; sourceTree = "<group>"; };
+		156386DB288A6E0B006653E8 /* JoinedGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedGroupCell.swift; sourceTree = "<group>"; };
 		15868739287EBB3F0003C2DC /* CertificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationModel.swift; sourceTree = "<group>"; };
+		159F1B20288B88DB00012113 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		159F1B24288BA0C200012113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		159F1B25288BA16000012113 /* AboutFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFont.swift; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		15D4C580287FF15A008BB89B /* NavigationBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColor.swift; sourceTree = "<group>"; };
 		15D4C582287FF7C0008BB89B /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
@@ -176,8 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				156386C8288A58A0006653E8 /* GroupSelectionButton.swift */,
-				156386D3288A5D84006653E8 /* VGroupFavoriteCell.swift */,
-				156386DB288A6E0B006653E8 /* HGroupCell.swift */,
+				156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */,
+				156386DB288A6E0B006653E8 /* JoinedGroupCell.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -214,6 +221,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		159F1B22288B9F7000012113 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */,
+				159F1B25288BA16000012113 /* AboutFont.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		15D4C57F287FD4CF008BB89B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +264,7 @@
 		15FAF132287D5DFF00B35570 /* Ren2U */ = {
 			isa = PBXGroup;
 			children = (
+				159F1B24288BA0C200012113 /* Info.plist */,
 				15FAF160287D5EC100B35570 /* Global */,
 				15FAF15D287D5E0E00B35570 /* Auth */,
 				156386BB288A51EE006653E8 /* Home */,
@@ -300,9 +317,11 @@
 		15FAF160287D5EC100B35570 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				159F1B22288B9F7000012113 /* Font */,
 				15FAF166287D606700B35570 /* View */,
 				15FAF168287D607800B35570 /* Extension.swift */,
 				15D4C580287FF15A008BB89B /* NavigationBarColor.swift */,
+				159F1B20288B88DB00012113 /* Variables.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -428,6 +447,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */,
 				15FAF13B287D5E0000B35570 /* Preview Assets.xcassets in Resources */,
 				15FAF138287D5E0000B35570 /* Assets.xcassets in Resources */,
 			);
@@ -463,12 +483,14 @@
 				156386C0288A5249006653E8 /* Home.swift in Sources */,
 				1586873A287EBB3F0003C2DC /* CertificationModel.swift in Sources */,
 				156386C2288A5252006653E8 /* GroupMain.swift in Sources */,
+				159F1B21288B88DB00012113 /* Variables.swift in Sources */,
 				156386D2288A5D1A006653E8 /* GroupModel.swift in Sources */,
 				156386D9288A62DB006653E8 /* JoinedGroup.swift in Sources */,
+				159F1B26288BA16000012113 /* AboutFont.swift in Sources */,
 				15246BD92884FD9A000BDFC8 /* LoginModel.swift in Sources */,
-				156386DC288A6E0B006653E8 /* HGroupCell.swift in Sources */,
+				156386DC288A6E0B006653E8 /* JoinedGroupCell.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
-				156386D4288A5D84006653E8 /* VGroupFavoriteCell.swift in Sources */,
+				156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */,
 				156386C9288A58A0006653E8 /* GroupSelectionButton.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
@@ -644,6 +666,7 @@
 				DEVELOPMENT_TEAM = MAU8HFALP8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ren2U/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -673,6 +696,7 @@
 				DEVELOPMENT_TEAM = MAU8HFALP8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ren2U/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

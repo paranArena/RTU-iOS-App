@@ -16,13 +16,11 @@ struct GroupSelectionButton: View {
         HStack {
             ForEach(GroupSelection.allCases, id: \.self) {  option in
                 Button {
-                    withAnimation {
-                        self.selectionOption = option
-                    }
+                    self.selectionOption = option
                 } label: {
                     Text(option.title)
                         .frame(width: selectionWidth)
-                        .font(.system(size: 18, weight: .medium))
+                        .font(.custom(CustomFont.NotoSansKR.rawValue, size: 18))
                         .foregroundColor(selectionOption == option ? .Navy_1E2F97 : .Gray_ADB5BD)
                 }
 

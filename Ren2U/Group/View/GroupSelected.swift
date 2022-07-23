@@ -15,7 +15,6 @@ struct GroupSelected: View {
                 GroupFavorites()
                 JoinedGroup()
                     .padding(.top, 30)
-                    .padding(.horizontal, 20)
             }
         }
     }

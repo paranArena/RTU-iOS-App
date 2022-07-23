@@ -10,11 +10,10 @@ import SwiftUI
 struct GroupFavorites: View {
     
     @EnvironmentObject var groupModel: GroupModel
-    
     var body: some View {
         VStack(alignment: .leading) {
             Text("즐겨찾기")
-                .font(.system(size: 16, weight: .medium))
+                .font(.custom(CustomFont.NotoSansKR.rawValue, size: 16))
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
@@ -22,7 +21,7 @@ struct GroupFavorites: View {
                         NavigationLink {
                             Text("Group!")
                         } label: {
-                            VGroupFavoriteCell(info: GroupInfo.dummyGroup())
+                            FavoriteGroupCell(info: GroupInfo.dummyGroup())
                         }
                     }
                 }

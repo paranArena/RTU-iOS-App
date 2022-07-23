@@ -31,19 +31,16 @@ struct GroupMain: View {
             VStack {
                 GroupSelectionButton(selectionOption: $groupSelection)
                 
-                TabView(selection: $groupSelection) {
+                ZStack {
                     GroupSelected()
-                        .tag(GroupSelection.group)
-                        .gesture(DragGesture()) // Swipe로 페이지 전환 막기
-                    
+                        .offset(x: groupSelection == GroupSelection.group ? 0 : -SCREEN_WIDTH)
                     NoticeSelected()
-                        .tag(GroupSelection.notice)
-                        .gesture(DragGesture())
-                    
+                        .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+                
+                Spacer() // ZStack이 Tabbar 위에 올라가지 않도록 해줌)
             }
+            .animation(.spring(), value: groupSelection)
             .navigationBarTitleDisplayMode(.large)
             .navigationBarHidden(true)
             .overlay { CreateGroupButton() }
@@ -60,6 +57,7 @@ struct GroupMain: View {
                 Image(systemName: "plus.circle")
                     .resizable()
                     .foregroundColor(.Navy_1E2F97)
+                    .background(Color.BackgroundColor)
                     .frame(width: 60, height: 60)
                     .padding(10)
             }

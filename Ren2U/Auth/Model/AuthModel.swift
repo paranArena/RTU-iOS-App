@@ -51,8 +51,8 @@ class AuthModel: ObservableObject {
     
     
     func sendCertificationNum() {
-        let random = Int.random(in: 0000...9999)
-        let randomGenerateNum = String(random)
+//        let random = Int.random(in: 0000...9999)
+//        let randomGenerateNum = String(random)
     }
     
     func checkCertificationNum(num: String, user: User) -> Bool{
@@ -89,7 +89,7 @@ class AuthModel: ObservableObject {
     
     func login(account: Account) {
         self.jwt = "123"
-        let defaults = UserDefaults.standard
+//        let defaults = UserDefaults.standard
         let url = "http://localhost:8080/authenticate"
         let param: [String: Any] = [
             "email" : account.email,
