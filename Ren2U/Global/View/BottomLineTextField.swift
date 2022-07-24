@@ -18,6 +18,7 @@ struct BottomLineTextfield: View {
     
     let placeholder: String
     let placeholderLocation: OverlayLocation
+    let placeholderSize: Int
     @Binding var isConfirmed : Bool
     @Binding var text: String
     
@@ -38,7 +39,7 @@ struct BottomLineTextfield: View {
                         Spacer()
                     }
                     Text(placeholder)
-                        .font(.system(size: 14))
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: CGFloat(placeholderSize)))
                         .foregroundColor(.Gray_ADB5BD)
                     if placeholderLocation == .leading {
                         Spacer()
@@ -48,8 +49,8 @@ struct BottomLineTextfield: View {
     }
 }
 
-struct TextEditorBottomLine__Previews: PreviewProvider {
-    static var previews: some View {
-        BottomLineTextfield( placeholder: "보기", placeholderLocation: .trailing, isConfirmed: .constant(false), text: .constant("Text"))
-    }
-}
+//struct TextEditorBottomLine__Previews: PreviewProvider {
+//    static var previews: some View {
+//        BottomLineTextfield( placeholder: "보기", placeholderLocation: .trailing, is, placeholderSize: 14, Confirmed: .constant(false), text: .constant("Text"))
+//    }
+//}

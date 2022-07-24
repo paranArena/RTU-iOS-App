@@ -19,7 +19,8 @@ struct Login: View {
 
                 GreetingText
                 
-                CapsulePlaceholder(text: $loginModel.account.email, placeholder: Text("E-mail"))
+                CapsulePlaceholder(text: $loginModel.account.email, placeholder: Text("E-mail"),
+                                   color: .Gray_ADB5BD)
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
                     .padding(.top, 46)
                     .onSubmit { focus = .password }

@@ -11,10 +11,12 @@ struct GroupSelected: View {
     var body: some View {
         
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading) {
-                GroupFavorites()
-                JoinedGroup()
-                    .padding(.top, 30)
+            RefreshableView {
+                VStack(alignment: .leading) {
+                    GroupFavorites()
+                    JoinedGroup()
+                        .padding(.top, 30)
+                }
             }
         }
     }

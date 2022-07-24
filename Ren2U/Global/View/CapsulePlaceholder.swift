@@ -12,13 +12,14 @@ struct CapsulePlaceholder: View {
     
     @Binding var text: String
     let placeholder: Text
+    let color: Color
     
     var body: some View {
         ZStack(alignment: .leading) {
             if text.isEmpty {
                 placeholder
                     .padding()
-                    .foregroundColor(.Gray_ADB5BD)
+                    .foregroundColor(color) 
             }
             
             TextField("", text: $text)
@@ -27,7 +28,7 @@ struct CapsulePlaceholder: View {
         }
         .overlay(
             Capsule()
-                .stroke(Color.Gray_ADB5BD, lineWidth: 1)
+                .stroke(color, lineWidth: 1)
         )
     }
 }

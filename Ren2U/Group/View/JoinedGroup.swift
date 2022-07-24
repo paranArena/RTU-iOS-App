@@ -26,11 +26,12 @@ struct JoinedGroup: View {
                 }
             }
         }
+        .frame(width: SCREEN_WIDTH)
     }
 }
 
-//struct JoinedGroup_Previews: PreviewProvider {
-//    static var previews: some View {
-//        JoinedGroup()
-//    }
-//}
+struct JoinedGroup_Previews: PreviewProvider {
+    static var previews: some View {
+        JoinedGroup()
+    }
+}

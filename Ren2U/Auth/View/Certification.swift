@@ -26,7 +26,7 @@ struct Certification: View {
                     .foregroundColor(.Gray_495057)
                     .padding(.top, 50)
                 
-                CapsulePlaceholder(text: $model.certificationNum, placeholder: Text(""))
+                CapsulePlaceholder(text: $model.certificationNum, placeholder: Text(""), color: .Gray_ADB5BD)
                     .keyboardType(.numberPad)
                     .font(.custom(CustomFont.RobotoMedium.rawValue, size: 36))
                     .multilineTextAlignment(.center)

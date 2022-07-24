@@ -9,31 +9,47 @@ import SwiftUI
 
 struct Ren2UTab: View {
     
+    init() {
+        let image =
+            UIImage.gradientImageWithBounds(bounds: CGRect(x: 0, y: 0, width: UIScreen.main.scale, height: 8), colors: [
+                UIColor.clear.cgColor,
+                UIColor.black.withAlphaComponent(0.1).cgColor
+            ])
+        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor.systemGray6
+        appearance.backgroundImage = UIImage()
+        appearance.shadowImage = image
+        UITabBar.appearance().standardAppearance = appearance
+    }
     var body: some View {
-        TabView {
-            Home()
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("홈")
-                }
-            GroupMain()
-                .tabItem {
-                    Image(systemName: "person.2")
-                    Text("그룹")
-                }
-            Rent()
-                .tabItem {
-                    Image(systemName: "rectangle.on.rectangle")
-                    Text("대여")
-                }
-            MyPage()
-                .tabItem {
-                    Image(systemName: "person")
-                    Text("마이페이지")
-                }
+        NavigationView {
+            TabView {
+                Home()
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("홈")
+                    }
+                GroupMain()
+                    .tabItem {
+                        Image(systemName: "person.2")
+                        Text("그룹")
+                    }
+                Rent()
+                    .tabItem {
+                        Image(systemName: "rectangle.on.rectangle")
+                        Text("대여")
+                    }
+                MyPage()
+                    .tabItem {
+                        Image(systemName: "person")
+                        Text("마이페이지")
+                    }
+            }
+            .accentColor(.Navy_1E2F97)
+            .foregroundColor(.LabelColor)
         }
-        .accentColor(.Navy_1E2F97)
-        .foregroundColor(.LabelColor)
     }
 }
 

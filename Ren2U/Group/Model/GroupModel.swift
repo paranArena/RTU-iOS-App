@@ -54,7 +54,6 @@ class GroupModel: ObservableObject {
 
             let newTag = "#\(tag.tag) "
             newLineCounter += newTag.utf8.count
-            print("\(tag.tag) : \(newLineCounter)")
             
             if !isReachedLineLimit && newLineCounter > 32 {
                 isReachedLineLimit = true

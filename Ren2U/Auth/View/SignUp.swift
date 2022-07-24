@@ -87,7 +87,7 @@ struct SignUp: View {
                                 .id(SignUpField.phoneNumber.rawValue)
                         } header: {
                             Text("휴대폰 번호")
-                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                                .font(.system(size: 12))
                         }
                     }
 
@@ -115,7 +115,7 @@ struct SignUp: View {
         VStack(alignment: .leading) {
             Section {
                 HStack {
-                    BottomLineTextfield(placeholder: "", placeholderLocation: .none, isConfirmed: $signUpModel.isOverlappedEmail, text: $signUpModel.text[0])
+                    BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $signUpModel.isOverlappedEmail, text: $signUpModel.text[0])
                         .onChange(of: signUpModel.text[SignUpField.email.rawValue]) { _ in signUpModel.isOverlappedEmail = false }
 
                     Text("@ajou.ac.kr")
