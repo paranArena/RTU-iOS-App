@@ -13,7 +13,7 @@ struct GroupFavorites: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("즐겨찾기")
-                .font(.custom(CustomFont.NotoSansKR.rawValue, size: 16))
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {

@@ -20,18 +20,18 @@ struct FavoriteGroupCell: View {
                     print(err.errorDescription)
                 }
                 .resizable()
-                .frame(width: 140, height: 140)
+                .frame(width: 120, height: 120)
                 .cornerRadius(20)
                 .overlay { LikeStar() }
             
             Text(info.groupName)
-                .font(.custom(CustomFont.NotoSansKR.rawValue, size: 16))
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.top, 5)
             
             Text(groupModel.makeFavoritesGroupTag(tags: info.tags))
-                .font(.custom(CustomFont.NotoSansKR.rawValue, size: 12))
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 .foregroundColor(.Gray_ADB5BD)
-                .multilineTextAlignment(.leading)
+                .multilineTextAlignment(.center)
                 .padding(.top, 0)
                 .lineLimit(2)
         }

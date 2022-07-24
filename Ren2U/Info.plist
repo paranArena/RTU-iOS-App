@@ -5,6 +5,12 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>NotoSansKR-Medium.otf</string>
+		<string>NotoSansKR-Regular.otf</string>
+		<string>Roboto-Black.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string></string>
 	</array>
 </dict>
 </plist>

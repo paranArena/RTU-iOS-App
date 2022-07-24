@@ -17,7 +17,9 @@ struct GroupInfo: Identifiable, Codable {
     
     static func dummyGroup() -> GroupInfo {
         return GroupInfo(imageSource: "https://picsum.photos/200", groupName: "그룹이름", groupId: "12345",
-                         tags: [Tag(tag: "tag1"), Tag(tag: "tag2"), Tag(tag: "tag3"), Tag(tag: "tag?"), Tag(tag: "태그4"), Tag(tag: "태그5"),
+                         tags: [Tag(tag: "태그"), Tag(tag: "태그"), Tag(tag: "태그"), Tag(tag: "태그"),
+                                Tag(tag: "태그"), Tag(tag: "태그"), Tag(tag: "태그"), Tag(tag: "태그"),
+                                Tag(tag: "태그4"), Tag(tag: "태그5"),
                                 Tag(tag: "태그6"), Tag(tag: "태그7"), Tag(tag: "Final Tag!")])
     }
 }
@@ -46,15 +48,21 @@ class GroupModel: ObservableObject {
     func makeFavoritesGroupTag(tags: [Tag]) -> String {
         var tagLabel: String = ""
         var newLineCounter: Int = 0
+        var isReachedLineLimit = false
         
         for tag in tags {
-            print("\(tag.tag)의 길이 : \(tag.tag.utf8.count)")
+
             let newTag = "#\(tag.tag) "
             newLineCounter += newTag.utf8.count
+            print("\(tag.tag) : \(newLineCounter)")
             
-            if newLineCounter > 24 {
+            if !isReachedLineLimit && newLineCounter > 32 {
+                isReachedLineLimit = true
                 tagLabel.append(contentsOf: "\n")
                 newLineCounter = 0
+            } else if isReachedLineLimit && newLineCounter > 23 {
+                tagLabel.append(contentsOf: "\n")
+                return tagLabel
             }
             
             tagLabel.append(contentsOf: newTag)

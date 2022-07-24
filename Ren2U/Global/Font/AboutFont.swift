@@ -22,5 +22,10 @@ class FontName {
 }
 
 enum CustomFont: String {
-    case NotoSansKR = "NotoSansKR-Medium"
+    case NSKRMedium = "NotoSansKR-Medium"
+    case NSKRRegular = "NotoSansKR-Regular"
+    case RobotoBlack = "Roboto-Black"
+    case RobotoRegular = "Roboto-Reuglar"
+    case RobotoMedium = "Roboto-Medium"
+    case RobotoBold = "Roboto-Bold"
 }

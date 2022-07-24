@@ -18,28 +18,35 @@ struct Certification: View {
         ScrollView(showsIndicators: false) {
             VStack {
                 Text("이메일로\n인증번호가 발송되었습니다.")
-                    .multilineTextAlignment(.center) .font(.system(size: 20, weight: .medium))
+                    .multilineTextAlignment(.center)
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                 
                 Text("4자리 숫자를 입력해주세요.")
-                    .foregroundColor(.Gray_495057) .padding(.top, 50)
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                    .foregroundColor(.Gray_495057)
+                    .padding(.top, 50)
                 
                 CapsulePlaceholder(text: $model.certificationNum, placeholder: Text(""))
-                    .keyboardType(.numberPad)   .font(.system(size: 36))
-                    .multilineTextAlignment(.center)    .overlay(TimerOverlay)
+                    .keyboardType(.numberPad)
+                    .font(.custom(CustomFont.RobotoMedium.rawValue, size: 36))
+                    .multilineTextAlignment(.center)
+                    .overlay(TimerOverlay())
                     .onTapGesture { model.certificationNum = "" }
                     .onChange(of: model.certificationNum) { _ in
                         model.endEditingIfLengthLimitReached()
                     }
                 
                 Text(model.isConfirmed ? " " : "인증번호가 일치하지 않습니다.")
-                    .font(.system(size: 14))
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .foregroundColor(.Red_EB1808)
                 
                 Button {
                     model.resetTimer()
                     model.certificationNum = ""
                 } label: {Text("인증번호 재발송")}
-                    .foregroundColor(.Gray_495057) .padding(.top, 50)
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+                    .foregroundColor(.Gray_495057)
+                    .padding(.top, 50)
                 
                 Button {
                     model.isConfirmed = authModel.checkCertificationNum(num: model.certificationNum, user: user)
@@ -79,16 +86,19 @@ struct Certification: View {
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text("이메일 인증")
-                    .font(.system(size: 20, weight: .medium))
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
         }
     }
     
-    var TimerOverlay: some View {
+    
+    @ViewBuilder
+    func TimerOverlay() -> some View {
         HStack {
             Spacer()
             Text("\(model.getTimeString(time:model.timeRemaining))")
-                .font(.system(size: 16)) .padding(.trailing, 10)
+                .font(.custom(CustomFont.RobotoMedium.rawValue, size: 16))
+                .padding(.trailing, 10)
                 .foregroundColor(.Red_EB1808)
         }
     }

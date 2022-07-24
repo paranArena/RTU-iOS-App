@@ -20,7 +20,7 @@ struct GroupSelectionButton: View {
                 } label: {
                     Text(option.title)
                         .frame(width: selectionWidth)
-                        .font(.custom(CustomFont.NotoSansKR.rawValue, size: 18))
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
                         .foregroundColor(selectionOption == option ? .Navy_1E2F97 : .Gray_ADB5BD)
                 }
 

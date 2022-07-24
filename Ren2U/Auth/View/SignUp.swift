@@ -21,13 +21,13 @@ struct SignUp: View {
             Rectangle()
                 .frame(width: UIScreen.main.bounds.width, height: 1)
                 .foregroundColor(Color.BackgroundColor)
-                .background(.background)
+                .background(Color.BackgroundColor)
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 25) {
 
                     Group {
-                        email
+                        Email()
 
                         PasswordTextField(textType: password[0], text: $signUpModel.text[SignUpField.password.rawValue],
                                           isShowingPassword: $signUpModel.isShowingPassword)
@@ -50,7 +50,7 @@ struct SignUp: View {
                                 .id(SignUpField.name.rawValue)
                         } header: {
                             Text("이름")
-                                .font(.system(size: 12))
+                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         }
                     }
 
@@ -62,7 +62,7 @@ struct SignUp: View {
 
                         } header: {
                             Text("학과")
-                                .font(.system(size: 12))
+                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         }
                     }
 
@@ -74,19 +74,20 @@ struct SignUp: View {
                                 .id(SignUpField.studentId.rawValue)
                         } header: {
                             Text("학번")
-                                .font(.system(size: 12))
+                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         }
                     }
 
                     VStack(alignment: .leading) {
                         Section {
                             BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $signUpModel.text[6])
+                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                                 .keyboardType(.numbersAndPunctuation)
                                 .focused($focusedField, equals: .phoneNumber)
                                 .id(SignUpField.phoneNumber.rawValue)
                         } header: {
                             Text("휴대폰 번호")
-                                .font(.system(size: 12))
+                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         }
                     }
 
@@ -105,10 +106,11 @@ struct SignUp: View {
         .navigationTitle(" ")
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
-            Text("회원가입").font(.system(size: 20, weight: .medium))}}
+                Text("회원가입").font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))}}
     } // body
     
-    var email: some View {
+    @ViewBuilder
+    func Email() -> some View {
         
         VStack(alignment: .leading) {
             Section {
@@ -117,14 +119,14 @@ struct SignUp: View {
                         .onChange(of: signUpModel.text[SignUpField.email.rawValue]) { _ in signUpModel.isOverlappedEmail = false }
 
                     Text("@ajou.ac.kr")
-                        .font(.system(size: 16))
+                        .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
                     
                     Button {
                         signUpModel.isOverlappedEmail.toggle()
                     } label: {
                         Text("중복확인")
                             .padding(5)
-                            .font(.system(size: 12))
+                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                             .overlay(Capsule().stroke(signUpModel.text[SignUpField.email.rawValue].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
                             .foregroundColor(signUpModel.text[SignUpField.email.rawValue].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
                             .padding(.leading, 19)
@@ -134,7 +136,7 @@ struct SignUp: View {
                 }
             } header: {
                 Text("아주대학교 이메일")
-                    .font(.system(size: 12))
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
             }
         }
         .padding(.top, 30)

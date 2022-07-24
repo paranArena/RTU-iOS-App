@@ -27,10 +27,10 @@ struct JoinedGroupCell: View {
                 
                 VStack(alignment: .leading) {
                     Text(info.groupName)
-                        .font(.custom(CustomFont.NotoSansKR.rawValue, size: 16))
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
                     Text(groupModel.makeFavoritesGroupTag(tags: info.tags))
-                        .font(.custom(CustomFont.NotoSansKR.rawValue, size: 12))
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(.Gray_ADB5BD)
                         .lineLimit(1)
                 }
