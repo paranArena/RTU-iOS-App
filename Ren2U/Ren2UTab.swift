@@ -10,6 +10,8 @@ import SwiftUI
 struct Ren2UTab: View {
     
     init() {
+        
+        // 탭바 그림자
         let image =
             UIImage.gradientImageWithBounds(bounds: CGRect(x: 0, y: 0, width: UIScreen.main.scale, height: 8), colors: [
                 UIColor.clear.cgColor,

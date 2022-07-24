@@ -7,18 +7,40 @@
 
 import SwiftUI
 
-enum CreateGroupField: Int, CaseIterable {
-    case groupName
-    case tagsText
-    case introduction 
-}
 class CreateGroupModel: ObservableObject {
     
     @Published var groupName = ""
     @Published var tagsText = ""
-    @Published var introduction = "" 
+    @Published var isShowingTagPlaceholder = true 
+    @Published var introduction = ""
     @Published var tags = [Tag]()
     
+    func showTagPlaceHolder(newValue: CreateGroupField?) {
+        if newValue == .tagsText {
+            self.isShowingTagPlaceholder = false
+        } else {
+            guard self.tagsText.isEmpty else { return }
+            isShowingTagPlaceholder = true
+        }
+    }
+    
+    func parsingTag() {
+        let parsedTags: [String] = tagsText.components(separatedBy: "#")
+                
+        for parsedTag in parsedTags {
+            var parsedTag = parsedTag
+            
+            if parsedTag == "" || parsedTag == " " {
+                continue
+            } else if parsedTag.last == " " {
+                parsedTag.removeLast()
+            }
+            
+            self.tags.append(Tag(tag: "#\(parsedTag)"))
+        }
+        
+        self.tagsText = ""
+    }
     
     func printUTF8Length(tag: String) {
         print("\(tag.utf8.count)")

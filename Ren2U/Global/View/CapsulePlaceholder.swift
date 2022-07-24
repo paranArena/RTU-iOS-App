@@ -24,7 +24,6 @@ struct CapsulePlaceholder: View {
             
             TextField("", text: $text)
                 .padding()
-                .onAppear(perform: UIApplication.shared.hideKeyboard)
         }
         .overlay(
             Capsule()

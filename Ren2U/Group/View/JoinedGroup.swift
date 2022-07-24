@@ -19,7 +19,7 @@ struct JoinedGroup: View {
             VStack {
                 ForEach(0..<10) { index in
                     NavigationLink {
-                        Text("가입된 그룹 정보!")
+                        GroupPage(groupInfo: GroupInfo.dummyGroup())
                     } label: {
                         JoinedGroupCell(info: GroupInfo.dummyGroup())
                     }

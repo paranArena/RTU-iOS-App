@@ -12,11 +12,14 @@ struct ContentView: View {
     @EnvironmentObject var authModel: AuthModel
     
     var body: some View {
-        if authModel.jwt != nil {
-            Ren2UTab()
-        } else {
-            Login()
+        Group {
+            if authModel.jwt != nil {
+                Ren2UTab()
+            } else {
+                Login()
+            }
         }
+        .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
 }
 

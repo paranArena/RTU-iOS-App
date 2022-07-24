@@ -3,12 +3,13 @@
 //  Ren2U
 //
 //  Created by 노우영 on 2022/07/24.
-//
+//  텍스트 필드 변경 감지 : https://stackoverflow.com/questions/58406224/how-to-detect-when-a-textfield-loses-the-focus-in-swiftui-for-ios
 
 import SwiftUI
 
 struct CreateGroup: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var createGroupModel = CreateGroupModel()
     @FocusState var focusField: CreateGroupField?
     
@@ -34,7 +35,7 @@ struct CreateGroup: View {
                     Text("그룹등록")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                 }
-        }
+            }
         }
     }
     
@@ -49,6 +50,10 @@ struct CreateGroup: View {
                 .font(.custom(CustomFont.RobotoRegular.rawValue, size: 30))
                 .overlay(SimpleBottomLine(color: Color.Gray_DEE2E6))
                 .focused($focusField, equals: .groupName)
+                .onSubmit {
+                    createGroupModel.isShowingTagPlaceholder = false
+                    focusField = .tagsText
+                }
         }
         .onTapGesture {
             focusField = .groupName
@@ -62,17 +67,53 @@ struct CreateGroup: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .foregroundColor(Color.Gray_495057)
             
-            BottomLineTextfield(placeholder: "#렌탈 #서비스는 #REN2U", placeholderLocation: .leading,
-                                placeholderSize: 18, isConfirmed: .constant(false), text: $createGroupModel.tagsText)
-            .onSubmit {
-                createGroupModel.printUTF8Length(tag: createGroupModel.tagsText)
+            ZStack(alignment: .leading) {
+                if createGroupModel.isShowingTagPlaceholder {
+                    Text("#렌탈 #서비스는 #REN2U")
+                        .foregroundColor(.Gray_ADB5BD)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
+                }
+                
+                TextField("", text: $createGroupModel.tagsText)
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
+                    .focused($focusField, equals: .tagsText)
+                    .onChange(of: focusField) { newValue in
+                        createGroupModel.parsingTag()
+                        createGroupModel.showTagPlaceHolder(newValue: newValue)
+                    }
             }
+            .overlay(
+                VStack {
+                    Spacer()
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(Color.Gray_ADB5BD)
+                }
+            )
             
             Text("#과 띄어쓰기를 포함해 영어는 최대 36글자, 한글은 24글자까지 가능합니다.")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .foregroundColor(Color.Gray_ADB5BD)
-                .padding(.top, -20)
+                .padding(.top, -10)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(createGroupModel.tags) { tag in
+                        Text(tag.tag)
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 10)
+                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                            .overlay(Capsule().stroke(lineWidth: 1))
+                    }
+                }
+                .foregroundColor(Color.Gray_495057)
+            }
         }
+        .onTapGesture {
+            focusField = CreateGroupField.tagsText
+            createGroupModel.isShowingTagPlaceholder = false
+        }
+        
     }
     
     @ViewBuilder
@@ -94,6 +135,7 @@ struct CreateGroup: View {
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .foregroundColor(Color.Gray_495057)
         }
+        .animation(.spring(), value: createGroupModel.tags)
     }
     
     @ViewBuilder
@@ -117,7 +159,12 @@ struct CreateGroup: View {
     
     @ViewBuilder
     func CreateCompleteButton() -> some View {
-        
+        Button {
+            presentationMode.wrappedValue.dismiss()
+        } label: {
+            Text("완료")
+        }
+
     }
 }
 

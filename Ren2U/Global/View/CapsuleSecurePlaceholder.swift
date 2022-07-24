@@ -22,7 +22,6 @@ struct CapsuleSecurePlaceholder: View {
             
             SecureField("", text: $text)
                 .padding()
-                .onAppear(perform: UIApplication.shared.hideKeyboard)
         }
         .overlay(
             Capsule()
