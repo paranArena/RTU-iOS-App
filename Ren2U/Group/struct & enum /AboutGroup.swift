@@ -36,6 +36,36 @@ struct Tag: Identifiable, Codable, Hashable {
     let tag: String
 }
 
+struct NoticeInfo: Identifiable {
+    var id = UUID()
+    let groupName: String
+    let noticeDto: NoticeDto
+    let isShown: Bool
+    
+    struct NoticeDto: Codable {
+        let imageSource: String?
+        let title: String
+        let updateDate: Date
+    }
+    
+    static func dummyNotices() -> [NoticeInfo] {
+        return [
+            NoticeInfo(groupName: "아나바다", noticeDto: NoticeDto(imageSource: "https://picsum.photos/seed/picsum/200/300",
+                                                               title: "그룹 공지!!", updateDate: Date.now), isShown: false),
+            NoticeInfo(groupName: "Ren2U", noticeDto: NoticeDto(imageSource: "https://picsum.photos/seed/picsum/200/300",
+                                                                title: "그룹 공지~~", updateDate: Date.now), isShown: true),
+            NoticeInfo(groupName: "Page", noticeDto: NoticeDto(imageSource: nil,
+                                                               title: "그룹 공지!!", updateDate: Date.now), isShown: false)]
+    }
+}
+
+struct RentalItemInfo: Identifiable, Codable {
+    var id = UUID()
+    let imageSource: String
+    let total: Int
+    let remain: Int
+}
+
 enum CreateGroupField: Int, CaseIterable {
     case groupName
     case tagsText

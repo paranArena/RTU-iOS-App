@@ -12,6 +12,7 @@ class GroupModel: ObservableObject {
     
     @Published var joinedGoups = [GroupInfo]()
     @Published var likesGroups = [LikeGroup]()
+    @Published var notices = [NoticeInfo]()
     
     func fetchJoinedGroups() {
         
