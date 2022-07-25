@@ -10,9 +10,9 @@ import Kingfisher
 
 struct GroupPage: View {
     
+    @EnvironmentObject var groupModel: GroupModel
     let groupInfo: GroupInfo
     let groupRole: GroupRole = .chairman
-    let notices = NoticeInfo.dummyNotices()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -35,6 +35,10 @@ struct GroupPage: View {
                     Spacer()
                 }
             }
+        }
+        .onAppear {
+            groupModel.fetchNotices()
+            groupModel.fetchRentalItems()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -122,8 +126,8 @@ struct GroupPage: View {
             }
             .padding(.horizontal)
             
-            ForEach(0..<3, id: \.self) { index in
-                NoticeCell(noticeInfo: notices[index])
+            ForEach(groupModel.notices) { notice in
+                NoticeCell(noticeInfo: notice)
             }
         }
         .padding(.bottom, 70)
@@ -149,8 +153,11 @@ struct GroupPage: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    
+                    ForEach(groupModel.rentalItems) { rentalItem in
+                        RentalItemCell(rentalItem: rentalItem)
+                    }
                 }
+                .padding(.horizontal, 20)
             }
         }
     }
@@ -158,6 +165,6 @@ struct GroupPage: View {
 
 struct GroupPage_Previews: PreviewProvider {
     static var previews: some View {
-        GroupPage(groupInfo: GroupInfo.dummyGroup())
+        GroupPage(groupInfo: GroupInfo.dummyGroups())
     }
 }

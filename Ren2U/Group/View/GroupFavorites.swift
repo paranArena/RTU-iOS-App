@@ -19,9 +19,9 @@ struct GroupFavorites: View {
                 HStack(spacing: 15) {
                     ForEach(0..<5, id: \.self) { index in
                         NavigationLink {
-                            GroupPage(groupInfo: GroupInfo.dummyGroup())
+                            GroupPage(groupInfo: GroupInfo.dummyGroups())
                         } label: {
-                            FavoriteGroupCell(info: GroupInfo.dummyGroup())
+                            FavoriteGroupCell(info: GroupInfo.dummyGroups())
                         }
                     }
                 }

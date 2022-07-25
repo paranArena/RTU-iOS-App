@@ -13,7 +13,7 @@ class CreateGroupModel: ObservableObject {
     @Published var tagsText = ""
     @Published var isShowingTagPlaceholder = true 
     @Published var introduction = ""
-    @Published var tags = [Tag]()
+    @Published var tags = [TagInfo]()
     
     func showTagPlaceHolder(newValue: CreateGroupField?) {
         if newValue == .tagsText {
@@ -36,7 +36,7 @@ class CreateGroupModel: ObservableObject {
                 parsedTag.removeLast()
             }
             
-            self.tags.append(Tag(tag: "#\(parsedTag)"))
+            self.tags.append(TagInfo(tag: "#\(parsedTag)"))
         }
         
         self.tagsText = ""

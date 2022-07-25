@@ -45,6 +45,6 @@ struct JoinedGroupCell: View {
 
 struct HGroupCell_Previews: PreviewProvider {
     static var previews: some View {
-        JoinedGroupCell(info: GroupInfo.dummyGroup())
+        JoinedGroupCell(info: GroupInfo.dummyGroups())
     }
 }

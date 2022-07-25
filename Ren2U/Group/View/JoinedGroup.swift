@@ -19,9 +19,9 @@ struct JoinedGroup: View {
             VStack {
                 ForEach(0..<10) { index in
                     NavigationLink {
-                        GroupPage(groupInfo: GroupInfo.dummyGroup())
+                        GroupPage(groupInfo: GroupInfo.dummyGroups())
                     } label: {
-                        JoinedGroupCell(info: GroupInfo.dummyGroup())
+                        JoinedGroupCell(info: GroupInfo.dummyGroups())
                     }
                 }
             }

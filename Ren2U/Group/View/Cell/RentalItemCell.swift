@@ -6,24 +6,35 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct RentalItemCell: View {
     
-    let rental
+    let rentalItem: RentalItemInfo
+    
     var body: some View {
-        VStack(alignment: .center, spacing: 5) {
-            KFImage(URL(string: imageSource)).onFailure { err in
-                    print(err.errorDescription)
+        VStack(alignment: .center, spacing: 0) {
+            KFImage(URL(string: rentalItem.imageSource)).onFailure { err in
+                print(err.errorDescription ?? "")
                 }
                 .resizable()
                 .cornerRadius(15)
-                .frame(width: 80, height: 80)
+                .frame(width: 110, height: 110)
+            
+            Text(rentalItem.itemName)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+            
+            Text("남은 수량 \(rentalItem.remain)/\(rentalItem.total)")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                .foregroundColor(Color.Gray_495057)
+
+            
         }
     }
 }
 
 struct RentalItemCell_Previews: PreviewProvider {
     static var previews: some View {
-        RentalItemCell()
+        RentalItemCell(rentalItem: RentalItemInfo.dummyRentalItem())
     }
 }

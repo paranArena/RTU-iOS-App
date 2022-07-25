@@ -58,6 +58,6 @@ struct FavoriteGroupCell: View {
 
 struct GroupFavoriteCell_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteGroupCell(info: GroupInfo.dummyGroup())
+        FavoriteGroupCell(info: GroupInfo.dummyGroups())
     }
 }
