@@ -30,11 +30,11 @@ struct CreateGroup: View {
                 }
                 .padding()
             }
-            .toolbar {
-                ToolbarItemGroup(placement: .principal) {
-                    Text("그룹등록")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-                }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .principal) {
+                Text("그룹등록")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
         }
     }

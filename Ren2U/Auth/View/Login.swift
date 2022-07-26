@@ -26,7 +26,7 @@ struct Login: View {
                 AuthHelp()
             }
             .navigationTitle(" ")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
             .padding(.horizontal, 40)
             .onAppear {
                 loginModel.initTextFields()

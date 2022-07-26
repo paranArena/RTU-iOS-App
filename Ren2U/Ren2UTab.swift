@@ -7,9 +7,18 @@
 
 import SwiftUI
 
+enum TabSelection: Int, CaseIterable {
+    case home
+    case group
+    case rent
+    case myPage
+}
+
 struct Ren2UTab: View {
     
     @EnvironmentObject var groupModel: GroupModel
+    @State private var tabSelection: TabSelection?
+
     
     init() {
         // 탭바 그림자
@@ -26,31 +35,37 @@ struct Ren2UTab: View {
         appearance.shadowImage = image
         UITabBar.appearance().standardAppearance = appearance
     }
+    
     var body: some View {
         NavigationView {
-            TabView {
+            TabView(selection: $tabSelection) {
                 Home()
                     .tabItem {
                         Image(systemName: "house")
                         Text("홈")
                     }
+                    .tag(TabSelection.home)
+
                 GroupMain()
                     .tabItem {
                         Image(systemName: "person.2")
                         Text("그룹")
                     }
+                    .tag(TabSelection.group)
                 Rent()
                     .tabItem {
                         Image(systemName: "rectangle.on.rectangle")
                         Text("대여")
                     }
+                    .tag(TabSelection.rent)
                 MyPage()
                     .tabItem {
                         Image(systemName: "person")
                         Text("마이페이지")
                     }
+                    .tag(TabSelection.myPage)
             }
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Hello")
             .navigationBarHidden(true)
             .accentColor(.Navy_1E2F97)
             .foregroundColor(.LabelColor)
