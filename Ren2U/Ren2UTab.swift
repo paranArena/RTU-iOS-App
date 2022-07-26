@@ -9,8 +9,9 @@ import SwiftUI
 
 struct Ren2UTab: View {
     
+    @EnvironmentObject var groupModel: GroupModel
+    
     init() {
-        
         // 탭바 그림자
         let image =
             UIImage.gradientImageWithBounds(bounds: CGRect(x: 0, y: 0, width: UIScreen.main.scale, height: 8), colors: [
@@ -51,6 +52,10 @@ struct Ren2UTab: View {
             }
             .accentColor(.Navy_1E2F97)
             .foregroundColor(.LabelColor)
+            .onAppear {
+                groupModel.fetchNotices()
+                groupModel.fetchRentalItems()
+            }
         }
     }
 }

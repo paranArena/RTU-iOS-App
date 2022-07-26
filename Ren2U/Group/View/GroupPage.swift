@@ -36,10 +36,6 @@ struct GroupPage: View {
                 }
             }
         }
-        .onAppear {
-            groupModel.fetchNotices()
-            groupModel.fetchRentalItems()
-        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
@@ -157,7 +153,7 @@ struct GroupPage: View {
                         RentalItemCell(rentalItem: rentalItem)
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal)
             }
         }
     }

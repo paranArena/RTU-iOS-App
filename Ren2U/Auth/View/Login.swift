@@ -12,45 +12,17 @@ struct Login: View {
     @EnvironmentObject var authModel: AuthModel
     @StateObject var loginModel = LoginModel()
     @FocusState var focus: LoginField?
+    @State private var isActive = false
     
     var body: some View {
+    
         NavigationView {
             VStack {
-
-                GreetingText
-                
-                CapsulePlaceholder(text: $loginModel.account.email, placeholder: Text("E-mail"),
-                                   color: .Gray_ADB5BD)
-                    .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
-                    .padding(.top, 46)
-                    .onSubmit { focus = .password }
-                
-                CapsuleSecurePlaceholder(text: $loginModel.account.password, placeholder: Text("Password"))
-                    .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
-                    .padding(.top, 19)
-                    .focused($focus, equals: .password)
-                    
-                
-                HStack {
-                    Text(loginModel.isWroungAccount ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
-                        .foregroundColor(.Red_EB1808)
-                    Spacer()
-                }
-                .padding(.leading)
-                .padding(.top, 0)
-                
-                Button {
-                    authModel.login(account: loginModel.account)
-                } label: {
-                    Image(systemName: "arrow.right.circle.fill")
-                        .resizable()
-                        .frame(width: 86, height: 86)
-                        .padding(.top, 21)
-                        .foregroundColor(!loginModel.account.email.isEmpty && !loginModel.account.password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
-                }
-                .disabled(loginModel.account.email.isEmpty || loginModel.account.password.isEmpty)
-                
+                GreetingText()
+                Email()
+                Password()
+                MissInput()
+                LoginButton()
                 AuthHelp()
             }
             .navigationTitle(" ")
@@ -63,7 +35,8 @@ struct Login: View {
         }
     }
     
-    var GreetingText: some View {
+    @ViewBuilder
+    private func GreetingText() -> some View {
         VStack {
             HStack {
                 Text("Welcome!")
@@ -80,6 +53,49 @@ struct Login: View {
     }
     
     @ViewBuilder
+    private func Email() -> some View {
+        CapsulePlaceholder(text: $loginModel.account.email, placeholder: Text("E-mail"),
+                           color: .Gray_ADB5BD)
+            .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
+            .padding(.top, 46)
+            .onSubmit { focus = .password }
+    }
+    
+    @ViewBuilder
+    private func Password() -> some View {
+        CapsuleSecurePlaceholder(text: $loginModel.account.password, placeholder: Text("Password"))
+            .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
+            .padding(.top, 19)
+            .focused($focus, equals: .password)
+    }
+    
+    @ViewBuilder
+    private func MissInput() -> some View {
+        HStack {
+            Text(loginModel.isWroungAccount ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                .foregroundColor(.Red_EB1808)
+            Spacer()
+        }
+        .padding(.leading)
+        .padding(.top, 0)
+    }
+    
+    @ViewBuilder
+    private func LoginButton() -> some View {
+        Button {
+            authModel.login(account: loginModel.account)
+        } label: {
+            Image(systemName: "arrow.right.circle.fill")
+                .resizable()
+                .frame(width: 86, height: 86)
+                .padding(.top, 21)
+                .foregroundColor(!loginModel.account.email.isEmpty && !loginModel.account.password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
+        }
+        .disabled(loginModel.account.email.isEmpty || loginModel.account.password.isEmpty)
+    }
+    
+    @ViewBuilder
     func AuthHelp() -> some View {
         HStack {
             Text("비밀번호 찾기")
@@ -89,8 +105,8 @@ struct Login: View {
             Text("|")
                 .foregroundColor(Color.Gray_E9ECEF)
             
-            NavigationLink {
-                SignUp()
+            NavigationLink(isActive: $isActive) {
+                SignUp(isActive: $isActive)
             } label: {
                 Text("회원 가입")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))

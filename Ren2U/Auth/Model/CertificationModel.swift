@@ -14,9 +14,10 @@ class CertificationModel: ObservableObject {
     
     @Published var startTime: Date
     @Published var timeRemaining: Double = 5*60
-    @Published var isConfirmed = true 
+    @Published var isConfirmed: Bool = true 
     @Published var certificationNum = ""
     @Published var timer = Timer()
+    @Published var isSingUpSeccussActive: Bool = false
     
     init() {
         startTime = Date.now

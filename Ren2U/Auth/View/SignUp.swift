@@ -12,6 +12,7 @@ struct SignUp: View {
     
     @StateObject var signUpModel = SignUpModel()
     @FocusState private var focusedField: SignUpField?
+    @Binding var isActive: Bool 
 
     let password: [String] = ["Password", "Password 확인"]
     
@@ -25,73 +26,14 @@ struct SignUp: View {
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 25) {
-
-                    Group {
-                        Email()
-
-                        PasswordTextField(textType: password[0], text: $signUpModel.text[SignUpField.password.rawValue],
-                                          isShowingPassword: $signUpModel.isShowingPassword)
-                        .overlay(bottomLine)
-                        .focused($focusedField, equals: .password)
-                        .id(SignUpField.password.rawValue)
-
-                        PasswordTextField(textType: password[1], text: $signUpModel.text[SignUpField.passwordCheck.rawValue],
-                                          isShowingPassword: $signUpModel.isShowingPasswordCheck)
-                        .overlay(bottomLine)
-                        .overlay(message)
-                        .focused($focusedField, equals: .passwordCheck)
-                        .id(SignUpField.passwordCheck.rawValue)
-                    }
-
-                    VStack(alignment: .leading) {
-                        Section {
-                            BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[3])
-                                .focused($focusedField, equals: .name)
-                                .id(SignUpField.name.rawValue)
-                        } header: {
-                            Text("이름")
-                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        }
-                    }
-
-                    VStack(alignment: .leading) {
-                        Section {
-                            BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[4])
-                                .focused($focusedField, equals: .department)
-                                .id(SignUpField.department.rawValue)
-
-                        } header: {
-                            Text("학과")
-                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        }
-                    }
-
-                    VStack(alignment: .leading) {
-                        Section {
-                            BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[5])
-                                .keyboardType(.numbersAndPunctuation)
-                                .focused($focusedField, equals: .studentId)
-                                .id(SignUpField.studentId.rawValue)
-                        } header: {
-                            Text("학번")
-                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        }
-                    }
-
-                    VStack(alignment: .leading) {
-                        Section {
-                            BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $signUpModel.text[6])
-                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                                .keyboardType(.numbersAndPunctuation)
-                                .focused($focusedField, equals: .phoneNumber)
-                                .id(SignUpField.phoneNumber.rawValue)
-                        } header: {
-                            Text("휴대폰 번호")
-                                .font(.system(size: 12))
-                        }
-                    }
-
-                    btnGoCertification
+                    Email()
+                    Password()
+                    PasswordCheck()
+                    Name()
+                    Major()
+                    StudentId()
+                    PhoneNumber()
+                    CertificatinoViewButton()
                     Spacer()
                 } // vstack
                 .padding(.horizontal, 28)
@@ -142,11 +84,90 @@ struct SignUp: View {
         .padding(.top, 30)
     }
     
-    var btnGoCertification: some View {
+    @ViewBuilder
+    private func Password() -> some View {
+        PasswordTextField(textType: password[0], text: $signUpModel.text[SignUpField.password.rawValue],
+                          isShowingPassword: $signUpModel.isShowingPassword)
+        .overlay(SimpleBottomLine(color: Color.Gray_DEE2E6))
+        .focused($focusedField, equals: .password)
+        .id(SignUpField.password.rawValue)
+    }
+    
+    @ViewBuilder
+    private func PasswordCheck() -> some View {
+        PasswordTextField(textType: password[1], text: $signUpModel.text[SignUpField.passwordCheck.rawValue],
+                          isShowingPassword: $signUpModel.isShowingPasswordCheck)
+        .overlay(SimpleBottomLine(color: Color.Gray_DEE2E6))
+        .overlay(message)
+        .focused($focusedField, equals: .passwordCheck)
+        .id(SignUpField.passwordCheck.rawValue)
+    }
+    
+    @ViewBuilder
+    private func Name() -> some View {
+        VStack(alignment: .leading) {
+            Section {
+                BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[3])
+                    .focused($focusedField, equals: .name)
+                    .id(SignUpField.name.rawValue)
+            } header: {
+                Text("이름")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func Major() -> some View {
+        VStack(alignment: .leading) {
+            Section {
+                BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[4])
+                    .focused($focusedField, equals: .department)
+                    .id(SignUpField.department.rawValue)
+
+            } header: {
+                Text("학과")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func StudentId() -> some View {
+        VStack(alignment: .leading) {
+            Section {
+                BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[5])
+                    .keyboardType(.numbersAndPunctuation)
+                    .focused($focusedField, equals: .studentId)
+                    .id(SignUpField.studentId.rawValue)
+            } header: {
+                Text("학번")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func PhoneNumber() -> some View {
+        VStack(alignment: .leading) {
+            Section {
+                BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $signUpModel.text[6])
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                    .keyboardType(.numbersAndPunctuation)
+                    .focused($focusedField, equals: .phoneNumber)
+                    .id(SignUpField.phoneNumber.rawValue)
+            } header: {
+                Text("휴대폰 번호")
+                    .font(.system(size: 12))
+            }
+        }
+    }
+    
+    private func CertificatinoViewButton() -> some View {
         HStack {
             Spacer()
             NavigationLink {
-                Certification(user: signUpModel.getUserInfo())
+                Certification(isActive: $isActive, user: signUpModel.getUserInfo())
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)

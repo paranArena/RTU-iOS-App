@@ -14,6 +14,7 @@
 		152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */; };
 		152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */; };
 		152C3E87287E7750000BFC97 /* Certification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E86287E7750000BFC97 /* Certification.swift */; };
+		152CA1D1288F84EE00DDC0E2 /* SignUpSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152CA1D0288F84EE00DDC0E2 /* SignUpSuccess.swift */; };
 		153C1A6E288CDED600F89B2E /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */; };
 		153C1A70288CE3A900F89B2E /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */; };
 		153C1A72288CE48900F89B2E /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A71288CE48900F89B2E /* Roboto-Regular.ttf */; };
@@ -87,6 +88,7 @@
 		152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLineTextField.swift; sourceTree = "<group>"; };
 		152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLinePlaceholder.swift; sourceTree = "<group>"; };
 		152C3E86287E7750000BFC97 /* Certification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certification.swift; sourceTree = "<group>"; };
+		152CA1D0288F84EE00DDC0E2 /* SignUpSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccess.swift; sourceTree = "<group>"; };
 		153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		153C1A71288CE48900F89B2E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				15FAF15E287D5E1800B35570 /* Login.swift */,
 				152C3E80287E5E84000BFC97 /* SignUp.swift */,
 				152C3E86287E7750000BFC97 /* Certification.swift */,
+				152CA1D0288F84EE00DDC0E2 /* SignUpSuccess.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
 				156386CB288A5B2F006653E8 /* GroupSelected.swift in Sources */,
 				15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */,
+				152CA1D1288F84EE00DDC0E2 /* SignUpSuccess.swift in Sources */,
 				15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */,
 				15FAF15F287D5E1800B35570 /* Login.swift in Sources */,
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
