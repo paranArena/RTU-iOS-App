@@ -18,7 +18,8 @@ struct Ren2UTab: View {
     
     @EnvironmentObject var groupModel: GroupModel
     @State private var tabSelection: TabSelection?
-
+    @State private var title = ""
+    @State private var isShowingTitle = true
     
     init() {
         // 탭바 그림자
@@ -45,6 +46,10 @@ struct Ren2UTab: View {
                         Text("홈")
                     }
                     .tag(TabSelection.home)
+                    .onAppear {
+                        self.title = "Home"
+                        self.isShowingTitle = false
+                    }
 
                 GroupMain()
                     .tabItem {
@@ -52,21 +57,36 @@ struct Ren2UTab: View {
                         Text("그룹")
                     }
                     .tag(TabSelection.group)
+                    .onAppear {
+                        self.title = "Group"
+                        self.isShowingTitle = false
+                    }
+                
+                
                 Rent()
                     .tabItem {
                         Image(systemName: "rectangle.on.rectangle")
                         Text("대여")
                     }
                     .tag(TabSelection.rent)
+                    .onAppear {
+                        self.title = "Rent"
+                        self.isShowingTitle = false
+                    }
+                
                 MyPage()
                     .tabItem {
                         Image(systemName: "person")
                         Text("마이페이지")
                     }
                     .tag(TabSelection.myPage)
+                    .onAppear {
+                        self.title = "MyPage"
+                        self.isShowingTitle = false
+                    }
             }
-            .navigationTitle("Hello")
-            .navigationBarHidden(true)
+            .navigationTitle(title)
+            .navigationBarHidden(!isShowingTitle)
             .accentColor(.Navy_1E2F97)
             .foregroundColor(.LabelColor)
             .onAppear {
