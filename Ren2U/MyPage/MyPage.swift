@@ -17,7 +17,6 @@ struct MyPage: View {
         } label: {
             Text("로그아웃")
         }
-
     }
 }
 

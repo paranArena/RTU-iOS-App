@@ -88,7 +88,7 @@ struct SignUp: View {
     private func Password() -> some View {
         PasswordTextField(textType: password[0], text: $signUpModel.text[SignUpField.password.rawValue],
                           isShowingPassword: $signUpModel.isShowingPassword)
-        .overlay(SimpleBottomLine(color: Color.Gray_DEE2E6))
+        .overlay(BottomLine())
         .focused($focusedField, equals: .password)
         .id(SignUpField.password.rawValue)
     }
@@ -97,7 +97,7 @@ struct SignUp: View {
     private func PasswordCheck() -> some View {
         PasswordTextField(textType: password[1], text: $signUpModel.text[SignUpField.passwordCheck.rawValue],
                           isShowingPassword: $signUpModel.isShowingPasswordCheck)
-        .overlay(SimpleBottomLine(color: Color.Gray_DEE2E6))
+        .overlay(BottomLine())
         .overlay(message)
         .focused($focusedField, equals: .passwordCheck)
         .id(SignUpField.passwordCheck.rawValue)
@@ -163,6 +163,7 @@ struct SignUp: View {
         }
     }
     
+    @ViewBuilder
     private func CertificatinoViewButton() -> some View {
         HStack {
             Spacer()
@@ -181,7 +182,8 @@ struct SignUp: View {
         }
     }
     
-    var bottomLine: some View {
+    @ViewBuilder
+    private func BottomLine() ->  some View {
         VStack {
             Spacer()
             Rectangle()

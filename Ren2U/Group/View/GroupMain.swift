@@ -23,10 +23,11 @@ enum GroupSelection: Int, CaseIterable {
 
 struct GroupMain: View {
     
-    @State var groupSelection: GroupSelection = .group
+    @State private var groupSelection: GroupSelection = .group
     @EnvironmentObject var groupModel: GroupModel
     
     var body: some View {
+        // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         VStack {
             GroupSelectionButton(selectionOption: $groupSelection)
             
@@ -40,11 +41,7 @@ struct GroupMain: View {
             Spacer() // ZStack이 Tabbar 위에 올라가지 않도록 해줌)
         }
         .animation(.spring(), value: groupSelection)
-        .navigationBarTitleDisplayMode(.large)
-        .navigationBarHidden(true)
-        .navigationTitle(" ")
         .overlay(CreateGroupButton())
-        // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
     }
     
     @ViewBuilder

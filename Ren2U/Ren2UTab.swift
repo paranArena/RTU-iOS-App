@@ -50,6 +50,8 @@ struct Ren2UTab: View {
                         Text("마이페이지")
                     }
             }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
             .accentColor(.Navy_1E2F97)
             .foregroundColor(.LabelColor)
             .onAppear {
