@@ -24,24 +24,35 @@ enum GroupSelection: Int, CaseIterable {
 struct GroupMain: View {
     
     @State private var groupSelection: GroupSelection = .group
+    @State private var text = ""
+    @State private var isFocused = false
     @EnvironmentObject var groupModel: GroupModel
     
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
+        
         VStack(alignment: .center, spacing: 10) {
-            GroupSelectionButton(selectionOption: $groupSelection)
             
-            ZStack {
-                GroupSelected()
-                    .offset(x: groupSelection == GroupSelection.group ? 0 : -SCREEN_WIDTH)
-                NoticeSelected()
-                    .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
+            SearchBar(text: $text, isFoucsed: $isFocused)
+            
+            if isFocused {
+                Search()
+            } else {
+                GroupSelectionButton(selectionOption: $groupSelection)
+                
+                ZStack {
+                    GroupSelected()
+                        .offset(x: groupSelection == GroupSelection.group ? 0 : -SCREEN_WIDTH)
+                        .overlay(CreateGroupButton())
+                    NoticeSelected()
+                        .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
+                }
             }
-
-            Spacer() // ZStack이 Tabbar 위에 올라가지 않도록 해줌)
+            
+            Spacer()
         }
+        .overlay(ShadowRectangle())
         .animation(.spring(), value: groupSelection)
-        .overlay(CreateGroupButton())
     }
     
     @ViewBuilder

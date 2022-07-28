@@ -26,7 +26,6 @@ struct JoinedGroup: View {
                 }
             }
         }
-        .frame(width: SCREEN_WIDTH)
     }
 }
 
