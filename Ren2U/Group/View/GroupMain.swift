@@ -37,6 +37,7 @@ struct GroupMain: View {
             
             if isFocused {
                 Search()
+                    .padding(.bottom, -10)
             } else {
                 GroupSelectionButton(selectionOption: $groupSelection)
                 
@@ -47,9 +48,8 @@ struct GroupMain: View {
                     NoticeSelected()
                         .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
                 }
+                .padding(.bottom, -10)
             }
-            
-            Spacer()
         }
         .overlay(ShadowRectangle())
         .animation(.spring(), value: groupSelection)
@@ -69,7 +69,8 @@ struct GroupMain: View {
                         .foregroundColor(.Navy_1E2F97)
                         .background(Color.BackgroundColor)
                         .frame(width: 60, height: 60)
-                        .padding(10)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 20)
                 }
             }
         }

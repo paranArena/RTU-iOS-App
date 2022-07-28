@@ -19,10 +19,8 @@ struct SignUp: View {
     var body: some View {
         
         VStack(alignment: .leading) {
-            Rectangle()
-                .frame(width: UIScreen.main.bounds.width, height: 1)
-                .foregroundColor(Color.BackgroundColor)
-                .background(Color.BackgroundColor)
+            
+            TransparentDivider()
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 25) {
@@ -46,6 +44,7 @@ struct SignUp: View {
             } // scroll
         } //VStack
         .navigationTitle(" ")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text("회원가입").font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))}}

@@ -21,6 +21,17 @@ struct Ren2UTab: View {
     @State private var title = ""
     @State private var isTitleHidden = true
     
+    init() {
+        if #available(iOS 15, *) {
+            let appearance: UITabBarAppearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.shadowColor = UIColor(Color.BackgroundColor)
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+            UITabBar.appearance().isTranslucent = false
+        }
+    }
+    
     var body: some View {
         NavigationView {
             
