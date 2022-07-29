@@ -9,32 +9,59 @@ import SwiftUI
 
 struct CreateGroup: View {
     
+    @EnvironmentObject var groupModel: GroupModel
     @Environment(\.presentationMode) var presentationMode
     @StateObject var createGroupModel = CreateGroupModel()
     @FocusState var focusField: CreateGroupField?
     
+    init() {
+        if #available(iOS 15, *) {
+            let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.shadowColor = UIColor(Color.BackgroundColor)
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            UINavigationBar.appearance().isTranslucent = false
+        }
+    }
+
     var body: some View {
         ScrollView {
-            VStack {
-                Image(systemName: "camera")
-                    .resizable()
-                    .frame(width: SCREEN_WIDTH, height: 215)
+            VStack(alignment: .center, spacing: 10) {
+                GroupImage()
                     .overlay(ChangeImageButton())
-                    .foregroundColor(.Gray_495057)
+                    
                 
                 VStack(alignment: .leading, spacing: 70) {
                     GroupName()
                     Tag()
                     Introduction()
-                    CreateCompleteButton()
                 }
-                .padding()
+                .padding(.horizontal, 10)
+                
+                CreateCompleteButton()
+                    .padding(.top, 30)
             }
         }
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text("그룹등록")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func GroupImage() -> some View {
+        Group {
+            if let image = createGroupModel.image {
+                image
+                    .resizable()
+                    .frame(width: SCREEN_WIDTH, height: 215)
+            } else {
+                Image("DefaultGroupImage")
+                    .resizable()
+                    .frame(width: SCREEN_WIDTH, height: 215)
             }
         }
     }
@@ -58,7 +85,7 @@ struct CreateGroup: View {
         .onTapGesture {
             focusField = .groupName
         }
-    }
+    }  
     
     @ViewBuilder
     func Tag() -> some View {
@@ -99,7 +126,7 @@ struct CreateGroup: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(createGroupModel.tags) { tag in
-                        Text(tag.tag)
+                        Text("\(tag.tag)")
                             .padding(.vertical, 5)
                             .padding(.horizontal, 10)
                             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
@@ -145,13 +172,20 @@ struct CreateGroup: View {
             HStack {
                 Spacer()
                 Button {
-                    
+                    createGroupModel.showImagePicker.toggle()
                 } label: {
                     Text("사진 변경")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                        .foregroundColor(.LabelColor)
+                        .foregroundColor(.BackgroundColor)
                         .padding(.horizontal, 10)
+                        .padding(.bottom, 5)
                 }
+                .sheet(isPresented: $createGroupModel.showImagePicker) {
+                    createGroupModel.loadImage()
+                } content: {
+                    ImagePicker(image: $createGroupModel.selectedUIImage)
+                }
+
 
             }
         }
@@ -163,6 +197,11 @@ struct CreateGroup: View {
             presentationMode.wrappedValue.dismiss()
         } label: {
             Text("완료")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
+                .foregroundColor(Color.white)
+                .padding(.horizontal, 25)
+                .padding(.vertical, 5)
+                .background(Capsule().fill(Color.Navy_1E2F97))
         }
 
     }

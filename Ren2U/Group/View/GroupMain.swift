@@ -34,6 +34,7 @@ struct GroupMain: View {
         VStack(alignment: .center, spacing: 10) {
             
             SearchBar(text: $text, isFoucsed: $isFocused)
+                .padding(.horizontal, 20)
             
             if isFocused {
                 Search()

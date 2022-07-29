@@ -14,6 +14,9 @@ class CreateGroupModel: ObservableObject {
     @Published var isShowingTagPlaceholder = true 
     @Published var introduction = ""
     @Published var tags = [TagInfo]()
+    @Published var showImagePicker = false
+    @Published var selectedUIImage: UIImage?
+    @Published var image: Image?
     
     func showTagPlaceHolder(newValue: CreateGroupField?) {
         if newValue == .tagsText {
@@ -25,24 +28,46 @@ class CreateGroupModel: ObservableObject {
     }
     
     func parsingTag() {
-        let parsedTags: [String] = tagsText.components(separatedBy: "#")
-                
-        for parsedTag in parsedTags {
-            var parsedTag = parsedTag
+        
+        var isPasingStarted = false
+        var parsedTag = ""
+        
+        for c in tagsText {
             
-            if parsedTag == "" || parsedTag == " " {
-                continue
-            } else if parsedTag.last == " " {
-                parsedTag.removeLast()
+            switch c {
+            case "#" :
+                if isPasingStarted {
+                    parsedTag.append("#")
+                } else {
+                    isPasingStarted = true
+                }
+                break
+            case " " :
+                isPasingStarted = false
+                if !parsedTag.isEmpty {
+                    self.tags.append(TagInfo(tag: "\(parsedTag)"))
+                }
+                parsedTag = ""
+                break
+            default :
+                if isPasingStarted {
+                    parsedTag.append(c)
+                }
             }
-            
-            self.tags.append(TagInfo(tag: "#\(parsedTag)"))
         }
         
+        if !parsedTag.isEmpty {
+            self.tags.append(TagInfo(tag: "#\(parsedTag)"))
+        }
         self.tagsText = ""
     }
     
     func printUTF8Length(tag: String) {
         print("\(tag.utf8.count)")
+    }
+    
+    func loadImage() {
+        guard let selectedImage = self.selectedUIImage else { return }
+        self.image = Image(uiImage: selectedImage)
     }
 }

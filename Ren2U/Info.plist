@@ -12,5 +12,7 @@
 		<string>Roboto-Bold.ttf</string>
 		<string></string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

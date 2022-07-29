@@ -50,7 +50,6 @@ struct SearchBar: View {
             }
             .frame(minWidth: 30)
         }
-        .padding(.horizontal, 10)
     }
 }
 
