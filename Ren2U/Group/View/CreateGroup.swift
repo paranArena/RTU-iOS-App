@@ -21,7 +21,6 @@ struct CreateGroup: View {
             appearance.shadowColor = UIColor(Color.BackgroundColor)
             UINavigationBar.appearance().standardAppearance = appearance
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            UINavigationBar.appearance().isTranslucent = false
         }
     }
 

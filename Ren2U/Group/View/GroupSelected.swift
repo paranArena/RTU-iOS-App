@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct GroupSelected: View {
+    
     var body: some View {
-        
         ScrollView(.vertical, showsIndicators: false) {
             RefreshableView {
                 VStack(alignment: .leading) {
@@ -20,6 +20,47 @@ struct GroupSelected: View {
             }
         }
     }
+    
+    @ViewBuilder
+    func GroupFavorites() -> some View {
+        VStack(alignment: .leading) {
+            Text("즐겨찾기")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                .padding(.horizontal, 20)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 15) {
+                    ForEach(0..<5, id: \.self) { index in
+                        NavigationLink {
+                            GroupPage(groupInfo: GroupInfo.dummyGroups())
+                        } label: {
+                            FavoriteGroupCell(info: GroupInfo.dummyGroups())
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func JoinedGroup() -> some View {
+        VStack(alignment: .leading) {
+            Text("가입된 그룹 목록")
+                .foregroundColor(.LabelColor)
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                .padding(.horizontal, 20)
+            VStack {
+                ForEach(0..<10) { index in
+                    NavigationLink {
+                        GroupPage(groupInfo: GroupInfo.dummyGroups())
+                    } label: {
+                        JoinedGroupCell(info: GroupInfo.dummyGroups())
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 struct GroupSelected_Previews: PreviewProvider {

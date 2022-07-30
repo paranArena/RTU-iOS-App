@@ -45,11 +45,12 @@ extension UIApplication {
     // 키보드 외 영역 터치시에 키보드 내리려면 이 함수를 onAppear에 적용하기
     // 최초 한번만 call 하면 모든 곳에 적용된다. 
     func hideKeyboard() {
-        guard let window = windows.first else { return }
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
         let tapRecognizer = UITapGestureRecognizer(target: window, action: #selector(UIView.endEditing))
         tapRecognizer.cancelsTouchesInView = false
         tapRecognizer.delegate = self
-        window.addGestureRecognizer(tapRecognizer)
+        window!.addGestureRecognizer(tapRecognizer)
     }
 }
 

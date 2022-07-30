@@ -11,14 +11,13 @@ import Kingfisher
 struct NoticeCell: View {
     
     let noticeInfo: NoticeInfo
-    let dateFormatter: () = DateFormatter().dateFormat = "yyyy-MM-dd"
     
     var body: some View {
         VStack {
             HStack {
                 if let imageSource = noticeInfo.noticeDto.imageSource {
                     KFImage(URL(string: imageSource)).onFailure { err in
-                            print(err.errorDescription)
+                        print(err.errorDescription ?? "KFImage err")
                         }
                         .resizable()
                         .cornerRadius(15)
@@ -26,21 +25,25 @@ struct NoticeCell: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 0) {
+                    Spacer()
                     Text(noticeInfo.noticeDto.title)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                     Text(noticeInfo.groupName)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(Color.Gray_ADB5BD)
+                    Spacer()
                 }
                 
                 Spacer()
                 
+                Text(getDate(date: noticeInfo.noticeDto.updateDate))
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                    .foregroundColor(Color.Gray_ADB5BD)
                 
                 
                 Image(systemName: "n.circle.fill")
-                    .clipShape(Circle())
-                    .foregroundColor(noticeInfo.isShown ? Color.BackgroundColor : Color.Gray_ADB5BD)
-                    .background(noticeInfo.isShown ? Color.BackgroundColor : Color.Red_EB1808)
+                    .foregroundStyle(noticeInfo.isShown ? Color.BackgroundColor : Color.Red_EB1808,
+                                     noticeInfo.isShown ? Color.BackgroundColor : Color.Gray_ADB5BD)
           
             }
             .padding(.horizontal)
@@ -48,6 +51,13 @@ struct NoticeCell: View {
             Divider()
         }
         .frame(height: 110)
+    }
+    
+    func getDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let result = dateFormatter.string(from: date)
+        return result
     }
 }
 

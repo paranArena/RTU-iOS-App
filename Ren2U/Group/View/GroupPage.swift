@@ -12,7 +12,7 @@ struct GroupPage: View {
     
     @EnvironmentObject var groupModel: GroupModel
     let groupInfo: GroupInfo
-    let groupRole: GroupRole = .chairman
+    let groupRole: GroupRole = .member
     
     var body: some View {
         VStack(spacing: 0) {
@@ -23,7 +23,7 @@ struct GroupPage: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading) {
                     KFImage(URL(string: groupInfo.imageSource)!).onFailure { err in
-                            print(err.errorDescription)
+                        print(err.errorDescription ?? "KFImage err")
                         }
                         .resizable()
                         .frame(width: SCREEN_WIDTH, height: 215)
@@ -50,6 +50,7 @@ struct GroupPage: View {
                         Text("공지 등록")
                     } label: {
                         Image(systemName: "ellipsis")
+                            .foregroundColor(Color.LabelColor)
                     }
 
                 case .member:
@@ -58,6 +59,7 @@ struct GroupPage: View {
                     } label: {
                         Text("탈퇴하기")
                             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                            .foregroundColor(Color.LabelColor)
                     }
 
                 case .application:
@@ -66,10 +68,12 @@ struct GroupPage: View {
                     } label: {
                         Text("가입취소")
                             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                            .foregroundColor(Color.LabelColor)
                     }
                 case .none:
                     Text("가입하기")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                        .foregroundColor(Color.LabelColor)
                 }
             }
         }
@@ -87,12 +91,13 @@ struct GroupPage: View {
             }
             .foregroundColor(Color.Gray_495057)
             .padding(.leading)
+            .padding(.bottom, 20)
         }
     }
     
     @ViewBuilder
     func Introduction() -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             Text("소개글")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.Gray_495057)
@@ -125,6 +130,8 @@ struct GroupPage: View {
             ForEach(groupModel.notices) { notice in
                 NoticeCell(noticeInfo: notice)
             }
+            .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
+            .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
         }
         .padding(.bottom, 70)
     }
@@ -155,6 +162,8 @@ struct GroupPage: View {
                 }
                 .padding(.horizontal)
             }
+            .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
+            .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
         }
     }
 }

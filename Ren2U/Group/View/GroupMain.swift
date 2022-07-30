@@ -27,6 +27,7 @@ struct GroupMain: View {
     @State private var text = ""
     @State private var isFocused = false
     @EnvironmentObject var groupModel: GroupModel
+    private let selectionWidth = UIScreen.main.bounds.width / CGFloat(GroupSelection.allCases.count)
     
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
@@ -40,7 +41,7 @@ struct GroupMain: View {
                 Search()
                     .padding(.bottom, -10)
             } else {
-                GroupSelectionButton(selectionOption: $groupSelection)
+                GroupSelectionButton()
                 
                 ZStack {
                     GroupSelected()
@@ -54,6 +55,23 @@ struct GroupMain: View {
         }
         .overlay(ShadowRectangle())
         .animation(.spring(), value: groupSelection)
+    }
+    
+    @ViewBuilder
+    func GroupSelectionButton() -> some View {
+        HStack {
+            ForEach(GroupSelection.allCases, id: \.self) {  option in
+                Button {
+                    self.groupSelection  = option
+                } label: {
+                    Text(option.title)
+                        .frame(width: selectionWidth)
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
+                        .foregroundColor(self.groupSelection == option ? .Navy_1E2F97 : .Gray_ADB5BD)
+                }
+
+            }
+        }
     }
     
     @ViewBuilder

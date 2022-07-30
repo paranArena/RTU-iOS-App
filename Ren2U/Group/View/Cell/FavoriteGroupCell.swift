@@ -17,7 +17,7 @@ struct FavoriteGroupCell: View {
         VStack(alignment: .center, spacing: 0) {
             KFImage(URL(string: info.imageSource)!)
                 .onFailure { err in
-                    print(err.errorDescription)
+                    print(err.errorDescription ?? "KFImage err")
                 }
                 .resizable()
                 .frame(width: 120, height: 120)
