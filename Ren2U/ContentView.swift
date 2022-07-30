@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
+    
     @EnvironmentObject var authModel: AuthModel
     
     var body: some View {

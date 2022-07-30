@@ -22,14 +22,11 @@ struct Ren2UTab: View {
     @State private var isTitleHidden = true
     
     init() {
-        if #available(iOS 15, *) {
-            let appearance: UITabBarAppearance = UITabBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.shadowColor = UIColor(Color.BackgroundColor)
-            UITabBar.appearance().standardAppearance = appearance
-            UITabBar.appearance().scrollEdgeAppearance = appearance
-            UITabBar.appearance().isTranslucent = false
-        }
+        let appearance: UITabBarAppearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.shadowColor = UIColor(Color.BackgroundColor)
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
     
     var body: some View {
@@ -90,6 +87,7 @@ struct Ren2UTab: View {
             .accentColor(.Navy_1E2F97)
             .foregroundColor(.LabelColor)
             .onAppear {
+                groupModel.fetchJoinedGroups()
                 groupModel.fetchNotices()
                 groupModel.fetchRentalItems()
             }

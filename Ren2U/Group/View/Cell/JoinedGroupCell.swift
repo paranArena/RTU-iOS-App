@@ -17,7 +17,7 @@ struct JoinedGroupCell: View {
         
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-                KFImage(URL(string: info.imageSource)!)
+                KFImage(URL(string: info.groupDto.imageSource)!)
                     .onFailure { err in
                         print(err.errorDescription ?? "KFImage Optional err")
                     }
@@ -26,10 +26,10 @@ struct JoinedGroupCell: View {
                     .cornerRadius(20)
                 
                 VStack(alignment: .leading) {
-                    Text(info.groupName)
+                    Text(info.groupDto.groupName)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
-                    Text(groupModel.makeFavoritesGroupTag(tags: info.tags))
+                    Text(groupModel.makeFavoritesGroupTag(tags: info.groupDto.tags))
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(.Gray_ADB5BD)
                         .lineLimit(1)
@@ -45,6 +45,6 @@ struct JoinedGroupCell: View {
 
 struct HGroupCell_Previews: PreviewProvider {
     static var previews: some View {
-        JoinedGroupCell(info: GroupInfo.dummyGroups())
+        JoinedGroupCell(info: GroupInfo.dummyGroup())
     }
 }

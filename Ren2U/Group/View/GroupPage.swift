@@ -22,7 +22,7 @@ struct GroupPage: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    KFImage(URL(string: groupInfo.imageSource)!).onFailure { err in
+                    KFImage(URL(string: groupInfo.groupDto.imageSource)!).onFailure { err in
                         print(err.errorDescription ?? "KFImage err")
                         }
                         .resizable()
@@ -39,7 +39,7 @@ struct GroupPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
-                Text(groupInfo.groupName)
+                Text(groupInfo.groupDto.groupName)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -83,7 +83,7 @@ struct GroupPage: View {
     func Tags() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(groupInfo.tags) { tag in
+                ForEach(groupInfo.groupDto.tags) { tag in
                     Text("#\(tag.tag)")
                         .foregroundColor(Color.Gray_495057)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
@@ -102,7 +102,7 @@ struct GroupPage: View {
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.Gray_495057)
             
-            Text(groupInfo.intoduction)
+            Text(groupInfo.groupDto.intoduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
         }
         .padding(.horizontal)
@@ -170,6 +170,6 @@ struct GroupPage: View {
 
 struct GroupPage_Previews: PreviewProvider {
     static var previews: some View {
-        GroupPage(groupInfo: GroupInfo.dummyGroups())
+        GroupPage(groupInfo: GroupInfo.dummyGroup())
     }
 }

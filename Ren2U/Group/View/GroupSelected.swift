@@ -9,6 +9,8 @@ import SwiftUI
 
 struct GroupSelected: View {
     
+    @EnvironmentObject var groupModel: GroupModel
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             RefreshableView {
@@ -31,9 +33,9 @@ struct GroupSelected: View {
                 HStack(spacing: 15) {
                     ForEach(0..<5, id: \.self) { index in
                         NavigationLink {
-                            GroupPage(groupInfo: GroupInfo.dummyGroups())
+                            GroupPage(groupInfo: GroupInfo.dummyGroup())
                         } label: {
-                            FavoriteGroupCell(info: GroupInfo.dummyGroups())
+                            FavoriteGroupCell(info: GroupInfo.dummyGroup())
                         }
                     }
                 }
@@ -50,11 +52,11 @@ struct GroupSelected: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
             VStack {
-                ForEach(0..<10) { index in
+                ForEach(groupModel.joinedGroups) { group in
                     NavigationLink {
-                        GroupPage(groupInfo: GroupInfo.dummyGroups())
+                        GroupPage(groupInfo: group)
                     } label: {
-                        JoinedGroupCell(info: GroupInfo.dummyGroups())
+                        JoinedGroupCell(info: group)
                     }
                 }
             }

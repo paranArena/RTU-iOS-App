@@ -18,9 +18,9 @@ struct Search: View {
                 VStack {
                     ForEach(0..<10) { index in
                         NavigationLink {
-                            GroupPage(groupInfo: GroupInfo.dummyGroups())
+                            GroupPage(groupInfo: GroupInfo.dummyGroup())
                         } label: {
-                            JoinedGroupCell(info: GroupInfo.dummyGroups())
+                            JoinedGroupCell(info: GroupInfo.dummyGroup())
                                 .overlay(ApplicatedGroupOverlay())
                         }
                     }

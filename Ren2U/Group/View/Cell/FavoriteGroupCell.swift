@@ -15,7 +15,7 @@ struct FavoriteGroupCell: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            KFImage(URL(string: info.imageSource)!)
+            KFImage(URL(string: info.groupDto.imageSource)!)
                 .onFailure { err in
                     print(err.errorDescription ?? "KFImage err")
                 }
@@ -24,11 +24,11 @@ struct FavoriteGroupCell: View {
                 .cornerRadius(20)
                 .overlay { LikeStar() }
             
-            Text(info.groupName)
+            Text(info.groupDto.groupName)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.top, 5)
             
-            Text(groupModel.makeFavoritesGroupTag(tags: info.tags))
+            Text(groupModel.makeFavoritesGroupTag(tags: info.groupDto.tags))
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 .foregroundColor(.Gray_ADB5BD)
                 .multilineTextAlignment(.center)
@@ -58,6 +58,6 @@ struct FavoriteGroupCell: View {
 
 struct GroupFavoriteCell_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteGroupCell(info: GroupInfo.dummyGroups())
+        FavoriteGroupCell(info: GroupInfo.dummyGroup())
     }
 }
