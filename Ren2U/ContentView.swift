@@ -14,10 +14,8 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            Ren2UTab()
-                .isHidden(hidden: authModel.jwt == nil)
-            Login()
-                .isHidden(hidden: authModel.jwt != nil)
+            Ren2UTab().isHidden(hidden: authModel.jwt == nil)
+            Login().isHidden(hidden: authModel.jwt != nil)
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
     }

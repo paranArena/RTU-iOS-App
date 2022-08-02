@@ -146,8 +146,8 @@ struct GroupPage: View {
                 Spacer()
                 
                 
-                NavigationLink {
-                    Rental() 
+                Button {
+                     
                 } label: {
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.Gray_495057)

@@ -19,30 +19,33 @@ struct GroupMain: View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
         VStack(alignment: .center, spacing: 10) {
-            
-            SearchBar(text: $text, isFoucsed: $isSearchBarFocused)
-                .padding(.horizontal, 20)
-            
-            Search()
-                .padding(.bottom, -10)
-                .isHidden(hidden: !isSearchBarFocused)
-            
-            Group {
-                GroupSelectionButton()
-                
-                ZStack {
-                    GroupSelected()
-                        .offset(x: groupSelection == GroupSelection.group ? 0 : -SCREEN_WIDTH)
-                        .overlay(CreateGroupButton())
-                    NoticeSelected()
-                        .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
+            NavigationView {
+                VStack(alignment: .center, spacing: 10) {
+                    SearchBar(text: $text, isFoucsed: $isSearchBarFocused)
+                        .padding(.horizontal, 20)
+                    
+                    Search()
+                        .padding(.bottom, -10)
+                        .isHidden(hidden: !isSearchBarFocused)
+                    
+                    Group {
+                        GroupSelectionButton()
+                        ZStack {
+                            GroupSelected()
+                                .offset(x: groupSelection == GroupSelection.group ? 0 : -SCREEN_WIDTH)
+                            NoticeSelected()
+                                .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
+                        }
+                        .padding(.bottom, -10)
+                    }
+                    .isHidden(hidden: isSearchBarFocused)
                 }
-                .padding(.bottom, -10)
+                .navigationTitle("")
+                .navigationBarHidden(true)
+                .animation(.spring(), value: groupSelection)
             }
-            .isHidden(hidden: isSearchBarFocused)
         }
-        .overlay(ShadowRectangle())
-        .animation(.spring(), value: groupSelection)
+        .overlay(CreateGroupButton())
     }
     
     @ViewBuilder
@@ -81,6 +84,7 @@ struct GroupMain: View {
                 }
             }
         }
+        .isHidden(hidden: isSearchBarFocused || groupSelection == .notice)
     }
 }
 
