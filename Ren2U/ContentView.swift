@@ -14,11 +14,10 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if authModel.jwt != nil {
-                Ren2UTab()
-            } else {
-                Login()
-            }
+            Ren2UTab()
+                .isHidden(hidden: authModel.jwt == nil)
+            Login()
+                .isHidden(hidden: authModel.jwt != nil)
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
     }

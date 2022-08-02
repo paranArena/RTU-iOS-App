@@ -35,15 +35,17 @@ struct CreateGroup: View {
                     Introduction()
                 }
                 .padding(.horizontal, 10)
-                
-                CreateCompleteButton()
-                    .padding(.top, 30)
             }
+            .animation(.spring(), value: focusField)
         }
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text("그룹등록")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
+            }
+            
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                CreateCompleteButton()
             }
         }
     }
@@ -79,6 +81,7 @@ struct CreateGroup: View {
                     focusField = .tagsText
                 }
         }
+        .isHidden(hidden: (focusField != nil && focusField != .groupName))
         .onTapGesture {
             focusField = .groupName
         }
@@ -133,8 +136,9 @@ struct CreateGroup: View {
                 .foregroundColor(Color.Gray_495057)
             }
         }
+        .isHidden(hidden: (focusField != nil && focusField != .tagsText))
         .onTapGesture {
-            focusField = CreateGroupField.tagsText
+            focusField = .tagsText
             createGroupModel.isShowingTagPlaceholder = false
         }
         
@@ -148,6 +152,7 @@ struct CreateGroup: View {
                 .foregroundColor(Color.Gray_495057)
             
             TextEditor(text: $createGroupModel.introduction)
+                .focused($focusField, equals: .introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .frame(height: 100)
                 .overlay{
@@ -158,6 +163,10 @@ struct CreateGroup: View {
             Text("띄어쓰기 포함 한글 130글자, 영어 150글자까지 가능합니다.")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .foregroundColor(Color.Gray_495057)
+        }
+        .isHidden(hidden: (focusField != nil && focusField != .introduction))
+        .onTapGesture {
+            focusField = .introduction
         }
         .animation(.spring(), value: createGroupModel.tags)
     }

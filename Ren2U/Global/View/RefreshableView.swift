@@ -18,7 +18,10 @@ struct RefreshableView<Content: View>: View {
     var body: some View {
         VStack {
             if isRefreshing {
-                ProgressView()
+                VStack {
+                    ProgressView()
+                    Spacer()
+                }
             }
             content()
         }
@@ -28,7 +31,7 @@ struct RefreshableView<Content: View>: View {
             Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
         })
         .onPreferenceChange(ViewOffsetKey.self) {
-            if $0 < -80 && !isRefreshing {   // << any creteria we want !!
+            if $0 < -200 && !isRefreshing {   // << any creteria we want !!
                 isRefreshing = true
                 Task {
                     await refresh?()           // << call refreshable !!

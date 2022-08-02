@@ -60,3 +60,12 @@ extension UIApplication: UIGestureRecognizerDelegate {
         return false
     }
 }
+
+extension View {
+    
+    @ViewBuilder
+    func isHidden(hidden: Bool) -> some View {
+        if hidden {}
+        else { self }
+    }
+}
