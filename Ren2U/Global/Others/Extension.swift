@@ -61,8 +61,9 @@ extension UIApplication: UIGestureRecognizerDelegate {
     }
 }
 
+
+// View 숨기기
 extension View {
-    
     @ViewBuilder
     func isHidden(hidden: Bool) -> some View {
         if hidden {}

@@ -145,8 +145,9 @@ struct GroupPage: View {
                     .foregroundColor(Color.Gray_495057)
                 Spacer()
                 
-                Button {
-                    
+                
+                NavigationLink {
+                    Rental() 
                 } label: {
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.Gray_495057)
@@ -157,7 +158,7 @@ struct GroupPage: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(groupModel.rentalItems) { rentalItem in
-                        RentalItemCell(rentalItem: rentalItem)
+                        RentalItemVCell(rentalItem: rentalItem)
                     }
                 }
                 .padding(.horizontal)

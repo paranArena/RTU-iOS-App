@@ -28,16 +28,18 @@ struct CreateGroup: View {
                 GroupImage()
                     .overlay(ChangeImageButton())
                     
-                
                 VStack(alignment: .leading, spacing: 70) {
                     GroupName()
                     Tag()
                     Introduction()
                 }
                 .padding(.horizontal, 10)
+                
+                Spacer()
             }
             .animation(.spring(), value: focusField)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text("그룹등록")
@@ -81,6 +83,7 @@ struct CreateGroup: View {
                     focusField = .tagsText
                 }
         }
+        .overlay(ChangeImageButton())
         .isHidden(hidden: (focusField != nil && focusField != .groupName))
         .onTapGesture {
             focusField = .groupName
@@ -203,13 +206,9 @@ struct CreateGroup: View {
             presentationMode.wrappedValue.dismiss()
         } label: {
             Text("완료")
+                .foregroundColor(Color.LabelColor)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
-                .foregroundColor(Color.white)
-                .padding(.horizontal, 25)
-                .padding(.vertical, 5)
-                .background(Capsule().fill(Color.Navy_1E2F97))
         }
-
     }
 }
 

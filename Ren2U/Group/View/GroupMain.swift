@@ -7,25 +7,11 @@
 
 import SwiftUI
 
-enum GroupSelection: Int, CaseIterable {
-    case group
-    case notice
-    
-    var title: String {
-        switch self {
-        case .group:
-            return "그룹"
-        case .notice:
-            return "공지사항"
-        }
-    }
-}
-
 struct GroupMain: View {
     
     @State private var groupSelection: GroupSelection = .group
     @State private var text = ""
-    @State private var isFocused = false
+    @State private var isSearchBarFocused = false
     @EnvironmentObject var groupModel: GroupModel
     private let selectionWidth = UIScreen.main.bounds.width / CGFloat(GroupSelection.allCases.count)
     
@@ -34,13 +20,14 @@ struct GroupMain: View {
         
         VStack(alignment: .center, spacing: 10) {
             
-            SearchBar(text: $text, isFoucsed: $isFocused)
+            SearchBar(text: $text, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
             
-            if isFocused {
-                Search()
-                    .padding(.bottom, -10)
-            } else {
+            Search()
+                .padding(.bottom, -10)
+                .isHidden(hidden: !isSearchBarFocused)
+            
+            Group {
                 GroupSelectionButton()
                 
                 ZStack {
@@ -52,6 +39,7 @@ struct GroupMain: View {
                 }
                 .padding(.bottom, -10)
             }
+            .isHidden(hidden: isSearchBarFocused)
         }
         .overlay(ShadowRectangle())
         .animation(.spring(), value: groupSelection)

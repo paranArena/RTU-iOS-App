@@ -17,9 +17,8 @@ enum TabSelection: Int, CaseIterable {
 struct Ren2UTab: View {
     
     @EnvironmentObject var groupModel: GroupModel
-    @State private var tabSelection: TabSelection?
+    @State var tabSelection: TabSelection?
     @State private var title = ""
-    @State private var isTitleHidden = true
     
     init() {
         let appearance: UITabBarAppearance = UITabBarAppearance()
@@ -31,8 +30,7 @@ struct Ren2UTab: View {
     
     var body: some View {
         NavigationView {
-            
-            TabView() {
+            TabView {
                 Home()
                     .tabItem {
                         Image(systemName: "house")
@@ -41,8 +39,6 @@ struct Ren2UTab: View {
                     .overlay(ShadowRectangle())
                     .onAppear {
                         self.title = "Home"
-                        self.isTitleHidden = true
-                        self.tabSelection = .home
                     }
 
                 GroupMain()
@@ -52,12 +48,10 @@ struct Ren2UTab: View {
                     }
                     .onAppear {
                         self.title = ""
-                        self.isTitleHidden = true
-                        self.tabSelection = .group
                     }
                 
                 
-                Rent()
+                Rental()
                     .tabItem {
                         Image(systemName: "rectangle.on.rectangle")
                         Text("대여")
@@ -65,8 +59,6 @@ struct Ren2UTab: View {
                     .overlay(ShadowRectangle())
                     .onAppear {
                         self.title = "Rent"
-                        self.isTitleHidden = true
-                        self.tabSelection = .rent
                     }
 
                 MyPage()
@@ -77,13 +69,10 @@ struct Ren2UTab: View {
                     .overlay(ShadowRectangle())
                     .onAppear {
                         self.title = "MyPage"
-                        self.isTitleHidden = true
-                        self.tabSelection = .myPage
                     }
             }
             .navigationTitle(title)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(isTitleHidden)
+            .navigationBarHidden(true)
             .accentColor(.Navy_1E2F97)
             .foregroundColor(.LabelColor)
             .onAppear {

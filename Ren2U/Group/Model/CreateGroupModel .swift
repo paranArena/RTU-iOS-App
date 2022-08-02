@@ -45,7 +45,7 @@ class CreateGroupModel: ObservableObject {
             case " " :
                 isPasingStarted = false
                 if !parsedTag.isEmpty {
-                    self.tags.append(TagInfo(tag: "\(parsedTag)"))
+                    self.tags.append(TagInfo(tag: "#\(parsedTag)"))
                 }
                 parsedTag = ""
                 break
@@ -59,6 +59,7 @@ class CreateGroupModel: ObservableObject {
         if !parsedTag.isEmpty {
             self.tags.append(TagInfo(tag: "#\(parsedTag)"))
         }
+        
         self.tagsText = ""
     }
     

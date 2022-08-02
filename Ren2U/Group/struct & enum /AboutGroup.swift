@@ -9,7 +9,50 @@ import Foundation
 import SwiftUI
 
 // struct - Info, Dto
-// enum = field, role
+// enum = field, role, selection
+
+enum GroupSelection: Int, CaseIterable {
+    case group
+    case notice
+    
+    var title: String {
+        switch self {
+        case .group:
+            return "그룹"
+        case .notice:
+            return "공지사항"
+        }
+    }
+}
+
+enum CreateGroupField: Int, CaseIterable {
+    case groupName
+    case tagsText
+    case introduction
+}
+
+enum GroupRole: Int, CaseIterable {
+    case chairman
+    case member
+    case application
+    case none
+}
+
+
+enum RentalSelection: Int, CaseIterable {
+    case rentalItem
+    case rentalList
+    
+    var title: String {
+        switch self {
+        case .rentalItem:
+            return "대여물품"
+        case .rentalList:
+            return "대여목록"
+        }
+    }
+}
+
 struct GroupInfo: Identifiable, Codable {
     
     var id = UUID()
@@ -109,17 +152,4 @@ struct RentalItemInfo: Identifiable, Codable {
             RentalItemInfo(imageSource: "https://picsum.photos/id/5/200/300", itemName: "컴퓨터", total: 3, remain: 2),
         ]
     }
-}
-
-enum CreateGroupField: Int, CaseIterable {
-    case groupName
-    case tagsText
-    case introduction
-}
-
-enum GroupRole: Int, CaseIterable {
-    case chairman
-    case member
-    case application 
-    case none
 }

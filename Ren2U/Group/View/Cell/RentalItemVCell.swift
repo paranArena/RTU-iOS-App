@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct RentalItemCell: View {
+struct RentalItemVCell: View {
     
     let rentalItem: RentalItemInfo
     
@@ -35,6 +35,6 @@ struct RentalItemCell: View {
 
 struct RentalItemCell_Previews: PreviewProvider {
     static var previews: some View {
-        RentalItemCell(rentalItem: RentalItemInfo.dummyRentalItem())
+        RentalItemVCell(rentalItem: RentalItemInfo.dummyRentalItem())
     }
 }
