@@ -14,8 +14,8 @@
             filePath = "Ren2U/Ren2UTab.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "previews"
             landmarkType = "24">
          </BreakpointContent>
@@ -34,6 +34,54 @@
             endingLineNumber = "70"
             landmarkName = "dummyGroup()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0484D14D-3EDC-4A14-A1D9-4A7BE0D3A5ED"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ren2U/Rent/View/Rental.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "Rental"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "0484D14D-3EDC-4A14-A1D9-4A7BE0D3A5ED - a3e9a6b2db5bf358"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ren2U.Rental.init() -&gt; Ren2U.Rental"
+                  moduleName = "Ren2U"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/page/Desktop/IDE/Xcode/Ren2U/Ren2U/Rent/View/Rental.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "352">
+               </Location>
+               <Location
+                  uuid = "0484D14D-3EDC-4A14-A1D9-4A7BE0D3A5ED - bf6f91b3ce978496"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ren2U.Rental.init(groupModel: SwiftUI.EnvironmentObject&lt;Ren2U.GroupModel&gt;) -&gt; Ren2U.Rental"
+                  moduleName = "Ren2U"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/page/Desktop/IDE/Xcode/Ren2U/Ren2U/Rent/View/Rental.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "424">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

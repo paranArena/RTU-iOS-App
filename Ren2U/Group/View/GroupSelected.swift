@@ -10,6 +10,8 @@ import SwiftUI
 struct GroupSelected: View {
     
     @EnvironmentObject var groupModel: GroupModel
+    @Binding var tabSelection: Int
+    @Binding var isCreateGroupButtonShowing: Bool
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -33,7 +35,7 @@ struct GroupSelected: View {
                 HStack(spacing: 15) {
                     ForEach(0..<5, id: \.self) { index in
                         NavigationLink {
-                            GroupPage(groupInfo: GroupInfo.dummyGroup())
+                            GroupPage(tabSelection: $tabSelection, isCreateGroupButtonShowing: $isCreateGroupButtonShowing, groupInfo: GroupInfo.dummyGroup())
                         } label: {
                             FavoriteGroupCell(info: GroupInfo.dummyGroup())
                         }
@@ -54,7 +56,7 @@ struct GroupSelected: View {
             VStack {
                 ForEach(groupModel.joinedGroups) { group in
                     NavigationLink {
-                        GroupPage(groupInfo: group)
+                        GroupPage(tabSelection: $tabSelection, isCreateGroupButtonShowing: $isCreateGroupButtonShowing, groupInfo: group)
                     } label: {
                         JoinedGroupCell(info: group)
                     }
@@ -64,9 +66,9 @@ struct GroupSelected: View {
     }
     
 }
-
-struct GroupSelected_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupSelected()
-    }
-}
+//
+//struct GroupSelected_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GroupSelected()
+//    }
+//}

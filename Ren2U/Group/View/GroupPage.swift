@@ -11,6 +11,8 @@ import Kingfisher
 struct GroupPage: View {
     
     @EnvironmentObject var groupModel: GroupModel
+    @Binding var tabSelection: Int
+    @Binding var isCreateGroupButtonShowing: Bool
     let groupInfo: GroupInfo
     let groupRole: GroupRole = .member
     
@@ -35,6 +37,12 @@ struct GroupPage: View {
                     Spacer()
                 }
             }
+        }
+        .onAppear {
+            self.isCreateGroupButtonShowing = false
+        }
+        .onDisappear{
+            self.isCreateGroupButtonShowing = true 
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -146,8 +154,8 @@ struct GroupPage: View {
                 Spacer()
                 
                 
-                NavigationLink {
-                     Rental() 
+                Button {
+                    self.tabSelection = TabSelection.rent.rawValue
                 } label: {
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.Gray_495057)
@@ -169,8 +177,8 @@ struct GroupPage: View {
     }
 }
 
-struct GroupPage_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupPage(groupInfo: GroupInfo.dummyGroup())
-    }
-}
+//struct GroupPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GroupPage(groupInfo: GroupInfo.dummyGroup())
+//    }
+//}

@@ -17,8 +17,8 @@ enum TabSelection: Int, CaseIterable {
 struct Ren2UTab: View {
     
     @EnvironmentObject var groupModel: GroupModel
-    @State var tabSelection: Int?
     @State private var title = ""
+    @State private var tabSelection: Int = 1
     
     init() {
         let appearance: UITabBarAppearance = UITabBarAppearance()
@@ -30,7 +30,7 @@ struct Ren2UTab: View {
     
     var body: some View {
         NavigationView {
-            TabView {
+            TabView(selection: $tabSelection) {
                 Home()
                     .tabItem {
                         Image(systemName: "house")
@@ -40,9 +40,10 @@ struct Ren2UTab: View {
                     .onAppear {
                         self.title = "Home"
                     }
+                    .tag(TabSelection.home.rawValue)
                     
 
-                GroupMain()
+                GroupMain(tabSelection: $tabSelection)
                     .tabItem {
                         Image(systemName: "person.2")
                         Text("그룹")
@@ -50,6 +51,7 @@ struct Ren2UTab: View {
                     .onAppear {
                         self.title = ""
                     }
+                    .tag(TabSelection.group.rawValue)
                 
                 
                 Rental()
@@ -61,6 +63,7 @@ struct Ren2UTab: View {
                     .onAppear {
                         self.title = "Rent"
                     }
+                    .tag(TabSelection.myPage.rawValue)
 
                 MyPage()
                     .tabItem {
@@ -71,6 +74,7 @@ struct Ren2UTab: View {
                     .onAppear {
                         self.title = "MyPage"
                     }
+                    .tag(TabSelection.myPage.rawValue)
             }
             .navigationTitle(title)
             .navigationBarHidden(true)
