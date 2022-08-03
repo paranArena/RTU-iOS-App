@@ -50,9 +50,6 @@ struct GroupMain: View {
         .navigationBarHidden(true)
         .animation(.spring(), value: groupSelection)
         .overlay(CreateGroupButton())
-        .onDisappear {
-            print("Disappear")
-        }
     }
     
     @ViewBuilder

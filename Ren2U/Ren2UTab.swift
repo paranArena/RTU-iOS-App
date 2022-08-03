@@ -18,7 +18,7 @@ struct Ren2UTab: View {
     
     @EnvironmentObject var groupModel: GroupModel
     @State private var title = ""
-    @State private var tabSelection: Int = 1
+    @State private var tabSelection: Int = TabSelection.home.rawValue
     
     init() {
         let appearance: UITabBarAppearance = UITabBarAppearance()
@@ -48,10 +48,11 @@ struct Ren2UTab: View {
                         Image(systemName: "person.2")
                         Text("그룹")
                     }
+                    .tag(TabSelection.group.rawValue)
+                    .overlay(ShadowRectangle())
                     .onAppear {
                         self.title = ""
                     }
-                    .tag(TabSelection.group.rawValue)
                 
                 
                 Rental()
@@ -63,7 +64,7 @@ struct Ren2UTab: View {
                     .onAppear {
                         self.title = "Rent"
                     }
-                    .tag(TabSelection.myPage.rawValue)
+                    .tag(TabSelection.rent.rawValue)
 
                 MyPage()
                     .tabItem {
