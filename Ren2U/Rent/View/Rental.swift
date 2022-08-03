@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Rental: View {
     
+    @EnvironmentObject var groupModel: GroupModel
     @State private var rentalSelection: RentalSelection = .rentalItem
     @State private var searchText = ""
     @State private var isSearchBarFocused = false
@@ -19,18 +20,21 @@ struct Rental: View {
             SearchBar(text: $searchText, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
             
-            Search()
-                .padding(.bottom, -10)
-                .isHidden(hidden: !isSearchBarFocused)
+            RentalSelectionButton()
             
-            Group() {
-                RentalSelectionButton()
-                
-                ZStack {
-                    
+            ScrollView {
+                VStack {
+                    ForEach(groupModel.rentalItems.indices) { i in
+                        NavigationLink {
+                            Text("3")
+                        } label: {
+                            RentalItemHCell(rentalItemInfo: groupModel.rentalItems[i])
+                        }
+                    }
                 }
             }
-            .isHidden(hidden: isSearchBarFocused)
+                
+            
         }
         .animation(.spring(), value: rentalSelection)
     }
@@ -50,6 +54,7 @@ struct Rental: View {
 
             }
         }
+        .padding(.bottom, 20)
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150072F4289A2042005B6A93 /* RentalItemHCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150072F3289A2042005B6A93 /* RentalItemHCell.swift */; };
+		150072F9289A3DFD005B6A93 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150072F8289A3DFD005B6A93 /* Item.swift */; };
 		15246BD92884FD9A000BDFC8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15246BD82884FD9A000BDFC8 /* LoginModel.swift */; };
 		152980F0288D39E500537A80 /* GroupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152980EF288D39E500537A80 /* GroupPage.swift */; };
 		152980F3288D3B6400537A80 /* AboutGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152980F2288D3B6400537A80 /* AboutGroup.swift */; };
@@ -83,6 +85,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		150072F3289A2042005B6A93 /* RentalItemHCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalItemHCell.swift; sourceTree = "<group>"; };
+		150072F8289A3DFD005B6A93 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		15246BD82884FD9A000BDFC8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		152980EF288D39E500537A80 /* GroupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPage.swift; sourceTree = "<group>"; };
 		152980F2288D3B6400537A80 /* AboutGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutGroup.swift; sourceTree = "<group>"; };
@@ -170,6 +174,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		150072F2289A1F4B005B6A93 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				156386C3288A525C006653E8 /* Rental.swift */,
+				150072F7289A3DE6005B6A93 /* Cell */,
+				150072F8289A3DFD005B6A93 /* Item.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		150072F7289A3DE6005B6A93 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				150072F3289A2042005B6A93 /* RentalItemHCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		15246BDE28851550000BDFC8 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,7 +240,7 @@
 		156386BC288A51F5006653E8 /* Rent */ = {
 			isa = PBXGroup;
 			children = (
-				156386C3288A525C006653E8 /* Rental.swift */,
+				150072F2289A1F4B005B6A93 /* View */,
 			);
 			path = Rent;
 			sourceTree = "<group>";
@@ -394,10 +416,10 @@
 				153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */,
 				15FAF164287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift */,
 				15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */,
-				153C1A77288CEE0A00F89B2E /* RefreshableView.swift */,
 				15F3672E289261300073E094 /* ShadowRectangle.swift */,
 				15F3673628927E770073E094 /* TransparentDivider.swift */,
 				158011782893992A006016AD /* ImagePicker.swift */,
+				153C1A77288CEE0A00F89B2E /* RefreshableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -556,6 +578,7 @@
 				152980F3288D3B6400537A80 /* AboutGroup.swift in Sources */,
 				153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */,
 				156386C0288A5249006653E8 /* Home.swift in Sources */,
+				150072F9289A3DFD005B6A93 /* Item.swift in Sources */,
 				1586873A287EBB3F0003C2DC /* CertificationModel.swift in Sources */,
 				156386C2288A5252006653E8 /* GroupMain.swift in Sources */,
 				158011792893992A006016AD /* ImagePicker.swift in Sources */,
@@ -571,6 +594,7 @@
 				153C1A7B288CF7D600F89B2E /* CreateGroup.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
 				156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */,
+				150072F4289A2042005B6A93 /* RentalItemHCell.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
 				15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,

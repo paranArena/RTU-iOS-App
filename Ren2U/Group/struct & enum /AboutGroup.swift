@@ -153,3 +153,4 @@ struct RentalItemInfo: Identifiable, Codable {
         ]
     }
 }
+

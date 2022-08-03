@@ -17,7 +17,7 @@ enum TabSelection: Int, CaseIterable {
 struct Ren2UTab: View {
     
     @EnvironmentObject var groupModel: GroupModel
-    @State var tabSelection: TabSelection?
+    @State var tabSelection: Int?
     @State private var title = ""
     
     init() {
@@ -40,6 +40,7 @@ struct Ren2UTab: View {
                     .onAppear {
                         self.title = "Home"
                     }
+                    
 
                 GroupMain()
                     .tabItem {
