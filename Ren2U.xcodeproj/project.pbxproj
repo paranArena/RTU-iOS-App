@@ -178,8 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				156386C3288A525C006653E8 /* Rental.swift */,
-				150072F7289A3DE6005B6A93 /* Cell */,
 				150072F8289A3DFD005B6A93 /* Item.swift */,
+				150072F7289A3DE6005B6A93 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -6,15 +6,37 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct Item: View {
+    
+    let itemInfo: RentalItemInfo
+    
+    init(itemInfo: RentalItemInfo) {
+        self.itemInfo = itemInfo
+        let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            KFImage(URL(string: itemInfo.imageSource)!)
+                .onFailure { err in
+                    print(err.errorDescription ?? "KFImage Optional err")
+                }
+                .resizable()
+                .frame(width: SCREEN_WIDTH, height: 300)
+        }
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
+        .ignoresSafeArea()
     }
 }
 
 struct Item_Previews: PreviewProvider {
     static var previews: some View {
-        Item()
+        Item(itemInfo: RentalItemInfo.dummyRentalItem())
     }
 }

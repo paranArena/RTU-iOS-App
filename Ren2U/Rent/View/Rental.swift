@@ -20,23 +20,20 @@ struct Rental: View {
             SearchBar(text: $searchText, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
             
-            RentalSelectionButton()
-            
-            ScrollView {
-                VStack {
-                    ForEach(groupModel.rentalItems.indices) { i in
-                        NavigationLink {
-                            Text("3")
-                        } label: {
-                            RentalItemHCell(rentalItemInfo: groupModel.rentalItems[i])
-                        }
-                    }
-                }
-            }
+            Group {
+                RentalSelectionButton()
                 
-            
+                ZStack {
+                    RentalItemSelected()
+                        .offset(x: rentalSelection == .rentalItem ? 0 : -SCREEN_WIDTH)
+                    RentalListSelected()
+                        .offset(x: rentalSelection == .rentalList ? 0 : SCREEN_WIDTH)
+                }
+                .padding(.bottom, -10)
+            }
         }
         .animation(.spring(), value: rentalSelection)
+        .navigationTitle("")
     }
     
     @ViewBuilder
@@ -55,6 +52,26 @@ struct Rental: View {
             }
         }
         .padding(.bottom, 20)
+    }
+    
+    @ViewBuilder
+    func RentalItemSelected() -> some View {
+        ScrollView {
+            VStack {
+                ForEach(groupModel.rentalItems.indices) { i in
+                    NavigationLink {
+                        Item(itemInfo: groupModel.rentalItems[i])
+                    } label: {
+                        RentalItemHCell(rentalItemInfo: groupModel.rentalItems[i])
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func RentalListSelected() -> some View {
+        Text("대여목록")
     }
 }
 
