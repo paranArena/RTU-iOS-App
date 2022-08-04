@@ -20,7 +20,7 @@ struct GroupMain: View {
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .center, spacing: 10) {
             SearchBar(text: $text, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
             

@@ -65,27 +65,27 @@ struct Ren2UTab: View {
         switch selection {
         case .home:
             Label {
-                Text("홈")
+                Text(Selection.home.title)
             } icon: {
-                Image(systemName: "house")
+                Image(systemName: Selection.home.imageSource)
             }
         case .group:
             Label {
-                Text("그룹")
+                Text(Selection.group.title)
             } icon: {
-                Image(systemName: "person.2")
+                Image(systemName: Selection.group.imageSource)
             }
         case .rent:
             Label {
-                Text("그룹")
+                Text(Selection.rent.title)
             } icon: {
-                Image(systemName: "rectangle.on.rectangle")
+                Image(systemName: Selection.rent.imageSource)
             }
         case .myPage:
             Label {
-                Text("마이페이지")
+                Text(Selection.rent.title)
             } icon: {
-                Image(systemName: "person")
+                Image(systemName: Selection.myPage.imageSource)
             }
         }
     }
@@ -97,6 +97,32 @@ extension Ren2UTab {
         case group
         case rent
         case myPage
+        
+        var title: String {
+            switch self {
+            case .home:
+                return "홈"
+            case .group:
+                return "그룹"
+            case .rent:
+                return "대여"
+            case .myPage:
+                return "마이페이지"
+            }
+        }
+        
+        var imageSource: String {
+            switch self {
+            case .home:
+                return "house"
+            case .group:
+                return "person.2"
+            case .rent:
+                return "rectangle.on.rectangle"
+            case .myPage:
+                return "person"
+            }
+        }
     }
 }
 
