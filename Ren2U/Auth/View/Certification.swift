@@ -12,7 +12,7 @@ struct Certification: View {
     @Binding var isActive: Bool
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var authModel: AuthModel
-    @StateObject var model = CertificationModel()
+    @StateObject var viewModel = ViewModel()
     
     let user: User
     
@@ -30,14 +30,14 @@ struct Certification: View {
                 
                 CertificationTextField()
                 
-                Text(model.isConfirmed ? " " : "인증번호가 일치하지 않습니다.")
+                Text(viewModel.isConfirmed ? " " : "인증번호가 일치하지 않습니다.")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .foregroundColor(.Red_EB1808)
                 
                 ResendButton()
                 GoSignUpSuccessButton()
                 
-                NavigationLink(isActive: $model.isSingUpSeccussActive) {
+                NavigationLink(isActive: $viewModel.isSingUpSeccussActive) {
                     SignUpSuccess(isActive: $isActive)
                 } label: { }
 
@@ -50,7 +50,7 @@ struct Certification: View {
         .onChange(of: scenePhase, perform: { scenePhsae in
             switch scenePhsae {
             case .active:
-                model.setTimeRemaining()
+                viewModel.setTimeRemaining()
             case .inactive:
                 break
             case .background:
@@ -60,7 +60,7 @@ struct Certification: View {
             }
         })
         .onAppear {
-            model.startTimer()
+            viewModel.startTimer()
         }
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
@@ -72,22 +72,22 @@ struct Certification: View {
     
     @ViewBuilder
     private func CertificationTextField() -> some View {
-        CapsulePlaceholder(text: $model.certificationNum, placeholder: Text(""), color: .Gray_ADB5BD)
+        CapsulePlaceholder(text: $viewModel.certificationNum, placeholder: Text(""), color: .Gray_ADB5BD)
             .keyboardType(.numberPad)
             .font(.custom(CustomFont.RobotoMedium.rawValue, size: 36))
             .multilineTextAlignment(.center)
             .overlay(TimerOverlay())
-            .onTapGesture { model.certificationNum = "" }
-            .onChange(of: model.certificationNum) { _ in
-                model.endEditingIfLengthLimitReached()
+            .onTapGesture { viewModel.certificationNum = "" }
+            .onChange(of: viewModel.certificationNum) { _ in
+                viewModel.endEditingIfLengthLimitReached()
             }
     }
     
     @ViewBuilder
     private func ResendButton() -> some View {
         Button {
-            model.resetTimer()
-            model.certificationNum = ""
+            viewModel.resetTimer()
+            viewModel.certificationNum = ""
         } label: {Text("인증번호 재발송")}
             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
             .foregroundColor(.Gray_495057)
@@ -97,28 +97,28 @@ struct Certification: View {
     @ViewBuilder
     private func GoSignUpSuccessButton() -> some View {
         Button {
-            model.isConfirmed = authModel.checkCertificationNum(num: model.certificationNum, user: user)
-            model.certificationNum = ""
-            if model.isConfirmed {
+            viewModel.isConfirmed = authModel.checkCertificationNum(num: viewModel.certificationNum, user: user)
+            viewModel.certificationNum = ""
+            if viewModel.isConfirmed {
                 authModel.signUp(user: user)
-                model.isSingUpSeccussActive = true
+                viewModel.isSingUpSeccussActive = true
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable()    .frame(width: 86, height: 86)
                 .padding(.top, 49)
-                .foregroundColor(model.isReachedMaxLength(num: model.certificationNum)
+                .foregroundColor(viewModel.isReachedMaxLength(num: viewModel.certificationNum)
                                  ? .Navy_1E2F97 : .Gray_E9ECEF)
                 .padding(.top, 50)
         }
-        .disabled(!model.isReachedMaxLength(num: model.certificationNum))
+        .disabled(!viewModel.isReachedMaxLength(num: viewModel.certificationNum))
     }
     
     @ViewBuilder
     private func TimerOverlay() -> some View {
         HStack {
             Spacer()
-            Text("\(model.getTimeString(time:model.timeRemaining))")
+            Text("\(viewModel.getTimeString(time: viewModel.timeRemaining))")
                 .font(.custom(CustomFont.RobotoMedium.rawValue, size: 16))
                 .padding(.trailing, 10)
                 .foregroundColor(.Red_EB1808)

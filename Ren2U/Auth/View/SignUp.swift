@@ -10,8 +10,8 @@ import Combine
 
 struct SignUp: View {
     
-    @StateObject var signUpModel = SignUpModel()
-    @FocusState private var focusedField: SignUpField?
+    @StateObject var viewModel = ViewModel()
+    @FocusState private var focusedField: Field?
     @Binding var isActive: Bool 
 
     let password: [String] = ["Password", "Password 확인"]
@@ -39,7 +39,7 @@ struct SignUp: View {
                 .padding(.bottom, CGFloat(focusedField?.rawValue ?? 0) * -40)
                 .animation(.spring(), value: focusedField)
                 .onSubmit {
-                    focusedField = signUpModel.foucsChange(curIndex: focusedField?.rawValue ?? 0)
+                    focusedField = viewModel.foucsChange(curIndex: focusedField?.rawValue ?? 0)
                 }
             } // scroll
         } //VStack
@@ -56,24 +56,24 @@ struct SignUp: View {
         VStack(alignment: .leading) {
             Section {
                 HStack {
-                    BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $signUpModel.isOverlappedEmail, text: $signUpModel.text[0])
-                        .onChange(of: signUpModel.text[SignUpField.email.rawValue]) { _ in signUpModel.isOverlappedEmail = false }
+                    BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[0])
+                        .onChange(of: viewModel.text[Field.email.rawValue]) { _ in viewModel.isOverlappedEmail = false }
 
                     Text("@ajou.ac.kr")
                         .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
                     
                     Button {
-                        signUpModel.isOverlappedEmail.toggle()
+                        viewModel.isOverlappedEmail.toggle()
                     } label: {
                         Text("중복확인")
                             .padding(5)
                             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                            .overlay(Capsule().stroke(signUpModel.text[SignUpField.email.rawValue].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
-                            .foregroundColor(signUpModel.text[SignUpField.email.rawValue].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
+                            .overlay(Capsule().stroke(viewModel.text[Field.email.rawValue].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
+                            .foregroundColor(viewModel.text[Field.email.rawValue].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
                             .padding(.leading, 19)
                     }
                     
-                    .disabled(signUpModel.isOverlappedEmail || signUpModel.text[SignUpField.email.rawValue].isEmpty)
+                    .disabled(viewModel.isOverlappedEmail || viewModel.text[Field.email.rawValue].isEmpty)
                 }
             } header: {
                 Text("아주대학교 이메일")
@@ -85,30 +85,30 @@ struct SignUp: View {
     
     @ViewBuilder
     private func Password() -> some View {
-        PasswordTextField(textType: password[0], text: $signUpModel.text[SignUpField.password.rawValue],
-                          isShowingPassword: $signUpModel.isShowingPassword)
+        PasswordTextField(textType: password[0], text: $viewModel.text[Field.password.rawValue],
+                          isShowingPassword: $viewModel.isShowingPassword)
         .overlay(BottomLine())
         .focused($focusedField, equals: .password)
-        .id(SignUpField.password.rawValue)
+        .id(Field.password.rawValue)
     }
     
     @ViewBuilder
     private func PasswordCheck() -> some View {
-        PasswordTextField(textType: password[1], text: $signUpModel.text[SignUpField.passwordCheck.rawValue],
-                          isShowingPassword: $signUpModel.isShowingPasswordCheck)
+        PasswordTextField(textType: password[1], text: $viewModel.text[Field.passwordCheck.rawValue],
+                          isShowingPassword: $viewModel.isShowingPasswordCheck)
         .overlay(BottomLine())
-        .overlay(message)
+        .overlay(Message())
         .focused($focusedField, equals: .passwordCheck)
-        .id(SignUpField.passwordCheck.rawValue)
+        .id(Field.passwordCheck.rawValue)
     }
     
     @ViewBuilder
     private func Name() -> some View {
         VStack(alignment: .leading) {
             Section {
-                BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[3])
+                BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[3])
                     .focused($focusedField, equals: .name)
-                    .id(SignUpField.name.rawValue)
+                    .id(Field.name.rawValue)
             } header: {
                 Text("이름")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
@@ -120,9 +120,9 @@ struct SignUp: View {
     private func Major() -> some View {
         VStack(alignment: .leading) {
             Section {
-                BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[4])
+                BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[4])
                     .focused($focusedField, equals: .department)
-                    .id(SignUpField.department.rawValue)
+                    .id(Field.department.rawValue)
 
             } header: {
                 Text("학과")
@@ -135,10 +135,10 @@ struct SignUp: View {
     private func StudentId() -> some View {
         VStack(alignment: .leading) {
             Section {
-                BottomLinePlaceholder(placeholder: Text(""), text: $signUpModel.text[5])
+                BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
                     .keyboardType(.numbersAndPunctuation)
                     .focused($focusedField, equals: .studentId)
-                    .id(SignUpField.studentId.rawValue)
+                    .id(Field.studentId.rawValue)
             } header: {
                 Text("학번")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
@@ -150,11 +150,11 @@ struct SignUp: View {
     private func PhoneNumber() -> some View {
         VStack(alignment: .leading) {
             Section {
-                BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $signUpModel.text[6])
+                BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[6])
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .keyboardType(.numbersAndPunctuation)
                     .focused($focusedField, equals: .phoneNumber)
-                    .id(SignUpField.phoneNumber.rawValue)
+                    .id(Field.phoneNumber.rawValue)
             } header: {
                 Text("휴대폰 번호")
                     .font(.system(size: 12))
@@ -167,15 +167,15 @@ struct SignUp: View {
         HStack {
             Spacer()
             NavigationLink {
-                Certification(isActive: $isActive, user: signUpModel.getUserInfo())
+                Certification(isActive: $isActive, user: viewModel.getUserInfo())
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)
                     .padding(.top, 49)
-                    .foregroundColor(signUpModel.isFilledAll(textArray: signUpModel.text) ? .Navy_1E2F97 : .Gray_E9ECEF)
+                    .foregroundColor(viewModel.isFilledAll(textArray: viewModel.text) ? .Navy_1E2F97 : .Gray_E9ECEF)
                     .padding(.top, 20)
             }
-            .disabled(!signUpModel.isFilledAll(textArray: signUpModel.text))
+            .disabled(!viewModel.isFilledAll(textArray: viewModel.text))
             
             Spacer()
         }
@@ -187,21 +187,22 @@ struct SignUp: View {
             Spacer()
             Rectangle()
                 .frame(height: 1)
-                .foregroundColor(!signUpModel.text[SignUpField.password.rawValue].isEmpty
-                                 && signUpModel.text[SignUpField.password.rawValue] == signUpModel.text[SignUpField.passwordCheck.rawValue]
+                .foregroundColor(!viewModel.text[Field.password.rawValue].isEmpty
+                                 && viewModel.text[Field.password.rawValue] == viewModel.text[Field.passwordCheck.rawValue]
                                  ? .Navy_1E2F97 : .Gray_ADB5BD)
         }
     }
     
-    var message: some View {
+    @ViewBuilder
+    private func Message() -> some View {
         HStack {
-            if signUpModel.isFilledAny(text1: signUpModel.text[SignUpField.password.rawValue],
-                                     text2: signUpModel.text[SignUpField.passwordCheck.rawValue]) {
-                Text(signUpModel.isFilledAnyAndEqualText(text1: signUpModel.text[SignUpField.password.rawValue],
-                                           text2: signUpModel.text[SignUpField.passwordCheck.rawValue])
+            if viewModel.isFilledAny(text1: viewModel.text[Field.password.rawValue],
+                                     text2: viewModel.text[Field.passwordCheck.rawValue]) {
+                Text(viewModel.isFilledAnyAndEqualText(text1: viewModel.text[Field.password.rawValue],
+                                           text2: viewModel.text[Field.passwordCheck.rawValue])
                      ? "비밀번호가 일치합니다" : "비밀번호가 일치하지 않습니다.")
-                .foregroundColor(signUpModel.isFilledAnyAndEqualText(text1: signUpModel.text[SignUpField.password.rawValue],
-                                                       text2: signUpModel.text[SignUpField.passwordCheck.rawValue])
+                .foregroundColor(viewModel.isFilledAnyAndEqualText(text1: viewModel.text[Field.password.rawValue],
+                                                       text2: viewModel.text[Field.passwordCheck.rawValue])
                                  ? Color.Green_2CA900 : Color.Red_EB1808)
                 .font(.system(size: 12))
                 .offset(y: 30)

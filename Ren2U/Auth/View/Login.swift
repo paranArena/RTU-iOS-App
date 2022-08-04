@@ -10,8 +10,8 @@ import SwiftUI
 struct Login: View {
     
     @EnvironmentObject var authModel: AuthModel
-    @StateObject var loginModel = LoginModel()
-    @FocusState var focus: LoginField?
+    @StateObject var viewModel = ViewModel()
+    @FocusState var focus: Field?
     @State private var isActive = false
     
     var body: some View {
@@ -29,7 +29,7 @@ struct Login: View {
             .navigationBarHidden(true)
             .padding(.horizontal, 40)
             .onAppear {
-                loginModel.initTextFields()
+                viewModel.initTextFields()
                 authModel.hello()
             }
         }
@@ -54,7 +54,7 @@ struct Login: View {
     
     @ViewBuilder
     private func Email() -> some View {
-        CapsulePlaceholder(text: $loginModel.account.email, placeholder: Text("E-mail"),
+        CapsulePlaceholder(text: $viewModel.account.email, placeholder: Text("E-mail"),
                            color: .Gray_ADB5BD)
             .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
             .padding(.top, 46)
@@ -63,7 +63,7 @@ struct Login: View {
     
     @ViewBuilder
     private func Password() -> some View {
-        CapsuleSecurePlaceholder(text: $loginModel.account.password, placeholder: Text("Password"))
+        CapsuleSecurePlaceholder(text: $viewModel.account.password, placeholder: Text("Password"))
             .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
             .padding(.top, 19)
             .focused($focus, equals: .password)
@@ -72,7 +72,7 @@ struct Login: View {
     @ViewBuilder
     private func MissInput() -> some View {
         HStack {
-            Text(loginModel.isWroungAccount ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
+            Text(viewModel.isWroungAccount ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .foregroundColor(.Red_EB1808)
             Spacer()
@@ -84,15 +84,15 @@ struct Login: View {
     @ViewBuilder
     private func LoginButton() -> some View {
         Button {
-            authModel.login(account: loginModel.account)
+            authModel.login(account: viewModel.account)
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable()
                 .frame(width: 86, height: 86)
                 .padding(.top, 21)
-                .foregroundColor(!loginModel.account.email.isEmpty && !loginModel.account.password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
+                .foregroundColor(!viewModel.account.email.isEmpty && !viewModel.account.password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
         }
-        .disabled(loginModel.account.email.isEmpty || loginModel.account.password.isEmpty)
+        .disabled(viewModel.account.email.isEmpty || viewModel.account.password.isEmpty)
     }
     
     @ViewBuilder
