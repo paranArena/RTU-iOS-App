@@ -8,17 +8,12 @@
 import SwiftUI
 import HidableTabView
 
-enum TabSelection: Int, CaseIterable {
-    case home
-    case group
-    case rent
-    case myPage
-}
+
 
 struct Ren2UTab: View {
     
     @EnvironmentObject var groupModel: GroupModel
-    @State private var tabSelection: Int = TabSelection.home.rawValue
+    @State private var tabSelection: Int = Selection.home.rawValue
     
     init() {
         let appearance: UITabBarAppearance = UITabBarAppearance()
@@ -30,44 +25,14 @@ struct Ren2UTab: View {
     
     var body: some View {
         TabView(selection: $tabSelection) {
-            
-            
-            NavigationView {
-                Home()
-            }
-            .tag(TabSelection.home.rawValue)
-            .tabItem {
-                Image(systemName: "house")
-                Text("홈")
-            }
-                
-
-            NavigationView {
-                GroupMain(tabSelection: $tabSelection)
-            }
-            .tag(TabSelection.group.rawValue)
-            .tabItem {
-                Image(systemName: "person.2")
-                Text("그룹")
-            }
-            
-            
-            NavigationView {
-                Rental()
-            }
-            .tag(TabSelection.rent.rawValue)
-            .tabItem {
-                Image(systemName: "rectangle.on.rectangle")
-                Text("대여")
-            }
-
-            NavigationView {
-                MyPage()
-            }
-            .tag(TabSelection.myPage.rawValue)
-            .tabItem {
-                Image(systemName: "person")
-                Text("마이페이지")
+            ForEach(Selection.allCases, id: \.rawValue) { selection in
+                NavigationView {
+                    Content(selection: selection)
+                }
+                .tag(selection.rawValue)
+                .tabItem {
+                    TabItem(selection: selection)
+                }
             }
         }
         .navigationTitle("")
@@ -79,6 +44,59 @@ struct Ren2UTab: View {
             groupModel.fetchNotices()
             groupModel.fetchRentalItems()
         }
+    }
+    
+    @ViewBuilder
+    private func Content(selection: Selection) -> some View {
+        switch selection {
+        case .home:
+            Home()
+        case .group:
+            GroupMain(tabSelection: $tabSelection)
+        case .rent:
+            Rental()
+        case .myPage:
+            MyPage()
+        }
+    }
+    
+    @ViewBuilder
+    private func TabItem(selection: Selection) -> some View {
+        switch selection {
+        case .home:
+            Label {
+                Text("홈")
+            } icon: {
+                Image(systemName: "house")
+            }
+        case .group:
+            Label {
+                Text("그룹")
+            } icon: {
+                Image(systemName: "person.2")
+            }
+        case .rent:
+            Label {
+                Text("그룹")
+            } icon: {
+                Image(systemName: "rectangle.on.rectangle")
+            }
+        case .myPage:
+            Label {
+                Text("마이페이지")
+            } icon: {
+                Image(systemName: "person")
+            }
+        }
+    }
+}
+
+extension Ren2UTab {
+    enum Selection: Int, CaseIterable {
+        case home
+        case group
+        case rent
+        case myPage
     }
 }
 

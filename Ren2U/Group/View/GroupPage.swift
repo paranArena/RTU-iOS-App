@@ -148,7 +148,7 @@ struct GroupPage: View {
                 
                 
                 Button {
-                    self.tabSelection = TabSelection.rent.rawValue
+                    self.tabSelection = Ren2UTab.Selection.rent.rawValue
                 } label: {
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.Gray_495057)
@@ -160,7 +160,7 @@ struct GroupPage: View {
                 HStack {
                     ForEach(groupModel.rentalItems) { rentalItem in
                         Button {
-                            self.tabSelection = TabSelection.rent.rawValue
+                            self.tabSelection = Ren2UTab.Selection.rent.rawValue
                             self.groupModel.itemViewActive[2] = true
                         } label: {
                             RentalItemVCell(rentalItem: rentalItem)
