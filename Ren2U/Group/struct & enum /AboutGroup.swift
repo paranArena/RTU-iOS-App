@@ -11,26 +11,6 @@ import SwiftUI
 // struct - Info, Dto
 // enum = field, role, selection
 
-enum GroupSelection: Int, CaseIterable {
-    case group
-    case notice
-    
-    var title: String {
-        switch self {
-        case .group:
-            return "그룹"
-        case .notice:
-            return "공지사항"
-        }
-    }
-}
-
-enum CreateGroupField: Int, CaseIterable {
-    case groupName
-    case tagsText
-    case introduction
-}
-
 enum GroupRole: Int, CaseIterable {
     case chairman
     case member

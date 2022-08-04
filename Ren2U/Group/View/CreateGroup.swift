@@ -214,6 +214,20 @@ struct CreateGroup: View {
     }
 }
 
+extension CreateGroup  {
+    enum Filed: Int, CaseIterable {
+        case groupName
+        case tagsText
+        case introduction
+    }
+}
+
+enum CreateGroupField: Int, CaseIterable {
+    case groupName
+    case tagsText
+    case introduction
+}
+
 struct CreateGroup_Previews: PreviewProvider {
     static var previews: some View {
         CreateGroup()

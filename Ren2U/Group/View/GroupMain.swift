@@ -10,12 +10,12 @@ import HidableTabView
 
 struct GroupMain: View {
     
-    @State private var groupSelection: GroupSelection = .group
+    @State private var groupSelection: Selection = .group
     @State private var text = ""
     @State private var isSearchBarFocused = false
     @Binding var tabSelection: Int 
     @EnvironmentObject var groupModel: GroupModel
-    private let selectionWidth = UIScreen.main.bounds.width / CGFloat(GroupSelection.allCases.count)
+    private let selectionWidth = UIScreen.main.bounds.width / CGFloat(Selection.allCases.count)
     
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
@@ -33,9 +33,9 @@ struct GroupMain: View {
                 ZStack {
                     GroupSelected(tabSelection: $tabSelection)
                         .overlay(CreateGroupButton())
-                        .offset(x: groupSelection == GroupSelection.group ? 0 : -SCREEN_WIDTH)
+                        .offset(x: groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)
                     NoticeSelected()
-                        .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
+                        .offset(x: groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
                 }
                 .overlay(ShadowRectangle())
                 .padding(.bottom, -10)
@@ -51,7 +51,7 @@ struct GroupMain: View {
     @ViewBuilder
     func GroupSelectionButton() -> some View {
         HStack {
-            ForEach(GroupSelection.allCases, id: \.self) {  option in
+            ForEach(Selection.allCases, id: \.self) {  option in
                 Button {
                     self.groupSelection  = option
                 } label: {
@@ -86,6 +86,24 @@ struct GroupMain: View {
         }
     }
 }
+
+extension GroupMain {
+    enum Selection: Int, CaseIterable {
+        case group
+        case notice
+        
+        var title: String {
+            switch self {
+            case .group:
+                return "그룹"
+            case .notice:
+                return "공지사항"
+            }
+        }
+    }
+}
+
+
 
 //struct Group_Previews: PreviewProvider {
 //    static var previews: some View {
