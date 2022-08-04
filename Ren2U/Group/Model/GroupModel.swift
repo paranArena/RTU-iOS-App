@@ -10,10 +10,12 @@ import Alamofire
 
 class GroupModel: ObservableObject {
     
-    @Published var likesGroups = [LikeGroupInfo]() 
+    @Published var likesGroups = [LikeGroupInfo]()
+//    @Published var 
     @Published var joinedGroups = [GroupInfo]() // VStack에서 나열될 그룹들
     @Published var notices = [NoticeInfo]() // Vstack 한개 그룹 셀에서 이동 후 사용될 정보
     @Published var rentalItems = [RentalItemInfo]() // Vstack 한개의 그룹 셀에서 이동 후 사용될 정보
+    @Published var itemViewActive = [Bool]()
     
     func fetchJoinedGroups() {
         self.joinedGroups = GroupInfo.dummyGroups()
@@ -30,6 +32,7 @@ class GroupModel: ObservableObject {
     
     func fetchRentalItems() {
         self.rentalItems = RentalItemInfo.dummyRentalItems()
+        self.itemViewActive = [Bool](repeating: false, count: rentalItems.count)
     }
     
     func makeFavoritesGroupTag(tags: [TagInfo]) -> String {

@@ -166,7 +166,12 @@ struct GroupPage: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(groupModel.rentalItems) { rentalItem in
-                        RentalItemVCell(rentalItem: rentalItem)
+                        Button {
+                            self.tabSelection = TabSelection.rent.rawValue
+                            self.groupModel.itemViewActive[2] = true
+                        } label: {
+                            RentalItemVCell(rentalItem: rentalItem)
+                        }
                     }
                 }
                 .padding(.horizontal)

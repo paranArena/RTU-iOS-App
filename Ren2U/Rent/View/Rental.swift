@@ -60,7 +60,7 @@ struct Rental: View {
         ScrollView {
             VStack {
                 ForEach(groupModel.rentalItems.indices) { i in
-                    NavigationLink {
+                    NavigationLink(isActive: $groupModel.itemViewActive[i]) {
                         Item(itemInfo: groupModel.rentalItems[i])
                     } label: {
                         RentalItemHCell(rentalItemInfo: groupModel.rentalItems[i])
