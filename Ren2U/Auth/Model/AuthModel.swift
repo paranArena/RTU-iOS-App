@@ -31,11 +31,9 @@ struct User: Codable {
     var major: String
     var studentId: String
     var phoneNumber: String
-    var deviceToken: String
     
     static let `default` = User(email: "temp", password: "12345", name: "Page",
-                                major: "소프트웨어학과", studentId: "12345678", phoneNumber: "01012345678",
-                                deviceToken: "")
+                                major: "소프트웨어학과", studentId: "12345678", phoneNumber: "01012345678")
 }
 
 class AuthModel: ObservableObject {
@@ -62,10 +60,10 @@ class AuthModel: ObservableObject {
         return true
     }
 
-    func signUp(user: User) {
+    func signUp(user: User) async -> Bool {
         
-        let url = "http://localhost:8080/signup"
-        
+        var result = false
+        let url = "\(baseURL)/signup"
         let param: [String: Any] = [
             "email" : "\(user.email)@ajou.ac.kr",
             "password" : user.password,
@@ -75,37 +73,42 @@ class AuthModel: ObservableObject {
             "major" : user.major
         ]
         
+        let task = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingString()
+        let response = await task.result
         
-        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default)
-            .responseString { res in
-                switch res.result {
-                case .success(let value):
-                    print("\(self) : \(value)")
-                case .failure(let err):
-                    print("\(self) : \(err)")
-                }
-            }
+        switch response {
+        case .success(let value):
+            print("[AuthVM] : \(value)")
+            result = true
+        case .failure(let err):
+            print("[AuthVM] : \(err)")
+            result = false
+        }
+        
+        return result
     }
     
-    func login(account: Account) {
+    @MainActor
+    func login(account: Account) async {
         self.jwt = "123"
-//        let defaults = UserDefaults.standard
-        let url = "http://localhost:8080/authenticate"
+        let defaults = UserDefaults.standard
+        let url = "\(baseURL)/authenticate"
         let param: [String: Any] = [
             "email" : account.email,
             "password" : account.password
         ]
         
-        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default)
-            .responseDecodable(of: LoginResponse.self) { res in
-                switch res.result {
-                case .success(let value):
-                    print(value)
-                    break
-                case .failure(let err):
-                    print(err)
-                }
-            }
+        
+        let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self)
+        let response = await request.result
+        
+        switch response {
+        case .success(let value):
+            print("[AuthVM] login : \(value)")
+            break
+        case .failure(let err):
+            print("[AuthVM] login : \(err)")
+        }
     }
     
     func testGet() {
@@ -118,19 +121,6 @@ class AuthModel: ObservableObject {
         
         AF.request(url, method: .get, parameters: param, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: User.self) { response in
-            }
-    }
-    
-    func hello() {
-        let url = "http://localhost:8080/api/hello"
-        AF.request(url, method: .get, encoding: JSONEncoding.default)
-            .responseString { res in
-                switch res.result {
-                case .success(let value):
-                    print("[\(self)] : \(value)")
-                case .failure(let err):
-                    print("[\(self)] : \(err)")
-                }
             }
     }
     

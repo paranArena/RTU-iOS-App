@@ -28,6 +28,7 @@ extension SignUp {
         @Published var isConfirmed = [Bool](repeating: false, count: 7)
         @Published var isShowingPassword = false
         @Published var isShowingPasswordCheck = false
+        @Published var goCeritification = false
 
         func isFilledAll(textArray: [String]) -> Bool {
             
@@ -85,8 +86,7 @@ extension SignUp {
         func getUserInfo() -> User {
             return User(email: text[SignUp.Field.email.rawValue], password: text[SignUp.Field.password.rawValue],
                         name: text[SignUp.Field.name.rawValue], major: text[SignUp.Field.department.rawValue],
-                        studentId: text[SignUp.Field.studentId.rawValue], phoneNumber: text[SignUp.Field.studentId.rawValue],
-                        deviceToken: "")
+                        studentId: text[SignUp.Field.studentId.rawValue], phoneNumber: text[SignUp.Field.studentId.rawValue])
         }
 
     }

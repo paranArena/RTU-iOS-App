@@ -10,6 +10,7 @@ import Combine
 
 struct SignUp: View {
     
+    @EnvironmentObject var authViewModel: AuthModel
     @StateObject var viewModel = ViewModel()
     @FocusState private var focusedField: Field?
     @Binding var isActive: Bool 
@@ -166,6 +167,7 @@ struct SignUp: View {
     private func CertificatinoViewButton() -> some View {
         HStack {
             Spacer()
+
             NavigationLink {
                 Certification(isActive: $isActive, user: viewModel.getUserInfo())
             } label: {

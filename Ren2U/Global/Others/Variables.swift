@@ -9,3 +9,5 @@ import SwiftUI
 
 let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
+
+let baseURL = "https://rtu-rent-server-uwdjr.run.goorm.io"

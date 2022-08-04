@@ -100,8 +100,9 @@ struct Certification: View {
             viewModel.isConfirmed = authModel.checkCertificationNum(num: viewModel.certificationNum, user: user)
             viewModel.certificationNum = ""
             if viewModel.isConfirmed {
-                authModel.signUp(user: user)
-                viewModel.isSingUpSeccussActive = true
+                Task {
+                    viewModel.isSingUpSeccussActive = await authModel.signUp(user: user)
+                }
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")

@@ -30,7 +30,6 @@ struct Login: View {
             .padding(.horizontal, 40)
             .onAppear {
                 viewModel.initTextFields()
-                authModel.hello()
             }
         }
     }
@@ -84,7 +83,7 @@ struct Login: View {
     @ViewBuilder
     private func LoginButton() -> some View {
         Button {
-            authModel.login(account: viewModel.account)
+            Task { await authModel.login(account: viewModel.account) }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable()
