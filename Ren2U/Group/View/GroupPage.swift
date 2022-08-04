@@ -12,7 +12,6 @@ struct GroupPage: View {
     
     @EnvironmentObject var groupModel: GroupModel
     @Binding var tabSelection: Int
-    @Binding var isCreateGroupButtonShowing: Bool
     let groupInfo: GroupInfo
     let groupRole: GroupRole = .member
     
@@ -37,12 +36,6 @@ struct GroupPage: View {
                     Spacer()
                 }
             }
-        }
-        .onAppear {
-            self.isCreateGroupButtonShowing = false
-        }
-        .onDisappear{
-            self.isCreateGroupButtonShowing = true 
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

@@ -11,7 +11,6 @@ struct GroupSelected: View {
     
     @EnvironmentObject var groupModel: GroupModel
     @Binding var tabSelection: Int
-    @Binding var isCreateGroupButtonShowing: Bool
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -35,7 +34,7 @@ struct GroupSelected: View {
                 HStack(spacing: 15) {
                     ForEach(0..<5, id: \.self) { index in
                         NavigationLink {
-                            GroupPage(tabSelection: $tabSelection, isCreateGroupButtonShowing: $isCreateGroupButtonShowing, groupInfo: GroupInfo.dummyGroup())
+                            GroupPage(tabSelection: $tabSelection, groupInfo: GroupInfo.dummyGroup())
                         } label: {
                             FavoriteGroupCell(info: GroupInfo.dummyGroup())
                         }
@@ -56,7 +55,7 @@ struct GroupSelected: View {
             VStack {
                 ForEach(groupModel.joinedGroups) { group in
                     NavigationLink {
-                        GroupPage(tabSelection: $tabSelection, isCreateGroupButtonShowing: $isCreateGroupButtonShowing, groupInfo: group)
+                        GroupPage(tabSelection: $tabSelection, groupInfo: group)
                     } label: {
                         JoinedGroupCell(info: group)
                     }

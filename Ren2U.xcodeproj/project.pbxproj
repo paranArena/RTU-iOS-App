@@ -37,6 +37,7 @@
 		156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */; };
 		156386D7288A5E58006653E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 156386D6288A5E58006653E8 /* Kingfisher */; };
 		156386DC288A6E0B006653E8 /* JoinedGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386DB288A6E0B006653E8 /* JoinedGroupCell.swift */; };
+		15788D2B289B883600F604CC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 15788D2A289B883600F604CC /* HidableTabView */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationModel.swift */; };
 		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
@@ -153,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				156386D7288A5E58006653E8 /* Kingfisher in Frameworks */,
+				15788D2B289B883600F604CC /* HidableTabView in Frameworks */,
 				15BDC4252881225100514EF1 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,6 +445,7 @@
 			packageProductDependencies = (
 				15BDC4242881225100514EF1 /* Alamofire */,
 				156386D6288A5E58006653E8 /* Kingfisher */,
+				15788D2A289B883600F604CC /* HidableTabView */,
 			);
 			productName = Ren2U;
 			productReference = 15FAF130287D5DFF00B35570 /* Ren2U.app */;
@@ -519,6 +522,7 @@
 			packageReferences = (
 				15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				15788D29289B883600F604CC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */,
 			);
 			productRefGroup = 15FAF131287D5DFF00B35570 /* Products */;
 			projectDirPath = "";
@@ -949,6 +953,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		15788D29289B883600F604CC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliMert/HidableTabView-SwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -964,6 +976,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		15788D2A289B883600F604CC /* HidableTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15788D29289B883600F604CC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */;
+			productName = HidableTabView;
 		};
 		15BDC4242881225100514EF1 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

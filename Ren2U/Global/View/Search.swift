@@ -10,7 +10,7 @@ import SwiftUI
 struct Search: View {
     
     @Binding var tabSelection: Int
-    @Binding var isCreateGroupButtonShowing: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("검색된 그룹 목록")
@@ -21,8 +21,7 @@ struct Search: View {
                 VStack {
                     ForEach(0..<10) { index in
                         NavigationLink {
-                            GroupPage(tabSelection: $tabSelection, isCreateGroupButtonShowing: $isCreateGroupButtonShowing,
-                                      groupInfo: GroupInfo.dummyGroup())
+                            GroupPage(tabSelection: $tabSelection, groupInfo: GroupInfo.dummyGroup())
                         } label: {
                             JoinedGroupCell(info: GroupInfo.dummyGroup())
                                 .overlay(ApplicatedGroupOverlay())

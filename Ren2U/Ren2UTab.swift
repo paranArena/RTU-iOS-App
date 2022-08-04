@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HidableTabView
 
 enum TabSelection: Int, CaseIterable {
     case home
@@ -17,7 +18,6 @@ enum TabSelection: Int, CaseIterable {
 struct Ren2UTab: View {
     
     @EnvironmentObject var groupModel: GroupModel
-    @State private var title = ""
     @State private var tabSelection: Int = TabSelection.home.rawValue
     
     init() {
@@ -29,63 +29,55 @@ struct Ren2UTab: View {
     }
     
     var body: some View {
-        NavigationView {
-            TabView(selection: $tabSelection) {
+        TabView(selection: $tabSelection) {
+            
+            
+            NavigationView {
                 Home()
-                    .tabItem {
-                        Image(systemName: "house")
-                        Text("홈")
-                    }
-                    .overlay(ShadowRectangle())
-                    .onAppear {
-                        self.title = "Home"
-                    }
-                    .tag(TabSelection.home.rawValue)
-                    
+            }
+            .tag(TabSelection.home.rawValue)
+            .tabItem {
+                Image(systemName: "house")
+                Text("홈")
+            }
+                
 
+            NavigationView {
                 GroupMain(tabSelection: $tabSelection)
-                    .tabItem {
-                        Image(systemName: "person.2")
-                        Text("그룹")
-                    }
-                    .tag(TabSelection.group.rawValue)
-                    .overlay(ShadowRectangle())
-                    .onAppear {
-                        self.title = ""
-                    }
-                
-                
+            }
+            .tag(TabSelection.group.rawValue)
+            .tabItem {
+                Image(systemName: "person.2")
+                Text("그룹")
+            }
+            
+            
+            NavigationView {
                 Rental()
-                    .tabItem {
-                        Image(systemName: "rectangle.on.rectangle")
-                        Text("대여")
-                    }
-                    .overlay(ShadowRectangle())
-                    .onAppear {
-                        self.title = "Rent"
-                    }
-                    .tag(TabSelection.rent.rawValue)
+            }
+            .tag(TabSelection.rent.rawValue)
+            .tabItem {
+                Image(systemName: "rectangle.on.rectangle")
+                Text("대여")
+            }
 
+            NavigationView {
                 MyPage()
-                    .tabItem {
-                        Image(systemName: "person")
-                        Text("마이페이지")
-                    }
-                    .overlay(ShadowRectangle())
-                    .onAppear {
-                        self.title = "MyPage"
-                    }
-                    .tag(TabSelection.myPage.rawValue)
             }
-            .navigationTitle(title)
-            .navigationBarHidden(true)
-            .accentColor(.Navy_1E2F97)
-            .foregroundColor(.LabelColor)
-            .onAppear {
-                groupModel.fetchJoinedGroups()
-                groupModel.fetchNotices()
-                groupModel.fetchRentalItems()
+            .tag(TabSelection.myPage.rawValue)
+            .tabItem {
+                Image(systemName: "person")
+                Text("마이페이지")
             }
+        }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .accentColor(.Navy_1E2F97)
+        .foregroundColor(.LabelColor)
+        .onAppear {
+            groupModel.fetchJoinedGroups()
+            groupModel.fetchNotices()
+            groupModel.fetchRentalItems()
         }
     }
 }

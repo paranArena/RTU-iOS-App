@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HidableTabView
 
 struct Rental: View {
     
@@ -32,9 +33,11 @@ struct Rental: View {
                 .padding(.bottom, -10)
             }
         }
+        .showTabBar(animated: false)
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
+
     }
     
     @ViewBuilder

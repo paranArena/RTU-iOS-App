@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import HidableTabView
 
 struct GroupMain: View {
     
     @State private var groupSelection: GroupSelection = .group
     @State private var text = ""
     @State private var isSearchBarFocused = false
-    @State private var isCreateGroupButtonShowing = true
     @Binding var tabSelection: Int 
     @EnvironmentObject var groupModel: GroupModel
     private let selectionWidth = UIScreen.main.bounds.width / CGFloat(GroupSelection.allCases.count)
@@ -20,36 +20,32 @@ struct GroupMain: View {
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
-        Group {
-            NavigationView {
-                VStack(alignment: .leading, spacing: 10) {
-                    SearchBar(text: $text, isFoucsed: $isSearchBarFocused)
-                        .padding(.horizontal, 20)
-                    
-                    Search(tabSelection: $tabSelection, isCreateGroupButtonShowing: $isCreateGroupButtonShowing )
-                        .padding(.bottom, -10)
-                        .isHidden(hidden: !isSearchBarFocused)
-                    
-                    Group {
-                        GroupSelectionButton()
-                        ZStack {
-                            GroupSelected(tabSelection: $tabSelection, isCreateGroupButtonShowing: $isCreateGroupButtonShowing)
-                                .offset(x: groupSelection == GroupSelection.group ? 0 : -SCREEN_WIDTH)
-                            NoticeSelected()
-                                .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
-                        }
-                        .padding(.bottom, -10)
-                    }
-                    .isHidden(hidden: isSearchBarFocused)
+        VStack(alignment: .leading, spacing: 10) {
+            SearchBar(text: $text, isFoucsed: $isSearchBarFocused)
+                .padding(.horizontal, 20)
+            
+            Search(tabSelection: $tabSelection)
+                .padding(.bottom, -10)
+                .isHidden(hidden: !isSearchBarFocused)
+            
+            Group {
+                GroupSelectionButton()
+                ZStack {
+                    GroupSelected(tabSelection: $tabSelection)
+                        .overlay(CreateGroupButton())
+                        .offset(x: groupSelection == GroupSelection.group ? 0 : -SCREEN_WIDTH)
+                    NoticeSelected()
+                        .offset(x: groupSelection == GroupSelection.notice ? 0 : SCREEN_WIDTH)
                 }
-                .navigationTitle("")
-                .navigationBarHidden(true)
+                .overlay(ShadowRectangle())
+                .padding(.bottom, -10)
             }
+            .isHidden(hidden: isSearchBarFocused)
         }
+        .showTabBar(animated: false)
         .navigationTitle("")
         .navigationBarHidden(true)
         .animation(.spring(), value: groupSelection)
-        .overlay(CreateGroupButton())
     }
     
     @ViewBuilder
@@ -88,7 +84,6 @@ struct GroupMain: View {
                 }
             }
         }
-        .isHidden(hidden: isSearchBarFocused || groupSelection == .notice || !isCreateGroupButtonShowing)
     }
 }
 

@@ -6,6 +6,7 @@
 //  텍스트 필드 변경 감지 : https://stackoverflow.com/questions/58406224/how-to-detect-when-a-textfield-loses-the-focus-in-swiftui-for-ios
 
 import SwiftUI
+import HidableTabView
 
 struct CreateGroup: View {
     
@@ -39,6 +40,7 @@ struct CreateGroup: View {
             }
             .animation(.spring(), value: focusField)
         }
+        .hideTabBar(animated: false)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import HidableTabView
 
 struct Item: View {
     
@@ -29,6 +30,7 @@ struct Item: View {
                 .resizable()
                 .frame(width: SCREEN_WIDTH, height: 300)
         }
+        .hideTabBar(animated: false)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
     }
