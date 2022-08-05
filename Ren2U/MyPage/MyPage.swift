@@ -9,13 +9,23 @@ import SwiftUI
 
 struct MyPage: View {
     
-    @EnvironmentObject var authModel: AuthViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
-        Button {
-            authModel.jwt = nil
-        } label: {
-            Text("로그아웃")
+        
+        VStack {
+            Button {
+                authViewModel.logout()
+            } label: {
+                Text("로그아웃")
+            }
+            
+            Button {
+                Task { await authViewModel.getMyInfo() }
+            } label: {
+                Text("개인정보조회")
+            }
+
         }
     }
 }

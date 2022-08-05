@@ -87,7 +87,6 @@ class AuthViewModel: ObservableObject {
     
     @MainActor
     func login(account: Account) async {
-        
         let url = "\(baseURL)/authenticate"
         let param: [String: Any] = [
             "email" : account.email,
@@ -114,8 +113,20 @@ class AuthViewModel: ObservableObject {
     }
     
     @MainActor
-    func getMyInfo() {
+    func getMyInfo() async {
+        let url = "\(baseURL)/members"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
         
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let response = await request.result
+        
+        switch response {
+        case .success(let value):
+            print(value)
+            break
+        case .failure(let err):
+            print("[AuthVM] login err: \(err)")
+        }
     }
     
     
