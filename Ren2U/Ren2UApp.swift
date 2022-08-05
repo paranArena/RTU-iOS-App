@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct Ren2UApp: App {
     
-    @StateObject var authModel = AuthModel()
+    @StateObject var authModel = AuthViewModel()
     @StateObject var groupModel = GroupModel()
     
     init() {

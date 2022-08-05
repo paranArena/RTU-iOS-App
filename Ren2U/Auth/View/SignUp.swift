@@ -10,7 +10,7 @@ import Combine
 
 struct SignUp: View {
     
-    @EnvironmentObject var authViewModel: AuthModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel = ViewModel()
     @FocusState private var focusedField: Field?
     @Binding var isActive: Bool 

@@ -11,7 +11,7 @@ struct Certification: View {
     
     @Binding var isActive: Bool
     @Environment(\.scenePhase) var scenePhase
-    @EnvironmentObject var authModel: AuthModel
+    @EnvironmentObject var authModel: AuthViewModel
     @StateObject var viewModel = ViewModel()
     
     let user: User

@@ -44,7 +44,7 @@
 		159F1B26288BA16000012113 /* AboutFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* AboutFont.swift */; };
 		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
 		15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A2E7B12893C58A00254793 /* KeyboardHandler.swift */; };
-		15BDC4222881218500514EF1 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthModel.swift */; };
+		15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel.swift */; };
 		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
 		15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C580287FF15A008BB89B /* NavigationBarColor.swift */; };
 		15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C582287FF7C0008BB89B /* SignUpVM.swift */; };
@@ -122,7 +122,7 @@
 		159F1B24288BA0C200012113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		159F1B25288BA16000012113 /* AboutFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFont.swift; sourceTree = "<group>"; };
 		15A2E7B12893C58A00254793 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
-		15BDC4212881218500514EF1 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
+		15BDC4212881218500514EF1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		15D4C580287FF15A008BB89B /* NavigationBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColor.swift; sourceTree = "<group>"; };
 		15D4C582287FF7C0008BB89B /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
 		15D4C58428800AB4008BB89B /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
@@ -288,15 +288,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		15868738287EBB270003C2DC /* Model */ = {
+		15868738287EBB270003C2DC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				15BDC4212881218500514EF1 /* AuthModel.swift */,
+				15BDC4212881218500514EF1 /* AuthViewModel.swift */,
 				15246BD82884FD9A000BDFC8 /* LoginVM.swift */,
 				15D4C582287FF7C0008BB89B /* SignUpVM.swift */,
 				15868739287EBB3F0003C2DC /* CertificationVM.swift */,
 			);
-			path = Model;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		159F1B22288B9F7000012113 /* Font */ = {
@@ -393,7 +393,7 @@
 		15FAF15D287D5E0E00B35570 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				15868738287EBB270003C2DC /* Model */,
+				15868738287EBB270003C2DC /* ViewModel */,
 				15D4C57F287FD4CF008BB89B /* View */,
 			);
 			path = Auth;
@@ -611,7 +611,7 @@
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
-				15BDC4222881218500514EF1 /* AuthModel.swift in Sources */,
+				15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
 				156386C4288A525C006653E8 /* Rental.swift in Sources */,
 				15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */,

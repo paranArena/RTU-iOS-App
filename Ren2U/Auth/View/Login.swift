@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Login: View {
     
-    @EnvironmentObject var authModel: AuthModel
+    @EnvironmentObject var authModel: AuthViewModel
     @StateObject var viewModel = ViewModel()
     @FocusState var focus: Field?
     @State private var isActive = false
