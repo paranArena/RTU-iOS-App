@@ -95,7 +95,7 @@ struct Login: View {
     }
     
     @ViewBuilder
-    func AuthHelp() -> some View {
+    private func AuthHelp() -> some View {
         HStack {
             Text("비밀번호 찾기")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))

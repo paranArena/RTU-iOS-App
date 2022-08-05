@@ -81,7 +81,7 @@ struct GroupPage: View {
     }
     
     @ViewBuilder
-    func Tags() -> some View {
+    private func Tags() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(groupInfo.groupDto.tags) { tag in
@@ -97,7 +97,7 @@ struct GroupPage: View {
     }
     
     @ViewBuilder
-    func Introduction() -> some View {
+    private func Introduction() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("소개글")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
@@ -111,7 +111,7 @@ struct GroupPage: View {
     }
     
     @ViewBuilder
-    func Notice() -> some View {
+    private func Notice() -> some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("공지사항")
@@ -138,7 +138,7 @@ struct GroupPage: View {
     }
     
     @ViewBuilder
-    func RentalItem() -> some View {
+    private func RentalItem() -> some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("대여물품")

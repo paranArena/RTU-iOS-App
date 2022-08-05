@@ -41,7 +41,7 @@ struct Rental: View {
     }
     
     @ViewBuilder
-    func RentalSelectionButton() -> some View {
+    private func RentalSelectionButton() -> some View {
         HStack {
             ForEach(RentalSelection.allCases, id: \.self) {  option in
                 Button {
@@ -59,7 +59,7 @@ struct Rental: View {
     }
     
     @ViewBuilder
-    func RentalItemSelected() -> some View {
+    private func RentalItemSelected() -> some View {
         ScrollView {
             VStack {
                 ForEach(groupModel.rentalItems.indices) { i in
@@ -74,7 +74,7 @@ struct Rental: View {
     }
     
     @ViewBuilder
-    func RentalListSelected() -> some View {
+    private func RentalListSelected() -> some View {
         Text("대여목록")
     }
 }

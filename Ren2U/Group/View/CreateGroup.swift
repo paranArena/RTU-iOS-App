@@ -55,7 +55,7 @@ struct CreateGroup: View {
     }
     
     @ViewBuilder
-    func GroupImage() -> some View {
+    private func GroupImage() -> some View {
         Group {
             if let image = createGroupModel.image {
                 image
@@ -70,7 +70,7 @@ struct CreateGroup: View {
     }
     
     @ViewBuilder
-    func GroupName() -> some View {
+    private func GroupName() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("그룹 이름")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
@@ -93,7 +93,7 @@ struct CreateGroup: View {
     }  
     
     @ViewBuilder
-    func Tag() -> some View {
+    private func Tag() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("태그")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
@@ -150,7 +150,7 @@ struct CreateGroup: View {
     }
     
     @ViewBuilder
-    func Introduction() -> some View {
+    private func Introduction() -> some View {
         VStack(alignment: .leading, spacing: 5) {
             Text("소개글")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
@@ -177,7 +177,7 @@ struct CreateGroup: View {
     }
     
     @ViewBuilder
-    func ChangeImageButton() -> some View {
+    private func ChangeImageButton() -> some View {
         VStack {
             Spacer()
             HStack {
@@ -203,7 +203,7 @@ struct CreateGroup: View {
     }
     
     @ViewBuilder
-    func CreateCompleteButton() -> some View {
+    private func CreateCompleteButton() -> some View {
         Button {
             presentationMode.wrappedValue.dismiss()
         } label: {

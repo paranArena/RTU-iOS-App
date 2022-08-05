@@ -49,7 +49,7 @@ struct GroupMain: View {
     }
     
     @ViewBuilder
-    func GroupSelectionButton() -> some View {
+    private func GroupSelectionButton() -> some View {
         HStack {
             ForEach(Selection.allCases, id: \.self) {  option in
                 Button {
@@ -66,7 +66,7 @@ struct GroupMain: View {
     }
     
     @ViewBuilder
-    func CreateGroupButton() -> some View {
+    private func CreateGroupButton() -> some View {
         VStack {
             Spacer()
             HStack {

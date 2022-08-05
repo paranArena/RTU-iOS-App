@@ -52,7 +52,7 @@ struct SignUp: View {
     } // body
     
     @ViewBuilder
-    func Email() -> some View {
+    private func Email() -> some View {
         
         VStack(alignment: .leading) {
             Section {

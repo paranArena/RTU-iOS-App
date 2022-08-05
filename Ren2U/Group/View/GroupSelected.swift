@@ -25,7 +25,7 @@ struct GroupSelected: View {
     }
     
     @ViewBuilder
-    func GroupFavorites() -> some View {
+    private func GroupFavorites() -> some View {
         VStack(alignment: .leading) {
             Text("즐겨찾기")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
@@ -46,7 +46,7 @@ struct GroupSelected: View {
     }
     
     @ViewBuilder
-    func JoinedGroup() -> some View {
+    private func JoinedGroup() -> some View {
         VStack(alignment: .leading) {
             Text("가입된 그룹 목록")
                 .foregroundColor(.LabelColor)
