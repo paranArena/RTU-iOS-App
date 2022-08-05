@@ -42,9 +42,7 @@ class AuthModel: ObservableObject {
     @Published var user: User?
     
     init() {
-        self.jwt = UserDefaults.standard.value(forKey: "jwt") as? String
-//        self.hello()
-//        self.testSignup()
+        self.jwt = UserDefaults.standard.value(forKey: jwtKey) as? String
     }
     
     
@@ -54,7 +52,6 @@ class AuthModel: ObservableObject {
     }
     
     func checkCertificationNum(num: String, user: User) -> Bool{
-        print("\(self) : check!")
         let num = Int(num)
         guard num == 1234 else { return false }
         return true
@@ -90,8 +87,7 @@ class AuthModel: ObservableObject {
     
     @MainActor
     func login(account: Account) async {
-        self.jwt = "123"
-        let defaults = UserDefaults.standard
+        
         let url = "\(baseURL)/authenticate"
         let param: [String: Any] = [
             "email" : account.email,
@@ -104,28 +100,20 @@ class AuthModel: ObservableObject {
         
         switch response {
         case .success(let value):
-            print("[AuthVM] login : \(value)")
+            self.setToken(token: value.data.token)
             break
         case .failure(let err):
-            print("[AuthVM] login : \(err)")
+            print("[AuthVM] login err: \(err)")
         }
     }
     
-    func testGet() {
-        let url = ""
-        let headers: HTTPHeaders = [.authorization(bearerToken: jwt!)]
-        let param: [String: Any] = [
-            "key1" : "123",
-            "key2" : "123"
-        ]
-        
-        AF.request(url, method: .get, parameters: param, encoding: JSONEncoding.default, headers: headers)
-            .responseDecodable(of: User.self) { response in
-            }
+    func logout() {
+        UserDefaults.standard.setValue(nil, forKey: jwtKey)
+        jwt = nil
     }
     
-    func logout() {
-        UserDefaults.standard.setValue(nil, forKey: "jwt")
-        jwt = nil
+    private func setToken(token: String) {
+        UserDefaults.standard.setValue(token, forKey: jwtKey)
+        self.jwt = token
     }
 }
