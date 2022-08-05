@@ -36,7 +36,7 @@ struct User: Codable {
                                 major: "소프트웨어학과", studentId: "12345678", phoneNumber: "01012345678")
 }
 
-class AuthModel: ObservableObject {
+class AuthViewModel: ObservableObject {
     
     @Published var jwt: String?
     @Published var user: User?
