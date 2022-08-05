@@ -16,25 +16,20 @@ struct GroupPage: View {
     let groupRole: Role = .member
     
     var body: some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .frame(height: 1)
-                .foregroundColor(Color.BackgroundColor)
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(alignment: .leading) {
-                    KFImage(URL(string: groupInfo.groupDto.imageSource)!).onFailure { err in
-                        print(err.errorDescription ?? "KFImage err")
-                        }
-                        .resizable()
-                        .frame(width: SCREEN_WIDTH, height: 215)
-                    
-                    Tags()
-                    Introduction()
-                    Notice()
-                    RentalItem()
-                    Spacer()
+ 
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .leading) {
+                KFImage(URL(string: groupInfo.groupDto.imageSource)!).onFailure { err in
+                    print(err.errorDescription ?? "KFImage err")
                 }
+                .resizable()
+                .frame(width: SCREEN_WIDTH, height: 215)
+                
+                Tags()
+                Introduction()
+                Notice()
+                RentalItem()
+                Spacer()
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -44,40 +39,10 @@ struct GroupPage: View {
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                switch groupRole {
-                case .chairman:
-                    Menu {
-                        Text("물품 등록")
-                        Text("공지 등록")
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(Color.LabelColor)
-                    }
-
-                case .member:
-                    Button {
-                        
-                    } label: {
-                        Text("탈퇴하기")
-                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                            .foregroundColor(Color.LabelColor)
-                    }
-
-                case .application:
-                    Button {
-                        
-                    } label: {
-                        Text("가입취소")
-                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                            .foregroundColor(Color.LabelColor)
-                    }
-                case .none:
-                    Text("가입하기")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                        .foregroundColor(Color.LabelColor)
-                }
+                TrailingToolbar()
             }
         }
+            
     }
     
     @ViewBuilder
@@ -171,6 +136,42 @@ struct GroupPage: View {
             }
             .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
             .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
+        }
+    }
+    
+    @ViewBuilder
+    func TrailingToolbar() -> some View {
+        switch groupRole {
+        case .chairman:
+            Menu {
+                Text("물품 등록")
+                Text("공지 등록")
+            } label: {
+                Image(systemName: "ellipsis")
+                    .foregroundColor(Color.LabelColor)
+            }
+            
+        case .member:
+            Button {
+                
+            } label: {
+                Text("탈퇴하기")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                    .foregroundColor(Color.LabelColor)
+            }
+            
+        case .application:
+            Button {
+                
+            } label: {
+                Text("가입취소")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                    .foregroundColor(Color.LabelColor)
+            }
+        case .none:
+            Text("가입하기")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                .foregroundColor(Color.LabelColor)
         }
     }
 }

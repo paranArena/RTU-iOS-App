@@ -14,6 +14,7 @@ struct RentalTab: View {
     @State private var rentalSelection: Selection = .rentalItem
     @State private var searchText = ""
     @State private var isSearchBarFocused = false
+    
     private let selectionWidth = UIScreen.main.bounds.width / CGFloat(Selection.allCases.count)
     
     var body: some View {
@@ -33,6 +34,7 @@ struct RentalTab: View {
                 .padding(.bottom, -10)
             }
         }
+        .overlay(ShadowRectangle())
         .showTabBar(animated: false)
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
