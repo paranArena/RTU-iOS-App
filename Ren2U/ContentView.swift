@@ -10,12 +10,12 @@ import SwiftUI
 struct ContentView: View {
     
     
-    @EnvironmentObject var authModel: AuthViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         Group {
-            Ren2UTab().isHidden(hidden: authModel.jwt == nil)
-            Login().isHidden(hidden: authModel.jwt != nil)
+            Ren2UTab().isHidden(hidden: authViewModel.jwt == nil)
+            Login().isHidden(hidden: authViewModel.jwt != nil)
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
     }

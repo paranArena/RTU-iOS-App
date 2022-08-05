@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MyPage: View {
+struct MyPageTab: View {
     
     @EnvironmentObject var authViewModel: AuthViewModel
     
@@ -32,6 +32,6 @@ struct MyPage: View {
 
 struct MyPage_Previews: PreviewProvider {
     static var previews: some View {
-        MyPage()
+        MyPageTab()
     }
 }

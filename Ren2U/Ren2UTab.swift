@@ -12,7 +12,7 @@ import HidableTabView
 
 struct Ren2UTab: View {
     
-    @EnvironmentObject var groupModel: GroupViewModel
+    @EnvironmentObject var groupViewModel: GroupViewModel
     @State private var tabSelection: Int = Selection.home.rawValue
     
     init() {
@@ -40,9 +40,9 @@ struct Ren2UTab: View {
         .accentColor(.Navy_1E2F97)
         .foregroundColor(.LabelColor)
         .onAppear {
-            groupModel.fetchJoinedGroups()
-            groupModel.fetchNotices()
-            groupModel.fetchRentalItems()
+            groupViewModel.fetchJoinedGroups()
+            groupViewModel.fetchNotices()
+            groupViewModel.fetchRentalItems()
         }
     }
     
@@ -50,13 +50,13 @@ struct Ren2UTab: View {
     private func Content(selection: Selection) -> some View {
         switch selection {
         case .home:
-            Home()
+            HomeTab()
         case .group:
-            GroupMain(tabSelection: $tabSelection)
+            GroupTab(tabSelection: $tabSelection)
         case .rent:
-            Rental()
+            RentalTab()
         case .myPage:
-            MyPage()
+            MyPageTab()
         }
     }
     

@@ -8,13 +8,13 @@
 import SwiftUI
 import HidableTabView
 
-struct Rental: View {
+struct RentalTab: View {
     
-    @EnvironmentObject var groupModel: GroupViewModel
-    @State private var rentalSelection: RentalSelection = .rentalItem
+    @EnvironmentObject var groupViewModel: GroupViewModel
+    @State private var rentalSelection: Selection = .rentalItem
     @State private var searchText = ""
     @State private var isSearchBarFocused = false
-    private let selectionWidth = UIScreen.main.bounds.width / CGFloat(RentalSelection.allCases.count)
+    private let selectionWidth = UIScreen.main.bounds.width / CGFloat(Selection.allCases.count)
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -43,7 +43,7 @@ struct Rental: View {
     @ViewBuilder
     private func RentalSelectionButton() -> some View {
         HStack {
-            ForEach(RentalSelection.allCases, id: \.self) {  option in
+            ForEach(Selection.allCases, id: \.self) {  option in
                 Button {
                     self.rentalSelection  = option
                 } label: {
@@ -62,11 +62,11 @@ struct Rental: View {
     private func RentalItemSelected() -> some View {
         ScrollView {
             VStack {
-                ForEach(groupModel.rentalItems.indices) { i in
-                    NavigationLink(isActive: $groupModel.itemViewActive[i]) {
-                        Item(itemInfo: groupModel.rentalItems[i])
+                ForEach(groupViewModel.rentalItems.indices) { i in
+                    NavigationLink(isActive: $groupViewModel.itemViewActive[i]) {
+                        Item(itemInfo: groupViewModel.rentalItems[i])
                     } label: {
-                        RentalItemHCell(rentalItemInfo: groupModel.rentalItems[i])
+                        RentalItemHCell(rentalItemInfo: groupViewModel.rentalItems[i])
                     }
                 }
             }
@@ -81,6 +81,6 @@ struct Rental: View {
 
 struct Rent_Previews: PreviewProvider {
     static var previews: some View {
-        Rental()
+        RentalTab()
     }
 }

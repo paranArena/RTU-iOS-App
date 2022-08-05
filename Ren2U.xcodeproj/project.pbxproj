@@ -27,10 +27,10 @@
 		153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */; };
 		153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */; };
 		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
-		156386C0288A5249006653E8 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* Home.swift */; };
-		156386C2288A5252006653E8 /* GroupMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C1288A5252006653E8 /* GroupMain.swift */; };
-		156386C4288A525C006653E8 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C3288A525C006653E8 /* Rental.swift */; };
-		156386C6288A5263006653E8 /* MyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C5288A5263006653E8 /* MyPage.swift */; };
+		156386C0288A5249006653E8 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* HomeTab.swift */; };
+		156386C2288A5252006653E8 /* GroupTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C1288A5252006653E8 /* GroupTab.swift */; };
+		156386C4288A525C006653E8 /* RentalTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C3288A525C006653E8 /* RentalTab.swift */; };
+		156386C6288A5263006653E8 /* MyPageTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C5288A5263006653E8 /* MyPageTab.swift */; };
 		156386CB288A5B2F006653E8 /* GroupSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CA288A5B2F006653E8 /* GroupSelected.swift */; };
 		156386CD288A5B7B006653E8 /* NoticeSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CC288A5B7B006653E8 /* NoticeSelected.swift */; };
 		156386D2288A5D1A006653E8 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D1288A5D1A006653E8 /* GroupViewModel.swift */; };
@@ -46,6 +46,7 @@
 		15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A2E7B12893C58A00254793 /* KeyboardHandler.swift */; };
 		15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel.swift */; };
 		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
+		15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C03144289CD5E500D0354E /* RentalTabVM.swift */; };
 		15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C580287FF15A008BB89B /* NavigationBarColor.swift */; };
 		15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C582287FF7C0008BB89B /* SignUpVM.swift */; };
 		15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C58428800AB4008BB89B /* PasswordTextField.swift */; };
@@ -106,10 +107,10 @@
 		153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVM.swift; sourceTree = "<group>"; };
 		153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SimpleBottomLine .swift"; sourceTree = "<group>"; };
 		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
-		156386BF288A5249006653E8 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		156386C1288A5252006653E8 /* GroupMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMain.swift; sourceTree = "<group>"; };
-		156386C3288A525C006653E8 /* Rental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rental.swift; sourceTree = "<group>"; };
-		156386C5288A5263006653E8 /* MyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPage.swift; sourceTree = "<group>"; };
+		156386BF288A5249006653E8 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
+		156386C1288A5252006653E8 /* GroupTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTab.swift; sourceTree = "<group>"; };
+		156386C3288A525C006653E8 /* RentalTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalTab.swift; sourceTree = "<group>"; };
+		156386C5288A5263006653E8 /* MyPageTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTab.swift; sourceTree = "<group>"; };
 		156386CA288A5B2F006653E8 /* GroupSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSelected.swift; sourceTree = "<group>"; };
 		156386CC288A5B7B006653E8 /* NoticeSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSelected.swift; sourceTree = "<group>"; };
 		156386D1288A5D1A006653E8 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 		159F1B25288BA16000012113 /* AboutFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFont.swift; sourceTree = "<group>"; };
 		15A2E7B12893C58A00254793 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		15C03144289CD5E500D0354E /* RentalTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalTabVM.swift; sourceTree = "<group>"; };
 		15D4C580287FF15A008BB89B /* NavigationBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColor.swift; sourceTree = "<group>"; };
 		15D4C582287FF7C0008BB89B /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
 		15D4C58428800AB4008BB89B /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
@@ -179,7 +181,7 @@
 		150072F2289A1F4B005B6A93 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				156386C3288A525C006653E8 /* Rental.swift */,
+				156386C3288A525C006653E8 /* RentalTab.swift */,
 				150072F8289A3DFD005B6A93 /* Item.swift */,
 				150072F7289A3DE6005B6A93 /* Cell */,
 			);
@@ -234,23 +236,24 @@
 		156386BB288A51EE006653E8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				156386BF288A5249006653E8 /* Home.swift */,
+				156386BF288A5249006653E8 /* HomeTab.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
 		};
-		156386BC288A51F5006653E8 /* Rent */ = {
+		156386BC288A51F5006653E8 /* Rental */ = {
 			isa = PBXGroup;
 			children = (
+				15C03143289CD5A900D0354E /* ViewModel */,
 				150072F2289A1F4B005B6A93 /* View */,
 			);
-			path = Rent;
+			path = Rental;
 			sourceTree = "<group>";
 		};
 		156386BD288A5201006653E8 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				156386C5288A5263006653E8 /* MyPage.swift */,
+				156386C5288A5263006653E8 /* MyPageTab.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -278,7 +281,7 @@
 		156386DA288A6523006653E8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				156386C1288A5252006653E8 /* GroupMain.swift */,
+				156386C1288A5252006653E8 /* GroupTab.swift */,
 				156386CA288A5B2F006653E8 /* GroupSelected.swift */,
 				156386CC288A5B7B006653E8 /* NoticeSelected.swift */,
 				153C1A7A288CF7D600F89B2E /* CreateGroup.swift */,
@@ -311,6 +314,14 @@
 				159F1B25288BA16000012113 /* AboutFont.swift */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		15C03143289CD5A900D0354E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				15C03144289CD5E500D0354E /* RentalTabVM.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		15D4C57F287FD4CF008BB89B /* View */ = {
@@ -363,7 +374,7 @@
 				15FAF15D287D5E0E00B35570 /* Auth */,
 				156386BB288A51EE006653E8 /* Home */,
 				156386BA288A51CF006653E8 /* Group */,
-				156386BC288A51F5006653E8 /* Rent */,
+				156386BC288A51F5006653E8 /* Rental */,
 				156386BD288A5201006653E8 /* MyPage */,
 				15FAF133287D5DFF00B35570 /* Ren2UApp.swift */,
 				15FAF135287D5DFF00B35570 /* ContentView.swift */,
@@ -581,10 +592,10 @@
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
 				152980F3288D3B6400537A80 /* AboutGroup.swift in Sources */,
 				153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */,
-				156386C0288A5249006653E8 /* Home.swift in Sources */,
+				156386C0288A5249006653E8 /* HomeTab.swift in Sources */,
 				150072F9289A3DFD005B6A93 /* Item.swift in Sources */,
 				1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */,
-				156386C2288A5252006653E8 /* GroupMain.swift in Sources */,
+				156386C2288A5252006653E8 /* GroupTab.swift in Sources */,
 				158011792893992A006016AD /* ImagePicker.swift in Sources */,
 				159F1B21288B88DB00012113 /* Variables.swift in Sources */,
 				156386D2288A5D1A006653E8 /* GroupViewModel.swift in Sources */,
@@ -612,10 +623,11 @@
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
 				15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */,
+				15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
-				156386C4288A525C006653E8 /* Rental.swift in Sources */,
+				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */,
-				156386C6288A5263006653E8 /* MyPage.swift in Sources */,
+				156386C6288A5263006653E8 /* MyPageTab.swift in Sources */,
 				15F3673728927E770073E094 /* TransparentDivider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

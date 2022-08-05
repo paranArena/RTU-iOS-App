@@ -30,8 +30,8 @@
             filePath = "Ren2U/Group/struct &amp; enum /AboutGroup.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "dummyGroup()"
             landmarkType = "7">
          </BreakpointContent>
@@ -48,7 +48,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
             endingLineNumber = "17"
-            landmarkName = "Rental"
+            landmarkName = "RentalTab"
             landmarkType = "14">
             <Locations>
                <Location

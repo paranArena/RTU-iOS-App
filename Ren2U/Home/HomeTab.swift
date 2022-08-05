@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Home: View {
+struct HomeTab: View {
     var body: some View {
         Text("??")
     }
@@ -15,6 +15,6 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        HomeTab()
     }
 }

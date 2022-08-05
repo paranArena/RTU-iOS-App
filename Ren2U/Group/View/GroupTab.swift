@@ -8,7 +8,7 @@
 import SwiftUI
 import HidableTabView
 
-struct GroupMain: View {
+struct GroupTab: View {
     
     @State private var groupSelection: Selection = .group
     @State private var text = ""
@@ -87,7 +87,7 @@ struct GroupMain: View {
     }
 }
 
-extension GroupMain {
+extension GroupTab {
     enum Selection: Int, CaseIterable {
         case group
         case notice
