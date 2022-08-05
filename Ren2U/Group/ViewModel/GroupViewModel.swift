@@ -8,7 +8,7 @@
 import SwiftUI
 import Alamofire
 
-class GroupModel: ObservableObject {
+class GroupViewModel: ObservableObject {
     
     @Published var likesGroups = [LikeGroupInfo]()
 //    @Published var 
