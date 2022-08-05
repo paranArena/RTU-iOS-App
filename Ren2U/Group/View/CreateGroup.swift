@@ -12,8 +12,8 @@ struct CreateGroup: View {
     
     @EnvironmentObject var groupModel: GroupViewModel
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var createGroupModel = CreateGroupModel()
-    @FocusState var focusField: CreateGroupField?
+    @StateObject var createGroupModel = ViewModel()
+    @FocusState var focusField: Field?
     
     init() {
         let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
@@ -215,17 +215,11 @@ struct CreateGroup: View {
 }
 
 extension CreateGroup  {
-    enum Filed: Int, CaseIterable {
+    enum Field: Int, CaseIterable {
         case groupName
         case tagsText
         case introduction
     }
-}
-
-enum CreateGroupField: Int, CaseIterable {
-    case groupName
-    case tagsText
-    case introduction
 }
 
 struct CreateGroup_Previews: PreviewProvider {

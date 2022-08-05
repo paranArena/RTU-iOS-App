@@ -13,7 +13,7 @@ struct GroupPage: View {
     @EnvironmentObject var groupModel: GroupViewModel
     @Binding var tabSelection: Int
     let groupInfo: GroupInfo
-    let groupRole: GroupRole = .member
+    let groupRole: Role = .member
     
     var body: some View {
         VStack(spacing: 0) {

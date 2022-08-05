@@ -83,7 +83,7 @@ struct Ren2UTab: View {
             }
         case .myPage:
             Label {
-                Text(Selection.rent.title)
+                Text(Selection.myPage.title)
             } icon: {
                 Image(systemName: Selection.myPage.imageSource)
             }

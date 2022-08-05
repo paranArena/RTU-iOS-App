@@ -11,13 +11,14 @@ import SwiftUI
 // struct - Info, Dto
 // enum = field, role, selection
 
-enum GroupRole: Int, CaseIterable {
-    case chairman
-    case member
-    case application
-    case none
+extension GroupPage {
+    enum Role: Int, CaseIterable {
+        case chairman
+        case member
+        case application
+        case none
+    }
 }
-
 
 enum RentalSelection: Int, CaseIterable {
     case rentalItem

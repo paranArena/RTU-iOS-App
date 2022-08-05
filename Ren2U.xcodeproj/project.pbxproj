@@ -24,7 +24,7 @@
 		153C1A76288CEB9300F89B2E /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A75288CEB9300F89B2E /* Roboto-Bold.ttf */; };
 		153C1A78288CEE0A00F89B2E /* RefreshableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A77288CEE0A00F89B2E /* RefreshableView.swift */; };
 		153C1A7B288CF7D600F89B2E /* CreateGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7A288CF7D600F89B2E /* CreateGroup.swift */; };
-		153C1A7D288D0A1F00F89B2E /* CreateGroupModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7C288D0A1F00F89B2E /* CreateGroupModel .swift */; };
+		153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */; };
 		153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */; };
 		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
 		156386C0288A5249006653E8 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* Home.swift */; };
@@ -103,7 +103,7 @@
 		153C1A75288CEB9300F89B2E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		153C1A77288CEE0A00F89B2E /* RefreshableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableView.swift; sourceTree = "<group>"; };
 		153C1A7A288CF7D600F89B2E /* CreateGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroup.swift; sourceTree = "<group>"; };
-		153C1A7C288D0A1F00F89B2E /* CreateGroupModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateGroupModel .swift"; sourceTree = "<group>"; };
+		153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVM.swift; sourceTree = "<group>"; };
 		153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SimpleBottomLine .swift"; sourceTree = "<group>"; };
 		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
 		156386BF288A5249006653E8 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -225,8 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				152980F1288D3B4700537A80 /* struct & enum  */,
-				156386D0288A5D06006653E8 /* ViewModel */,
 				156386DA288A6523006653E8 /* View */,
+				156386D0288A5D06006653E8 /* ViewModel */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -270,7 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				156386D1288A5D1A006653E8 /* GroupViewModel.swift */,
-				153C1A7C288D0A1F00F89B2E /* CreateGroupModel .swift */,
+				153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -575,7 +575,7 @@
 				152980F0288D39E500537A80 /* GroupPage.swift in Sources */,
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
-				153C1A7D288D0A1F00F89B2E /* CreateGroupModel .swift in Sources */,
+				153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */,
 				156386CD288A5B7B006653E8 /* NoticeSelected.swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
