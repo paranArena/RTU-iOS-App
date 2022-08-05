@@ -10,7 +10,7 @@ import Kingfisher
 
 struct JoinedGroupCell: View {
     
-    @EnvironmentObject var groupModel: GroupModel
+    @EnvironmentObject var groupModel: GroupViewModel
     let info: GroupInfo
     
     var body: some View {

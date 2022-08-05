@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroupSelected: View {
     
-    @EnvironmentObject var groupModel: GroupModel
+    @EnvironmentObject var groupModel: GroupViewModel
     @Binding var tabSelection: Int
     
     var body: some View {

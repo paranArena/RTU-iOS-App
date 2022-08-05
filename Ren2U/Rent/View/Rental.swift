@@ -10,7 +10,7 @@ import HidableTabView
 
 struct Rental: View {
     
-    @EnvironmentObject var groupModel: GroupModel
+    @EnvironmentObject var groupModel: GroupViewModel
     @State private var rentalSelection: RentalSelection = .rentalItem
     @State private var searchText = ""
     @State private var isSearchBarFocused = false

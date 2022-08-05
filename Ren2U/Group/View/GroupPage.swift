@@ -10,7 +10,7 @@ import Kingfisher
 
 struct GroupPage: View {
     
-    @EnvironmentObject var groupModel: GroupModel
+    @EnvironmentObject var groupModel: GroupViewModel
     @Binding var tabSelection: Int
     let groupInfo: GroupInfo
     let groupRole: GroupRole = .member

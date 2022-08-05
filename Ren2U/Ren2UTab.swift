@@ -12,7 +12,7 @@ import HidableTabView
 
 struct Ren2UTab: View {
     
-    @EnvironmentObject var groupModel: GroupModel
+    @EnvironmentObject var groupModel: GroupViewModel
     @State private var tabSelection: Int = Selection.home.rawValue
     
     init() {

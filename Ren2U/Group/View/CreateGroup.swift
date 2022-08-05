@@ -10,7 +10,7 @@ import HidableTabView
 
 struct CreateGroup: View {
     
-    @EnvironmentObject var groupModel: GroupModel
+    @EnvironmentObject var groupModel: GroupViewModel
     @Environment(\.presentationMode) var presentationMode
     @StateObject var createGroupModel = CreateGroupModel()
     @FocusState var focusField: CreateGroupField?

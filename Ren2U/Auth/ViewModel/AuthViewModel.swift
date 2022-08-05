@@ -109,7 +109,7 @@ class AuthViewModel: ObservableObject {
     
     func logout() {
         UserDefaults.standard.setValue(nil, forKey: jwtKey)
-        jwt = nil
+        self.jwt = nil
     }
     
     @MainActor
@@ -128,7 +128,6 @@ class AuthViewModel: ObservableObject {
             print("[AuthVM] login err: \(err)")
         }
     }
-    
     
     private func setToken(token: String) {
         UserDefaults.standard.setValue(token, forKey: jwtKey)

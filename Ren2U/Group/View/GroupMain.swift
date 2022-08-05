@@ -14,7 +14,7 @@ struct GroupMain: View {
     @State private var text = ""
     @State private var isSearchBarFocused = false
     @Binding var tabSelection: Int 
-    @EnvironmentObject var groupModel: GroupModel
+    @EnvironmentObject var groupModel: GroupViewModel
     private let selectionWidth = UIScreen.main.bounds.width / CGFloat(Selection.allCases.count)
     
     var body: some View {
