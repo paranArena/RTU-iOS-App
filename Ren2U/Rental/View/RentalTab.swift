@@ -26,10 +26,10 @@ struct RentalTab: View {
                 RentalSelectionButton()
                 
                 ZStack {
-                    RentalItemSelected()
-                        .offset(x: rentalSelection == .rentalItem ? 0 : -SCREEN_WIDTH)
-                    RentalListSelected()
-                        .offset(x: rentalSelection == .rentalList ? 0 : SCREEN_WIDTH)
+                    ForEach(Selection.allCases, id: \.rawValue) { selection in
+                        Content(selection: selection)
+                            .offset(x: CGFloat((selection.rawValue - self.rentalSelection.rawValue)) * SCREEN_WIDTH)
+                    }
                 }
                 .padding(.bottom, -10)
             }
@@ -45,7 +45,7 @@ struct RentalTab: View {
     @ViewBuilder
     private func RentalSelectionButton() -> some View {
         HStack {
-            ForEach(Selection.allCases, id: \.self) {  option in
+            ForEach(RentalTab.Selection.allCases, id: \.rawValue) {  option in
                 Button {
                     self.rentalSelection  = option
                 } label: {
@@ -54,10 +54,19 @@ struct RentalTab: View {
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
                         .foregroundColor(self.rentalSelection == option ? .Navy_1E2F97 : .Gray_ADB5BD)
                 }
-
             }
         }
         .padding(.bottom, 20)
+    }
+    
+    @ViewBuilder
+    private func Content(selection: RentalTab.Selection) -> some View {
+        switch selection {
+        case .rentalItem:
+            self.RentalItemSelected()
+        case .rentalList:
+            self.RentalListSelected()
+        }
     }
     
     @ViewBuilder
@@ -79,6 +88,7 @@ struct RentalTab: View {
     private func RentalListSelected() -> some View {
         Text("대여목록")
     }
+    
 }
 
 struct Rent_Previews: PreviewProvider {
