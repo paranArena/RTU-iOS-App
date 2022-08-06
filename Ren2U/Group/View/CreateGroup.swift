@@ -14,14 +14,6 @@ struct CreateGroup: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var createGroupModel = ViewModel()
     @FocusState var focusField: Field?
-    
-    init() {
-        let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.shadowColor = UIColor(Color.BackgroundColor)
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
 
     var body: some View {
         ScrollView {
@@ -42,6 +34,13 @@ struct CreateGroup: View {
         }
         .hideTabBar(animated: false)
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            let createGroupAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+            createGroupAppearance.configureWithOpaqueBackground()
+            createGroupAppearance.shadowColor = UIColor(Color.BackgroundColor)
+            UINavigationBar.appearance().standardAppearance = createGroupAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = createGroupAppearance
+        }
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text("그룹등록")

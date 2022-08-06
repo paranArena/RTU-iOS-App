@@ -15,10 +15,6 @@ struct Item: View {
     
     init(itemInfo: RentalItemInfo) {
         self.itemInfo = itemInfo
-        let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
     
     var body: some View {
@@ -29,6 +25,12 @@ struct Item: View {
                 }
                 .resizable()
                 .frame(width: SCREEN_WIDTH, height: 300)
+        }
+        .onAppear {
+            let itemAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+            itemAppearance.configureWithTransparentBackground()
+            UINavigationBar.appearance().standardAppearance = itemAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = itemAppearance
         }
         .hideTabBar(animated: false)
         .navigationTitle("")
