@@ -13,37 +13,27 @@ struct SignUp: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel = ViewModel()
     @FocusState private var focusedField: Field?
-    @Binding var isActive: Bool 
-
-    let password: [String] = ["Password", "Password 확인"]
+    @Binding var isActive: Bool
     
     var body: some View {
         
-        VStack(alignment: .leading) {
-            
-            TransparentDivider()
-            
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 25) {
-                    Email()
-                    Password()
-                    PasswordCheck()
-                    Name()
-                    Major()
-                    StudentId()
-                    PhoneNumber()
-                    CertificatinoViewButton()
-                    Spacer()
-                } // vstack
-                .padding(.horizontal, 28)
-                .offset(y : CGFloat(focusedField?.rawValue ?? 0) * -40)
-                .padding(.bottom, CGFloat(focusedField?.rawValue ?? 0) * -40)
-                .animation(.spring(), value: focusedField)
-                .onSubmit {
-                    focusedField = viewModel.foucsChange(curIndex: focusedField?.rawValue ?? 0)
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(Field.allCases, id: \.rawValue) { field in
+                    Section {
+                        Content(field: field)
+                            .padding(.bottom, 10)
+                            .focused($focusedField, equals: field)
+                            .onSubmit { focusedField = viewModel.foucsChange(curIndex: focusedField?.rawValue ?? 0) }
+                    } header: {
+                        Text(field.title).font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                    }
                 }
-            } // scroll
-        } //VStack
+
+                CertificatinoViewButton()
+            }
+            .padding(.horizontal, 20)
+        }
         .navigationTitle(" ")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -52,115 +42,84 @@ struct SignUp: View {
     } // body
     
     @ViewBuilder
+    private func Content(field: Field) -> some View {
+        switch field {
+        case .email:
+            Email()
+        case .password:
+            Password()
+        case .passwordCheck:
+            PasswordCheck()
+        case .name:
+            Name()
+        case .major:
+            Major()
+        case .studentId:
+            StudentId()
+        case .phoneNumber:
+            PhoneNumber()
+        }
+    }
+    
+    @ViewBuilder
     private func Email() -> some View {
         
         VStack(alignment: .leading) {
-            Section {
-                HStack {
-                    BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[0])
-                        .onChange(of: viewModel.text[Field.email.rawValue]) { _ in viewModel.isOverlappedEmail = false }
+            HStack {
+                BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[0])
+                    .onChange(of: viewModel.text[Field.email.rawValue]) { _ in viewModel.isOverlappedEmail = false }
 
-                    Text("@ajou.ac.kr")
-                        .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
-                    
-                    Button {
-                        viewModel.isOverlappedEmail.toggle()
-                    } label: {
-                        Text("중복확인")
-                            .padding(5)
-                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                            .overlay(Capsule().stroke(viewModel.text[Field.email.rawValue].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
-                            .foregroundColor(viewModel.text[Field.email.rawValue].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
-                            .padding(.leading, 19)
-                    }
-                    
-                    .disabled(viewModel.isOverlappedEmail || viewModel.text[Field.email.rawValue].isEmpty)
+                Text("@ajou.ac.kr")
+                    .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
+                
+                Button {
+                    viewModel.isOverlappedEmail.toggle()
+                } label: {
+                    Text("중복확인")
+                        .padding(5)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                        .overlay(Capsule().stroke(viewModel.text[Field.email.rawValue].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
+                        .foregroundColor(viewModel.text[Field.email.rawValue].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
+                        .padding(.leading, 19)
                 }
-            } header: {
-                Text("아주대학교 이메일")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                .disabled(viewModel.isOverlappedEmail || viewModel.text[Field.email.rawValue].isEmpty)
             }
         }
-        .padding(.top, 30)
     }
     
     @ViewBuilder
     private func Password() -> some View {
-        PasswordTextField(textType: password[0], text: $viewModel.text[Field.password.rawValue],
-                          isShowingPassword: $viewModel.isShowingPassword)
+        PasswordTextField(text: $viewModel.text[Field.password.rawValue], isShowingPassword: $viewModel.isShowingPassword)
         .overlay(BottomLine())
-        .focused($focusedField, equals: .password)
-        .id(Field.password.rawValue)
     }
     
     @ViewBuilder
     private func PasswordCheck() -> some View {
-        PasswordTextField(textType: password[1], text: $viewModel.text[Field.passwordCheck.rawValue],
-                          isShowingPassword: $viewModel.isShowingPasswordCheck)
+        PasswordTextField(text: $viewModel.text[Field.passwordCheck.rawValue], isShowingPassword: $viewModel.isShowingPasswordCheck)
         .overlay(BottomLine())
         .overlay(Message())
-        .focused($focusedField, equals: .passwordCheck)
-        .id(Field.passwordCheck.rawValue)
     }
     
     @ViewBuilder
     private func Name() -> some View {
-        VStack(alignment: .leading) {
-            Section {
-                BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[3])
-                    .focused($focusedField, equals: .name)
-                    .id(Field.name.rawValue)
-            } header: {
-                Text("이름")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-            }
-        }
+            BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[3])
+                .focused($focusedField, equals: .name)
     }
     
     @ViewBuilder
     private func Major() -> some View {
-        VStack(alignment: .leading) {
-            Section {
-                BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[4])
-                    .focused($focusedField, equals: .department)
-                    .id(Field.department.rawValue)
-
-            } header: {
-                Text("학과")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-            }
-        }
+        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[4])
     }
     
     @ViewBuilder
     private func StudentId() -> some View {
-        VStack(alignment: .leading) {
-            Section {
-                BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
-                    .keyboardType(.numbersAndPunctuation)
-                    .focused($focusedField, equals: .studentId)
-                    .id(Field.studentId.rawValue)
-            } header: {
-                Text("학번")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-            }
-        }
+        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
     }
     
     @ViewBuilder
     private func PhoneNumber() -> some View {
-        VStack(alignment: .leading) {
-            Section {
-                BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[6])
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                    .keyboardType(.numbersAndPunctuation)
-                    .focused($focusedField, equals: .phoneNumber)
-                    .id(Field.phoneNumber.rawValue)
-            } header: {
-                Text("휴대폰 번호")
-                    .font(.system(size: 12))
-            }
-        }
+        BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[6])
+            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
     }
     
     @ViewBuilder

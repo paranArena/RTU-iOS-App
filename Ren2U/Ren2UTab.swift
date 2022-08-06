@@ -110,7 +110,6 @@ extension Ren2UTab {
                 return "마이페이지"
             }
         }
-        
         var imageSource: String {
             switch self {
             case .home:

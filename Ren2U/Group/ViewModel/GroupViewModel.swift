@@ -11,7 +11,6 @@ import Alamofire
 class GroupViewModel: ObservableObject {
     
     @Published var likesGroups = [LikeGroupInfo]()
-//    @Published var 
     @Published var joinedGroups = [GroupInfo]() // VStack에서 나열될 그룹들
     @Published var notices = [NoticeInfo]() // Vstack 한개 그룹 셀에서 이동 후 사용될 정보
     @Published var rentalItems = [RentalItemInfo]() // Vstack 한개의 그룹 셀에서 이동 후 사용될 정보
