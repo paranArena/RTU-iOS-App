@@ -12,7 +12,7 @@ struct SignUp: View {
     
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel = ViewModel()
-    @FocusState private var focusedField: Field?
+    @FocusState private var focusedField: SignUp.Field?
     @Binding var isActive: Bool
     
     var body: some View {
@@ -34,6 +34,7 @@ struct SignUp: View {
             }
             .padding(.horizontal, 20)
         }
+        .interactiveDismissDisabled()
         .navigationTitle(" ")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -90,7 +91,7 @@ struct SignUp: View {
     @ViewBuilder
     private func Password() -> some View {
         PasswordTextField(text: $viewModel.text[Field.password.rawValue], isShowingPassword: $viewModel.isShowingPassword)
-        .overlay(BottomLine())
+            .overlay(BottomLine())
     }
     
     @ViewBuilder

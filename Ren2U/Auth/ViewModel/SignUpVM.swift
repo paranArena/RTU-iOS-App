@@ -9,7 +9,7 @@ import SwiftUI
 
 extension SignUp {
     
-    enum Field: Int, CaseIterable {
+    enum Field: Int, CaseIterable, Hashable {
         case email
         case password
         case passwordCheck
