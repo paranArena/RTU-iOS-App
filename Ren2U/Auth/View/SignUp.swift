@@ -18,22 +18,31 @@ struct SignUp: View {
     var body: some View {
         
         ScrollView(showsIndicators: false) {
+            
             VStack(alignment: .leading, spacing: 10) {
+                
+                Spacer()
                 ForEach(Field.allCases, id: \.rawValue) { field in
                     Section {
                         Content(field: field)
                             .padding(.bottom, 10)
                             .focused($focusedField, equals: field)
+                            .submitLabel(field != Field.phoneNumber ? .next : .done)
                             .onSubmit { focusedField = viewModel.foucsChange(curIndex: focusedField?.rawValue ?? 0) }
                     } header: {
                         Text(field.title).font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     }
+                    .isHidden(hidden: field.rawValue < focusedField?.rawValue ?? 0)
                 }
 
                 CertificatinoViewButton()
+                    .isHidden(hidden: focusedField != nil)
+                
+                Spacer()
             }
             .padding(.horizontal, 20)
         }
+        .animation(.spring(), value: focusedField)
         .interactiveDismissDisabled()
         .navigationTitle(" ")
         .navigationBarTitleDisplayMode(.inline)
@@ -67,7 +76,7 @@ struct SignUp: View {
         
         VStack(alignment: .leading) {
             HStack {
-                BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[0])
+                BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[Field.email.rawValue])
                     .onChange(of: viewModel.text[Field.email.rawValue]) { _ in viewModel.isOverlappedEmail = false }
 
                 Text("@ajou.ac.kr")
@@ -103,23 +112,22 @@ struct SignUp: View {
     
     @ViewBuilder
     private func Name() -> some View {
-            BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[3])
-                .focused($focusedField, equals: .name)
+        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[Field.name.rawValue])
     }
     
     @ViewBuilder
     private func Major() -> some View {
-        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[4])
+        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[Field.major.rawValue])
     }
     
     @ViewBuilder
     private func StudentId() -> some View {
-        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[5])
+        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[Field.studentId.rawValue])
     }
     
     @ViewBuilder
     private func PhoneNumber() -> some View {
-        BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[6])
+        BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[Field.phoneNumber.rawValue])
             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
     }
     

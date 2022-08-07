@@ -18,6 +18,7 @@ extension CreateGroup {
         @Published var showImagePicker = false
         @Published var selectedUIImage: UIImage?
         @Published var image: Image?
+        @Published var isShowingTab = false
         
         func showTagPlaceHolder(newValue: CreateGroup.Field?) {
             if newValue == .tagsText {

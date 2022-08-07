@@ -16,6 +16,7 @@ struct SignUpSuccess: View {
             SuccessText()
             GoLoginViewButton()
         }
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text("이메일 인증")

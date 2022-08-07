@@ -32,14 +32,17 @@ struct CreateGroup: View {
             }
             .animation(.spring(), value: focusField)
         }
-        .hideTabBar(animated: false)
         .navigationBarTitleDisplayMode(.inline)
+        .onDisappear(perform: {
+            UITabBar.showTabBar(animated: false)
+        })
         .onAppear {
             let createGroupAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
             createGroupAppearance.configureWithOpaqueBackground()
             createGroupAppearance.shadowColor = UIColor(Color.BackgroundColor)
             UINavigationBar.appearance().standardAppearance = createGroupAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = createGroupAppearance
+            UITabBar.hideTabBar(animated: false)
         }
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
@@ -78,6 +81,7 @@ struct CreateGroup: View {
             TextField("", text: $createGroupModel.groupName)
                 .font(.custom(CustomFont.RobotoRegular.rawValue, size: 30))
                 .overlay(SimpleBottomLine(color: Color.Gray_DEE2E6))
+                .submitLabel(.next)
                 .focused($focusField, equals: .groupName)
                 .onSubmit {
                     createGroupModel.isShowingTagPlaceholder = false
@@ -108,6 +112,7 @@ struct CreateGroup: View {
                 TextField("", text: $createGroupModel.tagsText)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
                     .focused($focusField, equals: .tagsText)
+                    .submitLabel(.return)
                     .onChange(of: focusField) { newValue in
                         createGroupModel.parsingTag()
                         createGroupModel.showTagPlaceHolder(newValue: newValue)
@@ -158,6 +163,7 @@ struct CreateGroup: View {
             TextEditor(text: $createGroupModel.introduction)
                 .focused($focusField, equals: .introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                .submitLabel(.done)
                 .frame(height: 100)
                 .overlay{
                     RoundedRectangle(cornerRadius: 20)

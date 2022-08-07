@@ -17,7 +17,7 @@ struct Login: View {
     var body: some View {
     
         NavigationView {
-            VStack {
+            VStack(alignment: .center, spacing: 10) {
                 GreetingText()
                 Email()
                 Password()

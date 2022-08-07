@@ -38,7 +38,7 @@ struct GroupTab: View {
                         .offset(x: groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
                 }
                 .padding(.bottom, -10)
-                .overlay(ShadowRectangle())
+//                .overlay(ShadowRectangle())
             }
             .isHidden(hidden: isSearchBarFocused)
         }
