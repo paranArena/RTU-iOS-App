@@ -71,7 +71,7 @@ struct Login: View {
     @ViewBuilder
     private func MissInput() -> some View {
         HStack {
-            Text(viewModel.isWroungAccount ? "이메일 또는 비밀번호를 잘못 입력했습니다" : " ")
+            Text(viewModel.authenticationInfo)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .foregroundColor(.Red_EB1808)
             Spacer()
@@ -83,7 +83,10 @@ struct Login: View {
     @ViewBuilder
     private func LoginButton() -> some View {
         Button {
-            Task { await authModel.login(account: viewModel.account) }
+            Task {
+                viewModel.isWroungAccount = await authModel.login(account: viewModel.account)
+                print(viewModel.isWroungAccount)
+            }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable()

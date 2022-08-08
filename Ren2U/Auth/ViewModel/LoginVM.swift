@@ -13,6 +13,14 @@ extension Login {
         @Published var account = Account(email: "", password: "")
         @Published var isWroungAccount = false
         
+        var authenticationInfo: String {
+            if isWroungAccount {
+                return "이메일 또는 비밀번호를 잘못 입력했습니다"
+            } else {
+                return " "
+            }
+        }
+        
         func initTextFields() {
             self.account.email = ""
             self.account.password = ""

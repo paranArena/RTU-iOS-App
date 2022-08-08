@@ -10,9 +10,7 @@ import HidableTabView
 
 struct GroupTab: View {
     
-    @State private var groupSelection: Selection = .group
-    @State private var text = ""
-    @State private var isSearchBarFocused = false
+    @StateObject private var viewModel = ViewModel()
     @Binding var tabSelection: Int 
     @EnvironmentObject var groupModel: GroupViewModel
     private let selectionWidth = UIScreen.main.bounds.width / CGFloat(Selection.allCases.count)
@@ -21,31 +19,31 @@ struct GroupTab: View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
         VStack(alignment: .center, spacing: 10) {
-            SearchBar(text: $text, isFoucsed: $isSearchBarFocused)
+            SearchBar(text: $viewModel.searchText, isFoucsed: $viewModel.isSearchBarFocused)
                 .padding(.horizontal, 20)
             
             Search(tabSelection: $tabSelection)
                 .padding(.bottom, -10)
-                .isHidden(hidden: !isSearchBarFocused)
+                .isHidden(hidden: !viewModel.isSearchBarFocused)
             
             Group {
                 GroupSelectionButton()
                 ZStack {
                     GroupSelected(tabSelection: $tabSelection)
                         .overlay(CreateGroupButton())
-                        .offset(x: groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)
+                        .offset(x: viewModel.groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)
                     NoticeSelected()
-                        .offset(x: groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
+                        .offset(x: viewModel.groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
                 }
                 .padding(.bottom, -10)
 //                .overlay(ShadowRectangle())
             }
-            .isHidden(hidden: isSearchBarFocused)
+            .isHidden(hidden: viewModel.isSearchBarFocused)
         }
         .showTabBar(animated: false)
         .navigationTitle("")
         .navigationBarHidden(true)
-        .animation(.spring(), value: groupSelection)
+        .animation(.spring(), value: viewModel.groupSelection)
     }
     
     @ViewBuilder
@@ -53,12 +51,12 @@ struct GroupTab: View {
         HStack {
             ForEach(Selection.allCases, id: \.self) {  option in
                 Button {
-                    self.groupSelection  = option
+                    self.viewModel.groupSelection  = option
                 } label: {
                     Text(option.title)
                         .frame(width: selectionWidth)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
-                        .foregroundColor(self.groupSelection == option ? .Navy_1E2F97 : .Gray_ADB5BD)
+                        .foregroundColor(self.viewModel.groupSelection == option ? .Navy_1E2F97 : .Gray_ADB5BD)
                 }
 
             }
@@ -82,22 +80,6 @@ struct GroupTab: View {
                         .padding(.horizontal, 10)
                         .padding(.vertical, 20)
                 }
-            }
-        }
-    }
-}
-
-extension GroupTab {
-    enum Selection: Int, CaseIterable {
-        case group
-        case notice
-        
-        var title: String {
-            switch self {
-            case .group:
-                return "그룹"
-            case .notice:
-                return "공지사항"
             }
         }
     }

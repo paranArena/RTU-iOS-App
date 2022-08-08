@@ -8,6 +8,7 @@
 import SwiftUI
 
 extension CreateGroup {
+    
     class ViewModel: ObservableObject {
         
         @Published var groupName = ""
@@ -15,10 +16,20 @@ extension CreateGroup {
         @Published var isShowingTagPlaceholder = true
         @Published var introduction = ""
         @Published var tags = [TagInfo]()
+        
         @Published var showImagePicker = false
         @Published var selectedUIImage: UIImage?
         @Published var image: Image?
         @Published var isShowingTab = false
+        
+        var imageSource: Image {
+            if let image = self.image {
+                return image
+            } else {
+                return Image("DefaultGroupImage")
+            }
+        }
+        
         
         func showTagPlaceHolder(newValue: CreateGroup.Field?) {
             if newValue == .tagsText {
@@ -77,3 +88,10 @@ extension CreateGroup {
 
 }
 
+extension CreateGroup  {
+    enum Field: Int, CaseIterable {
+        case groupName
+        case tagsText
+        case introduction
+    }
+}

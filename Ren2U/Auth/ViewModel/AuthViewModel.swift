@@ -86,7 +86,7 @@ class AuthViewModel: ObservableObject {
     }
     
     @MainActor
-    func login(account: Account) async {
+    func login(account: Account) async -> Bool {
         let url = "\(baseURL)/authenticate"
         let param: [String: Any] = [
             "email" : account.email,
@@ -100,9 +100,10 @@ class AuthViewModel: ObservableObject {
         switch response {
         case .success(let value):
             self.setToken(token: value.data.token)
-            break
+            return false
         case .failure(let err):
             print("[AuthVM] login err: \(err)")
+            return true
         }
     }
     

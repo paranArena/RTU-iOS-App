@@ -58,17 +58,9 @@ struct CreateGroup: View {
     
     @ViewBuilder
     private func GroupImage() -> some View {
-        Group {
-            if let image = createGroupModel.image {
-                image
-                    .resizable()
-                    .frame(width: SCREEN_WIDTH, height: 215)
-            } else {
-                Image("DefaultGroupImage")
-                    .resizable()
-                    .frame(width: SCREEN_WIDTH, height: 215)
-            }
-        }
+        createGroupModel.imageSource
+            .resizable()
+            .frame(width: SCREEN_WIDTH, height: 215)
     }
     
     @ViewBuilder
@@ -216,14 +208,6 @@ struct CreateGroup: View {
                 .foregroundColor(Color.LabelColor)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
         }
-    }
-}
-
-extension CreateGroup  {
-    enum Field: Int, CaseIterable {
-        case groupName
-        case tagsText
-        case introduction
     }
 }
 
