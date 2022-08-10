@@ -9,20 +9,11 @@ import SwiftUI
 import Kingfisher
 import HidableTabView
 
-
-extension Item {
-    enum Selection: Int {
-        case queue
-        case term
-    }
-}
-
 struct Item: View {
     
     let itemInfo: RentalItemInfo
-    @State private var date: Date = Date.now
-    @State private var isShowingRentalSelection = false
-    @State private var selection: Selection?
+    @StateObject private var viewModel = ViewModel()
+    @Environment(\.isPresented) var isPresented
     
     init(itemInfo: RentalItemInfo) {
         self.itemInfo = itemInfo
@@ -31,7 +22,6 @@ struct Item: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                
                 CarouselImage()
                 
                 Text("Ren2U")
@@ -61,18 +51,32 @@ struct Item: View {
                 Text("물품목록")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .foregroundColor(Color.Gray_495057)
+                
+                NavigationLink("", isActive: $viewModel.isRentalTerminal) {
+                    RentalComplete(itemInfo: itemInfo)
+                }
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .ignoresSafeArea(.container, edges: .top)
         .navigationTitle(" ")
         .navigationBarTitleDisplayMode(.inline)
         .hideTabBar(animated: false)
         .overlay(BottomToolbar())
         .onAppear {
+            print("Item onAppear")
+            viewModel.initValues()
             let itemAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
             itemAppearance.configureWithTransparentBackground()
             UINavigationBar.appearance().standardAppearance = itemAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = itemAppearance
+        }
+        .onChange(of: isPresented) { newValue in
+            if newValue {
+                UITabBar.hideTabBar(animated: false)
+            }
+        }
+        .sheet(isPresented: $viewModel.isShowingRental) {
+            RentalDetail(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)
         }
     }
     
@@ -114,10 +118,9 @@ struct Item: View {
                 .background(Color.Gray_DEE2E6)
                 .frame(width: SCREEN_WIDTH)
                 .cornerRadius(20)
-                .offset(y: isShowingRentalSelection ? 0 : SCREEN_HEIGHT)
-                .animation(.spring(), value: isShowingRentalSelection)
+                .offset(y: viewModel.isShowingRentalSelection ? 0 : SCREEN_HEIGHT)
+                .animation(.spring(), value: viewModel.isShowingRentalSelection)
             }
-            
             
             VStack {
                 Spacer()
@@ -139,10 +142,10 @@ struct Item: View {
     @ViewBuilder
     private func QueueSelectButton() -> some View {
         Button  {
-            if selection != .queue {
-                selection = .queue
+            if viewModel.selection != .queue {
+                viewModel.selection = .queue
             } else {
-                selection = nil
+                viewModel.selection = nil
             }
             
         } label: {
@@ -153,19 +156,19 @@ struct Item: View {
                 Text("바로 대여가 가능합니다.")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
             }
-            .foregroundColor(selection == .queue ? Color.BackgroundColor : Color.LabelColor)
+            .foregroundColor(viewModel.selection == .queue ? Color.BackgroundColor : Color.LabelColor)
         }
         .frame(maxWidth: SCREEN_WIDTH, minHeight: 80)
-        .background(selection == .queue ? Color.Navy_1E2F97 : Color.Gray_DEE2E6)
+        .background(viewModel.selection == .queue ? Color.Navy_1E2F97 : Color.Gray_DEE2E6)
     }
     
     @ViewBuilder
     private func TermSelectButton() -> some View {
         Button {
-            if selection != .term {
-                selection = .term
+            if viewModel.selection != .term {
+                viewModel.selection = .term
             } else {
-                selection = nil
+                viewModel.selection = nil
             }
         } label: {
             VStack {
@@ -175,21 +178,25 @@ struct Item: View {
                 Text("일정기간 대여가 가능합니다.")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
             }
-            .foregroundColor(selection == .term ? Color.BackgroundColor : Color.LabelColor)
+            .foregroundColor(viewModel.selection == .term ? Color.BackgroundColor : Color.LabelColor)
         }
         .frame(maxWidth: SCREEN_WIDTH, minHeight: 80)
-        .background(selection == .term ? Color.Navy_1E2F97 : Color.Gray_DEE2E6)
+        .background(viewModel.selection == .term ? Color.Navy_1E2F97 : Color.Gray_DEE2E6)
     }
     
     @ViewBuilder
     private func RentalButton() -> some View {
         Button {
-            isShowingRentalSelection.toggle()
+            if viewModel.selection != nil {
+                viewModel.isShowingRental.toggle()
+            } else {
+                viewModel.isShowingRentalSelection.toggle()
+            }
         } label: {
             Capsule()
-                .fill(!isShowingRentalSelection ? Color.white : Color.Navy_1E2F97)
+                .fill(!viewModel.isShowingRentalSelection ? Color.white : Color.Navy_1E2F97)
                 .overlay(Text("대여하기")
-                    .foregroundColor(!isShowingRentalSelection ? Color.Navy_1E2F97 : Color.white)
+                    .foregroundColor(!viewModel.isShowingRentalSelection ? Color.Navy_1E2F97 : Color.white)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20)))
                 .frame(height: 40)
         }
@@ -202,7 +209,7 @@ struct Item: View {
     private func DatePickerOverlay() -> some View {
         VStack {
             Spacer()
-            DatePicker("데이트 피커", selection: $date)
+            DatePicker("데이트 피커", selection: $viewModel.date)
         }
         .edgesIgnoringSafeArea(.bottom)
     }

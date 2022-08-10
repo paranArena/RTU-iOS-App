@@ -10,9 +10,8 @@
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 		<string>Roboto-Bold.ttf</string>
-		<string></string>
+		<string>NotoSansKR-Light.otf</string>
+		<string>NotoSansKR-Black.otf</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 </dict>
 </plist>

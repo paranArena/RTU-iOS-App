@@ -20,44 +20,6 @@ extension GroupPage {
     }
 }
 
-struct GroupInfo: Identifiable, Codable {
-    
-    var id = UUID()
-    let groupDto: GroupDto
-    var didLike = false
-    
-    struct GroupDto: Codable {
-        let imageSource: String
-        let groupName: String
-        let groupId: String
-        let tags: [TagInfo]
-        let intoduction: String
-    }
-    
-    static func dummyGroup() -> GroupInfo {
-        return GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/200", groupName: "아나바다", groupId: "12345",
-                         tags: [TagInfo(tag: "태그"), TagInfo(tag: "태그"), TagInfo(tag: "태그"), TagInfo(tag: "태그"),
-                                TagInfo(tag: "태그"), TagInfo(tag: "태그"), TagInfo(tag: "태그"), TagInfo(tag: "태그"),
-                                TagInfo(tag: "태그4"), TagInfo(tag: "태그5"),
-                                TagInfo(tag: "태그6"), TagInfo(tag: "태그7"), TagInfo(tag: "Final Tag!")],
-                                intoduction: "산아, 푸른 산아. 철철철 흐르듯 짙푸른 산아. 무성히 무성히 우거진 산마루에 금빛 기름진 햇살을 내려오고 둥둥 산을 넘어 흰 구름 걷는 자리 씻기는 하늘 사슴도 안오고 바람도 안불고 너멋골 골짜기서 울어오는 뻐꾸기..."))
-    }
-    static func dummyGroups() -> [GroupInfo] {
-        return [
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/10/200/300", groupName: "그룹1", groupId: "1", tags: [TagInfo(tag: "태그1")], intoduction: "첫번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/20/200/300", groupName: "그룹2", groupId: "1", tags: [TagInfo(tag: "태그2")], intoduction: "두번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/30/200/300", groupName: "그룹3", groupId: "1", tags: [TagInfo(tag: "태그3")], intoduction: "세번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/40/200/300", groupName: "그룹4", groupId: "1", tags: [TagInfo(tag: "태그4")], intoduction: "번번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/50/200/300", groupName: "그룹5", groupId: "1", tags: [TagInfo(tag: "태그5")], intoduction: "다섯번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/60/200/300", groupName: "그룹6", groupId: "1", tags: [TagInfo(tag: "태그6")], intoduction: "여섯번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/70/200/300", groupName: "그룹7", groupId: "1", tags: [TagInfo(tag: "태그7")], intoduction: "일곱번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/80/200/300", groupName: "그룹8", groupId: "1", tags: [TagInfo(tag: "태그8")], intoduction: "여덟번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/90/200/300", groupName: "그룹9", groupId: "1", tags: [TagInfo(tag: "태그9")], intoduction: "아홉번째 그룹"))
-        
-        ]
-    }
-}
-
 struct LikeGroupInfo: Codable {
     let groupId: String
     

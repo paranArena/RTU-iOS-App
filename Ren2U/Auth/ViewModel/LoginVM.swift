@@ -21,9 +21,10 @@ extension Login {
             }
         }
         
-        func initTextFields() {
+        func initValue() {
             self.account.email = ""
             self.account.password = ""
+            self.isWroungAccount = false
         }
     }
 }

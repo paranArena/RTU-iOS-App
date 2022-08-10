@@ -45,7 +45,6 @@ class AuthViewModel: ObservableObject {
         self.jwt = UserDefaults.standard.value(forKey: jwtKey) as? String
     }
     
-    
     func sendCertificationNum() {
 //        let random = Int.random(in: 0000...9999)
 //        let randomGenerateNum = String(random)

@@ -26,6 +26,11 @@
 		153C1A7B288CF7D600F89B2E /* CreateGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7A288CF7D600F89B2E /* CreateGroup.swift */; };
 		153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */; };
 		153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */; };
+		154553CD28A34B25005E7FDB /* RentalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553CC28A34B25005E7FDB /* RentalDetail.swift */; };
+		154553CF28A34DB3005E7FDB /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553CE28A34DB3005E7FDB /* NotoSansKR-Light.otf */; };
+		154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D028A351AA005E7FDB /* RentalComplete.swift */; };
+		154553D328A35412005E7FDB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553D228A35412005E7FDB /* NotoSansKR-Black.otf */; };
+		154553D528A35CC3005E7FDB /* ItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D428A35CC3005E7FDB /* ItemVM.swift */; };
 		155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CED5E28A0EA380032C1BA /* GroupTabVM.swift */; };
 		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
 		156386C0288A5249006653E8 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* HomeTab.swift */; };
@@ -107,6 +112,11 @@
 		153C1A7A288CF7D600F89B2E /* CreateGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroup.swift; sourceTree = "<group>"; };
 		153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVM.swift; sourceTree = "<group>"; };
 		153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SimpleBottomLine .swift"; sourceTree = "<group>"; };
+		154553CC28A34B25005E7FDB /* RentalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDetail.swift; sourceTree = "<group>"; };
+		154553CE28A34DB3005E7FDB /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		154553D028A351AA005E7FDB /* RentalComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalComplete.swift; sourceTree = "<group>"; };
+		154553D228A35412005E7FDB /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		154553D428A35CC3005E7FDB /* ItemVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemVM.swift; sourceTree = "<group>"; };
 		155CED5E28A0EA380032C1BA /* GroupTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTabVM.swift; sourceTree = "<group>"; };
 		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
 		156386BF288A5249006653E8 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
@@ -185,6 +195,8 @@
 			children = (
 				156386C3288A525C006653E8 /* RentalTab.swift */,
 				150072F8289A3DFD005B6A93 /* Item.swift */,
+				154553CC28A34B25005E7FDB /* RentalDetail.swift */,
+				154553D028A351AA005E7FDB /* RentalComplete.swift */,
 				150072F7289A3DE6005B6A93 /* Cell */,
 			);
 			path = View;
@@ -308,8 +320,10 @@
 		159F1B22288B9F7000012113 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				154553CE28A34DB3005E7FDB /* NotoSansKR-Light.otf */,
 				153C1A75288CEB9300F89B2E /* Roboto-Bold.ttf */,
 				153C1A73288CEB7800F89B2E /* Roboto-Medium.ttf */,
+				154553D228A35412005E7FDB /* NotoSansKR-Black.otf */,
 				153C1A71288CE48900F89B2E /* Roboto-Regular.ttf */,
 				153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */,
 				153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */,
@@ -323,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				15C03144289CD5E500D0354E /* RentalTabVM.swift */,
+				154553D428A35CC3005E7FDB /* ItemVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -379,10 +394,10 @@
 				156386BA288A51CF006653E8 /* Group */,
 				156386BC288A51F5006653E8 /* Rental */,
 				156386BD288A5201006653E8 /* MyPage */,
+				15F7606A289BA3FB0045055B /* Resources */,
 				15FAF133287D5DFF00B35570 /* Ren2UApp.swift */,
 				15FAF135287D5DFF00B35570 /* ContentView.swift */,
 				156386B8288A513B006653E8 /* Ren2UTab.swift */,
-				15F7606A289BA3FB0045055B /* Resources */,
 			);
 			path = Ren2U;
 			sourceTree = "<group>";
@@ -557,9 +572,11 @@
 				153C1A72288CE48900F89B2E /* Roboto-Regular.ttf in Resources */,
 				159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */,
 				15FAF13B287D5E0000B35570 /* Preview Assets.xcassets in Resources */,
+				154553D328A35412005E7FDB /* NotoSansKR-Black.otf in Resources */,
 				153C1A74288CEB7800F89B2E /* Roboto-Medium.ttf in Resources */,
 				153C1A70288CE3A900F89B2E /* Roboto-Black.ttf in Resources */,
 				153C1A6E288CDED600F89B2E /* NotoSansKR-Regular.otf in Resources */,
+				154553CF28A34DB3005E7FDB /* NotoSansKR-Light.otf in Resources */,
 				153C1A76288CEB9300F89B2E /* Roboto-Bold.ttf in Resources */,
 				15FAF138287D5E0000B35570 /* Assets.xcassets in Resources */,
 			);
@@ -591,8 +608,11 @@
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
 				153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */,
 				156386CD288A5B7B006653E8 /* NoticeSelected.swift in Sources */,
+				154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
+				154553CD28A34B25005E7FDB /* RentalDetail.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
+				154553D528A35CC3005E7FDB /* ItemVM.swift in Sources */,
 				152980F3288D3B6400537A80 /* AboutGroup.swift in Sources */,
 				153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */,
 				156386C0288A5249006653E8 /* HomeTab.swift in Sources */,
@@ -800,6 +820,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -831,6 +852,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

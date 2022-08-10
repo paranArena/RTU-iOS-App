@@ -39,7 +39,6 @@ struct RentalTab: View {
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
-
     }
     
     @ViewBuilder

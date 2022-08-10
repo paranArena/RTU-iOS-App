@@ -10,9 +10,10 @@ import HidableTabView
 
 struct CreateGroup: View {
     
-    @EnvironmentObject var groupModel: GroupViewModel
+    @EnvironmentObject var groupViewModel: GroupViewModel
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var createGroupModel = ViewModel()
+    @Environment(\.isPresented) var isPresented
+    @StateObject var viewModel = ViewModel()
     @FocusState var focusField: Field?
 
     var body: some View {
@@ -28,9 +29,13 @@ struct CreateGroup: View {
                 }
                 .padding(.horizontal, 10)
                 
-                Spacer()
             }
             .animation(.spring(), value: focusField)
+        }
+        .onChange(of: isPresented) { newValue in
+            if newValue {
+                UITabBar.hideTabBar(animated: true)
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear(perform: {
@@ -58,7 +63,7 @@ struct CreateGroup: View {
     
     @ViewBuilder
     private func GroupImage() -> some View {
-        createGroupModel.imageSource
+        viewModel.imageSource
             .resizable()
             .frame(width: SCREEN_WIDTH, height: 215)
     }
@@ -70,13 +75,13 @@ struct CreateGroup: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .foregroundColor(Color.Gray_495057)
             
-            TextField("", text: $createGroupModel.groupName)
+            TextField("", text: $viewModel.groupName)
                 .font(.custom(CustomFont.RobotoRegular.rawValue, size: 30))
                 .overlay(SimpleBottomLine(color: Color.Gray_DEE2E6))
                 .submitLabel(.next)
                 .focused($focusField, equals: .groupName)
                 .onSubmit {
-                    createGroupModel.isShowingTagPlaceholder = false
+                    viewModel.isShowingTagPlaceholder = false
                     focusField = .tagsText
                 }
         }
@@ -95,19 +100,19 @@ struct CreateGroup: View {
                 .foregroundColor(Color.Gray_495057)
             
             ZStack(alignment: .leading) {
-                if createGroupModel.isShowingTagPlaceholder {
+                if viewModel.isShowingTagPlaceholder {
                     Text("#렌탈 #서비스는 #REN2U")
                         .foregroundColor(.Gray_ADB5BD)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
                 }
                 
-                TextField("", text: $createGroupModel.tagsText)
+                TextField("", text: $viewModel.tagsText)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
                     .focused($focusField, equals: .tagsText)
                     .submitLabel(.return)
                     .onChange(of: focusField) { newValue in
-                        createGroupModel.parsingTag()
-                        createGroupModel.showTagPlaceHolder(newValue: newValue)
+                        viewModel.parsingTag()
+                        viewModel.showTagPlaceHolder(newValue: newValue)
                     }
             }
             .overlay(
@@ -126,7 +131,7 @@ struct CreateGroup: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(createGroupModel.tags) { tag in
+                    ForEach(viewModel.tags) { tag in
                         Text("\(tag.tag)")
                             .padding(.vertical, 5)
                             .padding(.horizontal, 10)
@@ -140,7 +145,7 @@ struct CreateGroup: View {
         .isHidden(hidden: (focusField != nil && focusField != .tagsText))
         .onTapGesture {
             focusField = .tagsText
-            createGroupModel.isShowingTagPlaceholder = false
+            viewModel.isShowingTagPlaceholder = false
         }
         
     }
@@ -152,7 +157,7 @@ struct CreateGroup: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .foregroundColor(Color.Gray_495057)
             
-            TextEditor(text: $createGroupModel.introduction)
+            TextEditor(text: $viewModel.introduction)
                 .focused($focusField, equals: .introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .submitLabel(.done)
@@ -170,7 +175,7 @@ struct CreateGroup: View {
         .onTapGesture {
             focusField = .introduction
         }
-        .animation(.spring(), value: createGroupModel.tags)
+        .animation(.spring(), value: viewModel.tags)
     }
     
     @ViewBuilder
@@ -180,7 +185,7 @@ struct CreateGroup: View {
             HStack {
                 Spacer()
                 Button {
-                    createGroupModel.showImagePicker.toggle()
+                    viewModel.showImagePicker.toggle()
                 } label: {
                     Text("사진 변경")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
@@ -188,10 +193,10 @@ struct CreateGroup: View {
                         .padding(.horizontal, 10)
                         .padding(.bottom, 5)
                 }
-                .sheet(isPresented: $createGroupModel.showImagePicker) {
-                    createGroupModel.loadImage()
+                .sheet(isPresented: $viewModel.showImagePicker) {
+                    viewModel.loadImage()
                 } content: {
-                    ImagePicker(image: $createGroupModel.selectedUIImage)
+                    ImagePicker(image: $viewModel.selectedUIImage)
                 }
 
 
@@ -202,6 +207,7 @@ struct CreateGroup: View {
     @ViewBuilder
     private func CreateCompleteButton() -> some View {
         Button {
+            groupViewModel.taskCreateClub(club: TempGroupInfo(name: viewModel.groupName, introduction: viewModel.introduction))
             presentationMode.wrappedValue.dismiss()
         } label: {
             Text("완료")

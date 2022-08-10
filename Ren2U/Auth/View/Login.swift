@@ -29,7 +29,7 @@ struct Login: View {
             .navigationBarHidden(true)
             .padding(.horizontal, 40)
             .onAppear {
-                viewModel.initTextFields()
+                viewModel.initValue()
             }
         }
     }
