@@ -43,6 +43,7 @@ struct Ren2UTab: View {
             groupViewModel.fetchJoinedGroups()
             groupViewModel.fetchNotices()
             groupViewModel.fetchRentalItems()
+            groupViewModel.getLikesGroups()
         }
     }
     

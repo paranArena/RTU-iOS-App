@@ -72,7 +72,7 @@ struct RentalTab: View {
     private func RentalItemSelected() -> some View {
         ScrollView {
             VStack {
-                ForEach(groupViewModel.rentalItems.indices) { i in
+                ForEach(groupViewModel.rentalItems.indices, id: \.self) { i in
                     NavigationLink(isActive: $groupViewModel.itemViewActive[i]) {
                         Item(itemInfo: groupViewModel.rentalItems[i])
                     } label: {

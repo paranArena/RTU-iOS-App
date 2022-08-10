@@ -20,14 +20,6 @@ extension GroupPage {
     }
 }
 
-struct LikeGroupInfo: Codable {
-    let groupId: String
-    
-    static func dummyLikeGroupInfos() -> [LikeGroupInfo] {
-        return [LikeGroupInfo(groupId: "1"), LikeGroupInfo(groupId: "4"), LikeGroupInfo(groupId: "6"), LikeGroupInfo(groupId: "8")]
-    }
-}
-
 struct TagInfo: Identifiable, Codable, Hashable {
     var id = UUID()
     let tag: String

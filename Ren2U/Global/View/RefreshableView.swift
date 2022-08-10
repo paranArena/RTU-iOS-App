@@ -13,6 +13,7 @@ struct RefreshableView<Content: View>: View {
     var content: () -> Content
     
     @Environment(\.refresh) private var refresh   // << refreshable injected !!
+    @EnvironmentObject var groupViewModel: GroupViewModel
     @State private var isRefreshing = false
 
     var body: some View {
@@ -33,6 +34,7 @@ struct RefreshableView<Content: View>: View {
         .onPreferenceChange(ViewOffsetKey.self) {
             if $0 < -200 && !isRefreshing {   // << any creteria we want !!
                 isRefreshing = true
+                groupViewModel.unlikesGroups()
                 Task {
                     await refresh?()           // << call refreshable !!
                     await MainActor.run {

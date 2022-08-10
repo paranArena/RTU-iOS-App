@@ -12,7 +12,7 @@ struct GroupPage: View {
     
     @EnvironmentObject var groupModel: GroupViewModel
     @Binding var tabSelection: Int
-    let groupInfo: GroupInfo
+    @Binding var groupInfo: GroupInfo
     let groupRole: Role = .member
     
     var body: some View {
@@ -24,12 +24,20 @@ struct GroupPage: View {
                 }
                 .resizable()
                 .frame(width: SCREEN_WIDTH, height: 215)
+                .overlay(LikeStar())
                 
                 Tags()
                 Introduction()
                 Notice()
                 RentalItem()
                 Spacer()
+            }
+        }
+        .onDisappear {
+            if groupInfo.didLike {
+                groupModel.likesGroup(group: groupInfo)
+            } else {
+                groupModel.unlikesGroups()
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -140,7 +148,7 @@ struct GroupPage: View {
     }
     
     @ViewBuilder
-    func TrailingToolbar() -> some View {
+    private func TrailingToolbar() -> some View {
         switch groupRole {
         case .chairman:
             Menu {
@@ -172,6 +180,24 @@ struct GroupPage: View {
             Text("가입하기")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.LabelColor)
+        }
+    }
+    
+    @ViewBuilder
+    private func LikeStar() -> some View {
+        VStack {
+            HStack {
+                Spacer()
+                Button {
+                    groupInfo.didLike.toggle()
+                } label: {
+                    Image(systemName: groupInfo.didLike ? "star.fill" : "star")
+                        .foregroundColor(.yellow)
+                }
+                .padding(5)
+
+            }
+            Spacer()
         }
     }
 }

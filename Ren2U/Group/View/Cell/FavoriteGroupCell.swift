@@ -11,7 +11,7 @@ import Kingfisher
 struct FavoriteGroupCell: View {
     
     @EnvironmentObject var groupModel: GroupViewModel
-    let info: GroupInfo
+    @Binding var info: GroupInfo
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -38,14 +38,14 @@ struct FavoriteGroupCell: View {
     }
     
     @ViewBuilder
-    func LikeStar() -> some View {
+    private func LikeStar() -> some View {
         VStack {
             HStack {
                 Spacer()
                 Button {
-                    print("Star clicked!")
+                    info.didLike.toggle()
                 } label: {
-                    Image(systemName: "star.fill")
+                    Image(systemName: info.didLike ? "star.fill" : "star")
                         .foregroundColor(.yellow)
                 }
                 .padding(5)
@@ -58,6 +58,6 @@ struct FavoriteGroupCell: View {
 
 struct GroupFavoriteCell_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteGroupCell(info: GroupInfo.dummyGroup())
+        ContentView()
     }
 }

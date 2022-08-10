@@ -34,14 +34,14 @@ struct GroupInfo: Identifiable, Codable {
     static func dummyGroups() -> [GroupInfo] {
         return [
                 GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/10/200/300", groupName: "그룹1", groupId: "1", tags: [TagInfo(tag: "태그1")], intoduction: "첫번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/20/200/300", groupName: "그룹2", groupId: "1", tags: [TagInfo(tag: "태그2")], intoduction: "두번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/30/200/300", groupName: "그룹3", groupId: "1", tags: [TagInfo(tag: "태그3")], intoduction: "세번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/40/200/300", groupName: "그룹4", groupId: "1", tags: [TagInfo(tag: "태그4")], intoduction: "번번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/50/200/300", groupName: "그룹5", groupId: "1", tags: [TagInfo(tag: "태그5")], intoduction: "다섯번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/60/200/300", groupName: "그룹6", groupId: "1", tags: [TagInfo(tag: "태그6")], intoduction: "여섯번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/70/200/300", groupName: "그룹7", groupId: "1", tags: [TagInfo(tag: "태그7")], intoduction: "일곱번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/80/200/300", groupName: "그룹8", groupId: "1", tags: [TagInfo(tag: "태그8")], intoduction: "여덟번째 그룹")),
-                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/90/200/300", groupName: "그룹9", groupId: "1", tags: [TagInfo(tag: "태그9")], intoduction: "아홉번째 그룹"))
+                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/20/200/300", groupName: "그룹2", groupId: "2", tags: [TagInfo(tag: "태그2")], intoduction: "두번째 그룹")),
+                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/30/200/300", groupName: "그룹3", groupId: "3", tags: [TagInfo(tag: "태그3")], intoduction: "세번째 그룹")),
+                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/40/200/300", groupName: "그룹4", groupId: "4", tags: [TagInfo(tag: "태그4")], intoduction: "번번째 그룹")),
+                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/50/200/300", groupName: "그룹5", groupId: "5", tags: [TagInfo(tag: "태그5")], intoduction: "다섯번째 그룹")),
+                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/60/200/300", groupName: "그룹6", groupId: "6", tags: [TagInfo(tag: "태그6")], intoduction: "여섯번째 그룹")),
+                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/70/200/300", groupName: "그룹7", groupId: "7", tags: [TagInfo(tag: "태그7")], intoduction: "일곱번째 그룹")),
+                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/80/200/300", groupName: "그룹8", groupId: "8", tags: [TagInfo(tag: "태그8")], intoduction: "여덟번째 그룹")),
+                GroupInfo(groupDto: GroupDto(imageSource: "https://picsum.photos/id/90/200/300", groupName: "그룹9", groupId: "9", tags: [TagInfo(tag: "태그9")], intoduction: "아홉번째 그룹"))
         
         ]
     }
@@ -53,12 +53,27 @@ struct TempGroupInfo: Codable {
     var introduction: String
 }
 
+struct LikeGroupInfo: Codable {
+    var groupId: String
+    
+    init(groupId: String) {
+        self.groupId = groupId
+    }
+    
+    static func dummyLikeGroupInfos() -> [LikeGroupInfo] {
+        return [LikeGroupInfo(groupId: "1"), LikeGroupInfo(groupId: "4"), LikeGroupInfo(groupId: "6"), LikeGroupInfo(groupId: "8")]
+    }
+}
+
 class GroupViewModel: ObservableObject {
     
-    @Published var likesGroups = [LikeGroupInfo]()
+    @Published var likesGroupId = [LikeGroupInfo]()
     @Published var joinedGroups = [GroupInfo]() // VStack에서 나열될 그룹들
+    @Published var likesGroups = [GroupInfo]()
+    
     @Published var notices = [NoticeInfo]() // Vstack 한개 그룹 셀에서 이동 후 사용될 정보
     @Published var rentalItems = [RentalItemInfo]() // Vstack 한개의 그룹 셀에서 이동 후 사용될 정보
+    
     @Published var itemViewActive = [Bool]()
     
     func taskCreateClub(club: TempGroupInfo) {
@@ -82,7 +97,7 @@ class GroupViewModel: ObservableObject {
         case .success(let value):
             print(value.description)
         case .failure(let err):
-            print(err.errorDescription)
+            print(err.errorDescription!)
         }
     }
     
@@ -92,7 +107,51 @@ class GroupViewModel: ObservableObject {
     }
     
     func fetchLikesGroups() {
-        self.likesGroups = LikeGroupInfo.dummyLikeGroupInfos()
+        self.likesGroupId = LikeGroupInfo.dummyLikeGroupInfos()
+    }
+    
+    func getLikesGroups() {
+        
+        var filteredGroups = [GroupInfo]()
+        
+        for i in 0..<joinedGroups.count {
+            let joinedGroup = joinedGroups[i]
+            
+            likesGroupId.contains { likesGroup in
+                if likesGroup.groupId == joinedGroup.groupDto.groupId {
+                    filteredGroups.append(joinedGroup)
+                    joinedGroups[i].didLike = true
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+       
+        self.likesGroups = joinedGroups.filter { groupInfo in
+            likesGroupId.contains { likesGroup in
+                if likesGroup.groupId == groupInfo.groupDto.groupId {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+    }
+    
+    func likesGroup(group: GroupInfo) {
+        likesGroups.append(group)
+    }
+    
+    func unlikesGroups() {
+        likesGroups.removeAll { group in
+            if !group.didLike {
+                
+                return true
+            } else {
+                return false
+            }
+        }
     }
     
     func fetchNotices() {

@@ -32,11 +32,11 @@ struct GroupSelected: View {
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(0..<5, id: \.self) { index in
+                    ForEach(groupModel.likesGroups.indices, id: \.self) { index in
                         NavigationLink {
-                            GroupPage(tabSelection: $tabSelection, groupInfo: GroupInfo.dummyGroup())
+                            GroupPage(tabSelection: $tabSelection, groupInfo: $groupModel.likesGroups[index])
                         } label: {
-                            FavoriteGroupCell(info: GroupInfo.dummyGroup())
+                            FavoriteGroupCell(info: $groupModel.likesGroups[index])
                         }
                     }
                 }
@@ -53,11 +53,11 @@ struct GroupSelected: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
             VStack {
-                ForEach(groupModel.joinedGroups) { group in
+                ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
                     NavigationLink {
-                        GroupPage(tabSelection: $tabSelection, groupInfo: group)
+                        GroupPage(tabSelection: $tabSelection, groupInfo: $groupModel.joinedGroups[index])
                     } label: {
-                        JoinedGroupCell(info: group)
+                        JoinedGroupCell(info: groupModel.joinedGroups[index])
                     }
                 }
             }
