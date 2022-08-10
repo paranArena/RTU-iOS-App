@@ -9,6 +9,7 @@ import SwiftUI
 import Alamofire
 
 
+
 struct GroupInfo: Identifiable, Codable {
     
     var id = UUID()
@@ -47,7 +48,6 @@ struct GroupInfo: Identifiable, Codable {
     }
 }
 
-
 struct TempGroupInfo: Codable {
     var name: String
     var introduction: String
@@ -69,18 +69,11 @@ class GroupViewModel: ObservableObject {
     
     @Published var likesGroupId = [LikeGroupInfo]()
     @Published var joinedGroups = [GroupInfo]() // VStack에서 나열될 그룹들
-    @Published var likesGroups = [GroupInfo]()
     
     @Published var notices = [NoticeInfo]() // Vstack 한개 그룹 셀에서 이동 후 사용될 정보
     @Published var rentalItems = [RentalItemInfo]() // Vstack 한개의 그룹 셀에서 이동 후 사용될 정보
     
     @Published var itemViewActive = [Bool]()
-    
-    func taskCreateClub(club: TempGroupInfo) {
-        Task {
-            await createClub(club: club)
-        }
-    }
     
     func createClub(club: TempGroupInfo) async {
         let url = "\(baseURL)/clubs"
@@ -112,14 +105,11 @@ class GroupViewModel: ObservableObject {
     
     func getLikesGroups() {
         
-        var filteredGroups = [GroupInfo]()
-        
         for i in 0..<joinedGroups.count {
             let joinedGroup = joinedGroups[i]
             
             likesGroupId.contains { likesGroup in
                 if likesGroup.groupId == joinedGroup.groupDto.groupId {
-                    filteredGroups.append(joinedGroup)
                     joinedGroups[i].didLike = true
                     return true
                 } else {
@@ -127,10 +117,18 @@ class GroupViewModel: ObservableObject {
                 }
             }
         }
-       
-        self.likesGroups = joinedGroups.filter { groupInfo in
-            likesGroupId.contains { likesGroup in
-                if likesGroup.groupId == groupInfo.groupDto.groupId {
+
+    }
+    
+    func likesGroup(group: GroupInfo) {
+        likesGroupId.append(LikeGroupInfo(groupId: group.groupDto.groupId))
+    }
+    
+    func unlikesGroups() {
+        //  좋아요 등록된 것중에 didLike = false면 삭제
+        likesGroupId.removeAll { likesGroups in
+            joinedGroups.contains { groupInfo in
+                if groupInfo.groupDto.groupId == likesGroups.groupId && !groupInfo.didLike {
                     return true
                 } else {
                     return false
@@ -139,17 +137,12 @@ class GroupViewModel: ObservableObject {
         }
     }
     
-    func likesGroup(group: GroupInfo) {
-        likesGroups.append(group)
-    }
-    
-    func unlikesGroups() {
-        likesGroups.removeAll { group in
-            if !group.didLike {
-                
+    func unlikeGroup(group: GroupInfo) {
+        likesGroupId.removeAll { likeGroup in
+            if likeGroup.groupId == group.groupDto.groupId {
                 return true
             } else {
-                return false
+                return false 
             }
         }
     }
@@ -196,5 +189,11 @@ class GroupViewModel: ObservableObject {
         }
         
         return tagLabel
+    }
+    
+    func taskCreateClub(club: TempGroupInfo) {
+        Task {
+            await createClub(club: club)
+        }
     }
 }

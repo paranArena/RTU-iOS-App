@@ -33,13 +33,6 @@ struct GroupPage: View {
                 Spacer()
             }
         }
-        .onDisappear {
-            if groupInfo.didLike {
-                groupModel.likesGroup(group: groupInfo)
-            } else {
-                groupModel.unlikesGroups()
-            }
-        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
@@ -190,6 +183,11 @@ struct GroupPage: View {
                 Spacer()
                 Button {
                     groupInfo.didLike.toggle()
+                    if groupInfo.didLike {
+                        groupModel.likesGroup(group: groupInfo)
+                    } else {
+                        groupModel.unlikeGroup(group: groupInfo)
+                    }
                 } label: {
                     Image(systemName: groupInfo.didLike ? "star.fill" : "star")
                         .foregroundColor(.yellow)

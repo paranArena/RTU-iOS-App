@@ -18,7 +18,6 @@ struct GroupSelected: View {
                 VStack(alignment: .leading) {
                     GroupFavorites()
                     JoinedGroup()
-                        .padding(.top, 30)
                 }
             }
         }
@@ -32,17 +31,21 @@ struct GroupSelected: View {
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(groupModel.likesGroups.indices, id: \.self) { index in
-                        NavigationLink {
-                            GroupPage(tabSelection: $tabSelection, groupInfo: $groupModel.likesGroups[index])
-                        } label: {
-                            FavoriteGroupCell(info: $groupModel.likesGroups[index])
+                    ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
+                        if groupModel.likesGroupId.contains(where: { $0.groupId == groupModel.joinedGroups[index].groupDto.groupId }) {
+                            NavigationLink {
+                                GroupPage(tabSelection: $tabSelection, groupInfo: $groupModel.joinedGroups[index])
+                            } label: {
+                                FavoriteGroupCell(info: $groupModel.joinedGroups[index])
+                            }
                         }
                     }
                 }
                 .padding(.horizontal, 20)
             }
         }
+        .padding(.bottom, 30)
+        .isHidden(hidden: groupModel.likesGroupId.isEmpty)
     }
     
     @ViewBuilder
