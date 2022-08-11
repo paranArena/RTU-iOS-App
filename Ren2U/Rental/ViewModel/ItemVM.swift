@@ -29,6 +29,8 @@ extension Item {
         @Published var timer = Timer()
         @Published var time = 0
         
+        @Published var offset: CGFloat = 0 
+        
         init() {
             runTimer()
         }

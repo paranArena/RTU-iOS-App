@@ -22,6 +22,8 @@ extension CreateGroup {
         @Published var image: Image?
         @Published var isShowingTab = false
         
+        @Published var offset: CGFloat = 0 
+        
         var imageSource: Image {
             if let image = self.image {
                 return image

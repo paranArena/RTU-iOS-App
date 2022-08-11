@@ -57,6 +57,10 @@ struct Item: View {
                     RentalComplete(itemInfo: itemInfo)
                 }
             }
+            .background(GeometryReader {
+                // detect Pull-to-refresh
+                Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+            })
         }
         .ignoresSafeArea(.container, edges: .top)
         .navigationTitle(" ")
@@ -73,14 +77,11 @@ struct Item: View {
         .sheet(isPresented: $viewModel.isShowingRental) {
             RentalDetail(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)
         }
-        .introspectScrollView { scrollView in
-            scrollView.bounces = scrollView.contentOffset.y < 0
+        .introspectScrollView { uiScrollView in
+            uiScrollView.bounces = (viewModel.offset > 0)
         }
-        .introspectNavigationController { controller in
-            let itemAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            itemAppearance.configureWithTransparentBackground()
-            controller.navigationBar.standardAppearance = itemAppearance
-            controller.navigationBar.scrollEdgeAppearance = itemAppearance
+        .onPreferenceChange(ViewOffsetKey.self) {
+            viewModel.offset = $0
         }
     }
     

@@ -32,6 +32,12 @@ struct CreateGroup: View {
             }
             .animation(.spring(), value: focusField)
         }
+        .introspectScrollView { uiScrollView in
+            uiScrollView.bounces = (viewModel.offset > 0)
+        }
+        .onPreferenceChange(ViewOffsetKey.self) {
+            viewModel.offset = $0
+        }
         .onChange(of: isPresented) { newValue in
             if newValue {
                 UITabBar.hideTabBar(animated: true)

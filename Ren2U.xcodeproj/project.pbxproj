@@ -38,11 +38,11 @@
 		156386C4288A525C006653E8 /* RentalTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C3288A525C006653E8 /* RentalTab.swift */; };
 		156386C6288A5263006653E8 /* MyPageTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386C5288A5263006653E8 /* MyPageTab.swift */; };
 		156386CB288A5B2F006653E8 /* GroupSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CA288A5B2F006653E8 /* GroupSelected.swift */; };
-		156386CD288A5B7B006653E8 /* NoticeSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CC288A5B7B006653E8 /* NoticeSelected.swift */; };
 		156386D2288A5D1A006653E8 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D1288A5D1A006653E8 /* GroupViewModel.swift */; };
 		156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */; };
 		156386D7288A5E58006653E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 156386D6288A5E58006653E8 /* Kingfisher */; };
 		156386DC288A6E0B006653E8 /* JoinedGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386DB288A6E0B006653E8 /* JoinedGroupCell.swift */; };
+		1570663628A53139002F7365 /* ScrollBounceControlelr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570663528A53139002F7365 /* ScrollBounceControlelr.swift */; };
 		15788D2B289B883600F604CC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 15788D2A289B883600F604CC /* HidableTabView */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationVM.swift */; };
@@ -125,10 +125,10 @@
 		156386C3288A525C006653E8 /* RentalTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalTab.swift; sourceTree = "<group>"; };
 		156386C5288A5263006653E8 /* MyPageTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTab.swift; sourceTree = "<group>"; };
 		156386CA288A5B2F006653E8 /* GroupSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSelected.swift; sourceTree = "<group>"; };
-		156386CC288A5B7B006653E8 /* NoticeSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSelected.swift; sourceTree = "<group>"; };
 		156386D1288A5D1A006653E8 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGroupCell.swift; sourceTree = "<group>"; };
 		156386DB288A6E0B006653E8 /* JoinedGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedGroupCell.swift; sourceTree = "<group>"; };
+		1570663528A53139002F7365 /* ScrollBounceControlelr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollBounceControlelr.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		15868739287EBB3F0003C2DC /* CertificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationVM.swift; sourceTree = "<group>"; };
 		159F1B20288B88DB00012113 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
@@ -300,7 +300,6 @@
 			children = (
 				156386C1288A5252006653E8 /* GroupTab.swift */,
 				156386CA288A5B2F006653E8 /* GroupSelected.swift */,
-				156386CC288A5B7B006653E8 /* NoticeSelected.swift */,
 				153C1A7A288CF7D600F89B2E /* CreateGroup.swift */,
 				152980EF288D39E500537A80 /* GroupPage.swift */,
 				156386C7288A588D006653E8 /* Cell */,
@@ -453,6 +452,7 @@
 				15F3673628927E770073E094 /* TransparentDivider.swift */,
 				158011782893992A006016AD /* ImagePicker.swift */,
 				153C1A77288CEE0A00F89B2E /* RefreshableView.swift */,
+				1570663528A53139002F7365 /* ScrollBounceControlelr.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -611,7 +611,6 @@
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
 				153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */,
-				156386CD288A5B7B006653E8 /* NoticeSelected.swift in Sources */,
 				154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
 				154553CD28A34B25005E7FDB /* RentalDetail.swift in Sources */,
@@ -626,6 +625,7 @@
 				158011792893992A006016AD /* ImagePicker.swift in Sources */,
 				159F1B21288B88DB00012113 /* Variables.swift in Sources */,
 				155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */,
+				1570663628A53139002F7365 /* ScrollBounceControlelr.swift in Sources */,
 				156386D2288A5D1A006653E8 /* GroupViewModel.swift in Sources */,
 				159F1B26288BA16000012113 /* AboutFont.swift in Sources */,
 				15246BD92884FD9A000BDFC8 /* LoginVM.swift in Sources */,

@@ -13,7 +13,9 @@ struct GroupPage: View {
     @EnvironmentObject var groupModel: GroupViewModel
     @Binding var tabSelection: Int
     @Binding var groupInfo: GroupInfo
+    @State var offset: CGFloat = 0
     let groupRole: Role = .member
+    
     
     var body: some View {
  
@@ -32,6 +34,16 @@ struct GroupPage: View {
                 RentalItem()
                 Spacer()
             }
+            .background(GeometryReader {
+                // detect Pull-to-refresh
+                Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+            })
+        }
+        .introspectScrollView { uiScrollView in
+            uiScrollView.bounces = (offset > 0)
+        }
+        .onPreferenceChange(ViewOffsetKey.self) {
+            offset = $0
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

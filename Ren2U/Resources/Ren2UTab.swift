@@ -21,6 +21,12 @@ struct Ren2UTab: View {
         appearance.shadowColor = UIColor(Color.BackgroundColor)
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
+        
+        let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.shadowColor = UIColor(Color.BackgroundColor)
+        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
     }
     
     var body: some View {

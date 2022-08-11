@@ -82,6 +82,19 @@ struct GroupTab: View {
             }
         }
     }
+    
+    @ViewBuilder
+    private func NoticeSelected() -> some View {
+        ScrollView {
+            RefreshableView {
+                VStack {
+                    ForEach(NoticeInfo.dummyNotices()) { notice in
+                        NoticeCell(noticeInfo: notice)
+                    }
+                }
+            }
+        }
+    }
 }
 
 

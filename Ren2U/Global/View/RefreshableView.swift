@@ -32,6 +32,7 @@ struct RefreshableView<Content: View>: View {
             Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
         })
         .onPreferenceChange(ViewOffsetKey.self) {
+//            print($0) //  print offset 
             if $0 < -200 && !isRefreshing {   // << any creteria we want !!
                 isRefreshing = true
                 groupViewModel.unlikesGroups()
