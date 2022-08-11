@@ -27,6 +27,7 @@ extension Item {
         
         @Published var imageSelection = 0
         @Published var timer = Timer()
+        @Published var time = 0
         
         init() {
             runTimer()
@@ -38,8 +39,13 @@ extension Item {
         }
         
         func runTimer() {
-            timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { Timer in
-                self.imageSelection = (self.imageSelection + 1) % 3
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { Timer in
+                self.time += 1
+                
+                if self.time == 3 {
+                    self.imageSelection = (self.imageSelection + 1) % 5
+                    self.time = 0
+                }
             })
         }
     }

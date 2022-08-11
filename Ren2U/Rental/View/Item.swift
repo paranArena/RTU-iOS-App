@@ -8,6 +8,7 @@
 import SwiftUI
 import Kingfisher
 import HidableTabView
+import Introspect
 
 struct Item: View {
     
@@ -60,14 +61,9 @@ struct Item: View {
         .ignoresSafeArea(.container, edges: .top)
         .navigationTitle(" ")
         .navigationBarTitleDisplayMode(.inline)
-        .hideTabBar(animated: false)
         .overlay(BottomToolbar())
         .onAppear {
             viewModel.initValues()
-            let itemAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            itemAppearance.configureWithTransparentBackground()
-            UINavigationBar.appearance().standardAppearance = itemAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = itemAppearance
         }
         .onChange(of: isPresented) { newValue in
             if newValue {
@@ -77,12 +73,21 @@ struct Item: View {
         .sheet(isPresented: $viewModel.isShowingRental) {
             RentalDetail(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)
         }
+        .introspectScrollView { scrollView in
+            scrollView.bounces = scrollView.contentOffset.y < 0
+        }
+        .introspectNavigationController { controller in
+            let itemAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+            itemAppearance.configureWithTransparentBackground()
+            controller.navigationBar.standardAppearance = itemAppearance
+            controller.navigationBar.scrollEdgeAppearance = itemAppearance
+        }
     }
     
     @ViewBuilder
     private func CarouselImage() -> some View {
         TabView(selection: $viewModel.imageSelection) {
-            ForEach(0..<3, id:\.self) { i in
+            ForEach(0..<5, id:\.self) { i in
                 KFImage(URL(string: itemInfo.imageSource)!)
                     .onFailure { err in
                         print(err.errorDescription ?? "KFImage Optional err")
@@ -90,9 +95,10 @@ struct Item: View {
                     .resizable()
                     .frame(width: SCREEN_WIDTH, height: 300)
                     .tag(i)
+
             }
         }
-        .animation(.spring(), value: viewModel.imageSelection)
+        .animation(viewModel.imageSelection == 0 ? nil : .spring(), value: viewModel.imageSelection)
         .frame(height: 300)
         .tabViewStyle(PageTabViewStyle())
     }

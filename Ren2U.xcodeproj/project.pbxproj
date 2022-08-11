@@ -46,6 +46,7 @@
 		15788D2B289B883600F604CC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 15788D2A289B883600F604CC /* HidableTabView */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationVM.swift */; };
+		15934A9C28A4DC0000BC97E3 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 15934A9B28A4DC0000BC97E3 /* Introspect */; };
 		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
 		159F1B26288BA16000012113 /* AboutFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* AboutFont.swift */; };
 		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
@@ -168,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				156386D7288A5E58006653E8 /* Kingfisher in Frameworks */,
+				15934A9C28A4DC0000BC97E3 /* Introspect in Frameworks */,
 				15788D2B289B883600F604CC /* HidableTabView in Frameworks */,
 				15BDC4252881225100514EF1 /* Alamofire in Frameworks */,
 			);
@@ -475,6 +477,7 @@
 				15BDC4242881225100514EF1 /* Alamofire */,
 				156386D6288A5E58006653E8 /* Kingfisher */,
 				15788D2A289B883600F604CC /* HidableTabView */,
+				15934A9B28A4DC0000BC97E3 /* Introspect */,
 			);
 			productName = Ren2U;
 			productReference = 15FAF130287D5DFF00B35570 /* Ren2U.app */;
@@ -552,6 +555,7 @@
 				15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				15788D29289B883600F604CC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */,
+				15934A9A28A4DC0000BC97E3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 15FAF131287D5DFF00B35570 /* Products */;
 			projectDirPath = "";
@@ -1001,6 +1005,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		15934A9A28A4DC0000BC97E3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 		15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1021,6 +1033,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 15788D29289B883600F604CC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */;
 			productName = HidableTabView;
+		};
+		15934A9B28A4DC0000BC97E3 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15934A9A28A4DC0000BC97E3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		15BDC4242881225100514EF1 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
