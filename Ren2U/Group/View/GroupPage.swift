@@ -18,8 +18,8 @@ struct GroupPage: View {
     
     
     var body: some View {
- 
-        ScrollView(.vertical, showsIndicators: false) {
+        
+        BounceControllScrollView(offset: $offset) {
             VStack(alignment: .leading) {
                 KFImage(URL(string: groupInfo.groupDto.imageSource)!).onFailure { err in
                     print(err.errorDescription ?? "KFImage err")
@@ -34,16 +34,6 @@ struct GroupPage: View {
                 RentalItem()
                 Spacer()
             }
-            .background(GeometryReader {
-                // detect Pull-to-refresh
-                Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
-            })
-        }
-        .introspectScrollView { uiScrollView in
-            uiScrollView.bounces = (offset > 0)
-        }
-        .onPreferenceChange(ViewOffsetKey.self) {
-            offset = $0
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

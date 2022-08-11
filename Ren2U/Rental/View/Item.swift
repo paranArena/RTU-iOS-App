@@ -21,7 +21,7 @@ struct Item: View {
     }
     
     var body: some View {
-        ScrollView {
+        BounceControllScrollView(offset: $viewModel.offset) {
             VStack(alignment: .leading, spacing: 10) {
                 CarouselImage()
                 
@@ -57,11 +57,8 @@ struct Item: View {
                     RentalComplete(itemInfo: itemInfo)
                 }
             }
-            .background(GeometryReader {
-                // detect Pull-to-refresh
-                Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
-            })
         }
+        .transparentNavigationBar()
         .ignoresSafeArea(.container, edges: .top)
         .navigationTitle(" ")
         .navigationBarTitleDisplayMode(.inline)
@@ -76,12 +73,6 @@ struct Item: View {
         }
         .sheet(isPresented: $viewModel.isShowingRental) {
             RentalDetail(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)
-        }
-        .introspectScrollView { uiScrollView in
-            uiScrollView.bounces = (viewModel.offset > 0)
-        }
-        .onPreferenceChange(ViewOffsetKey.self) {
-            viewModel.offset = $0
         }
     }
     

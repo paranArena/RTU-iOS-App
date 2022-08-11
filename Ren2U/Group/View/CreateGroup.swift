@@ -17,7 +17,7 @@ struct CreateGroup: View {
     @FocusState var focusField: Field?
 
     var body: some View {
-        ScrollView {
+        BounceControllScrollView(offset: $viewModel.offset) {
             VStack(alignment: .center, spacing: 10) {
                 GroupImage()
                     .overlay(ChangeImageButton())
@@ -32,12 +32,6 @@ struct CreateGroup: View {
             }
             .animation(.spring(), value: focusField)
         }
-        .introspectScrollView { uiScrollView in
-            uiScrollView.bounces = (viewModel.offset > 0)
-        }
-        .onPreferenceChange(ViewOffsetKey.self) {
-            viewModel.offset = $0
-        }
         .onChange(of: isPresented) { newValue in
             if newValue {
                 UITabBar.hideTabBar(animated: true)
@@ -47,14 +41,6 @@ struct CreateGroup: View {
         .onDisappear(perform: {
             UITabBar.showTabBar(animated: false)
         })
-        .onAppear {
-            let createGroupAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            createGroupAppearance.configureWithOpaqueBackground()
-            createGroupAppearance.shadowColor = UIColor(Color.BackgroundColor)
-            UINavigationBar.appearance().standardAppearance = createGroupAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = createGroupAppearance
-            UITabBar.hideTabBar(animated: false)
-        }
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text("그룹등록")

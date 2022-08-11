@@ -75,6 +75,27 @@ extension View {
     }
 }
 
+// 임시로 네비게이션바 투명하게 하기 
+extension View {
+    @ViewBuilder
+    func transparentNavigationBar() -> some View {
+        self
+            .onAppear {
+                let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+                navigationBarAppearance.configureWithTransparentBackground()
+                UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+                UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            }
+            .onDisappear {
+                let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+                navigationBarAppearance.configureWithOpaqueBackground()
+                navigationBarAppearance.shadowColor = UIColor(Color.BackgroundColor)
+                UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+                UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            }
+    }
+}
+
 // Touch down 
 extension View {
     func onTouchDownGesture(callback: @escaping () -> Void) -> some View {
