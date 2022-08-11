@@ -357,6 +357,9 @@
 		15F7606A289BA3FB0045055B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15FAF133287D5DFF00B35570 /* Ren2UApp.swift */,
+				15FAF135287D5DFF00B35570 /* ContentView.swift */,
+				156386B8288A513B006653E8 /* Ren2UTab.swift */,
 				159F1B22288B9F7000012113 /* Font */,
 				15FAF13A287D5E0000B35570 /* Preview Assets.xcassets */,
 				15FAF137287D5E0000B35570 /* Assets.xcassets */,
@@ -395,9 +398,6 @@
 				156386BC288A51F5006653E8 /* Rental */,
 				156386BD288A5201006653E8 /* MyPage */,
 				15F7606A289BA3FB0045055B /* Resources */,
-				15FAF133287D5DFF00B35570 /* Ren2UApp.swift */,
-				15FAF135287D5DFF00B35570 /* ContentView.swift */,
-				156386B8288A513B006653E8 /* Ren2UTab.swift */,
 			);
 			path = Ren2U;
 			sourceTree = "<group>";

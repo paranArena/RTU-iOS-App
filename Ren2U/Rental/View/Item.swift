@@ -63,7 +63,6 @@ struct Item: View {
         .hideTabBar(animated: false)
         .overlay(BottomToolbar())
         .onAppear {
-            print("Item onAppear")
             viewModel.initValues()
             let itemAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
             itemAppearance.configureWithTransparentBackground()
@@ -82,21 +81,18 @@ struct Item: View {
     
     @ViewBuilder
     private func CarouselImage() -> some View {
-        TabView {
-            KFImage(URL(string: itemInfo.imageSource)!)
-                .onFailure { err in
-                    print(err.errorDescription ?? "KFImage Optional err")
-                }
-                .resizable()
-                .frame(width: SCREEN_WIDTH, height: 300)
-            
-            KFImage(URL(string: itemInfo.imageSource)!)
-                .onFailure { err in
-                    print(err.errorDescription ?? "KFImage Optional err")
-                }
-                .resizable()
-                .frame(width: SCREEN_WIDTH, height: 300)
+        TabView(selection: $viewModel.imageSelection) {
+            ForEach(0..<3, id:\.self) { i in
+                KFImage(URL(string: itemInfo.imageSource)!)
+                    .onFailure { err in
+                        print(err.errorDescription ?? "KFImage Optional err")
+                    }
+                    .resizable()
+                    .frame(width: SCREEN_WIDTH, height: 300)
+                    .tag(i)
+            }
         }
+        .animation(.spring(), value: viewModel.imageSelection)
         .frame(height: 300)
         .tabViewStyle(PageTabViewStyle())
     }

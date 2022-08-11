@@ -25,9 +25,22 @@ extension Item {
         @Published var isRentalTerminal = false
         @Published var isRented: Bool = false
         
+        @Published var imageSelection = 0
+        @Published var timer = Timer()
+        
+        init() {
+            runTimer()
+        }
+        
         func initValues() {
             self.selection = nil
             self.isShowingRentalSelection = false
+        }
+        
+        func runTimer() {
+            timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { Timer in
+                self.imageSelection = (self.imageSelection + 1) % 3
+            })
         }
     }
 }
