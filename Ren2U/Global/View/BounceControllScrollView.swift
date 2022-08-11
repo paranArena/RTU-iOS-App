@@ -25,6 +25,7 @@ struct BounceControllScrollView<Content: View>: View {
             uiScrollView.bounces = (offset > 0)
         }
         .onPreferenceChange(ViewOffsetKey.self) {
+            // offset 값 변경 
             offset = $0
         }
     }

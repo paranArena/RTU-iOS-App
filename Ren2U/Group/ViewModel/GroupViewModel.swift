@@ -124,8 +124,15 @@ class GroupViewModel: ObservableObject {
         likesGroupId.append(LikeGroupInfo(groupId: group.groupDto.groupId))
     }
     
-    func unlikesGroups() {
+    func unlikesGroups() async {
         //  좋아요 등록된 것중에 didLike = false면 삭제
+        
+        do {
+            try await Task.sleep(nanoseconds: 2_000_000_000)
+        } catch {
+            
+        }
+        
         likesGroupId.removeAll { likesGroups in
             joinedGroups.contains { groupInfo in
                 if groupInfo.groupDto.groupId == likesGroups.groupId && !groupInfo.didLike {

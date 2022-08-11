@@ -13,13 +13,14 @@ struct GroupSelected: View {
     @Binding var tabSelection: Int
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            RefreshableView {
-                VStack(alignment: .leading) {
-                    GroupFavorites()
-                    JoinedGroup()
-                }
+        RefreshScrollView {
+            VStack(alignment: .leading) {
+                GroupFavorites()
+                JoinedGroup()
             }
+        }
+        .refreshable {
+            await groupModel.unlikesGroups()
         }
     }
     

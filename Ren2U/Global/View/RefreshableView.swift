@@ -12,7 +12,7 @@ struct RefreshableView<Content: View>: View {
     
     var content: () -> Content
     
-    @Environment(\.refresh) private var refresh   // << refreshable injected !!
+    @Environment(\.refresh) private var refresh  // << refreshable injected !!
     @EnvironmentObject var groupViewModel: GroupViewModel
     @State private var isRefreshing = false
 
@@ -23,6 +23,7 @@ struct RefreshableView<Content: View>: View {
                     ProgressView()
                     Spacer()
                 }
+                .padding(.top, 0)
             }
             content()
         }
@@ -32,13 +33,12 @@ struct RefreshableView<Content: View>: View {
             Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
         })
         .onPreferenceChange(ViewOffsetKey.self) {
-//            print($0) //  print offset 
-            if $0 < -200 && !isRefreshing {   // << any creteria we want !!
-                isRefreshing = true
-                groupViewModel.unlikesGroups()
+            if $0 < -250 && !isRefreshing {   // << any creteria we want !!
                 Task {
+                    isRefreshing = true
                     await refresh?()           // << call refreshable !!
-                    await MainActor.run {
+                    try await Task.sleep(nanoseconds: 30000000)
+                    withAnimation {
                         isRefreshing = false
                     }
                 }
