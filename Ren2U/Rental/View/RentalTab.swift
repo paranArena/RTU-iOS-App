@@ -15,8 +15,6 @@ struct RentalTab: View {
     @State private var searchText = ""
     @State private var isSearchBarFocused = false
     
-    private let selectionWidth = UIScreen.main.bounds.width / CGFloat(Selection.allCases.count)
-    
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             SearchBar(text: $searchText, isFoucsed: $isSearchBarFocused)
@@ -49,13 +47,12 @@ struct RentalTab: View {
                     self.rentalSelection  = option
                 } label: {
                     Text(option.title)
-                        .frame(width: selectionWidth)
+                        .frame(maxWidth: .infinity)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
                         .foregroundColor(self.rentalSelection == option ? .Navy_1E2F97 : .Gray_ADB5BD)
                 }
             }
         }
-        .padding(.bottom, 20)
     }
     
     @ViewBuilder
@@ -70,7 +67,7 @@ struct RentalTab: View {
     
     @ViewBuilder
     private func RentalItemSelected() -> some View {
-        ScrollView {
+        RefreshScrollView(threshold: 120) {
             VStack {
                 ForEach(groupViewModel.rentalItems.indices, id: \.self) { i in
                     NavigationLink(isActive: $groupViewModel.itemViewActive[i]) {
@@ -81,11 +78,21 @@ struct RentalTab: View {
                 }
             }
         }
+        .refreshable {
+            await groupViewModel.refreshItems()
+        }
     }
     
     @ViewBuilder
     private func RentalListSelected() -> some View {
-        Text("대여목록")
+        RefreshScrollView(threshold: 120) {
+            VStack {
+                Text("대여목록")
+            }
+        }
+        .refreshable {
+            await groupViewModel.refreshItems()
+        }
     }
     
 }

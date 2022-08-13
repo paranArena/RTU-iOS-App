@@ -12,24 +12,30 @@ struct GroupTab: View {
     
     @StateObject private var viewModel = ViewModel()
     @Binding var tabSelection: Int 
-    @EnvironmentObject var groupModel: GroupViewModel
-    private let selectionWidth = UIScreen.main.bounds.width / CGFloat(Selection.allCases.count)
+    @EnvironmentObject var groupViewModel: GroupViewModel
+    @State private var offset: CGFloat = 0
+    let spacing: CGFloat = 10
     
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
-        VStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .center, spacing: spacing) {
             SearchBar(text: $viewModel.searchText, isFoucsed: $viewModel.isSearchBarFocused)
                 .padding(.horizontal, 20)
-            
+
             Search(tabSelection: $tabSelection)
                 .padding(.bottom, -10)
                 .isHidden(hidden: !viewModel.isSearchBarFocused)
             
             Group {
                 GroupSelectionButton()
+                    .background(GeometryReader { gp -> Color in
+                        offset = gp.frame(in: .global).maxY + spacing //
+                        return Color.clear
+                    })
+                
                 ZStack {
-                    GroupSelected(tabSelection: $tabSelection)
+                    GroupSelected(tabSelection: $tabSelection, refreshThreshold: offset)
                         .overlay(CreateGroupButton())
                         .offset(x: viewModel.groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)
                     NoticeSelected()
@@ -48,12 +54,12 @@ struct GroupTab: View {
     @ViewBuilder
     private func GroupSelectionButton() -> some View {
         HStack {
-            ForEach(Selection.allCases, id: \.self) {  option in
+            ForEach(Selection.allCases, id: \.rawValue) {  option in
                 Button {
                     self.viewModel.groupSelection  = option
                 } label: {
                     Text(option.title)
-                        .frame(width: selectionWidth)
+                        .frame(maxWidth: .infinity)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
                         .foregroundColor(self.viewModel.groupSelection == option ? .Navy_1E2F97 : .Gray_ADB5BD)
                 }
@@ -85,14 +91,15 @@ struct GroupTab: View {
     
     @ViewBuilder
     private func NoticeSelected() -> some View {
-        ScrollView {
-            RefreshableView {
-                VStack {
-                    ForEach(NoticeInfo.dummyNotices()) { notice in
-                        NoticeCell(noticeInfo: notice)
-                    }
+        RefreshScrollView(threshold: 220) {
+            VStack {
+                ForEach(NoticeInfo.dummyNotices()) { notice in
+                    NoticeCell(noticeInfo: notice)
                 }
             }
+        }
+        .refreshable {
+            await groupViewModel.refreshItems()
         }
     }
 }

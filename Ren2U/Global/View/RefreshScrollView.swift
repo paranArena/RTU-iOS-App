@@ -10,11 +10,12 @@ import AVFoundation
 
 struct RefreshScrollView<Content: View>: View {
     
+    let threshold: CGFloat
     var content: () -> Content
     
     @Environment(\.refresh) private var refresh   // << refreshable injected !!
     @State private var isRefreshing = false
-    let threshold: CGFloat = -250
+    
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -22,18 +23,18 @@ struct RefreshScrollView<Content: View>: View {
                 ProgressView()
             }
             
+            
             ScrollView(.vertical, showsIndicators: false) {
                 content()
                     .background(GeometryReader {
                         // detect Pull-to-refresh
-                        Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+                        Color.clear.preference(key: ViewOffsetKey.self, value: $0.frame(in: .global).minY)
                     })
-                    .padding(.top, isRefreshing ? 120 : 0)
+                    .padding(.top, isRefreshing ? 100 : 0)
             }
             .allowsHitTesting(!isRefreshing)
             .onPreferenceChange(ViewOffsetKey.self) {
-                if $0 < threshold && !isRefreshing {
-                    print($0)
+                if $0 > (threshold+100) && !isRefreshing {
                     simpleSuccess() // 핸드폰에 진동 주기
                     Task {
                         isRefreshing = true
@@ -50,5 +51,14 @@ struct RefreshScrollView<Content: View>: View {
     func simpleSuccess() {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
+    }
+}
+
+
+public struct ViewOffsetKey: PreferenceKey {
+    public typealias Value = CGFloat
+    public static var defaultValue = CGFloat.zero
+    public static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
     }
 }

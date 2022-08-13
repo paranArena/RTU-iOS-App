@@ -11,9 +11,10 @@ struct GroupSelected: View {
     
     @EnvironmentObject var groupModel: GroupViewModel
     @Binding var tabSelection: Int
+    let refreshThreshold: CGFloat
     
     var body: some View {
-        RefreshScrollView {
+        RefreshScrollView(threshold: refreshThreshold) {
             VStack(alignment: .leading) {
                 GroupFavorites()
                 JoinedGroup()
