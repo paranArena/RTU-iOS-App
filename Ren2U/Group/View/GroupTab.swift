@@ -30,7 +30,8 @@ struct GroupTab: View {
             Group {
                 GroupSelectionButton()
                     .background(GeometryReader { gp -> Color in
-                        offset = gp.frame(in: .global).maxY + spacing //
+                        offset = gp.frame(in: .global).maxY + spacing
+                        print("\(offset)")
                         return Color.clear
                     })
                 
