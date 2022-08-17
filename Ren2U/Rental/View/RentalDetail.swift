@@ -10,9 +10,7 @@ import SwiftUI
 struct RentalDetail: View {
     
     let itemInfo: RentalItemInfo
-    @State private var startDate: Date?
-    @State private var endDate: Date?
-    @State private var pickUpTime = Date.now
+    @StateObject var viewModel = ViewModel()
     @Binding var isRentalTerminal: Bool
     @Environment(\.presentationMode) var presentationMode
     
@@ -25,8 +23,17 @@ struct RentalDetail: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             
             VStack(alignment: .leading, spacing: 10) {
+                
+                RentalDatePicker(viewModel: viewModel)
+                
                 Text("대여기간 확인")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                
+                HStack(alignment: .center, spacing: 0) {
+                    Text(viewModel.startDateString)
+                    Text(viewModel.endDateString)
+                }
+                .font(.custom(CustomFont.RobotoBold.rawValue, size: 24))
                 
                 // 대여기간 정보
                 Text(" ")
@@ -48,32 +55,38 @@ struct RentalDetail: View {
                 Text("픽업시간")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 
-                Text(getDate(date:pickUpTime))
+                Text(getDate(date:viewModel.pickUpTime))
                     .font(.custom(CustomFont.RobotoMedium.rawValue, size: 24))
                 
             }
             .frame(maxHeight: .infinity)
             
-            DatePicker("Pickup Time Picker", selection: $pickUpTime, displayedComponents: .hourAndMinute)
+            DatePicker("Pickup Time Picker", selection: $viewModel.pickUpTime, displayedComponents: .hourAndMinute)
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
-            
-            Button {
-                self.isRentalTerminal.toggle()
-                self.presentationMode.wrappedValue.dismiss()
-            } label: {
-                Text("종료")
-            }
-
-
+        }
+        .padding(.bottom, 200)
+        .ignoresSafeArea(.all, edges: .bottom)
+        .overlay(ReservationButton())
+    }
+    
+    @ViewBuilder
+    private func ReservationButton() -> some View {
+        VStack {
+            Spacer()
+            Text("예약하기")
+                .frame(width: 340, height: 50)
+                .background(Color.Navy_1E2F97)
+                .foregroundColor(Color.white)
+                .overlay(Capsule().stroke(Color.Navy_1E2F97, lineWidth: 1))
+            TransparentDivider()
         }
     }
     
     func getDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
-        let result = dateFormatter.string(from: date)
-        return result
+        return dateFormatter.string(from: date)
     }
 }
 

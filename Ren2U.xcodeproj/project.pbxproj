@@ -47,6 +47,8 @@
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationVM.swift */; };
 		15934A9C28A4DC0000BC97E3 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 15934A9B28A4DC0000BC97E3 /* Introspect */; };
+		159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086728AC72170008EC16 /* RentalDatePicker.swift */; };
+		159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */; };
 		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
 		159F1B26288BA16000012113 /* AboutFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* AboutFont.swift */; };
 		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
@@ -131,6 +133,8 @@
 		1570663728A5413B002F7365 /* RefreshScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshScrollView.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		15868739287EBB3F0003C2DC /* CertificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationVM.swift; sourceTree = "<group>"; };
+		159F086728AC72170008EC16 /* RentalDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDatePicker.swift; sourceTree = "<group>"; };
+		159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDetailVM.swift; sourceTree = "<group>"; };
 		159F1B20288B88DB00012113 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		159F1B24288BA0C200012113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 				150072F8289A3DFD005B6A93 /* Item.swift */,
 				154553CC28A34B25005E7FDB /* RentalDetail.swift */,
 				154553D028A351AA005E7FDB /* RentalComplete.swift */,
+				159F086728AC72170008EC16 /* RentalDatePicker.swift */,
 				150072F7289A3DE6005B6A93 /* Cell */,
 			);
 			path = View;
@@ -339,6 +344,7 @@
 			children = (
 				15C03144289CD5E500D0354E /* RentalTabVM.swift */,
 				154553D428A35CC3005E7FDB /* ItemVM.swift */,
+				159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -638,6 +644,7 @@
 				156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */,
 				150072F4289A2042005B6A93 /* RentalItemHCell.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
+				159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */,
 				15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
 				1570663828A5413B002F7365 /* RefreshScrollView.swift in Sources */,
@@ -650,6 +657,7 @@
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
+				159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */,
 				15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */,
 				15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
