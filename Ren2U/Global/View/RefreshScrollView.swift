@@ -15,6 +15,7 @@ struct RefreshScrollView<Content: View>: View {
     
     @Environment(\.refresh) private var refresh   // << refreshable injected !!
     @State private var isRefreshing = false
+    @State private var isTouched = false
     
     
     var body: some View {
@@ -30,11 +31,17 @@ struct RefreshScrollView<Content: View>: View {
                         // detect Pull-to-refresh
                         Color.clear.preference(key: ViewOffsetKey.self, value: $0.frame(in: .global).minY)
                     })
-                    .padding(.top, isRefreshing ? 100 : 0)
+                    .padding(.top, isRefreshing ? 50 : 0)
             }
+            .simultaneousGesture(
+                DragGesture()
+                    .onChanged({ _ in
+                        isTouched = true
+                    })
+            )
             .allowsHitTesting(!isRefreshing)
             .onPreferenceChange(ViewOffsetKey.self) {
-                if $0 > (threshold+100) && !isRefreshing {
+                if $0 > (threshold+50) && !isRefreshing && isTouched {
                     simpleSuccess() // 핸드폰에 진동 주기
                     Task {
                         isRefreshing = true

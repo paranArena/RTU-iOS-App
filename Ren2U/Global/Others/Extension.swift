@@ -27,10 +27,13 @@ extension Color {
     static let Gray_E9ECEF = Color(hex: "E9ECEF")
     static let Gray_DEE2E6 = Color(hex: "DEE2E6")
     static let Gray_FFFFFF = Color(hex: "FFFFFF")
+    static let grayF1F2F3 = Color(hex: "F1F2F3")
+    static let gray868E96 = Color(hex: "868E96")
     
     static let Navy_1E2F97 = Color(hex: "1E2F97")
     
     static let Red_EB1808 = Color(hex: "EB1808")
+    static let redFF6155 = Color(hex: "FF6155")
     
     static let Green_2CA900 = Color(hex: "2CA900")
     

@@ -32,8 +32,10 @@ struct User: Codable {
     var studentId: String
     var phoneNumber: String
     
-    static let `default` = User(email: "temp", password: "12345", name: "Page",
-                                major: "소프트웨어학과", studentId: "12345678", phoneNumber: "01012345678")
+    static func dummyUser() -> User {
+        return  User(email: "temp", password: "12345", name: "Page",
+                     major: "소프트웨어학과", studentId: "12345678", phoneNumber: "01012345678")
+    }
 }
 
 class AuthViewModel: ObservableObject {

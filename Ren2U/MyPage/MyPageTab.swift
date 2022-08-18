@@ -25,8 +25,15 @@ struct MyPageTab: View {
             } label: {
                 Text("개인정보조회")
             }
+            
+            NavigationLink {
+                GroupManagement()
+            } label: {
+                Text("그룹 관리 임시 버튼 ")
+            }
 
         }
+        .navigationTitle(" ")
     }
 }
 

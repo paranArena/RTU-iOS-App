@@ -13,7 +13,7 @@ struct GroupTab: View {
     @StateObject private var viewModel = ViewModel()
     @Binding var tabSelection: Int 
     @EnvironmentObject var groupViewModel: GroupViewModel
-    @State private var offset: CGFloat = 0
+    @State private var offset: CGFloat = 200
     let spacing: CGFloat = 10
     
     var body: some View {
@@ -31,7 +31,6 @@ struct GroupTab: View {
                 GroupSelectionButton()
                     .background(GeometryReader { gp -> Color in
                         offset = gp.frame(in: .global).maxY + spacing
-                        print("\(offset)")
                         return Color.clear
                     })
                 

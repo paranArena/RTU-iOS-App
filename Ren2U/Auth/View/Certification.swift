@@ -129,6 +129,6 @@ struct Certification: View {
 
 struct Certification_Previews: PreviewProvider {
     static var previews: some View {
-        Certification(isActive: .constant(true), user: User.default)
+        Certification(isActive: .constant(true), user: User.dummyUser())
     }
 }

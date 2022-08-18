@@ -41,6 +41,13 @@
 		156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */; };
 		156386D7288A5E58006653E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 156386D6288A5E58006653E8 /* Kingfisher */; };
 		156386DC288A6E0B006653E8 /* JoinedGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386DB288A6E0B006653E8 /* JoinedGroupCell.swift */; };
+		1563FE8E28ADDF5600F46CC7 /* GroupManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE8D28ADDF5600F46CC7 /* GroupManagement.swift */; };
+		1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */; };
+		1563FE9328ADEF9000F46CC7 /* SignUpCell .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9228ADEF9000F46CC7 /* SignUpCell .swift */; };
+		1563FE9528ADF62E00F46CC7 /* ReturnNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */; };
+		1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */; };
+		1563FE9928ADFBA700F46CC7 /* RetnalNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */; };
+		1563FE9B28AE059D00F46CC7 /* ReturnManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */; };
 		1570663628A53139002F7365 /* BounceControllScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570663528A53139002F7365 /* BounceControllScrollView.swift */; };
 		1570663828A5413B002F7365 /* RefreshScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570663728A5413B002F7365 /* RefreshScrollView.swift */; };
 		15788D2B289B883600F604CC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 15788D2A289B883600F604CC /* HidableTabView */; };
@@ -129,6 +136,13 @@
 		156386D1288A5D1A006653E8 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGroupCell.swift; sourceTree = "<group>"; };
 		156386DB288A6E0B006653E8 /* JoinedGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedGroupCell.swift; sourceTree = "<group>"; };
+		1563FE8D28ADDF5600F46CC7 /* GroupManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagement.swift; sourceTree = "<group>"; };
+		1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRentalCell.swift; sourceTree = "<group>"; };
+		1563FE9228ADEF9000F46CC7 /* SignUpCell .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpCell .swift"; sourceTree = "<group>"; };
+		1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnNoticeCell.swift; sourceTree = "<group>"; };
+		1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalViewModel.swift; sourceTree = "<group>"; };
+		1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetnalNoticeCell.swift; sourceTree = "<group>"; };
+		1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnManagement.swift; sourceTree = "<group>"; };
 		1570663528A53139002F7365 /* BounceControllScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceControllScrollView.swift; sourceTree = "<group>"; };
 		1570663728A5413B002F7365 /* RefreshScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshScrollView.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -307,9 +321,31 @@
 				156386CA288A5B2F006653E8 /* GroupSelected.swift */,
 				153C1A7A288CF7D600F89B2E /* CreateGroup.swift */,
 				152980EF288D39E500537A80 /* GroupPage.swift */,
+				1563FE8C28ADDF0100F46CC7 /* Management */,
 				156386C7288A588D006653E8 /* Cell */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1563FE8C28ADDF0100F46CC7 /* Management */ = {
+			isa = PBXGroup;
+			children = (
+				1563FE8D28ADDF5600F46CC7 /* GroupManagement.swift */,
+				1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */,
+				1563FE9128ADEE1600F46CC7 /* Cell */,
+			);
+			path = Management;
+			sourceTree = "<group>";
+		};
+		1563FE9128ADEE1600F46CC7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */,
+				1563FE9228ADEF9000F46CC7 /* SignUpCell .swift */,
+				1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */,
+				1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		15868738287EBB270003C2DC /* ViewModel */ = {
@@ -345,6 +381,7 @@
 				15C03144289CD5E500D0354E /* RentalTabVM.swift */,
 				154553D428A35CC3005E7FDB /* ItemVM.swift */,
 				159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */,
+				1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -617,13 +654,16 @@
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
 				153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */,
+				1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */,
 				154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */,
+				1563FE9328ADEF9000F46CC7 /* SignUpCell .swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
 				154553CD28A34B25005E7FDB /* RentalDetail.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
 				154553D528A35CC3005E7FDB /* ItemVM.swift in Sources */,
 				152980F3288D3B6400537A80 /* AboutGroup.swift in Sources */,
 				153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */,
+				1563FE9928ADFBA700F46CC7 /* RetnalNoticeCell.swift in Sources */,
 				156386C0288A5249006653E8 /* HomeTab.swift in Sources */,
 				150072F9289A3DFD005B6A93 /* Item.swift in Sources */,
 				1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */,
@@ -641,18 +681,21 @@
 				156386DC288A6E0B006653E8 /* JoinedGroupCell.swift in Sources */,
 				153C1A7B288CF7D600F89B2E /* CreateGroup.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
+				1563FE9B28AE059D00F46CC7 /* ReturnManagement.swift in Sources */,
 				156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */,
 				150072F4289A2042005B6A93 /* RentalItemHCell.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
 				159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */,
 				15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
+				1563FE9528ADF62E00F46CC7 /* ReturnNoticeCell.swift in Sources */,
 				1570663828A5413B002F7365 /* RefreshScrollView.swift in Sources */,
 				156386CB288A5B2F006653E8 /* GroupSelected.swift in Sources */,
 				15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */,
 				152CA1D1288F84EE00DDC0E2 /* SignUpSuccess.swift in Sources */,
 				15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */,
 				15F3673528926F6F0073E094 /* Search.swift in Sources */,
+				1563FE8E28ADDF5600F46CC7 /* GroupManagement.swift in Sources */,
 				15FAF15F287D5E1800B35570 /* Login.swift in Sources */,
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
@@ -660,6 +703,7 @@
 				159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */,
 				15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */,
 				15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */,
+				1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */,
