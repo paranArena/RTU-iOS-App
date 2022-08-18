@@ -99,12 +99,13 @@ struct GroupManagement: View {
                                     .foregroundColor(rentalSelection == selection ? Color.Navy_1E2F97 : Color.gray868E96)
                             }
                             .frame(maxWidth: .infinity)
-                            .background(
-                                GeometryReader(content: { proxy -> Color in
-                                    rentalWidth = proxy.size.width
-                                    return Color.clear
-                                })
-                            )
+                            .background(GeometryReader {
+                                // detect Pull-to-refresh
+                                Color.clear.preference(key: ViewWidthKey.self, value: $0.frame(in: .global).width)
+                            })
+                            .onPreferenceChange(ViewWidthKey.self) {
+                                rentalWidth = $0
+                            }
                         }
                     }
                     .padding(.bottom, 10)
@@ -158,5 +159,13 @@ struct GroupManagement: View {
 struct GroupManagement_Previews: PreviewProvider {
     static var previews: some View {
         GroupManagement()
+    }
+}
+
+public struct ViewWidthKey: PreferenceKey {
+    public typealias Value = CGFloat
+    public static var defaultValue = CGFloat.zero
+    public static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
     }
 }
