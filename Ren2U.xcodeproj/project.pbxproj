@@ -57,7 +57,7 @@
 		159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086728AC72170008EC16 /* RentalDatePicker.swift */; };
 		159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */; };
 		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
-		159F1B26288BA16000012113 /* AboutFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* AboutFont.swift */; };
+		159F1B26288BA16000012113 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* CustomFont.swift */; };
 		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
 		15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A2E7B12893C58A00254793 /* KeyboardHandler.swift */; };
 		15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B63DA328AF38EA000AB82D /* ViewExtensions .swift */; };
@@ -153,7 +153,7 @@
 		159F1B20288B88DB00012113 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		159F1B24288BA0C200012113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		159F1B25288BA16000012113 /* AboutFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFont.swift; sourceTree = "<group>"; };
+		159F1B25288BA16000012113 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		15A2E7B12893C58A00254793 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		15B63DA328AF38EA000AB82D /* ViewExtensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewExtensions .swift"; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -372,7 +372,7 @@
 				153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */,
 				153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */,
 				159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */,
-				159F1B25288BA16000012113 /* AboutFont.swift */,
+				159F1B25288BA16000012113 /* CustomFont.swift */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -685,7 +685,7 @@
 				155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */,
 				1570663628A53139002F7365 /* BounceControllScrollView.swift in Sources */,
 				156386D2288A5D1A006653E8 /* GroupViewModel.swift in Sources */,
-				159F1B26288BA16000012113 /* AboutFont.swift in Sources */,
+				159F1B26288BA16000012113 /* CustomFont.swift in Sources */,
 				15246BD92884FD9A000BDFC8 /* LoginVM.swift in Sources */,
 				15D774F4288E2B8A00428465 /* NoticeCell.swift in Sources */,
 				15F3672F289261300073E094 /* ShadowRectangle.swift in Sources */,

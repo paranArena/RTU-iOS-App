@@ -21,7 +21,7 @@ extension RentalDetail {
         
         var month: String {
             let formatter = DateFormatter()
-            formatter.dateFormat = "MM"
+            formatter.dateFormat = "M월"
             return formatter.string(from: self.currentDate)
         }
         
@@ -108,7 +108,7 @@ extension RentalDetail {
             } else if rentalDays[index].date == self.startDate || rentalDays[index].date == self.endDate {
                 return Color.Navy_1E2F97
             } else if rentalDays[index].isClicked {
-                return Color.blue
+                return Color.Navy_1E2F97.opacity(0.15)
             }
             
             return Color.BackgroundColor
