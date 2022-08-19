@@ -14,14 +14,20 @@ struct RentalTab: View {
     @State private var rentalSelection: Selection = .rentalItem
     @State private var searchText = ""
     @State private var isSearchBarFocused = false
+    @State private var offset: CGFloat = 200
+    let spacing: CGFloat = 10
     
     var body: some View {
-        VStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .center, spacing: spacing) {
             SearchBar(text: $searchText, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
             
             Group {
                 RentalSelectionButton()
+                    .background(GeometryReader { gp -> Color in
+                        offset = gp.frame(in: .global).maxY + spacing
+                        return Color.clear
+                    })
                 
                 ZStack {
                     ForEach(Selection.allCases, id: \.rawValue) { selection in
@@ -33,7 +39,6 @@ struct RentalTab: View {
             }
         }
         .overlay(ShadowRectangle())
-        .showTabBar(animated: false)
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -67,7 +72,7 @@ struct RentalTab: View {
     
     @ViewBuilder
     private func RentalItemSelected() -> some View {
-        RefreshScrollView(threshold: 120) {
+        RefreshScrollView(threshold: offset) {
             VStack {
                 ForEach(groupViewModel.rentalItems.indices, id: \.self) { i in
                     NavigationLink(isActive: $groupViewModel.itemViewActive[i]) {

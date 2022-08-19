@@ -90,9 +90,12 @@ extension RentalDetail {
         }
         
         func setUpTextColor(index: Int) -> Color {
+            
+            let baseDate = Calendar.current.date(byAdding: .day, value: -1, to: Date.now)!
+            
             if rentalDays[index].date == self.startDate || rentalDays[index].date == self.endDate {
                 return Color.BackgroundColor
-            } else if rentalDays[index].date < Date.now {
+            } else if rentalDays[index].date < baseDate {
                 return Color.gray
             }
             
@@ -100,7 +103,9 @@ extension RentalDetail {
         }
         
         func setUpDayBackground(index: Int) -> Color {
-            if rentalDays[index].date == self.startDate || rentalDays[index].date == self.endDate {
+            if rentalDays[index].day == -1 {
+                return Color.BackgroundColor
+            } else if rentalDays[index].date == self.startDate || rentalDays[index].date == self.endDate {
                 return Color.Navy_1E2F97
             } else if rentalDays[index].isClicked {
                 return Color.blue

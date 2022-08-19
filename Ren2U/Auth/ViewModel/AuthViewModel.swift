@@ -14,14 +14,18 @@ struct Account: Codable {
     var password: String
 }
 
+//struct LoginResponse: Codable {
+//    var statusCode: Int
+//    var responseMessage: String
+//    var data: UserToken
+//
+//    struct UserToken: Codable {
+//        var token: String
+//    }
+//}
+
 struct LoginResponse: Codable {
-    var statusCode: Int
-    var responseMessage: String
-    var data: UserToken
-    
-    struct UserToken: Codable {
-        var token: String
-    }
+    var token: String
 }
 
 struct User: Codable {
@@ -59,7 +63,6 @@ class AuthViewModel: ObservableObject {
     }
 
     func signUp(user: User) async -> Bool {
-        
         var result = false
         let url = "\(baseURL)/signup"
         let param: [String: Any] = [
@@ -94,18 +97,22 @@ class AuthViewModel: ObservableObject {
             "password" : account.password
         ]
         
+ 
         
         let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self)
         let response = await request.result
         
+        setToken(token: "123")
+
         switch response {
         case .success(let value):
-            self.setToken(token: value.data.token)
+            self.setToken(token: value.token)
             return false
         case .failure(let err):
-            print("[AuthVM] login err: \(err)")
+            print("[Auth] login err: \(err)")
             return true
         }
+        
     }
     
     

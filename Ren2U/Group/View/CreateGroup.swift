@@ -32,11 +32,7 @@ struct CreateGroup: View {
             }
             .animation(.spring(), value: focusField)
         }
-        .onChange(of: isPresented) { newValue in
-            if newValue {
-                UITabBar.hideTabBar(animated: true)
-            }
-        }
+        .controllTabbar(isPresented)
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear(perform: {
             UITabBar.showTabBar(animated: false)

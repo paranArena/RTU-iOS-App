@@ -11,7 +11,7 @@ struct SignUpCell: View {
     
     let userInfo: User
     @State private var isShowingRequestButton = false
-    @State private var offset: CGSize = .zero
+    @State private var offset: CGFloat = .zero
     
     var body: some View {
         
@@ -31,37 +31,50 @@ struct SignUpCell: View {
             
             HStack(alignment: .center, spacing: 0) {
                 Button {
+                    self.offset = .zero
                     self.isShowingRequestButton = false
                 } label: {
                     Text("확인")
+                        .lineLimit(1)
                 }
                 .frame(width: 80, height: 80)
                 .background(Color.Navy_1E2F97)
                 .foregroundColor(Color.white)
                 
                 Button {
+                    self.offset = .zero
                     self.isShowingRequestButton = false
                 } label: {
                     Text("거부")
+                        .lineLimit(1)
                 }
                 .frame(width: 80, height: 80)
                 .background(Color.redFF6155)
                 .foregroundColor(Color.white)
+                .padding(0)
             }
-            .offset(x: isShowingRequestButton ? 0 : 180)
-            .padding(.leading, isShowingRequestButton ? 0 : -180)
+            .offset(x : 180)
+            .padding(.leading, -180)
             
         }
+        .offset(x: isShowingRequestButton ? -160 : max(-160, offset))
         .animation(.spring(), value: isShowingRequestButton)
+        .animation(.spring(), value: offset)
         .gesture(
             DragGesture()
                 .onChanged {
-                    self.offset = $0.translation
+                    print(offset)
+                    self.offset = $0.translation.width
+                    self.offset = min(offset, 0)
                 }
                 .onEnded {
-                    if $0.translation.width < -50 {
+                    if $0.translation.width <= -80 {
                         self.isShowingRequestButton = true
-                    } else if $0.translation.width > 50 {
+                    } else if $0.translation.width > -80 && $0.translation.width < 50 {
+                        withAnimation {
+                            self.offset = 0
+                        }
+                    } else if $0.translation.width >= 50 {
                         self.isShowingRequestButton = false
                     }
                 }

@@ -27,7 +27,6 @@ struct ReturnNoticeCell: View {
                 .resizable()
                 .frame(width: 80, height: 80)
                 .cornerRadius(15)
-                .isHidden(hidden: isShowingRequestButton)
                 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(userInfo.name)
@@ -59,10 +58,9 @@ struct ReturnNoticeCell: View {
                 .background(Color.Navy_1E2F97)
                 .foregroundColor(Color.white)
             }
-            .offset(x: isShowingRequestButton ? 0 : 180)
-            .padding(.leading, isShowingRequestButton ? 0 : -180)
-            
+            .offset(x: 90)
         }
+        .offset(x: isShowingRequestButton ? -90 : 0)
         .padding(.vertical, 10)
         .animation(.spring(), value: isShowingRequestButton)
         .simultaneousGesture(

@@ -18,41 +18,48 @@ struct DateValue: Identifiable {
 struct RentalDatePicker: View {
     
     @ObservedObject var viewModel: RentalDetail.ViewModel
-    let daySize = (SCREEN_WIDTH - 40) / 7
+    @State private var width: CGFloat = .zero
 
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center, spacing: 0) {
             MonthHeader()
+                .padding(.bottom, 20)
             
             let days: [String] = ["일", "월", "화", "수", "목", "금", "토"]
             
-            HStack {
+            HStack(alignment: .center, spacing: 0) {
                 ForEach(days, id: \.self) { day in
-                    
                     Text(day)
                         .frame(maxWidth: .infinity)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                        .background(GeometryReader {
+                            Color.clear.preference(key: ViewWidthKey.self, value: $0.frame(in: .global).width)
+                        })
+                        .onPreferenceChange(ViewWidthKey.self) {
+                            width = $0
+                        }
                 }
             }
+            .padding(.bottom, 5)
             
-            let columns = Array(repeating: GridItem(.fixed(daySize)), count: 7)
+            let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 7)
+            
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(viewModel.rentalDays.indices, id: \.self) { index in
                     let day = Calendar.current.date(byAdding: .day, value: -1, to: Date.now)!
-                    
                     Button {
                         viewModel.selectRentalDays(index: index)
                     } label: {
                         Text(viewModel.setUpDayString(index: index))
                             .foregroundColor(viewModel.setUpTextColor(index: index))
-                            .frame(maxWidth: .infinity)
-                            .background(viewModel.setUpDayBackground(index: index))
-                            .frame(height: daySize)
-                            .overlay(
-                                Rectangle()
-                                    .stroke(Color.Gray_495057, lineWidth: 1)
-                            )
                     }
+                    .frame(width: width, height:  width)
+                    .background(viewModel.setUpDayBackground(index: index))
+                    .overlay(
+                        Rectangle()
+                            .stroke(Color.Gray_DEE2E6, lineWidth: 1)
+                    )
                     .padding(.horizontal, 0)
                     .disabled(viewModel.rentalDays[index].date < day)
                 }
@@ -71,17 +78,19 @@ struct RentalDatePicker: View {
             } label: {
                 Image(systemName: "chevron.left")
             }
+            .foregroundColor(Color.Navy_1E2F97)
 
             
-            VStack(alignment: .leading, spacing: 10) {
-                Text(viewModel.month)
-            }
+            Text(viewModel.month)
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
+                .padding(.horizontal, 20)
             
             Button {
                 viewModel.currentDate = Calendar.current.date(byAdding: .month, value: 1, to: viewModel.currentDate)!
             } label: {
                 Image(systemName: "chevron.right")
             }
+            .foregroundColor(Color.Navy_1E2F97)
 
         }
         .onChange(of: viewModel.currentDate) { _ in
@@ -90,11 +99,11 @@ struct RentalDatePicker: View {
     }
 }
 
-//struct Calendar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RentalDatePicker()
-//    }
-//}
+struct Calendar_Previews: PreviewProvider {
+    static var previews: some View {
+        RentalDatePicker(viewModel: RentalDetail.ViewModel())
+    }
+}
 
 extension Date {
     

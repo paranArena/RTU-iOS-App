@@ -106,7 +106,7 @@ struct Certification: View {
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
-                .resizable()    .frame(width: 86, height: 86)
+                .resizable().frame(width: 86, height: 86)
                 .padding(.top, 49)
                 .foregroundColor(viewModel.isReachedMaxLength(num: viewModel.certificationNum)
                                  ? .Navy_1E2F97 : .Gray_E9ECEF)

@@ -45,10 +45,11 @@ struct RetnalNoticeCell: View {
                 .background(Color.redFF6155)
                 .foregroundColor(Color.white)
             }
-            .offset(x: isShowingRequestButton ? 0 : 180)
-            .padding(.leading, isShowingRequestButton ? 0 : -180)
+            .offset(x : 180)
+            .padding(.leading, -180)
             
         }
+        .offset(x: isShowingRequestButton ? -160 : 0)
         .animation(.spring(), value: isShowingRequestButton)
         .gesture(
             DragGesture()

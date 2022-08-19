@@ -20,13 +20,12 @@ struct BounceControllScrollView<Content: View>: View {
                 // detect Pull-to-refresh
                 Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
             })
+            .onPreferenceChange(ViewOffsetKey.self) {
+                offset = $0
+            }
         }
         .introspectScrollView { uiScrollView in
             uiScrollView.bounces = (offset > 0)
-        }
-        .onPreferenceChange(ViewOffsetKey.self) {
-            // offset 값 변경 
-            offset = $0
         }
     }
 }

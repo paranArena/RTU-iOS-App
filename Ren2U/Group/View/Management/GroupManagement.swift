@@ -56,6 +56,7 @@ struct GroupManagement: View {
     
     @State private var rentalSelection: RentalSelection = .reservation
     @State private var rentalWidth: CGFloat = 0
+    @Environment(\.isPresented) var isPresented
     
     
     var body: some View {
@@ -100,7 +101,6 @@ struct GroupManagement: View {
                             }
                             .frame(maxWidth: .infinity)
                             .background(GeometryReader {
-                                // detect Pull-to-refresh
                                 Color.clear.preference(key: ViewWidthKey.self, value: $0.frame(in: .global).width)
                             })
                             .onPreferenceChange(ViewWidthKey.self) {
@@ -132,6 +132,7 @@ struct GroupManagement: View {
             }
             .padding(.horizontal, 10)
         }
+        .controllTabbar(isPresented)
         .navigationTitle("그룹 관리자")
         .navigationBarTitleDisplayMode(.inline)
     }

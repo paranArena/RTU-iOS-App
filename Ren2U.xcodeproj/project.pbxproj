@@ -60,6 +60,7 @@
 		159F1B26288BA16000012113 /* AboutFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* AboutFont.swift */; };
 		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
 		15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A2E7B12893C58A00254793 /* KeyboardHandler.swift */; };
+		15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B63DA328AF38EA000AB82D /* ViewExtensions .swift */; };
 		15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel.swift */; };
 		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
 		15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C03144289CD5E500D0354E /* RentalTabVM.swift */; };
@@ -154,6 +155,7 @@
 		159F1B24288BA0C200012113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		159F1B25288BA16000012113 /* AboutFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFont.swift; sourceTree = "<group>"; };
 		15A2E7B12893C58A00254793 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		15B63DA328AF38EA000AB82D /* ViewExtensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewExtensions .swift"; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		15C03144289CD5E500D0354E /* RentalTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalTabVM.swift; sourceTree = "<group>"; };
 		15D4C580287FF15A008BB89B /* NavigationBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColor.swift; sourceTree = "<group>"; };
@@ -375,6 +377,14 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		15B63DA228AF38C3000AB82D /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				15B63DA328AF38EA000AB82D /* ViewExtensions .swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
 		15C03143289CD5A900D0354E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,7 +414,6 @@
 				15FAF133287D5DFF00B35570 /* Ren2UApp.swift */,
 				15FAF135287D5DFF00B35570 /* ContentView.swift */,
 				156386B8288A513B006653E8 /* Ren2UTab.swift */,
-				159F1B22288B9F7000012113 /* Font */,
 				15FAF13A287D5E0000B35570 /* Preview Assets.xcassets */,
 				15FAF137287D5E0000B35570 /* Assets.xcassets */,
 			);
@@ -475,6 +484,8 @@
 		15FAF160287D5EC100B35570 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				159F1B22288B9F7000012113 /* Font */,
+				15B63DA228AF38C3000AB82D /* Modifier */,
 				153C1A6C288CDDF200F89B2E /* Others */,
 				15FAF166287D606700B35570 /* View */,
 			);
@@ -669,6 +680,7 @@
 				1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */,
 				156386C2288A5252006653E8 /* GroupTab.swift in Sources */,
 				158011792893992A006016AD /* ImagePicker.swift in Sources */,
+				15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */,
 				159F1B21288B88DB00012113 /* Variables.swift in Sources */,
 				155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */,
 				1570663628A53139002F7365 /* BounceControllScrollView.swift in Sources */,

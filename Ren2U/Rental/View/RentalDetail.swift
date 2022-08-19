@@ -16,15 +16,12 @@ struct RentalDetail: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .center, spacing: 10) {
-                Text(itemInfo.itemName)
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            
             VStack(alignment: .leading, spacing: 10) {
                 
+                ItemPicker()
+                
                 RentalDatePicker(viewModel: viewModel)
+                    .padding(.horizontal, 10)
                 
                 Text("대여기간 확인")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
@@ -65,20 +62,55 @@ struct RentalDetail: View {
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
         }
+        .padding(.horizontal, 10)
         .padding(.bottom, 200)
-        .ignoresSafeArea(.all, edges: .bottom)
         .overlay(ReservationButton())
+    }
+    
+    @ViewBuilder
+    private func ItemPicker() -> some View {
+        HStack(alignment: .center, spacing: 0) {
+            Button {
+                
+            } label: {
+                Image(systemName: "chevron.left")
+            }
+            .foregroundColor(Color.Navy_1E2F97)
+            
+            Spacer()
+            Text(itemInfo.itemName)
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
+            Spacer()
+            Button {
+                
+            } label: {
+                Image(systemName: "chevron.right")
+            }
+            .foregroundColor(Color.Navy_1E2F97)
+        }
+        .padding(.top, 10)
+        .padding(.horizontal, 30)
+        .padding(.bottom, 30)
+        .frame(maxHeight: .infinity, alignment: .center)
     }
     
     @ViewBuilder
     private func ReservationButton() -> some View {
         VStack {
             Spacer()
-            Text("예약하기")
-                .frame(width: 340, height: 50)
-                .background(Color.Navy_1E2F97)
-                .foregroundColor(Color.white)
-                .overlay(Capsule().stroke(Color.Navy_1E2F97, lineWidth: 1))
+            
+            Button {
+                presentationMode.wrappedValue.dismiss()
+                isRentalTerminal.toggle()
+            } label: {
+                Capsule()
+                    .foregroundColor(Color.Navy_1E2F97)
+                    .overlay(Text("예약하기")
+                        .foregroundColor(Color.white)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20)))
+            }
+            .padding(.horizontal, 20)
+            .frame(maxWidth: .infinity, maxHeight: 50)
             TransparentDivider()
         }
     }
@@ -92,6 +124,6 @@ struct RentalDetail: View {
 
 struct RentalDetail_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RentalDetail(itemInfo: RentalItemInfo.dummyRentalItem(), isRentalTerminal: .constant(false))
     }
 }

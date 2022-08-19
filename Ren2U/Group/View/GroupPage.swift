@@ -14,7 +14,7 @@ struct GroupPage: View {
     @Binding var tabSelection: Int
     @Binding var groupInfo: GroupInfo
     @State var offset: CGFloat = 0
-    let groupRole: Role = .member
+    let groupRole: Role = .chairman
     
     
     var body: some View {
@@ -35,6 +35,7 @@ struct GroupPage: View {
                 Spacer()
             }
         }
+        .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
@@ -146,14 +147,12 @@ struct GroupPage: View {
     private func TrailingToolbar() -> some View {
         switch groupRole {
         case .chairman:
-            Menu {
-                Text("물품 등록")
-                Text("공지 등록")
+            NavigationLink {
+                GroupManagement()
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundColor(Color.LabelColor)
             }
-            
         case .member:
             Button {
                 

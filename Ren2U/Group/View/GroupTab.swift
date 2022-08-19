@@ -13,7 +13,7 @@ struct GroupTab: View {
     @StateObject private var viewModel = ViewModel()
     @Binding var tabSelection: Int 
     @EnvironmentObject var groupViewModel: GroupViewModel
-    @State private var offset: CGFloat = 200
+    @State private var offset: CGFloat = .zero
     let spacing: CGFloat = 10
     
     var body: some View {

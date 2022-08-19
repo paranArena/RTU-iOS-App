@@ -59,17 +59,13 @@ struct Item: View {
             }
         }
         .transparentNavigationBar()
+        .controllTabbar(isPresented)
         .ignoresSafeArea(.container, edges: .top)
-        .navigationTitle(" ")
+        .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .overlay(BottomToolbar())
         .onAppear {
             viewModel.initValues()
-        }
-        .onChange(of: isPresented) { newValue in
-            if newValue {
-                UITabBar.hideTabBar(animated: false)
-            }
         }
         .sheet(isPresented: $viewModel.isShowingRental) {
             RentalDetail(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)

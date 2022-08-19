@@ -9,16 +9,8 @@ import SwiftUI
 
 struct HomeTab: View {
     
-    @State private var offset: CGFloat = 0
     var body: some View {
-        ScrollView {
-            Text("??")
-                .background(GeometryReader { gp -> Color in
-                    offset = gp.frame(in: .global).maxY
-                    print(offset)
-                    return Color.clear
-                })
-        }
+        Text("??")
     }
 }
 

@@ -7,16 +7,31 @@
 
 import SwiftUI
 import AVFoundation
+import Combine
 
 struct RefreshScrollView<Content: View>: View {
     
     let threshold: CGFloat
     var content: () -> Content
+    let detector: CurrentValueSubject<CGFloat, Never>
+    let publisher: AnyPublisher<CGFloat, Never>
     
-    @Environment(\.refresh) private var refresh   // << refreshable injected !!
+    @Environment(\.refresh) private var refresh
+    @State private var offset: CGFloat = .zero
+    @State private var startoffset: CGFloat = .zero
     @State private var isRefreshing = false
-    @State private var isTouched = false
-    
+    @State private var isScrolled = false
+
+    init(threshold: CGFloat, c: @escaping () -> Content ) {
+        self.threshold = threshold
+        self.content = c
+        let detector = CurrentValueSubject<CGFloat, Never>(0)
+        self.detector = detector
+        self.publisher = detector
+            .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
+            .dropFirst()
+            .eraseToAnyPublisher()
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -27,30 +42,28 @@ struct RefreshScrollView<Content: View>: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 content()
+                    .padding(.top, isRefreshing ? 50 : 0)
                     .background(GeometryReader {
-                        // detect Pull-to-refresh
                         Color.clear.preference(key: ViewOffsetKey.self, value: $0.frame(in: .global).minY)
                     })
-                    .padding(.top, isRefreshing ? 50 : 0)
-            }
-            .simultaneousGesture(
-                DragGesture()
-                    .onChanged({ _ in
-                        isTouched = true
-                    })
-            )
-            .allowsHitTesting(!isRefreshing)
-            .onPreferenceChange(ViewOffsetKey.self) {
-                if $0 > (threshold+50) && !isRefreshing && isTouched {
-                    simpleSuccess() // 핸드폰에 진동 주기
-                    Task {
-                        isRefreshing = true
-                        await refresh?()
-                        withAnimation {
-                            isRefreshing = false
+                    .onPreferenceChange(ViewOffsetKey.self) {
+                        offset = $0
+                        detector.send($0)
+                        if $0 > (threshold+50) && !isRefreshing && (startoffset == threshold) {
+                            simpleSuccess() // 핸드폰에 진동 주기
+                            Task {
+                                isRefreshing = true
+                                await refresh?()
+                                withAnimation {
+                                    isRefreshing = false
+                                }
+                            }
                         }
                     }
-                }
+            }
+            .allowsHitTesting(!isRefreshing)
+            .onReceive(publisher) {
+                startoffset = $0
             }
         }
     }

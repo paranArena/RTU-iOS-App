@@ -103,13 +103,7 @@ struct RentalComplete: View {
             )
         }
         .navigationBarHidden(true)
-        .onAppear {
-            print("RentalComplete onDisappear")
-            let itemAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            itemAppearance.configureWithTransparentBackground()
-            UINavigationBar.appearance().standardAppearance = itemAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = itemAppearance
-        }
+
     }
 }
 
