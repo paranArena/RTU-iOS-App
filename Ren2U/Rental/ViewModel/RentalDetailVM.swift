@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension RentalDetail {
+extension RentalSheet {
     
     //  RentalDetail과 RentalDatePicker에서 모두 이용 
     class ViewModel: ObservableObject {

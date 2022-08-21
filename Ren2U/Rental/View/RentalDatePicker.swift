@@ -17,7 +17,7 @@ struct DateValue: Identifiable {
 
 struct RentalDatePicker: View {
     
-    @ObservedObject var viewModel: RentalDetail.ViewModel
+    @ObservedObject var viewModel: RentalSheet.ViewModel
     @State private var width: CGFloat = .zero
 
     
@@ -101,7 +101,7 @@ struct RentalDatePicker: View {
 
 struct Calendar_Previews: PreviewProvider {
     static var previews: some View {
-        RentalDatePicker(viewModel: RentalDetail.ViewModel())
+        RentalDatePicker(viewModel: RentalSheet.ViewModel())
     }
 }
 

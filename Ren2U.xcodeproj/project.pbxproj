@@ -25,7 +25,7 @@
 		153C1A7B288CF7D600F89B2E /* CreateGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7A288CF7D600F89B2E /* CreateGroup.swift */; };
 		153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */; };
 		153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */; };
-		154553CD28A34B25005E7FDB /* RentalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553CC28A34B25005E7FDB /* RentalDetail.swift */; };
+		154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553CC28A34B25005E7FDB /* RentalSheet.swift */; };
 		154553CF28A34DB3005E7FDB /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553CE28A34DB3005E7FDB /* NotoSansKR-Light.otf */; };
 		154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D028A351AA005E7FDB /* RentalComplete.swift */; };
 		154553D328A35412005E7FDB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553D228A35412005E7FDB /* NotoSansKR-Black.otf */; };
@@ -122,7 +122,7 @@
 		153C1A7A288CF7D600F89B2E /* CreateGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroup.swift; sourceTree = "<group>"; };
 		153C1A7C288D0A1F00F89B2E /* CreateGroupVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVM.swift; sourceTree = "<group>"; };
 		153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SimpleBottomLine .swift"; sourceTree = "<group>"; };
-		154553CC28A34B25005E7FDB /* RentalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDetail.swift; sourceTree = "<group>"; };
+		154553CC28A34B25005E7FDB /* RentalSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalSheet.swift; sourceTree = "<group>"; };
 		154553CE28A34DB3005E7FDB /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
 		154553D028A351AA005E7FDB /* RentalComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalComplete.swift; sourceTree = "<group>"; };
 		154553D228A35412005E7FDB /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 			children = (
 				156386C3288A525C006653E8 /* RentalTab.swift */,
 				150072F8289A3DFD005B6A93 /* Item.swift */,
-				154553CC28A34B25005E7FDB /* RentalDetail.swift */,
+				154553CC28A34B25005E7FDB /* RentalSheet.swift */,
 				154553D028A351AA005E7FDB /* RentalComplete.swift */,
 				159F086728AC72170008EC16 /* RentalDatePicker.swift */,
 				150072F7289A3DE6005B6A93 /* Cell */,
@@ -669,7 +669,7 @@
 				154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */,
 				1563FE9328ADEF9000F46CC7 /* SignUpCell .swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
-				154553CD28A34B25005E7FDB /* RentalDetail.swift in Sources */,
+				154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
 				154553D528A35CC3005E7FDB /* ItemVM.swift in Sources */,
 				152980F3288D3B6400537A80 /* AboutGroup.swift in Sources */,

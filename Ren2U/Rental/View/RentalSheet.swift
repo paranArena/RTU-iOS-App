@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RentalDetail: View {
+struct RentalSheet: View {
     
     let itemInfo: RentalItemInfo
     @StateObject var viewModel = ViewModel()
@@ -49,18 +49,10 @@ struct RentalDetail: View {
                 Text(" ")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 24))
                 
-                Text("픽업시간")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                
-                Text(getDate(date:viewModel.pickUpTime))
-                    .font(.custom(CustomFont.RobotoMedium.rawValue, size: 24))
-                
+                PickUpTime()
             }
             .frame(maxHeight: .infinity)
             
-            DatePicker("Pickup Time Picker", selection: $viewModel.pickUpTime, displayedComponents: .hourAndMinute)
-                .datePickerStyle(WheelDatePickerStyle())
-                .labelsHidden()
         }
         .padding(.horizontal, 10)
         .padding(.bottom, 200)
@@ -95,6 +87,22 @@ struct RentalDetail: View {
     }
     
     @ViewBuilder
+    private func PickUpTime() -> some View {
+        
+        Group {
+            Text("픽업시간")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+            
+            Text(getDate(date:viewModel.pickUpTime))
+                .font(.custom(CustomFont.RobotoMedium.rawValue, size: 24))
+            
+            DatePicker("Pickup Time Picker", selection: $viewModel.pickUpTime, displayedComponents: .hourAndMinute)
+                .datePickerStyle(WheelDatePickerStyle())
+                .labelsHidden()
+        }
+    }
+    
+    @ViewBuilder
     private func ReservationButton() -> some View {
         VStack {
             Spacer()
@@ -124,6 +132,6 @@ struct RentalDetail: View {
 
 struct RentalDetail_Previews: PreviewProvider {
     static var previews: some View {
-        RentalDetail(itemInfo: RentalItemInfo.dummyRentalItem(), isRentalTerminal: .constant(false))
+        RentalSheet(itemInfo: RentalItemInfo.dummyRentalItem(), isRentalTerminal: .constant(false))
     }
 }

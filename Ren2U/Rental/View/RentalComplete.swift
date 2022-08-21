@@ -103,7 +103,6 @@ struct RentalComplete: View {
             )
         }
         .navigationBarHidden(true)
-
     }
 }
 

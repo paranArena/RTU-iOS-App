@@ -10,34 +10,48 @@ import SwiftUI
 
 extension Item {
     enum Selection: Int {
+        case `default`
+        case none
         case queue
         case term
+        
+        var rentalButtonFillColor: Color {
+            switch self {
+            case .none, .`default`:
+                return Color.white
+            case .term, .queue:
+                return Color.Navy_1E2F97
+            }
+        }
+        
+        var rentalButtonFGColor: Color {
+            switch self {
+            case .none, .`default`:
+                return Color.Navy_1E2F97
+            case .term, .queue:
+                return Color.white
+            }
+        }
     }
 }
 
 extension Item {
-    
     class ViewModel: ObservableObject {
         @Published var date: Date = Date.now
-        @Published var isShowingRentalSelection = false
-        @Published var isShowingRental = false
-        @Published var selection: Selection?
+        @Published var selection: Selection = .default
         @Published var isRentalTerminal = false
         @Published var isRented: Bool = false
+        @Published var isShowingRental = false
         
         @Published var imageSelection = 0
         @Published var timer = Timer()
         @Published var time = 0
         
-        @Published var offset: CGFloat = 0 
+        @Published var offset: CGFloat = 0
+        
         
         init() {
             runTimer()
-        }
-        
-        func initValues() {
-            self.selection = nil
-            self.isShowingRentalSelection = false
         }
         
         func runTimer() {

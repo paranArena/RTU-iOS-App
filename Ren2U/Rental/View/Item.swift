@@ -53,22 +53,28 @@ struct Item: View {
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .foregroundColor(Color.Gray_495057)
                 
+                Text("사용 시 주의사항")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                    .foregroundColor(Color.Gray_495057)
+                
                 NavigationLink("", isActive: $viewModel.isRentalTerminal) {
                     RentalComplete(itemInfo: itemInfo)
                 }
             }
         }
-        .transparentNavigationBar()
+        .overlay(BottomToolbar())
+        .onAppear {
+            let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithTransparentBackground()
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
         .controllTabbar(isPresented)
         .ignoresSafeArea(.container, edges: .top)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
-        .overlay(BottomToolbar())
-        .onAppear {
-            viewModel.initValues()
-        }
         .sheet(isPresented: $viewModel.isShowingRental) {
-            RentalDetail(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)
+            RentalSheet(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)
         }
     }
     
@@ -93,40 +99,36 @@ struct Item: View {
     
     @ViewBuilder
     private func BottomToolbar() -> some View {
-        ZStack(alignment: .center) {
-            VStack(alignment: .center, spacing: 20) {
-                Spacer()
-                
-                VStack {
-                    Text("기간 선택")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-                    HStack {
-                        QueueSelectButton()
-                        TermSelectButton()
-                    }
-                }
-                .background(Color.Gray_DEE2E6)
-                .frame(width: SCREEN_WIDTH)
-                .cornerRadius(20)
-                .offset(y: viewModel.isShowingRentalSelection ? 0 : SCREEN_HEIGHT)
-                .animation(.spring(), value: viewModel.isShowingRentalSelection)
-            }
+        VStack (alignment: .center) {
             
-            VStack {
-                Spacer()
+            Spacer()
+            
+            VStack(alignment: .center, spacing: 20) {
+                Text("기간 선택")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                 HStack {
-                    Text("대여가능 수량 : \(itemInfo.remain)")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
-                        .frame(maxWidth: SCREEN_WIDTH)
-                    RentalButton()
+                    QueueSelectButton()
+                    TermSelectButton()
                 }
-                .background(Color.BackgroundColor)
-                .padding(.horizontal, 20)
             }
+            .background(Color.Gray_DEE2E6)
+            .frame(width: SCREEN_WIDTH)
+            .cornerRadius(20)
+            .offset(y: viewModel.selection != .default ? 0 : SCREEN_HEIGHT)
+            .animation(.spring(), value: viewModel.selection)
+            
+            HStack {
+                Text("대여가능 수량 : \(itemInfo.remain)")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
+                    .frame(maxWidth: SCREEN_WIDTH)
+                RentalButton()
+            }
+            .background(Color.BackgroundColor)
+            .padding(.horizontal, 20)
             .padding(.bottom, 30)
-            .ignoresSafeArea(.container, edges: .bottom)
             .frame(maxWidth: SCREEN_WIDTH)
         }
+        .ignoresSafeArea(.container, edges: .bottom)
     }
     
     @ViewBuilder
@@ -135,7 +137,7 @@ struct Item: View {
             if viewModel.selection != .queue {
                 viewModel.selection = .queue
             } else {
-                viewModel.selection = nil
+                viewModel.selection = .none
             }
             
         } label: {
@@ -158,7 +160,7 @@ struct Item: View {
             if viewModel.selection != .term {
                 viewModel.selection = .term
             } else {
-                viewModel.selection = nil
+                viewModel.selection = .none
             }
         } label: {
             VStack {
@@ -177,16 +179,22 @@ struct Item: View {
     @ViewBuilder
     private func RentalButton() -> some View {
         Button {
-            if viewModel.selection != nil {
-                viewModel.isShowingRental.toggle()
+            if viewModel.selection == .none {
+                viewModel.selection = .default
+            } else if viewModel.selection == .default {
+                viewModel.selection = .none
+            } else if viewModel.selection == .term {
+                viewModel.isShowingRental = true
+                viewModel.selection = .default
             } else {
-                viewModel.isShowingRentalSelection.toggle()
+                viewModel.isRentalTerminal = true
+                viewModel.selection = .default
             }
         } label: {
             Capsule()
-                .fill(!viewModel.isShowingRentalSelection ? Color.white : Color.Navy_1E2F97)
+                .fill(viewModel.selection.rentalButtonFillColor)
                 .overlay(Text("대여하기")
-                    .foregroundColor(!viewModel.isShowingRentalSelection ? Color.Navy_1E2F97 : Color.white)
+                    .foregroundColor(viewModel.selection.rentalButtonFGColor)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20)))
                 .frame(height: 40)
         }

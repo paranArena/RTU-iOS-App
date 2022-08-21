@@ -11,7 +11,22 @@ import Kingfisher
 struct RentalItemHCell: View {
     
     let rentalItemInfo: RentalItemInfo
-
+    
+    private var itemStatusText: String {
+        if rentalItemInfo.remain == 0 {
+            return "대여불가"
+        } else {
+            return "남은 수량"
+        }
+    }
+    
+    private var FGColor: Color {
+        if rentalItemInfo.remain == 0 {
+            return Color.Red_EB1808
+        } else {
+            return Color.gray868E96
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -37,14 +52,14 @@ struct RentalItemHCell: View {
                 Spacer()
                 
                 VStack(alignment: .center, spacing: 5) {
-                    Text("남은 수량")
-                        .foregroundColor(Color.Gray_ADB5BD)
+                    Text(self.itemStatusText)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     Text("\(rentalItemInfo.remain)/\(rentalItemInfo.total)")
-                        .foregroundColor(Color.Gray_ADB5BD)
+                        .font(.custom(CustomFont.RobotoMedium.rawValue, size: 16))
                 }
+                .foregroundColor(self.FGColor)
             }
             .padding(.horizontal, 10)
-            
             Divider()
         }
     }

@@ -42,6 +42,13 @@ struct RentalTab: View {
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
+        .onAppear {
+            let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            navigationBarAppearance.shadowColor = UIColor(Color.BackgroundColor)
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
     }
     
     @ViewBuilder
