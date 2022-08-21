@@ -78,7 +78,7 @@ extension SignUp {
             return true
         }
         
-        func foucsChange(curIndex: Int) -> SignUp.Field? {
+        func changeFocus(curIndex: Int) -> SignUp.Field? {
             guard curIndex < text.count - 1 else { return nil }
             guard self.text[curIndex + 1].isEmpty else { return nil }
             

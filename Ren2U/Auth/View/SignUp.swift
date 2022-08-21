@@ -28,11 +28,11 @@ struct SignUp: View {
                             .padding(.bottom, 10)
                             .focused($focusedField, equals: field)
                             .submitLabel(field != Field.phoneNumber ? .next : .done)
-                            .onSubmit { focusedField = viewModel.foucsChange(curIndex: focusedField?.rawValue ?? 0) }
+                            .onSubmit { focusedField = viewModel.changeFocus(curIndex: focusedField?.rawValue ?? 0) }
                     } header: {
                         Text(field.title).font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     }
-                    .isHidden(hidden: field.rawValue < focusedField?.rawValue ?? 0)
+                    .isHidden(hidden: (field.rawValue) + 2 < focusedField?.rawValue ?? 0)
                 }
 
                 CertificatinoViewButton()
