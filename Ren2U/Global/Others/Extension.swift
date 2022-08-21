@@ -22,6 +22,7 @@ extension Color {
        self.init(red: r, green: g, blue: b)
      }
     
+    // 흰색-회색 계열
     static let Gray_ADB5BD = Color(hex: "ADB5BD")
     static let Gray_495057 = Color(hex: "495057")
     static let Gray_E9ECEF = Color(hex: "E9ECEF")
@@ -29,6 +30,7 @@ extension Color {
     static let Gray_FFFFFF = Color(hex: "FFFFFF")
     static let grayF1F2F3 = Color(hex: "F1F2F3")
     static let gray868E96 = Color(hex: "868E96")
+    static let F8F9FA = Color(hex: "F8F9FA")
     
     static let Navy_1E2F97 = Color(hex: "1E2F97")
     

@@ -99,34 +99,42 @@ struct Item: View {
     
     @ViewBuilder
     private func BottomToolbar() -> some View {
-        VStack (alignment: .center) {
+        VStack(alignment: .center, spacing: 0) {
             
             Spacer()
             
             VStack(alignment: .center, spacing: 20) {
                 Text("기간 선택")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-                HStack {
+                    .padding(.top, 20 )
+                
+                HStack(alignment: .center, spacing: 0) {
                     QueueSelectButton()
                     TermSelectButton()
                 }
             }
-            .background(Color.Gray_DEE2E6)
-            .frame(width: SCREEN_WIDTH)
-            .cornerRadius(20)
+            .background(Color.F8F9FA)
+            .frame(maxWidth: .infinity)
             .offset(y: viewModel.selection != .default ? 0 : SCREEN_HEIGHT)
-            .animation(.spring(), value: viewModel.selection)
+            .cornerRadius(30, corners: [.topRight, .topLeft])
+            .clipped()
+            .shadow(color: Color.Gray_495057, radius: 10, x: 0, y: 10)
+            .animation(.default, value: viewModel.selection)
             
             HStack {
                 Text("대여가능 수량 : \(itemInfo.remain)")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
                     .frame(maxWidth: SCREEN_WIDTH)
+                
                 RentalButton()
             }
-            .background(Color.BackgroundColor)
-            .padding(.horizontal, 20)
             .padding(.bottom, 30)
-            .frame(maxWidth: SCREEN_WIDTH)
+            .padding(.top, 10)
+            .padding(.trailing, 20)
+            .frame(maxWidth: .infinity)
+            .background(Color.BackgroundColor)
+            .clipped()
+            .shadow(color: Color.Gray_495057, radius: 10, x: 0, y: 10)
         }
         .ignoresSafeArea(.container, edges: .bottom)
     }
@@ -150,8 +158,8 @@ struct Item: View {
             }
             .foregroundColor(viewModel.selection == .queue ? Color.BackgroundColor : Color.LabelColor)
         }
-        .frame(maxWidth: SCREEN_WIDTH, minHeight: 80)
-        .background(viewModel.selection == .queue ? Color.Navy_1E2F97 : Color.Gray_DEE2E6)
+        .frame(maxWidth: SCREEN_WIDTH, minHeight: 120)
+        .background(viewModel.selection == .queue ? Color.Navy_1E2F97 : Color.F8F9FA)
     }
     
     @ViewBuilder
@@ -172,8 +180,8 @@ struct Item: View {
             }
             .foregroundColor(viewModel.selection == .term ? Color.BackgroundColor : Color.LabelColor)
         }
-        .frame(maxWidth: SCREEN_WIDTH, minHeight: 80)
-        .background(viewModel.selection == .term ? Color.Navy_1E2F97 : Color.Gray_DEE2E6)
+        .frame(maxWidth: SCREEN_WIDTH, minHeight: 120)
+        .background(viewModel.selection == .term ? Color.Navy_1E2F97 : Color.F8F9FA)
     }
     
     @ViewBuilder
