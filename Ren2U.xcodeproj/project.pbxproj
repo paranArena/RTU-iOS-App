@@ -73,6 +73,7 @@
 		15F3672F289261300073E094 /* ShadowRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3672E289261300073E094 /* ShadowRectangle.swift */; };
 		15F3673528926F6F0073E094 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3673428926F6F0073E094 /* Search.swift */; };
 		15F3673728927E770073E094 /* TransparentDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3673628927E770073E094 /* TransparentDivider.swift */; };
+		15F4594228B31C86003E3C60 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15F4594128B31C86003E3C60 /* NotoSansKR-Bold.otf */; };
 		15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF133287D5DFF00B35570 /* Ren2UApp.swift */; };
 		15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF135287D5DFF00B35570 /* ContentView.swift */; };
 		15FAF138287D5E0000B35570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FAF137287D5E0000B35570 /* Assets.xcassets */; };
@@ -167,6 +168,7 @@
 		15F3672E289261300073E094 /* ShadowRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowRectangle.swift; sourceTree = "<group>"; };
 		15F3673428926F6F0073E094 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		15F3673628927E770073E094 /* TransparentDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentDivider.swift; sourceTree = "<group>"; };
+		15F4594128B31C86003E3C60 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		15FAF130287D5DFF00B35570 /* Ren2U.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ren2U.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15FAF133287D5DFF00B35570 /* Ren2UApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UApp.swift; sourceTree = "<group>"; };
 		15FAF135287D5DFF00B35570 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 		159F1B22288B9F7000012113 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				15F4594128B31C86003E3C60 /* NotoSansKR-Bold.otf */,
 				154553CE28A34DB3005E7FDB /* NotoSansKR-Light.otf */,
 				153C1A75288CEB9300F89B2E /* Roboto-Bold.ttf */,
 				153C1A73288CEB7800F89B2E /* Roboto-Medium.ttf */,
@@ -627,6 +630,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15F4594228B31C86003E3C60 /* NotoSansKR-Bold.otf in Resources */,
 				153C1A72288CE48900F89B2E /* Roboto-Regular.ttf in Resources */,
 				159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */,
 				15FAF13B287D5E0000B35570 /* Preview Assets.xcassets in Resources */,

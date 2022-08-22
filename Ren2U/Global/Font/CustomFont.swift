@@ -26,6 +26,7 @@ enum CustomFont: String {
     case NSKRRegular = "NotoSansKR-Regular"
     case NSKRLight = "NotoSansKR-Light"
     case NSKRBlack = "NotoSansKR-Black"
+    case NSKRBold = "NotoSansKR-Bold"
     
     case RobotoBlack = "Roboto-Black"
     case RobotoRegular = "Roboto-Reuglar"

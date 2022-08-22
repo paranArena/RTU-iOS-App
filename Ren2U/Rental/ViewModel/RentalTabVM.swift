@@ -22,3 +22,12 @@ extension RentalTab {
         }
     }
 }
+
+extension RentalTab {
+    enum CancelSelection: Int, CaseIterable {
+        case `default`
+        case none
+        case yes
+        case no 
+    }
+}

@@ -10,23 +10,14 @@ import Kingfisher
 
 struct RentalItemHCell: View {
     
+    enum CancelOption {
+        case `default`
+        case none
+        case yes
+        case no
+    }
+    
     let rentalItemInfo: RentalItemInfo
-    
-    private var itemStatusText: String {
-        if rentalItemInfo.remain == 0 {
-            return "대여불가"
-        } else {
-            return "남은 수량"
-        }
-    }
-    
-    private var FGColor: Color {
-        if rentalItemInfo.remain == 0 {
-            return Color.Red_EB1808
-        } else {
-            return Color.gray868E96
-        }
-    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -61,6 +52,32 @@ struct RentalItemHCell: View {
             }
             .padding(.horizontal, 10)
             Divider()
+        }
+    }
+    
+    @ViewBuilder
+    private func RentalCancelButton() -> some View {
+        Text("예약취소")
+            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+            .foregroundColor(Color.Navy_1E2F97)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
+            .overlay(Capsule().stroke(Color.Navy_1E2F97, lineWidth: 1))
+    }
+    
+    private var itemStatusText: String {
+        if rentalItemInfo.remain == 0 {
+            return "대여불가"
+        } else {
+            return "남은 수량"
+        }
+    }
+    
+    private var FGColor: Color {
+        if rentalItemInfo.remain == 0 {
+            return Color.Red_EB1808
+        } else {
+            return Color.gray868E96
         }
     }
 }
