@@ -72,3 +72,12 @@ struct RoundedCorner: Shape {
         return Path(path.cgPath)
     }
 }
+
+//
+extension View {
+    func capsuleStrokeAndForegroundColor(color: Color) -> some View {
+        self
+            .foregroundColor(color)
+            .background(Capsule().stroke(color, lineWidth: 1))
+    }
+}

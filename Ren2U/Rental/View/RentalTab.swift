@@ -41,7 +41,7 @@ struct RentalTab: View {
         }
         .disabled(cancelSelection != .default)
         .overlay(ShadowRectangle())
-        .overlay(RentalCancelModal())
+        .overlay(ModalRentalCancel())
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -111,7 +111,7 @@ struct RentalTab: View {
     }
     
     @ViewBuilder
-    private func RentalCancelModal() -> some View {
+    private func ModalRentalCancel() -> some View {
         VStack(alignment: .center, spacing: 20) {
             Text("예약을 취소하시겠습니까?")
                 .font(.custom(CustomFont.NSKRBold.rawValue, size: 16))

@@ -55,14 +55,32 @@ struct RentalItemHCell: View {
         }
     }
     
+    
+    
     @ViewBuilder
-    private func RentalCancelButton() -> some View {
-        Text("예약취소")
-            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-            .foregroundColor(Color.navy_1E2F97)
-            .padding(.vertical, 8)
-            .padding(.horizontal, 16)
-            .overlay(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
+    private func ButtonCancelRental() -> some View {
+        Button {
+            
+        } label: {
+            Text("예약취소")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .capsuleStrokeAndForegroundColor(color: Color.navy_1E2F97)
+        }
+    }
+    
+    @ViewBuilder
+    private func ButtonReturn() -> some View {
+        Button {
+            
+        } label: {
+            Text("반납하기")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .capsuleStrokeAndForegroundColor(color: Color.navy_1E2F97)
+        }
     }
     
     private var itemStatusText: String {

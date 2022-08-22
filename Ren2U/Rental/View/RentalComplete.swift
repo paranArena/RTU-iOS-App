@@ -93,14 +93,10 @@ struct RentalComplete: View {
             } label: {
                 Text("확인")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
-                    .foregroundColor(Color.navy_1E2F97)
+                    .padding(.horizontal, 80)
+                    .padding(.vertical, 12)
+                    .capsuleStrokeAndForegroundColor(color: Color.navy_1E2F97)
             }
-            .padding(.horizontal, 80)
-            .padding(.vertical, 12)
-            .overlay(
-                Capsule()
-                    .strokeBorder(Color.navy_1E2F97, lineWidth: 3)
-            )
         }
         .navigationBarHidden(true)
     }

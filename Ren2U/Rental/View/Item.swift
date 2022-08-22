@@ -140,7 +140,7 @@ struct Item: View {
     private func OverlayContent() -> some View {
         VStack(alignment: .center, spacing: 0) {
             Spacer()
-            ReservationOverlayButton()
+            RentalCompleteOverlayButton()
         }
         .ignoresSafeArea(.all, edges: .bottom)
     }
