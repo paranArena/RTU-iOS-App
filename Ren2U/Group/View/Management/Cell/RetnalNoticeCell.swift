@@ -33,7 +33,7 @@ struct RetnalNoticeCell: View {
                     Text("확인")
                 }
                 .frame(width: 80, height: 80)
-                .background(Color.Navy_1E2F97)
+                .background(Color.navy_1E2F97)
                 .foregroundColor(Color.white)
                 
                 Button {
@@ -42,7 +42,7 @@ struct RetnalNoticeCell: View {
                     Text("거부")
                 }
                 .frame(width: 80, height: 80)
-                .background(Color.redFF6155)
+                .background(Color.red_FF6155)
                 .foregroundColor(Color.white)
             }
             .offset(x : 180)

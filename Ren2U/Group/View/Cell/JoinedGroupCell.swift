@@ -31,7 +31,7 @@ struct JoinedGroupCell: View {
                     
                     Text(groupModel.makeFavoritesGroupTag(tags: info.groupDto.tags))
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(.Gray_ADB5BD)
+                        .foregroundColor(.gray_ADB5BD)
                         .lineLimit(1)
                 }
             }

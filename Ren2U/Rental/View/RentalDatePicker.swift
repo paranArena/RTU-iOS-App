@@ -78,7 +78,7 @@ struct RentalDatePicker: View {
             } label: {
                 Image(systemName: "chevron.left")
             }
-            .foregroundColor(Color.Navy_1E2F97)
+            .foregroundColor(Color.navy_1E2F97)
 
             
             Text(viewModel.month)
@@ -90,7 +90,7 @@ struct RentalDatePicker: View {
             } label: {
                 Image(systemName: "chevron.right")
             }
-            .foregroundColor(Color.Navy_1E2F97)
+            .foregroundColor(Color.navy_1E2F97)
 
         }
         .onChange(of: viewModel.currentDate) { _ in

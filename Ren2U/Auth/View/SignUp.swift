@@ -88,8 +88,8 @@ struct SignUp: View {
                     Text("중복확인")
                         .padding(5)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .overlay(Capsule().stroke(viewModel.text[Field.email.rawValue].isEmpty ? Color.Gray_ADB5BD : Color.Navy_1E2F97, lineWidth: 1))
-                        .foregroundColor(viewModel.text[Field.email.rawValue].isEmpty ? .Gray_ADB5BD : .Navy_1E2F97)
+                        .overlay(Capsule().stroke(viewModel.text[Field.email.rawValue].isEmpty ? Color.gray_ADB5BD : Color.navy_1E2F97, lineWidth: 1))
+                        .foregroundColor(viewModel.text[Field.email.rawValue].isEmpty ? .gray_ADB5BD : .navy_1E2F97)
                         .padding(.leading, 19)
                 }
                 .disabled(viewModel.isOverlappedEmail || viewModel.text[Field.email.rawValue].isEmpty)
@@ -142,7 +142,7 @@ struct SignUp: View {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)
                     .padding(.top, 49)
-                    .foregroundColor(viewModel.isFilledAll(textArray: viewModel.text) ? .Navy_1E2F97 : .Gray_E9ECEF)
+                    .foregroundColor(viewModel.isFilledAll(textArray: viewModel.text) ? .navy_1E2F97 : .gray_E9ECEF)
                     .padding(.top, 20)
             }
             .disabled(!viewModel.isFilledAll(textArray: viewModel.text))
@@ -159,7 +159,7 @@ struct SignUp: View {
                 .frame(height: 1)
                 .foregroundColor(!viewModel.text[Field.password.rawValue].isEmpty
                                  && viewModel.text[Field.password.rawValue] == viewModel.text[Field.passwordCheck.rawValue]
-                                 ? .Navy_1E2F97 : .Gray_ADB5BD)
+                                 ? .navy_1E2F97 : .gray_ADB5BD)
         }
     }
     
@@ -173,7 +173,7 @@ struct SignUp: View {
                      ? "비밀번호가 일치합니다" : "비밀번호가 일치하지 않습니다.")
                 .foregroundColor(viewModel.isFilledAnyAndEqualText(text1: viewModel.text[Field.password.rawValue],
                                                        text2: viewModel.text[Field.passwordCheck.rawValue])
-                                 ? Color.Green_2CA900 : Color.Red_EB1808)
+                                 ? Color.green_2CA900 : Color.red_EB1808)
                 .font(.system(size: 12))
                 .offset(y: 30)
             }

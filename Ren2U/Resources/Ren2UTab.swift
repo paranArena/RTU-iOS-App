@@ -43,7 +43,7 @@ struct Ren2UTab: View {
         }
         .navigationTitle("")
         .navigationBarHidden(true)
-        .accentColor(.Navy_1E2F97)
+        .accentColor(.navy_1E2F97)
         .foregroundColor(.LabelColor)
         .onAppear {
             groupViewModel.fetchJoinedGroups()

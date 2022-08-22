@@ -36,7 +36,7 @@ struct RentalItemHCell: View {
                     
                     Text("임시 그룹명")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(.Gray_ADB5BD)
+                        .foregroundColor(.gray_ADB5BD)
                         .lineLimit(1)
                 }
                 
@@ -59,10 +59,10 @@ struct RentalItemHCell: View {
     private func RentalCancelButton() -> some View {
         Text("예약취소")
             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-            .foregroundColor(Color.Navy_1E2F97)
+            .foregroundColor(Color.navy_1E2F97)
             .padding(.vertical, 8)
             .padding(.horizontal, 16)
-            .overlay(Capsule().stroke(Color.Navy_1E2F97, lineWidth: 1))
+            .overlay(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
     }
     
     private var itemStatusText: String {
@@ -75,9 +75,9 @@ struct RentalItemHCell: View {
     
     private var FGColor: Color {
         if rentalItemInfo.remain == 0 {
-            return Color.Red_EB1808
+            return Color.red_EB1808
         } else {
-            return Color.gray868E96
+            return Color.gray_868E96
         }
     }
 }

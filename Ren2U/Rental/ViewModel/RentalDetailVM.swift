@@ -106,9 +106,9 @@ extension RentalSheet {
             if rentalDays[index].day == -1 {
                 return Color.BackgroundColor
             } else if rentalDays[index].date == self.startDate || rentalDays[index].date == self.endDate {
-                return Color.Navy_1E2F97
+                return Color.navy_1E2F97
             } else if rentalDays[index].isClicked {
-                return Color.Navy_1E2F97.opacity(0.15)
+                return Color.navy_1E2F97.opacity(0.15)
             }
             
             return Color.BackgroundColor

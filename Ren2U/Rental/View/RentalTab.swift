@@ -64,7 +64,7 @@ struct RentalTab: View {
                     Text(option.title)
                         .frame(maxWidth: .infinity)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
-                        .foregroundColor(self.rentalSelection == option ? .Navy_1E2F97 : .Gray_ADB5BD)
+                        .foregroundColor(self.rentalSelection == option ? .navy_1E2F97 : .gray_ADB5BD)
                 }
             }
         }
@@ -120,9 +120,9 @@ struct RentalTab: View {
                 Text("예")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .frame(width: 90, height: 36)
-                    .foregroundColor(self.cancelSelection == .yes ? Color.white : Color.Navy_1E2F97)
-                    .background(Capsule().fill(self.cancelSelection == .yes ? Color.Navy_1E2F97 : Color.white))
-                    .background(Capsule().stroke(Color.Navy_1E2F97, lineWidth: 2))
+                    .foregroundColor(self.cancelSelection == .yes ? Color.white : Color.navy_1E2F97)
+                    .background(Capsule().fill(self.cancelSelection == .yes ? Color.navy_1E2F97 : Color.white))
+                    .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 2))
                     .simultaneousGesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
@@ -136,9 +136,9 @@ struct RentalTab: View {
                 Text("아니오")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .frame(width: 90, height: 36)
-                    .foregroundColor(self.cancelSelection == .no ? Color.white : Color.Navy_1E2F97)
-                    .background(Capsule().fill(self.cancelSelection == .no ? Color.Navy_1E2F97 : Color.white))
-                    .background(Capsule().stroke(Color.Navy_1E2F97, lineWidth: 2))
+                    .foregroundColor(self.cancelSelection == .no ? Color.white : Color.navy_1E2F97)
+                    .background(Capsule().fill(self.cancelSelection == .no ? Color.navy_1E2F97 : Color.white))
+                    .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 2))
                     .simultaneousGesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
@@ -151,10 +151,10 @@ struct RentalTab: View {
             }
         }
         .frame(width: 320, height: 160)
-        .background(Color.F8F9FA)
+        .background(Color.gray_F8F9FA)
         .cornerRadius(15)
         .clipped()
-        .shadow(color: Color.Gray_ADB5BD, radius: 5, x: 0, y: 0)
+        .shadow(color: Color.gray_ADB5BD, radius: 5, x: 0, y: 0)
         .overlay(
             VStack {
                 HStack {
@@ -163,6 +163,9 @@ struct RentalTab: View {
                         self.cancelSelection = .default
                     } label: {
                         Image(systemName: "xmark")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                            .foregroundColor(Color.black)
                     }
                     .padding(.all, 10)
                 }

@@ -30,7 +30,7 @@ struct NoticeCell: View {
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                     Text(noticeInfo.groupName)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(Color.Gray_ADB5BD)
+                        .foregroundColor(Color.gray_ADB5BD)
                     Spacer()
                 }
                 
@@ -38,12 +38,12 @@ struct NoticeCell: View {
                 
                 Text(getDate(date: noticeInfo.noticeDto.updateDate))
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                    .foregroundColor(Color.Gray_ADB5BD)
+                    .foregroundColor(Color.gray_ADB5BD)
                 
                 
                 Image(systemName: "n.circle.fill")
-                    .foregroundStyle(noticeInfo.isShown ? Color.BackgroundColor : Color.Red_EB1808,
-                                     noticeInfo.isShown ? Color.BackgroundColor : Color.Gray_ADB5BD)
+                    .foregroundStyle(noticeInfo.isShown ? Color.BackgroundColor : Color.red_EB1808,
+                                     noticeInfo.isShown ? Color.BackgroundColor : Color.gray_ADB5BD)
           
             }
             .padding(.horizontal)

@@ -61,7 +61,7 @@ struct GroupTab: View {
                     Text(option.title)
                         .frame(maxWidth: .infinity)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
-                        .foregroundColor(self.viewModel.groupSelection == option ? .Navy_1E2F97 : .Gray_ADB5BD)
+                        .foregroundColor(self.viewModel.groupSelection == option ? .navy_1E2F97 : .gray_ADB5BD)
                 }
 
             }
@@ -79,7 +79,7 @@ struct GroupTab: View {
                 } label: {
                     Image(systemName: "plus.circle")
                         .resizable()
-                        .foregroundColor(.Navy_1E2F97)
+                        .foregroundColor(.navy_1E2F97)
                         .background(Color.BackgroundColor)
                         .frame(width: 60, height: 60)
                         .padding(.horizontal, 10)

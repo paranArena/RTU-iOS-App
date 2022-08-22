@@ -65,7 +65,7 @@ struct RentalComplete: View {
             Map(coordinateRegion: $region, interactionModes: [], showsUserLocation: false, userTrackingMode: .constant(.none), annotationItems: [ItemLocation.dummyItemLocation()]) { item in
                 MapAnnotation(coordinate: item.coordinate) {
                     Image(systemName: "mappin.circle")
-                        .foregroundColor(Color.Navy_1E2F97)
+                        .foregroundColor(Color.navy_1E2F97)
                 }
             }
             .frame(width: 300, height: 200)
@@ -74,7 +74,7 @@ struct RentalComplete: View {
             HStack(alignment: .center, spacing: 0) {
                 Text("10분 내")
                     .font(.custom(CustomFont.RobotoBold.rawValue, size: 22))
-                    .foregroundColor(Color.Navy_1E2F97)
+                    .foregroundColor(Color.navy_1E2F97)
                 Text("에")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
             }
@@ -82,7 +82,7 @@ struct RentalComplete: View {
             HStack(alignment: .center, spacing: 0) {
                 Text("성호관 201호")
                     .font(.custom(CustomFont.RobotoBold.rawValue, size: 22))
-                    .foregroundColor(Color.Navy_1E2F97)
+                    .foregroundColor(Color.navy_1E2F97)
                 Text("에서 물품을 픽업해주세요!")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
             }
@@ -93,13 +93,13 @@ struct RentalComplete: View {
             } label: {
                 Text("확인")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
-                    .foregroundColor(Color.Navy_1E2F97)
+                    .foregroundColor(Color.navy_1E2F97)
             }
             .padding(.horizontal, 80)
             .padding(.vertical, 12)
             .overlay(
                 Capsule()
-                    .strokeBorder(Color.Navy_1E2F97, lineWidth: 3)
+                    .strokeBorder(Color.navy_1E2F97, lineWidth: 3)
             )
         }
         .navigationBarHidden(true)

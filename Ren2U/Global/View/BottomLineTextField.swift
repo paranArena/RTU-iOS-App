@@ -30,7 +30,7 @@ struct BottomLineTextfield: View {
                     Spacer()
                     Rectangle()
                         .frame(height: 1)
-                        .foregroundColor(isConfirmed ? .Navy_1E2F97 : .Gray_ADB5BD)
+                        .foregroundColor(isConfirmed ? .navy_1E2F97 : .gray_ADB5BD)
                 }
             )
             .overlay(
@@ -40,7 +40,7 @@ struct BottomLineTextfield: View {
                     }
                     Text(placeholder)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: CGFloat(placeholderSize)))
-                        .foregroundColor(.Gray_ADB5BD)
+                        .foregroundColor(.gray_ADB5BD)
                     if placeholderLocation == .leading {
                         Spacer()
                     }

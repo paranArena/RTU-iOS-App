@@ -17,7 +17,7 @@ struct CapsuleSecurePlaceholder: View {
             if text.isEmpty {
                 placeholder
                     .padding()
-                    .foregroundColor(.Gray_ADB5BD)
+                    .foregroundColor(.gray_ADB5BD)
             }
             
             SecureField("", text: $text)
@@ -25,7 +25,7 @@ struct CapsuleSecurePlaceholder: View {
         }
         .overlay(
             Capsule()
-                .stroke(Color.Gray_ADB5BD, lineWidth: 1)
+                .stroke(Color.gray_ADB5BD, lineWidth: 1)
         )
     }
 }

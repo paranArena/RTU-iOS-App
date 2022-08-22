@@ -33,7 +33,7 @@ struct ReturnManagement: View {
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                             Text("기한 내 반납")
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                                .foregroundColor(Color.Navy_1E2F97)
+                                .foregroundColor(Color.navy_1E2F97)
                         }
                         
                         Text("2022.08.02 ~ 2022.08.08")

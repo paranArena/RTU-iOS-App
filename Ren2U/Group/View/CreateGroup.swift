@@ -90,7 +90,7 @@ struct CreateGroup: View {
             ZStack(alignment: .leading) {
                 if viewModel.isShowingTagPlaceholder {
                     Text("#렌탈 #서비스는 #REN2U")
-                        .foregroundColor(.Gray_ADB5BD)
+                        .foregroundColor(.gray_ADB5BD)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
                 }
                 
@@ -108,13 +108,13 @@ struct CreateGroup: View {
                     Spacer()
                     Rectangle()
                         .frame(height: 1)
-                        .foregroundColor(Color.Gray_ADB5BD)
+                        .foregroundColor(Color.gray_ADB5BD)
                 }
             )
             
             Text("#과 띄어쓰기를 포함해 영어는 최대 36글자, 한글은 24글자까지 가능합니다.")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
-                .foregroundColor(Color.Gray_ADB5BD)
+                .foregroundColor(Color.gray_ADB5BD)
                 .padding(.top, -10)
             
             ScrollView(.horizontal, showsIndicators: false) {

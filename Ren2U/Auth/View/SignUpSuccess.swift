@@ -45,7 +45,7 @@ struct SignUpSuccess: View {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable()
                 .frame(width: 86, height: 86)
-                .foregroundColor(Color.Navy_1E2F97)
+                .foregroundColor(Color.navy_1E2F97)
         }
     }
 }

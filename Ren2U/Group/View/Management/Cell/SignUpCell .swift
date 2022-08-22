@@ -23,7 +23,7 @@ struct SignUpCell: View {
                 
                 Text(getTime())
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 12))
-                    .foregroundColor(Color.gray868E96)
+                    .foregroundColor(Color.gray_868E96)
             
             }
             
@@ -38,7 +38,7 @@ struct SignUpCell: View {
                         .lineLimit(1)
                 }
                 .frame(width: 80, height: 80)
-                .background(Color.Navy_1E2F97)
+                .background(Color.navy_1E2F97)
                 .foregroundColor(Color.white)
                 
                 Button {
@@ -49,7 +49,7 @@ struct SignUpCell: View {
                         .lineLimit(1)
                 }
                 .frame(width: 80, height: 80)
-                .background(Color.redFF6155)
+                .background(Color.red_FF6155)
                 .foregroundColor(Color.white)
                 .padding(0)
             }

@@ -42,7 +42,7 @@ struct RentalSheet: View {
                     Spacer()
                     Text("*픽업 장소에서만 대여 확정이 가능합니다.")
                         .font(.custom(CustomFont.NSKRLight.rawValue, size: 12))
-                        .foregroundColor(Color.Red_EB1808)
+                        .foregroundColor(Color.red_EB1808)
                 }
                 
                 // 픽업장소 정소
@@ -67,7 +67,7 @@ struct RentalSheet: View {
             } label: {
                 Image(systemName: "chevron.left")
             }
-            .foregroundColor(Color.Navy_1E2F97)
+            .foregroundColor(Color.navy_1E2F97)
             
             Spacer()
             Text(itemInfo.itemName)
@@ -78,7 +78,7 @@ struct RentalSheet: View {
             } label: {
                 Image(systemName: "chevron.right")
             }
-            .foregroundColor(Color.Navy_1E2F97)
+            .foregroundColor(Color.navy_1E2F97)
         }
         .padding(.top, 10)
         .padding(.horizontal, 30)
@@ -112,7 +112,7 @@ struct RentalSheet: View {
                 isRentalTerminal.toggle()
             } label: {
                 Capsule()
-                    .foregroundColor(Color.Navy_1E2F97)
+                    .foregroundColor(Color.navy_1E2F97)
                     .overlay(Text("예약하기")
                         .foregroundColor(Color.white)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20)))

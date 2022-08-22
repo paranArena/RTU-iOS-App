@@ -50,7 +50,7 @@ struct Search: View {
                 .foregroundColor(Color.white)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
-                .background(Capsule().fill(Color.Navy_1E2F97))
+                .background(Capsule().fill(Color.navy_1E2F97))
         }
         .padding()
     }
@@ -60,12 +60,12 @@ struct Search: View {
             Spacer()
             Text("가입 요청")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                .foregroundColor(Color.Navy_1E2F97)
+                .foregroundColor(Color.navy_1E2F97)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .overlay(
                     Capsule()
-                        .strokeBorder(Color.Navy_1E2F97, lineWidth: 2)
+                        .strokeBorder(Color.navy_1E2F97, lineWidth: 2)
                 )
         }
         .padding()

@@ -31,7 +31,7 @@ struct ReturnNoticeCell: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(userInfo.name)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(Color.gray868E96)
+                        .foregroundColor(Color.gray_868E96)
                     
                     Text("\(rentalItemInfo.itemName)을 반납 완료했습니다.")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
@@ -39,7 +39,7 @@ struct ReturnNoticeCell: View {
                     
                     Text(getTime())
                         .font(.custom(CustomFont.RobotoRegular.rawValue, size: 12))
-                        .foregroundColor(Color.gray868E96)
+                        .foregroundColor(Color.gray_868E96)
                 }
             }
             .simultaneousGesture(TapGesture().onEnded {
@@ -55,7 +55,7 @@ struct ReturnNoticeCell: View {
                     Text("확인")
                 }
                 .frame(width: 80, height: 80)
-                .background(Color.Navy_1E2F97)
+                .background(Color.navy_1E2F97)
                 .foregroundColor(Color.white)
             }
             .offset(x: 90)

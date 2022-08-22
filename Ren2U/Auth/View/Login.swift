@@ -54,7 +54,7 @@ struct Login: View {
     @ViewBuilder
     private func Email() -> some View {
         CapsulePlaceholder(text: $viewModel.account.email, placeholder: Text("E-mail"),
-                           color: .Gray_ADB5BD)
+                           color: .gray_ADB5BD)
             .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
             .padding(.top, 46)
             .onSubmit { focus = .password }
@@ -73,7 +73,7 @@ struct Login: View {
         HStack {
             Text(viewModel.authenticationInfo)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
-                .foregroundColor(.Red_EB1808)
+                .foregroundColor(.red_EB1808)
             Spacer()
         }
         .padding(.leading)
@@ -92,7 +92,7 @@ struct Login: View {
                 .resizable()
                 .frame(width: 86, height: 86)
                 .padding(.top, 21)
-                .foregroundColor(!viewModel.account.email.isEmpty && !viewModel.account.password.isEmpty ? .Navy_1E2F97 : .Gray_E9ECEF)
+                .foregroundColor(!viewModel.account.email.isEmpty && !viewModel.account.password.isEmpty ? .navy_1E2F97 : .gray_E9ECEF)
         }
         .disabled(viewModel.account.email.isEmpty || viewModel.account.password.isEmpty)
     }
@@ -105,7 +105,7 @@ struct Login: View {
                 .foregroundColor(Color.Gray_495057)
             
             Text("|")
-                .foregroundColor(Color.Gray_E9ECEF)
+                .foregroundColor(Color.gray_E9ECEF)
             
             NavigationLink(isActive: $isActive) {
                 SignUp(isActive: $isActive)

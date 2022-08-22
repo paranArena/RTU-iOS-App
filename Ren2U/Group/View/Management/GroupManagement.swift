@@ -82,7 +82,7 @@ struct GroupManagement: View {
                     }
                     .frame(height: 400)
                 }
-                .background(Color.grayF1F2F3)
+                .background(Color.gray_F1F2F3)
                 .cornerRadius(15)
                 
                 VStack(alignment: .center, spacing: 0) {
@@ -97,7 +97,7 @@ struct GroupManagement: View {
                             } label: {
                                 Text(selection.title)
                                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                                    .foregroundColor(rentalSelection == selection ? Color.Navy_1E2F97 : Color.gray868E96)
+                                    .foregroundColor(rentalSelection == selection ? Color.navy_1E2F97 : Color.gray_868E96)
                             }
                             .frame(maxWidth: .infinity)
                             .background(GeometryReader {
@@ -112,7 +112,7 @@ struct GroupManagement: View {
                     
                     HStack {
                         Rectangle()
-                            .fill(Color.Navy_1E2F97)
+                            .fill(Color.navy_1E2F97)
                             .frame(width: rentalWidth * 0.6, height: 2)
                             .padding(.leading, rentalWidth * CGFloat(rentalSelection.rawValue) + rentalWidth * 0.2)
                             .animation(.spring(), value: rentalSelection)
@@ -147,6 +147,8 @@ struct GroupManagement: View {
                         .padding(.horizontal, 20)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     Spacer()
+                    
+                    
                 }
                 Divider()
                     .padding(.horizontal, 10)
@@ -160,13 +162,5 @@ struct GroupManagement: View {
 struct GroupManagement_Previews: PreviewProvider {
     static var previews: some View {
         GroupManagement()
-    }
-}
-
-public struct ViewWidthKey: PreferenceKey {
-    public typealias Value = CGFloat
-    public static var defaultValue = CGFloat.zero
-    public static func reduce(value: inout Value, nextValue: () -> Value) {
-        value += nextValue()
     }
 }

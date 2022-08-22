@@ -14,22 +14,27 @@ extension Item {
         case none
         case queue
         case term
+        case completeFail
         
         var rentalButtonFillColor: Color {
             switch self {
             case .none, .`default`:
                 return Color.white
             case .term, .queue:
-                return Color.Navy_1E2F97
+                return Color.navy_1E2F97
+            case .completeFail:
+                return Color.clear
             }
         }
         
         var rentalButtonFGColor: Color {
             switch self {
             case .none, .`default`:
-                return Color.Navy_1E2F97
+                return Color.navy_1E2F97
             case .term, .queue:
                 return Color.white
+            case .completeFail:
+                return Color.clear
             }
         }
     }
@@ -63,6 +68,18 @@ extension Item {
                     self.time = 0
                 }
             })
+        }
+        
+        func formatPickUpDate(_ date: Date) -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM.dd/HH:mm"
+            return dateFormatter.string(from: date)
+        }
+        
+        func formatReturnDate(_ date: Date) -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY.MM.dd"
+            return dateFormatter.string(from: date)
         }
     }
 }

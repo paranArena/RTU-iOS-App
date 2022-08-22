@@ -27,7 +27,7 @@ struct PasswordTextField: View {
                 Button {
                     isShowingPassword.toggle()
                 } label: {
-                    Text("보기").font(.system(size: 14)).foregroundColor(.Gray_ADB5BD)
+                    Text("보기").font(.system(size: 14)).foregroundColor(.gray_ADB5BD)
                 }
             }
         )

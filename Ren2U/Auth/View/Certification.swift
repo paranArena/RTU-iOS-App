@@ -32,7 +32,7 @@ struct Certification: View {
                 
                 Text(viewModel.isConfirmed ? " " : "인증번호가 일치하지 않습니다.")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                    .foregroundColor(.Red_EB1808)
+                    .foregroundColor(.red_EB1808)
                 
                 ResendButton()
                 GoSignUpSuccessButton()
@@ -72,7 +72,7 @@ struct Certification: View {
     
     @ViewBuilder
     private func CertificationTextField() -> some View {
-        CapsulePlaceholder(text: $viewModel.certificationNum, placeholder: Text(""), color: .Gray_ADB5BD)
+        CapsulePlaceholder(text: $viewModel.certificationNum, placeholder: Text(""), color: .gray_ADB5BD)
             .keyboardType(.numberPad)
             .font(.custom(CustomFont.RobotoMedium.rawValue, size: 36))
             .multilineTextAlignment(.center)
@@ -109,7 +109,7 @@ struct Certification: View {
                 .resizable().frame(width: 86, height: 86)
                 .padding(.top, 49)
                 .foregroundColor(viewModel.isReachedMaxLength(num: viewModel.certificationNum)
-                                 ? .Navy_1E2F97 : .Gray_E9ECEF)
+                                 ? .navy_1E2F97 : .gray_E9ECEF)
                 .padding(.top, 50)
         }
         .disabled(!viewModel.isReachedMaxLength(num: viewModel.certificationNum))
@@ -122,7 +122,7 @@ struct Certification: View {
             Text("\(viewModel.getTimeString(time: viewModel.timeRemaining))")
                 .font(.custom(CustomFont.RobotoMedium.rawValue, size: 16))
                 .padding(.trailing, 10)
-                .foregroundColor(.Red_EB1808)
+                .foregroundColor(.red_EB1808)
         }
     }
 }
