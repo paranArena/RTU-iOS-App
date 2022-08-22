@@ -56,6 +56,7 @@ struct GroupManagement: View {
     
     @State private var rentalSelection: RentalSelection = .reservation
     @State private var rentalWidth: CGFloat = 0
+    @State private var rentalToggle = false
     @Environment(\.isPresented) var isPresented
     
     
@@ -142,13 +143,22 @@ struct GroupManagement: View {
         VStack(alignment: .center, spacing: 0) {
             ForEach(ManageSelection.allCases, id : \.rawValue) { selection in
                 HStack {
-                    Text(selection.title)
+                    if selection != .rentalActive {
+                        Text(selection.title)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 20)
+                            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                    } else {
+                        Toggle(isOn: $rentalToggle) {
+                            Text(selection.title)
+                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                        }
                         .padding(.vertical, 8)
-                        .padding(.horizontal, 20)
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                        .padding(.leading, 20)
+                        .toggleStyle(CustomToggleStyle())
+                    }
+                    
                     Spacer()
-                    
-                    
                 }
                 Divider()
                     .padding(.horizontal, 10)

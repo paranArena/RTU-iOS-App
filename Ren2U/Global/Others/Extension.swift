@@ -38,6 +38,8 @@ extension Color {
     static let red_EB1808 = Color(hex: "EB1808")
     static let red_FF6155 = Color(hex: "FF6155")
     
+    static let yellow_FFB800 = Color(hex: "FFB800")
+    
     static let green_2CA900 = Color(hex: "2CA900")
     
     static let BackgroundColor = Color("BackgroundColor")

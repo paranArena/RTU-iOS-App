@@ -30,6 +30,7 @@
 		154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D028A351AA005E7FDB /* RentalComplete.swift */; };
 		154553D328A35412005E7FDB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553D228A35412005E7FDB /* NotoSansKR-Black.otf */; };
 		154553D528A35CC3005E7FDB /* ItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D428A35CC3005E7FDB /* ItemVM.swift */; };
+		1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */; };
 		155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CED5E28A0EA380032C1BA /* GroupTabVM.swift */; };
 		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
 		156386C0288A5249006653E8 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* HomeTab.swift */; };
@@ -128,6 +129,7 @@
 		154553D028A351AA005E7FDB /* RentalComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalComplete.swift; sourceTree = "<group>"; };
 		154553D228A35412005E7FDB /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		154553D428A35CC3005E7FDB /* ItemVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemVM.swift; sourceTree = "<group>"; };
+		1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
 		155CED5E28A0EA380032C1BA /* GroupTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTabVM.swift; sourceTree = "<group>"; };
 		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
 		156386BF288A5249006653E8 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
@@ -260,6 +262,14 @@
 				15A2E7B12893C58A00254793 /* KeyboardHandler.swift */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		1550ECA928B35C3F00BECBE7 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		156386BA288A51CF006653E8 /* Group */ = {
@@ -489,6 +499,7 @@
 			children = (
 				159F1B22288B9F7000012113 /* Font */,
 				15B63DA228AF38C3000AB82D /* Modifier */,
+				1550ECA928B35C3F00BECBE7 /* Styles */,
 				153C1A6C288CDDF200F89B2E /* Others */,
 				15FAF166287D606700B35570 /* View */,
 			);
@@ -671,6 +682,7 @@
 				153C1A7D288D0A1F00F89B2E /* CreateGroupVM.swift in Sources */,
 				1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */,
 				154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */,
+				1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */,
 				1563FE9328ADEF9000F46CC7 /* SignUpCell .swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
 				154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */,
