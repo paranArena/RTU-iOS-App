@@ -35,7 +35,7 @@ struct JoinedGroupCell: View {
                         .lineLimit(1)
                 }
             }
-            
+            .padding(.top, 10)
             .padding(.horizontal, 20)
             
             Divider()

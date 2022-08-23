@@ -25,6 +25,7 @@ struct RentalTab: View {
             
             Group {
                 RentalSelectionButton()
+                    .isHidden(hidden: isSearchBarFocused)
                     .background(GeometryReader { gp -> Color in
                         offset = gp.frame(in: .global).maxY + spacing
                         return Color.clear
@@ -90,6 +91,7 @@ struct RentalTab: View {
                     } label: {
                         RentalItemHCell(rentalItemInfo: groupViewModel.rentalItems[i])
                     }
+                    .isHidden(hidden: isSearchBarFocused && !groupViewModel.rentalItems[i].itemName.contains(searchText))
                 }
             }
         }

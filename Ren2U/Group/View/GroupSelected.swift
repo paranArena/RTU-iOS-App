@@ -35,13 +35,13 @@ struct GroupSelected: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
-                        if groupModel.likesGroupId.contains(where: { $0.groupId == groupModel.joinedGroups[index].groupDto.groupId }) {
-                            NavigationLink {
-                                GroupPage(tabSelection: $tabSelection, groupInfo: $groupModel.joinedGroups[index])
-                            } label: {
-                                FavoriteGroupCell(info: $groupModel.joinedGroups[index])
-                            }
+                        let compareGroupId = groupModel.joinedGroups[index].groupDto.groupId
+                        Button {
+                            groupModel.joinedGroups[index].isActive.toggle()
+                        } label: {
+                            FavoriteGroupCell(info: $groupModel.joinedGroups[index])
                         }
+                        .isHidden(hidden: !groupModel.likesGroupId.contains(where: { $0.groupId == compareGroupId }))
                     }
                 }
                 .padding(.horizontal, 20)
@@ -58,9 +58,9 @@ struct GroupSelected: View {
                 .foregroundColor(.LabelColor)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
-            VStack {
+            VStack(alignment: .center, spacing: 0) {
                 ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
-                    NavigationLink {
+                    NavigationLink(isActive: $groupModel.joinedGroups[index].isActive) {
                         GroupPage(tabSelection: $tabSelection, groupInfo: $groupModel.joinedGroups[index])
                     } label: {
                         JoinedGroupCell(info: groupModel.joinedGroups[index])

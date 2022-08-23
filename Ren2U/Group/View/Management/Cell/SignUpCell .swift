@@ -57,7 +57,7 @@ struct SignUpCell: View {
             .padding(.leading, -180)
             
         }
-        .offset(x: isShowingRequestButton ? -160 : max(-160, offset))
+        .offset(x: isShowingRequestButton ? max(-160, offset) : max(-160, offset))
         .animation(.spring(), value: isShowingRequestButton)
         .animation(.spring(), value: offset)
         .gesture(
@@ -65,17 +65,27 @@ struct SignUpCell: View {
                 .onChanged {
                     print(offset)
                     self.offset = $0.translation.width
-                    self.offset = min(offset, 0)
+                    if !self.isShowingRequestButton {
+                        self.offset = min(offset, 0)
+                    } else {
+                        self.offset = max(-160 + offset, -160)
+                    }
                 }
                 .onEnded {
-                    if $0.translation.width <= -80 {
-                        self.isShowingRequestButton = true
-                    } else if $0.translation.width > -80 && $0.translation.width < 50 {
-                        withAnimation {
+                    if !isShowingRequestButton {
+                        if $0.translation.width <= -80 {
+                            self.isShowingRequestButton = true
+                            self.offset = -160
+                        } else {
                             self.offset = 0
                         }
-                    } else if $0.translation.width >= 50 {
-                        self.isShowingRequestButton = false
+                    } else {
+                        if $0.translation.width >= 80 {
+                            self.isShowingRequestButton = false
+                            self.offset = 0
+                        } else {
+                            self.offset = -160
+                        }
                     }
                 }
         )

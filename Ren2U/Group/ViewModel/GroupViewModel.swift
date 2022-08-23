@@ -15,6 +15,7 @@ struct GroupInfo: Identifiable, Codable {
     var id = UUID()
     let groupDto: GroupDto
     var didLike = false
+    var isActive = false
     
     struct GroupDto: Codable {
         let imageSource: String

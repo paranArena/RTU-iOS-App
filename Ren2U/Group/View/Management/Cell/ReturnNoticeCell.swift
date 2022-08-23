@@ -13,7 +13,7 @@ struct ReturnNoticeCell: View {
     let rentalItemInfo: ReturnInfo
     
     @State private var isShowingRequestButton = false
-    @State private var offset: CGSize = .zero
+    @State private var offset: CGFloat = .zero
     @State private var isShowingSheet = false
     
     var body: some View {
@@ -42,7 +42,7 @@ struct ReturnNoticeCell: View {
                         .foregroundColor(Color.gray_868E96)
                 }
             }
-            .simultaneousGesture(TapGesture().onEnded {
+            .gesture(TapGesture().onEnded {
                 self.isShowingSheet = true
             })
                 
@@ -51,6 +51,7 @@ struct ReturnNoticeCell: View {
             HStack(alignment: .center, spacing: 0) {
                 Button {
                     self.isShowingRequestButton = false
+                    self.offset = .zero
                 } label: {
                     Text("확인")
                 }
@@ -60,19 +61,35 @@ struct ReturnNoticeCell: View {
             }
             .offset(x: 90)
         }
-        .offset(x: isShowingRequestButton ? -90 : 0)
-        .padding(.vertical, 10)
+        .offset(x: isShowingRequestButton ? max(-90, offset) : max(-90, offset))
         .animation(.spring(), value: isShowingRequestButton)
+        .animation(.spring(), value: offset)
         .simultaneousGesture(
             DragGesture()
                 .onChanged {
-                    self.offset = $0.translation
+                    print(offset)
+                    self.offset = $0.translation.width
+                    if !self.isShowingRequestButton {
+                        self.offset = min(offset, 0)
+                    } else {
+                        self.offset = max(-90 + offset, -90)
+                    }
                 }
                 .onEnded {
-                    if $0.translation.width < -50 {
-                        self.isShowingRequestButton = true
-                    } else if $0.translation.width > 50 {
-                        self.isShowingRequestButton = false
+                    if !isShowingRequestButton {
+                        if $0.translation.width <= -80 {
+                            self.isShowingRequestButton = true
+                            self.offset = -90
+                        } else {
+                            self.offset = 0
+                        }
+                    } else {
+                        if $0.translation.width >= 80 {
+                            self.isShowingRequestButton = false
+                            self.offset = 0
+                        } else {
+                            self.offset = -90
+                        }
                     }
                 }
         )
