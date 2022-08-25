@@ -58,7 +58,7 @@ struct RentalDatePicker: View {
                     .background(viewModel.setUpDayBackground(index: index))
                     .overlay(
                         Rectangle()
-                            .stroke(Color.Gray_DEE2E6, lineWidth: 1)
+                            .stroke(Color.gray_DEE2E6, lineWidth: 1)
                     )
                     .padding(.horizontal, 0)
                     .disabled(viewModel.rentalDays[index].date < day)

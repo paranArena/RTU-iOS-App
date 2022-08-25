@@ -128,14 +128,20 @@ struct GroupManagement: View {
                     .frame(maxWidth: .infinity)
                     .background(Color.BackgroundColor)
                 }
-                .background(Color.Gray_DEE2E6)
+                .background(Color.gray_DEE2E6)
                 .cornerRadius(15)
             }
             .padding(.horizontal, 10)
         }
         .controllTabbar(isPresented)
-        .navigationTitle("그룹 관리자")
+        .navigationTitle(" ")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("그룹 관리자")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
+            }
+        }
     }
     
     @ViewBuilder
@@ -144,10 +150,15 @@ struct GroupManagement: View {
             ForEach(ManageSelection.allCases, id : \.rawValue) { selection in
                 HStack {
                     if selection != .rentalActive {
-                        Text(selection.title)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 20)
-                            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                        NavigationLink {
+                            Navigation(selection: selection)
+                        } label: {
+                            Text(selection.title)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 20)
+                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                                .foregroundColor(Color.primary)
+                        }
                     } else {
                         Toggle(isOn: $rentalToggle) {
                             Text(selection.title)
@@ -164,8 +175,24 @@ struct GroupManagement: View {
                     .padding(.horizontal, 10)
             }
         }
-        .background(Color.Gray_DEE2E6)
+        .background(Color.gray_DEE2E6)
         .cornerRadius(15)
+    }
+    
+    @ViewBuilder
+    private func Navigation(selection: ManageSelection) -> some View {
+        switch selection {
+        case .profileEdit:
+            Text("프로필 수정")
+        case .rentalManagement:
+            RentalAndItemManagement()
+        case .notice:
+            Text("공지사항")
+        case .memberManagement:
+            Text("멤버 관리")
+        case .rentalActive:
+            Text("Empty View")
+        }
     }
 }
 

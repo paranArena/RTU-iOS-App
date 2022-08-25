@@ -13,24 +13,15 @@ extension CreateGroup {
         
         @Published var groupName = ""
         @Published var tagsText = ""
-        @Published var isShowingTagPlaceholder = true
         @Published var introduction = ""
+        
+        @Published var isShowingTagPlaceholder = true
         @Published var tags = [TagInfo]()
         
         @Published var showImagePicker = false
         @Published var selectedUIImage: UIImage?
-        @Published var image: Image?
-        @Published var isShowingTab = false
         
-        @Published var offset: CGFloat = 0 
-        
-        var imageSource: Image {
-            if let image = self.image {
-                return image
-            } else {
-                return Image("DefaultGroupImage")
-            }
-        }
+        @Published var offset: CGFloat = 0
         
         
         func showTagPlaceHolder(newValue: CreateGroup.Field?) {
@@ -80,11 +71,6 @@ extension CreateGroup {
         
         func printUTF8Length(tag: String) {
             print("\(tag.utf8.count)")
-        }
-        
-        func loadImage() {
-            guard let selectedImage = self.selectedUIImage else { return }
-            self.image = Image(uiImage: selectedImage)
         }
     }
 

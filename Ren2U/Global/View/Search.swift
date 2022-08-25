@@ -37,7 +37,7 @@ struct Search: View {
             Spacer()
             Text("가입된 그룹")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                .foregroundColor(Color.Gray_DEE2E6)
+                .foregroundColor(Color.gray_DEE2E6)
         }
         .padding()
     }

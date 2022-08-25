@@ -12,12 +12,13 @@ struct SimpleBottomLine: View {
     let color: Color
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
             Rectangle()
                 .frame(height: 1)
                 .foregroundColor(color)
         }
+        .padding(0)
     }
 }
 

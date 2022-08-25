@@ -77,13 +77,7 @@ struct GroupTab: View {
                 NavigationLink {
                     CreateGroup()
                 } label: {
-                    Image(systemName: "plus.circle")
-                        .resizable()
-                        .foregroundColor(.navy_1E2F97)
-                        .background(Color.BackgroundColor)
-                        .frame(width: 60, height: 60)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 20)
+                    PlusCircle()
                 }
             }
         }

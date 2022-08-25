@@ -19,7 +19,7 @@ struct SearchBar: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .padding(.leading, 5)
-                    .foregroundColor(Color.Gray_DEE2E6)
+                    .foregroundColor(Color.gray_DEE2E6)
                 TextField("I`ll Ren 2 U!", text: $text)
                     .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
                     .focused($focused, equals: true)
@@ -31,7 +31,7 @@ struct SearchBar: View {
             }
             .overlay{
                 Capsule()
-                    .strokeBorder(Color.Gray_DEE2E6, lineWidth: 2)
+                    .strokeBorder(Color.gray_DEE2E6, lineWidth: 2)
             }
             
             Group {

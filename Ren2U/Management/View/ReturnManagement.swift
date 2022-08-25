@@ -78,7 +78,7 @@ struct ReturnManagement: View {
                     .frame(height: 100)
                     .overlay{
                         RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.Gray_DEE2E6, lineWidth: 2)
+                            .stroke(Color.gray_DEE2E6, lineWidth: 2)
                     }
                 
                 Text("별점")
@@ -87,7 +87,7 @@ struct ReturnManagement: View {
                 HStack {
                     ForEach(0..<5, id: \.self) { _ in
                         Circle()
-                            .fill(Color.Gray_DEE2E6)
+                            .fill(Color.gray_DEE2E6)
                             .frame(width: 30, height: 30)
                     }
                 }

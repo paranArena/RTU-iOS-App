@@ -73,11 +73,26 @@ struct RoundedCorner: Shape {
     }
 }
 
-//
+//  MARK: 테두리만 있는 캡슐
 extension View {
     func capsuleStrokeAndForegroundColor(color: Color) -> some View {
         self
             .foregroundColor(color)
             .background(Capsule().stroke(color, lineWidth: 1))
+    }
+}
+
+//  MARK: 기본 타이틀 제어
+extension View {
+    func basicNavigationTitle(title: String) -> some View {
+        self
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(title)
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
+                }
+            }
     }
 }

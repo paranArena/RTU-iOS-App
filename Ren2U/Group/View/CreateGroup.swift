@@ -51,9 +51,15 @@ struct CreateGroup: View {
     
     @ViewBuilder
     private func GroupImage() -> some View {
-        viewModel.imageSource
-            .resizable()
-            .frame(width: SCREEN_WIDTH, height: 215)
+        if let uiImage = viewModel.selectedUIImage {
+            Image(uiImage: uiImage)
+                .resizable()
+                .frame(width: SCREEN_WIDTH, height: 215)
+        } else {
+            Image("DefaultGroupImage")
+                .resizable()
+                .frame(width: SCREEN_WIDTH, height: 215)
+        }
     }
     
     @ViewBuilder
@@ -65,7 +71,7 @@ struct CreateGroup: View {
             
             TextField("", text: $viewModel.groupName)
                 .font(.custom(CustomFont.RobotoRegular.rawValue, size: 30))
-                .overlay(SimpleBottomLine(color: Color.Gray_DEE2E6))
+                .overlay(SimpleBottomLine(color: Color.gray_DEE2E6))
                 .submitLabel(.next)
                 .focused($focusField, equals: .groupName)
                 .onSubmit {
@@ -152,7 +158,7 @@ struct CreateGroup: View {
                 .frame(height: 100)
                 .overlay{
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.Gray_DEE2E6, lineWidth: 2)
+                        .stroke(Color.gray_DEE2E6, lineWidth: 2)
                 }
             
             Text("띄어쓰기 포함 한글 130글자, 영어 150글자까지 가능합니다.")
@@ -181,14 +187,14 @@ struct CreateGroup: View {
                         .padding(.horizontal, 10)
                         .padding(.bottom, 5)
                 }
-                .sheet(isPresented: $viewModel.showImagePicker) {
-                    viewModel.loadImage()
-                } content: {
-                    ImagePicker(image: $viewModel.selectedUIImage)
-                }
-
-
+//                .sheet(isPresented: $viewModel.showImagePicker) {
+//                    ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.selectedUIImage?)
+//                        .ignoresSafeArea(.all)
+//                }
             }
+        }
+        .sheet(isPresented: $viewModel.showImagePicker) {
+            ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.selectedUIImage)
         }
     }
     
