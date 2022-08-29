@@ -13,6 +13,8 @@
 		1514A0FE28B753BB0040F681 /* PickUpLocationMap .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */; };
 		1514A10028B7594F0040F681 /* ItemCaution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FF28B7594F0040F681 /* ItemCaution.swift */; };
 		1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A10128B75CDA0040F681 /* HeightSetterView.swift */; };
+		151B556F28BCA1660090A5E8 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B556E28BCA1660090A5E8 /* Account.swift */; };
+		151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557028BCA1AA0090A5E8 /* Reponses.swift */; };
 		15246BD92884FD9A000BDFC8 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15246BD82884FD9A000BDFC8 /* LoginVM.swift */; };
 		1525F5FC28B731A600C7CA51 /* ImagesPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */; };
 		1525F5FE28B7362C00C7CA51 /* ItemInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F5FD28B7362C00C7CA51 /* ItemInformation.swift */; };
@@ -133,6 +135,8 @@
 		1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickUpLocationMap .swift"; sourceTree = "<group>"; };
 		1514A0FF28B7594F0040F681 /* ItemCaution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCaution.swift; sourceTree = "<group>"; };
 		1514A10128B75CDA0040F681 /* HeightSetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightSetterView.swift; sourceTree = "<group>"; };
+		151B556E28BCA1660090A5E8 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		151B557028BCA1AA0090A5E8 /* Reponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reponses.swift; sourceTree = "<group>"; };
 		15246BD82884FD9A000BDFC8 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPicker.swift; sourceTree = "<group>"; };
 		1525F5FD28B7362C00C7CA51 /* ItemInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInformation.swift; sourceTree = "<group>"; };
@@ -282,6 +286,8 @@
 		151B556B28BC9D8C0090A5E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				151B557028BCA1AA0090A5E8 /* Reponses.swift */,
+				151B556E28BCA1660090A5E8 /* Account.swift */,
 				15FA687828BC5A2400B3DF0B /* User.swift */,
 				15FA687C28BC656600B3DF0B /* SignUpExtension.swift */,
 				15FA688028BC717900B3DF0B /* Group */,
@@ -295,13 +301,13 @@
 			isa = PBXGroup;
 			children = (
 				15FAF166287D606700B35570 /* Global  */,
-				156386BB288A51EE006653E8 /* Home */,
-				1525F60728B73DA800C7CA51 /* ItemRegistration */,
-				150072F2289A1F4B005B6A93 /* Rental */,
-				156386DA288A6523006653E8 /* Group */,
 				15D4C57F287FD4CF008BB89B /* Auth */,
-				157190EB28B701B400880F98 /* Management */,
+				156386BB288A51EE006653E8 /* Home */,
+				156386DA288A6523006653E8 /* Group */,
+				150072F2289A1F4B005B6A93 /* Rental */,
 				15FA687428BC594000B3DF0B /* MyPage */,
+				1525F60728B73DA800C7CA51 /* ItemRegistration */,
+				157190EB28B701B400880F98 /* Management */,
 				156386B8288A513B006653E8 /* Ren2UTab.swift */,
 				15FAF135287D5DFF00B35570 /* ContentView.swift */,
 			);
@@ -806,6 +812,7 @@
 				157190F628B7072200880F98 /* RightArrow.swift in Sources */,
 				156386D2288A5D1A006653E8 /* GroupViewModel.swift in Sources */,
 				159F1B26288BA16000012113 /* CustomFont.swift in Sources */,
+				151B556F28BCA1660090A5E8 /* Account.swift in Sources */,
 				15246BD92884FD9A000BDFC8 /* LoginVM.swift in Sources */,
 				1514A0FE28B753BB0040F681 /* PickUpLocationMap .swift in Sources */,
 				15D774F4288E2B8A00428465 /* NoticeCell.swift in Sources */,
@@ -850,6 +857,7 @@
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */,
+				151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */,
 				1514A10028B7594F0040F681 /* ItemCaution.swift in Sources */,
 				156386C6288A5263006653E8 /* MyPageTab.swift in Sources */,
 				15F3673728927E770073E094 /* TransparentDivider.swift in Sources */,

@@ -9,34 +9,10 @@
 import Foundation
 import Alamofire
 
-struct Account: Codable {
-    var email: String
-    var password: String
-}
-
-//struct LoginResponse: Codable {
-//    var statusCode: Int
-//    var responseMessage: String
-//    var data: UserToken
-//
-//    struct UserToken: Codable {
-//        var token: String
-//    }
-//}
-
-struct LoginResponse: Codable {
-    var token: String
-}
-
-
 class AuthViewModel: ObservableObject {
     
     @Published var jwt: String?
     @Published var user: User?
-    
-    init() {
-//        self.jwt = UserDefaults.standard.value(forKey: jwtKey) as? String
-    }
     
     func sendCertificationNum() {
 //        let random = Int.random(in: 0000...9999)
@@ -138,10 +114,10 @@ class AuthViewModel: ObservableObject {
     
     //  MARK: Func for Local Test
     private func setLocalToken() {
-        
+        self.jwt = "123"
     }
     
     private func setLocalUser() {
-        
+        self.user = User.dummyUser()
     }
 }
