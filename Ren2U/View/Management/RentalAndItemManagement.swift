@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HidableTabView
 
 extension RentalAndItemManagement {
     
@@ -28,6 +29,7 @@ extension RentalAndItemManagement {
 struct RentalAndItemManagement: View {
     
     @State private var headerSelection: Selection = .rentalManagement
+    @Environment(\.isPresented) var isPresented
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -40,6 +42,10 @@ struct RentalAndItemManagement: View {
                 }
             }
             .animation(.default, value: headerSelection)
+        }
+        .onAppear {
+            UITabBar.hideTabBar()
+            print("Hide Tab Bar")
         }
         .frame(maxWidth: .infinity, maxHeight:  .infinity)
         .toolbar {

@@ -12,6 +12,7 @@ struct Profile: View {
     
     @EnvironmentObject var authVM: AuthViewModel
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.isPresented) var isPresented
     @State private var isShowingModal = false
     
     var body: some View {
@@ -23,7 +24,7 @@ struct Profile: View {
                 .resizable()
                 .frame(width: 120, height: 120)
                 .clipShape(Circle())
-            
+
             Button {
                 
             } label: {
@@ -45,9 +46,6 @@ struct Profile: View {
 
             
         }
-        .overlay(Modal(isShowingModal: $isShowingModal, text: "탈퇴하시겠습니까?", callback: {
-            print("Yes! on Ended ")
-        }))
         .basicNavigationTitle(title: "프로필 확인")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -59,6 +57,12 @@ struct Profile: View {
                 }
             }
         }
+        .controllTabbar(isPresented)
+        .disabled(isShowingModal)
+        .navigationBarBackButtonHidden(isShowingModal)
+        .overlay(Modal(isShowingModal: $isShowingModal, text: "탈퇴하시겠습니까?", callback: {
+            print("Yes! on Ended ")
+        }))
     }
     
     @ViewBuilder

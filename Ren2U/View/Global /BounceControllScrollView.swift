@@ -15,11 +15,15 @@ struct BounceControllScrollView<Content: View>: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            content() 
+            content()
             .background(GeometryReader {
                 // detect Pull-to-refresh
                 Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
             })
+            .background(
+                Rectangle()
+                    .fill(offset > 0 ? Color.clear : Color.clear)
+            )
             .onPreferenceChange(ViewOffsetKey.self) {
                 offset = $0
             }

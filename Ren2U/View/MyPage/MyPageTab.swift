@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import Introspect
 
 struct MyPageTab: View {
     
