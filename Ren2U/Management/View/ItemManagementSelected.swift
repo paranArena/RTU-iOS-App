@@ -13,16 +13,13 @@ struct ItemManagementSelected: View {
     
     var body: some View {
         VStack {
-            
-        }
-        .frame(width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-        .overlay(alignment: .bottomTrailing) {
             NavigationLink(isActive: $isActive) {
                 ItemPhoto(isActive: $isActive)
             } label: {
                 PlusCircle()
             }
         }
+        .frame(width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
     }

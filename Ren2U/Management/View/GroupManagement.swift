@@ -8,50 +8,6 @@
 import SwiftUI
 import Introspect
 
-extension GroupManagement {
-    enum ManageSelection: Int, CaseIterable {
-        case profileEdit
-        case rentalManagement
-        case notice
-        case memberManagement
-        case rentalActive
-        
-        var title: String {
-            switch self {
-            case .profileEdit:
-                return "프로필 수정"
-            case .rentalManagement:
-                return "대여/물품 관리"
-            case .notice:
-                return "공지사항"
-            case .memberManagement:
-                return "멤버 관리"
-            case .rentalActive:
-                return "대여목록 활성화"
-            }
-        }
-    }
-}
-
-extension GroupManagement {
-    enum RentalSelection: Int, CaseIterable {
-        case reservation
-        case rental
-        case `return`
-        
-        var title: String {
-            switch self {
-            case .reservation:
-                return "예약"
-            case .rental:
-                return "대여"
-            case .return:
-                return "반납"
-            }
-        }
-    }
-}
-
 struct GroupManagement: View {
     
     @State private var rentalSelection: RentalSelection = .reservation
@@ -145,6 +101,13 @@ struct GroupManagement: View {
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
         }
+        .background(
+            NavigationLink(isActive: $isActivated, destination: {
+                Navigation(selection: selectedContent)
+            }, label: {
+                
+            })
+        )
     }
     
     @ViewBuilder
@@ -155,7 +118,7 @@ struct GroupManagement: View {
                     if selection != .rentalActive {
                         Button {
                             selectedContent = selection
-                            isActivated = true 
+                            isActivated = true
                         } label: {
                             Text(selection.title)
                                 .padding(.vertical, 8)
@@ -178,13 +141,6 @@ struct GroupManagement: View {
                 Divider()
                     .padding(.horizontal, 10)
             }
-            .background(
-                NavigationLink(isActive: $isActivated, destination: {
-                    Navigation(selection: selectedContent)
-                }, label: {
-                    
-                })
-            )
         }
         .background(Color.gray_DEE2E6)
         .cornerRadius(15)

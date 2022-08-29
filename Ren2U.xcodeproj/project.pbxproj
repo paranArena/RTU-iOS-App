@@ -96,6 +96,7 @@
 		15FA687B28BC62B800B3DF0B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687A28BC62B800B3DF0B /* Profile.swift */; };
 		15FA687D28BC656600B3DF0B /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687C28BC656600B3DF0B /* SignUpExtension.swift */; };
 		15FA687F28BC661700B3DF0B /* ProfileExtension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687E28BC661700B3DF0B /* ProfileExtension .swift */; };
+		15FA688228BC718500B3DF0B /* GroupManagementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA688128BC718500B3DF0B /* GroupManagementExtension.swift */; };
 		15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF133287D5DFF00B35570 /* Ren2UApp.swift */; };
 		15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF135287D5DFF00B35570 /* ContentView.swift */; };
 		15FAF138287D5E0000B35570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FAF137287D5E0000B35570 /* Assets.xcassets */; };
@@ -213,6 +214,7 @@
 		15FA687A28BC62B800B3DF0B /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		15FA687C28BC656600B3DF0B /* SignUpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExtension.swift; sourceTree = "<group>"; };
 		15FA687E28BC661700B3DF0B /* ProfileExtension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileExtension .swift"; sourceTree = "<group>"; };
+		15FA688128BC718500B3DF0B /* GroupManagementExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementExtension.swift; sourceTree = "<group>"; };
 		15FAF130287D5DFF00B35570 /* Ren2U.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ren2U.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15FAF133287D5DFF00B35570 /* Ren2UApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UApp.swift; sourceTree = "<group>"; };
 		15FAF135287D5DFF00B35570 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 		156386BA288A51CF006653E8 /* Group */ = {
 			isa = PBXGroup;
 			children = (
+				15FA688028BC717900B3DF0B /* Model */,
 				152980F1288D3B4700537A80 /* struct & enum  */,
 				156386DA288A6523006653E8 /* View */,
 				156386D0288A5D06006653E8 /* ViewModel */,
@@ -556,6 +559,14 @@
 			children = (
 				15FA687828BC5A2400B3DF0B /* User.swift */,
 				15FA687C28BC656600B3DF0B /* SignUpExtension.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		15FA688028BC717900B3DF0B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15FA688128BC718500B3DF0B /* GroupManagementExtension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -837,6 +848,7 @@
 				156386C2288A5252006653E8 /* GroupTab.swift in Sources */,
 				158011792893992A006016AD /* ImagePicker.swift in Sources */,
 				1525F60428B739EF00C7CA51 /* Category.swift in Sources */,
+				15FA688228BC718500B3DF0B /* GroupManagementExtension.swift in Sources */,
 				15FA687D28BC656600B3DF0B /* SignUpExtension.swift in Sources */,
 				15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */,
 				159F1B21288B88DB00012113 /* Variables.swift in Sources */,
