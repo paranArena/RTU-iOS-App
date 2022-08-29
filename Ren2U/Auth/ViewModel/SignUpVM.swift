@@ -7,38 +7,6 @@
 
 import SwiftUI
 
-extension SignUp {
-    
-    enum Field: Int, CaseIterable, Hashable {
-        case email
-        case password
-        case passwordCheck
-        case name
-        case major
-        case studentId
-        case phoneNumber
-        
-        var title: String {
-            switch self {
-            case .email:
-                return "아주대학교 이메일 "
-            case .password:
-                return "Password"
-            case .passwordCheck:
-                return "Password 확인"
-            case .name:
-                return "이름"
-            case .major:
-                return "학과"
-            case .studentId:
-                return "학번"
-            case .phoneNumber:
-                return "휴대폰 번호"
-            }
-        }
-    }
-}
-
 
 extension SignUp {
     class ViewModel: ObservableObject {
@@ -105,7 +73,7 @@ extension SignUp {
         func getUserInfo() -> User {
             return User(email: text[SignUp.Field.email.rawValue], password: text[SignUp.Field.password.rawValue],
                         name: text[SignUp.Field.name.rawValue], major: text[SignUp.Field.major.rawValue],
-                        studentId: text[SignUp.Field.studentId.rawValue], phoneNumber: text[SignUp.Field.studentId.rawValue])
+                        studentId: text[SignUp.Field.studentId.rawValue], phoneNumber: text[SignUp.Field.studentId.rawValue], imageSource: "")
         }
 
     }

@@ -20,6 +20,7 @@ struct GroupTab: View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
         VStack(alignment: .center, spacing: spacing) {
+            
             SearchBar(text: $viewModel.searchText, isFoucsed: $viewModel.isSearchBarFocused)
                 .padding(.horizontal, 20)
 

@@ -28,19 +28,6 @@ struct LoginResponse: Codable {
     var token: String
 }
 
-struct User: Codable {
-    var email: String
-    var password: String
-    var name: String
-    var major: String
-    var studentId: String
-    var phoneNumber: String
-    
-    static func dummyUser() -> User {
-        return  User(email: "temp", password: "12345", name: "Page",
-                     major: "소프트웨어학과", studentId: "12345678", phoneNumber: "01012345678")
-    }
-}
 
 class AuthViewModel: ObservableObject {
     
@@ -49,6 +36,10 @@ class AuthViewModel: ObservableObject {
     
     init() {
         self.jwt = UserDefaults.standard.value(forKey: jwtKey) as? String
+        
+        // MARK: API 안되서 임시용 코드 
+        setToken(token: "123")
+        self.user = User.dummyUser()
     }
     
     func sendCertificationNum() {
@@ -56,11 +47,18 @@ class AuthViewModel: ObservableObject {
 //        let randomGenerateNum = String(random)
     }
     
+    
+    
     func checkCertificationNum(num: String, user: User) -> Bool{
         let num = Int(num)
         guard num == 1234 else { return false }
         return true
     }
+    
+//    @MainActor
+//    func checkEmailPuplicate(email: String) async -> Bool {
+//        let url = "\(baseURL)/\(email)/exists"
+//    }
 
     func signUp(user: User) async -> Bool {
         var result = false
@@ -101,8 +99,6 @@ class AuthViewModel: ObservableObject {
         
         let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self)
         let response = await request.result
-        
-        setToken(token: "123")
 
         switch response {
         case .success(let value):

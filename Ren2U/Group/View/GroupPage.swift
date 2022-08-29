@@ -16,7 +16,6 @@ struct GroupPage: View {
     @State var offset: CGFloat = 0
     let groupRole: Role = .chairman
     
-    
     var body: some View {
         
         BounceControllScrollView(offset: $offset) {

@@ -60,6 +60,9 @@ struct GroupManagement: View {
     @Environment(\.isPresented) var isPresented
     
     
+    @State var isActivated = false
+    @State var selectedContent: ManageSelection = .memberManagement
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .center, spacing: 80) {
@@ -150,8 +153,9 @@ struct GroupManagement: View {
             ForEach(ManageSelection.allCases, id : \.rawValue) { selection in
                 HStack {
                     if selection != .rentalActive {
-                        NavigationLink {
-                            Navigation(selection: selection)
+                        Button {
+                            selectedContent = selection
+                            isActivated = true 
                         } label: {
                             Text(selection.title)
                                 .padding(.vertical, 8)
@@ -174,6 +178,13 @@ struct GroupManagement: View {
                 Divider()
                     .padding(.horizontal, 10)
             }
+            .background(
+                NavigationLink(isActive: $isActivated, destination: {
+                    Navigation(selection: selectedContent)
+                }, label: {
+                    
+                })
+            )
         }
         .background(Color.gray_DEE2E6)
         .cornerRadius(15)

@@ -35,6 +35,7 @@ struct Ren2UTab: View {
                 NavigationView {
                     Content(selection: selection)
                 }
+                .navigationViewStyle(.stack)
                 .tag(selection.rawValue)
                 .tabItem {
                     TabItem(selection: selection)

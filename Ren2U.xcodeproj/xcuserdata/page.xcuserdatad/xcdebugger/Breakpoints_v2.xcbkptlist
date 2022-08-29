@@ -142,8 +142,8 @@
             filePath = "Ren2U/Group/View/GroupPage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -194,6 +194,69 @@
             endingLineNumber = "20"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B841AF1-D3CC-443E-88E7-3E3A0F8E5238"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ren2U/MyPage/View/Profile.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "Profile"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "1B841AF1-D3CC-443E-88E7-3E3A0F8E5238 - 9b2cd68add77beee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ren2U.Profile.authVM.getter : Ren2U.AuthViewModel"
+                  moduleName = "Ren2U"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/page/Desktop/IDE/Xcode/Ren2U/Ren2U/MyPage/View/Profile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "1B841AF1-D3CC-443E-88E7-3E3A0F8E5238 - db2ff5b0176e2744"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ren2U.Profile.$authVM.getter : SwiftUI.EnvironmentObject&lt;Ren2U.AuthViewModel&gt;.Wrapper"
+                  moduleName = "Ren2U"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/page/Desktop/IDE/Xcode/Ren2U/Ren2U/MyPage/View/Profile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "1B841AF1-D3CC-443E-88E7-3E3A0F8E5238 - 58a5c354124fd91d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ren2U.Profile.init() -&gt; Ren2U.Profile"
+                  moduleName = "Ren2U"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/page/Desktop/IDE/Xcode/Ren2U/Ren2U/MyPage/View/Profile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
