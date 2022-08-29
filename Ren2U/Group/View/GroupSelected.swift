@@ -14,6 +14,9 @@ struct GroupSelected: View {
     @Binding var tabSelection: Int
     let refreshThreshold: CGFloat
     
+    @State private var isActive = false
+    @State private var groupInfo: GroupInfo = GroupInfo.dummyGroup()
+    
     var body: some View {
         RefreshScrollView(threshold: refreshThreshold) {
             VStack(alignment: .leading) {
@@ -21,6 +24,11 @@ struct GroupSelected: View {
                 JoinedGroup()
             }
         }
+        .background(
+            NavigationLink(isActive: $isActive, destination: {
+                GroupPage(tabSelection: $tabSelection, groupInfo: $groupInfo)
+            }, label: { })
+        )
         .refreshable {
             await groupModel.unlikesGroups()
         }
@@ -60,8 +68,9 @@ struct GroupSelected: View {
                 .padding(.horizontal, 20)
             VStack(alignment: .center, spacing: 0) {
                 ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
-                    NavigationLink(isActive: $groupModel.joinedGroups[index].isActive) {
-                        GroupPage(tabSelection: $tabSelection, groupInfo: $groupModel.joinedGroups[index])
+                    Button {
+                        self.groupInfo = groupModel.joinedGroups[index]
+                        self.isActive = true
                     } label: {
                         JoinedGroupCell(info: groupModel.joinedGroups[index])
                     }
