@@ -15,7 +15,6 @@ struct MyPageTab: View {
     var body: some View {
         
         VStack {
-            
             HStack {
                 KFImage(URL(string: authVM.user?.imageSource ?? "https://picsum.photos/seed/picsum/200/300")!)
                     .onFailure { err in
@@ -60,20 +59,15 @@ struct MyPageTab: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 20)
+            .padding(.bottom, 20)
             
-            VStack(alignment: .leading, spacing: 10) {
-                
-                NavigationLink("프로필 확인") {
-                    Profile() 
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(Content.allCases, id: \.rawValue) { content in
+                    ContentView(content: content)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 10)
+                    Divider()
                 }
-                
-                Divider()
-                
-                Button("로그아웃") {
-                    authVM.logout()
-                }
-                
-                Divider()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 10 )
@@ -86,6 +80,57 @@ struct MyPageTab: View {
         }
         .basicNavigationTitle(title: "")
         .padding(.horizontal, 10)
+    }
+    
+    @ViewBuilder
+    private func ContentView(content: Content) -> some View {
+        switch content {
+        case .checkProfile:
+            ProfileNavigation()
+        case .alarm:
+            AlaramNavigation()
+        case .notice:
+            NoticeNavigation()
+        case .term:
+            TermNavigation()
+        case .logout:
+            LogoutButton()
+        }
+    }
+    
+    @ViewBuilder
+    private func ProfileNavigation() -> some View {
+        NavigationLink("프로필 확인") {
+            Profile()
+        }
+    }
+    
+    @ViewBuilder
+    private func AlaramNavigation() -> some View {
+        NavigationLink("알림") {
+            Text("Emptry View")
+        }
+    }
+    
+    @ViewBuilder
+    private func NoticeNavigation() -> some View {
+        NavigationLink("공지사항") {
+            Text("Emptry View")
+        }
+    }
+    
+    @ViewBuilder
+    private func TermNavigation() -> some View {
+        NavigationLink("이용약관") {
+            Text("Emptry View")
+        }
+    }
+    
+    @ViewBuilder
+    private func LogoutButton() -> some View {
+        Button("로그아웃") {
+            authVM.logout()
+        }
     }
 }
 

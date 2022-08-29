@@ -15,6 +15,8 @@
 		1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A10128B75CDA0040F681 /* HeightSetterView.swift */; };
 		151B556F28BCA1660090A5E8 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B556E28BCA1660090A5E8 /* Account.swift */; };
 		151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557028BCA1AA0090A5E8 /* Reponses.swift */; };
+		151B557328BCA4FE0090A5E8 /* MyPageTabExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */; };
+		151B557528BCAA2F0090A5E8 /* Modal .swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557428BCAA2F0090A5E8 /* Modal .swift */; };
 		15246BD92884FD9A000BDFC8 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15246BD82884FD9A000BDFC8 /* LoginVM.swift */; };
 		1525F5FC28B731A600C7CA51 /* ImagesPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */; };
 		1525F5FE28B7362C00C7CA51 /* ItemInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F5FD28B7362C00C7CA51 /* ItemInformation.swift */; };
@@ -137,6 +139,8 @@
 		1514A10128B75CDA0040F681 /* HeightSetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightSetterView.swift; sourceTree = "<group>"; };
 		151B556E28BCA1660090A5E8 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		151B557028BCA1AA0090A5E8 /* Reponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reponses.swift; sourceTree = "<group>"; };
+		151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTabExtension.swift; sourceTree = "<group>"; };
+		151B557428BCAA2F0090A5E8 /* Modal .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modal .swift"; sourceTree = "<group>"; };
 		15246BD82884FD9A000BDFC8 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPicker.swift; sourceTree = "<group>"; };
 		1525F5FD28B7362C00C7CA51 /* ItemInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInformation.swift; sourceTree = "<group>"; };
@@ -529,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				15FA687E28BC661700B3DF0B /* ProfileExtension .swift */,
+				151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -622,6 +627,7 @@
 				157190F528B7072200880F98 /* RightArrow.swift */,
 				158011782893992A006016AD /* ImagePicker.swift */,
 				1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */,
+				151B557428BCAA2F0090A5E8 /* Modal .swift */,
 			);
 			path = "Global ";
 			sourceTree = "<group>";
@@ -809,6 +815,7 @@
 				155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */,
 				1570663628A53139002F7365 /* BounceControllScrollView.swift in Sources */,
 				157190EA28B6FE0F00880F98 /* WidthSetterView .swift in Sources */,
+				151B557528BCAA2F0090A5E8 /* Modal .swift in Sources */,
 				157190F628B7072200880F98 /* RightArrow.swift in Sources */,
 				156386D2288A5D1A006653E8 /* GroupViewModel.swift in Sources */,
 				159F1B26288BA16000012113 /* CustomFont.swift in Sources */,
@@ -826,6 +833,7 @@
 				1563FE9B28AE059D00F46CC7 /* ReturnManagement.swift in Sources */,
 				156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */,
 				150072F4289A2042005B6A93 /* RentalItemHCell.swift in Sources */,
+				151B557328BCA4FE0090A5E8 /* MyPageTabExtension.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
 				159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */,
 				15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */,

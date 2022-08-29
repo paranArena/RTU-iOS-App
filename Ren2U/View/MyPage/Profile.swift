@@ -12,6 +12,7 @@ struct Profile: View {
     
     @EnvironmentObject var authVM: AuthViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State private var isShowingModal = false
     
     var body: some View {
         VStack {
@@ -32,17 +33,21 @@ struct Profile: View {
             }
             
             Button {
-                
+                self.isShowingModal.toggle()
             } label: {
                 Text("탈퇴하기")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                     .foregroundColor(.Gray_495057)
             }
-            .padding()
-            .frame(maxWidth: .infinity)
+            .frame(width: SCREEN_WIDTH - 40, height: 30, alignment: .leading)
+            .padding(.leading, 15)
+            .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray_F1F2F3))
 
             
         }
+        .overlay(Modal(isShowingModal: $isShowingModal, text: "탈퇴하시겠습니까?", callback: {
+            print("Yes! on Ended ")
+        }))
         .basicNavigationTitle(title: "프로필 확인")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -65,6 +70,7 @@ struct Profile: View {
             }
         }
     }
+    
 }
 
 struct Profile_Previews: PreviewProvider {

@@ -14,6 +14,10 @@ class AuthViewModel: ObservableObject {
     @Published var jwt: String?
     @Published var user: User?
     
+    init() {
+        self.setLocalValues()
+    }
+    
     func sendCertificationNum() {
 //        let random = Int.random(in: 0000...9999)
 //        let randomGenerateNum = String(random)
@@ -113,6 +117,12 @@ class AuthViewModel: ObservableObject {
     
     
     //  MARK: Func for Local Test
+    
+    private func setLocalValues() {
+        setLocalToken()
+        setLocalUser()
+    }
+    
     private func setLocalToken() {
         self.jwt = "123"
     }

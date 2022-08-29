@@ -16,6 +16,8 @@ struct RentalTab: View {
     @State private var isSearchBarFocused = false
     @State private var offset: CGFloat = 200
     @State private var cancelSelection: CancelSelection = .none
+    
+    @State private var isShowingModal = true
     let spacing: CGFloat = 10
     
     var body: some View {
@@ -42,7 +44,9 @@ struct RentalTab: View {
         }
         .disabled(cancelSelection != .default)
         .overlay(ShadowRectangle())
-        .overlay(ModalRentalCancel())
+        .overlay(Modal(isShowingModal: $isShowingModal, text: "예약을 취소하시겠습니까?", callback: {
+            print("예약이 취소되었습니다!")
+        }))
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -110,71 +114,6 @@ struct RentalTab: View {
         .refreshable {
             await groupViewModel.refreshItems()
         }
-    }
-    
-    @ViewBuilder
-    private func ModalRentalCancel() -> some View {
-        VStack(alignment: .center, spacing: 20) {
-            Text("예약을 취소하시겠습니까?")
-                .font(.custom(CustomFont.NSKRBold.rawValue, size: 16))
-            
-            HStack {
-                Text("예")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                    .frame(width: 90, height: 36)
-                    .foregroundColor(self.cancelSelection == .yes ? Color.white : Color.navy_1E2F97)
-                    .background(Capsule().fill(self.cancelSelection == .yes ? Color.navy_1E2F97 : Color.white))
-                    .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 2))
-                    .simultaneousGesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { _ in
-                                self.cancelSelection = .yes
-                            }
-                            .onEnded { _ in
-                                self.cancelSelection = .default
-                            }
-                    )
-                
-                Text("아니오")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                    .frame(width: 90, height: 36)
-                    .foregroundColor(self.cancelSelection == .no ? Color.white : Color.navy_1E2F97)
-                    .background(Capsule().fill(self.cancelSelection == .no ? Color.navy_1E2F97 : Color.white))
-                    .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 2))
-                    .simultaneousGesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { _ in
-                                self.cancelSelection = .no
-                            }
-                            .onEnded { _ in
-                                self.cancelSelection = .default
-                            }
-                    )
-            }
-        }
-        .frame(width: 320, height: 160)
-        .background(Color.gray_F8F9FA)
-        .cornerRadius(15)
-        .clipped()
-        .shadow(color: Color.gray_ADB5BD, radius: 5, x: 0, y: 0)
-        .overlay(
-            VStack {
-                HStack {
-                    Spacer()
-                    Button {
-                        self.cancelSelection = .default
-                    } label: {
-                        Image(systemName: "xmark")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                            .foregroundColor(Color.black)
-                    }
-                    .padding(.all, 10)
-                }
-                Spacer()
-            }
-        )
-        .isHidden(hidden: cancelSelection == .default)
     }
 }
 
