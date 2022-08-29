@@ -134,4 +134,14 @@ class AuthViewModel: ObservableObject {
         UserDefaults.standard.setValue(token, forKey: jwtKey)
         self.jwt = token
     }
+    
+    
+    //  MARK: Func for Local Test
+    private func setLocalToken() {
+        
+    }
+    
+    private func setLocalUser() {
+        
+    }
 }
