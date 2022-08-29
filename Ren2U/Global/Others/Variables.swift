@@ -11,7 +11,8 @@ import SwiftUI
 let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
 
-let baseURL = "http://ec2-13-125-234-225.ap-northeast-2.compute.amazonaws.com:8080"
+//let baseURL = "http://ec2-13-125-234-225.ap-northeast-2.compute.amazonaws.com:8080"
+let baseURL = "localhost:8080"
 
 let jwtKey = "jwt"
 

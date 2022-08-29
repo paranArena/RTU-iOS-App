@@ -35,11 +35,7 @@ class AuthViewModel: ObservableObject {
     @Published var user: User?
     
     init() {
-        self.jwt = UserDefaults.standard.value(forKey: jwtKey) as? String
-        
-        // MARK: API 안되서 임시용 코드 
-        setToken(token: "123")
-        self.user = User.dummyUser()
+//        self.jwt = UserDefaults.standard.value(forKey: jwtKey) as? String
     }
     
     func sendCertificationNum() {

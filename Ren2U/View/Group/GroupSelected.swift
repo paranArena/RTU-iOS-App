@@ -45,7 +45,8 @@ struct GroupSelected: View {
                     ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
                         let compareGroupId = groupModel.joinedGroups[index].groupDto.groupId
                         Button {
-                            groupModel.joinedGroups[index].isActive.toggle()
+                            self.groupInfo = groupModel.joinedGroups[index]
+                            self.isActive = true
                         } label: {
                             FavoriteGroupCell(info: $groupModel.joinedGroups[index])
                         }
