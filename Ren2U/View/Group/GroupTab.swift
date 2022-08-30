@@ -24,7 +24,7 @@ struct GroupTab: View {
             SearchBar(text: $viewModel.searchText, isFoucsed: $viewModel.isSearchBarFocused)
                 .padding(.horizontal, 20)
 
-            Search(tabSelection: $tabSelection)
+            GroupSearch(search: $viewModel.searchText, tabSelection: $tabSelection)
                 .padding(.bottom, -10)
                 .isHidden(hidden: !viewModel.isSearchBarFocused)
             

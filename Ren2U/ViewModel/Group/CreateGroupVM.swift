@@ -16,7 +16,7 @@ extension CreateGroup {
         @Published var introduction = ""
         
         @Published var isShowingTagPlaceholder = true
-        @Published var tags = [TagInfo]()
+        @Published var tags = [String]()
         
         @Published var showImagePicker = false
         @Published var selectedUIImage: UIImage?
@@ -51,7 +51,7 @@ extension CreateGroup {
                 case " " :
                     isPasingStarted = false
                     if !parsedTag.isEmpty {
-                        self.tags.append(TagInfo(tag: "#\(parsedTag)"))
+                        self.tags.append("#\(parsedTag)")
                     }
                     parsedTag = ""
                     break
@@ -63,7 +63,7 @@ extension CreateGroup {
             }
             
             if !parsedTag.isEmpty {
-                self.tags.append(TagInfo(tag: "#\(parsedTag)"))
+                self.tags.append("#\(parsedTag)")
             }
             
             self.tagsText = ""

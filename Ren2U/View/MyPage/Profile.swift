@@ -17,7 +17,7 @@ struct Profile: View {
     
     var body: some View {
         VStack {
-            KFImage(URL(string: authVM.user?.imageSource ?? "https://picsum.photos/seed/picsum/200/300")!)
+            KFImage(URL(string: "https://picsum.photos/seed/picsum/200/300")!)
                 .onFailure { err in
                     print(err.errorDescription ?? "KFImage err")
                 }

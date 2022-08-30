@@ -15,7 +15,7 @@ struct GroupSelected: View {
     let refreshThreshold: CGFloat
     
     @State private var isActive = false
-    @State private var groupInfo: GroupInfo = GroupInfo.dummyGroup()
+    @State private var groupInfo: ClubAndRoleData = ClubAndRoleData(id: 1, club: ClubData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""]), role: "")
     
     var body: some View {
         RefreshScrollView(threshold: refreshThreshold) {
@@ -30,7 +30,7 @@ struct GroupSelected: View {
             }, label: { })
         )
         .refreshable {
-            await groupModel.unlikesGroups()
+            groupModel.getMyClubsTask()
         }
     }
     
@@ -43,14 +43,14 @@ struct GroupSelected: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
-                        let compareGroupId = groupModel.joinedGroups[index].groupDto.groupId
+                        let compareGroupId = groupModel.joinedGroups[index].id
                         Button {
                             self.groupInfo = groupModel.joinedGroups[index]
                             self.isActive = true
                         } label: {
                             FavoriteGroupCell(info: $groupModel.joinedGroups[index])
                         }
-                        .isHidden(hidden: !groupModel.likesGroupId.contains(where: { $0.groupId == compareGroupId }))
+                        .isHidden(hidden: !groupModel.likesGroupId.contains(where: { Int($0.groupId)! == compareGroupId }))
                     }
                 }
                 .padding(.horizontal, 20)

@@ -11,24 +11,25 @@ import Kingfisher
 struct FavoriteGroupCell: View {
     
     @EnvironmentObject var groupModel: GroupViewModel
-    @Binding var info: GroupInfo
+    @Binding var info: ClubAndRoleData
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            KFImage(URL(string: info.groupDto.imageSource)!)
-                .onFailure { err in
-                    print(err.errorDescription ?? "KFImage err")
-                }
-                .resizable()
-                .frame(width: 120, height: 120)
-                .cornerRadius(20)
-                .overlay { LikeStar() }
+            if let thumbnaulPath = info.club.thumbnailPath {
+                KFImage(URL(string: thumbnaulPath))
+                    .onFailure { err in
+                        print(err.errorDescription ?? "KFImage Optional err")
+                    }
+                    .resizable()
+                    .frame(width: 90, height: 90)
+                    .cornerRadius(20)
+            }
             
-            Text(info.groupDto.groupName)
+            Text(info.club.name)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.top, 5)
             
-            Text(groupModel.makeFavoritesGroupTag(tags: info.groupDto.tags))
+            Text(groupModel.makeFavoritesGroupTag(tags: info.club.hashtags))
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 .foregroundColor(.gray_ADB5BD)
                 .multilineTextAlignment(.center)
@@ -43,9 +44,9 @@ struct FavoriteGroupCell: View {
             HStack {
                 Spacer()
                 Button {
-                    info.didLike.toggle()
+                    
                 } label: {
-                    Image(systemName: info.didLike ? "star.fill" : "star")
+                    Image(systemName: "star")
                         .foregroundColor(.yellow)
                 }
                 .padding(5)

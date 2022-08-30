@@ -125,8 +125,8 @@ struct CreateGroup: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(viewModel.tags) { tag in
-                        Text("\(tag.tag)")
+                    ForEach(viewModel.tags, id: \.self) { tag in
+                        Text("\(tag)")
                             .padding(.vertical, 5)
                             .padding(.horizontal, 10)
                             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
@@ -201,7 +201,7 @@ struct CreateGroup: View {
     @ViewBuilder
     private func CreateCompleteButton() -> some View {
         Button {
-            groupViewModel.taskCreateClub(club: TempGroupInfo(name: viewModel.groupName, introduction: viewModel.introduction))
+            groupViewModel.taskCreateClub(club: CreateClubFormdata(name: viewModel.groupName, introduction: viewModel.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.tags))
             presentationMode.wrappedValue.dismiss()
         } label: {
             Text("완료")

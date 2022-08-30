@@ -32,6 +32,7 @@ struct Login: View {
                 viewModel.initValue()
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     @ViewBuilder

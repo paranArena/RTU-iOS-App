@@ -17,7 +17,7 @@ struct MyPageTab: View {
         
         VStack {
             HStack {
-                KFImage(URL(string: authVM.user?.imageSource ?? "https://picsum.photos/seed/picsum/200/300")!)
+                KFImage(URL(string: "https://picsum.photos/seed/picsum/200/300")!)
                     .onFailure { err in
                         print(err.errorDescription ?? "KFImage err")
                     }
@@ -27,11 +27,11 @@ struct MyPageTab: View {
                     .padding(.trailing, 30)
                 
                 VStack(alignment: .trailing, spacing: 0) {
-                    Text("\(authVM.user!.major) \(authVM.user!.studentId.substring(from: 2, to: 3))학번")
+                    Text("\(authVM.userResponse?.major ?? "") \(authVM.userResponse?.studentId.substring(from: 2, to: 3) ?? "") 학번")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                         .foregroundColor(.gray_868E96)
-                    
-                    Text("\(authVM.user!.name)")
+//
+                    Text("\(authVM.userResponse?.name ?? "")")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                     
                     HStack {

@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-struct Search: View {
+struct GroupSearch: View {
     
+    @Binding var search: String
     @Binding var tabSelection: Int
+    @State private var groupInfo = [ClubData]()
+    @EnvironmentObject var groupVM: GroupViewModel
+    @State private var isActive = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -19,15 +23,25 @@ struct Search: View {
             
             ScrollView {
                 VStack {
-                    ForEach(0..<10) { index in
-                        NavigationLink {
-//                            GroupPage(tabSelection: $tabSelection, groupInfo: GroupInfo.dummyGroup())
-                        } label: {
-                            JoinedGroupCell(info: GroupInfo.dummyGroup())
-                                .overlay(ApplicatedGroupOverlay())
-                        }
-                    }
+//                    ForEach(groupInfo, id: \.self) { searchCLubData in
+//                        Button {
+//                            isActive = true
+//                        } label: {
+//                            JoinedGroupCell(info: )
+//                                .overlay(ApplicatedGroupOverlay())
+//                        }
+//                    }
                 }
+            }
+        }
+//        .background {
+//            NavigationLink(isActive: $isActive) {
+//                GroupPage(tabSelection: $tabSelection, groupInfo: )
+//            } label: { }
+//        }
+        .onAppear {
+            Task {
+                groupInfo = await groupVM.searchClubsAll()
             }
         }
     }
@@ -71,6 +85,7 @@ struct Search: View {
         .padding()
     }
 }
+
 
 //struct Search_Previews: PreviewProvider {
 //    static var previews: some View {

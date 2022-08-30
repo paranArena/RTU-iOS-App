@@ -13,6 +13,7 @@ import HidableTabView
 struct Ren2UTab: View {
     
     @EnvironmentObject var groupViewModel: GroupViewModel
+    @EnvironmentObject var authViewMoel: AuthViewModel
     @State private var tabSelection: Int = Selection.home.rawValue
     
     init() {
@@ -47,10 +48,12 @@ struct Ren2UTab: View {
         .accentColor(.navy_1E2F97)
         .foregroundColor(.LabelColor)
         .onAppear {
-            groupViewModel.fetchJoinedGroups()
+            Task {
+                await authViewMoel.getMyInfo() 
+                await groupViewModel.getMyClubs()
+            }
             groupViewModel.fetchNotices()
             groupViewModel.fetchRentalItems()
-            groupViewModel.getLikesGroups()
         }
     }
     

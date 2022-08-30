@@ -12,7 +12,7 @@ struct GroupPage: View {
     
     @EnvironmentObject var groupModel: GroupViewModel
     @Binding var tabSelection: Int
-    @Binding var groupInfo: GroupInfo
+    @Binding var groupInfo: ClubAndRoleData
     @State var offset: CGFloat = 0
     let groupRole: Role = .chairman
     
@@ -20,12 +20,15 @@ struct GroupPage: View {
         
         BounceControllScrollView(offset: $offset) {
             VStack(alignment: .leading) {
-                KFImage(URL(string: groupInfo.groupDto.imageSource)!).onFailure { err in
-                    print(err.errorDescription ?? "KFImage err")
+                if let thumbnaulPath = groupInfo.club.thumbnailPath {
+                    KFImage(URL(string: thumbnaulPath))
+                        .onFailure { err in
+                            print(err.errorDescription ?? "KFImage Optional err")
+                        }
+                        .resizable()
+                        .frame(width: 90, height: 90)
+                        .cornerRadius(20)
                 }
-                .resizable()
-                .frame(width: SCREEN_WIDTH, height: 215)
-                .overlay(LikeStar())
                 
                 Tags()
                 Introduction()
@@ -38,7 +41,7 @@ struct GroupPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
-                Text(groupInfo.groupDto.groupName)
+                Text(groupInfo.club.name)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -52,8 +55,8 @@ struct GroupPage: View {
     private func Tags() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(groupInfo.groupDto.tags) { tag in
-                    Text("#\(tag.tag)")
+                ForEach(groupInfo.club.hashtags, id: \.self) { tag in
+                    Text("#\(tag)")
                         .foregroundColor(Color.Gray_495057)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 }
@@ -71,7 +74,7 @@ struct GroupPage: View {
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.Gray_495057)
             
-            Text(groupInfo.groupDto.intoduction)
+            Text(groupInfo.club.introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
         }
         .padding(.horizontal)
@@ -182,14 +185,14 @@ struct GroupPage: View {
             HStack {
                 Spacer()
                 Button {
-                    groupInfo.didLike.toggle()
-                    if groupInfo.didLike {
-                        groupModel.likesGroup(group: groupInfo)
-                    } else {
-                        groupModel.unlikeGroup(group: groupInfo)
-                    }
+//                    groupInfo.didLike.toggle()
+//                    if groupInfo.didLike {
+//                        groupModel.likesGroup(group: groupInfo)
+//                    } else {
+//                        groupModel.unlikeGroup(group: groupInfo)
+//                    }
                 } label: {
-                    Image(systemName: groupInfo.didLike ? "star.fill" : "star")
+                    Image(systemName: "star")
                         .foregroundColor(.yellow)
                 }
                 .padding(5)

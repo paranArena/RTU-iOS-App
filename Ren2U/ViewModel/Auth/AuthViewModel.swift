@@ -12,10 +12,10 @@ import Alamofire
 class AuthViewModel: ObservableObject {
     
     @Published var jwt: String?
-    @Published var user: User?
+    @Published var userResponse: UserData?
     
     init() {
-        self.setLocalValues()
+        self.jwt = UserDefaults.standard.string(forKey: jwtKey)
     }
     
     func sendCertificationNum() {
@@ -32,10 +32,10 @@ class AuthViewModel: ObservableObject {
     }
     
 //    @MainActor
-//    func checkEmailPuplicate(email: String) async -> Bool {
+//    func checkEmailDuplicate(email: String) async -> Bool {
 //        let url = "\(baseURL)/\(email)/exists"
 //    }
-
+    
     func signUp(user: User) async -> Bool {
         var result = false
         let url = "\(baseURL)/signup"
@@ -70,9 +70,9 @@ class AuthViewModel: ObservableObject {
             "email" : account.email,
             "password" : account.password
         ]
-        
- 
-        
+
+
+
         let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self)
         let response = await request.result
 
@@ -84,7 +84,7 @@ class AuthViewModel: ObservableObject {
             print("[Auth] login err: \(err)")
             return true
         }
-        
+
     }
     
     
@@ -95,16 +95,16 @@ class AuthViewModel: ObservableObject {
     
     @MainActor
     func getMyInfo() async {
-        let url = "\(baseURL)/members"
+        let url = "\(baseURL)/members/my/info"
         let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
         
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyInfoResponse.self)
         let response = await request.result
         
         switch response {
         case .success(let value):
-            print(value)
-            break
+            print(value.data)
+            self.userResponse = value.data
         case .failure(let err):
             print("[AuthVM] login err: \(err)")
         }
@@ -113,21 +113,5 @@ class AuthViewModel: ObservableObject {
     private func setToken(token: String) {
         UserDefaults.standard.setValue(token, forKey: jwtKey)
         self.jwt = token
-    }
-    
-    
-    //  MARK: Func for Local Test
-    
-    private func setLocalValues() {
-        setLocalToken()
-        setLocalUser()
-    }
-    
-    private func setLocalToken() {
-        self.jwt = "123"
-    }
-    
-    private func setLocalUser() {
-        self.user = User.dummyUser()
     }
 }
