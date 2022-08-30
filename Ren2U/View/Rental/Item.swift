@@ -62,7 +62,6 @@ struct Item: View {
                 }
             }
         }
-//        .overlay(BottomToolbar())
         .overlay(OverlayContent())
         .overlay(Modal())
         .onAppear {

@@ -154,9 +154,9 @@ struct GroupManagement: View {
         case .rentalManagement:
             RentalAndItemManagement()
         case .notice:
-            Text("공지사항")
+            NoticeManagement() 
         case .memberManagement:
-            Text("멤버 관리")
+            MemberManagement() 
         case .rentalActive:
             Text("Empty View")
         }

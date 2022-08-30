@@ -31,7 +31,7 @@ extension GroupViewModel {
 class GroupViewModel: ObservableObject {
     
     @Published var likesGroupId = [LikeGroupInfo]()
-    @Published var joinedGroups = [ClubAndRoleData]() // VStack에서 나열될 그룹들
+    @Published var joinedClubs = [ClubAndRoleData]() // VStack에서 나열될 그룹들
     
     @Published var notices = [NoticeInfo]() // Vstack 한개 그룹 셀에서 이동 후 사용될 정보
     @Published var rentalItems = [RentalItemInfo]() // Vstack 한개의 그룹 셀에서 이동 후 사용될 정보
@@ -90,7 +90,8 @@ class GroupViewModel: ObservableObject {
         switch response {
         case .success(let value):
             print("getMyClubsSuccess")
-            self.joinedGroups = value.data
+            print("Club count : \(value.data.count)")
+            self.joinedClubs = value.data
         case .failure(let err):
             print("getMyClubs err : \(err.errorDescription!)")
         }
@@ -148,8 +149,24 @@ class GroupViewModel: ObservableObject {
         return tagLabel
     }
     
+    //  MARK: REQUEST
+    func requestClubJoin(clubId: Int) async {
+        
+        let url = "\(baseURL)/clubs/\(clubId)/requests/join"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        
+        let task = AF.request(url, method: .post, encoding: JSONEncoding.default, headers:  hearders).serializingDecodable(requestClubJoinResponse.self)
+        let result = await task.result
+        
+        switch result {
+        case .success(let value):
+            print(value)
+        case .failure(let err):
+            print(err)
+        }
+    }
     
-    // MARK: SEARCH
+    //  MARK: SEARCH
     
     @MainActor
     func searchClubsAll() async -> [ClubData] {
@@ -170,9 +187,8 @@ class GroupViewModel: ObservableObject {
         }
     }
     
-    
     //  MARK: TASK
-    func taskCreateClub(club: CreateClubFormdata) {
+    func createClubTask(club: CreateClubFormdata) {
         Task {
             await createClub(club: club)
         }
@@ -181,6 +197,12 @@ class GroupViewModel: ObservableObject {
     func getMyClubsTask() {
         Task {
             await getMyClubs()
+        }
+    }
+    
+    func requestClubJoinTask(cludId: Int) {
+        Task {
+            await requestClubJoin(clubId: cludId)
         }
     }
 }

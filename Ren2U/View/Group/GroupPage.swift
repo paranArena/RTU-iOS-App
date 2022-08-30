@@ -14,7 +14,6 @@ struct GroupPage: View {
     @Binding var tabSelection: Int
     @Binding var groupInfo: ClubAndRoleData
     @State var offset: CGFloat = 0
-    let groupRole: Role = .chairman
     
     var body: some View {
         
@@ -26,8 +25,11 @@ struct GroupPage: View {
                             print(err.errorDescription ?? "KFImage Optional err")
                         }
                         .resizable()
-                        .frame(width: 90, height: 90)
-                        .cornerRadius(20)
+                        .frame(maxWidth: .infinity, minHeight: 200)
+                } else {
+                    Image(AssetImages.DefaultGroupImage.rawValue)
+                        .resizable()
+                        .frame(maxWidth: .infinity, minHeight: 200)
                 }
                 
                 Tags()
@@ -102,8 +104,8 @@ struct GroupPage: View {
             ForEach(groupModel.notices) { notice in
                 NoticeCell(noticeInfo: notice)
             }
-            .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
-            .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
+//            .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
+//            .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
         }
         .padding(.bottom, 70)
     }
@@ -140,42 +142,45 @@ struct GroupPage: View {
                 }
                 .padding(.horizontal)
             }
-            .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
-            .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
+//            .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
+//            .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
         }
     }
     
     @ViewBuilder
     private func TrailingToolbar() -> some View {
-        switch groupRole {
-        case .chairman:
+        switch groupInfo.role {
+        case ClubAndRoleData.GroupRole.owner.rawValue:
             NavigationLink {
                 GroupManagement()
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundColor(Color.LabelColor)
             }
-        case .member:
+        case ClubAndRoleData.GroupRole.wait.rawValue :
             Button {
-                
+
             } label: {
                 Text("탈퇴하기")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .foregroundColor(Color.LabelColor)
             }
-            
-        case .application:
+
+        case ClubAndRoleData.GroupRole.applicant.rawValue :
             Button {
-                
+
             } label: {
                 Text("가입취소")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .foregroundColor(Color.LabelColor)
             }
-        case .none:
+        case ClubAndRoleData.GroupRole.applicant.rawValue:
             Text("가입하기")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.LabelColor)
+        default:
+            Text("트레일링 바")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
         }
     }
     

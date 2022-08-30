@@ -112,22 +112,22 @@ struct SignUp: View {
     
     @ViewBuilder
     private func Name() -> some View {
-        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[Field.name.rawValue])
+        BottomLinePlaceholder(placeholder: "", text: $viewModel.text[Field.name.rawValue])
     }
     
     @ViewBuilder
     private func Major() -> some View {
-        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[Field.major.rawValue])
+        BottomLinePlaceholder(placeholder: "", text: $viewModel.text[Field.major.rawValue])
     }
     
     @ViewBuilder
     private func StudentId() -> some View {
-        BottomLinePlaceholder(placeholder: Text(""), text: $viewModel.text[Field.studentId.rawValue])
+        BottomLinePlaceholder(placeholder: "", text: $viewModel.text[Field.studentId.rawValue])
     }
     
     @ViewBuilder
     private func PhoneNumber() -> some View {
-        BottomLinePlaceholder(placeholder: Text("'-'를 제외한 숫자로 된 전화번호를 입력하세요"), text: $viewModel.text[Field.phoneNumber.rawValue])
+        BottomLinePlaceholder(placeholder: "'-'를 제외한 숫자로 된 전화번호를 입력하세요", text: $viewModel.text[Field.phoneNumber.rawValue])
             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
     }
     

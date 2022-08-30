@@ -9,14 +9,14 @@ import SwiftUI
 
 struct BottomLinePlaceholder: View {
     
-    let placeholder: Text
+    let placeholder: String
     @Binding var text: String
     
     var body: some View {
         
         ZStack(alignment: .leading) {
             if text.isEmpty {
-                placeholder
+                Text(placeholder)
                     .foregroundColor(.gray_ADB5BD)
                     .font(.system(size: 14))
             }
@@ -36,6 +36,6 @@ struct BottomLinePlaceholder: View {
 
 struct BottomLinePlaceholder_Previews: PreviewProvider {
     static var previews: some View {
-        BottomLinePlaceholder(placeholder: Text("placeholder"), text: .constant(""))
+        BottomLinePlaceholder(placeholder: "placeholder" , text: .constant(""))
     }
 }

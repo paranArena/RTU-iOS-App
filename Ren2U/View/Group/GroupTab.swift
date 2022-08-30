@@ -10,7 +10,7 @@ import HidableTabView
 
 struct GroupTab: View {
     
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var vm = ViewModel()
     @Binding var tabSelection: Int 
     @EnvironmentObject var groupViewModel: GroupViewModel
     @State private var offset: CGFloat = .zero
@@ -21,12 +21,12 @@ struct GroupTab: View {
         
         VStack(alignment: .center, spacing: spacing) {
             
-            SearchBar(text: $viewModel.searchText, isFoucsed: $viewModel.isSearchBarFocused)
+            SearchBar(text: $vm.searchText, isFoucsed: $vm.isSearchBarFocused)
                 .padding(.horizontal, 20)
 
-            GroupSearch(search: $viewModel.searchText, tabSelection: $tabSelection)
+            GroupSearch(search: $vm.searchText, tabSelection: $tabSelection)
                 .padding(.bottom, -10)
-                .isHidden(hidden: !viewModel.isSearchBarFocused)
+                .isHidden(hidden: !vm.isSearchBarFocused)
             
             Group {
                 GroupSelectionButton()
@@ -38,18 +38,18 @@ struct GroupTab: View {
                 ZStack {
                     GroupSelected(tabSelection: $tabSelection, refreshThreshold: offset)
                         .overlay(CreateGroupButton())
-                        .offset(x: viewModel.groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)
+                        .offset(x: vm.groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)
                     NoticeSelected()
-                        .offset(x: viewModel.groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
+                        .offset(x: vm.groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
                 }
                 .padding(.bottom, -10)
             }
-            .isHidden(hidden: viewModel.isSearchBarFocused)
+            .isHidden(hidden: vm.isSearchBarFocused)
         }
         .showTabBar(animated: false)
         .navigationTitle("")
         .navigationBarHidden(true)
-        .animation(.spring(), value: viewModel.groupSelection)
+        .animation(.spring(), value: vm.groupSelection)
     }
     
     @ViewBuilder
@@ -57,12 +57,12 @@ struct GroupTab: View {
         HStack {
             ForEach(Selection.allCases, id: \.rawValue) {  option in
                 Button {
-                    self.viewModel.groupSelection  = option
+                    self.vm.groupSelection  = option
                 } label: {
                     Text(option.title)
                         .frame(maxWidth: .infinity)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
-                        .foregroundColor(self.viewModel.groupSelection == option ? .navy_1E2F97 : .gray_ADB5BD)
+                        .foregroundColor(self.vm.groupSelection == option ? .navy_1E2F97 : .gray_ADB5BD)
                 }
 
             }
@@ -76,7 +76,7 @@ struct GroupTab: View {
             HStack {
                 Spacer()
                 NavigationLink {
-                    CreateGroup()
+                    CreateGroupView()
                 } label: {
                     PlusCircle()
                 }

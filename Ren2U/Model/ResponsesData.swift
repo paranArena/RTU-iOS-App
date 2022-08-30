@@ -16,7 +16,7 @@ struct UserData: Codable {
     var major: String
 }
 
-struct ClubData: Codable {
+struct ClubData: Codable, Hashable {
     let id: Int
     var name: String
     var introduction: String
@@ -33,5 +33,14 @@ struct ClubAndRoleData: Codable, Identifiable {
         self.id = id
         self.club = club
         self.role = role
+    }
+}
+
+extension ClubAndRoleData {
+    enum GroupRole: String {
+        case owner = "OWNER"
+        case wait = "WAIT"
+        case applicant = "APPLICANT"
+        case nonMember = "NONMEMBER"
     }
 }

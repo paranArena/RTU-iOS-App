@@ -42,13 +42,13 @@ struct GroupSelected: View {
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
-                        let compareGroupId = groupModel.joinedGroups[index].id
+                    ForEach(groupModel.joinedClubs.indices, id: \.self) { index in
+                        let compareGroupId = groupModel.joinedClubs[index].id
                         Button {
-                            self.groupInfo = groupModel.joinedGroups[index]
+                            self.groupInfo = groupModel.joinedClubs[index]
                             self.isActive = true
                         } label: {
-                            FavoriteGroupCell(info: $groupModel.joinedGroups[index])
+                            FavoriteGroupCell(info: $groupModel.joinedClubs[index])
                         }
                         .isHidden(hidden: !groupModel.likesGroupId.contains(where: { Int($0.groupId)! == compareGroupId }))
                     }
@@ -68,12 +68,12 @@ struct GroupSelected: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
             VStack(alignment: .center, spacing: 0) {
-                ForEach(groupModel.joinedGroups.indices, id: \.self) { index in
+                ForEach(groupModel.joinedClubs.indices, id: \.self) { index in
                     Button {
-                        self.groupInfo = groupModel.joinedGroups[index]
+                        self.groupInfo = groupModel.joinedClubs[index]
                         self.isActive = true
                     } label: {
-                        JoinedGroupCell(info: groupModel.joinedGroups[index])
+                        HorizontalClubCell(info: groupModel.joinedClubs[index])
                     }
                 }
             }

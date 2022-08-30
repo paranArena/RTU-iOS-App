@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension CreateGroup {
+extension CreateGroupView {
     
     class ViewModel: ObservableObject {
         
@@ -24,7 +24,7 @@ extension CreateGroup {
         @Published var offset: CGFloat = 0
         
         
-        func showTagPlaceHolder(newValue: CreateGroup.Field?) {
+        func showTagPlaceHolder(newValue: CreateGroupView.Field?) {
             if newValue == .tagsText {
                 self.isShowingTagPlaceholder = false
             } else {
@@ -76,7 +76,7 @@ extension CreateGroup {
 
 }
 
-extension CreateGroup  {
+extension CreateGroupView  {
     enum Field: Int, CaseIterable {
         case groupName
         case tagsText

@@ -9,11 +9,13 @@ import SwiftUI
 
 struct GroupSearch: View {
     
+    @EnvironmentObject var groupVM: GroupViewModel
     @Binding var search: String
     @Binding var tabSelection: Int
+    
     @State private var groupInfo = [ClubData]()
-    @EnvironmentObject var groupVM: GroupViewModel
     @State private var isActive = false
+    @State private var offset: CGFloat = .zero
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -21,22 +23,23 @@ struct GroupSearch: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
             
-            ScrollView {
+            BounceControllScrollView(offset: $offset) {
                 VStack {
-//                    ForEach(groupInfo, id: \.self) { searchCLubData in
-//                        Button {
-//                            isActive = true
-//                        } label: {
-//                            JoinedGroupCell(info: )
-//                                .overlay(ApplicatedGroupOverlay())
-//                        }
-//                    }
+                    ForEach(groupInfo, id: \.self) { searchCLubData in
+                        Button {
+                            print("???")
+                            isActive = true
+                        } label: {
+                            HorizontalClubCell(info: ClubAndRoleData(id: 1, club: searchCLubData, role: ClubAndRoleData.GroupRole.owner.rawValue))
+                                .overlay(alignment: .trailing) { OverlayFinder(clubId: searchCLubData.id) }
+                        }
+                    }
                 }
             }
         }
 //        .background {
 //            NavigationLink(isActive: $isActive) {
-//                GroupPage(tabSelection: $tabSelection, groupInfo: )
+//                GroupPage(tabSelection: $tabSelection)
 //            } label: { }
 //        }
         .onAppear {
@@ -44,19 +47,31 @@ struct GroupSearch: View {
                 groupInfo = await groupVM.searchClubsAll()
             }
         }
-    }
-    
-    func JoinedGroupOverlay() -> some View {
-        HStack {
-            Spacer()
-            Text("가입된 그룹")
-                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                .foregroundColor(Color.gray_DEE2E6)
+        .onChange(of: search) { newValue in
+            
         }
-        .padding()
     }
     
-    func ApplicatedGroupOverlay() -> some View {
+    @ViewBuilder
+    private func OverlayFinder(clubId: Int) -> some View {
+        
+        if groupVM.joinedClubs.contains(where: { $0.club.id == clubId }) {
+            JoindeClubOverlay()
+        } else {
+            NoneOverlay(clubId: clubId)
+        }
+    }
+    
+    @ViewBuilder
+    private func JoindeClubOverlay() -> some View {
+        Text("가입된 그룹")
+            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+            .foregroundColor(Color.gray_868E96)
+            .padding()
+    }
+    
+    @ViewBuilder
+    private func ApplicatedGroupOverlay() -> some View {
         HStack {
             Spacer()
             Text("요청완료")
@@ -69,9 +84,11 @@ struct GroupSearch: View {
         .padding()
     }
     
-    func NoneOverlay() -> some View {
-        HStack {
-            Spacer()
+    @ViewBuilder
+    private func NoneOverlay(clubId: Int) -> some View {
+        Button {
+            groupVM.requestClubJoinTask(cludId: clubId)
+        } label: {
             Text("가입 요청")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 .foregroundColor(Color.navy_1E2F97)
@@ -79,7 +96,7 @@ struct GroupSearch: View {
                 .padding(.vertical, 5)
                 .overlay(
                     Capsule()
-                        .strokeBorder(Color.navy_1E2F97, lineWidth: 2)
+                        .strokeBorder(Color.navy_1E2F97, lineWidth: 1)
                 )
         }
         .padding()

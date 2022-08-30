@@ -45,15 +45,9 @@ struct RentalAndItemManagement: View {
         }
         .onAppear {
             UITabBar.hideTabBar()
-            print("Hide Tab Bar")
         }
         .frame(maxWidth: .infinity, maxHeight:  .infinity)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("대여/물품 관리")
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-            }
-        }
+        .basicNavigationTitle(title: "대여/물품 관리")
     }
     
     @ViewBuilder

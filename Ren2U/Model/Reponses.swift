@@ -47,6 +47,14 @@ struct GetSearchClubsAllResponse: Codable {
     let responseMessage: String
     let data: [ClubData]
 }
+
+//  MARK: REQUEST
+struct requestClubJoinResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: String? 
+}
+
 // MARK: 임시 코드
 
 struct NoticeInfo: Identifiable {

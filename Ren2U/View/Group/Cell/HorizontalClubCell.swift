@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct JoinedGroupCell: View {
+struct HorizontalClubCell: View {
     
     @EnvironmentObject var groupModel: GroupViewModel
     let info: ClubAndRoleData
@@ -17,12 +17,16 @@ struct JoinedGroupCell: View {
         
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-                if let thumbnaulPath = info.club.thumbnailPath {
-                    KFImage(URL(string: thumbnaulPath))
+                if let thumnnailPath = info.club.thumbnailPath {
+                    KFImage(URL(string: thumnnailPath))
                         .onFailure { err in
                             print(err.errorDescription ?? "KFImage Optional err")
                         }
                         .resizable()
+                        .frame(width: 90, height: 90)
+                        .cornerRadius(20)
+                } else {
+                    Image(AssetImages.DefaultGroupImage.rawValue)
                         .frame(width: 90, height: 90)
                         .cornerRadius(20)
                 }

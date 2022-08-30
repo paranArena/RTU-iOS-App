@@ -8,9 +8,9 @@
 import SwiftUI
 import HidableTabView
 
-struct CreateGroup: View {
+struct CreateGroupView: View {
     
-    @EnvironmentObject var groupViewModel: GroupViewModel
+    @EnvironmentObject var clubVM: GroupViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.isPresented) var isPresented
     @StateObject var viewModel = ViewModel()
@@ -201,7 +201,7 @@ struct CreateGroup: View {
     @ViewBuilder
     private func CreateCompleteButton() -> some View {
         Button {
-            groupViewModel.taskCreateClub(club: CreateClubFormdata(name: viewModel.groupName, introduction: viewModel.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.tags))
+            clubVM.createClubTask(club: CreateClubFormdata(name: viewModel.groupName, introduction: viewModel.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.tags))
             presentationMode.wrappedValue.dismiss()
         } label: {
             Text("완료")
@@ -213,6 +213,6 @@ struct CreateGroup: View {
 
 struct CreateGroup_Previews: PreviewProvider {
     static var previews: some View {
-        CreateGroup()
+        CreateGroupView()
     }
 }
