@@ -15,6 +15,11 @@ struct MemberManagement: View {
     var body: some View {
         VStack {
             SelectionButton()
+            
+            ZStack {
+                
+            }
+            .frame(maxHeight: .infinity)
         }
         .basicNavigationTitle(title: "멤버 관리")
         .onAppear {
@@ -36,6 +41,13 @@ struct MemberManagement: View {
                 }
 
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func Applicant() -> some View {
+        VStack {
+            
         }
     }
 }

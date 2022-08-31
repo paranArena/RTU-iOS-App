@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignUpCell: View {
     
-    let userInfo: User
+    let userInfo: UserData
     @State private var isShowingRequestButton = false
     @State private var offset: CGFloat = .zero
     
@@ -100,6 +100,6 @@ struct SignUpCell: View {
 
 struct SignUpCell_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpCell(userInfo: User.dummyUser())
+        SignUpCell(userInfo: UserData.dummyUserData())
     }
 }

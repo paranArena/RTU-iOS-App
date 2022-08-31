@@ -14,6 +14,7 @@ struct GroupPage: View {
     @Binding var tabSelection: Int
     @Binding var groupInfo: ClubAndRoleData
     @State var offset: CGFloat = 0
+    @State var isActive = false
     
     var body: some View {
         
@@ -39,6 +40,11 @@ struct GroupPage: View {
                 Spacer()
             }
         }
+        .background(
+            NavigationLink(isActive: $isActive, destination: {
+                GroupManagement(groupId: groupInfo.club.id)
+            }, label: {}) 
+        )
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -151,8 +157,9 @@ struct GroupPage: View {
     private func TrailingToolbar() -> some View {
         switch groupInfo.role {
         case ClubAndRoleData.GroupRole.owner.rawValue:
-            NavigationLink {
-                GroupManagement()
+            
+            Button {
+                isActive = true
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundColor(Color.LabelColor)

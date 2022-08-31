@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct ReturnNoticeCell: View {
-    let userInfo: User
+    let userInfo: UserData
     let rentalItemInfo: ReturnInfo
     
     @State private var isShowingRequestButton = false
@@ -107,6 +107,6 @@ struct ReturnNoticeCell: View {
 
 struct ReturnNoticeCell_Previews: PreviewProvider {
     static var previews: some View {
-        ReturnNoticeCell(userInfo: User.dummyUser(), rentalItemInfo: ReturnInfo.dummyReturnInfo())
+        ReturnNoticeCell(userInfo: UserData.dummyUserData(), rentalItemInfo: ReturnInfo.dummyReturnInfo())
     }
 }

@@ -24,6 +24,7 @@ struct GroupSelected: View {
                 JoinedGroup()
             }
         }
+        .frame(maxWidth: .infinity)
         .background(
             NavigationLink(isActive: $isActive, destination: {
                 GroupPage(tabSelection: $tabSelection, groupInfo: $groupInfo)
@@ -67,6 +68,7 @@ struct GroupSelected: View {
                 .foregroundColor(.LabelColor)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
+            
             VStack(alignment: .center, spacing: 0) {
                 ForEach(groupModel.joinedClubs.indices, id: \.self) { index in
                     Button {
@@ -78,6 +80,7 @@ struct GroupSelected: View {
                 }
             }
         }
+        .frame(alignment: .leading)
     }
     
 }

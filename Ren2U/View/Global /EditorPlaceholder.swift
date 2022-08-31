@@ -6,27 +6,26 @@
 //
 
 import SwiftUI
+import Introspect
 
-struct SimplePlaceholderEditor: View {
+struct EditorPlaceholder: View {
     
     let placeholder: String
     @Binding var text: String
-    @FocusState var foucsState: Bool?
-    
     
     var body: some View {
         TextEditor(text: $text)
             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-            .focused($foucsState, equals: true)
-            .background(.clear)
-            .opacity(text.isEmpty ? 0.1 : 1)
             .background(alignment: .topLeading) {
-                TextEditor(text: .constant(placeholder))
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                TextEditor(text: text.isEmpty ? .constant(placeholder) : .constant(""))
                     .foregroundColor(.gray_ADB5BD)
-                    .isHidden(hidden: !text.isEmpty)
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+            }
+            .introspectTextView { uiTextView in
+                uiTextView.backgroundColor = .clear
             }
     }
+        
 }
 //
 //struct SimplePlaceholder_Previews: PreviewProvider {

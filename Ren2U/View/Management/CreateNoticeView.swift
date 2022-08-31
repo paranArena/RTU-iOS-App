@@ -10,6 +10,8 @@ import SwiftUI
 struct CreateNoticeView: View {
     
     @State private var raw = NotificationModel(title: "", content: "")
+    @ObservedObject var managementVM: ManagementViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
@@ -17,14 +19,15 @@ struct CreateNoticeView: View {
                 .padding(.top, 20)
             Divider()
             
-            SimplePlaceholderEditor(placeholder: "내용을 입력해주세요", text: $raw.content)
+            EditorPlaceholder(placeholder: "내용을 입력해주세요", text: $raw.content)
         }
         .padding(.horizontal, 10)
         .basicNavigationTitle(title: "공지사항 등록")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    
+                    managementVM.createNotification(notice: raw)
+                    dismiss() 
                 } label: {
                     Text("완료")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
@@ -37,6 +40,6 @@ struct CreateNoticeView: View {
 
 struct CreateNoticeView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNoticeView()
+        CreateNoticeView(managementVM: ManagementViewModel(groupId: 0))
     }
 }

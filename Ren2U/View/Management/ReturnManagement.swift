@@ -10,7 +10,7 @@ import Kingfisher
 
 struct ReturnManagement: View {
     
-    let userInfo: User
+    let userInfo: UserData
     let returnInfo: ReturnInfo
     @State private var review: String = ""
     @Environment(\.presentationMode) var presentationMode
@@ -99,6 +99,6 @@ struct ReturnManagement: View {
 
 struct RetrunManagement_Previews: PreviewProvider {
     static var previews: some View {
-        ReturnManagement(userInfo: User.dummyUser(), returnInfo: ReturnInfo.dummyReturnInfo())
+        ReturnManagement(userInfo: UserData.dummyUserData(), returnInfo: ReturnInfo.dummyReturnInfo())
     }
 }

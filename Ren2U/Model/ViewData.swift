@@ -14,6 +14,10 @@ struct UserData: Codable {
     var phoneNumber: String
     var studentId: String
     var major: String
+    
+    static func dummyUserData() -> UserData {
+        return UserData(id: 123, email: "이메일", name: "이름", phoneNumber: "01064330824", studentId: "201820767", major: "소프트웨어학과")
+    }
 }
 
 struct ClubData: Codable, Hashable {

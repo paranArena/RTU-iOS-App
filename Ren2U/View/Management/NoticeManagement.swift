@@ -9,6 +9,8 @@ import SwiftUI
 import HidableTabView
 
 struct NoticeManagement: View {
+    
+    @ObservedObject var managementVM: ManagementViewModel
     var body: some View {
         ScrollView {
             VStack {
@@ -32,7 +34,7 @@ struct NoticeManagement: View {
                 HStack{
                     Spacer()
                     NavigationLink {
-                        CreateNoticeView()
+                        CreateNoticeView(managementVM: managementVM)
                     } label: {
                         PlusCircle()
                     }
@@ -48,6 +50,6 @@ struct NoticeManagement: View {
 
 struct NoticeManagement_Previews: PreviewProvider {
     static var previews: some View {
-        NoticeManagement()
+        NoticeManagement(managementVM: ManagementViewModel(groupId: 0))
     }
 }

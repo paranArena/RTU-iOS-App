@@ -14,6 +14,8 @@ struct GroupManagement: View {
     @State private var rentalWidth: CGFloat = 0
     @State private var rentalToggle = false
     @Environment(\.isPresented) var isPresented
+    let groupId: Int
+    @StateObject var managementVM = ManagementViewModel(groupId: 10)
     
     
     @State var isActivated = false
@@ -30,11 +32,7 @@ struct GroupManagement: View {
                     
                     ScrollView {
                         VStack {
-                            SignUpCell(userInfo: User.dummyUser())
-                            ReturnNoticeCell(userInfo: User.dummyUser(), rentalItemInfo: ReturnInfo.dummyReturnInfo())
-                            SignUpCell(userInfo: User.dummyUser())
-                            SignUpCell(userInfo: User.dummyUser())
-                            SignUpCell(userInfo: User.dummyUser())
+                            
                         }
                         .padding(.leading, 10)
                         .frame(maxWidth: .infinity)
@@ -154,7 +152,7 @@ struct GroupManagement: View {
         case .rentalManagement:
             RentalAndItemManagement()
         case .notice:
-            NoticeManagement() 
+            NoticeManagement(managementVM: managementVM)
         case .memberManagement:
             MemberManagement() 
         case .rentalActive:
@@ -165,6 +163,6 @@ struct GroupManagement: View {
 
 struct GroupManagement_Previews: PreviewProvider {
     static var previews: some View {
-        GroupManagement()
+        GroupManagement(groupId: 10)
     }
 }
