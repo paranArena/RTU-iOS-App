@@ -14,8 +14,14 @@ struct GroupManagement: View {
     @State private var rentalWidth: CGFloat = 0
     @State private var rentalToggle = false
     @Environment(\.isPresented) var isPresented
+    
     let groupId: Int
-    @StateObject var managementVM = ManagementViewModel(groupId: 10)
+    @StateObject var managementVM: ManagementViewModel
+    
+    init(groupId: Int) {
+        self.groupId = groupId
+        _managementVM = StateObject(wrappedValue: ManagementViewModel(groupId: groupId))
+    }
     
     
     @State var isActivated = false
@@ -154,7 +160,7 @@ struct GroupManagement: View {
         case .notice:
             NoticeManagement(managementVM: managementVM)
         case .memberManagement:
-            MemberManagement() 
+            MemberManagement(managementVM: managementVM)
         case .rentalActive:
             Text("Empty View")
         }

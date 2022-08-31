@@ -107,3 +107,9 @@ struct RentalItemInfo: Identifiable, Codable {
     }
 }
 
+struct SearchClubJoinsAllResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [UserData]
+}
+

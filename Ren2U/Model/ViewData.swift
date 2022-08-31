@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserData: Codable {
+struct UserData: Codable, Identifiable {
     var id: Int
     var email: String
     var name: String
@@ -16,7 +16,7 @@ struct UserData: Codable {
     var major: String
     
     static func dummyUserData() -> UserData {
-        return UserData(id: 123, email: "이메일", name: "이름", phoneNumber: "01064330824", studentId: "201820767", major: "소프트웨어학과")
+        return UserData(id: 123, email: "nou0jid", name: "노우영", phoneNumber: "01064330824", studentId: "201820767", major: "소프트웨어학과")
     }
 }
 

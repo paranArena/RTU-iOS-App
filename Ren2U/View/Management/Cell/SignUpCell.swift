@@ -1,38 +1,44 @@
 //
-//  SignUpCell .swift
+//  SignUpCell.swift
 //  Ren2U
 //
-//  Created by 노우영 on 2022/08/18.
+//  Created by 노우영 on 2022/08/31.
 //
 
 import SwiftUI
 
 struct SignUpCell: View {
     
-    let userInfo: UserData
+    @ObservedObject var managementVM: ManagementViewModel
+    let userData: UserData
     @State private var isShowingRequestButton = false
     @State private var offset: CGFloat = .zero
     
     var body: some View {
         
         HStack {
-            VStack(alignment: .leading, spacing: 5) {
-                Text("\(userInfo.major) \(userInfo.name)님이 회원가입을 요청했습니다.")
-                    .lineLimit(1)
+            VStack(alignment: .leading) {
+                Text(userData.name)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                 
-                Text(getTime())
-                    .font(.custom(CustomFont.RobotoRegular.rawValue, size: 12))
-                    .foregroundColor(Color.gray_868E96)
-            
+                Text("\(userData.major) \(userData.studentId.substring(from: 2, to: 3))")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                    .foregroundColor(.gray_868E96)
             }
             
             Spacer()
+            
+            HStack {
+                Text("가입신청")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+                    .foregroundColor(.navy_1E2F97)
+            }
             
             HStack(alignment: .center, spacing: 0) {
                 Button {
                     self.offset = .zero
                     self.isShowingRequestButton = false
+                    managementVM.acceptClubJoinTask(userData: userData)
                 } label: {
                     Text("확인")
                         .lineLimit(1)
@@ -97,9 +103,8 @@ struct SignUpCell: View {
         return formatter.string(from: Date.now)
     }
 }
-
 struct SignUpCell_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpCell(userInfo: UserData.dummyUserData())
+        SignUpCell(managementVM: ManagementViewModel(groupId: 1), userData: UserData.dummyUserData())
     }
 }

@@ -37,6 +37,7 @@ struct GroupSearch: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
 //        .background {
 //            NavigationLink(isActive: $isActive) {
 //                GroupPage(tabSelection: $tabSelection)
@@ -47,9 +48,7 @@ struct GroupSearch: View {
                 groupInfo = await groupVM.searchClubsAll()
             }
         }
-        .onChange(of: search) { newValue in
-            
-        }
+        
     }
     
     @ViewBuilder

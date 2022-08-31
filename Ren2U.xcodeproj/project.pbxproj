@@ -67,7 +67,7 @@
 		156386DC288A6E0B006653E8 /* HorizontalClubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386DB288A6E0B006653E8 /* HorizontalClubCell.swift */; };
 		1563FE8E28ADDF5600F46CC7 /* GroupManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE8D28ADDF5600F46CC7 /* GroupManagement.swift */; };
 		1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */; };
-		1563FE9328ADEF9000F46CC7 /* SignUpCell .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9228ADEF9000F46CC7 /* SignUpCell .swift */; };
+		1563FE9328ADEF9000F46CC7 /* SignUpNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9228ADEF9000F46CC7 /* SignUpNoticeCell.swift */; };
 		1563FE9528ADF62E00F46CC7 /* ReturnNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */; };
 		1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */; };
 		1563FE9928ADFBA700F46CC7 /* RetnalNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */; };
@@ -91,6 +91,7 @@
 		159F1B26288BA16000012113 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* CustomFont.swift */; };
 		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
 		15A2E7B22893C58A00254793 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A2E7B12893C58A00254793 /* KeyboardHandler.swift */; };
+		15AC7E3A28BF2ECE00879106 /* SignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AC7E3928BF2ECE00879106 /* SignUpCell.swift */; };
 		15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B63DA328AF38EA000AB82D /* ViewExtensions .swift */; };
 		15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel.swift */; };
 		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
@@ -201,7 +202,7 @@
 		156386DB288A6E0B006653E8 /* HorizontalClubCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalClubCell.swift; sourceTree = "<group>"; };
 		1563FE8D28ADDF5600F46CC7 /* GroupManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagement.swift; sourceTree = "<group>"; };
 		1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRentalCell.swift; sourceTree = "<group>"; };
-		1563FE9228ADEF9000F46CC7 /* SignUpCell .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpCell .swift"; sourceTree = "<group>"; };
+		1563FE9228ADEF9000F46CC7 /* SignUpNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNoticeCell.swift; sourceTree = "<group>"; };
 		1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnNoticeCell.swift; sourceTree = "<group>"; };
 		1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalViewModel.swift; sourceTree = "<group>"; };
 		1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetnalNoticeCell.swift; sourceTree = "<group>"; };
@@ -224,6 +225,7 @@
 		159F1B24288BA0C200012113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		159F1B25288BA16000012113 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		15A2E7B12893C58A00254793 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		15AC7E3928BF2ECE00879106 /* SignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCell.swift; sourceTree = "<group>"; };
 		15B63DA328AF38EA000AB82D /* ViewExtensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewExtensions .swift"; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		15C03144289CD5E500D0354E /* RentalTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalTabVM.swift; sourceTree = "<group>"; };
@@ -475,7 +477,8 @@
 			isa = PBXGroup;
 			children = (
 				1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */,
-				1563FE9228ADEF9000F46CC7 /* SignUpCell .swift */,
+				1563FE9228ADEF9000F46CC7 /* SignUpNoticeCell.swift */,
+				15AC7E3928BF2ECE00879106 /* SignUpCell.swift */,
 				1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */,
 				1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */,
 			);
@@ -847,7 +850,7 @@
 				1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */,
 				1523D5DA28BDCB1F009EB733 /* Formdata, raw.swift in Sources */,
 				1523D5E228BE291C009EB733 /* MemberManagement.swift in Sources */,
-				1563FE9328ADEF9000F46CC7 /* SignUpCell .swift in Sources */,
+				1563FE9328ADEF9000F46CC7 /* SignUpNoticeCell.swift in Sources */,
 				1523D5E828BE2C8D009EB733 /* NoticeManagement.swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
 				157190F128B7043100880F98 /* PlusCircle.swift in Sources */,
@@ -921,6 +924,7 @@
 				1523D5D828BDC986009EB733 /* ViewData.swift in Sources */,
 				15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */,
 				1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */,
+				15AC7E3A28BF2ECE00879106 /* SignUpCell.swift in Sources */,
 				157190F328B7053200880F98 /* ItemPhoto.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
