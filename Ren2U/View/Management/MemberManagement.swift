@@ -25,7 +25,7 @@ extension MemberManagement {
 }
 struct MemberManagement: View {
     
-    @ObservedObject var managementVM: ManagementViewModel
+    @EnvironmentObject var managementVM: ManagementViewModel
     @State private var buttonSelection: Selection = .member
     
     var body: some View {
@@ -87,6 +87,6 @@ struct MemberManagement: View {
 
 struct MemberManament_Previews: PreviewProvider {
     static var previews: some View {
-        MemberManagement(managementVM: ManagementViewModel(groupId: 1))
+        MemberManagement()
     }
 }

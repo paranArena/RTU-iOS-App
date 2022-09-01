@@ -80,7 +80,7 @@ struct GroupSelected: View {
                 }
             }
         }
-        .frame(alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
 }

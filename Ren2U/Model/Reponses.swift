@@ -48,6 +48,12 @@ struct GetSearchClubsAllResponse: Codable {
     let data: [ClubData]
 }
 
+struct SearchNotificationsAllResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [NoticeData]
+}
+
 //  MARK: REQUEST
 struct requestClubJoinResponse: Codable {
     let statusCode: Int

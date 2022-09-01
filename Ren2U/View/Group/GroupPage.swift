@@ -26,11 +26,12 @@ struct GroupPage: View {
                             print(err.errorDescription ?? "KFImage Optional err")
                         }
                         .resizable()
-                        .frame(maxWidth: .infinity, minHeight: 200)
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity, maxHeight: 200)
                 } else {
                     Image(AssetImages.DefaultGroupImage.rawValue)
                         .resizable()
-                        .frame(maxWidth: .infinity, minHeight: 200)
+                        .frame(maxWidth: .infinity, maxHeight: 200)
                 }
                 
                 Tags()
@@ -42,7 +43,8 @@ struct GroupPage: View {
         }
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                GroupManagement(groupId: groupInfo.club.id)
+                GroupManagement()
+                    .environmentObject(ManagementViewModel(groupId: groupInfo.club.id))
             }, label: {}) 
         )
         .navigationTitle("")

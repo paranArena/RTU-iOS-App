@@ -10,7 +10,7 @@ import SwiftUI
 struct CreateNoticeView: View {
     
     @State private var raw = NotificationModel(title: "", content: "")
-    @ObservedObject var managementVM: ManagementViewModel
+    @EnvironmentObject var managementVM: ManagementViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -40,6 +40,6 @@ struct CreateNoticeView: View {
 
 struct CreateNoticeView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNoticeView(managementVM: ManagementViewModel(groupId: 0))
+        CreateNoticeView()
     }
 }

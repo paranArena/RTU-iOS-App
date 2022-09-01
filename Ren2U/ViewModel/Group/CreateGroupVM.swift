@@ -51,7 +51,7 @@ extension CreateGroupView {
                 case " " :
                     isPasingStarted = false
                     if !parsedTag.isEmpty {
-                        self.tags.append("#\(parsedTag)")
+                        self.tags.append(parsedTag)
                     }
                     parsedTag = ""
                     break
@@ -63,7 +63,7 @@ extension CreateGroupView {
             }
             
             if !parsedTag.isEmpty {
-                self.tags.append("#\(parsedTag)")
+                self.tags.append(parsedTag)
             }
             
             self.tagsText = ""

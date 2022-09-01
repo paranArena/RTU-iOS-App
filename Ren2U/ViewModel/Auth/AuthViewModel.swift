@@ -18,6 +18,12 @@ class AuthViewModel: ObservableObject {
         self.jwt = UserDefaults.standard.string(forKey: jwtKey)
     }
     
+    
+    private func setToken(token: String) {
+        UserDefaults.standard.setValue(token, forKey: jwtKey)
+        self.jwt = token
+    }
+    
     func sendCertificationNum() {
 //        let random = Int.random(in: 0000...9999)
 //        let randomGenerateNum = String(random)
@@ -31,10 +37,43 @@ class AuthViewModel: ObservableObject {
         return true
     }
     
-//    @MainActor
-//    func checkEmailDuplicate(email: String) async -> Bool {
-//        let url = "\(baseURL)/\(email)/exists"
-//    }
+    //  MARK: GET
+    
+    @MainActor
+    func checkEmailDuplicate(email: String) async -> Bool {
+        let url = "\(baseURL)/members/\(email)/exists"
+        let response =  await AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(Bool.self).result
+        
+        switch response {
+        case .success(let value):
+            print("checkEmailDuplicate success : \(value)")
+            return value
+        case .failure(let err):
+            print("ceheckEmailDuplicate err : \(err)")
+        }
+        
+        return true
+    }
+    
+    @MainActor
+    func getMyInfo() async {
+        let url = "\(baseURL)/members/my/info"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
+        
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyInfoResponse.self)
+        let response = await request.result
+        
+        switch response {
+        case .success(let value):
+            print(value.data)
+            self.userResponse = value.data
+        case .failure(let err):
+            print("[AuthVM] login err: \(err)")
+        }
+    }
+    
+    
+    //  MARK: POST
     
     func signUp(user: User) async -> Bool {
         var result = false
@@ -93,25 +132,9 @@ class AuthViewModel: ObservableObject {
         self.jwt = nil
     }
     
-    @MainActor
-    func getMyInfo() async {
-        let url = "\(baseURL)/members/my/info"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
+    //  MARK: TASK
+    func checkEmailDuplicateTask(email: String) -> Bool {
+        return true
         
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyInfoResponse.self)
-        let response = await request.result
-        
-        switch response {
-        case .success(let value):
-            print(value.data)
-            self.userResponse = value.data
-        case .failure(let err):
-            print("[AuthVM] login err: \(err)")
-        }
-    }
-    
-    private func setToken(token: String) {
-        UserDefaults.standard.setValue(token, forKey: jwtKey)
-        self.jwt = token
     }
 }

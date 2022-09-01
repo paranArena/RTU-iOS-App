@@ -13,19 +13,12 @@ struct GroupManagement: View {
     @State private var rentalSelection: RentalSelection = .reservation
     @State private var rentalWidth: CGFloat = 0
     @State private var rentalToggle = false
-    @Environment(\.isPresented) var isPresented
-    
-    let groupId: Int
-    @StateObject var managementVM: ManagementViewModel
-    
-    init(groupId: Int) {
-        self.groupId = groupId
-        _managementVM = StateObject(wrappedValue: ManagementViewModel(groupId: groupId))
-    }
-    
-    
     @State var isActivated = false
     @State var selectedContent: ManageSelection = .memberManagement
+    @Environment(\.isPresented) var isPresented
+    
+    @EnvironmentObject var managementVM: ManagementViewModel
+    
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -158,9 +151,9 @@ struct GroupManagement: View {
         case .rentalManagement:
             RentalAndItemManagement()
         case .notice:
-            NoticeManagement(managementVM: managementVM)
+            NoticeManagement()
         case .memberManagement:
-            MemberManagement(managementVM: managementVM)
+            MemberManagement()
         case .rentalActive:
             Text("Empty View")
         }
@@ -169,6 +162,6 @@ struct GroupManagement: View {
 
 struct GroupManagement_Previews: PreviewProvider {
     static var previews: some View {
-        GroupManagement(groupId: 10)
+        GroupManagement()
     }
 }

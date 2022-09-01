@@ -15,15 +15,15 @@ class ManagementViewModel: ObservableObject {
     
     init(groupId: Int) {
         self.groupId = groupId
-        print("[ManageViewModel] groupId : \(groupId)")
+        print("ManageViewModel init, groupId[\(groupId)]")
     }
     //  MARK: POST
     func createNotification(notice: NotificationModel) async {
         let url = "\(baseURL)/clubs/\(groupId)/notifications"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
         let param: [String: Any] = [
-            "title" : notice.content,
-            "content" : notice.title
+            "title" : notice.title,
+            "content" : notice.content
         ]
         
         let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: hearders).serializingString()

@@ -21,13 +21,6 @@ struct LikeGroupInfo: Codable {
     }
 }
 
-extension GroupViewModel {
-    
-    struct ClubInfo {
-        
-    }
-}
-
 class GroupViewModel: ObservableObject {
     
     @Published var likesGroupId = [LikeGroupInfo]()
@@ -38,51 +31,11 @@ class GroupViewModel: ObservableObject {
     
     @Published var itemViewActive = [Bool]()
     
-    func createClub(club: CreateClubFormdata) async {
-        let url = "\(baseURL)/clubs"
-        
-        let hearders: HTTPHeaders = [
-            .authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!),
-            .init(name: "Content-Type", value: "multipart/form-data")
-        ]
-        
-        let param: [String: Any] = [
-            "name": club.name,
-            "introduction": club.introduction,
-            "hashtags": club.hashtags
-        ]
-        
-        AF.upload(multipartFormData: { multipart in
-            if let image = club.thumbnail.jpegData(compressionQuality: 1) {
-                multipart.append(image, withName: "thumbnail", mimeType: "image/jpeg")
-            }
-            
-            for (key, value) in param {
-                if key == "hashtags" {
-                    for v in value as! [String] {
-                        multipart.append(v.data(using: .utf8, allowLossyConversion: false)!, withName: key)
-                    }
-                } else {
-                    multipart.append("\(value)".data(using: .utf8, allowLossyConversion: false)!, withName: key)
-                }
-            }
-            
-        }, to: url, method: .post, headers: hearders).response { res in
-            switch res.result {
-            case .success(let value):
-                print("create success \(value?.description ?? "그룹 생성 성공")")
-            case .failure(let err):
-                print("create err \(err.errorDescription!)")
-            }
-        }
-        
-        await getMyClubs()
-    }
-    
+    //  MARK: GET
     @MainActor
     func getMyClubs() async {
         let url = "\(baseURL)/members/my/clubs"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: jwtKey)!)"]
         
         let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyClubsResponse.self)
         let response = await task.result
@@ -90,10 +43,71 @@ class GroupViewModel: ObservableObject {
         switch response {
         case .success(let value):
             print("getMyClubsSuccess")
-            print("Club count : \(value.data.count)")
             self.joinedClubs = value.data
         case .failure(let err):
-            print("getMyClubs err : \(err.errorDescription!)")
+            print("getMyClubs err : \(err)")
+        }
+    }
+    
+    
+    //  MARK: POST
+    
+    func createClub(club: CreateClubFormdata) async {
+        let url = "\(baseURL)/clubs"
+        
+        let hearders: HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: jwtKey)!)",
+            "Content-type": "multipart/form-data"
+        ]
+        
+        let param: [String: Any] = [
+            "name": club.name,
+            "introduction": club.introduction,
+            "hashtags": club.hashtags
+        ]
+      
+        
+        let task = AF.upload(multipartFormData: { multipart in
+            if let image = club.thumbnail.jpegData(compressionQuality: 1) {
+                multipart.append(image, withName: "thumbnail", fileName: "\(club.name).thumbnail", mimeType: "image/jpeg")
+            }
+
+            for (key, value) in param {
+                if key == "hashtags" {
+                    for v in value as! [String] {
+                        multipart.append(Data(v.utf8), withName: key)
+                    }
+                } else {
+                    multipart.append(Data(String("\(value)").utf8), withName: key)
+                }
+            }
+
+        }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingDecodable(CreateClubResponse.self)
+        
+        
+        let result = await task.result
+        
+        switch result {
+        case .success(let value):
+            print("create club success : \(value.data)")
+        case .failure(let err):
+            print("create club failure : \(err)")
+        }
+    }
+    
+    func requestClubJoin(clubId: Int) async {
+        
+        let url = "\(baseURL)/clubs/\(clubId)/requests/join"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        
+        let task = AF.request(url, method: .post, encoding: JSONEncoding.default, headers:  hearders).serializingDecodable(requestClubJoinResponse.self)
+        let result = await task.result
+        
+        switch result {
+        case .success(let value):
+            print(value)
+        case .failure(let err):
+            print(err)
         }
     }
     
@@ -149,23 +163,6 @@ class GroupViewModel: ObservableObject {
         return tagLabel
     }
     
-    //  MARK: REQUEST
-    func requestClubJoin(clubId: Int) async {
-        
-        let url = "\(baseURL)/clubs/\(clubId)/requests/join"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
-        
-        let task = AF.request(url, method: .post, encoding: JSONEncoding.default, headers:  hearders).serializingDecodable(requestClubJoinResponse.self)
-        let result = await task.result
-        
-        switch result {
-        case .success(let value):
-            print(value)
-        case .failure(let err):
-            print(err)
-        }
-    }
-    
     //  MARK: SEARCH
     
     @MainActor
@@ -191,6 +188,7 @@ class GroupViewModel: ObservableObject {
     func createClubTask(club: CreateClubFormdata) {
         Task {
             await createClub(club: club)
+            await getMyClubs()
         }
     }
     

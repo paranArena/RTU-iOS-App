@@ -40,6 +40,13 @@ struct ClubAndRoleData: Codable, Identifiable {
     }
 }
 
+struct NoticeData: Codable, Identifiable {
+    let id: Int
+    let title: String
+    let createdAt: Date
+    let updatedAt: Date 
+}
+
 extension ClubAndRoleData {
     enum GroupRole: String {
         case owner = "OWNER"
