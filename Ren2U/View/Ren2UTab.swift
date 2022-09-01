@@ -48,11 +48,8 @@ struct Ren2UTab: View {
         .accentColor(.navy_1E2F97)
         .foregroundColor(.LabelColor)
         .onAppear {
-            Task {
-                await authViewMoel.getMyInfo() 
-                await groupViewModel.getMyClubs()
-            }
-            groupViewModel.fetchNotices()
+            authViewMoel.getMyInfoTask()
+            groupViewModel.getMyClubsTask()
             groupViewModel.fetchRentalItems()
         }
     }

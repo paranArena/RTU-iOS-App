@@ -10,7 +10,8 @@ import SwiftUI
 struct CreateNoticeView: View {
     
     @State private var raw = NotificationModel(title: "", content: "")
-    @EnvironmentObject var managementVM: ManagementViewModel
+    @ObservedObject var managementVM: ManagementViewModel
+    @EnvironmentObject var groupVM: GroupViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -26,7 +27,10 @@ struct CreateNoticeView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    managementVM.createNotification(notice: raw)
+                    Task {
+                        await managementVM.createNotification(notice: raw)
+                        groupVM.searchNotificationsAllTask()
+                    }
                     dismiss() 
                 } label: {
                     Text("완료")
@@ -38,8 +42,8 @@ struct CreateNoticeView: View {
     }
 }
 
-struct CreateNoticeView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateNoticeView()
-    }
-}
+//struct CreateNoticeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CreateNoticeView()
+//    }
+//}

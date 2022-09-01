@@ -13,11 +13,9 @@ struct GroupManagement: View {
     @State private var rentalSelection: RentalSelection = .reservation
     @State private var rentalWidth: CGFloat = 0
     @State private var rentalToggle = false
-    @State var isActivated = false
-    @State var selectedContent: ManageSelection = .memberManagement
     @Environment(\.isPresented) var isPresented
     
-    @EnvironmentObject var managementVM: ManagementViewModel
+    @StateObject var managementVM: ManagementViewModel
     
     
     var body: some View {
@@ -98,13 +96,6 @@ struct GroupManagement: View {
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
         }
-        .background(
-            NavigationLink(isActive: $isActivated, destination: {
-                Navigation(selection: selectedContent)
-            }, label: {
-                
-            })
-        )
     }
     
     @ViewBuilder
@@ -113,9 +104,8 @@ struct GroupManagement: View {
             ForEach(ManageSelection.allCases, id : \.rawValue) { selection in
                 HStack {
                     if selection != .rentalActive {
-                        Button {
-                            selectedContent = selection
-                            isActivated = true
+                        NavigationLink {
+                            Navigation(selection: selection)
                         } label: {
                             Text(selection.title)
                                 .padding(.vertical, 8)
@@ -151,7 +141,7 @@ struct GroupManagement: View {
         case .rentalManagement:
             RentalAndItemManagement()
         case .notice:
-            NoticeManagement()
+            NoticeManagement(managementVM: managementVM)
         case .memberManagement:
             MemberManagement()
         case .rentalActive:
@@ -160,8 +150,8 @@ struct GroupManagement: View {
     }
 }
 
-struct GroupManagement_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupManagement()
-    }
-}
+//struct GroupManagement_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GroupManagement(managementVM: ManagementViewModel()
+//    }
+//}

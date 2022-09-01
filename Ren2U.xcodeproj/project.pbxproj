@@ -381,6 +381,15 @@
 			path = SubView;
 			sourceTree = "<group>";
 		};
+		15246E1D28C0AA8E0021D4F0 /* PreferenceSetter */ = {
+			isa = PBXGroup;
+			children = (
+				1514A10128B75CDA0040F681 /* HeightSetterView.swift */,
+				157190E928B6FE0F00880F98 /* WidthSetterView .swift */,
+			);
+			path = PreferenceSetter;
+			sourceTree = "<group>";
+		};
 		1525F5FF28B7365D00C7CA51 /* ItemRegistration */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +671,7 @@
 		15FAF166287D606700B35570 /* Global  */ = {
 			isa = PBXGroup;
 			children = (
+				15246E1D28C0AA8E0021D4F0 /* PreferenceSetter */,
 				15F3672C289252B70073E094 /* SearchBar.swift */,
 				1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */,
 				152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */,
@@ -673,8 +683,6 @@
 				15F3673628927E770073E094 /* TransparentDivider.swift */,
 				1570663528A53139002F7365 /* BounceControllScrollView.swift */,
 				1570663728A5413B002F7365 /* RefreshScrollView.swift */,
-				157190E928B6FE0F00880F98 /* WidthSetterView .swift */,
-				1514A10128B75CDA0040F681 /* HeightSetterView.swift */,
 				157190F028B7043100880F98 /* PlusCircle.swift */,
 				157190F528B7072200880F98 /* RightArrow.swift */,
 				158011782893992A006016AD /* ImagePicker.swift */,

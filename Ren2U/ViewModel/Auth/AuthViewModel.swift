@@ -65,10 +65,10 @@ class AuthViewModel: ObservableObject {
         
         switch response {
         case .success(let value):
-            print(value.data)
+            print("getMyInfo success")
             self.userResponse = value.data
         case .failure(let err):
-            print("[AuthVM] login err: \(err)")
+            print("getMyInfo err: \(err)")
         }
     }
     
@@ -135,6 +135,11 @@ class AuthViewModel: ObservableObject {
     //  MARK: TASK
     func checkEmailDuplicateTask(email: String) -> Bool {
         return true
-        
+    }
+    
+    func getMyInfoTask() {
+        Task {
+            await getMyInfo()
+        }
     }
 }

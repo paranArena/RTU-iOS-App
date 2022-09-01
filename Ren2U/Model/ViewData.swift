@@ -43,8 +43,8 @@ struct ClubAndRoleData: Codable, Identifiable {
 struct NoticeData: Codable, Identifiable {
     let id: Int
     let title: String
-    let createdAt: Date
-    let updatedAt: Date 
+    let createdAt: String
+    let updatedAt: String
 }
 
 extension ClubAndRoleData {

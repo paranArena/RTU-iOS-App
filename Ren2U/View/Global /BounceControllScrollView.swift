@@ -18,7 +18,7 @@ struct BounceControllScrollView<Content: View>: View {
             content()
             .background(GeometryReader {
                 // detect Pull-to-refresh
-                Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+                Color.clear.preference(key: ViewOffsetKey.self, value: $0.frame(in: .global).origin.y)
             })
             .background(
                 Rectangle()
@@ -28,8 +28,12 @@ struct BounceControllScrollView<Content: View>: View {
                 offset = $0
             }
         }
+        .onChange(of: offset, perform: { newValue in
+            print(offset)
+        })
         .introspectScrollView { uiScrollView in
-            uiScrollView.bounces = (offset > 0)
+            uiScrollView.bounces = (offset <= 100)
+//            uiScrollView.bounces = true
         }
     }
 }

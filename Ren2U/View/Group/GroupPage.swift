@@ -16,6 +16,7 @@ struct GroupPage: View {
     @State var offset: CGFloat = 0
     @State var isActive = false
     
+    
     var body: some View {
         
         BounceControllScrollView(offset: $offset) {
@@ -43,8 +44,7 @@ struct GroupPage: View {
         }
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                GroupManagement()
-                    .environmentObject(ManagementViewModel(groupId: groupInfo.club.id))
+                GroupManagement(managementVM: ManagementViewModel(groupId: groupInfo.club.id))
             }, label: {}) 
         )
         .navigationTitle("")
@@ -109,9 +109,9 @@ struct GroupPage: View {
             }
             .padding(.horizontal)
             
-            ForEach(groupModel.notices) { notice in
-                NoticeCell(noticeInfo: notice)
-            }
+//            ForEach(groupModel.notices) { notice in
+//                NoticeCell(noticeInfo: notice)
+//            }
 //            .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
 //            .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
         }

@@ -10,25 +10,25 @@ import Kingfisher
 
 struct NoticeCell: View {
     
-    let noticeInfo: NoticeInfo
+    let noticeInfo: NoticeData
     
     var body: some View {
         VStack {
             HStack {
-                if let imageSource = noticeInfo.noticeDto.imageSource {
-                    KFImage(URL(string: imageSource)).onFailure { err in
-                        print(err.errorDescription ?? "KFImage err")
-                        }
-                        .resizable()
-                        .cornerRadius(15)
-                        .frame(width: 80, height: 80)
-                }
+//                if let imageSource = noticeInfo.noticeDto.imageSource {
+//                    KFImage(URL(string: imageSource)).onFailure { err in
+//                        print(err.errorDescription ?? "KFImage err")
+//                        }
+//                        .resizable()
+//                        .cornerRadius(15)
+//                        .frame(width: 80, height: 80)
+//                }
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Spacer()
-                    Text(noticeInfo.noticeDto.title)
+                    Text(noticeInfo.title)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                    Text(noticeInfo.groupName)
+                    Text("\(noticeInfo.id)")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(Color.gray_ADB5BD)
                     Spacer()
@@ -36,14 +36,15 @@ struct NoticeCell: View {
                 
                 Spacer()
                 
-                Text(getDate(date: noticeInfo.noticeDto.updateDate))
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                    .foregroundColor(Color.gray_ADB5BD)
+                Text(noticeInfo.updatedAt)
+//                Text(getDate(date: noticeInfo.noticeDto.updateDate))
+//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+//                    .foregroundColor(Color.gray_ADB5BD)
                 
                 
-                Image(systemName: "n.circle.fill")
-                    .foregroundStyle(noticeInfo.isShown ? Color.BackgroundColor : Color.red_EB1808,
-                                     noticeInfo.isShown ? Color.BackgroundColor : Color.gray_ADB5BD)
+//                Image(systemName: "n.circle.fill")
+//                    .foregroundStyle(noticeInfo.isShown ? Color.BackgroundColor : Color.red_EB1808,
+//                                     noticeInfo.isShown ? Color.BackgroundColor : Color.gray_ADB5BD)
           
             }
             .padding(.horizontal)

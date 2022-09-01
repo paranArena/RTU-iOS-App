@@ -73,7 +73,7 @@ class ManagementViewModel: ObservableObject {
     
     
     //  MARK: TASK
-    func createNotification(notice: NotificationModel) {
+    func createNotificationTask(notice: NotificationModel) {
         Task {
             await createNotification(notice: notice)
         }
