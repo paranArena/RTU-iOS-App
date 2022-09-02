@@ -10,7 +10,11 @@ import SwiftUI
 struct HomeTab: View {
     
     var body: some View {
-        Text("??")
+        VStack {
+            Text("홈")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .overlay(ShadowRectangle())
     }
 }
 

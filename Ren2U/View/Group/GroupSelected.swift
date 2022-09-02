@@ -18,7 +18,7 @@ struct GroupSelected: View {
     @State private var groupInfo: ClubAndRoleData = ClubAndRoleData(id: 1, club: ClubData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""]), role: "")
     
     var body: some View {
-        RefreshScrollView(threshold: refreshThreshold) {
+        RefreshableScrollView(threshold: refreshThreshold) {
             VStack(alignment: .leading) {
                 GroupFavorites()
                 JoinedGroup()

@@ -6,6 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
+
+struct CreateClubFormdata {
+    var name: String
+    var introduction: String
+    var thumbnail: UIImage
+    var hashtags: [String]
+}
 
 struct UserData: Codable, Identifiable {
     var id: Int
@@ -24,7 +32,7 @@ struct ClubData: Codable, Hashable {
     let id: Int
     var name: String
     var introduction: String
-    var thumbnailPath: String?
+    var thumbnailPath: String
     var hashtags: [String]
 }
 
@@ -53,5 +61,18 @@ extension ClubAndRoleData {
         case wait = "WAIT"
         case applicant = "APPLICANT"
         case nonMember = "NONMEMBER"
+    }
+}
+
+//  MARK: TEMP
+struct LikeGroupInfo: Codable {
+    var groupId: String
+    
+    init(groupId: String) {
+        self.groupId = groupId
+    }
+    
+    static func dummyLikeGroupInfos() -> [LikeGroupInfo] {
+        return [LikeGroupInfo(groupId: "1"), LikeGroupInfo(groupId: "4"), LikeGroupInfo(groupId: "6"), LikeGroupInfo(groupId: "8")]
     }
 }

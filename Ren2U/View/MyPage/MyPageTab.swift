@@ -81,6 +81,7 @@ struct MyPageTab: View {
         }
         .basicNavigationTitle(title: "")
         .padding(.horizontal, 10)
+        .overlay(ShadowRectangle())
     }
     
     @ViewBuilder

@@ -11,6 +11,7 @@ import Kingfisher
 struct NoticeCell: View {
     
     let noticeInfo: NoticeData
+    let groupName: String 
     
     var body: some View {
         VStack {
@@ -24,11 +25,16 @@ struct NoticeCell: View {
 //                        .frame(width: 80, height: 80)
 //                }
                 
+                Image(AssetImages.DefaultGroupImage.rawValue)
+                    .resizable()
+                    .cornerRadius(15)
+                    .frame(width: 80, height: 80)
+                
                 VStack(alignment: .leading, spacing: 0) {
                     Spacer()
                     Text(noticeInfo.title)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                    Text("\(noticeInfo.id)")
+                    Text(groupName)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(Color.gray_ADB5BD)
                     Spacer()
@@ -36,11 +42,9 @@ struct NoticeCell: View {
                 
                 Spacer()
                 
-                Text(noticeInfo.updatedAt)
-//                Text(getDate(date: noticeInfo.noticeDto.updateDate))
-//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-//                    .foregroundColor(Color.gray_ADB5BD)
-                
+                Text("\(noticeInfo.updatedAt)")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                    .foregroundColor(Color.gray_ADB5BD)
                 
 //                Image(systemName: "n.circle.fill")
 //                    .foregroundStyle(noticeInfo.isShown ? Color.BackgroundColor : Color.red_EB1808,

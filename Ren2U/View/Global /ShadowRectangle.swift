@@ -13,9 +13,8 @@ struct ShadowRectangle: View {
         VStack {
             Spacer()
             Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color.gray_DEE2E6, Color.BackgroundColor]), startPoint: .bottom, endPoint: .top))
+                .fill(LinearGradient(gradient: Gradient(colors: [Color.gray_DEE2E6, Color.BackgroundColor.opacity(0)]), startPoint: .bottom, endPoint: .top))
                 .frame(width: UIScreen.main.bounds.width, height: 10)
-                .opacity(0.5)
         }
     }
 }

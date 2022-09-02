@@ -8,19 +8,6 @@
 import SwiftUI
 import Alamofire
 
-
-struct LikeGroupInfo: Codable {
-    var groupId: String
-    
-    init(groupId: String) {
-        self.groupId = groupId
-    }
-    
-    static func dummyLikeGroupInfos() -> [LikeGroupInfo] {
-        return [LikeGroupInfo(groupId: "1"), LikeGroupInfo(groupId: "4"), LikeGroupInfo(groupId: "6"), LikeGroupInfo(groupId: "8")]
-    }
-}
-
 class GroupViewModel: ObservableObject {
     
     @Published var likesGroupId = [LikeGroupInfo]()
@@ -31,7 +18,66 @@ class GroupViewModel: ObservableObject {
     
     @Published var itemViewActive = [Bool]()
     
+    //  MARK: LOCAL
+    
+    func getGroupNameByGroupId(groupId: Int) -> String {
+        if let fooOffset = joinedClubs.firstIndex(where: {$0.club.id == groupId }) {
+            return joinedClubs[fooOffset].club.name
+        } else {
+            return "그룹 이름 에러"
+        }
+    }
+    
+    func refreshItems() async {
+        do {
+            try await Task.sleep(nanoseconds: 2_000_000_000)
+        } catch {
+            
+        }
+    }
+    
+    func fetchRentalItems() {
+        self.rentalItems = RentalItemInfo.dummyRentalItems()
+        self.itemViewActive = [Bool](repeating: false, count: rentalItems.count)
+    }
+    
+    func makeFavoritesGroupTag(tags: [String]) -> String {
+        var tagLabel: String = ""
+        var newLineCounter: Int = 0
+        var isReachedLineLimit = false
+        
+        for tag in tags {
+
+            let newTag = "#\(tag) "
+            newLineCounter += newTag.utf8.count
+            
+            if !isReachedLineLimit && newLineCounter > 32 {
+                isReachedLineLimit = true
+                tagLabel.append(contentsOf: "\n")
+                newLineCounter = 0
+            } else if isReachedLineLimit && newLineCounter > 23 {
+                tagLabel.append(contentsOf: "\n")
+                return tagLabel
+            }
+            
+            tagLabel.append(contentsOf: newTag)
+        }
+        
+        return tagLabel
+    }
+    
+    func makeJoinedGroupTage(tags: [String]) -> String {
+        var tagLabel: String = ""
+        
+        for tag in tags {
+            tagLabel.append(contentsOf: "#\(tag )")
+        }
+        
+        return tagLabel
+    }
+    
     //  MARK: GET
+    
     @MainActor
     func getMyClubs() async {
         let url = "\(baseURL)/members/my/clubs"
@@ -49,12 +95,90 @@ class GroupViewModel: ObservableObject {
         }
     }
     
+    @MainActor
+    func searchClubsAll() async -> [ClubData] {
+        
+        let url = "\(baseURL)/clubs/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+
+        let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetSearchClubsAllResponse.self)
+        let result = await task.result
+        
+        switch result {
+        case .success(let value):
+            return value.data
+        case .failure(let err):
+            print(err)
+            return [ClubData]()
+        }
+    }
+    
+    @MainActor
+    func searchClubsWithName(groupName: String) async -> ClubData? {
+        let url = "\(baseURL)/clubs/search?name=\(groupName)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        
+        if let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let encodedURL = URL(string: encoded) {
+            let task = AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchClubsWithName.self)
+            let result = await task.result
+            
+            switch result {
+            case .success(let value):
+                return value.data
+            case .failure(let err):
+                print(url)
+                print("searchClubsWithName err [\(groupName)] : \(err)")
+                return nil
+            }
+        }
+        
+        return nil
+    }
+    
+    @MainActor
+    func searchClubsWithHashTag(hashTag: String) async -> [ClubData] {
+        let url = "\(baseURL)/clubs/search?hashtag=\(hashTag)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        
+        if let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let encodedURL = URL(string: encoded) {
+            
+            let task = AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetSearchClubsAllResponse.self)
+            let result = await task.result
+            
+//            switch result {
+//            case .success(let value):
+//                print("SearchCLubsWithHashTag Success")
+//                return value.
+//                case
+//            }
+        }
+        
+        return [ClubData]()
+    }
+    
+    @MainActor
+    func searchNotificationsAll(groupId: Int) async {
+        
+        let url = "\(baseURL)/clubs/\(groupId)/notifications/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        
+        let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchNotificationsAllResponse.self)
+        let result = await task.result
+        
+        switch result {
+        case .success(let value):
+            print("searchNotificationAll success, GroupId: \(groupId)")
+            self.notices[groupId] = value.data
+        case .failure(let err):
+            print("searchNotificationsAll failure, GroupId: \(groupId) : \(err)")
+        }
+    }
+    
     
     //  MARK: POST
     
     func createClub(club: CreateClubFormdata) async {
         let url = "\(baseURL)/clubs"
-        
         let hearders: HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: jwtKey)!)",
             "Content-type": "multipart/form-data"
@@ -108,92 +232,6 @@ class GroupViewModel: ObservableObject {
             print(value)
         case .failure(let err):
             print(err)
-        }
-    }
-    
-    func refreshItems() async {
-        do {
-            try await Task.sleep(nanoseconds: 2_000_000_000) 
-        } catch {
-            
-        }
-    }
-    
-    func fetchRentalItems() {
-        self.rentalItems = RentalItemInfo.dummyRentalItems()
-        self.itemViewActive = [Bool](repeating: false, count: rentalItems.count)
-    }
-    
-    func makeFavoritesGroupTag(tags: [String]) -> String {
-        var tagLabel: String = ""
-        var newLineCounter: Int = 0
-        var isReachedLineLimit = false
-        
-        for tag in tags {
-
-            let newTag = "#\(tag) "
-            newLineCounter += newTag.utf8.count
-            
-            if !isReachedLineLimit && newLineCounter > 32 {
-                isReachedLineLimit = true
-                tagLabel.append(contentsOf: "\n")
-                newLineCounter = 0
-            } else if isReachedLineLimit && newLineCounter > 23 {
-                tagLabel.append(contentsOf: "\n")
-                return tagLabel
-            }
-            
-            tagLabel.append(contentsOf: newTag)
-        }
-        
-        return tagLabel
-    }
-    
-    func makeJoinedGroupTage(tags: [String]) -> String {
-        var tagLabel: String = ""
-        
-        for tag in tags {
-            tagLabel.append(contentsOf: "#\(tag )")
-        }
-        
-        return tagLabel
-    }
-    
-    //  MARK: SEARCH
-    
-    @MainActor
-    func searchClubsAll() async -> [ClubData] {
-        
-        let url = "\(baseURL)/clubs/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
-
-        let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetSearchClubsAllResponse.self)
-        let result = await task.result
-        
-        switch result {
-        case .success(let value):
-            return value.data
-        case .failure(let err):
-            print(err)
-            return [ClubData]()
-        }
-    }
-    
-    @MainActor
-    func searchNotificationsAll(groupId: Int) async {
-        
-        let url = "\(baseURL)/clubs/\(groupId)/notifications/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
-        
-        let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchNotificationsAllResponse.self)
-        let result = await task.result
-        
-        switch result {
-        case .success(let value):
-            print("searchNotificationAll success, GroupId: \(groupId)")
-            self.notices[groupId] = value.data
-        case .failure(let err):
-            print("searchNotificationsAll failer, GroupId: \(groupId) : \(err)")
         }
     }
     

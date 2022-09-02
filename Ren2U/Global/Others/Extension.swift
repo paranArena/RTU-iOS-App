@@ -88,3 +88,22 @@ extension String {
     }
 }
 
+extension String {
+      func toDate() -> Date? {
+          let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+          return dateFormatter.date(from: self)
+    }
+}
+
+//  Date to String
+extension Date {
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        return dateFormatter.string(from: self)
+    }
+}
+
+

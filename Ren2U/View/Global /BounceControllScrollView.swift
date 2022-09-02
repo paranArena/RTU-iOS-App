@@ -17,23 +17,13 @@ struct BounceControllScrollView<Content: View>: View {
         ScrollView(.vertical, showsIndicators: false) {
             content()
             .background(GeometryReader {
-                // detect Pull-to-refresh
                 Color.clear.preference(key: ViewOffsetKey.self, value: $0.frame(in: .global).origin.y)
             })
-            .background(
-                Rectangle()
-                    .fill(offset > 0 ? Color.clear : Color.clear)
-            )
-            .onPreferenceChange(ViewOffsetKey.self) {
-                offset = $0
-            }
+            .background(Rectangle().fill(offset > 0 ? Color.clear : Color.clear))
+            .onPreferenceChange(ViewOffsetKey.self) { offset = $0 }
         }
-        .onChange(of: offset, perform: { newValue in
-            print(offset)
-        })
         .introspectScrollView { uiScrollView in
             uiScrollView.bounces = (offset <= 100)
-//            uiScrollView.bounces = true
         }
     }
 }

@@ -88,7 +88,7 @@ struct RentalTab: View {
     
     @ViewBuilder
     private func RentalItemSelected() -> some View {
-        RefreshScrollView(threshold: offset) {
+        RefreshableScrollView(threshold: offset) {
             VStack {
                 ForEach(groupViewModel.rentalItems.indices, id: \.self) { i in
                     NavigationLink(isActive: $groupViewModel.itemViewActive[i]) {
@@ -107,7 +107,7 @@ struct RentalTab: View {
     
     @ViewBuilder
     private func RentalListSelected() -> some View {
-        RefreshScrollView(threshold: 120) {
+        RefreshableScrollView(threshold: 120) {
             VStack {
                 Text("대여목록")
             }

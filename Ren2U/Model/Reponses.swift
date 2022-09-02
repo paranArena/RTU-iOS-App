@@ -24,12 +24,6 @@ struct GetMyInfoResponse: Codable {
     var data: UserData
 }
 
-struct SerachClubsAllResponse: Codable {
-    var statusCode: Int
-    var responseMessage: String
-    var data: ClubData
-}
-
 struct CreateClubResponse: Codable {
     var statusCode: Int
     var responseMessage: String
@@ -48,11 +42,18 @@ struct GetSearchClubsAllResponse: Codable {
     let data: [ClubData]
 }
 
+struct SearchClubsWithName: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: ClubData
+}
+
 struct SearchNotificationsAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
     let data: [NoticeData]
 }
+
 
 //  MARK: REQUEST
 struct requestClubJoinResponse: Codable {

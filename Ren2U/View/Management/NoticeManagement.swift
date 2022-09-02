@@ -10,21 +10,13 @@ import HidableTabView
 
 struct NoticeManagement: View {
     
+    @EnvironmentObject var groupVM: GroupViewModel
     @ObservedObject var managementVM: ManagementViewModel
     
     var body: some View {
         ScrollView {
-            VStack {
-                Text("공지사항")
-                Text("공지사항")
-                Text("공지사항")
-                Text("공지사항")
-                Text("공지사항")
-                Text("공지사항")
-                Text("공지사항")
-                Text("공지사항")
-                Text("공지사항")
-                Text("공지사항")
+            ForEach(groupVM.notices[managementVM.groupId]?.indices ?? 0..<0, id: \.self) { i in
+                NoticeCell(noticeInfo: groupVM.notices[managementVM.groupId]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.groupId))
             }
         }
         .basicNavigationTitle(title: "공지사항")

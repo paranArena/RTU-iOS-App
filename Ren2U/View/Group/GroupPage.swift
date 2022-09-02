@@ -21,19 +21,23 @@ struct GroupPage: View {
         
         BounceControllScrollView(offset: $offset) {
             VStack(alignment: .leading) {
-                if let thumbnaulPath = groupInfo.club.thumbnailPath {
-                    KFImage(URL(string: thumbnaulPath))
-                        .onFailure { err in
-                            print(err.errorDescription ?? "KFImage Optional err")
-                        }
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: .infinity, maxHeight: 200)
-                } else {
-                    Image(AssetImages.DefaultGroupImage.rawValue)
-                        .resizable()
-                        .frame(maxWidth: .infinity, maxHeight: 200)
+                VStack {
+                    if let thumbnaulPath = groupInfo.club.thumbnailPath {
+                        KFImage(URL(string: thumbnaulPath))
+                            .onFailure { err in
+                                print(err.errorDescription ?? "KFImage Optional err")
+                            }
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 200, height: 200)
+                    } else {
+                        Image(AssetImages.DefaultGroupImage.rawValue)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 200, height: 200)
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
                 
                 Tags()
                 Introduction()

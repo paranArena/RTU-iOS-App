@@ -46,6 +46,7 @@ struct GroupTab: View {
             }
             .isHidden(hidden: vm.isSearchBarFocused)
         }
+        .overlay(ShadowRectangle())
         .showTabBar(animated: false)
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -86,12 +87,12 @@ struct GroupTab: View {
     
     @ViewBuilder
     private func NoticeSelected() -> some View {
-        RefreshScrollView(threshold: 220) {
+        RefreshableScrollView(threshold: 220) {
             VStack {
                 ForEach(groupViewModel.joinedClubs.indices, id: \.self) { i in
                     let id = groupViewModel.joinedClubs[i].club.id
                     ForEach(groupViewModel.notices[id]?.indices ?? 0..<0, id: \.self) { j in
-                        NoticeCell(noticeInfo: groupViewModel.notices[id]![j])
+                        NoticeCell(noticeInfo: groupViewModel.notices[id]![j], groupName: groupViewModel.getGroupNameByGroupId(groupId: id))
                     }
                 }
 //                ForEach(groupViewModel.notices.values) { notice in

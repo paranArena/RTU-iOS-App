@@ -37,6 +37,7 @@ struct GroupSearch: View {
                 }
             }
         }
+        
         .frame(maxWidth: .infinity, alignment: .leading)
 //        .background {
 //            NavigationLink(isActive: $isActive) {
@@ -46,6 +47,13 @@ struct GroupSearch: View {
         .onAppear {
             Task {
                 groupInfo = await groupVM.searchClubsAll()
+            }
+        }
+        .onChange(of: search) { newValue in
+            Task {
+                groupInfo.removeAll()
+                guard let searchedGroup = await groupVM.searchClubsWithName(groupName: search) else { return }
+                groupInfo.append(searchedGroup)
             }
         }
         
