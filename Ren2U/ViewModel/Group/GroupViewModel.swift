@@ -88,10 +88,10 @@ class GroupViewModel: ObservableObject {
         
         switch response {
         case .success(let value):
-            print("getMyClubsSuccess")
+            print("getMyClubs Success")
             self.joinedClubs = value.data
         case .failure(let err):
-            print("getMyClubs err : \(err)")
+            print("getMyClubs Error : \(err)")
         }
     }
     
@@ -126,9 +126,7 @@ class GroupViewModel: ObservableObject {
             case .success(let value):
                 return value.data
             case .failure(let err):
-                print(url)
                 print("searchClubsWithName err [\(groupName)] : \(err)")
-                return nil
             }
         }
         
@@ -145,12 +143,13 @@ class GroupViewModel: ObservableObject {
             let task = AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetSearchClubsAllResponse.self)
             let result = await task.result
             
-//            switch result {
-//            case .success(let value):
-//                print("SearchCLubsWithHashTag Success")
-//                return value.
-//                case
-//            }
+            switch result {
+            case .success(let value):
+                print("SearchCLubsWithHashTag Success")
+                return value.data
+            case .failure(let err):
+                print("SearchClubWithHashTag Error : \(err)")
+            }
         }
         
         return [ClubData]()

@@ -16,6 +16,8 @@ struct GroupSearch: View {
     @State private var groupInfo = [ClubData]()
     @State private var isActive = false
     @State private var offset: CGFloat = .zero
+    @State private var searchDelay = 0
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -50,10 +52,17 @@ struct GroupSearch: View {
             }
         }
         .onChange(of: search) { newValue in
-            Task {
-                groupInfo.removeAll()
-                guard let searchedGroup = await groupVM.searchClubsWithName(groupName: search) else { return }
-                groupInfo.append(searchedGroup)
+            self.searchDelay = 0
+        }
+        .onReceive(timer) { _ in
+            searchDelay += 1
+            if searchDelay == 10 && !search.isEmpty {
+                Task {
+                    groupInfo = await groupVM.searchClubsWithHashTag(hashTag: search)
+                    if let groupSearchedByName = await groupVM.searchClubsWithName(groupName: search) {
+                        groupInfo.append(groupSearchedByName)
+                    }
+                }
             }
         }
         
