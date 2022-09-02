@@ -7,6 +7,7 @@
 
 import SwiftUI
 import HidableTabView
+import Introspect
 
 struct NoticeManagement: View {
     
@@ -42,8 +43,6 @@ struct NoticeManagement: View {
         }
         .onAppear {
             UITabBar.hideTabBar()
-            print(managementVM.groupId)
-            
         }
     }
 }

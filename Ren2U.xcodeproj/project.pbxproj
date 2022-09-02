@@ -73,6 +73,7 @@
 		1563FE9928ADFBA700F46CC7 /* RetnalNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */; };
 		1563FE9B28AE059D00F46CC7 /* ReturnManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */; };
 		156673DC28C1B6660011535D /* CellWithTwoSlideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156673DB28C1B6660011535D /* CellWithTwoSlideButton.swift */; };
+		156673DE28C1C6860011535D /* MaxYSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156673DD28C1C6860011535D /* MaxYSetterView.swift */; };
 		1570663628A53139002F7365 /* BounceControllScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570663528A53139002F7365 /* BounceControllScrollView.swift */; };
 		1570663828A5413B002F7365 /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570663728A5413B002F7365 /* RefreshableScrollView.swift */; };
 		157190E828B6F5F300880F98 /* RentalAndItemManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190E728B6F5F300880F98 /* RentalAndItemManagement.swift */; };
@@ -91,7 +92,7 @@
 		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
 		159F1B26288BA16000012113 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* CustomFont.swift */; };
 		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
-		15AC7E3A28BF2ECE00879106 /* SignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AC7E3928BF2ECE00879106 /* SignUpCell.swift */; };
+		15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */; };
 		15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B63DA328AF38EA000AB82D /* ViewExtensions .swift */; };
 		15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel.swift */; };
 		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
@@ -208,6 +209,7 @@
 		1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetnalNoticeCell.swift; sourceTree = "<group>"; };
 		1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnManagement.swift; sourceTree = "<group>"; };
 		156673DB28C1B6660011535D /* CellWithTwoSlideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWithTwoSlideButton.swift; sourceTree = "<group>"; };
+		156673DD28C1C6860011535D /* MaxYSetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxYSetterView.swift; sourceTree = "<group>"; };
 		1570663528A53139002F7365 /* BounceControllScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceControllScrollView.swift; sourceTree = "<group>"; };
 		1570663728A5413B002F7365 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		157190E728B6F5F300880F98 /* RentalAndItemManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalAndItemManagement.swift; sourceTree = "<group>"; };
@@ -225,7 +227,7 @@
 		159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		159F1B24288BA0C200012113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		159F1B25288BA16000012113 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
-		15AC7E3928BF2ECE00879106 /* SignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCell.swift; sourceTree = "<group>"; };
+		15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSignUpCell.swift; sourceTree = "<group>"; };
 		15B63DA328AF38EA000AB82D /* ViewExtensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewExtensions .swift"; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		15C03144289CD5E500D0354E /* RentalTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalTabVM.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			children = (
 				1514A10128B75CDA0040F681 /* HeightSetterView.swift */,
 				157190E928B6FE0F00880F98 /* WidthSetterView .swift */,
+				156673DD28C1C6860011535D /* MaxYSetterView.swift */,
 			);
 			path = PreferenceSetter;
 			sourceTree = "<group>";
@@ -485,7 +488,7 @@
 			children = (
 				1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */,
 				1563FE9228ADEF9000F46CC7 /* SignUpNoticeCell.swift */,
-				15AC7E3928BF2ECE00879106 /* SignUpCell.swift */,
+				15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */,
 				1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */,
 				1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */,
 				15382EC928C1A338004D7977 /* ManageNoticeCell.swift */,
@@ -502,8 +505,8 @@
 				157190EC28B7023600880F98 /* RentalManagementSelected.swift */,
 				157190EE28B7024D00880F98 /* ItemManagementSelected.swift */,
 				1523D5E728BE2C8D009EB733 /* NoticeManagement.swift */,
-				1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */,
 				1523D5E128BE291C009EB733 /* MemberManagement.swift */,
+				1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */,
 				1563FE9128ADEE1600F46CC7 /* Cell */,
 			);
 			path = Management;
@@ -932,11 +935,12 @@
 				1523D5D828BDC986009EB733 /* ViewData.swift in Sources */,
 				15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */,
 				1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */,
-				15AC7E3A28BF2ECE00879106 /* SignUpCell.swift in Sources */,
+				15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */,
 				157190F328B7053200880F98 /* ItemPhoto.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */,
+				156673DE28C1C6860011535D /* MaxYSetterView.swift in Sources */,
 				151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */,
 				1514A10028B7594F0040F681 /* ItemCaution.swift in Sources */,
 				156386C6288A5263006653E8 /* MyPageTab.swift in Sources */,

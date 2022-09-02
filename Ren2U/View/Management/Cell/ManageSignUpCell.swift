@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct SignUpCell: View {
+struct ManageSignUpCell: View {
     
     
-    @ObservedObject var managementVM: ManagementViewModel
     let userData: UserData
-    @State private var isShowingRequestButton = false
-    @State private var offset: CGFloat = .zero
+    @Binding var selectedCellID: Int
+    @ObservedObject var managementVM: ManagementViewModel
+
     
     var body: some View {
         
-        CellWithTwoSlideButton(okMessage: "확인", cancelMessage: "거부", cellID: 0, selectedID: .constant(0)) {
+        CellWithTwoSlideButton(okMessage: "확인", cancelMessage: "거부", cellID: userData.id, selectedID: $selectedCellID) {
             HStack {
                 VStack(alignment: .leading) {
                     Text(userData.name)
@@ -47,8 +47,9 @@ struct SignUpCell: View {
         return formatter.string(from: Date.now)
     }
 }
-struct SignUpCell_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpCell(managementVM: ManagementViewModel(groupId: 1), userData: UserData.dummyUserData())
-    }
-}
+//
+//struct SignUpCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ManageSignUpCell(managementVM: ManagementViewModel(groupId: 1), userData: UserData.dummyUserData())
+//    }
+//}

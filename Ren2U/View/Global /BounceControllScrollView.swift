@@ -30,7 +30,7 @@ struct BounceControllScrollView<Content: View>: View {
             .onPreferenceChange(ViewOffsetKey.self) { offset = $0 }
         }
         .introspectScrollView { uiScrollView in
-            uiScrollView.bounces = (offset <= 100)
+            uiScrollView.bounces = (offset <= baseOffset)
         }
     }
 }

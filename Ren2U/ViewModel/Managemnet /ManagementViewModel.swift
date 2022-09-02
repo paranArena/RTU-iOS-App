@@ -10,7 +10,7 @@ import Alamofire
 
 class ManagementViewModel: ObservableObject {
     
-    @Published var members = [UserData]()
+    @Published var applicants = [UserData]()
     var groupId = 0
     
     init(groupId: Int) {
@@ -65,7 +65,7 @@ class ManagementViewModel: ObservableObject {
         switch result {
         case .success(let value):
             print("클럽 가입 조회 성공")
-            self.members = value.data
+            self.applicants = value.data
         case .failure(let err):
             print("searchClubJoinsAll 실패 : \(err)")
         }

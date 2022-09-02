@@ -141,6 +141,9 @@ struct GroupManagement: View {
         switch selection {
         case .profileEdit:
             Text("프로필 수정")
+                .onAppear {
+                    UITabBar.hideTabBar()
+                }
         case .rentalManagement:
             RentalAndItemManagement()
         case .notice:

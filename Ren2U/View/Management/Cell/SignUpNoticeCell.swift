@@ -14,7 +14,6 @@ struct SignUpNoticeCell: View {
     @State private var offset: CGFloat = .zero
     
     var body: some View {
-        
         HStack {
             VStack(alignment: .leading, spacing: 5) {
                 Text("\(userInfo.major) \(userInfo.name)님이 회원가입을 요청했습니다.")

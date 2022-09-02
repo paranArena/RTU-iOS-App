@@ -19,7 +19,7 @@ struct GroupPage: View {
     
     var body: some View {
         
-        BounceControllScrollView(baseOffset: 100, offset: $offset) {
+        BounceControllScrollView(baseOffset: 80, offset: $offset) {
             VStack(alignment: .leading) {
                 VStack {
                     if let thumbnaulPath = groupInfo.club.thumbnailPath {
@@ -46,6 +46,7 @@ struct GroupPage: View {
                 Spacer()
             }
         }
+        .overlay(ShadowRectangle())
         .background(
             NavigationLink(isActive: $isActive, destination: {
                 GroupManagement(managementVM: ManagementViewModel(groupId: groupInfo.club.id))

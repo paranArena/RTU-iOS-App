@@ -7,6 +7,7 @@
 
 import SwiftUI
 import HidableTabView
+import Introspect
 
 extension MemberManagement {
     enum Selection: Int, CaseIterable {
@@ -27,6 +28,7 @@ struct MemberManagement: View {
     
     @ObservedObject var managementVM: ManagementViewModel
     @State private var buttonSelection: Selection = .member
+    @State private var selectedCellID = 0
     
     var body: some View {
         VStack {
@@ -41,10 +43,10 @@ struct MemberManagement: View {
             .frame(maxHeight: .infinity, alignment: .topLeading)
             
         }
-        .basicNavigationTitle(title: "멤버 관리")
         .onAppear {
-            UITabBar.hideTabBar(animated: false)
+            UITabBar.hideTabBar()
         }
+        .basicNavigationTitle(title: "멤버 관리")
     }
     
     @ViewBuilder
@@ -77,8 +79,8 @@ struct MemberManagement: View {
     @ViewBuilder
     private func Applicant() -> some View {
         VStack {
-            ForEach(managementVM.members.indices, id: \.self) { index in
-                SignUpCell(managementVM: managementVM, userData: managementVM.members[index])
+            ForEach(managementVM.applicants.indices, id: \.self) { index in
+                ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, managementVM: managementVM)
             }
         }
     }
