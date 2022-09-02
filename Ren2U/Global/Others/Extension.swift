@@ -25,7 +25,7 @@ extension Color {
     // 흰색-회색 계열
     static let gray_ADB5BD = Color(hex: "ADB5BD")
     static let gray_Shadow = Color(hex: "ADB5BD")
-    static let Gray_495057 = Color(hex: "495057")
+    static let gray_495057 = Color(hex: "495057")
     static let gray_E9ECEF = Color(hex: "E9ECEF")
     static let gray_DEE2E6 = Color(hex: "DEE2E6")
     static let gray_FFFFFF = Color(hex: "FFFFFF")

@@ -36,7 +36,7 @@ struct Item: View {
                 HStack {
                     Text("카테고리")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                        .foregroundColor(Color.Gray_495057)
+                        .foregroundColor(Color.gray_495057)
                     
                     Spacer()
                 }
@@ -44,18 +44,18 @@ struct Item: View {
                 HStack {
                     Text("물품가치")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                        .foregroundColor(Color.Gray_495057)
+                        .foregroundColor(Color.gray_495057)
                     
                     Spacer()
                 }
                 
                 Text("물품목록")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                    .foregroundColor(Color.Gray_495057)
+                    .foregroundColor(Color.gray_495057)
                 
                 Text("사용 시 주의사항")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                    .foregroundColor(Color.Gray_495057)
+                    .foregroundColor(Color.gray_495057)
                 
                 NavigationLink("", isActive: $viewModel.isRentalTerminal) {
                     RentalComplete(itemInfo: itemInfo)
@@ -162,7 +162,7 @@ struct Item: View {
             .offset(y: viewModel.selection != .default ? 0 : SCREEN_HEIGHT)
             .cornerRadius(30, corners: [.topRight, .topLeft])
             .clipped()
-            .shadow(color: Color.Gray_495057, radius: 10, x: 0, y: 10)
+            .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
             .animation(.default, value: viewModel.selection)
             
             HStack {
@@ -178,7 +178,7 @@ struct Item: View {
             .frame(maxWidth: .infinity)
             .background(Color.BackgroundColor)
             .clipped()
-            .shadow(color: Color.Gray_495057, radius: 10, x: 0, y: 10)
+            .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
         }
     }
     
@@ -208,7 +208,7 @@ struct Item: View {
         .background(Color.BackgroundColor)
         .frame(maxWidth: .infinity)
         .clipped()
-        .shadow(color: Color.Gray_495057, radius: 10, x: 0, y: 10)
+        .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
     }
     
     @ViewBuilder
@@ -237,7 +237,7 @@ struct Item: View {
         .background(Color.BackgroundColor)
         .frame(maxWidth: .infinity)
         .clipped()
-        .shadow(color: Color.Gray_495057, radius: 10, x: 0, y: 10)
+        .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
     }
     
     @ViewBuilder

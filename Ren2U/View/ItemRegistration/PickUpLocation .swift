@@ -23,7 +23,7 @@ struct PickUpLocation: View {
             
             Text("지도에서 픽업장소를 표시해주세요.")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-                .foregroundColor(.Gray_495057)
+                .foregroundColor(.gray_495057)
             
             Text("표시 완료")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
@@ -58,7 +58,7 @@ struct PickUpLocation: View {
             
             Text("건물명과 호수까지 입력해주세요.")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-                .foregroundColor(.Gray_495057)
+                .foregroundColor(.gray_495057)
             
             TextField("", text: $itemVM.locationDetail)
                 .overlay(SimpleBottomLine(color: .gray_DEE2E6))

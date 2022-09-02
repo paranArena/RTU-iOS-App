@@ -26,7 +26,7 @@ struct RentalItemVCell: View {
             
             Text("남은 수량 \(rentalItem.remain)/\(rentalItem.total)")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                .foregroundColor(Color.Gray_495057)
+                .foregroundColor(Color.gray_495057)
 
             
         }

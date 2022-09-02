@@ -46,7 +46,7 @@ struct ItemInformation: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
             
             HStack {
-                TextField("", text: $itemVM.itemValue)
+                TextField("", text: $itemVM.price)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                     .overlay(SimpleBottomLine(color: .gray_DEE2E6))
                 

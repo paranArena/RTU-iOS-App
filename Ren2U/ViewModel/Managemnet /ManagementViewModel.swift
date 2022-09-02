@@ -45,8 +45,8 @@ class ManagementViewModel: ObservableObject {
         let result = await request.result
         
         switch result {
-        case .success(_):
-            print("클럽 가입 수락 성공")
+        case .success(let value):
+            print("acceptClubJoin Success : \(value)")
         case .failure(let err):
             print("클럽 가입 수락 실패 : \(err)")
         }

@@ -413,8 +413,8 @@
 			children = (
 				157190F228B7053200880F98 /* ItemPhoto.swift */,
 				1525F5FD28B7362C00C7CA51 /* ItemInformation.swift */,
-				1525F60528B73B4700C7CA51 /* ItemCategory.swift */,
 				15CFAD2928B7456E0004CDF7 /* ItemInformation2.swift */,
+				1525F60528B73B4700C7CA51 /* ItemCategory.swift */,
 				1514A0FB28B7510C0040F681 /* PickUpLocation .swift */,
 				1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */,
 				1514A0FF28B7594F0040F681 /* ItemCaution.swift */,

@@ -67,7 +67,7 @@ struct CreateGroupView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("그룹 이름")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                .foregroundColor(Color.Gray_495057)
+                .foregroundColor(Color.gray_495057)
             
             TextField("", text: $viewModel.groupName)
                 .font(.custom(CustomFont.RobotoRegular.rawValue, size: 30))
@@ -91,7 +91,7 @@ struct CreateGroupView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("태그")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                .foregroundColor(Color.Gray_495057)
+                .foregroundColor(Color.gray_495057)
             
             ZStack(alignment: .leading) {
                 if viewModel.isShowingTagPlaceholder {
@@ -133,7 +133,7 @@ struct CreateGroupView: View {
                             .overlay(Capsule().stroke(lineWidth: 1))
                     }
                 }
-                .foregroundColor(Color.Gray_495057)
+                .foregroundColor(Color.gray_495057)
             }
         }
         .isHidden(hidden: (focusField != nil && focusField != .tagsText))
@@ -149,7 +149,7 @@ struct CreateGroupView: View {
         VStack(alignment: .leading, spacing: 5) {
             Text("소개글")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                .foregroundColor(Color.Gray_495057)
+                .foregroundColor(Color.gray_495057)
             
             TextEditor(text: $viewModel.introduction)
                 .focused($focusField, equals: .introduction)
@@ -163,7 +163,7 @@ struct CreateGroupView: View {
             
             Text("띄어쓰기 포함 한글 130글자, 영어 150글자까지 가능합니다.")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
-                .foregroundColor(Color.Gray_495057)
+                .foregroundColor(Color.gray_495057)
         }
         .isHidden(hidden: (focusField != nil && focusField != .introduction))
         .onTapGesture {

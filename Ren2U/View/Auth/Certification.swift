@@ -25,7 +25,7 @@ struct Certification: View {
                 
                 Text("4자리 숫자를 입력해주세요.")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                    .foregroundColor(.Gray_495057)
+                    .foregroundColor(.gray_495057)
                     .padding(.top, 50)
                 
                 CertificationTextField()
@@ -90,7 +90,7 @@ struct Certification: View {
             viewModel.certificationNum = ""
         } label: {Text("인증번호 재발송")}
             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-            .foregroundColor(.Gray_495057)
+            .foregroundColor(.gray_495057)
             .padding(.top, 50)
     }
     

@@ -103,7 +103,7 @@ struct Login: View {
         HStack {
             Text("비밀번호 찾기")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                .foregroundColor(Color.Gray_495057)
+                .foregroundColor(Color.gray_495057)
             
             Text("|")
                 .foregroundColor(Color.gray_E9ECEF)
@@ -113,7 +113,7 @@ struct Login: View {
             } label: {
                 Text("회원 가입")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                    .foregroundColor(Color.Gray_495057)
+                    .foregroundColor(Color.gray_495057)
             }
         }
         .padding(.top, 21)

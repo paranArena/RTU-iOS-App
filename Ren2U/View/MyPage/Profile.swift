@@ -38,7 +38,7 @@ struct Profile: View {
             } label: {
                 Text("탈퇴하기")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-                    .foregroundColor(.Gray_495057)
+                    .foregroundColor(.gray_495057)
             }
             .frame(width: SCREEN_WIDTH - 40, height: 30, alignment: .leading)
             .padding(.leading, 15)

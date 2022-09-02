@@ -72,11 +72,11 @@ struct GroupPage: View {
             HStack {
                 ForEach(groupInfo.club.hashtags, id: \.self) { tag in
                     Text("#\(tag)")
-                        .foregroundColor(Color.Gray_495057)
+                        .foregroundColor(Color.gray_495057)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 }
             }
-            .foregroundColor(Color.Gray_495057)
+            .foregroundColor(Color.gray_495057)
             .padding(.leading)
             .padding(.bottom, 20)
         }
@@ -87,7 +87,7 @@ struct GroupPage: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("소개글")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                .foregroundColor(Color.Gray_495057)
+                .foregroundColor(Color.gray_495057)
             
             Text(groupInfo.club.introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
@@ -102,14 +102,14 @@ struct GroupPage: View {
             HStack {
                 Text("공지사항")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                    .foregroundColor(Color.Gray_495057)
+                    .foregroundColor(Color.gray_495057)
                 Spacer()
                 
                 Button {
                     
                 } label: {
                     Image(systemName: "chevron.right")
-                        .foregroundColor(Color.Gray_495057)
+                        .foregroundColor(Color.gray_495057)
                 }
             }
             .padding(.horizontal)
@@ -133,7 +133,7 @@ struct GroupPage: View {
             HStack {
                 Text("대여물품")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                    .foregroundColor(Color.Gray_495057)
+                    .foregroundColor(Color.gray_495057)
                 Spacer()
                 
                 
@@ -141,7 +141,7 @@ struct GroupPage: View {
                     self.tabSelection = Ren2UTab.Selection.rent.rawValue
                 } label: {
                     Image(systemName: "chevron.right")
-                        .foregroundColor(Color.Gray_495057)
+                        .foregroundColor(Color.gray_495057)
                 }
             }
             .padding(.horizontal)
