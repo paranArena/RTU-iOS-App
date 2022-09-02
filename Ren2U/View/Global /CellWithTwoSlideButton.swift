@@ -43,7 +43,6 @@ struct CellWithTwoSlideButton<Content: View>: View {
                     okCallback()
                 } label: {
                     Text(okMessage)
-                        .lineLimit(1)
                 }
                 .frame(width: 80, height: 80)
                 .background(Color.navy_1E2F97)
@@ -55,7 +54,6 @@ struct CellWithTwoSlideButton<Content: View>: View {
                     cancelCallback()
                 } label: {
                     Text(cancelMessage)
-                        .lineLimit(1)
                 }
                 .frame(width: 80, height: 80)
                 .background(Color.red_FF6155)
@@ -66,41 +64,48 @@ struct CellWithTwoSlideButton<Content: View>: View {
             .padding(.leading, -180)
         }
         .offset(x: isShowingRequestButton ? max(-160, offset) : max(-160, offset))
-        .animation(.spring(), value: isShowingRequestButton)
-        .animation(.spring(), value: offset)
         .gesture(
             DragGesture()
                 .onChanged {
                     selectedID = cellID
-                    self.offset = $0.translation.width
-                    if !self.isShowingRequestButton {
-                        self.offset = min(offset, 0)
-                    } else {
-                        self.offset = max(-160 + offset, -160)
+                    let translationWidth = $0.translation.width
+                    
+                    withAnimation {
+                        self.offset = translationWidth
+                        if !self.isShowingRequestButton {
+                            self.offset = min(offset, 0)
+                        } else {
+                            self.offset = min(0, max(-160 + offset, -160))
+                        }
                     }
                 }
                 .onEnded {
-                    if !isShowingRequestButton {
-                        if $0.translation.width <= -80 {
-                            self.isShowingRequestButton = true
-                            self.offset = -160
+                    let translationWidth = $0.translation.width
+                    withAnimation {
+                        if !isShowingRequestButton {
+                            if translationWidth <= -80 {
+                                self.isShowingRequestButton = true
+                                self.offset = -160
+                            } else {
+                                self.offset = 0
+                            }
                         } else {
-                            self.offset = 0
-                        }
-                    } else {
-                        if $0.translation.width >= 80 {
-                            self.isShowingRequestButton = false
-                            self.offset = 0
-                        } else {
-                            self.offset = -160
+                            if translationWidth >= 80 {
+                                self.isShowingRequestButton = false
+                                self.offset = 0
+                            } else {
+                                self.offset = -160
+                            }
                         }
                     }
                 }
         )
         .onChange(of: selectedID) { newValue in
             if cellID != newValue {
-                self.isShowingRequestButton = false
-                self.offset = 0
+                withAnimation {
+                    self.isShowingRequestButton = false
+                    self.offset = 0
+                }
             }
         }
     }
