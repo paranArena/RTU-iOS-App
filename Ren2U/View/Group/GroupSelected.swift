@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroupSelected: View {
     
-    @EnvironmentObject var groupModel: GroupViewModel
+    @EnvironmentObject var groupVM: GroupViewModel
     @State private var offset: CGFloat = 0 
     @Binding var tabSelection: Int
     let refreshThreshold: CGFloat
@@ -31,7 +31,7 @@ struct GroupSelected: View {
             }, label: { })
         )
         .refreshable {
-            groupModel.getMyClubsTask()
+            groupVM.getMyClubsTask()
         }
     }
     
@@ -43,22 +43,22 @@ struct GroupSelected: View {
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(groupModel.joinedClubs.indices, id: \.self) { index in
-                        let compareGroupId = groupModel.joinedClubs[index].id
+                    ForEach(groupVM.joinedClubs.indices, id: \.self) { index in
+                        let compareGroupId = groupVM.joinedClubs[index].id
                         Button {
-                            self.groupInfo = groupModel.joinedClubs[index]
+                            self.groupInfo = groupVM.joinedClubs[index]
                             self.isActive = true
                         } label: {
-                            FavoriteGroupCell(info: $groupModel.joinedClubs[index])
+                            FavoriteGroupCell(info: $groupVM.joinedClubs[index])
                         }
-                        .isHidden(hidden: !groupModel.likesGroupId.contains(where: { Int($0.groupId)! == compareGroupId }))
+                        .isHidden(hidden: !groupVM.likesGroupId.contains(where: { Int($0.groupId)! == compareGroupId }))
                     }
                 }
                 .padding(.horizontal, 20)
             }
         }
         .padding(.bottom, 30)
-        .isHidden(hidden: groupModel.likesGroupId.isEmpty)
+        .isHidden(hidden: groupVM.likesGroupId.isEmpty)
     }
     
     @ViewBuilder
@@ -70,12 +70,12 @@ struct GroupSelected: View {
                 .padding(.horizontal, 20)
             
             VStack(alignment: .center, spacing: 0) {
-                ForEach(groupModel.joinedClubs.indices, id: \.self) { index in
+                ForEach(groupVM.joinedClubs.indices, id: \.self) { index in
                     Button {
-                        self.groupInfo = groupModel.joinedClubs[index]
+                        self.groupInfo = groupVM.joinedClubs[index]
                         self.isActive = true
                     } label: {
-                        HorizontalClubCell(info: groupModel.joinedClubs[index])
+                        HorizontalClubCell(info: groupVM.joinedClubs[index])
                     }
                 }
             }

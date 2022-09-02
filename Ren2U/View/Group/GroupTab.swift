@@ -87,7 +87,7 @@ struct GroupTab: View {
     
     @ViewBuilder
     private func NoticeSelected() -> some View {
-        RefreshableScrollView(threshold: 220) {
+        RefreshableScrollView(threshold: offset) {
             VStack {
                 ForEach(groupViewModel.joinedClubs.indices, id: \.self) { i in
                     let id = groupViewModel.joinedClubs[i].club.id
@@ -95,13 +95,10 @@ struct GroupTab: View {
                         NoticeCell(noticeInfo: groupViewModel.notices[id]![j], groupName: groupViewModel.getGroupNameByGroupId(groupId: id))
                     }
                 }
-//                ForEach(groupViewModel.notices.values) { notice in
-//                    NoticeCell(noticeInfo: notice)
-//                }
             }
         }
         .refreshable {
-            await groupViewModel.refreshItems()
+            groupViewModel.getMyClubsTask()
         }
     }
 }

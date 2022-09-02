@@ -12,9 +12,10 @@ import HidableTabView
 
 struct Ren2UTab: View {
     
-    @EnvironmentObject var groupViewModel: GroupViewModel
-    @EnvironmentObject var authViewMoel: AuthViewModel
+    @EnvironmentObject var groupVM: GroupViewModel
+    @EnvironmentObject var authVM: AuthViewModel
     @State private var tabSelection: Int = Selection.home.rawValue
+    @State private var isLoading = true
     
     init() {
         let appearance: UITabBarAppearance = UITabBarAppearance()
@@ -31,26 +32,38 @@ struct Ren2UTab: View {
     }
     
     var body: some View {
-        TabView(selection: $tabSelection) {
-            ForEach(Selection.allCases, id: \.rawValue) { selection in
-                NavigationView {
-                    Content(selection: selection)
-                }
-                .navigationViewStyle(.stack)
-                .tag(selection.rawValue)
-                .tabItem {
-                    TabItem(selection: selection)
+        Group {
+            ProgressView()
+                .isHidden(hidden: !isLoading)
+            
+            TabView(selection: $tabSelection) {
+                ForEach(Selection.allCases, id: \.rawValue) { selection in
+                    NavigationView {
+                        Content(selection: selection)
+                    }
+                    .navigationViewStyle(.stack)
+                    .tag(selection.rawValue)
+                    .tabItem {
+                        TabItem(selection: selection)
+                    }
                 }
             }
+            .isHidden(hidden: isLoading)
         }
         .navigationTitle("")
         .navigationBarHidden(true)
         .accentColor(.navy_1E2F97)
         .foregroundColor(.LabelColor)
         .onAppear {
-            authViewMoel.getMyInfoTask()
-            groupViewModel.getMyClubsTask()
-            groupViewModel.fetchRentalItems()
+            Task {
+                await authVM.getMyInfo()
+                await groupVM.getMyClubs()
+                for joinedClub in groupVM.joinedClubs {
+                    await groupVM.searchNotificationsAll(groupId: joinedClub.club.id)
+                }
+                groupVM.fetchRentalItems()
+                isLoading = false
+            }
         }
     }
     
