@@ -21,7 +21,7 @@ struct Item: View {
     }
     
     var body: some View {
-        BounceControllScrollView(offset: $viewModel.offset) {
+        BounceControllScrollView(baseOffset: 100, offset: $viewModel.offset) {
             VStack(alignment: .leading, spacing: 10) {
                 CarouselImage()
                 
@@ -139,7 +139,7 @@ struct Item: View {
     private func OverlayContent() -> some View {
         VStack(alignment: .center, spacing: 0) {
             Spacer()
-            RentalCompleteOverlayButton()
+            ReservationOverlayButton()
         }
         .ignoresSafeArea(.all, edges: .bottom)
     }

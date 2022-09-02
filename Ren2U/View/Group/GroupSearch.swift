@@ -25,7 +25,7 @@ struct GroupSearch: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
             
-            BounceControllScrollView(offset: $offset) {
+            BounceControllScrollView(baseOffset: 100, offset: $offset) {
                 VStack {
                     ForEach(groupInfo, id: \.self) { searchCLubData in
                         Button {

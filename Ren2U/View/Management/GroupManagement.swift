@@ -87,6 +87,9 @@ struct GroupManagement: View {
             }
             .padding(.horizontal, 10)
         }
+        .onAppear {
+            managementVM.searchClubJoinsAllTask()
+        }
         .controllTabbar(isPresented)
         .navigationTitle(" ")
         .navigationBarTitleDisplayMode(.inline)
@@ -143,7 +146,7 @@ struct GroupManagement: View {
         case .notice:
             NoticeManagement(managementVM: managementVM)
         case .memberManagement:
-            MemberManagement()
+            MemberManagement(managementVM: managementVM)
         case .rentalActive:
             Text("Empty View")
         }

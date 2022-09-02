@@ -17,7 +17,7 @@ struct CreateGroupView: View {
     @FocusState var focusField: Field?
 
     var body: some View {
-        BounceControllScrollView(offset: $viewModel.offset) {
+        BounceControllScrollView(baseOffset: 100, offset: $viewModel.offset) {
             VStack(alignment: .center, spacing: 10) {
                 GroupImage()
                     .overlay(ChangeImageButton())

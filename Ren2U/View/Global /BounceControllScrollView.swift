@@ -10,8 +10,15 @@ import Introspect
 
 struct BounceControllScrollView<Content: View>: View {
     
+    let baseOffset: CGFloat
     @Binding var offset: CGFloat
     var content: () -> Content
+    
+    init(baseOffset: CGFloat, offset: Binding<CGFloat>, content: @escaping () -> Content) {
+        self.baseOffset = baseOffset
+        self._offset = offset
+        self.content = content
+    }
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {

@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-
 let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
 
-let baseURL = "http://ec2-13-125-234-225.ap-northeast-2.compute.amazonaws.com:8080"
-//let baseURL = "localhost:8080"
+//let BASE_URL = "ren2u.ap-northeast-2.elasticbeanstalk.com"
+let BASE_URL = "http://ec2-13-125-234-225.ap-northeast-2.compute.amazonaws.com:8080"
+//let BASE_URL = "localhost:8080"
 
-let jwtKey = "jwt"
-let randomImageSource = "https://picsum.photos/seed/picsum/200/300"
+let JWT_KEY = "jwt"
+
 
 public struct ViewOffsetKey: PreferenceKey {
     public typealias Value = CGFloat

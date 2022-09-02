@@ -13,10 +13,15 @@ struct NoticeManagement: View {
     @EnvironmentObject var groupVM: GroupViewModel
     @ObservedObject var managementVM: ManagementViewModel
     
+    @State private var selectedNum = 0
+    @State private var offset: CGFloat = .zero
+    
     var body: some View {
         ScrollView {
             ForEach(groupVM.notices[managementVM.groupId]?.indices ?? 0..<0, id: \.self) { i in
-                NoticeCell(noticeInfo: groupVM.notices[managementVM.groupId]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.groupId))
+                HStack {
+                    ManageNoticeCell(noticeInfo: groupVM.notices[managementVM.groupId]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.groupId), groupID: managementVM.groupId, selectedCellID: $selectedNum, managementVM: managementVM)
+                }
             }
         }
         .basicNavigationTitle(title: "공지사항")

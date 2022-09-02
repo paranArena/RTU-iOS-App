@@ -15,12 +15,12 @@ class AuthViewModel: ObservableObject {
     @Published var userResponse: UserData?
     
     init() {
-        self.jwt = UserDefaults.standard.string(forKey: jwtKey)
+        self.jwt = UserDefaults.standard.string(forKey: JWT_KEY)
     }
     
     
     private func setToken(token: String) {
-        UserDefaults.standard.setValue(token, forKey: jwtKey)
+        UserDefaults.standard.setValue(token, forKey: JWT_KEY)
         self.jwt = token
     }
     
@@ -41,7 +41,7 @@ class AuthViewModel: ObservableObject {
     
     @MainActor
     func checkEmailDuplicate(email: String) async -> Bool {
-        let url = "\(baseURL)/members/\(email)/exists"
+        let url = "\(BASE_URL)/members/\(email)/exists"
         let response =  await AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(Bool.self).result
         
         switch response {
@@ -57,7 +57,7 @@ class AuthViewModel: ObservableObject {
     
     @MainActor
     func getMyInfo() async {
-        let url = "\(baseURL)/members/my/info"
+        let url = "\(BASE_URL)/members/my/info"
         let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyInfoResponse.self)
@@ -77,7 +77,7 @@ class AuthViewModel: ObservableObject {
     
     func signUp(user: User) async -> Bool {
         var result = false
-        let url = "\(baseURL)/signup"
+        let url = "\(BASE_URL)/signup"
         let param: [String: Any] = [
             "email" : "\(user.email)@ajou.ac.kr",
             "password" : user.password,
@@ -104,7 +104,7 @@ class AuthViewModel: ObservableObject {
     
     @MainActor
     func login(account: Account) async -> Bool {
-        let url = "\(baseURL)/authenticate"
+        let url = "\(BASE_URL)/authenticate"
         let param: [String: Any] = [
             "email" : account.email,
             "password" : account.password
@@ -120,7 +120,7 @@ class AuthViewModel: ObservableObject {
             self.setToken(token: value.token)
             return false
         case .failure(let err):
-            print("[Auth] login err: \(err)")
+            print("login err: \(err)")
             return true
         }
 
@@ -128,7 +128,7 @@ class AuthViewModel: ObservableObject {
     
     
     func logout() {
-        UserDefaults.standard.setValue(nil, forKey: jwtKey)
+        UserDefaults.standard.setValue(nil, forKey: JWT_KEY)
         self.jwt = nil
     }
     

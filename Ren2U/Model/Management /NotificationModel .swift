@@ -6,8 +6,3 @@
 //
 
 import Foundation
-
-struct NotificationModel: Codable {
-    var title: String
-    var content: String 
-}

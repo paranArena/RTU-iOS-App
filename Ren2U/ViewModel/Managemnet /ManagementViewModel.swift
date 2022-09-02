@@ -19,8 +19,8 @@ class ManagementViewModel: ObservableObject {
     }
     //  MARK: POST
     func createNotification(notice: NotificationModel) async {
-        let url = "\(baseURL)/clubs/\(groupId)/notifications"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let url = "\(BASE_URL)/clubs/\(groupId)/notifications"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         let param: [String: Any] = [
             "title" : notice.title,
             "content" : notice.content
@@ -38,13 +38,13 @@ class ManagementViewModel: ObservableObject {
     }
     
     func acceptClubJoin(userData: UserData) async {
-        let url = "\(baseURL)/clubs/\(groupId)/requests/join/\(userData.id)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let url = "\(BASE_URL)/clubs/\(groupId)/requests/join/\(userData.id)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).serializingString()
-        let reuslt = await request.result
+        let result = await request.result
         
-        switch reuslt {
+        switch result {
         case .success(_):
             print("클럽 가입 수락 성공")
         case .failure(let err):
@@ -56,13 +56,13 @@ class ManagementViewModel: ObservableObject {
     
     @MainActor
     func searchClubJoinsAll() async {
-        let url = "\(baseURL)/clubs/\(groupId)/requests/join/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let url = "\(BASE_URL)/clubs/\(groupId)/requests/join/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchClubJoinsAllResponse.self)
-        let response = await request.result
+        let result = await request.result
         
-        switch response {
+        switch result {
         case .success(let value):
             print("클럽 가입 조회 성공")
             self.members = value.data
@@ -71,6 +71,23 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    //  MARK: DELETE
+    func deleteNotification(groupID: Int, notificationID: Int) async {
+        let url = "\(BASE_URL)/clubs/\(groupID)/notifications/\(notificationID)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
+        
+        switch result {
+        case .success(_):
+            print("deleteNotification Success")
+        case .failure(let err):
+            print("deleteNotification Err : \(err)")
+        }
+        
+        
+    }
     
     //  MARK: TASK
     func createNotificationTask(notice: NotificationModel) {
@@ -88,6 +105,12 @@ class ManagementViewModel: ObservableObject {
     func acceptClubJoinTask(userData: UserData) {
         Task {
             await acceptClubJoin(userData: userData)
+        }
+    }
+    
+    func deleteNotificationTask(groupID: Int, notificationID: Int) {
+        Task {
+            await deleteNotification(groupID: groupID, notificationID: notificationID)
         }
     }
     

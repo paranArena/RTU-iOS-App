@@ -10,7 +10,7 @@ import Kingfisher
 
 struct GroupPage: View {
     
-    @EnvironmentObject var groupModel: GroupViewModel
+    @EnvironmentObject var groupVM: GroupViewModel
     @Binding var tabSelection: Int
     @Binding var groupInfo: ClubAndRoleData
     @State var offset: CGFloat = 0
@@ -19,7 +19,7 @@ struct GroupPage: View {
     
     var body: some View {
         
-        BounceControllScrollView(offset: $offset) {
+        BounceControllScrollView(baseOffset: 100, offset: $offset) {
             VStack(alignment: .leading) {
                 VStack {
                     if let thumbnaulPath = groupInfo.club.thumbnailPath {
@@ -113,6 +113,10 @@ struct GroupPage: View {
             }
             .padding(.horizontal)
             
+            ForEach(groupVM.notices[groupInfo.club.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
+                NoticeCell(noticeInfo: groupVM.notices[groupInfo.club.id]![i], groupName: groupVM.getGroupNameByGroupId(groupId: groupInfo.club.id))
+            }
+            
 //            ForEach(groupModel.notices) { notice in
 //                NoticeCell(noticeInfo: notice)
 //            }
@@ -143,10 +147,9 @@ struct GroupPage: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(groupModel.rentalItems) { rentalItem in
+                    ForEach(groupVM.rentalItems) { rentalItem in
                         Button {
                             self.tabSelection = Ren2UTab.Selection.rent.rawValue
-                            self.groupModel.itemViewActive[2] = true
                         } label: {
                             RentalItemVCell(rentalItem: rentalItem)
                         }

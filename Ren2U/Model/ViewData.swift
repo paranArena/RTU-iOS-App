@@ -32,7 +32,7 @@ struct ClubData: Codable, Hashable {
     let id: Int
     var name: String
     var introduction: String
-    var thumbnailPath: String
+    var thumbnailPath: String?
     var hashtags: [String]
 }
 

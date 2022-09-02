@@ -25,7 +25,7 @@ extension MemberManagement {
 }
 struct MemberManagement: View {
     
-    @EnvironmentObject var managementVM: ManagementViewModel
+    @ObservedObject var managementVM: ManagementViewModel
     @State private var buttonSelection: Selection = .member
     
     var body: some View {
@@ -44,7 +44,6 @@ struct MemberManagement: View {
         .basicNavigationTitle(title: "멤버 관리")
         .onAppear {
             UITabBar.hideTabBar(animated: false)
-            managementVM.searchClubJoinsAllTask()
         }
     }
     
@@ -87,6 +86,6 @@ struct MemberManagement: View {
 
 struct MemberManament_Previews: PreviewProvider {
     static var previews: some View {
-        MemberManagement()
+        MemberManagement(managementVM:  ManagementViewModel(groupId: 0))
     }
 }

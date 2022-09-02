@@ -22,4 +22,14 @@ struct User: Codable {
     }
 }
 
+struct NotificationModel: Codable {
+    var title: String
+    var content: String
+}
+
+struct Account: Codable {
+    var email: String
+    var password: String
+}
+
 

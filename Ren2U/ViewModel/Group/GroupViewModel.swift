@@ -80,8 +80,8 @@ class GroupViewModel: ObservableObject {
     
     @MainActor
     func getMyClubs() async {
-        let url = "\(baseURL)/members/my/clubs"
-        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: jwtKey)!)"]
+        let url = "\(BASE_URL)/members/my/clubs"
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)"]
         
         let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyClubsResponse.self)
         let response = await task.result
@@ -98,8 +98,8 @@ class GroupViewModel: ObservableObject {
     @MainActor
     func searchClubsAll() async -> [ClubData] {
         
-        let url = "\(baseURL)/clubs/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let url = "\(BASE_URL)/clubs/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
 
         let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetSearchClubsAllResponse.self)
         let result = await task.result
@@ -115,8 +115,8 @@ class GroupViewModel: ObservableObject {
     
     @MainActor
     func searchClubsWithName(groupName: String) async -> ClubData? {
-        let url = "\(baseURL)/clubs/search?name=\(groupName)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let url = "\(BASE_URL)/clubs/search?name=\(groupName)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         if let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let encodedURL = URL(string: encoded) {
             let task = AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchClubsWithName.self)
@@ -135,8 +135,8 @@ class GroupViewModel: ObservableObject {
     
     @MainActor
     func searchClubsWithHashTag(hashTag: String) async -> [ClubData] {
-        let url = "\(baseURL)/clubs/search?hashtag=\(hashTag)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let url = "\(BASE_URL)/clubs/search?hashtag=\(hashTag)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         if let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let encodedURL = URL(string: encoded) {
             
@@ -158,8 +158,8 @@ class GroupViewModel: ObservableObject {
     @MainActor
     func searchNotificationsAll(groupId: Int) async {
         
-        let url = "\(baseURL)/clubs/\(groupId)/notifications/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let url = "\(BASE_URL)/clubs/\(groupId)/notifications/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchNotificationsAllResponse.self)
         let result = await task.result
@@ -168,6 +168,7 @@ class GroupViewModel: ObservableObject {
         case .success(let value):
             print("searchNotificationAll success, GroupId: \(groupId)")
             self.notices[groupId] = value.data
+            self.notices[groupId] = notices[groupId]!.reversed()
         case .failure(let err):
             print("searchNotificationsAll failure, GroupId: \(groupId) : \(err)")
         }
@@ -177,9 +178,9 @@ class GroupViewModel: ObservableObject {
     //  MARK: POST
     
     func createClub(club: CreateClubFormdata) async {
-        let url = "\(baseURL)/clubs"
+        let url = "\(BASE_URL)/clubs"
         let hearders: HTTPHeaders = [
-            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: jwtKey)!)",
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",
             "Content-type": "multipart/form-data"
         ]
         
@@ -220,8 +221,8 @@ class GroupViewModel: ObservableObject {
     
     func requestClubJoin(clubId: Int) async {
         
-        let url = "\(baseURL)/clubs/\(clubId)/requests/join"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: jwtKey)!)]
+        let url = "\(BASE_URL)/clubs/\(clubId)/requests/join"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let task = AF.request(url, method: .post, encoding: JSONEncoding.default, headers:  hearders).serializingDecodable(requestClubJoinResponse.self)
         let result = await task.result

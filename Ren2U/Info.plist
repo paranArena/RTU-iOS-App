@@ -14,14 +14,10 @@
 		<string>NotoSansKR-Black.otf</string>
 		<string>NotoSansKR-Bold.otf</string>
 	</array>
-    
-    
-    <!-- http 통신을위한 임시용 설정-->
-    <key>NSAppTransportSecurity</key>
-     <dict>
-       <key>NSAllowsArbitraryLoads</key>
-       <true/>
-     </dict>
-     
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
