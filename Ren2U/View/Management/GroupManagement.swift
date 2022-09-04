@@ -144,7 +144,7 @@ struct GroupManagement: View {
     private func Navigation(selection: ManageSelection) -> some View {
         switch selection {
         case .profileEdit:
-            ProfileManagement(managementVM: managementVM)
+            ClubProfile(viewModel: ClubProfile.ViewModel(putModeData: managementVM.clubData, mode: .put))
         case .rentalManagement:
             RentalAndItemManagement()
         case .notice:

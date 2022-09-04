@@ -7,24 +7,25 @@
 
 import SwiftUI
 import HidableTabView
+import Kingfisher
 
-extension CreateGroupView {
+extension ClubProfile {
     enum Mode {
         case post
         case put
     }
 }
 
-struct CreateGroupView: View {
+struct ClubProfile: View {
     
-    @EnvironmentObject var clubVM: GroupViewModel
+    @EnvironmentObject var clubVM: ClubViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.isPresented) var isPresented
-    @StateObject var viewModel = ViewModel()
+    @StateObject var viewModel: ViewModel
     @FocusState var focusField: Field?
 
     var body: some View {
-        BounceControllScrollView(baseOffset: 100, offset: $viewModel.offset) {
+        BounceControllScrollView(baseOffset: 30, offset: $viewModel.offset) {
             VStack(alignment: .center, spacing: 10) {
                 GroupImage()
                     .overlay(ChangeImageButton())
@@ -58,14 +59,24 @@ struct CreateGroupView: View {
     
     @ViewBuilder
     private func GroupImage() -> some View {
-        if let uiImage = viewModel.selectedUIImage {
-            Image(uiImage: uiImage)
-                .resizable()
-                .frame(width: SCREEN_WIDTH, height: 215)
+        if viewModel.mode == .post {
+            if let uiImage = viewModel.selectedUIImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .frame(width: SCREEN_WIDTH, height: 215)
+            } else {
+                Image("DefaultGroupImage")
+                    .resizable()
+                    .frame(width: SCREEN_WIDTH, height: 215)
+            }
         } else {
-            Image("DefaultGroupImage")
+            KFImage(URL(string: viewModel.clubProfileData.thumbnailPath!))
+                .onFailure { err in
+                    print(err.errorDescription ?? "KFImage Optional err")
+                }
                 .resizable()
-                .frame(width: SCREEN_WIDTH, height: 215)
+                .scaledToFill()
+                .frame(width: 200, height: 200)
         }
     }
     
@@ -76,7 +87,7 @@ struct CreateGroupView: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .foregroundColor(Color.gray_495057)
             
-            TextField("", text: $viewModel.groupName)
+            TextField("", text: $viewModel.clubProfileData.name)
                 .font(.custom(CustomFont.RobotoRegular.rawValue, size: 30))
                 .overlay(SimpleBottomLine(color: Color.gray_DEE2E6))
                 .submitLabel(.next)
@@ -138,13 +149,13 @@ struct CreateGroupView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(viewModel.tags.indices, id: \.self) { i in
+                    ForEach(viewModel.clubProfileData.hashtags.indices, id: \.self) { i in
                         HStack {
-                            Text("#\(viewModel.tags[i])")
+                            Text("#\(viewModel.clubProfileData.hashtags[i])")
                                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                             
                             Button {
-                                viewModel.tags.remove(at: i)
+                                viewModel.clubProfileData.hashtags.remove(at: i)
                             } label: {
                                 Image(systemName: "xmark")
                                     .resizable()
@@ -169,7 +180,7 @@ struct CreateGroupView: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .foregroundColor(Color.gray_495057)
             
-            TextEditor(text: $viewModel.introduction)
+            TextEditor(text: $viewModel.clubProfileData.introduction)
                 .focused($focusField, equals: .introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .submitLabel(.done)
@@ -187,7 +198,7 @@ struct CreateGroupView: View {
         .onTapGesture {
             focusField = .introduction
         }
-        .animation(.spring(), value: viewModel.tags)
+        .animation(.spring(), value: viewModel.clubProfileData.hashtags)
     }
     
     @ViewBuilder
@@ -219,7 +230,9 @@ struct CreateGroupView: View {
     @ViewBuilder
     private func CreateCompleteButton() -> some View {
         Button {
-            clubVM.createClubTask(club: CreateClubFormdata(name: viewModel.groupName, introduction: viewModel.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.tags))
+            if viewModel.mode == .post {
+                clubVM.createClubTask(club: CreateClubFormdata(name: viewModel.clubProfileData.name, introduction: viewModel.clubProfileData.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.clubProfileData.hashtags))
+            }
             presentationMode.wrappedValue.dismiss()
         } label: {
             Text("완료")
@@ -231,6 +244,6 @@ struct CreateGroupView: View {
 
 struct CreateGroup_Previews: PreviewProvider {
     static var previews: some View {
-        CreateGroupView()
+        ClubProfile(viewModel: ClubProfile.ViewModel(mode: ClubProfile.Mode.post))
     }
 }

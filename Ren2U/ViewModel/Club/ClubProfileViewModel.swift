@@ -7,24 +7,30 @@
 
 import SwiftUI
 
-extension CreateGroupView {
+extension ClubProfile {
     
     class ViewModel: ObservableObject {
+        @Published var clubProfileData = ClubProfileData()
+        @Published var mode: ClubProfile.Mode
         
-        @Published var groupName = ""
         @Published var tagsText = ""
-        @Published var introduction = ""
-        @Published var tags = [String]()
-        
         @Published var isShowingTagPlaceholder = true
-        
         @Published var showImagePicker = false
         @Published var selectedUIImage: UIImage?
         
         @Published var offset: CGFloat = 0
         
+        init(putModeData: ClubData, mode: ClubProfile.Mode) {
+            clubProfileData = ClubProfileData(clubData: putModeData)
+            self.mode = mode
+        }
         
-        func showTagPlaceHolder(newValue: CreateGroupView.Field?) {
+        init(mode: ClubProfile.Mode){
+            self.mode = mode
+        }
+        
+        
+        func showTagPlaceHolder(newValue: ClubProfile.Field?) {
             if newValue == .tagsText {
                 self.isShowingTagPlaceholder = false
             } else {
@@ -51,7 +57,7 @@ extension CreateGroupView {
                 case " " :
                     isPasingStarted = false
                     if !parsedTag.isEmpty {
-                        self.tags.append(parsedTag)
+                        self.clubProfileData.hashtags.append(parsedTag)
                     }
                     parsedTag = ""
                     break
@@ -63,7 +69,7 @@ extension CreateGroupView {
             }
             
             if !parsedTag.isEmpty {
-                self.tags.append(parsedTag)
+                self.clubProfileData.hashtags.append(parsedTag)
             }
             
             self.tagsText = ""
@@ -76,7 +82,7 @@ extension CreateGroupView {
 
 }
 
-extension CreateGroupView  {
+extension ClubProfile  {
     enum Field: Int, CaseIterable {
         case groupName
         case tagsText

@@ -8,6 +8,27 @@
 import Foundation
 import SwiftUI
 
+struct ClubProfileData {
+    var name: String
+    var introduction: String
+    var thumbnail: UIImage?
+    var hashtags: [String]
+    var thumbnailPath: String?
+    
+    init(clubData: ClubData) {
+        self.name = clubData.name
+        self.introduction = clubData.introduction
+        self.hashtags = clubData.hashtags
+        self.thumbnailPath = clubData.thumbnailPath
+    }
+    
+    init() {
+        self.name = ""
+        self.introduction = ""
+        self.hashtags = [String]()
+    }
+}
+
 struct CreateClubFormdata {
     var name: String
     var introduction: String
@@ -36,7 +57,7 @@ struct ClubData: Codable, Hashable {
     var hashtags: [String]
     
     static func dummyClubData() -> ClubData {
-        return ClubData(id: 1, name: "오류", introduction: "오류", hashtags: ["오류"]) 
+        return ClubData(id: 1, name: "오류", introduction: "오류", hashtags: ["오류"])
     }
 }
 
@@ -53,7 +74,7 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
     }
     
     func extractClubData() -> ClubData {
-        return ClubData(id: id, name: name, introduction: introduction, hashtags: hashtags)
+        return ClubData(id: id, name: name, introduction: introduction, thumbnailPath: thumbnailPath, hashtags: hashtags)
     }
 }
 

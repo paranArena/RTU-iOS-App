@@ -11,7 +11,7 @@ import SwiftUI
 struct Ren2UApp: App {
     
     @StateObject var authModel = AuthViewModel()
-    @StateObject var groupModel = GroupViewModel()
+    @StateObject var groupModel = ClubViewModel()
     
     init() {
         // 네비게이션 바 틴트 컬러 변경 

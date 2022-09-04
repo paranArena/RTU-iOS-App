@@ -12,7 +12,7 @@ struct ManageMemberCell: View {
     @Binding var selectedCellID: Int
     
     @ObservedObject var managementVM: ManagementViewModel
-    @EnvironmentObject var groupVM: GroupViewModel
+    @EnvironmentObject var groupVM: ClubViewModel
   
     var body: some View {
         

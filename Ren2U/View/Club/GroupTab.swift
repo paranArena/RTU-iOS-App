@@ -12,7 +12,7 @@ struct GroupTab: View {
     
     @StateObject private var vm = ViewModel()
     @Binding var tabSelection: Int 
-    @EnvironmentObject var groupViewModel: GroupViewModel
+    @EnvironmentObject var groupViewModel: ClubViewModel
     @State private var offset: CGFloat = .zero
     let spacing: CGFloat = 10
     
@@ -79,7 +79,7 @@ struct GroupTab: View {
             HStack {
                 Spacer()
                 NavigationLink {
-                    CreateGroupView()
+                    ClubProfile(viewModel: ClubProfile.ViewModel(mode: .post))
                 } label: {
                     PlusCircle()
                 }

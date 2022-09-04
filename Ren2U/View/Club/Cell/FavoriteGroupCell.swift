@@ -10,7 +10,7 @@ import Kingfisher
 
 struct FavoriteGroupCell: View {
     
-    @EnvironmentObject var groupModel: GroupViewModel
+    @EnvironmentObject var groupModel: ClubViewModel
     @Binding var info: ClubAndRoleData
     
     var body: some View {

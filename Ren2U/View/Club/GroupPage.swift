@@ -10,7 +10,7 @@ import Kingfisher
 
 struct GroupPage: View {
     
-    @EnvironmentObject var groupVM: GroupViewModel
+    @EnvironmentObject var groupVM: ClubViewModel
     @Binding var tabSelection: Int
     @Binding var groupInfo: ClubAndRoleData
     @State var offset: CGFloat = 0

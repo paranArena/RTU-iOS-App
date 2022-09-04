@@ -8,7 +8,7 @@
 import SwiftUI
 import Alamofire
 
-class GroupViewModel: ObservableObject {
+class ClubViewModel: ObservableObject {
     
     @Published var likesGroupId = [LikeGroupInfo]()
     @Published var joinedClubs = [ClubAndRoleData]() // VStack에서 나열될 그룹들

@@ -10,7 +10,7 @@ import Kingfisher
 
 struct HorizontalClubCell: View {
     
-    @EnvironmentObject var groupModel: GroupViewModel
+    @EnvironmentObject var groupModel: ClubViewModel
     let info: ClubAndRoleData
     
     var body: some View {

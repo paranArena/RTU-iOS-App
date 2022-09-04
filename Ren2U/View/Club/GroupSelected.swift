@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroupSelected: View {
     
-    @EnvironmentObject var groupVM: GroupViewModel
+    @EnvironmentObject var groupVM: ClubViewModel
     @State private var offset: CGFloat = 0 
     @Binding var tabSelection: Int
     let refreshThreshold: CGFloat

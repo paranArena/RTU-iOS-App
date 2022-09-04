@@ -11,7 +11,7 @@ import Introspect
 
 struct NoticeManagement: View {
     
-    @EnvironmentObject var groupVM: GroupViewModel
+    @EnvironmentObject var groupVM: ClubViewModel
     @ObservedObject var managementVM: ManagementViewModel
     
     @State private var selectedCellId = -1

@@ -10,7 +10,7 @@ import CoreAudio
 
 struct GroupSearch: View {
     
-    @EnvironmentObject var groupVM: GroupViewModel
+    @EnvironmentObject var groupVM: ClubViewModel
     @Binding var search: String
     @Binding var tabSelection: Int
     

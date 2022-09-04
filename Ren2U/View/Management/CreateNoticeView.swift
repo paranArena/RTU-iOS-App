@@ -12,7 +12,7 @@ struct CreateNoticeView: View {
     @State private var raw = NotificationModel(title: "", content: "")
     @State private var isShowingImagePicker = false
     @ObservedObject var managementVM: ManagementViewModel
-    @EnvironmentObject var groupVM: GroupViewModel
+    @EnvironmentObject var groupVM: ClubViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
