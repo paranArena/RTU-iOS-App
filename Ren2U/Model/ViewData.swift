@@ -38,13 +38,14 @@ struct ClubData: Codable, Hashable {
 
 struct ClubAndRoleData: Codable, Identifiable {
     var id: Int
-    var club: ClubData
-    var role: String
+    var name: String
+    var introduction: String
+    var thumbnailPath: String
+    var hashtags: [String]
+    var clubRole: String
     
-    init(id: Int, club: ClubData, role: String) {
-        self.id = id
-        self.club = club
-        self.role = role
+    static func dummyClubAndRoleData() -> ClubAndRoleData {
+        return ClubAndRoleData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""], clubRole: "")
     }
 }
 
@@ -58,9 +59,10 @@ struct NoticeData: Codable, Identifiable {
 extension ClubAndRoleData {
     enum GroupRole: String {
         case owner = "OWNER"
+        case admin = "ADMIN"
+        case user = "USER"
         case wait = "WAIT"
-        case applicant = "APPLICANT"
-        case nonMember = "NONMEMBER"
+        case none = "NONE"
     }
 }
 

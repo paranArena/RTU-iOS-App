@@ -285,8 +285,8 @@
             filePath = "Ren2U/ViewModel/Group/GroupViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "searchClubsWithName(groupName:)"
             landmarkType = "7">
          </BreakpointContent>

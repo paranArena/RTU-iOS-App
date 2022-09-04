@@ -21,18 +21,10 @@ class GroupViewModel: ObservableObject {
     //  MARK: LOCAL
     
     func getGroupNameByGroupId(groupId: Int) -> String {
-        if let fooOffset = joinedClubs.firstIndex(where: {$0.club.id == groupId }) {
-            return joinedClubs[fooOffset].club.name
+        if let fooOffset = joinedClubs.firstIndex(where: {$0.id == groupId }) {
+            return joinedClubs[fooOffset].name
         } else {
             return "그룹 이름 에러"
-        }
-    }
-    
-    func refreshItems() async {
-        do {
-            try await Task.sleep(nanoseconds: 2_000_000_000)
-        } catch {
-            
         }
     }
     
@@ -91,7 +83,7 @@ class GroupViewModel: ObservableObject {
             print("getMyClubs Success")
             self.joinedClubs = value.data
         case .failure(let err):
-            print("getMyClubs Error : \(err)")
+            print("[getMyClubs Error]\n \(err)")
         }
     }
     
@@ -106,8 +98,10 @@ class GroupViewModel: ObservableObject {
         
         switch result {
         case .success(let value):
+            print("serachClubsAll success")
             return value.data
         case .failure(let err):
+            print("serachClubsAll failure")
             print(err)
             return [ClubData]()
         }
@@ -249,12 +243,12 @@ class GroupViewModel: ObservableObject {
             
             notices.removeAll()
             for joinedClub in joinedClubs {
-                await searchNotificationsAll(groupId: joinedClub.club.id)
+                await searchNotificationsAll(groupId: joinedClub.id)
             }
             
             for joinedClub in joinedClubs {
-                for i in 0..<(notices[joinedClub.club.id]?.count ?? 0) {
-                    print("공지사항 : \(notices[joinedClub.club.id]![i].title)")
+                for i in 0..<(notices[joinedClub.id]?.count ?? 0) {
+                    print("공지사항 : \(notices[joinedClub.id]![i].title)")
                 }
             }
         }
@@ -270,7 +264,7 @@ class GroupViewModel: ObservableObject {
     func searchNotificationsAllTask() {
         Task {
             for joinedClub in joinedClubs {
-                await searchNotificationsAll(groupId: joinedClub.club.id)
+                await searchNotificationsAll(groupId: joinedClub.id)
             }
         }
     }

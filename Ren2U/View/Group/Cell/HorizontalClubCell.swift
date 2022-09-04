@@ -17,7 +17,7 @@ struct HorizontalClubCell: View {
         
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-                if let thumnnailPath = info.club.thumbnailPath {
+                if let thumnnailPath = info.thumbnailPath {
                     KFImage(URL(string: thumnnailPath))
                         .onFailure { err in
                             print(err.errorDescription ?? "KFImage Optional err")
@@ -33,10 +33,10 @@ struct HorizontalClubCell: View {
                 
                 
                 VStack(alignment: .leading) {
-                    Text(info.club.name)
+                    Text(info.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
-                    Text(groupModel.makeFavoritesGroupTag(tags: info.club.hashtags))
+                    Text(groupModel.makeFavoritesGroupTag(tags: info.hashtags))
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(.gray_ADB5BD)
                         .lineLimit(1)

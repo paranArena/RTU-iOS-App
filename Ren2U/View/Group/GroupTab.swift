@@ -90,7 +90,7 @@ struct GroupTab: View {
         RefreshableScrollView(threshold: offset) {
             VStack {
                 ForEach(groupViewModel.joinedClubs.indices, id: \.self) { i in
-                    let id = groupViewModel.joinedClubs[i].club.id
+                    let id = groupViewModel.joinedClubs[i].id
                     ForEach(groupViewModel.notices[id]?.indices ?? 0..<0, id: \.self) { j in
                         NoticeCell(noticeInfo: groupViewModel.notices[id]![j], groupName: groupViewModel.getGroupNameByGroupId(groupId: id))
                     }

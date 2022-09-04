@@ -22,7 +22,7 @@ struct GroupPage: View {
         BounceControllScrollView(baseOffset: 80, offset: $offset) {
             VStack(alignment: .leading) {
                 VStack {
-                    if let thumbnaulPath = groupInfo.club.thumbnailPath {
+                    if let thumbnaulPath = groupInfo.thumbnailPath {
                         KFImage(URL(string: thumbnaulPath))
                             .onFailure { err in
                                 print(err.errorDescription ?? "KFImage Optional err")
@@ -49,14 +49,14 @@ struct GroupPage: View {
         .overlay(ShadowRectangle())
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                GroupManagement(managementVM: ManagementViewModel(groupId: groupInfo.club.id))
+                GroupManagement(managementVM: ManagementViewModel(groupId: groupInfo.id))
             }, label: {}) 
         )
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
-                Text(groupInfo.club.name)
+                Text(groupInfo.name)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -70,7 +70,7 @@ struct GroupPage: View {
     private func Tags() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(groupInfo.club.hashtags, id: \.self) { tag in
+                ForEach(groupInfo.hashtags, id: \.self) { tag in
                     Text("#\(tag)")
                         .foregroundColor(Color.gray_495057)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
@@ -89,7 +89,7 @@ struct GroupPage: View {
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.gray_495057)
             
-            Text(groupInfo.club.introduction)
+            Text(groupInfo.introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
         }
         .padding(.horizontal)
@@ -114,8 +114,8 @@ struct GroupPage: View {
             }
             .padding(.horizontal)
             
-            ForEach(groupVM.notices[groupInfo.club.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
-                NoticeCell(noticeInfo: groupVM.notices[groupInfo.club.id]![i], groupName: groupVM.getGroupNameByGroupId(groupId: groupInfo.club.id))
+            ForEach(groupVM.notices[groupInfo.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
+                NoticeCell(noticeInfo: groupVM.notices[groupInfo.id]![i], groupName: groupVM.getGroupNameByGroupId(groupId: groupInfo.id))
             }
             
 //            ForEach(groupModel.notices) { notice in
@@ -165,16 +165,15 @@ struct GroupPage: View {
     
     @ViewBuilder
     private func TrailingToolbar() -> some View {
-        switch groupInfo.role {
+        switch groupInfo.clubRole {
         case ClubAndRoleData.GroupRole.owner.rawValue:
-            
             Button {
                 isActive = true
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundColor(Color.LabelColor)
             }
-        case ClubAndRoleData.GroupRole.wait.rawValue :
+        case ClubAndRoleData.GroupRole.user.rawValue:
             Button {
 
             } label: {
@@ -183,7 +182,7 @@ struct GroupPage: View {
                     .foregroundColor(Color.LabelColor)
             }
 
-        case ClubAndRoleData.GroupRole.applicant.rawValue :
+        case ClubAndRoleData.GroupRole.wait.rawValue:
             Button {
 
             } label: {
@@ -191,7 +190,7 @@ struct GroupPage: View {
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .foregroundColor(Color.LabelColor)
             }
-        case ClubAndRoleData.GroupRole.applicant.rawValue:
+        case ClubAndRoleData.GroupRole.none.rawValue:
             Text("가입하기")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.LabelColor)

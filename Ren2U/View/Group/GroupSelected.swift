@@ -15,7 +15,7 @@ struct GroupSelected: View {
     let refreshThreshold: CGFloat
     
     @State private var isActive = false
-    @State private var groupInfo: ClubAndRoleData = ClubAndRoleData(id: 1, club: ClubData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""]), role: "")
+    @State private var groupInfo: ClubAndRoleData = ClubAndRoleData.dummyClubAndRoleData()
     
     var body: some View {
         RefreshableScrollView(threshold: refreshThreshold) {

@@ -59,7 +59,7 @@ struct Ren2UTab: View {
                 await authVM.getMyInfo()
                 await groupVM.getMyClubs()
                 for joinedClub in groupVM.joinedClubs {
-                    await groupVM.searchNotificationsAll(groupId: joinedClub.club.id)
+                    await groupVM.searchNotificationsAll(groupId: joinedClub.id)
                 }
                 groupVM.fetchRentalItems()
                 isLoading = false

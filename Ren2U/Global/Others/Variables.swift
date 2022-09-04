@@ -11,7 +11,7 @@ let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
 
 //let BASE_URL = "ren2u.ap-northeast-2.elasticbeanstalk.com"
-let BASE_URL = "http://ec2-13-125-234-225.ap-northeast-2.compute.amazonaws.com:8080"
+let BASE_URL = "http://ec2-3-35-241-206.ap-northeast-2.compute.amazonaws.com:8080"
 //let BASE_URL = "localhost:8080"
 
 let JWT_KEY = "jwt"

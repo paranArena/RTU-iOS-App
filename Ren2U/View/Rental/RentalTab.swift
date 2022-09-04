@@ -101,7 +101,7 @@ struct RentalTab: View {
             }
         }
         .refreshable {
-            await groupViewModel.refreshItems()
+            //  MARK: 추후에 비동기 함수 추가
         }
     }
     
@@ -113,7 +113,7 @@ struct RentalTab: View {
             }
         }
         .refreshable {
-            await groupViewModel.refreshItems()
+            //  MARK: 추후에 비동기 함수 추가
         }
     }
 }

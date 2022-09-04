@@ -32,7 +32,8 @@ struct GroupSearch: View {
                             print("???")
                             isActive = true
                         } label: {
-                            HorizontalClubCell(info: ClubAndRoleData(id: 1, club: searchCLubData, role: ClubAndRoleData.GroupRole.owner.rawValue))
+                            //  MARK: API 변경 후 임시코드. 수정 필요
+                            HorizontalClubCell(info: ClubAndRoleData.dummyClubAndRoleData())
                                 .overlay(alignment: .trailing) { OverlayFinder(clubId: searchCLubData.id) }
                         }
                     }
@@ -71,7 +72,7 @@ struct GroupSearch: View {
     @ViewBuilder
     private func OverlayFinder(clubId: Int) -> some View {
         
-        if groupVM.joinedClubs.contains(where: { $0.club.id == clubId }) {
+        if groupVM.joinedClubs.contains(where: { $0.id == clubId }) {
             JoindeClubOverlay()
         } else {
             NoneOverlay(clubId: clubId)

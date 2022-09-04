@@ -15,7 +15,7 @@ struct FavoriteGroupCell: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            if let thumbnaulPath = info.club.thumbnailPath {
+            if let thumbnaulPath = info.thumbnailPath {
                 KFImage(URL(string: thumbnaulPath))
                     .onFailure { err in
                         print(err.errorDescription ?? "KFImage Optional err")
@@ -25,11 +25,11 @@ struct FavoriteGroupCell: View {
                     .cornerRadius(20)
             }
             
-            Text(info.club.name)
+            Text(info.name)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.top, 5)
             
-            Text(groupModel.makeFavoritesGroupTag(tags: info.club.hashtags))
+            Text(groupModel.makeFavoritesGroupTag(tags: info.hashtags))
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 .foregroundColor(.gray_ADB5BD)
                 .multilineTextAlignment(.center)
