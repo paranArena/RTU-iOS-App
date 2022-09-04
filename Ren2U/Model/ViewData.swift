@@ -34,6 +34,10 @@ struct ClubData: Codable, Hashable {
     var introduction: String
     var thumbnailPath: String?
     var hashtags: [String]
+    
+    static func dummyClubData() -> ClubData {
+        return ClubData(id: 1, name: "오류", introduction: "오류", hashtags: ["오류"]) 
+    }
 }
 
 struct ClubAndRoleData: Codable, Identifiable, Hashable {
@@ -46,6 +50,10 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
     
     static func dummyClubAndRoleData() -> ClubAndRoleData {
         return ClubAndRoleData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""], clubRole: "")
+    }
+    
+    func extractClubData() -> ClubData {
+        return ClubData(id: id, name: name, introduction: introduction, hashtags: hashtags)
     }
 }
 

@@ -144,10 +144,7 @@ struct GroupManagement: View {
     private func Navigation(selection: ManageSelection) -> some View {
         switch selection {
         case .profileEdit:
-            Text("프로필 수정")
-                .onAppear {
-                    UITabBar.hideTabBar()
-                }
+            ProfileManagement(managementVM: managementVM)
         case .rentalManagement:
             RentalAndItemManagement()
         case .notice:

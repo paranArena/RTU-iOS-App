@@ -14,9 +14,9 @@ extension CreateGroupView {
         @Published var groupName = ""
         @Published var tagsText = ""
         @Published var introduction = ""
+        @Published var tags = [String]()
         
         @Published var isShowingTagPlaceholder = true
-        @Published var tags = [String]()
         
         @Published var showImagePicker = false
         @Published var selectedUIImage: UIImage?

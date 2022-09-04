@@ -49,7 +49,7 @@ struct GroupPage: View {
         .overlay(ShadowRectangle())
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                GroupManagement(managementVM: ManagementViewModel(groupId: groupInfo.id))
+                GroupManagement(managementVM: ManagementViewModel(clubData: groupInfo.extractClubData()))
             }, label: {}) 
         )
         .navigationTitle("")

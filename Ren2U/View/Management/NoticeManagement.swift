@@ -20,9 +20,9 @@ struct NoticeManagement: View {
     var body: some View {
         SlideResettableScrollView(selectedCellId: $selectedCellId) {
             VStack {
-                ForEach(groupVM.notices[managementVM.groupId]?.indices ?? 0..<0, id: \.self) { i in
+                ForEach(groupVM.notices[managementVM.clubData.id]?.indices ?? 0..<0, id: \.self) { i in
                     HStack {
-                        ManageNoticeCell(noticeInfo: groupVM.notices[managementVM.groupId]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.groupId), groupID: managementVM.groupId, selectedCellID: $selectedCellId, managementVM: managementVM)
+                        ManageNoticeCell(noticeInfo: groupVM.notices[managementVM.clubData.id]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.clubData.id), groupID: managementVM.clubData.id, selectedCellID: $selectedCellId, managementVM: managementVM)
                     }
                 }
             }

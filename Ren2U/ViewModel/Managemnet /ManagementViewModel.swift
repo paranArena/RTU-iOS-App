@@ -11,19 +11,19 @@ import UIKit
 
 class ManagementViewModel: ObservableObject {
     
+    @Published var clubData = ClubData.dummyClubData()
     @Published var applicants = [UserData]()
     @Published var members = [UserAndRoleData]()
     
-    var groupId = 0
     
-    init(groupId: Int) {
-        self.groupId = groupId
-        print("ManageViewModel init, groupId[\(groupId)]")
+    init(clubData: ClubData) {
+        self.clubData = clubData
+        print("ManageViewModel init, groupId[\(clubData.id)]")
     }
     
     //  MARK: POST
     func createNotification(notice: NotificationModel) async {
-        let url = "\(BASE_URL)/clubs/\(groupId)/notifications"
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/notifications"
         let hearders: HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",
             "Content-type": "multipart/form-data"
@@ -36,7 +36,7 @@ class ManagementViewModel: ObservableObject {
             
         let task = AF.upload(multipartFormData: { multipart in
             if let image = notice.image {
-                multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "\(self.groupId).\(notice.title).image", mimeType: "image/jpeg")
+                multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "\(self.clubData.id).\(notice.title).image", mimeType: "image/jpeg")
             }
 
             for (key, value) in param {
@@ -63,7 +63,7 @@ class ManagementViewModel: ObservableObject {
     }
     
     func acceptClubJoin(userData: UserData) async {
-        let url = "\(BASE_URL)/clubs/\(groupId)/requests/join/\(userData.id)"
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/requests/join/\(userData.id)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).serializingString()
@@ -81,7 +81,7 @@ class ManagementViewModel: ObservableObject {
     
     @MainActor
     func searchClubMembersAll() async {
-        let url = "\(BASE_URL)/clubs/\(groupId)/members/search/all"
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/members/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchClubMembersAllResponse.self)
@@ -101,7 +101,7 @@ class ManagementViewModel: ObservableObject {
     
     @MainActor
     func searchClubJoinsAll() async {
-        let url = "\(BASE_URL)/clubs/\(groupId)/requests/join/search/all"
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/requests/join/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchClubJoinsAllResponse.self)

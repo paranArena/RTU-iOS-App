@@ -104,6 +104,6 @@ struct MemberManagement: View {
 
 struct MemberManament_Previews: PreviewProvider {
     static var previews: some View {
-        MemberManagement(managementVM:  ManagementViewModel(groupId: 0))
+        MemberManagement(managementVM:  ManagementViewModel(clubData: ClubData.dummyClubData()))
     }
 }

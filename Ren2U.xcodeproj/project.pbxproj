@@ -13,6 +13,7 @@
 		1514A0FE28B753BB0040F681 /* PickUpLocationMap .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */; };
 		1514A10028B7594F0040F681 /* ItemCaution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FF28B7594F0040F681 /* ItemCaution.swift */; };
 		1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A10128B75CDA0040F681 /* HeightSetterView.swift */; };
+		1519E99728C4B69E00009C7E /* ProfileManagement .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1519E99628C4B69E00009C7E /* ProfileManagement .swift */; };
 		151B556F28BCA1660090A5E8 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B556E28BCA1660090A5E8 /* Account.swift */; };
 		151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557028BCA1AA0090A5E8 /* Reponses.swift */; };
 		151B557328BCA4FE0090A5E8 /* MyPageTabExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */; };
@@ -153,6 +154,7 @@
 		1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickUpLocationMap .swift"; sourceTree = "<group>"; };
 		1514A0FF28B7594F0040F681 /* ItemCaution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCaution.swift; sourceTree = "<group>"; };
 		1514A10128B75CDA0040F681 /* HeightSetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightSetterView.swift; sourceTree = "<group>"; };
+		1519E99628C4B69E00009C7E /* ProfileManagement .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileManagement .swift"; sourceTree = "<group>"; };
 		151B556E28BCA1660090A5E8 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		151B557028BCA1AA0090A5E8 /* Reponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reponses.swift; sourceTree = "<group>"; };
 		151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTabExtension.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				1523D5E728BE2C8D009EB733 /* NoticeManagement.swift */,
 				1523D5E128BE291C009EB733 /* MemberManagement.swift */,
 				1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */,
+				1519E99628C4B69E00009C7E /* ProfileManagement .swift */,
 				1563FE9128ADEE1600F46CC7 /* Cell */,
 			);
 			path = Management;
@@ -931,6 +934,7 @@
 				151E4E9228C4948600FFB668 /* SlideResettableScrollView.swift in Sources */,
 				1523D5DE28BE0207009EB733 /* GroupModel .swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
+				1519E99728C4B69E00009C7E /* ProfileManagement .swift in Sources */,
 				1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */,
 				1563FE9528ADF62E00F46CC7 /* ReturnNoticeCell.swift in Sources */,
 				1570663828A5413B002F7365 /* RefreshableScrollView.swift in Sources */,

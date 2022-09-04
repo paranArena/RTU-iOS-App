@@ -8,6 +8,13 @@
 import SwiftUI
 import HidableTabView
 
+extension CreateGroupView {
+    enum Mode {
+        case post
+        case put
+    }
+}
+
 struct CreateGroupView: View {
     
     @EnvironmentObject var clubVM: GroupViewModel
