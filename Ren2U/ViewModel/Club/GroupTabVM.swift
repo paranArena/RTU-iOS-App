@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension GroupTab {
+extension ClubTab {
     
     class ViewModel: ObservableObject {
         @Published var groupSelection: Selection = .group
@@ -16,7 +16,7 @@ extension GroupTab {
     }
 }
 
-extension GroupTab {
+extension ClubTab {
     enum Selection: Int, CaseIterable {
         case group
         case notice

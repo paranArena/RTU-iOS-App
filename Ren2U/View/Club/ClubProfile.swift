@@ -25,7 +25,7 @@ struct ClubProfile: View {
     @FocusState var focusField: Field?
 
     var body: some View {
-        BounceControllScrollView(baseOffset: 30, offset: $viewModel.offset) {
+        BounceControllScrollView(baseOffset: 80, offset: $viewModel.offset) {
             VStack(alignment: .center, spacing: 10) {
                 GroupImage()
                     .overlay(ChangeImageButton())

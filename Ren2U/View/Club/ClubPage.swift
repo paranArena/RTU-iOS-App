@@ -8,9 +8,9 @@
 import SwiftUI
 import Kingfisher
 
-struct GroupPage: View {
+struct ClubPage: View {
     
-    @EnvironmentObject var groupVM: ClubViewModel
+    @EnvironmentObject var clubVM: ClubViewModel
     @Binding var tabSelection: Int
     @Binding var groupInfo: ClubAndRoleData
     @State var offset: CGFloat = 0
@@ -113,8 +113,8 @@ struct GroupPage: View {
             }
             .padding(.horizontal)
             
-            ForEach(groupVM.notices[groupInfo.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
-                NoticeCell(noticeInfo: groupVM.notices[groupInfo.id]![i], groupName: groupVM.getGroupNameByGroupId(groupId: groupInfo.id))
+            ForEach(clubVM.notices[groupInfo.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
+                NoticeCell(noticeInfo: clubVM.notices[groupInfo.id]![i], groupName: clubVM.getGroupNameByGroupId(groupId: groupInfo.id))
             }
             
 //            ForEach(groupModel.notices) { notice in
@@ -147,7 +147,7 @@ struct GroupPage: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(groupVM.rentalItems) { rentalItem in
+                    ForEach(clubVM.rentalItems) { rentalItem in
                         Button {
                             self.tabSelection = Ren2UTab.Selection.rent.rawValue
                         } label: {

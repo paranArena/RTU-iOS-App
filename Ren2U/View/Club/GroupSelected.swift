@@ -27,7 +27,7 @@ struct GroupSelected: View {
         .frame(maxWidth: .infinity)
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                GroupPage(tabSelection: $tabSelection, groupInfo: $groupInfo)
+                ClubPage(tabSelection: $tabSelection, groupInfo: $groupInfo)
             }, label: { })
         )
         .refreshable {

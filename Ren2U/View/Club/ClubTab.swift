@@ -8,11 +8,11 @@
 import SwiftUI
 import HidableTabView
 
-struct GroupTab: View {
+struct ClubTab: View {
     
     @StateObject private var vm = ViewModel()
     @Binding var tabSelection: Int 
-    @EnvironmentObject var groupViewModel: ClubViewModel
+    @EnvironmentObject var clubVM: ClubViewModel
     @State private var offset: CGFloat = .zero
     let spacing: CGFloat = 10
     
@@ -24,7 +24,7 @@ struct GroupTab: View {
             SearchBar(text: $vm.searchText, isFoucsed: $vm.isSearchBarFocused)
                 .padding(.horizontal, 20)
 
-            GroupSearch(search: $vm.searchText, tabSelection: $tabSelection)
+            ClubSearch(search: $vm.searchText, tabSelection: $tabSelection)
                 .padding(.bottom, -10)
                 .isHidden(hidden: !vm.isSearchBarFocused || vm.groupSelection == .notice)
             
@@ -91,21 +91,21 @@ struct GroupTab: View {
     private func NoticeSelected() -> some View {
         RefreshableScrollView(threshold: offset) {
             VStack {
-                ForEach(groupViewModel.joinedClubs.indices, id: \.self) { i in
-                    let id = groupViewModel.joinedClubs[i].id
-                    let groupName = groupViewModel.getGroupNameByGroupId(groupId: id)
+                ForEach(clubVM.joinedClubs.indices, id: \.self) { i in
+                    let id = clubVM.joinedClubs[i].id
+                    let groupName = clubVM.getGroupNameByGroupId(groupId: id)
                     
-                    ForEach(groupViewModel.notices[id]?.indices ?? 0..<0, id: \.self) { j in
-                        let title = groupViewModel.notices[id]![j].title
+                    ForEach(clubVM.notices[id]?.indices ?? 0..<0, id: \.self) { j in
+                        let title = clubVM.notices[id]![j].title
                         
-                        NoticeCell(noticeInfo: groupViewModel.notices[id]![j], groupName: groupName)
+                        NoticeCell(noticeInfo: clubVM.notices[id]![j], groupName: groupName)
                             .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
                     }
                 }
             }
         }
         .refreshable {
-            groupViewModel.getMyClubsTask()
+            clubVM.getMyClubsTask()
         }
     }
 }

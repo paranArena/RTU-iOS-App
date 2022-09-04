@@ -73,7 +73,7 @@ struct Ren2UTab: View {
         case .home:
             HomeTab()
         case .group:
-            GroupTab(tabSelection: $tabSelection)
+            ClubTab(tabSelection: $tabSelection)
         case .rent:
             RentalTab()
         case .myPage:
