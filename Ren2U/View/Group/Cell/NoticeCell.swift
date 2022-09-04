@@ -16,19 +16,19 @@ struct NoticeCell: View {
     var body: some View {
         VStack {
             HStack {
-//                if let imageSource = noticeInfo.noticeDto.imageSource {
-//                    KFImage(URL(string: imageSource)).onFailure { err in
-//                        print(err.errorDescription ?? "KFImage err")
-//                        }
-//                        .resizable()
-//                        .cornerRadius(15)
-//                        .frame(width: 80, height: 80)
-//                }
-                
-                Image(AssetImages.DefaultGroupImage.rawValue)
-                    .resizable()
-                    .cornerRadius(15)
-                    .frame(width: 80, height: 80)
+                if let imageSource = noticeInfo.imagePath {
+                    KFImage(URL(string: imageSource)).onFailure { err in
+                        print(err.errorDescription ?? "KFImage err")
+                        }
+                        .resizable()
+                        .cornerRadius(15)
+                        .frame(width: 80, height: 80)
+                } else {
+                    Image(AssetImages.DefaultGroupImage.rawValue)
+                        .resizable()
+                        .cornerRadius(15)
+                        .frame(width: 80, height: 80)
+                }
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Spacer()

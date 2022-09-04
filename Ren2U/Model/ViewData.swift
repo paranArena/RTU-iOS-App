@@ -52,18 +52,17 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
 struct NoticeData: Codable, Identifiable {
     let id: Int
     let title: String
+    let imagePath: String
     let createdAt: String
     let updatedAt: String
 }
 
-extension ClubAndRoleData {
-    enum GroupRole: String {
-        case owner = "OWNER"
-        case admin = "ADMIN"
-        case user = "USER"
-        case wait = "WAIT"
-        case none = "NONE"
-    }
+enum GroupRole: String {
+    case owner = "OWNER"
+    case admin = "ADMIN"
+    case user = "USER"
+    case wait = "WAIT"
+    case none = "NONE"
 }
 
 //  MARK: TEMP

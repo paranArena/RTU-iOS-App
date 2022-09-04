@@ -42,7 +42,7 @@ struct GetSearchClubsAllResponse: Codable {
     let data: [ClubAndRoleData]
 }
 
-struct SearchClubsWithName: Codable {
+struct SearchClubsWithNameResponse: Codable {
     let statusCode: Int
     let responseMessage: String
     let data: ClubAndRoleData

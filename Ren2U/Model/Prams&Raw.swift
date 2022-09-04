@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct User: Codable {
     var email: String
@@ -22,9 +23,10 @@ struct User: Codable {
     }
 }
 
-struct NotificationModel: Codable {
+struct NotificationModel {
     var title: String
     var content: String
+    var image: UIImage?
 }
 
 struct Account: Codable {

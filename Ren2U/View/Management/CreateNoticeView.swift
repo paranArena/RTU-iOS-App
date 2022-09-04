@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateNoticeView: View {
     
     @State private var raw = NotificationModel(title: "", content: "")
+    @State private var isShowingImagePicker = false
     @ObservedObject var managementVM: ManagementViewModel
     @EnvironmentObject var groupVM: GroupViewModel
     @Environment(\.dismiss) var dismiss
@@ -29,7 +30,7 @@ struct CreateNoticeView: View {
                 Button {
                     Task {
                         await managementVM.createNotification(notice: raw)
-                        groupVM.searchNotificationsAllTask()
+                        await groupVM.searchNotificationsAll(groupId: managementVM.groupId)
                     }
                     dismiss() 
                 } label: {
@@ -39,6 +40,34 @@ struct CreateNoticeView: View {
 
             }
         }
+        .overlay(content: {
+            ImagePickerButton()
+                .padding(.leading, 20)
+                .ignoresSafeArea(.all, edges: .bottom)
+        })
+        .sheet(isPresented: $isShowingImagePicker) {
+            ImagePicker(sourceType: .photoLibrary, selectedImage: $raw.image)
+        }
+    }
+    
+    @ViewBuilder
+    private func ImagePickerButton() -> some View{
+        VStack {
+            Spacer()
+            
+            Button {
+                isShowingImagePicker = true
+            } label: {
+                Image(systemName: "camera")
+                    .resizable()
+                    .foregroundColor(.gray_ADB5BD)
+                    .frame(width: 24, height: 24)
+            }
+            .overlay(alignment: .top) {
+                ShadowRectangle()
+            }
+        }
+        .frame(width: SCREEN_WIDTH, alignment: .leading)
     }
 }
 

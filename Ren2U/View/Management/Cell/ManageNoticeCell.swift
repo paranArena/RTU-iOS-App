@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ManageNoticeCell: View {
     
@@ -21,20 +22,22 @@ struct ManageNoticeCell: View {
         
         
         CellWithTwoSlideButton(okMessage: "비공개", cancelMessage: "삭제", cellID: noticeInfo.id, selectedID: $selectedCellID) {
-            //  MARK: 공지사항 이미지 활성 화 이후 아래 주석 제거
-//                if let imageSource = noticeInfo.noticeDto.imageSource {
-//                    KFImage(URL(string: imageSource)).onFailure { err in
-//                        print(err.errorDescription ?? "KFImage err")
-//                        }
-//                        .resizable()
-//                        .cornerRadius(15)
-//                        .frame(width: 80, height: 80)
-//                }
+            
             HStack {
-                Image(AssetImages.DefaultGroupImage.rawValue)
-                    .resizable()
-                    .cornerRadius(15)
-                    .frame(width: 80, height: 80)
+                
+                if let imageSource = noticeInfo.imagePath {
+                    KFImage(URL(string: imageSource)).onFailure { err in
+                        print(err.errorDescription ?? "KFImage err")
+                        }
+                        .resizable()
+                        .cornerRadius(15)
+                        .frame(width: 80, height: 80)
+                } else {
+                    Image(AssetImages.DefaultGroupImage.rawValue)
+                        .resizable()
+                        .cornerRadius(15)
+                        .frame(width: 80, height: 80)
+                }
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Spacer()

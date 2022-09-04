@@ -20,20 +20,39 @@ class ManagementViewModel: ObservableObject {
     //  MARK: POST
     func createNotification(notice: NotificationModel) async {
         let url = "\(BASE_URL)/clubs/\(groupId)/notifications"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
-        let param: [String: Any] = [
-            "title" : notice.title,
-            "content" : notice.content
+        let hearders: HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",
+            "Content-type": "multipart/form-data"
         ]
         
-        let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: hearders).serializingString()
-        let result = await request.result
+        let param: [String: Any] = [
+            "title": notice.title,
+            "content": notice.content,
+        ]
+      
+        let task = AF.upload(multipartFormData: { multipart in
+            if let image = notice.image {
+                multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "\(self.groupId).\(notice.title).image", mimeType: "image/jpeg")
+            }
+
+            for (key, value) in param {
+                if key == "hashtags" {
+                    for v in value as! [String] {
+                        multipart.append(Data(v.utf8), withName: key)
+                    }
+                } else {
+                    multipart.append(Data(String("\(value)").utf8), withName: key)
+                }
+            }
+
+        }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingString()
         
-        switch result {
-        case .success(let value):
-            print("공지사항 생성 성공 : \(value)")
+        
+        switch await task.result {
+        case .success(_):
+            print("[createNotification success]")
         case .failure(let err):
-            print("공지사항 생성 실패: \(err)")
+            print("[createNotification err]\n \(err)")
         }
     }
     

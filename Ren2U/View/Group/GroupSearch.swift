@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreAudio
 
 struct GroupSearch: View {
     
@@ -17,6 +18,7 @@ struct GroupSearch: View {
     @State private var isActive = false
     @State private var offset: CGFloat = .zero
     @State private var searchDelay = 0
+    @State private var groupInfoIndex: Int?
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -27,14 +29,15 @@ struct GroupSearch: View {
             
             BounceControllScrollView(baseOffset: 100, offset: $offset) {
                 VStack {
-                    ForEach(groupInfo, id: \.self) { searchCLubData in
+                    ForEach(groupInfo.indices, id: \.self) { i in
                         Button {
-                            print("???")
+                            groupInfoIndex = i
                             isActive = true
                         } label: {
-                            //  MARK: API 변경 후 임시코드. 수정 필요
-                            HorizontalClubCell(info: searchCLubData)
-                                .overlay(alignment: .trailing) { OverlayFinder(clubId: searchCLubData.id) }
+                            HorizontalClubCell(info: groupInfo[i])
+                                .overlay(alignment: .trailing) {
+                                    OverlayFinder(index: i)
+                                }
                         }
                     }
                 }
@@ -42,11 +45,13 @@ struct GroupSearch: View {
         }
         
         .frame(maxWidth: .infinity, alignment: .leading)
-//        .background {
-//            NavigationLink(isActive: $isActive) {
-//                GroupPage(tabSelection: $tabSelection)
-//            } label: { }
-//        }
+        .background {
+            NavigationLink(isActive: $isActive) {
+                if let index = groupInfoIndex {
+                    GroupPage(tabSelection: $tabSelection, groupInfo: $groupInfo[index])
+                }
+            } label: { }
+        }
         .onAppear {
             Task {
                 groupInfo = await groupVM.searchClubsAll()
@@ -70,12 +75,17 @@ struct GroupSearch: View {
     }
     
     @ViewBuilder
-    private func OverlayFinder(clubId: Int) -> some View {
+    private func OverlayFinder(index: Int) -> some View {
         
-        if groupVM.joinedClubs.contains(where: { $0.id == clubId }) {
+        switch groupInfo[index].clubRole {
+        case GroupRole.admin.rawValue, GroupRole.owner.rawValue, GroupRole.user.rawValue:
             JoindeClubOverlay()
-        } else {
-            NoneOverlay(clubId: clubId)
+        case GroupRole.wait.rawValue:
+            ApplicatedGroupOverlay()
+        case GroupRole.none.rawValue:
+            NoneOverlay(index: index)
+        default:
+            Text("Group Role Err")
         }
     }
     
@@ -102,9 +112,10 @@ struct GroupSearch: View {
     }
     
     @ViewBuilder
-    private func NoneOverlay(clubId: Int) -> some View {
+    private func NoneOverlay(index: Int) -> some View {
         Button {
-            groupVM.requestClubJoinTask(cludId: clubId)
+            groupVM.requestClubJoinTask(cludId: groupInfo[index].id)
+            groupInfo[index].clubRole = GroupRole.wait.rawValue
         } label: {
             Text("가입 요청")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))

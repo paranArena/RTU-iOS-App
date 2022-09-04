@@ -158,22 +158,22 @@ struct GroupPage: View {
                 }
                 .padding(.horizontal)
             }
-//            .blur(radius: groupRole == .none || groupRole == .application ? 4 : 0 , opaque: false)
-//            .opacity(groupRole == .none || groupRole == .application ? 0.7 : 1)
+            .blur(radius: groupInfo.clubRole == GroupRole.wait.rawValue || groupInfo.clubRole == GroupRole.none.rawValue ? 4 : 0 , opaque: false)
+            .opacity(groupInfo.clubRole == GroupRole.wait.rawValue || groupInfo.clubRole == GroupRole.none.rawValue ? 0.7 : 1)
         }
     }
     
     @ViewBuilder
     private func TrailingToolbar() -> some View {
         switch groupInfo.clubRole {
-        case ClubAndRoleData.GroupRole.owner.rawValue:
+        case GroupRole.owner.rawValue:
             Button {
                 isActive = true
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundColor(Color.LabelColor)
             }
-        case ClubAndRoleData.GroupRole.user.rawValue:
+        case GroupRole.user.rawValue:
             Button {
 
             } label: {
@@ -182,7 +182,7 @@ struct GroupPage: View {
                     .foregroundColor(Color.LabelColor)
             }
 
-        case ClubAndRoleData.GroupRole.wait.rawValue:
+        case GroupRole.wait.rawValue:
             Button {
 
             } label: {
@@ -190,7 +190,7 @@ struct GroupPage: View {
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .foregroundColor(Color.LabelColor)
             }
-        case ClubAndRoleData.GroupRole.none.rawValue:
+        case GroupRole.none.rawValue:
             Text("가입하기")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.LabelColor)
