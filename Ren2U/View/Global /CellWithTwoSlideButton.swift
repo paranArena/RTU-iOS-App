@@ -33,6 +33,8 @@ struct CellWithTwoSlideButton<Content: View>: View {
     var body: some View {
         HStack {
             content()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.BackgroundColor)
             
             Spacer()
             

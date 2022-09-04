@@ -19,9 +19,11 @@ struct NoticeManagement: View {
     
     var body: some View {
         ScrollView {
-            ForEach(groupVM.notices[managementVM.groupId]?.indices ?? 0..<0, id: \.self) { i in
-                HStack {
-                    ManageNoticeCell(noticeInfo: groupVM.notices[managementVM.groupId]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.groupId), groupID: managementVM.groupId, selectedCellID: $selectedNum, managementVM: managementVM)
+            VStack {
+                ForEach(groupVM.notices[managementVM.groupId]?.indices ?? 0..<0, id: \.self) { i in
+                    HStack {
+                        ManageNoticeCell(noticeInfo: groupVM.notices[managementVM.groupId]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.groupId), groupID: managementVM.groupId, selectedCellID: $selectedNum, managementVM: managementVM)
+                    }
                 }
             }
         }

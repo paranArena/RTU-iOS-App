@@ -34,14 +34,15 @@ struct MemberManagement: View {
         VStack {
             SelectionButton()
             
-            Group {
-                ForEach(Selection.allCases, id: \.rawValue) { selection in
-                    Content(selection: selection)
-                        .isHidden(hidden: selection != buttonSelection)
+            ScrollView {
+                Group {
+                    ForEach(Selection.allCases, id: \.rawValue) { selection in
+                        Content(selection: selection)
+                            .isHidden(hidden: selection != buttonSelection)
+                    }
                 }
+                .frame(maxHeight: .infinity, alignment: .topLeading)
             }
-            .frame(maxHeight: .infinity, alignment: .topLeading)
-            
         }
         .onAppear {
             UITabBar.hideTabBar()

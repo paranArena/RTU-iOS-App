@@ -26,10 +26,11 @@ struct GroupTab: View {
 
             GroupSearch(search: $vm.searchText, tabSelection: $tabSelection)
                 .padding(.bottom, -10)
-                .isHidden(hidden: !vm.isSearchBarFocused)
+                .isHidden(hidden: !vm.isSearchBarFocused || vm.groupSelection == .notice)
             
             Group {
                 GroupSelectionButton()
+                    .isHidden(hidden: vm.isSearchBarFocused)
                     .background(GeometryReader { gp -> Color in
                         offset = gp.frame(in: .global).maxY + spacing
                         return Color.clear
@@ -37,14 +38,15 @@ struct GroupTab: View {
                 
                 ZStack {
                     GroupSelected(tabSelection: $tabSelection, refreshThreshold: offset)
+                        .isHidden(hidden: vm.isSearchBarFocused)
                         .overlay(CreateGroupButton())
                         .offset(x: vm.groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)
                     NoticeSelected()
                         .offset(x: vm.groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
+                        .isHidden(hidden: vm.isSearchBarFocused && vm.groupSelection == .group)
                 }
                 .padding(.bottom, -10)
             }
-            .isHidden(hidden: vm.isSearchBarFocused)
         }
         .overlay(ShadowRectangle())
         .showTabBar(animated: false)
@@ -91,8 +93,13 @@ struct GroupTab: View {
             VStack {
                 ForEach(groupViewModel.joinedClubs.indices, id: \.self) { i in
                     let id = groupViewModel.joinedClubs[i].id
+                    let groupName = groupViewModel.getGroupNameByGroupId(groupId: id)
+                    
                     ForEach(groupViewModel.notices[id]?.indices ?? 0..<0, id: \.self) { j in
-                        NoticeCell(noticeInfo: groupViewModel.notices[id]![j], groupName: groupViewModel.getGroupNameByGroupId(groupId: id))
+                        let title = groupViewModel.notices[id]![j].title
+                        
+                        NoticeCell(noticeInfo: groupViewModel.notices[id]![j], groupName: groupName)
+                            .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
                     }
                 }
             }

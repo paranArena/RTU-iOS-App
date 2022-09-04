@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 class ManagementViewModel: ObservableObject {
     
@@ -32,7 +33,7 @@ class ManagementViewModel: ObservableObject {
             "title": notice.title,
             "content": notice.content,
         ]
-      
+            
         let task = AF.upload(multipartFormData: { multipart in
             if let image = notice.image {
                 multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "\(self.groupId).\(notice.title).image", mimeType: "image/jpeg")
@@ -47,13 +48,15 @@ class ManagementViewModel: ObservableObject {
                     multipart.append(Data(String("\(value)").utf8), withName: key)
                 }
             }
+            
 
         }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingString()
         
         
         switch await task.result {
-        case .success(_):
+        case .success(let value):
             print("[createNotification success]")
+            print(value.description)
         case .failure(let err):
             print("[createNotification err]\n \(err)")
         }
