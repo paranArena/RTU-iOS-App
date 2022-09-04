@@ -11,12 +11,15 @@ import Alamofire
 class ManagementViewModel: ObservableObject {
     
     @Published var applicants = [UserData]()
+    @Published var members = [UserAndRoleData]()
+    
     var groupId = 0
     
     init(groupId: Int) {
         self.groupId = groupId
         print("ManageViewModel init, groupId[\(groupId)]")
     }
+    
     //  MARK: POST
     func createNotification(notice: NotificationModel) async {
         let url = "\(BASE_URL)/clubs/\(groupId)/notifications"
@@ -74,6 +77,26 @@ class ManagementViewModel: ObservableObject {
     //  MARK: GET
     
     @MainActor
+    func searchClubMembersAll() async {
+        let url = "\(BASE_URL)/clubs/\(groupId)/members/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchClubMembersAllResponse.self)
+        let result = await request.result
+        
+        switch result {
+        case .success(let value):
+            print("[searchClubMembersAll success]")
+            print(value.responseMessage)
+            self.members = value.data
+        case .failure(let err):
+            print("[seaerchClubMembersAll err]")
+            print(err)
+        }
+        
+    }
+    
+    @MainActor
     func searchClubJoinsAll() async {
         let url = "\(BASE_URL)/clubs/\(groupId)/requests/join/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
@@ -83,10 +106,12 @@ class ManagementViewModel: ObservableObject {
         
         switch result {
         case .success(let value):
-            print("클럽 가입 조회 성공")
+            print("[searchClubJoinsAll success]")
+            print(value.responseMessage)
             self.applicants = value.data
         case .failure(let err):
             print("searchClubJoinsAll 실패 : \(err)")
+            print(err)
         }
     }
     

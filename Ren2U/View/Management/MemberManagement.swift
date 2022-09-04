@@ -34,10 +34,10 @@ struct MemberManagement: View {
         VStack {
             SelectionButton()
             
-            ZStack {
+            Group {
                 ForEach(Selection.allCases, id: \.rawValue) { selection in
                     Content(selection: selection)
-                        .offset(x: CGFloat((selection.rawValue - self.buttonSelection.rawValue)) * SCREEN_WIDTH)
+                        .isHidden(hidden: selection != buttonSelection)
                 }
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
@@ -70,9 +70,20 @@ struct MemberManagement: View {
     private func Content(selection: Selection) -> some View {
         switch selection {
         case .member:
-            VStack { }
+            Members()
         case .applicant:
             Applicant()
+        }
+    }
+    
+    @ViewBuilder
+    private func Members() -> some View {
+        VStack {
+            ForEach(managementVM.members.indices, id: \.self) { index in
+                ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, managementVM: managementVM)
+                
+                Divider()
+            }
         }
     }
     
@@ -81,6 +92,8 @@ struct MemberManagement: View {
         VStack {
             ForEach(managementVM.applicants.indices, id: \.self) { index in
                 ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, managementVM: managementVM)
+                
+                Divider()
             }
         }
     }

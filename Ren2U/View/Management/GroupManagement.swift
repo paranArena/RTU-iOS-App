@@ -88,7 +88,10 @@ struct GroupManagement: View {
             .padding(.horizontal, 10)
         }
         .onAppear {
-            managementVM.searchClubJoinsAllTask()
+            Task {
+                await managementVM.searchClubMembersAll()
+                await managementVM.searchClubJoinsAll()
+            }
         }
         .controllTabbar(isPresented)
         .navigationTitle(" ")

@@ -57,6 +57,17 @@ struct NoticeData: Codable, Identifiable {
     let updatedAt: String
 }
 
+//  MARK: searchClubMembersAll
+struct UserAndRoleData: Codable, Identifiable {
+    let id: Int
+    let email: String
+    let name: String
+    let phoneNumber: String
+    let studentId: String
+    let major: String
+    let clubRole: String
+}
+
 enum GroupRole: String {
     case owner = "OWNER"
     case admin = "ADMIN"

@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+//  MARK: GET
+
+struct SearchClubMembersAllResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [UserAndRoleData]
+}
+
 struct SignUpResponse: Codable {
     var statusCode: Int
     var responseMessage: String

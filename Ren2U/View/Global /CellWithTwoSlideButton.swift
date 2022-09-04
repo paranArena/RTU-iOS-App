@@ -62,6 +62,7 @@ struct CellWithTwoSlideButton<Content: View>: View {
             }
             .offset(x : 180)
             .padding(.leading, -180)
+            .disabled(selectedID != cellID)
         }
         .offset(x: isShowingRequestButton ? max(-160, offset) : max(-160, offset))
         .gesture(

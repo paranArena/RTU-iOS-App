@@ -22,6 +22,8 @@ struct GroupSearch: View {
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     var body: some View {
+        
+        
         VStack(alignment: .leading, spacing: 10) {
             Text("검색된 그룹 목록")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
@@ -43,7 +45,6 @@ struct GroupSearch: View {
                 }
             }
         }
-        
         .frame(maxWidth: .infinity, alignment: .leading)
         .background {
             NavigationLink(isActive: $isActive) {
