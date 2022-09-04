@@ -25,19 +25,14 @@ struct ManageNoticeCell: View {
             
             HStack {
                 
-                if let imageSource = noticeInfo.imagePath {
-                    KFImage(URL(string: imageSource)).onFailure { err in
-                        print(err.errorDescription ?? "KFImage err")
-                        }
-                        .resizable()
-                        .cornerRadius(15)
-                        .frame(width: 80, height: 80)
-                } else {
-                    Image(AssetImages.DefaultGroupImage.rawValue)
-                        .resizable()
-                        .cornerRadius(15)
-                        .frame(width: 80, height: 80)
-                }
+                
+                KFImage(URL(string: noticeInfo.imagePath)).onFailure { err in
+                    print(err.errorDescription ?? "KFImage err")
+                    }
+                    .resizable()
+                    .cornerRadius(15)
+                    .frame(width: 80, height: 80)
+                    .isHidden(hidden: noticeInfo.imagePath.isEmpty)
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Spacer()

@@ -72,10 +72,9 @@ struct GroupPage: View {
             HStack {
                 ForEach(groupInfo.hashtags, id: \.self) { tag in
                     Text("#\(tag)")
-                        .foregroundColor(Color.gray_495057)
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 }
             }
+            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
             .foregroundColor(Color.gray_495057)
             .padding(.leading)
             .padding(.bottom, 20)

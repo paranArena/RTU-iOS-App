@@ -24,7 +24,7 @@ struct CreateGroupView: View {
                     
                 VStack(alignment: .leading, spacing: 70) {
                     GroupName()
-                    Tag()
+                    Tags()
                     Introduction()
                 }
                 .padding(.horizontal, 10)
@@ -87,61 +87,72 @@ struct CreateGroupView: View {
     }  
     
     @ViewBuilder
-    private func Tag() -> some View {
+    private func Tags() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("태그")
-                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                .foregroundColor(Color.gray_495057)
-            
-            ZStack(alignment: .leading) {
-                if viewModel.isShowingTagPlaceholder {
-                    Text("#렌탈 #서비스는 #REN2U")
-                        .foregroundColor(.gray_ADB5BD)
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
-                }
+            Group {
+                Text("태그")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                    .foregroundColor(Color.gray_495057)
                 
-                TextField("", text: $viewModel.tagsText)
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
-                    .focused($focusField, equals: .tagsText)
-                    .submitLabel(.return)
-                    .onChange(of: focusField) { newValue in
-                        viewModel.parsingTag()
-                        viewModel.showTagPlaceHolder(newValue: newValue)
+                ZStack(alignment: .leading) {
+                    if viewModel.isShowingTagPlaceholder {
+                        Text("#렌탈 #서비스는 #REN2U")
+                            .foregroundColor(.gray_ADB5BD)
+                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
                     }
-            }
-            .overlay(
-                VStack {
-                    Spacer()
-                    Rectangle()
-                        .frame(height: 1)
-                        .foregroundColor(Color.gray_ADB5BD)
+                    
+                    TextField("", text: $viewModel.tagsText)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
+                        .focused($focusField, equals: .tagsText)
+                        .submitLabel(.return)
+                        .onChange(of: focusField) { newValue in
+                            viewModel.parsingTag()
+                            viewModel.showTagPlaceHolder(newValue: newValue)
+                        }
                 }
-            )
-            
-            Text("#과 띄어쓰기를 포함해 영어는 최대 36글자, 한글은 24글자까지 가능합니다.")
-                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
-                .foregroundColor(Color.gray_ADB5BD)
-                .padding(.top, -10)
+                .overlay(
+                    VStack {
+                        Spacer()
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(Color.gray_ADB5BD)
+                    }
+                )
+                
+                Text("#과 띄어쓰기를 포함해 영어는 최대 36글자, 한글은 24글자까지 가능합니다.")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                    .foregroundColor(Color.gray_ADB5BD)
+                    .padding(.top, -10)
+            }
+            .onTapGesture {
+                focusField = .tagsText
+                viewModel.isShowingTagPlaceholder = false
+            }
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(viewModel.tags, id: \.self) { tag in
-                        Text("\(tag)")
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 10)
-                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                            .overlay(Capsule().stroke(lineWidth: 1))
+                    ForEach(viewModel.tags.indices, id: \.self) { i in
+                        HStack {
+                            Text("#\(viewModel.tags[i])")
+                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                            
+                            Button {
+                                viewModel.tags.remove(at: i)
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .resizable()
+                                    .frame(width: 10, height: 10)
+                            }
+                        }
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .overlay(Capsule().stroke(lineWidth: 1))
                     }
                 }
                 .foregroundColor(Color.gray_495057)
             }
         }
         .isHidden(hidden: (focusField != nil && focusField != .tagsText))
-        .onTapGesture {
-            focusField = .tagsText
-            viewModel.isShowingTagPlaceholder = false
-        }
-        
     }
     
     @ViewBuilder
