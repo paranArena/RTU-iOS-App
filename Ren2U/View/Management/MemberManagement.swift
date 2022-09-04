@@ -34,15 +34,13 @@ struct MemberManagement: View {
         VStack {
             SelectionButton()
             
-            ScrollView {
-                Group {
-                    ForEach(Selection.allCases, id: \.rawValue) { selection in
-                        Content(selection: selection)
-                            .isHidden(hidden: selection != buttonSelection)
-                    }
+            Group {
+                ForEach(Selection.allCases, id: \.rawValue) { selection in
+                    Content(selection: selection)
+                        .isHidden(hidden: selection != buttonSelection)
                 }
-                .frame(maxHeight: .infinity, alignment: .topLeading)
             }
+            .frame(maxHeight: .infinity, alignment: .topLeading)
         }
         .onAppear {
             UITabBar.hideTabBar()
@@ -79,22 +77,26 @@ struct MemberManagement: View {
     
     @ViewBuilder
     private func Members() -> some View {
-        VStack {
-            ForEach(managementVM.members.indices, id: \.self) { index in
-                ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, managementVM: managementVM)
-                
-                Divider()
+        SlideResettableScrollView(selectedCellId: $selectedCellID) {
+            VStack {
+                ForEach(managementVM.members.indices, id: \.self) { index in
+                    ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, managementVM: managementVM)
+                    
+                    Divider()
+                }
             }
         }
     }
     
     @ViewBuilder
     private func Applicant() -> some View {
-        VStack {
-            ForEach(managementVM.applicants.indices, id: \.self) { index in
-                ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, managementVM: managementVM)
-                
-                Divider()
+        SlideResettableScrollView(selectedCellId: $selectedCellID) {
+            VStack {
+                ForEach(managementVM.applicants.indices, id: \.self) { index in
+                    ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, managementVM: managementVM)
+                    
+                    Divider()
+                }
             }
         }
     }

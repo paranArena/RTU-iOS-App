@@ -14,15 +14,15 @@ struct NoticeManagement: View {
     @EnvironmentObject var groupVM: GroupViewModel
     @ObservedObject var managementVM: ManagementViewModel
     
-    @State private var selectedNum = 0
-    @State private var offset: CGFloat = .zero
+    @State private var selectedCellId = -1
+    @State private var maxY: CGFloat = .zero
     
     var body: some View {
-        ScrollView {
+        SlideResettableScrollView(selectedCellId: $selectedCellId) {
             VStack {
                 ForEach(groupVM.notices[managementVM.groupId]?.indices ?? 0..<0, id: \.self) { i in
                     HStack {
-                        ManageNoticeCell(noticeInfo: groupVM.notices[managementVM.groupId]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.groupId), groupID: managementVM.groupId, selectedCellID: $selectedNum, managementVM: managementVM)
+                        ManageNoticeCell(noticeInfo: groupVM.notices[managementVM.groupId]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.groupId), groupID: managementVM.groupId, selectedCellID: $selectedCellId, managementVM: managementVM)
                     }
                 }
             }

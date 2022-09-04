@@ -22,7 +22,6 @@ class GroupViewModel: ObservableObject {
     
     func getGroupNameByGroupId(groupId: Int) -> String {
         if let fooOffset = joinedClubs.firstIndex(where: {$0.id == groupId }) {
-            print(joinedClubs[fooOffset].name)
             return joinedClubs[fooOffset].name
         } else {
             return "그룹 이름 에러"

@@ -18,6 +18,7 @@
 		151B557328BCA4FE0090A5E8 /* MyPageTabExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */; };
 		151B557528BCAA2F0090A5E8 /* Modal .swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557428BCAA2F0090A5E8 /* Modal .swift */; };
 		151E4E9028C4620400FFB668 /* ManageMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */; };
+		151E4E9228C4948600FFB668 /* SlideResettableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E9128C4948600FFB668 /* SlideResettableScrollView.swift */; };
 		1523D5D828BDC986009EB733 /* ViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5D728BDC986009EB733 /* ViewData.swift */; };
 		1523D5DC28BE01D2009EB733 /* GroupPageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DB28BE01D2009EB733 /* GroupPageExtension.swift */; };
 		1523D5DE28BE0207009EB733 /* GroupModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DD28BE0207009EB733 /* GroupModel .swift */; };
@@ -157,6 +158,7 @@
 		151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTabExtension.swift; sourceTree = "<group>"; };
 		151B557428BCAA2F0090A5E8 /* Modal .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modal .swift"; sourceTree = "<group>"; };
 		151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMemberCell.swift; sourceTree = "<group>"; };
+		151E4E9128C4948600FFB668 /* SlideResettableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideResettableScrollView.swift; sourceTree = "<group>"; };
 		1523D5D728BDC986009EB733 /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
 		1523D5DB28BE01D2009EB733 /* GroupPageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPageExtension.swift; sourceTree = "<group>"; };
 		1523D5DD28BE0207009EB733 /* GroupModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupModel .swift"; sourceTree = "<group>"; };
@@ -360,6 +362,16 @@
 				156386D0288A5D06006653E8 /* Group */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		151E4E9328C4948B00FFB668 /* Scroll */ = {
+			isa = PBXGroup;
+			children = (
+				1570663528A53139002F7365 /* BounceControllScrollView.swift */,
+				1570663728A5413B002F7365 /* RefreshableScrollView.swift */,
+				151E4E9128C4948600FFB668 /* SlideResettableScrollView.swift */,
+			);
+			path = Scroll;
 			sourceTree = "<group>";
 		};
 		1523D5E328BE29BE009EB733 /* Managemnet  */ = {
@@ -678,6 +690,7 @@
 		15FAF166287D606700B35570 /* Global  */ = {
 			isa = PBXGroup;
 			children = (
+				151E4E9328C4948B00FFB668 /* Scroll */,
 				15246E1D28C0AA8E0021D4F0 /* PreferenceSetter */,
 				15F3672C289252B70073E094 /* SearchBar.swift */,
 				1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */,
@@ -688,8 +701,6 @@
 				15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */,
 				15F3672E289261300073E094 /* ShadowRectangle.swift */,
 				15F3673628927E770073E094 /* TransparentDivider.swift */,
-				1570663528A53139002F7365 /* BounceControllScrollView.swift */,
-				1570663728A5413B002F7365 /* RefreshableScrollView.swift */,
 				156673DB28C1B6660011535D /* CellWithTwoSlideButton.swift */,
 				157190F028B7043100880F98 /* PlusCircle.swift */,
 				157190F528B7072200880F98 /* RightArrow.swift */,
@@ -917,6 +928,7 @@
 				1523D5DC28BE01D2009EB733 /* GroupPageExtension.swift in Sources */,
 				1523D5E028BE138B009EB733 /* AssetImages.swift in Sources */,
 				1523D5EF28BE33C4009EB733 /* EditorPlaceholder.swift in Sources */,
+				151E4E9228C4948600FFB668 /* SlideResettableScrollView.swift in Sources */,
 				1523D5DE28BE0207009EB733 /* GroupModel .swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
 				1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */,
