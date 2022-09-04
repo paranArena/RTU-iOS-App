@@ -88,7 +88,7 @@ class GroupViewModel: ObservableObject {
     }
     
     @MainActor
-    func searchClubsAll() async -> [ClubData] {
+    func searchClubsAll() async -> [ClubAndRoleData] {
         
         let url = "\(BASE_URL)/clubs/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
@@ -103,12 +103,12 @@ class GroupViewModel: ObservableObject {
         case .failure(let err):
             print("serachClubsAll failure")
             print(err)
-            return [ClubData]()
+            return [ClubAndRoleData]()
         }
     }
     
     @MainActor
-    func searchClubsWithName(groupName: String) async -> ClubData? {
+    func searchClubsWithName(groupName: String) async -> ClubAndRoleData? {
         let url = "\(BASE_URL)/clubs/search?name=\(groupName)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
@@ -128,7 +128,7 @@ class GroupViewModel: ObservableObject {
     }
     
     @MainActor
-    func searchClubsWithHashTag(hashTag: String) async -> [ClubData] {
+    func searchClubsWithHashTag(hashTag: String) async -> [ClubAndRoleData] {
         let url = "\(BASE_URL)/clubs/search?hashtag=\(hashTag)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
@@ -146,7 +146,7 @@ class GroupViewModel: ObservableObject {
             }
         }
         
-        return [ClubData]()
+        return [ClubAndRoleData]()
     }
     
     @MainActor

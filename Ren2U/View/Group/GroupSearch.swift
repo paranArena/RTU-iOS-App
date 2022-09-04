@@ -13,7 +13,7 @@ struct GroupSearch: View {
     @Binding var search: String
     @Binding var tabSelection: Int
     
-    @State private var groupInfo = [ClubData]()
+    @State private var groupInfo = [ClubAndRoleData]()
     @State private var isActive = false
     @State private var offset: CGFloat = .zero
     @State private var searchDelay = 0
@@ -33,7 +33,7 @@ struct GroupSearch: View {
                             isActive = true
                         } label: {
                             //  MARK: API 변경 후 임시코드. 수정 필요
-                            HorizontalClubCell(info: ClubAndRoleData.dummyClubAndRoleData())
+                            HorizontalClubCell(info: searchCLubData)
                                 .overlay(alignment: .trailing) { OverlayFinder(clubId: searchCLubData.id) }
                         }
                     }

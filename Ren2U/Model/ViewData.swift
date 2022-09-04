@@ -36,7 +36,7 @@ struct ClubData: Codable, Hashable {
     var hashtags: [String]
 }
 
-struct ClubAndRoleData: Codable, Identifiable {
+struct ClubAndRoleData: Codable, Identifiable, Hashable {
     var id: Int
     var name: String
     var introduction: String

@@ -39,13 +39,13 @@ struct GetMyClubsResponse: Codable {
 struct GetSearchClubsAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [ClubData]
+    let data: [ClubAndRoleData]
 }
 
 struct SearchClubsWithName: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: ClubData
+    let data: ClubAndRoleData
 }
 
 struct SearchNotificationsAllResponse: Codable {
