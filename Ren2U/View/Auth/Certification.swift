@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Certification: View {
     
+    let email: String
     @Binding var isActive: Bool
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var authModel: AuthViewModel
@@ -60,6 +61,7 @@ struct Certification: View {
             }
         })
         .onAppear {
+            authModel.requestEmailCode(email: email)
             viewModel.startTimer()
         }
         .toolbar {
@@ -129,6 +131,6 @@ struct Certification: View {
 
 struct Certification_Previews: PreviewProvider {
     static var previews: some View {
-        Certification(isActive: .constant(true), user: User.dummyUser())
+        Certification(email: "email", isActive: .constant(true), user: User.dummyUser())
     }
 }

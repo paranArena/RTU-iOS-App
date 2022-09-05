@@ -9,6 +9,18 @@ import SwiftUI
 import Kingfisher
 import Introspect
 
+
+extension MyPageTab {
+    enum Content: Int, CaseIterable {
+        case checkProfile
+        case alarm
+        case notice
+        case term
+        case logout
+    }
+}
+
+
 struct MyPageTab: View {
     
     @EnvironmentObject var authVM: AuthViewModel

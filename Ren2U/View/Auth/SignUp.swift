@@ -8,6 +8,40 @@
 import SwiftUI
 import Combine
 
+
+extension SignUp {
+    
+    enum Field: Int, CaseIterable, Hashable {
+        case email
+        case password
+        case passwordCheck
+        case name
+        case major
+        case studentId
+        case phoneNumber
+        
+        var title: String {
+            switch self {
+            case .email:
+                return "아주대학교 이메일 "
+            case .password:
+                return "Password"
+            case .passwordCheck:
+                return "Password 확인"
+            case .name:
+                return "이름"
+            case .major:
+                return "학과"
+            case .studentId:
+                return "학번"
+            case .phoneNumber:
+                return "휴대폰 번호"
+            }
+        }
+    }
+}
+
+
 struct SignUp: View {
     
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -85,7 +119,7 @@ struct SignUp: View {
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
                 
                 Button {
-                    authViewModel.checkEmailDuplicateTask(email: viewModel.text[emailIndex])
+                    viewModel.isOverlappedEmail = authViewModel.checkEmailDuplicateTask(email: viewModel.text[emailIndex])
                 } label: {
                     Text("중복확인")
                         .padding(5)
@@ -139,7 +173,7 @@ struct SignUp: View {
             Spacer()
 
             NavigationLink {
-                Certification(isActive: $isActive, user: viewModel.getUserInfo())
+                Certification(email: viewModel.text[Field.email.rawValue], isActive: $isActive, user: viewModel.getUserInfo())
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)

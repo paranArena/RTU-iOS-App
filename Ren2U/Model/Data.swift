@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+//  MARK: CLUB
 struct ClubProfileData {
     var name: String
     var introduction: String
@@ -29,26 +30,7 @@ struct ClubProfileData {
     }
 }
 
-struct CreateClubFormdata {
-    var name: String
-    var introduction: String
-    var thumbnail: UIImage
-    var hashtags: [String]
-}
-
-struct UserData: Codable, Identifiable {
-    var id: Int
-    var email: String
-    var name: String
-    var phoneNumber: String
-    var studentId: String
-    var major: String
-    
-    static func dummyUserData() -> UserData {
-        return UserData(id: 123, email: "nou0jid", name: "노우영", phoneNumber: "01064330824", studentId: "201820767", major: "소프트웨어학과")
-    }
-}
-
+//  MARK: CLUB
 struct ClubData: Codable, Hashable {
     let id: Int
     var name: String
@@ -78,13 +60,7 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
     }
 }
 
-struct NoticeData: Codable, Identifiable, Equatable {
-    let id: Int
-    let title: String
-    let imagePath: String
-    let createdAt: String
-    let updatedAt: String
-}
+//  MARK: NOTIFICATION DATA
 
 struct NoticeDetailData: Codable {
     let id: Int
@@ -93,7 +69,17 @@ struct NoticeDetailData: Codable {
     let createdAt, updatedAt: String
 }
 
-//  MARK: searchClubMembersAll
+struct NoticeCellData: Codable, Equatable, Identifiable {
+    let id: Int
+    let clubId: Int
+    let title: String
+    let isPublic: Bool?
+    let imagePath: String
+    let createdAt, updatedAt: String
+}
+
+
+//  MARK: USER
 struct UserAndRoleData: Codable, Identifiable {
     let id: Int
     let email: String
@@ -102,6 +88,19 @@ struct UserAndRoleData: Codable, Identifiable {
     let studentId: String
     let major: String
     let clubRole: String
+}
+
+struct UserData: Codable, Identifiable {
+    var id: Int
+    var email: String
+    var name: String
+    var phoneNumber: String
+    var studentId: String
+    var major: String
+    
+    static func dummyUserData() -> UserData {
+        return UserData(id: 123, email: "nou0jid", name: "노우영", phoneNumber: "01064330824", studentId: "201820767", major: "소프트웨어학과")
+    }
 }
 
 enum GroupRole: String {

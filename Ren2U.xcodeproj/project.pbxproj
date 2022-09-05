@@ -13,21 +13,16 @@
 		1514A0FE28B753BB0040F681 /* PickUpLocationMap .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */; };
 		1514A10028B7594F0040F681 /* ItemCaution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FF28B7594F0040F681 /* ItemCaution.swift */; };
 		1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A10128B75CDA0040F681 /* HeightSetterView.swift */; };
-		151B556F28BCA1660090A5E8 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B556E28BCA1660090A5E8 /* Account.swift */; };
 		151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557028BCA1AA0090A5E8 /* Reponses.swift */; };
-		151B557328BCA4FE0090A5E8 /* MyPageTabExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */; };
 		151B557528BCAA2F0090A5E8 /* Modal .swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557428BCAA2F0090A5E8 /* Modal .swift */; };
 		151E4E9028C4620400FFB668 /* ManageMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */; };
 		151E4E9228C4948600FFB668 /* SlideResettableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E9128C4948600FFB668 /* SlideResettableScrollView.swift */; };
-		1523D5D828BDC986009EB733 /* ViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5D728BDC986009EB733 /* ViewData.swift */; };
-		1523D5DC28BE01D2009EB733 /* GroupPageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DB28BE01D2009EB733 /* GroupPageExtension.swift */; };
-		1523D5DE28BE0207009EB733 /* GroupModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DD28BE0207009EB733 /* GroupModel .swift */; };
+		1523D5D828BDC986009EB733 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5D728BDC986009EB733 /* Data.swift */; };
 		1523D5E028BE138B009EB733 /* AssetImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DF28BE138A009EB733 /* AssetImages.swift */; };
 		1523D5E228BE291C009EB733 /* MemberManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E128BE291C009EB733 /* MemberManagementView.swift */; };
 		1523D5E528BE29E9009EB733 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E428BE29E9009EB733 /* ManagementViewModel.swift */; };
 		1523D5E828BE2C8D009EB733 /* NoticeManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */; };
 		1523D5EA28BE2CE7009EB733 /* CreateNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */; };
-		1523D5ED28BE325B009EB733 /* NotificationModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5EC28BE325B009EB733 /* NotificationModel .swift */; };
 		1523D5EF28BE33C4009EB733 /* EditorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */; };
 		15246BD92884FD9A000BDFC8 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15246BD82884FD9A000BDFC8 /* LoginVM.swift */; };
 		1525F5FC28B731A600C7CA51 /* ImagesPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */; };
@@ -113,9 +108,8 @@
 		15F3673528926F6F0073E094 /* ClubSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3673428926F6F0073E094 /* ClubSearch.swift */; };
 		15F3673728927E770073E094 /* TransparentDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3673628927E770073E094 /* TransparentDivider.swift */; };
 		15F4594228B31C86003E3C60 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15F4594128B31C86003E3C60 /* NotoSansKR-Bold.otf */; };
-		15FA687928BC5A2400B3DF0B /* Prams&Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687828BC5A2400B3DF0B /* Prams&Raw.swift */; };
+		15FA687928BC5A2400B3DF0B /* Param.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687828BC5A2400B3DF0B /* Param.swift */; };
 		15FA687B28BC62B800B3DF0B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687A28BC62B800B3DF0B /* Profile.swift */; };
-		15FA687D28BC656600B3DF0B /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687C28BC656600B3DF0B /* SignUpExtension.swift */; };
 		15FA688228BC718500B3DF0B /* GroupManagementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA688128BC718500B3DF0B /* GroupManagementExtension.swift */; };
 		15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF133287D5DFF00B35570 /* Ren2UApp.swift */; };
 		15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF135287D5DFF00B35570 /* ContentView.swift */; };
@@ -154,21 +148,16 @@
 		1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickUpLocationMap .swift"; sourceTree = "<group>"; };
 		1514A0FF28B7594F0040F681 /* ItemCaution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCaution.swift; sourceTree = "<group>"; };
 		1514A10128B75CDA0040F681 /* HeightSetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightSetterView.swift; sourceTree = "<group>"; };
-		151B556E28BCA1660090A5E8 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		151B557028BCA1AA0090A5E8 /* Reponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reponses.swift; sourceTree = "<group>"; };
-		151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTabExtension.swift; sourceTree = "<group>"; };
 		151B557428BCAA2F0090A5E8 /* Modal .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modal .swift"; sourceTree = "<group>"; };
 		151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMemberCell.swift; sourceTree = "<group>"; };
 		151E4E9128C4948600FFB668 /* SlideResettableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideResettableScrollView.swift; sourceTree = "<group>"; };
-		1523D5D728BDC986009EB733 /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
-		1523D5DB28BE01D2009EB733 /* GroupPageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPageExtension.swift; sourceTree = "<group>"; };
-		1523D5DD28BE0207009EB733 /* GroupModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupModel .swift"; sourceTree = "<group>"; };
+		1523D5D728BDC986009EB733 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1523D5DF28BE138A009EB733 /* AssetImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImages.swift; sourceTree = "<group>"; };
 		1523D5E128BE291C009EB733 /* MemberManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberManagementView.swift; sourceTree = "<group>"; };
 		1523D5E428BE29E9009EB733 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
 		1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManagementView.swift; sourceTree = "<group>"; };
 		1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoticeView.swift; sourceTree = "<group>"; };
-		1523D5EC28BE325B009EB733 /* NotificationModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationModel .swift"; sourceTree = "<group>"; };
 		1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorPlaceholder.swift; sourceTree = "<group>"; };
 		15246BD82884FD9A000BDFC8 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPicker.swift; sourceTree = "<group>"; };
@@ -251,9 +240,8 @@
 		15F3673428926F6F0073E094 /* ClubSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubSearch.swift; sourceTree = "<group>"; };
 		15F3673628927E770073E094 /* TransparentDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentDivider.swift; sourceTree = "<group>"; };
 		15F4594128B31C86003E3C60 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
-		15FA687828BC5A2400B3DF0B /* Prams&Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Prams&Raw.swift"; sourceTree = "<group>"; };
+		15FA687828BC5A2400B3DF0B /* Param.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Param.swift; sourceTree = "<group>"; };
 		15FA687A28BC62B800B3DF0B /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		15FA687C28BC656600B3DF0B /* SignUpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExtension.swift; sourceTree = "<group>"; };
 		15FA688128BC718500B3DF0B /* GroupManagementExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementExtension.swift; sourceTree = "<group>"; };
 		15FAF130287D5DFF00B35570 /* Ren2U.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ren2U.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15FAF133287D5DFF00B35570 /* Ren2UApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UApp.swift; sourceTree = "<group>"; };
@@ -325,14 +313,10 @@
 			isa = PBXGroup;
 			children = (
 				151B557028BCA1AA0090A5E8 /* Reponses.swift */,
-				1523D5D728BDC986009EB733 /* ViewData.swift */,
-				15FA687828BC5A2400B3DF0B /* Prams&Raw.swift */,
-				151B556E28BCA1660090A5E8 /* Account.swift */,
-				15FA687C28BC656600B3DF0B /* SignUpExtension.swift */,
+				1523D5D728BDC986009EB733 /* Data.swift */,
+				15FA687828BC5A2400B3DF0B /* Param.swift */,
 				15FA688028BC717900B3DF0B /* Group */,
 				1525F60228B739DE00C7CA51 /* ItemRegistration */,
-				1523D5EB28BE3240009EB733 /* Management  */,
-				15FA687628BC594B00B3DF0B /* MyPage */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -384,14 +368,6 @@
 				1523D5E428BE29E9009EB733 /* ManagementViewModel.swift */,
 			);
 			path = "Managemnet ";
-			sourceTree = "<group>";
-		};
-		1523D5EB28BE3240009EB733 /* Management  */ = {
-			isa = PBXGroup;
-			children = (
-				1523D5EC28BE325B009EB733 /* NotificationModel .swift */,
-			);
-			path = "Management ";
 			sourceTree = "<group>";
 		};
 		15246BDE28851550000BDFC8 /* SubView */ = {
@@ -611,20 +587,10 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
-		15FA687628BC594B00B3DF0B /* MyPage */ = {
-			isa = PBXGroup;
-			children = (
-				151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */,
-			);
-			path = MyPage;
-			sourceTree = "<group>";
-		};
 		15FA688028BC717900B3DF0B /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				1523D5DD28BE0207009EB733 /* GroupModel .swift */,
 				15FA688128BC718500B3DF0B /* GroupManagementExtension.swift */,
-				1523D5DB28BE01D2009EB733 /* GroupPageExtension.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -876,7 +842,6 @@
 				1523D5EA28BE2CE7009EB733 /* CreateNoticeView.swift in Sources */,
 				154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */,
 				15CFAD2A28B7456E0004CDF7 /* ItemInformation2.swift in Sources */,
-				1523D5ED28BE325B009EB733 /* NotificationModel .swift in Sources */,
 				1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */,
 				1523D5E228BE291C009EB733 /* MemberManagementView.swift in Sources */,
 				1563FE9328ADEF9000F46CC7 /* SignUpNoticeCell.swift in Sources */,
@@ -897,7 +862,6 @@
 				152D463028C606E5008F26E0 /* MapViewModel.swift in Sources */,
 				1525F60428B739EF00C7CA51 /* Category.swift in Sources */,
 				15FA688228BC718500B3DF0B /* GroupManagementExtension.swift in Sources */,
-				15FA687D28BC656600B3DF0B /* SignUpExtension.swift in Sources */,
 				15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */,
 				15382ECA28C1A338004D7977 /* ManageNoticeCell.swift in Sources */,
 				159F1B21288B88DB00012113 /* Variables.swift in Sources */,
@@ -909,7 +873,6 @@
 				156386D2288A5D1A006653E8 /* ClubViewModel.swift in Sources */,
 				159F1B26288BA16000012113 /* CustomFont.swift in Sources */,
 				1523D5E528BE29E9009EB733 /* ManagementViewModel.swift in Sources */,
-				151B556F28BCA1660090A5E8 /* Account.swift in Sources */,
 				15246BD92884FD9A000BDFC8 /* LoginVM.swift in Sources */,
 				1514A0FE28B753BB0040F681 /* PickUpLocationMap .swift in Sources */,
 				15D774F4288E2B8A00428465 /* NoticeCell.swift in Sources */,
@@ -921,18 +884,15 @@
 				153C1A7B288CF7D600F89B2E /* ClubProfile.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
 				15FA687B28BC62B800B3DF0B /* Profile.swift in Sources */,
-				15FA687928BC5A2400B3DF0B /* Prams&Raw.swift in Sources */,
+				15FA687928BC5A2400B3DF0B /* Param.swift in Sources */,
 				1563FE9B28AE059D00F46CC7 /* ReturnManagement.swift in Sources */,
 				156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */,
 				150072F4289A2042005B6A93 /* RentalItemHCell.swift in Sources */,
-				151B557328BCA4FE0090A5E8 /* MyPageTabExtension.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
 				159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */,
-				1523D5DC28BE01D2009EB733 /* GroupPageExtension.swift in Sources */,
 				1523D5E028BE138B009EB733 /* AssetImages.swift in Sources */,
 				1523D5EF28BE33C4009EB733 /* EditorPlaceholder.swift in Sources */,
 				151E4E9228C4948600FFB668 /* SlideResettableScrollView.swift in Sources */,
-				1523D5DE28BE0207009EB733 /* GroupModel .swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
 				1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */,
 				1563FE9528ADF62E00F46CC7 /* ReturnNoticeCell.swift in Sources */,
@@ -955,7 +915,7 @@
 				159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */,
 				15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */,
 				1525F60128B7366B00C7CA51 /* ItemViewModel.swift in Sources */,
-				1523D5D828BDC986009EB733 /* ViewData.swift in Sources */,
+				1523D5D828BDC986009EB733 /* Data.swift in Sources */,
 				15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */,
 				1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */,
 				15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */,

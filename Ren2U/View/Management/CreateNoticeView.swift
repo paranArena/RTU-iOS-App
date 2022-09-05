@@ -30,7 +30,9 @@ struct CreateNoticeView: View {
                 Button {
                     Task {
                         await managementVM.createNotification(notice: raw)
-                        groupVM.searchNotificationsAll(groupId: managementVM.clubData.id)
+                        
+                        //  MARK: 나중에 수정 
+//                        groupVM.searchNotificationsAll(clubId: managementVM.clubData.id)
                     }
                     dismiss()
                 } label: {

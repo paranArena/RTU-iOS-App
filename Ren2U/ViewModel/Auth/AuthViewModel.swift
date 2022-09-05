@@ -64,10 +64,12 @@ class AuthViewModel: ObservableObject {
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyInfoResponse.self) { res in
             switch res.result {
             case .success(let value):
-                print("getMyInfo success")
+                print("[getMyInfo success]")
+                print(value.responseMessage)
                 self.userData = value.data
             case .failure(let err):
-                print("getMyInfo err: \(err)")
+                print("[getMyInfo err]")
+                print(err)
             }
         }
     }
@@ -126,6 +128,44 @@ class AuthViewModel: ObservableObject {
 
     }
     
+    func requestEmailCode(email: String) {
+        let url = "\(BASE_URL)/members/email/requesetCode"
+        let param: [String: Any] = [
+            "email" : email
+        ]
+        
+        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).responseString { res in
+            switch res.result {
+            case .success(let value):
+                print("[requestEmailCode success]")
+                print(value)
+            case .failure(let err):
+                print("[requestEmailCode err]")
+                print(err)
+            }
+        }
+    }
+    
+    func verifyEmailCode(email: String, code: String) async {
+        let url = "\(BASE_URL)/members/email/verifyCode"
+        let param: [String: Any] = [
+            "email" : email,
+            "code" : code
+        ]
+        
+        let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingString()
+        let result = await request.result
+        
+        switch result {
+        case .success(let value):
+            print("[verifyEmailCodeSuccess]")
+            print(value)
+        case .failure(let err):
+            print("[verfyEmailCodeFailur")
+            print(err)
+        }
+        
+    }
     
     func logout() {
         UserDefaults.standard.setValue(nil, forKey: JWT_KEY)
@@ -135,11 +175,5 @@ class AuthViewModel: ObservableObject {
     //  MARK: TASK
     func checkEmailDuplicateTask(email: String) -> Bool {
         return true
-    }
-    
-    func getMyInfoTask() {
-        Task {
-            await getMyInfo()
-        }
     }
 }

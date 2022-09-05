@@ -36,10 +36,14 @@ struct HorizontalClubCell: View {
                     Text(info.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
-                    Text(groupModel.makeFavoritesGroupTag(tags: info.hashtags))
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(.gray_ADB5BD)
-                        .lineLimit(1)
+                    HStack(spacing: 0) {
+                        ForEach(info.hashtags.indices, id: \.self) { i in
+                            Text("#\(info.hashtags[i]) ")
+                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                                .foregroundColor(.gray_ADB5BD)
+                                .lineLimit(1)
+                        }
+                    }
                 }
             }
             .padding(.top, 10)

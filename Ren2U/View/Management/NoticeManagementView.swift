@@ -25,9 +25,7 @@ struct NoticeManagementView: View {
                 ForEach(clubVM.notices[clubId]?.indices ?? 0..<0, id: \.self) { i in
                     let noticeInfo = clubVM.notices[clubId]![i]
                     let groupName = clubVM.getGroupNameByGroupId(groupId: clubId)
-                    HStack {
-                        ManageNoticeCell(noticeInfo: noticeInfo, groupName: groupName, groupID: clubId, selectedCellID: $selectedCellId, managementVM: managementVM)
-                    }
+                    ManageNoticeCell(noticeInfo: noticeInfo, groupName: groupName, groupID: clubId, selectedCellID: $selectedCellId, managementVM: managementVM)
                 }
             }
         }

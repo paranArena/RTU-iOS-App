@@ -35,3 +35,10 @@ struct Account: Codable {
 }
 
 
+struct CreateClubFormdata {
+    var name: String
+    var introduction: String
+    var thumbnail: UIImage
+    var hashtags: [String]
+}
+

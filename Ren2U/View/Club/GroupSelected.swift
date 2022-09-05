@@ -31,7 +31,8 @@ struct GroupSelected: View {
             }, label: { })
         )
         .refreshable {
-            groupVM.getMyClubsTask()
+            await groupVM.getMyClubs()
+            await groupVM.getMyNotifications()
         }
     }
     

@@ -39,6 +39,12 @@ struct GetMyInfoResponse: Codable {
     var data: UserData
 }
 
+struct GetMyNotificationsResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [NoticeCellData]
+}
+
 //  MARK: POST
 
 struct CreateClubResponse: Codable {
@@ -68,7 +74,7 @@ struct SearchClubsWithNameResponse: Codable {
 struct SearchNotificationsAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [NoticeData]
+    let data: [NoticeCellData]
 }
 
 

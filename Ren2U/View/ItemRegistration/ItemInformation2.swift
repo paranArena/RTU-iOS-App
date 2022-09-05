@@ -39,6 +39,8 @@ struct ItemInformation2: View {
     
     @ObservedObject var itemVM: ItemViewModel
     @Binding var isActive: Bool
+    
+    @State private var isActive2 = false
     @State private var pickerSelection: Field?
     @State private var integerPicker = [[Int]] (repeating: [Int](repeating: 0, count: 2), count: 4)
     
@@ -84,6 +86,9 @@ struct ItemInformation2: View {
         .animation(.easeInOut, value: self.pickerSelection)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(Color.BackgroundColor)
+        .background(NavigationLink(isActive: $isActive2, destination: {
+            PickUpLocation(itemVM: itemVM, isActive: $isActive)
+        }, label: {}))
         .onTapGesture {
             self.pickerSelection = nil
         }
@@ -120,12 +125,17 @@ struct ItemInformation2: View {
     
     @ViewBuilder
     private func GoNextButton() -> some View {
-        NavigationLink {
-            PickUpLocation(itemVM: itemVM, isActive: $isActive)
+        Button {
+            itemVM.fifoCount = integerPicker[0][0] * 10 + integerPicker[0][1]
+            itemVM.reserveCount = integerPicker[1][0] * 10 + integerPicker[1][1]
+            itemVM.fifoRentalPeriod = integerPicker[2][0] * 10 + integerPicker[2][1]
+            itemVM.reserveRentalPeriod = integerPicker[3][0] * 10 + integerPicker[3][1]
+            isActive2 = true
         } label: {
             RightArrow(isDisabled: false)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+
     }
 
 }

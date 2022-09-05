@@ -105,7 +105,8 @@ struct ClubTab: View {
             }
         }
         .refreshable {
-            clubVM.getMyClubsTask()
+            await clubVM.getMyClubs()
+            await clubVM.getMyNotifications()
         }
     }
 }
