@@ -47,7 +47,7 @@ struct ItemInformation2: View {
             Group {
                 Text("다음 사항을 입력해주세요")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 
                 Text("수량")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
@@ -78,16 +78,11 @@ struct ItemInformation2: View {
                 PickerSet(selection: Field.reservePeriod)
             }
             
-            NavigationLink {
-                PickUpLocation(itemVM: itemVM, isActive: $isActive)
-            } label: {
-                RightArrow(isDisabled: false)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            
+            GoNextButton()
+                .isHidden(hidden: pickerSelection != nil)
         }
         .animation(.easeInOut, value: self.pickerSelection)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(Color.BackgroundColor)
         .onTapGesture {
             self.pickerSelection = nil
@@ -121,6 +116,16 @@ struct ItemInformation2: View {
             CustomPicker(values: $integerPicker[selection.rawValue])
                 .customHide(selectedValue: pickerSelection?.rawValue, value: selection.rawValue)
         }
+    }
+    
+    @ViewBuilder
+    private func GoNextButton() -> some View {
+        NavigationLink {
+            PickUpLocation(itemVM: itemVM, isActive: $isActive)
+        } label: {
+            RightArrow(isDisabled: false)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
     }
 
 }

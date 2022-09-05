@@ -10,6 +10,7 @@ import Kingfisher
 
 struct ClubPage: View {
     
+    @EnvironmentObject var tabVM: AmongTabsViewModel
     @EnvironmentObject var clubVM: ClubViewModel
     @Binding var tabSelection: Int
     @Binding var groupInfo: ClubAndRoleData
@@ -118,7 +119,9 @@ struct ClubPage: View {
             .padding(.horizontal)
             
             ForEach(clubVM.notices[groupInfo.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
-                NoticeCell(noticeInfo: clubVM.notices[groupInfo.id]![i], groupName: clubVM.getGroupNameByGroupId(groupId: groupInfo.id))
+                if (i < 5) {
+                    NoticeCell(noticeInfo: clubVM.notices[groupInfo.id]![i], groupName: clubVM.getGroupNameByGroupId(groupId: groupInfo.id))
+                }
             }
             
 //            ForEach(groupModel.notices) { notice in
@@ -141,6 +144,7 @@ struct ClubPage: View {
                 
                 
                 Button {
+                    tabVM.selectedClubId = groupInfo.id
                     self.tabSelection = Ren2UTab.Selection.rent.rawValue
                 } label: {
                     Image(systemName: "chevron.right")

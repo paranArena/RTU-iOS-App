@@ -86,6 +86,13 @@ struct NoticeData: Codable, Identifiable, Equatable {
     let updatedAt: String
 }
 
+struct NoticeDetailData: Codable {
+    let id: Int
+    let title, content: String
+    let imagePath: String
+    let createdAt, updatedAt: String
+}
+
 //  MARK: searchClubMembersAll
 struct UserAndRoleData: Codable, Identifiable {
     let id: Int

@@ -9,7 +9,7 @@ import SwiftUI
 import HidableTabView
 import Introspect
 
-extension MemberManagement {
+extension MemberManagementView {
     enum Selection: Int, CaseIterable {
         case member
         case applicant
@@ -24,7 +24,7 @@ extension MemberManagement {
         }
     }
 }
-struct MemberManagement: View {
+struct MemberManagementView: View {
     
     @ObservedObject var managementVM: ManagementViewModel
     @State private var buttonSelection: Selection = .member
@@ -104,6 +104,6 @@ struct MemberManagement: View {
 
 struct MemberManament_Previews: PreviewProvider {
     static var previews: some View {
-        MemberManagement(managementVM:  ManagementViewModel(clubData: ClubData.dummyClubData()))
+        MemberManagementView(managementVM:  ManagementViewModel(clubData: ClubData.dummyClubData()))
     }
 }

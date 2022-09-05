@@ -58,6 +58,7 @@ struct Login: View {
                            color: .gray_ADB5BD)
             .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
             .padding(.top, 46)
+            .keyboardType(.emailAddress)
             .onSubmit { focus = .password }
     }
     

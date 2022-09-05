@@ -231,7 +231,7 @@ struct ClubProfile: View {
     private func CreateCompleteButton() -> some View {
         Button {
             if viewModel.mode == .post {
-                clubVM.createClubTask(club: CreateClubFormdata(name: viewModel.clubProfileData.name, introduction: viewModel.clubProfileData.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.clubProfileData.hashtags))
+                clubVM.createClubTask(club: CreateClubFormdata(name: viewModel.clubProfileData.name.removeWhiteSpace(), introduction: viewModel.clubProfileData.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.clubProfileData.hashtags))
             }
             presentationMode.wrappedValue.dismiss()
         } label: {

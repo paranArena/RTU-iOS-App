@@ -34,7 +34,13 @@ struct RentalManagementSelected: View {
     var body: some View {
         VStack {
             ButtonRentalSelection()
+            
+            ScrollView {
+                
+            }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .avoidSafeArea()
     }
     
     @ViewBuilder

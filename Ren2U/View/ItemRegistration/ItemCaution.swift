@@ -38,13 +38,13 @@ struct ItemCaution: View {
             Spacer()
             
             Button {
-                isActive = false
+                Task {
+                    isActive = false
+                    await itemVM.createProduct()
+                }
             } label: {
                 RightArrow(isDisabled: itemVM.caution.isEmpty)
             }
-            
-            
-            Text("\(isActive.description)")
         }
         .padding(.horizontal, 20)
         .basicNavigationTitle(title: "물품 등록")

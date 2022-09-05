@@ -79,9 +79,6 @@ struct PickUpLocation: View {
         }
         .basicNavigationTitle(title: "물품 등록")
         .padding(.horizontal, 20)
-        .onAppear {
-            print("\(isActive.description)")
-        }
     }
 }
 

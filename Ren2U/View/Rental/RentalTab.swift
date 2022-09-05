@@ -11,19 +11,24 @@ import HidableTabView
 struct RentalTab: View {
     
     @EnvironmentObject var groupViewModel: ClubViewModel
+    @EnvironmentObject var tabVM: AmongTabsViewModel
+    
     @State private var rentalSelection: Selection = .rentalItem
     @State private var searchText = ""
     @State private var isSearchBarFocused = false
     @State private var offset: CGFloat = 200
     @State private var cancelSelection: CancelSelection = .none
-    
     @State private var isShowingModal = true
+    @State private var clubId: Int?
+    
     let spacing: CGFloat = 10
     
     var body: some View {
         VStack(alignment: .center, spacing: spacing) {
             SearchBar(text: $searchText, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
+            
+            FilterView()
             
             Group {
                 RentalSelectionButton()
@@ -96,6 +101,7 @@ struct RentalTab: View {
                     } label: {
                         RentalItemHCell(rentalItemInfo: groupViewModel.rentalItems[i])
                     }
+                    .isHidden(hidden: tabVM.selectedClubId != nil && groupViewModel.rentalItems[i].id != tabVM.selectedClubId)
                     .isHidden(hidden: isSearchBarFocused && !groupViewModel.rentalItems[i].itemName.contains(searchText))
                 }
             }
@@ -115,6 +121,37 @@ struct RentalTab: View {
         .refreshable {
             //  MARK: 추후에 비동기 함수 추가
         }
+    }
+    
+    @ViewBuilder
+    private func FilterView() -> some View {
+        HStack {
+            if let clubId = tabVM.selectedClubId {
+                Text("필터링 결과")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                    .foregroundColor(.gray_495057)
+                
+                HStack(spacing: 10) {
+                    Text(groupViewModel.getGroupNameByGroupId(groupId: clubId))
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 13))
+                        .foregroundColor(.gray_495057)
+                    
+                    Button {
+                        tabVM.selectedClubId = nil
+                    } label: {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .frame(width: 8, height: 8)
+                            .foregroundColor(.gray_495057)
+                    }
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(Capsule().stroke(Color.gray_495057, lineWidth: 1))
+            }
+        }
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

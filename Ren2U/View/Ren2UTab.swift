@@ -55,11 +55,11 @@ struct Ren2UTab: View {
         .accentColor(.navy_1E2F97)
         .foregroundColor(.LabelColor)
         .onAppear {
+            authVM.getMyInfo()
             Task {
-                await authVM.getMyInfo()
                 await groupVM.getMyClubs()
                 for joinedClub in groupVM.joinedClubs {
-                    await groupVM.searchNotificationsAll(groupId: joinedClub.id)
+                    groupVM.searchNotificationsAll(groupId: joinedClub.id)
                 }
                 groupVM.fetchRentalItems()
                 isLoading = false

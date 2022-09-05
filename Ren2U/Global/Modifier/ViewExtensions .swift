@@ -96,3 +96,17 @@ extension View {
             }
     }
 }
+
+//  MARK: TAB VIEW 숨긴 후 SAFE AREA만큼 띄우기 (스크롤에서 사용)
+extension View {
+    func avoidSafeArea() -> some View {
+        self
+            .padding(.bottom, SAFE_AREA_BOTTOM_HEIGHT)
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(Color.BackgroundColor)
+                    .frame(height: SAFE_AREA_BOTTOM_HEIGHT)
+            }
+            .ignoresSafeArea(.all, edges: .bottom)
+    }
+}

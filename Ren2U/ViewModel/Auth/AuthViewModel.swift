@@ -12,7 +12,7 @@ import Alamofire
 class AuthViewModel: ObservableObject {
     
     @Published var jwt: String?
-    @Published var userResponse: UserData?
+    @Published var userData: UserData?
     
     init() {
         self.jwt = UserDefaults.standard.string(forKey: JWT_KEY)
@@ -46,7 +46,8 @@ class AuthViewModel: ObservableObject {
         
         switch response {
         case .success(let value):
-            print("checkEmailDuplicate success : \(value)")
+            print("[checkEmailDuplicate success]")
+            print(value)
             return value
         case .failure(let err):
             print("ceheckEmailDuplicate err : \(err)")
@@ -56,19 +57,18 @@ class AuthViewModel: ObservableObject {
     }
     
     @MainActor
-    func getMyInfo() async {
+    func getMyInfo() {
         let url = "\(BASE_URL)/members/my/info"
         let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
         
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyInfoResponse.self)
-        let response = await request.result
-        
-        switch response {
-        case .success(let value):
-            print("getMyInfo success")
-            self.userResponse = value.data
-        case .failure(let err):
-            print("getMyInfo err: \(err)")
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyInfoResponse.self) { res in
+            switch res.result {
+            case .success(let value):
+                print("getMyInfo success")
+                self.userData = value.data
+            case .failure(let err):
+                print("getMyInfo err: \(err)")
+            }
         }
     }
     

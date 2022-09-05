@@ -47,6 +47,7 @@ struct ItemInformation: View {
             
             HStack {
                 TextField("", text: $itemVM.price)
+                    .keyboardType(.numberPad)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                     .overlay(SimpleBottomLine(color: .gray_DEE2E6))
                 

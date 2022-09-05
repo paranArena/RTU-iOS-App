@@ -149,22 +149,22 @@ class ClubViewModel: ObservableObject {
         return [ClubAndRoleData]()
     }
     
+    
     @MainActor
-    func searchNotificationsAll(groupId: Int) async {
+    func searchNotificationsAll(groupId: Int) {
         
         let url = "\(BASE_URL)/clubs/\(groupId)/notifications/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchNotificationsAllResponse.self)
-        let result = await task.result
-        
-        switch result {
-        case .success(let value):
-            print("searchNotificationAll success, GroupId: \(groupId)")
-            self.notices[groupId] = value.data
-            self.notices[groupId] = notices[groupId]!.reversed()
-        case .failure(let err):
-            print("searchNotificationsAll failure, GroupId: \(groupId) : \(err)")
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchNotificationsAllResponse.self) { res in
+            switch res.result {
+            case .success(let value):
+                print("searchNotificationAll success, GroupId: \(groupId)")
+                self.notices[groupId] = value.data
+                self.notices[groupId] = self.notices[groupId]!.reversed()
+            case .failure(let err):
+                print("searchNotificationsAll failure, GroupId: \(groupId) : \(err)")
+            }
         }
     }
     
@@ -207,7 +207,8 @@ class ClubViewModel: ObservableObject {
         
         switch result {
         case .success(let value):
-            print("create club success : \(value.data)")
+            print("[create club success]")
+            print(value.responseMessage)
         case .failure(let err):
             print("create club failure : \(err)")
         }
@@ -258,14 +259,6 @@ class ClubViewModel: ObservableObject {
     func requestClubJoinTask(cludId: Int) {
         Task {
             await requestClubJoin(clubId: cludId)
-        }
-    }
-    
-    func searchNotificationsAllTask() {
-        Task {
-            for joinedClub in joinedClubs {
-                await searchNotificationsAll(groupId: joinedClub.id)
-            }
         }
     }
 }

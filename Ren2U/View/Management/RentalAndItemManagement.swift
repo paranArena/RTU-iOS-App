@@ -29,25 +29,23 @@ extension RentalAndItemManagement {
 struct RentalAndItemManagement: View {
     
     @State private var headerSelection: Selection = .rentalManagement
-    @Environment(\.isPresented) var isPresented
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             ButtonHeaderSelection()
             
-            ZStack {
-                ForEach(Selection.allCases, id: \.rawValue) { selection in
-                    Content()
-                        .offset(x: CGFloat((selection.rawValue - self.headerSelection.rawValue)) * SCREEN_WIDTH)
-                }
+            if headerSelection == .rentalManagement {
+                RentalManagementSelected()
+            } else {
+                ItemManagementSelected()
             }
-            .animation(.default, value: headerSelection)
         }
         .onAppear {
             UITabBar.hideTabBar()
         }
         .frame(maxWidth: .infinity, maxHeight:  .infinity)
         .basicNavigationTitle(title: "대여/물품 관리")
+        .avoidSafeArea()
     }
     
     @ViewBuilder

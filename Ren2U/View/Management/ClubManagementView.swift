@@ -148,9 +148,9 @@ struct ClubManagementView: View {
         case .rentalManagement:
             RentalAndItemManagement()
         case .notice:
-            NoticeManagement(managementVM: managementVM)
+            NoticeManagementView(managementVM: managementVM)
         case .memberManagement:
-            MemberManagement(managementVM: managementVM)
+            MemberManagementView(managementVM: managementVM)
         case .rentalActive:
             Text("Empty View")
         }

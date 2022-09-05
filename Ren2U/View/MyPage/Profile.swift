@@ -8,6 +8,31 @@
 import SwiftUI
 import Kingfisher
 
+extension Profile {
+    enum Field: Int, CaseIterable {
+        case name
+        case major
+        case studentId
+        case email
+        case phoneNumber
+        
+        var title: String {
+            switch self {
+            case .name:
+                return "이름"
+            case .major:
+                return "학과"
+            case .studentId:
+                return "학번"
+            case .email:
+                return "이메일"
+            case .phoneNumber:
+                return "전화번호"
+            }
+        }
+    }
+}
+
 struct Profile: View {
     
     @EnvironmentObject var authVM: AuthViewModel
@@ -17,6 +42,9 @@ struct Profile: View {
     
     var body: some View {
         VStack {
+            
+            
+            
             KFImage(URL(string: "https://picsum.photos/seed/picsum/200/300")!)
                 .onFailure { err in
                     print(err.errorDescription ?? "KFImage err")
@@ -24,7 +52,12 @@ struct Profile: View {
                 .resizable()
                 .frame(width: 120, height: 120)
                 .clipShape(Circle())
-
+            
+            ForEach(Field.allCases, id: \.rawValue) { field in
+                ProfileField(field: field)
+            }
+            
+            
             Button {
                 
             } label: {
@@ -65,20 +98,35 @@ struct Profile: View {
         }))
     }
     
+    
     @ViewBuilder
-    private func Fields() -> some View {
-        ForEach(SignUp.Field.allCases, id: \.rawValue) { field in
-            VStack {
-                Text(field.title)
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+    private func ProfileField(field: Field) -> some View {
+        VStack {
+            Text(field.title)
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+            
+            
+            Group {
+                switch field {
+                case .email:
+                    Text("??")
+                case .name:
+                    Text("??")
+                case .major:
+                    Text("??")
+                case .studentId:
+                    Text("??")
+                case .phoneNumber:
+                    Text("??")
+                }
             }
+            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
         }
     }
-    
 }
 
-struct Profile_Previews: PreviewProvider {
-    static var previews: some View {
-        Profile()
-    }
-}
+//struct Profile_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Profile()
+//    }
+//}

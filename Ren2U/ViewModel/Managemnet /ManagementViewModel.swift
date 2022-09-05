@@ -50,15 +50,16 @@ class ManagementViewModel: ObservableObject {
             }
             
 
-        }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingString()
+        }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingDecodable(CreateNotificationResponse.self)
         
         
         switch await task.result {
         case .success(let value):
             print("[createNotification success]")
-            print(value.description)
+            print(value.responseMessage)
         case .failure(let err):
-            print("[createNotification err]\n \(err)")
+            print("[createNotification err]")
+            print(err)
         }
     }
     
@@ -74,6 +75,23 @@ class ManagementViewModel: ObservableObject {
             print("acceptClubJoin Success : \(value)")
         case .failure(let err):
             print("클럽 가입 수락 실패 : \(err)")
+        }
+    }
+    
+    @MainActor
+    func searchClubProductsAll(clubId: Int) {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/products/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseString { res in
+            switch res.result {
+            case .success(let value):
+                print("[searchClubProductsAll success]")
+                print(value)
+            case .failure(let err):
+                print("[searchClubProductsAll err]")
+                print(err)
+            }
         }
     }
     
@@ -137,11 +155,6 @@ class ManagementViewModel: ObservableObject {
     }
     
     //  MARK: TASK
-    func createNotificationTask(notice: NotificationModel) {
-        Task {
-            await createNotification(notice: notice)
-        }
-    }
     
     func searchClubJoinsAllTask() {
         Task {

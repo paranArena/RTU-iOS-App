@@ -76,14 +76,16 @@ struct SignUp: View {
         
         VStack(alignment: .leading) {
             HStack {
-                BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[Field.email.rawValue])
-                    .onChange(of: viewModel.text[Field.email.rawValue]) { _ in viewModel.isOverlappedEmail = false }
+                let emailIndex = Field.email.rawValue
+                
+                BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[emailIndex])
+                    .onChange(of: viewModel.text[emailIndex]) { _ in viewModel.isOverlappedEmail = false }
 
                 Text("@ajou.ac.kr")
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
                 
                 Button {
-                    viewModel.isOverlappedEmail.toggle()
+                    authViewModel.checkEmailDuplicateTask(email: viewModel.text[emailIndex])
                 } label: {
                     Text("중복확인")
                         .padding(5)

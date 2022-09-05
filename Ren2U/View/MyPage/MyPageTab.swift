@@ -27,11 +27,11 @@ struct MyPageTab: View {
                     .padding(.trailing, 30)
                 
                 VStack(alignment: .trailing, spacing: 0) {
-                    Text("\(authVM.userResponse?.major ?? "") \(authVM.userResponse?.studentId.substring(from: 2, to: 3) ?? "") 학번")
+                    Text("\(authVM.userData?.major ?? "") \(authVM.userData?.studentId.substring(from: 2, to: 3) ?? "") 학번")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                         .foregroundColor(.gray_868E96)
 //
-                    Text("\(authVM.userResponse?.name ?? "")")
+                    Text("\(authVM.userData?.name ?? "")")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                     
                     HStack {
@@ -103,7 +103,7 @@ struct MyPageTab: View {
     @ViewBuilder
     private func ProfileNavigation() -> some View {
         NavigationLink("프로필 확인") {
-            Profile()
+            Profile() 
         }
     }
     

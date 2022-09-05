@@ -23,9 +23,9 @@
 		1523D5DC28BE01D2009EB733 /* GroupPageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DB28BE01D2009EB733 /* GroupPageExtension.swift */; };
 		1523D5DE28BE0207009EB733 /* GroupModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DD28BE0207009EB733 /* GroupModel .swift */; };
 		1523D5E028BE138B009EB733 /* AssetImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DF28BE138A009EB733 /* AssetImages.swift */; };
-		1523D5E228BE291C009EB733 /* MemberManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E128BE291C009EB733 /* MemberManagement.swift */; };
+		1523D5E228BE291C009EB733 /* MemberManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E128BE291C009EB733 /* MemberManagementView.swift */; };
 		1523D5E528BE29E9009EB733 /* ManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E428BE29E9009EB733 /* ManagementViewModel.swift */; };
-		1523D5E828BE2C8D009EB733 /* NoticeManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E728BE2C8D009EB733 /* NoticeManagement.swift */; };
+		1523D5E828BE2C8D009EB733 /* NoticeManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */; };
 		1523D5EA28BE2CE7009EB733 /* CreateNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */; };
 		1523D5ED28BE325B009EB733 /* NotificationModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5EC28BE325B009EB733 /* NotificationModel .swift */; };
 		1523D5EF28BE33C4009EB733 /* EditorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */; };
@@ -41,6 +41,8 @@
 		152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */; };
 		152C3E87287E7750000BFC97 /* Certification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C3E86287E7750000BFC97 /* Certification.swift */; };
 		152CA1D1288F84EE00DDC0E2 /* SignUpSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152CA1D0288F84EE00DDC0E2 /* SignUpSuccess.swift */; };
+		152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */; };
+		152D463028C606E5008F26E0 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152D462F28C606E5008F26E0 /* MapViewModel.swift */; };
 		15382ECA28C1A338004D7977 /* ManageNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15382EC928C1A338004D7977 /* ManageNoticeCell.swift */; };
 		153C1A6E288CDED600F89B2E /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */; };
 		153C1A70288CE3A900F89B2E /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */; };
@@ -114,7 +116,6 @@
 		15FA687928BC5A2400B3DF0B /* Prams&Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687828BC5A2400B3DF0B /* Prams&Raw.swift */; };
 		15FA687B28BC62B800B3DF0B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687A28BC62B800B3DF0B /* Profile.swift */; };
 		15FA687D28BC656600B3DF0B /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687C28BC656600B3DF0B /* SignUpExtension.swift */; };
-		15FA687F28BC661700B3DF0B /* ProfileExtension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA687E28BC661700B3DF0B /* ProfileExtension .swift */; };
 		15FA688228BC718500B3DF0B /* GroupManagementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FA688128BC718500B3DF0B /* GroupManagementExtension.swift */; };
 		15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF133287D5DFF00B35570 /* Ren2UApp.swift */; };
 		15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF135287D5DFF00B35570 /* ContentView.swift */; };
@@ -163,9 +164,9 @@
 		1523D5DB28BE01D2009EB733 /* GroupPageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPageExtension.swift; sourceTree = "<group>"; };
 		1523D5DD28BE0207009EB733 /* GroupModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupModel .swift"; sourceTree = "<group>"; };
 		1523D5DF28BE138A009EB733 /* AssetImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImages.swift; sourceTree = "<group>"; };
-		1523D5E128BE291C009EB733 /* MemberManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberManagement.swift; sourceTree = "<group>"; };
+		1523D5E128BE291C009EB733 /* MemberManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberManagementView.swift; sourceTree = "<group>"; };
 		1523D5E428BE29E9009EB733 /* ManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementViewModel.swift; sourceTree = "<group>"; };
-		1523D5E728BE2C8D009EB733 /* NoticeManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManagement.swift; sourceTree = "<group>"; };
+		1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManagementView.swift; sourceTree = "<group>"; };
 		1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoticeView.swift; sourceTree = "<group>"; };
 		1523D5EC28BE325B009EB733 /* NotificationModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationModel .swift"; sourceTree = "<group>"; };
 		1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorPlaceholder.swift; sourceTree = "<group>"; };
@@ -181,6 +182,8 @@
 		152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLinePlaceholder.swift; sourceTree = "<group>"; };
 		152C3E86287E7750000BFC97 /* Certification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certification.swift; sourceTree = "<group>"; };
 		152CA1D0288F84EE00DDC0E2 /* SignUpSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccess.swift; sourceTree = "<group>"; };
+		152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmongTabsViewModel.swift; sourceTree = "<group>"; };
+		152D462F28C606E5008F26E0 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		15382EC928C1A338004D7977 /* ManageNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageNoticeCell.swift; sourceTree = "<group>"; };
 		153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -251,7 +254,6 @@
 		15FA687828BC5A2400B3DF0B /* Prams&Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Prams&Raw.swift"; sourceTree = "<group>"; };
 		15FA687A28BC62B800B3DF0B /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		15FA687C28BC656600B3DF0B /* SignUpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExtension.swift; sourceTree = "<group>"; };
-		15FA687E28BC661700B3DF0B /* ProfileExtension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileExtension .swift"; sourceTree = "<group>"; };
 		15FA688128BC718500B3DF0B /* GroupManagementExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementExtension.swift; sourceTree = "<group>"; };
 		15FAF130287D5DFF00B35570 /* Ren2U.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ren2U.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15FAF133287D5DFF00B35570 /* Ren2UApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UApp.swift; sourceTree = "<group>"; };
@@ -360,6 +362,8 @@
 				15C03143289CD5A900D0354E /* Rental */,
 				15868738287EBB270003C2DC /* Auth */,
 				156386D0288A5D06006653E8 /* Club */,
+				152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */,
+				152D462F28C606E5008F26E0 /* MapViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -521,8 +525,8 @@
 				1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */,
 				157190EC28B7023600880F98 /* RentalManagementSelected.swift */,
 				157190EE28B7024D00880F98 /* ItemManagementSelected.swift */,
-				1523D5E728BE2C8D009EB733 /* NoticeManagement.swift */,
-				1523D5E128BE291C009EB733 /* MemberManagement.swift */,
+				1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */,
+				1523D5E128BE291C009EB733 /* MemberManagementView.swift */,
 				1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */,
 				1563FE9128ADEE1600F46CC7 /* Cell */,
 			);
@@ -610,7 +614,6 @@
 		15FA687628BC594B00B3DF0B /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				15FA687E28BC661700B3DF0B /* ProfileExtension .swift */,
 				151B557228BCA4FE0090A5E8 /* MyPageTabExtension.swift */,
 			);
 			path = MyPage;
@@ -867,7 +870,6 @@
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
 				153C1A7D288D0A1F00F89B2E /* ClubProfileViewModel.swift in Sources */,
-				15FA687F28BC661700B3DF0B /* ProfileExtension .swift in Sources */,
 				157190EF28B7024D00880F98 /* ItemManagementSelected.swift in Sources */,
 				1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */,
 				157190ED28B7023600880F98 /* RentalManagementSelected.swift in Sources */,
@@ -876,9 +878,9 @@
 				15CFAD2A28B7456E0004CDF7 /* ItemInformation2.swift in Sources */,
 				1523D5ED28BE325B009EB733 /* NotificationModel .swift in Sources */,
 				1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */,
-				1523D5E228BE291C009EB733 /* MemberManagement.swift in Sources */,
+				1523D5E228BE291C009EB733 /* MemberManagementView.swift in Sources */,
 				1563FE9328ADEF9000F46CC7 /* SignUpNoticeCell.swift in Sources */,
-				1523D5E828BE2C8D009EB733 /* NoticeManagement.swift in Sources */,
+				1523D5E828BE2C8D009EB733 /* NoticeManagementView.swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
 				157190F128B7043100880F98 /* PlusCircle.swift in Sources */,
 				156673DC28C1B6660011535D /* CellWithTwoSlideButton.swift in Sources */,
@@ -892,6 +894,7 @@
 				1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */,
 				156386C2288A5252006653E8 /* ClubTab.swift in Sources */,
 				158011792893992A006016AD /* ImagePicker.swift in Sources */,
+				152D463028C606E5008F26E0 /* MapViewModel.swift in Sources */,
 				1525F60428B739EF00C7CA51 /* Category.swift in Sources */,
 				15FA688228BC718500B3DF0B /* GroupManagementExtension.swift in Sources */,
 				15FA687D28BC656600B3DF0B /* SignUpExtension.swift in Sources */,
@@ -958,6 +961,7 @@
 				15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */,
 				157190F328B7053200880F98 /* ItemPhoto.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
+				152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */,
 				156673DE28C1C6860011535D /* MaxYSetterView.swift in Sources */,
@@ -1128,6 +1132,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ren2U/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라에 접근합니다";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "물품 등록과 대여를 위해 위치 정보를 조회합니다. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1161,6 +1166,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ren2U/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라에 접근합니다";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "물품 등록과 대여를 위해 위치 정보를 조회합니다. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

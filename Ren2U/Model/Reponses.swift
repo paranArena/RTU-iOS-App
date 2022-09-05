@@ -15,6 +15,13 @@ struct SearchClubMembersAllResponse: Codable {
     let data: [UserAndRoleData]
 }
 
+
+struct GetMyClubsResponse: Codable {
+    var statusCode: Int
+    var responseMessage: String
+    var data: [ClubAndRoleData]
+}
+
 struct SignUpResponse: Codable {
     var statusCode: Int
     var responseMessage: String
@@ -32,16 +39,18 @@ struct GetMyInfoResponse: Codable {
     var data: UserData
 }
 
+//  MARK: POST
+
 struct CreateClubResponse: Codable {
     var statusCode: Int
     var responseMessage: String
     var data: ClubData
 }
 
-struct GetMyClubsResponse: Codable {
-    var statusCode: Int
-    var responseMessage: String
-    var data: [ClubAndRoleData]
+struct CreateNotificationResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: NoticeDetailData
 }
 
 struct GetSearchClubsAllResponse: Codable {
@@ -74,24 +83,24 @@ struct requestClubJoinResponse: Codable {
 //  MARK: 임시 코드 
 
 struct RentalItemInfo: Identifiable, Codable {
-    var id = UUID()
+    var id: Int
     let imageSource: String
     let itemName: String
     let total: Int
     let remain: Int
     
     static func dummyRentalItem() -> RentalItemInfo {
-        return RentalItemInfo(imageSource: "https://picsum.photos/id/0/200/300", itemName: "컴퓨터", total: 4, remain: 4)
+        return RentalItemInfo(id:5, imageSource: "https://picsum.photos/id/0/200/300", itemName: "컴퓨터", total: 4, remain: 4)
     }
     
     static func dummyRentalItems() -> [RentalItemInfo] {
         return [
-            RentalItemInfo(imageSource: "https://picsum.photos/id/0/200/300", itemName: "컴퓨터", total: 4, remain: 4),
-            RentalItemInfo(imageSource: "https://picsum.photos/id/1/200/300", itemName: "컴퓨터", total: 5, remain: 1),
-            RentalItemInfo(imageSource: "https://picsum.photos/id/2/200/300", itemName: "컴퓨터", total: 3, remain: 1),
-            RentalItemInfo(imageSource: "https://picsum.photos/id/3/200/300", itemName: "컴퓨터", total: 1, remain: 0),
-            RentalItemInfo(imageSource: "https://picsum.photos/id/4/200/300", itemName: "컴퓨터", total: 6, remain: 3),
-            RentalItemInfo(imageSource: "https://picsum.photos/id/5/200/300", itemName: "컴퓨터", total: 3, remain: 2),
+            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/0/200/300", itemName: "컴퓨터", total: 4, remain: 4),
+            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/1/200/300", itemName: "컴퓨터", total: 5, remain: 1),
+            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/2/200/300", itemName: "컴퓨터", total: 3, remain: 1),
+            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/3/200/300", itemName: "컴퓨터", total: 1, remain: 0),
+            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/4/200/300", itemName: "컴퓨터", total: 6, remain: 3),
+            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/5/200/300", itemName: "컴퓨터", total: 3, remain: 2),
         ]
     }
 }

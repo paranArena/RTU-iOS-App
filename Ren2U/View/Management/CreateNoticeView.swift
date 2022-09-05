@@ -30,9 +30,9 @@ struct CreateNoticeView: View {
                 Button {
                     Task {
                         await managementVM.createNotification(notice: raw)
-                        await groupVM.searchNotificationsAll(groupId: managementVM.clubData.id)
+                        groupVM.searchNotificationsAll(groupId: managementVM.clubData.id)
                     }
-                    dismiss() 
+                    dismiss()
                 } label: {
                     Text("완료")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))

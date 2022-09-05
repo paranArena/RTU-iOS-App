@@ -21,18 +21,19 @@ struct CustomPicker: UIViewRepresentable {
 
     //updateUIView(_:context:)
     func updateUIView(_ view: UIPickerView, context: UIViewRepresentableContext<CustomPicker>) {
-        print("updateUIView is called!")
+        print("updateUIView is called! \(values[0]) \(values[1])")
     }
     
 
     class Coordinator: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         var parent: CustomPicker
         init(_ pickerView: CustomPicker) {
-            print("COordinator Init")
             self.parent = pickerView
+            print("Coordinator Init, [\(parent.values[0]), \(parent.values[1])")
         }
         
         func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            
             parent.values[component] = parent.rowDatas[row]
         }
         
@@ -73,9 +74,15 @@ struct CustomPicker: UIViewRepresentable {
             
 
             view.addSubview(pickerLabel)
-
             view.clipsToBounds = true
             view.layer.cornerRadius = view.bounds.height * 0.1
+            
+            
+            
+            if parent.rowDatas[row] == parent.values[component] {
+                print("\(component) selected \(row)")
+                pickerView.selectRow(row, inComponent: component, animated: false)
+            }
 
             return view
         }
@@ -88,9 +95,6 @@ struct CustomPicker: UIViewRepresentable {
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.dataSource = context.coordinator
         picker.delegate = context.coordinator
-        
-        let label = UILabel()
-        label.textColor = .red
         
         return picker
     }

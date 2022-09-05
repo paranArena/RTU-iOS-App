@@ -9,13 +9,14 @@ import SwiftUI
 import HidableTabView
 import Introspect
 
-struct NoticeManagement: View {
+struct NoticeManagementView: View {
     
     @EnvironmentObject var clubVM: ClubViewModel
     @ObservedObject var managementVM: ManagementViewModel
     
     @State private var selectedCellId = -1
     @State private var maxY: CGFloat = .zero
+    @State var uiTabarController: UITabBarController?
     
     var body: some View {
         SlideResettableScrollView(selectedCellId: $selectedCellId) {
@@ -30,24 +31,18 @@ struct NoticeManagement: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity)
+        .overlay(alignment: .bottomTrailing) {
+            NavigationLink {
+                CreateNoticeView(managementVM: managementVM)
+            } label: {
+                PlusCircle()
+            }
+        }
+        .avoidSafeArea()
         .animation(.spring(), value: clubVM.notices[managementVM.clubData.id])
         .basicNavigationTitle(title: "공지사항")
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .overlay {
-            VStack {
-                Spacer()
-                HStack{
-                    Spacer()
-                    NavigationLink {
-                        CreateNoticeView(managementVM: managementVM)
-                    } label: {
-                        PlusCircle()
-                    }
-                    .padding(.bottom, SAFE_AREA_BOTTOM_HEIGHT)
-                }
-            }
-            .ignoresSafeArea(.all, edges: .bottom)
-        }
+        .frame(maxWidth: .infinity, maxHeight: SCREEN_HEIGHT - 100)
         .onAppear {
             UITabBar.hideTabBar()
         }

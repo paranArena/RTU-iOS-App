@@ -11,15 +11,18 @@ import MapKit
 struct PickUpLocationMap: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.279952, longitude: 127.046147), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+    @StateObject private var mapVM = MapViewModel()
     @ObservedObject var itemVM: ItemViewModel
     
     var body: some View {
         VStack {
-            Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.none))
+            
+            Map(coordinateRegion: $mapVM.region, showsUserLocation: false, userTrackingMode: .constant(.none))
                 .overlay(Image(systemName: "checkmark").foregroundColor(.navy_1E2F97))
             
             Button {
+                itemVM.locationLongtitude = mapVM.region.center.longitude
+                itemVM.locationLatitude = mapVM.region.center.latitude
                 itemVM.isSelectedLocation = true
                 self.presentationMode.wrappedValue.dismiss()
             } label: {

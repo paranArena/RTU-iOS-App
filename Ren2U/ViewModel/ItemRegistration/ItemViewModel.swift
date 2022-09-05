@@ -29,6 +29,11 @@ class ItemViewModel: ObservableObject {
     @Published var isActive = false
     @Published var isDonation = false
     
+    init() {
+        image = [UIImage]()
+        print("ItemViewModel init")
+    }
+    
     var isImageSelected: Bool {
         guard image.isEmpty else { return true }
         return false
@@ -80,7 +85,12 @@ class ItemViewModel: ObservableObject {
             "latitude": self.locationLatitude,
             "caution": self.caution
         ]
-      
+        
+        for (key, value) in param {
+            print("key : \(key), value: \(value)")
+        }
+        
+        
         
         let task = AF.upload(multipartFormData: { multipart in
             if let image = self.image[0].jpegData(compressionQuality: 1) {

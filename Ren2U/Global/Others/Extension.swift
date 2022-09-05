@@ -6,6 +6,19 @@
 //
 
 import SwiftUI
+import CoreLocation
+
+
+//  MARK: CLLocationCoordinate2D
+
+extension CLLocationCoordinate2D {
+    
+    func distance(from: CLLocationCoordinate2D) -> CLLocationDistance {
+        let from = CLLocation(latitude: from.latitude, longitude: from.longitude)
+        let to = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        return from.distance(from: to)
+    }
+}
 
 extension Color {
     
@@ -74,6 +87,8 @@ extension UIApplication: UIGestureRecognizerDelegate {
     }
 }
 
+//  MARK: String extensions
+
 //  SubString 구하기
 extension String {
     func substring(from: Int, to: Int) -> String {
@@ -96,6 +111,29 @@ extension String {
     }
 }
 
+extension String {
+    func removeWhiteSpace() -> String {
+        let parsedString = self.components(separatedBy: .whitespaces)
+        var whiteSpaceRemovedString = ""
+        
+        for i in 0..<parsedString.count {
+            if parsedString[i] == "" {
+                continue
+            }
+            
+            whiteSpaceRemovedString.append(contentsOf: parsedString[i])
+            if i < parsedString.count - 1 {
+                whiteSpaceRemovedString.append(contentsOf: " ")
+            }
+        }
+        
+        print(whiteSpaceRemovedString)
+        return whiteSpaceRemovedString
+    }
+}
+
+
+//  MARK: Date extensions
 //  Date to String
 extension Date {
     func toString() -> String {
