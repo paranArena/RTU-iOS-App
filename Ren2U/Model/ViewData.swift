@@ -78,7 +78,7 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
     }
 }
 
-struct NoticeData: Codable, Identifiable {
+struct NoticeData: Codable, Identifiable, Equatable {
     let id: Int
     let title: String
     let imagePath: String

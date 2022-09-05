@@ -8,7 +8,7 @@
 import SwiftUI
 import Introspect
 
-struct GroupManagement: View {
+struct ClubManagementView: View {
     
     @State private var rentalSelection: RentalSelection = .reservation
     @State private var rentalWidth: CGFloat = 0

@@ -21,24 +21,7 @@ struct ClubPage: View {
         
         BounceControllScrollView(baseOffset: 80, offset: $offset) {
             VStack(alignment: .leading) {
-                VStack {
-                    if let thumbnaulPath = groupInfo.thumbnailPath {
-                        KFImage(URL(string: thumbnaulPath))
-                            .onFailure { err in
-                                print(err.errorDescription ?? "KFImage Optional err")
-                            }
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 200, height: 200)
-                    } else {
-                        Image(AssetImages.DefaultGroupImage.rawValue)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 200, height: 200)
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .center)
-                
+                Thumbnail()
                 Tags()
                 Introduction()
                 Notice()
@@ -49,7 +32,7 @@ struct ClubPage: View {
         .overlay(ShadowRectangle())
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                GroupManagement(managementVM: ManagementViewModel(clubData: groupInfo.extractClubData()))
+                ClubManagementView(managementVM: ManagementViewModel(clubData: groupInfo.extractClubData()))
             }, label: {}) 
         )
         .navigationTitle("")
@@ -64,6 +47,27 @@ struct ClubPage: View {
             }
         }
             
+    }
+    
+    @ViewBuilder
+    private func Thumbnail() -> some View {
+        Group{
+            if let thumbnaulPath = groupInfo.thumbnailPath {
+                KFImage(URL(string: thumbnaulPath))
+                    .onFailure { err in
+                        print(err.errorDescription ?? "KFImage Optional err")
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 200)
+            } else {
+                Image(AssetImages.DefaultGroupImage.rawValue)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 200)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
     }
     
     @ViewBuilder

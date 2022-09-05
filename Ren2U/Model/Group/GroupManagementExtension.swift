@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-extension GroupManagement {
+extension ClubManagementView {
     enum ManageSelection: Int, CaseIterable {
         case profileEdit
         case rentalManagement
@@ -33,7 +33,7 @@ extension GroupManagement {
     }
 }
 
-extension GroupManagement {
+extension ClubManagementView {
     enum RentalSelection: Int, CaseIterable {
         case reservation
         case rental

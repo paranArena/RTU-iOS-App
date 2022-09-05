@@ -37,14 +37,11 @@ struct CreateNoticeView: View {
                     Text("완료")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
                 }
-
             }
         }
-        .overlay(content: {
+        .overlay(
             ImagePickerButton()
-                .padding(.leading, 20)
-                .ignoresSafeArea(.all, edges: .bottom)
-        })
+        )
         .sheet(isPresented: $isShowingImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $raw.image)
         }
@@ -63,11 +60,12 @@ struct CreateNoticeView: View {
                     .foregroundColor(.gray_ADB5BD)
                     .frame(width: 24, height: 24)
             }
-            .overlay(alignment: .top) {
-                ShadowRectangle()
-            }
         }
         .frame(width: SCREEN_WIDTH, alignment: .leading)
+        .padding(.leading, 20)
+        .padding(.bottom, SAFE_AREA_BOTTOM_HEIGHT)
+        .ignoresSafeArea(.all, edges: .bottom)
+        .overlay(ShadowRectangle())
     }
 }
 

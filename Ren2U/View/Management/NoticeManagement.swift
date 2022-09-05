@@ -11,7 +11,7 @@ import Introspect
 
 struct NoticeManagement: View {
     
-    @EnvironmentObject var groupVM: ClubViewModel
+    @EnvironmentObject var clubVM: ClubViewModel
     @ObservedObject var managementVM: ManagementViewModel
     
     @State private var selectedCellId = -1
@@ -20,13 +20,17 @@ struct NoticeManagement: View {
     var body: some View {
         SlideResettableScrollView(selectedCellId: $selectedCellId) {
             VStack {
-                ForEach(groupVM.notices[managementVM.clubData.id]?.indices ?? 0..<0, id: \.self) { i in
+                let clubId = managementVM.clubData.id
+                ForEach(clubVM.notices[clubId]?.indices ?? 0..<0, id: \.self) { i in
+                    let noticeInfo = clubVM.notices[clubId]![i]
+                    let groupName = clubVM.getGroupNameByGroupId(groupId: clubId)
                     HStack {
-                        ManageNoticeCell(noticeInfo: groupVM.notices[managementVM.clubData.id]![i], groupName: groupVM.getGroupNameByGroupId(groupId: managementVM.clubData.id), groupID: managementVM.clubData.id, selectedCellID: $selectedCellId, managementVM: managementVM)
+                        ManageNoticeCell(noticeInfo: noticeInfo, groupName: groupName, groupID: clubId, selectedCellID: $selectedCellId, managementVM: managementVM)
                     }
                 }
             }
         }
+        .animation(.spring(), value: clubVM.notices[managementVM.clubData.id])
         .basicNavigationTitle(title: "공지사항")
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay {
@@ -39,6 +43,7 @@ struct NoticeManagement: View {
                     } label: {
                         PlusCircle()
                     }
+                    .padding(.bottom, SAFE_AREA_BOTTOM_HEIGHT)
                 }
             }
             .ignoresSafeArea(.all, edges: .bottom)

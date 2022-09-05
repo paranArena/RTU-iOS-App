@@ -41,8 +41,11 @@ struct CellWithTwoSlideButton<Content: View>: View {
             
             HStack(alignment: .center, spacing: 0) {
                 Button {
-                    self.offset = .zero
-                    self.isShowingRequestButton = false
+                    
+                    withAnimation {
+                        self.offset = .zero
+                        self.isShowingRequestButton = false
+                    }
                     okCallback()
                 } label: {
                     Text(okMessage)
