@@ -18,7 +18,7 @@ struct RentalTab: View {
     @State private var isSearchBarFocused = false
     @State private var offset: CGFloat = 200
     @State private var cancelSelection: CancelSelection = .none
-    @State private var isShowingModal = true
+    @State private var isShowingModal = false
     @State private var clubId: Int?
     
     let spacing: CGFloat = 10
@@ -27,17 +27,9 @@ struct RentalTab: View {
         VStack(alignment: .center, spacing: spacing) {
             SearchBar(text: $searchText, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
-            
             FilterView()
-            
             Group {
                 RentalSelectionButton()
-                    .isHidden(hidden: isSearchBarFocused)
-                    .background(GeometryReader { gp -> Color in
-                        offset = gp.frame(in: .global).maxY + spacing
-                        return Color.clear
-                    })
-                
                 ZStack {
                     ForEach(Selection.allCases, id: \.rawValue) { selection in
                         Content(selection: selection)
@@ -49,10 +41,10 @@ struct RentalTab: View {
         }
         .disabled(isShowingModal)
         .overlay(ShadowRectangle())
-        .overlay(Modal(isShowingModal: $isShowingModal, text: "예약을 취소하시겠습니까?", callback: {
-            isShowingModal = false
-            print("예약이 취소되었습니다!")
-        }))
+//        .overlay(Modal(isShowingModal: $isShowingModal, text: "예약을 취소하시겠습니까?", callback: {
+//            isShowingModal = false
+//            print("예약이 취소되었습니다!")
+//        }))
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -79,6 +71,11 @@ struct RentalTab: View {
                 }
             }
         }
+        .isHidden(hidden: isSearchBarFocused)
+        .background(GeometryReader { gp -> Color in
+            offset = gp.frame(in: .global).maxY + spacing
+            return Color.clear
+        })
     }
     
     @ViewBuilder
@@ -95,14 +92,14 @@ struct RentalTab: View {
     private func RentalItemSelected() -> some View {
         RefreshableScrollView(threshold: offset) {
             VStack {
-                ForEach(groupViewModel.rentalItems.indices, id: \.self) { i in
-                    NavigationLink(isActive: $groupViewModel.itemViewActive[i]) {
-                        Item(itemInfo: groupViewModel.rentalItems[i])
+                ForEach(groupViewModel.products.indices, id: \.self) { i in
+                    NavigationLink(isActive: $groupViewModel.products[i].isActive) {
+                        Item(itemInfo: groupViewModel.products[i].data)
                     } label: {
-                        RentalItemHCell(rentalItemInfo: groupViewModel.rentalItems[i])
+                        RentalItemHCell(rentalItemInfo: groupViewModel.products[i].data)
                     }
-                    .isHidden(hidden: tabVM.selectedClubId != nil && groupViewModel.rentalItems[i].id != tabVM.selectedClubId)
-                    .isHidden(hidden: isSearchBarFocused && !groupViewModel.rentalItems[i].itemName.contains(searchText))
+                    .isHidden(hidden: tabVM.selectedClubId != nil && groupViewModel.products[i].data.clubId != tabVM.selectedClubId)
+                    .isHidden(hidden: isSearchBarFocused && !groupViewModel.products[i].data.name.contains(searchText))
                 }
             }
         }

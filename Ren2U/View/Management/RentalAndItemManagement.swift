@@ -29,6 +29,7 @@ extension RentalAndItemManagement {
 struct RentalAndItemManagement: View {
     
     @State private var headerSelection: Selection = .rentalManagement
+    let clubId: Int
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -37,7 +38,7 @@ struct RentalAndItemManagement: View {
             if headerSelection == .rentalManagement {
                 RentalManagementSelected()
             } else {
-                ItemManagementSelected()
+                ItemManagementSelected(clubId: clubId)
             }
         }
         .onAppear {
@@ -47,17 +48,6 @@ struct RentalAndItemManagement: View {
         .basicNavigationTitle(title: "대여/물품 관리")
         .avoidSafeArea()
     }
-    
-    @ViewBuilder
-    private func Content() -> some View {
-        switch headerSelection {
-        case .rentalManagement:
-            RentalManagementSelected() 
-        case .itemManagement:
-            ItemManagementSelected()
-        }
-    }
-    
     
     @ViewBuilder
     private func ButtonHeaderSelection() -> some View {
@@ -76,9 +66,9 @@ struct RentalAndItemManagement: View {
         }
     }
 }
-
-struct RentalAndtemManagement_Previews: PreviewProvider {
-    static var previews: some View {
-        RentalAndItemManagement()
-    }
-}
+//
+//struct RentalAndtemManagement_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RentalAndItemManagement()
+//    }
+//}

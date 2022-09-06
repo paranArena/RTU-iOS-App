@@ -15,7 +15,7 @@ struct Ren2UTab: View {
     @EnvironmentObject var groupVM: ClubViewModel
     @EnvironmentObject var authVM: AuthViewModel
     @State private var tabSelection: Int = Selection.home.rawValue
-    @State private var isLoading = true
+    @State private var funcCount = 1
     
     init() {
         let appearance: UITabBarAppearance = UITabBarAppearance()
@@ -34,7 +34,7 @@ struct Ren2UTab: View {
     var body: some View {
         Group {
             ProgressView()
-                .isHidden(hidden: !isLoading)
+                .isHidden(hidden: funcCount == 0)
             
             TabView(selection: $tabSelection) {
                 ForEach(Selection.allCases, id: \.rawValue) { selection in
@@ -48,7 +48,7 @@ struct Ren2UTab: View {
                     }
                 }
             }
-            .isHidden(hidden: isLoading)
+            .isHidden(hidden: funcCount != 0)
         }
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -56,11 +56,17 @@ struct Ren2UTab: View {
         .foregroundColor(.LabelColor)
         .onAppear {
             authVM.getMyInfo()
+            funcCount = 3
             Task {
-                await groupVM.getMyClubs()
-                await groupVM.getMyNotifications()
-                groupVM.fetchRentalItems()
-                isLoading = false
+                await groupVM.getMyClubsAsync()
+                funcCount -= 1
+            }
+            Task {
+                await groupVM.getMyNotificationsAsync()
+                funcCount -= 1
+            }
+            Task { await groupVM.getMyProducts()
+                funcCount -= 1
             }
         }
     }

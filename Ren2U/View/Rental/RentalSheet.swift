@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RentalSheet: View {
     
-    let itemInfo: RentalItemInfo
+    let itemInfo: ProductResponseData
     @StateObject var viewModel = ViewModel()
     @Binding var isRentalTerminal: Bool
     @Environment(\.presentationMode) var presentationMode
@@ -70,7 +70,7 @@ struct RentalSheet: View {
             .foregroundColor(Color.navy_1E2F97)
             
             Spacer()
-            Text(itemInfo.itemName)
+            Text(itemInfo.name)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             Spacer()
             Button {
@@ -129,9 +129,9 @@ struct RentalSheet: View {
         return dateFormatter.string(from: date)
     }
 }
-
-struct RentalDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        RentalSheet(itemInfo: RentalItemInfo.dummyRentalItem(), isRentalTerminal: .constant(false))
-    }
-}
+//
+//struct RentalDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RentalSheet(itemInfo: RentalItemInfo.dummyRentalItem(), isRentalTerminal: .constant(false))
+//    }
+//}

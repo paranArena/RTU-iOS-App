@@ -12,8 +12,10 @@ import UIKit
 class ManagementViewModel: ObservableObject {
     
     @Published var clubData = ClubData.dummyClubData()
+    
     @Published var applicants = [UserData]()
     @Published var members = [UserAndRoleData]()
+    @Published var products = [ProductResponseData]()
     
     
     init(clubData: ClubData) {
@@ -95,6 +97,22 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    func applyRent(clubId: Int, itemId: Int) {
+        let url = "\(BASE_URL)/clubs/\(clubId)/apply/rent/\(itemId)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).responseString { res in
+            switch res.result {
+            case .success(let value):
+                print("[applyRent success]")
+                print(value)
+            case .failure(let err):
+                print("[applyRent err]")
+                print(err)
+            }
+        }
+    }
+    
     //  MARK: GET
     
     @MainActor
@@ -136,6 +154,39 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    @MainActor
+    func searchClubProductsAll() async {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/products/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        //  MARK: 수정 필요
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingString()
+    }
+    
+    //  MARK: PUT
+    func updateNotification(groupId: Int, notificationId: Int, noticeData: NoticeCellData) async {
+        let url = "\(BASE_URL)/clubs/\(groupId)/notifications/\(notificationId)"
+        let hearders: HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",
+            "Content-type": "multipart/form-data"
+        ]
+        
+//        let param: [String: Any] = [
+//            "title" : noticeData.title,
+//            "content" : noticeData.id
+//        ]
+        
+        let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
+        
+        switch result {
+        case .success(_):
+            print("deleteNotification Success")
+        case .failure(let err):
+            print("deleteNotification Err : \(err)")
+        }
+    }
+    
     //  MARK: DELETE
     func deleteNotification(groupID: Int, notificationID: Int) async {
         let url = "\(BASE_URL)/clubs/\(groupID)/notifications/\(notificationID)"
@@ -150,9 +201,8 @@ class ManagementViewModel: ObservableObject {
         case .failure(let err):
             print("deleteNotification Err : \(err)")
         }
-        
-        
     }
+    
     
     //  MARK: TASK
     

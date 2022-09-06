@@ -12,23 +12,25 @@ import Introspect
 
 struct Item: View {
     
-    let itemInfo: RentalItemInfo
+    let itemInfo: ProductResponseData
     @StateObject private var viewModel = ViewModel()
+    @StateObject private var rentVM = RentalViewModel()
     @Environment(\.isPresented) var isPresented
+    @State private var isShowingModel = false
     
-    init(itemInfo: RentalItemInfo) {
+    init(itemInfo: ProductResponseData) {
         self.itemInfo = itemInfo
     }
     
     var body: some View {
-        BounceControllScrollView(baseOffset: 100, offset: $viewModel.offset) {
+        BounceControllScrollView(baseOffset: -10, offset: $viewModel.offset) {
             VStack(alignment: .leading, spacing: 10) {
                 CarouselImage()
                 
-                Text("Ren2U")
+                Text("RENU")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                 
-                Text(itemInfo.itemName)
+                Text(itemInfo.name)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 26))
                 
                 Divider()
@@ -39,6 +41,8 @@ struct Item: View {
                         .foregroundColor(Color.gray_495057)
                     
                     Spacer()
+                    
+                    Text(itemInfo.name)
                 }
                 
                 HStack {
@@ -57,6 +61,8 @@ struct Item: View {
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .foregroundColor(Color.gray_495057)
                 
+                Image(systemName: "applelogo")
+                    .frame(height: 300)
                 NavigationLink("", isActive: $viewModel.isRentalTerminal) {
                     RentalComplete(itemInfo: itemInfo)
                 }
@@ -69,6 +75,7 @@ struct Item: View {
             navigationBarAppearance.configureWithTransparentBackground()
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            rentVM.getProduct(clubId: 5, productId: 3)
         }
         .controllTabbar(isPresented)
         .ignoresSafeArea(.container, edges: .top)
@@ -83,7 +90,7 @@ struct Item: View {
     private func CarouselImage() -> some View {
         TabView(selection: $viewModel.imageSelection) {
             ForEach(0..<5, id:\.self) { i in
-                KFImage(URL(string: itemInfo.imageSource)!)
+                KFImage(URL(string: itemInfo.imagePath)!)
                     .onFailure { err in
                         print(err.errorDescription ?? "KFImage Optional err")
                     }
@@ -133,6 +140,7 @@ struct Item: View {
                 Spacer()
             }
         )
+        .isHidden(hidden: !isShowingModel)
     }
     
     @ViewBuilder
@@ -166,7 +174,7 @@ struct Item: View {
             .animation(.default, value: viewModel.selection)
             
             HStack {
-                Text("대여가능 수량 : \(itemInfo.remain)")
+                Text("대여가능 수량 : \(itemInfo.left)")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
                     .frame(maxWidth: SCREEN_WIDTH)
                 
@@ -322,8 +330,8 @@ struct Item: View {
     }
 }
 
-struct Item_Previews: PreviewProvider {
-    static var previews: some View {
-        Item(itemInfo: RentalItemInfo.dummyRentalItem())
-    }
-}
+//struct Item_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Item(itemInfo: RentalItemInfo.dummyRentalItem())
+//    }
+//}

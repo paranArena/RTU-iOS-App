@@ -13,10 +13,8 @@ class ClubViewModel: ObservableObject {
     @Published var likesGroupId = [LikeGroupInfo]()
     @Published var joinedClubs = [ClubAndRoleData]() // VStack에서 나열될 그룹들
     
-    @Published var notices = [Int: [NoticeCellData]]() // Vstack 한개 그룹 셀에서 이동 후 사용될 정보
-    @Published var rentalItems = [RentalItemInfo]() // Vstack 한개의 그룹 셀에서 이동 후 사용될 정보
-    
-    @Published var itemViewActive = [Bool]()
+    @Published var notices = [Int: [NoticeCellData]]() // Vstack 한개 그룹 이동 후 사용될 정보
+    @Published var products = [ProductCellData]()
     
     //  MARK: LOCAL
     
@@ -26,11 +24,6 @@ class ClubViewModel: ObservableObject {
         } else {
             return "그룹 이름 에러"
         }
-    }
-    
-    func fetchRentalItems() {
-        self.rentalItems = RentalItemInfo.dummyRentalItems()
-        self.itemViewActive = [Bool](repeating: false, count: rentalItems.count)
     }
     
     func makeFavoritesGroupTag(tags: [String]) -> String {
@@ -71,7 +64,25 @@ class ClubViewModel: ObservableObject {
     //  MARK: GET
     
     @MainActor
-    func getMyClubs() async {
+    func getMyClubs() {
+        let url = "\(BASE_URL)/members/my/clubs"
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)"]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyClubsResponse.self) { res in
+            switch res.result {
+            case .success(let value):
+                print("[getMyClubs success]")
+                self.joinedClubs = value.data
+                print(value.responseMessage)
+            case .failure(let err):
+                print("[getMyClubs Error]")
+                print(err)
+            }
+        }
+    }
+    
+    @MainActor
+    func getMyClubsAsync() async {
         let url = "\(BASE_URL)/members/my/clubs"
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)"]
         
@@ -87,6 +98,102 @@ class ClubViewModel: ObservableObject {
             print("[getMyClubs Error]")
             print(err)
         }
+    }
+    
+    @MainActor
+    func getMyNotifications() {
+        let url = "\(BASE_URL)/members/my/notifications"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyNotificationsResponse.self) { res in
+            switch res.result {
+            case .success(let value):
+                print("[getMyNotificationsSuccess]")
+                print(value.responseMessage)
+                self.notices.removeAll()
+                
+                for i in 0..<value.data.count {
+                    let clubId = value.data[i].clubId
+                    
+                    if self.notices[clubId] == nil {
+                        self.notices[clubId] = [NoticeCellData]()
+                    }
+                    
+                    self.notices[clubId]!.append(value.data[i])
+                }
+            case .failure(let err):
+                print("[getMyNotificationsErr")
+                print(err)
+            }
+        }
+    }
+    
+    @MainActor
+    func getMyNotificationsAsync() async {
+        let url = "\(BASE_URL)/members/my/notifications"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyNotificationsResponse.self)
+        let result = await request.result
+        
+        notices.removeAll()
+        
+        switch result {
+        case .success(let value):
+            print("[getMyNotificationsSuccess]")
+            print(value.responseMessage)
+            notices.removeAll()
+            
+            for i in 0..<value.data.count {
+                let clubId = value.data[i].clubId
+                
+                if notices[clubId] == nil {
+                    notices[clubId] = [NoticeCellData]()
+                }
+                
+                notices[clubId]!.append(value.data[i])
+            }
+        case .failure(let err):
+            print("[getMyNotificationsErr")
+            print(err)
+        }
+    }
+    
+    @MainActor
+    func getMyProducts() async {
+        let url = "\(BASE_URL)/members/my/products"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+
+        let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyProductsResponse.self)
+        let result = await task.result
+        
+        switch result {
+        case .success(let value):
+            print("[getMyProducts success]")
+            print(value.responseMessage)
+            self.products = value.data.map { ProductCellData(data: $0) }
+        case .failure(let err):
+            print("[getMyProducts err")
+            print(err)
+        }
+    }
+    
+    @MainActor
+    func getMyRentals() {
+        let url = "\(BASE_URL)/members/my/rentals"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
+            switch res.result {
+            case .success(let value):
+                print("getMyRentals success")
+                print(value)
+            case .failure(let err):
+                print("getMyRentals err")
+                print(err)
+            }
+        }
+        
     }
     
     @MainActor
@@ -150,54 +257,25 @@ class ClubViewModel: ObservableObject {
         
         return [ClubAndRoleData]()
     }
-    
+
     @MainActor
-    func getMyNotifications() async {
-        let url = "\(BASE_URL)/members/my/notifications"
+    func searchNotificationsAll(clubId: Int) {
+
+        let url = "\(BASE_URL)/clubs/\(clubId)/notifications/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
-        
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyNotificationsResponse.self)
-        let result = await request.result
-        
-        notices.removeAll()
-        
-        switch result {
-        case .success(let value):
-            print("[getMyNotificationsSuccess]")
-            print(value.responseMessage)
-            for i in 0..<value.data.count {
-                let clubId = value.data[i].clubId
-                
-                if notices[clubId] == nil {
-                    notices[clubId] = [NoticeCellData]()
-                }
-                
-                notices[clubId]!.append(value.data[i])
+
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchNotificationsAllResponse.self) { res in
+            switch res.result {
+            case .success(let value):
+                print("searchNotificationAll success, GroupId: \(clubId)")
+                self.notices[clubId] = value.data
+                self.notices[clubId] = self.notices[clubId]!.reversed()
+            case .failure(let err):
+                print("searchNotificationsAll failure, GroupId: \(clubId) : \(err)")
             }
-        case .failure(let err):
-            print("[getMyNotificationsErr")
-            print(err)
         }
     }
-//
-//    @MainActor
-//    func searchNotificationsAll(clubId: Int) {
-//
-//        let url = "\(BASE_URL)/clubs/\(clubId)/notifications/search/all"
-//        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
-//
-//        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchNotificationsAllResponse.self) { res in
-//            switch res.result {
-//            case .success(let value):
-//                print("searchNotificationAll success, GroupId: \(clubId)")
-//                self.notices[clubId] = value.data
-//                self.notices[clubId] = self.notices[clubId]!.reversed()
-//            case .failure(let err):
-//                print("searchNotificationsAll failure, GroupId: \(clubId) : \(err)")
-//            }
-//        }
-//    }
-//
+
     
     //  MARK: POST
     
@@ -254,8 +332,45 @@ class ClubViewModel: ObservableObject {
         
         switch result {
         case .success(let value):
+            print("[requestClubJoin success]")
+            print(value.responseMessage)
+        case .failure(let err):
+            print("[requestClubJoin err]")
+            print(err)
+        }
+    }
+    
+    //  MARK: DELETE
+    func cancelClubJoin(clubId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/requests/join/cancel"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        
+        let result = await request.result
+        switch result {
+        case .success(let value):
+            print("[cancelClubJoin success]")
             print(value)
         case .failure(let err):
+            print("[cancelClubJoin err]")
+            print(err)
+        }
+    }
+    
+    func leaveClub(clubId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/requests/leave"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        
+        let result = await request.result
+        switch result {
+        case .success(let value):
+            print("[leaveClub success]")
+            print(value)
+        case .failure(let err):
+            print("[leaveClub err]")
             print(err)
         }
     }
@@ -264,31 +379,7 @@ class ClubViewModel: ObservableObject {
     func createClubTask(club: CreateClubFormdata) {
         Task {
             await createClub(club: club)
-            await getMyClubs()
-        }
-    }
-    
-//    func getMyClubsTask() {
-//        Task {
-//            await getMyClubs()
-//            
-//            notices.removeAll()
-//            for joinedClub in joinedClubs {
-//                await searchNotificationsAll(clubId: joinedClub.id)
-//            }
-//            
-//            for joinedClub in joinedClubs {
-//                for i in 0..<(notices[joinedClub.id]?.count ?? 0) {
-//                    print("공지사항 : \(notices[joinedClub.id]![i].title)")
-//                }
-//            }
-//        }
-//        
-//    }
-    
-    func requestClubJoinTask(cludId: Int) {
-        Task {
-            await requestClubJoin(clubId: cludId)
+            await getMyClubsAsync()
         }
     }
 }

@@ -89,9 +89,9 @@ struct ItemInformation: View {
         .basicNavigationTitle(title: "물품 등록")
     }
 }
-
-struct ItemInformation_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemInformation(itemVM: ItemViewModel(), isActive: .constant(true))
-    }
-}
+//
+//struct ItemInformation_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemInformation(itemVM: ItemViewModel(), isActive: .constant(true))
+//    }
+//}

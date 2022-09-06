@@ -49,13 +49,15 @@ struct ClubSearch: View {
         .background {
             NavigationLink(isActive: $isActive) {
                 if let index = groupInfoIndex {
-                    ClubPage(tabSelection: $tabSelection, groupInfo: $clubData[index])
+                    ClubPage(tabSelection: $tabSelection, clubData: $clubData[index])
                 }
             } label: { }
         }
         .onAppear {
             Task {
-                clubData = await clubVM.searchClubsAll()
+                if search.isEmpty {
+                    clubData = await clubVM.searchClubsAll()
+                }
             }
         }
         .onChange(of: search) { newValue in
@@ -79,11 +81,11 @@ struct ClubSearch: View {
     private func OverlayFinder(index: Int) -> some View {
         
         switch clubData[index].clubRole {
-        case GroupRole.admin.rawValue, GroupRole.owner.rawValue, GroupRole.user.rawValue:
+        case ClubRole.admin.rawValue, ClubRole.owner.rawValue, ClubRole.user.rawValue:
             JoindeClubOverlay()
-        case GroupRole.wait.rawValue:
+        case ClubRole.wait.rawValue:
             ApplicatedGroupOverlay()
-        case GroupRole.none.rawValue:
+        case ClubRole.none.rawValue:
             NoneOverlay(index: index)
         default:
             Text("Group Role Err")
@@ -115,8 +117,11 @@ struct ClubSearch: View {
     @ViewBuilder
     private func NoneOverlay(index: Int) -> some View {
         Button {
-            clubVM.requestClubJoinTask(cludId: clubData[index].id)
-            clubData[index].clubRole = GroupRole.wait.rawValue
+            Task {
+                let clubId = clubData[index].id
+                await clubVM.requestClubJoin(clubId: clubId)
+                clubData[index].clubRole = ClubRole.wait.rawValue
+            }
         } label: {
             Text("가입 요청")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))

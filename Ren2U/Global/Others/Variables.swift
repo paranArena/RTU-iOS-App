@@ -13,8 +13,7 @@ let SCREEN_HEIGHT = UIScreen.main.bounds.height
 let SAFE_AREA_TOP_HEIGHT: CGFloat = 44
 let SAFE_AREA_BOTTOM_HEIGHT: CGFloat = 34 
 
-//let BASE_URL = "ren2u.ap-northeast-2.elasticbeanstalk.com"
-let BASE_URL = "http://ec2-3-34-90-174.ap-northeast-2.compute.amazonaws.com:8080"
+let BASE_URL = "http://ec2-15-165-38-225.ap-northeast-2.compute.amazonaws.com:8080"
 //let BASE_URL = "localhost:8080"
 
 let JWT_KEY = "jwt"

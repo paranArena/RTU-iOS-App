@@ -10,21 +10,21 @@ import Kingfisher
 
 struct RentalItemVCell: View {
     
-    let rentalItem: RentalItemInfo
+    let rentalItem: ProductResponseData
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            KFImage(URL(string: rentalItem.imageSource)).onFailure { err in
+            KFImage(URL(string: rentalItem.imagePath)).onFailure { err in
                 print(err.errorDescription ?? "")
                 }
                 .resizable()
                 .cornerRadius(15)
                 .frame(width: 110, height: 110)
             
-            Text(rentalItem.itemName)
+            Text(rentalItem.name)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
             
-            Text("남은 수량 \(rentalItem.remain)/\(rentalItem.total)")
+            Text("남은 수량 \(rentalItem.left)/\(rentalItem.max)")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 .foregroundColor(Color.gray_495057)
 
@@ -33,8 +33,8 @@ struct RentalItemVCell: View {
     }
 }
 
-struct RentalItemCell_Previews: PreviewProvider {
-    static var previews: some View {
-        RentalItemVCell(rentalItem: RentalItemInfo.dummyRentalItem())
-    }
-}
+//struct RentalItemCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RentalItemVCell(rentalItem: RentalItemInfo.dummyRentalItem())
+//    }
+//}

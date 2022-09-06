@@ -10,6 +10,7 @@ import SwiftUI
 struct ItemManagementSelected: View {
     
     @State private var isActive = false
+    let clubId: Int
     
     var body: some View {
         VStack {
@@ -22,7 +23,7 @@ struct ItemManagementSelected: View {
         .navigationBarTitleDisplayMode(.inline)
         .overlay(alignment: .bottomTrailing) {
             NavigationLink(isActive: $isActive) {
-                ItemPhoto(isActive: $isActive)
+                ItemPhoto(itemVM: ItemViewModel(clubId: clubId), isActive: $isActive)
             } label: {
                 PlusCircle()
             }
@@ -31,8 +32,8 @@ struct ItemManagementSelected: View {
     }
 }
 
-struct ItemManagementSelected_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemManagementSelected()
-    }
-}
+//struct ItemManagementSelected_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemManagementSelected()
+//    }
+//}

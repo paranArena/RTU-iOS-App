@@ -119,7 +119,10 @@ struct SignUp: View {
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
                 
                 Button {
-                    viewModel.isOverlappedEmail = authViewModel.checkEmailDuplicateTask(email: viewModel.text[emailIndex])
+                    Task {
+                        let email = viewModel.text[emailIndex]
+                        viewModel.isOverlappedEmail = await !authViewModel.checkEmailDuplicate(email: email)
+                    }
                 } label: {
                     Text("중복확인")
                         .padding(5)

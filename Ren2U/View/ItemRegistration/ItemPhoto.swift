@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ItemPhoto: View {
     
-    @StateObject var itemVM = ItemViewModel() 
+    
+    @StateObject var itemVM: ItemViewModel
+    @Binding var isActive: Bool
+    
     @State private var isPhotoNotSelected = true
-    @Binding var isActive: Bool 
     let photoLength = (SCREEN_WIDTH - 70) / 4
     
     
@@ -62,8 +64,8 @@ struct ItemPhoto: View {
     }
 }
 
-struct ItemRegistration_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemPhoto(itemVM: ItemViewModel(), isActive: .constant(true))
-    }
-}
+//struct ItemRegistration_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemPhoto(itemVM: ItemViewModel(), isActive: .constant(true))
+//    }
+//}

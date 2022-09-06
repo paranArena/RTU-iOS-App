@@ -10,6 +10,8 @@ import Alamofire
 
 class ItemViewModel: ObservableObject {
     
+    let clubId: Int
+    
     @Published var image = [UIImage]()
     @Published var showPicker = false
     
@@ -29,7 +31,8 @@ class ItemViewModel: ObservableObject {
     @Published var isActive = false
     @Published var isDonation = false
     
-    init() {
+    init(clubId: Int) {
+        self.clubId = clubId
         image = [UIImage]()
         print("ItemViewModel init")
     }
@@ -65,7 +68,7 @@ class ItemViewModel: ObservableObject {
     
     //  MARK: POST
     func createProduct() async {
-        let url = "\(BASE_URL)/clubs/5/products"
+        let url = "\(BASE_URL)/clubs/\(clubId)/products"
         let hearders: HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",
             "Content-type": "multipart/form-data"

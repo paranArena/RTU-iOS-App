@@ -146,7 +146,7 @@ struct ClubManagementView: View {
         case .profileEdit:
             ClubProfile(viewModel: ClubProfile.ViewModel(putModeData: managementVM.clubData, mode: .put))
         case .rentalManagement:
-            RentalAndItemManagement()
+            RentalAndItemManagement(clubId: managementVM.clubData.id)
         case .notice:
             NoticeManagementView(managementVM: managementVM)
         case .memberManagement:

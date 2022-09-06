@@ -24,35 +24,25 @@ class AuthViewModel: ObservableObject {
         self.jwt = token
     }
     
-    func sendCertificationNum() {
-//        let random = Int.random(in: 0000...9999)
-//        let randomGenerateNum = String(random)
-    }
-    
-    
-    
-    func checkCertificationNum(num: String, user: User) -> Bool{
-        let num = Int(num)
-        guard num == 1234 else { return false }
-        return true
-    }
-    
     //  MARK: GET
     
     @MainActor
-    func checkEmailDuplicate(email: String) async -> Bool {
-        let url = "\(BASE_URL)/members/\(email)/exists"
-        let response =  await AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(Bool.self).result
+    func checkEmailDuplicate(email: String) async -> Bool{
+        let url = "\(BASE_URL)/members/\(email)@ajou.ac.kr/exists"
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(Bool.self)
         
-        switch response {
+        let result = await request.result
+//          email이 존재하면 true, 아니면 false 반환
+        switch result {
         case .success(let value):
             print("[checkEmailDuplicate success]")
             print(value)
             return value
         case .failure(let err):
-            print("ceheckEmailDuplicate err : \(err)")
+            print("[checkEmailDuplicate err]")
+            print(err)
         }
-        
+
         return true
     }
     
@@ -93,11 +83,12 @@ class AuthViewModel: ObservableObject {
         let response = await task.result
         
         switch response {
-        case .success(let value):
-            print("[AuthVM] : \(value)")
+        case .success(_):
+            print("signUp success")
             result = true
         case .failure(let err):
-            print("[AuthVM] : \(err)")
+            print("signUp err")
+            print(err)
             result = false
         }
         
@@ -129,9 +120,9 @@ class AuthViewModel: ObservableObject {
     }
     
     func requestEmailCode(email: String) {
-        let url = "\(BASE_URL)/members/email/requesetCode"
+        let url = "\(BASE_URL)/members/email/requestCode"
         let param: [String: Any] = [
-            "email" : email
+            "email" : "\(email)@ajou.ac.kr"
         ]
         
         AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).responseString { res in
@@ -146,34 +137,38 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func verifyEmailCode(email: String, code: String) async {
+    func verifyEmailCode(email: String, code: String) async -> Bool {
         let url = "\(BASE_URL)/members/email/verifyCode"
         let param: [String: Any] = [
-            "email" : email,
+            "email" : "\(email)@ajou.ac.kr",
             "code" : code
         ]
         
-        let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingString()
+        print("url : \(url)")
+        print("email : \(email)")
+        print("code : \(code)")
+        let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(VerifyEmailCodeResponse.self)
         let result = await request.result
         
         switch result {
         case .success(let value):
             print("[verifyEmailCodeSuccess]")
-            print(value)
+            if value.responseMessage == "이메일 검증 성공" {
+                return true
+            } else {
+                return false
+            }
+
         case .failure(let err):
-            print("[verfyEmailCodeFailur")
+            print("[verfyEmailCode filure]")
             print(err)
         }
         
+        return false
     }
     
     func logout() {
         UserDefaults.standard.setValue(nil, forKey: JWT_KEY)
         self.jwt = nil
-    }
-    
-    //  MARK: TASK
-    func checkEmailDuplicateTask(email: String) -> Bool {
-        return true
     }
 }

@@ -30,7 +30,6 @@ struct ClubProfileData {
     }
 }
 
-//  MARK: CLUB
 struct ClubData: Codable, Hashable {
     let id: Int
     var name: String
@@ -103,13 +102,30 @@ struct UserData: Codable, Identifiable {
     }
 }
 
-enum GroupRole: String {
+enum ClubRole: String {
     case owner = "OWNER"
     case admin = "ADMIN"
     case user = "USER"
     case wait = "WAIT"
     case none = "NONE"
 }
+
+//  MARK: PRODUCT
+struct ProductCellData {
+    let data: ProductResponseData
+    var isActive = false
+}
+
+struct ProductResponseData: Codable {
+    let id: Int
+    let name: String
+    let category: String
+    let left, max: Int
+    let clubName: String
+    let imagePath: String
+    let clubId: Int
+}
+
 
 //  MARK: TEMP
 struct LikeGroupInfo: Codable {

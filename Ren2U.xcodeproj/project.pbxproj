@@ -548,10 +548,10 @@
 		15C03143289CD5A900D0354E /* Rental */ = {
 			isa = PBXGroup;
 			children = (
+				1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */,
 				15C03144289CD5E500D0354E /* RentalTabVM.swift */,
 				154553D428A35CC3005E7FDB /* ItemVM.swift */,
 				159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */,
-				1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */,
 			);
 			path = Rental;
 			sourceTree = "<group>";

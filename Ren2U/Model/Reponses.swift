@@ -45,7 +45,25 @@ struct GetMyNotificationsResponse: Codable {
     let data: [NoticeCellData]
 }
 
+struct GetMyProductsResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [ProductResponseData]
+}
+
+struct SearchClubProductsAll: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [ProductResponseData]
+}
+
 //  MARK: POST
+
+struct VerifyEmailCodeResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: String?
+}
 
 struct CreateClubResponse: Codable {
     var statusCode: Int
@@ -85,31 +103,6 @@ struct requestClubJoinResponse: Codable {
     let data: String? 
 }
 
-
-//  MARK: 임시 코드 
-
-struct RentalItemInfo: Identifiable, Codable {
-    var id: Int
-    let imageSource: String
-    let itemName: String
-    let total: Int
-    let remain: Int
-    
-    static func dummyRentalItem() -> RentalItemInfo {
-        return RentalItemInfo(id:5, imageSource: "https://picsum.photos/id/0/200/300", itemName: "컴퓨터", total: 4, remain: 4)
-    }
-    
-    static func dummyRentalItems() -> [RentalItemInfo] {
-        return [
-            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/0/200/300", itemName: "컴퓨터", total: 4, remain: 4),
-            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/1/200/300", itemName: "컴퓨터", total: 5, remain: 1),
-            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/2/200/300", itemName: "컴퓨터", total: 3, remain: 1),
-            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/3/200/300", itemName: "컴퓨터", total: 1, remain: 0),
-            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/4/200/300", itemName: "컴퓨터", total: 6, remain: 3),
-            RentalItemInfo(id: 5, imageSource: "https://picsum.photos/id/5/200/300", itemName: "컴퓨터", total: 3, remain: 2),
-        ]
-    }
-}
 
 struct SearchClubJoinsAllResponse: Codable {
     let statusCode: Int

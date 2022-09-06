@@ -58,8 +58,8 @@ struct ItemCaution: View {
     }
 }
 
-struct ItemCaution_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemCaution(itemVM: ItemViewModel(), isActive: .constant(true))
-    }
-}
+//struct ItemCaution_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemCaution(itemVM: ItemViewModel(), isActive: .constant(true))
+//    }
+//}

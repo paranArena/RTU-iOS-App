@@ -82,8 +82,8 @@ struct PickUpLocation: View {
     }
 }
 
-struct PickUpLocation_Previews: PreviewProvider {
-    static var previews: some View {
-        PickUpLocation(itemVM: ItemViewModel(), isActive: .constant(true))
-    }
-}
+//struct PickUpLocation_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PickUpLocation(itemVM: ItemViewModel(), isActive: .constant(true))
+//    }
+//}

@@ -11,7 +11,7 @@ import Alamofire
 extension Certification {
     class ViewModel: ObservableObject {
         
-        let certificationNumLengthLimit = 4
+        let certificationNumLengthLimit = 6
         
         @Published var startTime: Date
         @Published var timeRemaining: Double = 5*60

@@ -39,8 +39,8 @@ struct PickUpLocationMap: View {
     }
 }
 
-struct PickUpLocationMap_Previews: PreviewProvider {
-    static var previews: some View {
-        PickUpLocationMap(itemVM: ItemViewModel())
-    }
-}
+//struct PickUpLocationMap_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PickUpLocationMap(itemVM: ItemViewModel())
+//    }
+//}

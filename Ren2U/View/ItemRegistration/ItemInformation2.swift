@@ -139,9 +139,9 @@ struct ItemInformation2: View {
     }
 
 }
-
-struct ItemInformation2_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemInformation2(itemVM: ItemViewModel(), isActive: .constant(true))
-    }
-}
+//
+//struct ItemInformation2_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemInformation2(itemVM: ItemViewModel(), isActive: .constant(true))
+//    }
+//}

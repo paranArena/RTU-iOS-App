@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import Alamofire
 
 
 struct ReturnInfo: Codable {
@@ -25,4 +26,39 @@ struct ReturnInfo: Codable {
 
 class RentalViewModel: ObservableObject {
     
+    //  MARK: GET
+    func getProduct(clubId: Int, productId: Int) {
+        let url = "\(BASE_URL)/clubs/\(5)/products/\(2)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
+            
+            switch res.result {
+            case .success(let value):
+                print("[getProduct success]")
+                print(value)
+            case .failure(let err):
+                print("[getProduct failure]")
+                print(err)
+            }
+        }
+    }
+    
+    //  MARK: POST
+    func requestRent(clubId: Int, itemId: Int) {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/request"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
+            
+            switch res.result {
+            case .success(let value):
+                print("[requestRent success]")
+                print(value)
+            case .failure(let err):
+                print("[requestRent failure]")
+                print(err)
+            }
+        }
+    }
 }

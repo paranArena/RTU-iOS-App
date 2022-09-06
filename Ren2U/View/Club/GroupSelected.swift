@@ -27,12 +27,13 @@ struct GroupSelected: View {
         .frame(maxWidth: .infinity)
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                ClubPage(tabSelection: $tabSelection, groupInfo: $groupInfo)
+                ClubPage(tabSelection: $tabSelection, clubData: $groupInfo)
             }, label: { })
         )
         .refreshable {
-            await groupVM.getMyClubs()
-            await groupVM.getMyNotifications()
+            groupVM.getMyClubs()
+            groupVM.getMyNotifications()
+            await groupVM.getMyProducts()
         }
     }
     

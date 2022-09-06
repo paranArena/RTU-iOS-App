@@ -13,10 +13,10 @@ struct ClubPage: View {
     @EnvironmentObject var tabVM: AmongTabsViewModel
     @EnvironmentObject var clubVM: ClubViewModel
     @Binding var tabSelection: Int
-    @Binding var groupInfo: ClubAndRoleData
-    @State var offset: CGFloat = 0
-    @State var isActive = false
+    @Binding var clubData: ClubAndRoleData
     
+    @State private var offset: CGFloat = 0
+    @State private var isActive = false
     
     var body: some View {
         
@@ -33,14 +33,14 @@ struct ClubPage: View {
         .overlay(ShadowRectangle())
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                ClubManagementView(managementVM: ManagementViewModel(clubData: groupInfo.extractClubData()))
+                ClubManagementView(managementVM: ManagementViewModel(clubData: clubData.extractClubData()))
             }, label: {}) 
         )
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
-                Text(groupInfo.name)
+                Text(clubData.name)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -53,7 +53,7 @@ struct ClubPage: View {
     @ViewBuilder
     private func Thumbnail() -> some View {
         Group{
-            if let thumbnaulPath = groupInfo.thumbnailPath {
+            if let thumbnaulPath = clubData.thumbnailPath {
                 KFImage(URL(string: thumbnaulPath))
                     .onFailure { err in
                         print(err.errorDescription ?? "KFImage Optional err")
@@ -75,7 +75,7 @@ struct ClubPage: View {
     private func Tags() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(groupInfo.hashtags, id: \.self) { tag in
+                ForEach(clubData.hashtags, id: \.self) { tag in
                     Text("#\(tag)")
                 }
             }
@@ -93,7 +93,7 @@ struct ClubPage: View {
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                 .foregroundColor(Color.gray_495057)
             
-            Text(groupInfo.introduction)
+            Text(clubData.introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
         }
         .padding(.horizontal)
@@ -118,9 +118,9 @@ struct ClubPage: View {
             }
             .padding(.horizontal)
             
-            ForEach(clubVM.notices[groupInfo.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
+            ForEach(clubVM.notices[clubData.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
                 if (i < 5) {
-                    NoticeCell(noticeInfo: clubVM.notices[groupInfo.id]![i], groupName: clubVM.getGroupNameByGroupId(groupId: groupInfo.id))
+                    NoticeCell(noticeInfo: clubVM.notices[clubData.id]![i], groupName: clubVM.getGroupNameByGroupId(groupId: clubData.id))
                 }
             }
             
@@ -144,7 +144,7 @@ struct ClubPage: View {
                 
                 
                 Button {
-                    tabVM.selectedClubId = groupInfo.id
+                    tabVM.selectedClubId = clubData.id
                     self.tabSelection = Ren2UTab.Selection.rent.rawValue
                 } label: {
                     Image(systemName: "chevron.right")
@@ -155,52 +155,68 @@ struct ClubPage: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(clubVM.rentalItems) { rentalItem in
+                    ForEach(clubVM.products.indices, id: \.self) { i in
                         Button {
+                            clubVM.products[i].isActive = true
                             self.tabSelection = Ren2UTab.Selection.rent.rawValue
+
                         } label: {
-                            RentalItemVCell(rentalItem: rentalItem)
+                            RentalItemVCell(rentalItem: clubVM.products[i].data)
                         }
+                        .isHidden(hidden: clubVM.products[i].data.clubId != clubData.id)
                     }
                 }
                 .padding(.horizontal)
             }
-            .blur(radius: groupInfo.clubRole == GroupRole.wait.rawValue || groupInfo.clubRole == GroupRole.none.rawValue ? 4 : 0 , opaque: false)
-            .opacity(groupInfo.clubRole == GroupRole.wait.rawValue || groupInfo.clubRole == GroupRole.none.rawValue ? 0.7 : 1)
+            .blur(radius: clubData.clubRole == ClubRole.wait.rawValue || clubData.clubRole == ClubRole.none.rawValue ? 4 : 0 , opaque: false)
+            .opacity(clubData.clubRole == ClubRole.wait.rawValue || clubData.clubRole == ClubRole.none.rawValue ? 0.7 : 1)
         }
     }
     
     @ViewBuilder
     private func TrailingToolbar() -> some View {
-        switch groupInfo.clubRole {
-        case GroupRole.owner.rawValue:
+        switch clubData.clubRole {
+        case ClubRole.owner.rawValue:
             Button {
                 isActive = true
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundColor(Color.LabelColor)
             }
-        case GroupRole.user.rawValue:
+        case ClubRole.user.rawValue:
             Button {
-
+                Task {
+                    await clubVM.leaveClub(clubId: clubData.id)
+                    clubData.clubRole = ClubRole.none.rawValue
+                }
             } label: {
                 Text("탈퇴하기")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .foregroundColor(Color.LabelColor)
             }
 
-        case GroupRole.wait.rawValue:
+        case ClubRole.wait.rawValue:
             Button {
-
+                Task {
+                    await clubVM.cancelClubJoin(clubId: clubData.id)
+                    clubData.clubRole = ClubRole.none.rawValue
+                }
             } label: {
                 Text("가입취소")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .foregroundColor(Color.LabelColor)
             }
-        case GroupRole.none.rawValue:
-            Text("가입하기")
-                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                .foregroundColor(Color.LabelColor)
+        case ClubRole.none.rawValue:
+            Button {
+                Task {
+                    await clubVM.requestClubJoin(clubId: clubData.id)
+                    clubData.clubRole = ClubRole.wait.rawValue
+                }
+            } label: {
+                Text("가입하기")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                    .foregroundColor(Color.LabelColor)
+            }
         default:
             Text("트레일링 바")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))

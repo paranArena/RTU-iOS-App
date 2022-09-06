@@ -17,24 +17,28 @@ struct RentalItemHCell: View {
         case no
     }
     
-    let rentalItemInfo: RentalItemInfo
+    let rentalItemInfo: ProductResponseData
+
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-                KFImage(URL(string: rentalItemInfo.imageSource)!)
-                    .onFailure { err in
-                        print(err.errorDescription ?? "KFImage Optional err")
-                    }
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .cornerRadius(20)
-                
+                if let thumbnailPath = rentalItemInfo.imagePath {
+                    KFImage(URL(string: thumbnailPath))
+                        .onFailure { err in
+                            print(err.errorDescription ?? "KFImage Optional err")
+                        }
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(20)
+                    
+                }
+               
                 VStack(alignment: .leading) {
-                    Text(rentalItemInfo.itemName)
+                    Text(rentalItemInfo.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
-                    Text("임시 그룹명")
+                    Text("\(rentalItemInfo.clubName)")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(.gray_ADB5BD)
                         .lineLimit(1)
@@ -45,7 +49,7 @@ struct RentalItemHCell: View {
                 VStack(alignment: .center, spacing: 5) {
                     Text(self.itemStatusText)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                    Text("\(rentalItemInfo.remain)/\(rentalItemInfo.total)")
+                    Text("\(rentalItemInfo.left)/\(rentalItemInfo.max)")
                         .font(.custom(CustomFont.RobotoMedium.rawValue, size: 16))
                 }
                 .foregroundColor(self.FGColor)
@@ -84,7 +88,7 @@ struct RentalItemHCell: View {
     }
     
     private var itemStatusText: String {
-        if rentalItemInfo.remain == 0 {
+        if rentalItemInfo.left == 0 {
             return "대여불가"
         } else {
             return "남은 수량"
@@ -92,7 +96,7 @@ struct RentalItemHCell: View {
     }
     
     private var FGColor: Color {
-        if rentalItemInfo.remain == 0 {
+        if rentalItemInfo.left == 0 {
             return Color.red_EB1808
         } else {
             return Color.gray_868E96
@@ -100,8 +104,8 @@ struct RentalItemHCell: View {
     }
 }
 
-struct RentalItemHCell_Previews: PreviewProvider {
-    static var previews: some View {
-        RentalItemHCell(rentalItemInfo: .dummyRentalItem())
-    }
-}
+//struct RentalItemHCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RentalItemHCell(rentalItemInfo: .dummyRentalItem())
+//    }
+//}

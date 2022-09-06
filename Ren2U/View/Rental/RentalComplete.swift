@@ -48,14 +48,14 @@ struct RentalComplete: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var mapViewModel = MapViewModel()
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.279952, longitude: 127.046147), span: MapDetails.defaultSpan)
-    let itemInfo: RentalItemInfo
+    let itemInfo: ProductResponseData
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             Text("예약이 완료되었습니다!")
                 .font(.custom(CustomFont.NSKRBlack.rawValue, size: 24))
             
-            Text("물품이름 : \(itemInfo.itemName)")
+            Text("물품이름 : \(itemInfo.name)")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
             
             Text("대여기간 : ")

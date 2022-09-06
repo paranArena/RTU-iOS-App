@@ -99,10 +99,11 @@ struct Certification: View {
     @ViewBuilder
     private func GoSignUpSuccessButton() -> some View {
         Button {
-            viewModel.isConfirmed = authModel.checkCertificationNum(num: viewModel.certificationNum, user: user)
-            viewModel.certificationNum = ""
-            if viewModel.isConfirmed {
-                Task {
+            Task {
+                viewModel.isConfirmed = await authModel.verifyEmailCode(email: email, code: viewModel.certificationNum)
+                viewModel.certificationNum = ""
+                
+                if viewModel.isConfirmed {
                     viewModel.isSingUpSeccussActive = await authModel.signUp(user: user)
                 }
             }
