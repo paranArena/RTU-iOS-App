@@ -275,7 +275,8 @@ class ClubViewModel: ObservableObject {
             }
         }
     }
-
+    
+    
     
     //  MARK: POST
     

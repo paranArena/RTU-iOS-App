@@ -79,11 +79,12 @@
 		157190E828B6F5F300880F98 /* RentalAndItemManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190E728B6F5F300880F98 /* RentalAndItemManagement.swift */; };
 		157190EA28B6FE0F00880F98 /* WidthSetterView .swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190E928B6FE0F00880F98 /* WidthSetterView .swift */; };
 		157190ED28B7023600880F98 /* RentalManagementSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190EC28B7023600880F98 /* RentalManagementSelected.swift */; };
-		157190EF28B7024D00880F98 /* ItemManagementSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190EE28B7024D00880F98 /* ItemManagementSelected.swift */; };
+		157190EF28B7024D00880F98 /* ProductManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190EE28B7024D00880F98 /* ProductManageView.swift */; };
 		157190F128B7043100880F98 /* PlusCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F028B7043100880F98 /* PlusCircle.swift */; };
 		157190F328B7053200880F98 /* ItemPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F228B7053200880F98 /* ItemPhoto.swift */; };
 		157190F628B7072200880F98 /* RightArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F528B7072200880F98 /* RightArrow.swift */; };
 		15788D2B289B883600F604CC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 15788D2A289B883600F604CC /* HidableTabView */; };
+		15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15799D3F28C789A70032D884 /* ManageProductCell.swift */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationVM.swift */; };
 		15934A9C28A4DC0000BC97E3 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 15934A9B28A4DC0000BC97E3 /* Introspect */; };
@@ -213,10 +214,11 @@
 		157190E728B6F5F300880F98 /* RentalAndItemManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalAndItemManagement.swift; sourceTree = "<group>"; };
 		157190E928B6FE0F00880F98 /* WidthSetterView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidthSetterView .swift"; sourceTree = "<group>"; };
 		157190EC28B7023600880F98 /* RentalManagementSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalManagementSelected.swift; sourceTree = "<group>"; };
-		157190EE28B7024D00880F98 /* ItemManagementSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManagementSelected.swift; sourceTree = "<group>"; };
+		157190EE28B7024D00880F98 /* ProductManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManageView.swift; sourceTree = "<group>"; };
 		157190F028B7043100880F98 /* PlusCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCircle.swift; sourceTree = "<group>"; };
 		157190F228B7053200880F98 /* ItemPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPhoto.swift; sourceTree = "<group>"; };
 		157190F528B7072200880F98 /* RightArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightArrow.swift; sourceTree = "<group>"; };
+		15799D3F28C789A70032D884 /* ManageProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProductCell.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		15868739287EBB3F0003C2DC /* CertificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationVM.swift; sourceTree = "<group>"; };
 		159F086728AC72170008EC16 /* RentalDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDatePicker.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				1563FE9828ADFBA700F46CC7 /* RetnalNoticeCell.swift */,
 				15382EC928C1A338004D7977 /* ManageNoticeCell.swift */,
 				151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */,
+				15799D3F28C789A70032D884 /* ManageProductCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -500,7 +503,7 @@
 				157190E728B6F5F300880F98 /* RentalAndItemManagement.swift */,
 				1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */,
 				157190EC28B7023600880F98 /* RentalManagementSelected.swift */,
-				157190EE28B7024D00880F98 /* ItemManagementSelected.swift */,
+				157190EE28B7024D00880F98 /* ProductManageView.swift */,
 				1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */,
 				1523D5E128BE291C009EB733 /* MemberManagementView.swift */,
 				1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */,
@@ -836,7 +839,7 @@
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
 				153C1A7D288D0A1F00F89B2E /* ClubProfileViewModel.swift in Sources */,
-				157190EF28B7024D00880F98 /* ItemManagementSelected.swift in Sources */,
+				157190EF28B7024D00880F98 /* ProductManageView.swift in Sources */,
 				1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */,
 				157190ED28B7023600880F98 /* RentalManagementSelected.swift in Sources */,
 				1523D5EA28BE2CE7009EB733 /* CreateNoticeView.swift in Sources */,
@@ -854,6 +857,7 @@
 				154553D528A35CC3005E7FDB /* ItemVM.swift in Sources */,
 				153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */,
 				1563FE9928ADFBA700F46CC7 /* RetnalNoticeCell.swift in Sources */,
+				15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */,
 				156386C0288A5249006653E8 /* HomeTab.swift in Sources */,
 				150072F9289A3DFD005B6A93 /* Item.swift in Sources */,
 				1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */,

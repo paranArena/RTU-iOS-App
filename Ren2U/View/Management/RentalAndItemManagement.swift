@@ -29,7 +29,7 @@ extension RentalAndItemManagement {
 struct RentalAndItemManagement: View {
     
     @State private var headerSelection: Selection = .rentalManagement
-    let clubId: Int
+    @ObservedObject var managementVM: ManagementViewModel
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -38,7 +38,7 @@ struct RentalAndItemManagement: View {
             if headerSelection == .rentalManagement {
                 RentalManagementSelected()
             } else {
-                ItemManagementSelected(clubId: clubId)
+                ProductManageView(managementVM: managementVM)
             }
         }
         .onAppear {

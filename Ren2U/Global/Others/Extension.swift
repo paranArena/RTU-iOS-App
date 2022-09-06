@@ -132,6 +132,27 @@ extension String {
     }
 }
 
+//  MARK: INT extensions
+
+//  for product cell
+extension Int {
+    func productStatus() -> String {
+        if self == 0 {
+            return "대여불가"
+        } else {
+            return "남은 수량"
+        }
+    }
+    
+    func productColor() -> Color {
+        if self == 0 {
+            return Color.red_EB1808
+        } else {
+            return Color.gray_868E96
+        }
+    }
+}
+
 
 //  MARK: Date extensions
 //  Date to String

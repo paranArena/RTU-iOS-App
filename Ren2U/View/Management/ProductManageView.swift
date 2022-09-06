@@ -7,15 +7,16 @@
 
 import SwiftUI
 
-struct ItemManagementSelected: View {
+struct ProductManageView: View {
     
     @State private var isActive = false
-    let clubId: Int
+    @State private var selectedCellId = -1
+    @ObservedObject var managementVM: ManagementViewModel
     
     var body: some View {
-        VStack {
-            ScrollView {
-                
+        SlideResettableScrollView(selectedCellId: $selectedCellId) {
+            ForEach(managementVM.products.indices, id: \.self) { i in
+                ManageProductCell(manageVM: managementVM, productData: managementVM.products[i], selectedId: $selectedCellId)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -23,7 +24,7 @@ struct ItemManagementSelected: View {
         .navigationBarTitleDisplayMode(.inline)
         .overlay(alignment: .bottomTrailing) {
             NavigationLink(isActive: $isActive) {
-                ItemPhoto(itemVM: ItemViewModel(clubId: clubId), isActive: $isActive)
+                ItemPhoto(itemVM: ItemViewModel(clubId: managementVM.clubData.id), isActive: $isActive)
             } label: {
                 PlusCircle()
             }

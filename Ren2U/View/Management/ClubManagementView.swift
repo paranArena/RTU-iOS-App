@@ -92,6 +92,7 @@ struct ClubManagementView: View {
             Task {
                 await managementVM.searchClubMembersAll()
                 await managementVM.searchClubJoinsAll()
+                managementVM.searchClubProductsAll()
             }
         }
         .controllTabbar(isPresented)
@@ -146,7 +147,7 @@ struct ClubManagementView: View {
         case .profileEdit:
             ClubProfile(viewModel: ClubProfile.ViewModel(putModeData: managementVM.clubData, mode: .put))
         case .rentalManagement:
-            RentalAndItemManagement(clubId: managementVM.clubData.id)
+            RentalAndItemManagement(managementVM: managementVM)
         case .notice:
             NoticeManagementView(managementVM: managementVM)
         case .memberManagement:

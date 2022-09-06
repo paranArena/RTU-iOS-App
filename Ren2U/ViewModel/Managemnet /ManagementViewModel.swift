@@ -155,12 +155,23 @@ class ManagementViewModel: ObservableObject {
     }
     
     @MainActor
-    func searchClubProductsAll() async {
+    func searchClubProductsAll()  {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/products/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        //  MARK: 수정 필요
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchClubProductsAll.self) {
+            res in
+            
+            switch res.result {
+            case .success(let value):
+                print("[searchClubProductsAll success]")
+                self.products = value.data
+            case .failure(let err):
+                print("[searchClubProductsAll failure")
+                print(err)
+            }
+            
+        }
     }
     
     //  MARK: PUT
@@ -203,6 +214,23 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    
+    func deleteProduct(productId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/products/\(productId)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
+        
+        switch result {
+        case .success(let value):
+            print("[deleteProduct success]")
+            print(value)
+        case .failure(let err):
+            print("[deleteProduct err]")
+            print(err)
+        }
+    }
     
     //  MARK: TASK
     
