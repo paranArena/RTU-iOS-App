@@ -64,10 +64,16 @@ struct GetProductResponse: Codable {
     let data: ProductDetailData
 }
 
-struct GetMyRentals: Codable {
+struct GetMyRentalsResponse: Codable {
     let statusCode: Int
     let responseMessage: String
     let data: [RentalData]
+}
+
+struct GetClubRetnalsResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [ClubRentalData]
 }
 
 //  MARK: POST

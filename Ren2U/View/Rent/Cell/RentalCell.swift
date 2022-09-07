@@ -17,27 +17,30 @@ struct RentalCell: View {
     }
     
     let rentalItemInfo: RentalData
+    @Binding var selectedClubId: Int
+    @Binding var selectedItemId: Int
+    @Binding var isShowingRentalCancelAlert: Bool
 
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-//                if let thumbnailPath = rentalItemInfo.imagePath {
-//                    KFImage(URL(string: thumbnailPath))
-//                        .onFailure { err in
-//                            print(err.errorDescription ?? "KFImage Optional err")
-//                        }
-//                        .resizable()
-//                        .frame(width: 80, height: 80)
-//                        .cornerRadius(20)
-//
-//                }
+                if let thumbnailPath = rentalItemInfo.imagePath {
+                    KFImage(URL(string: thumbnailPath))
+                        .onFailure { err in
+                            print(err.errorDescription ?? "KFImage Optional err")
+                        }
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(20)
+
+                }
                
                 VStack(alignment: .leading) {
-                    Text("Product name")
+                    Text(rentalItemInfo.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
-                    Text("Club name")
+                    Text(rentalItemInfo.clubName)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(.gray_ADB5BD)
                         .lineLimit(1)
@@ -46,7 +49,9 @@ struct RentalCell: View {
                 Spacer()
                 
                 Button {
-                    
+                    selectedItemId = rentalItemInfo.id
+                    selectedClubId = rentalItemInfo.clubId
+                    isShowingRentalCancelAlert = true 
                 } label: {
                     Text("예약취소")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))

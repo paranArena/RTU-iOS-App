@@ -107,7 +107,7 @@ struct ClubManagementView: View {
         VStack(alignment: .center, spacing: 0) {
             ForEach(ManageSelection.allCases, id : \.rawValue) { selection in
                 HStack {
-                    if selection != .rentalActive {
+                    if selection != .rentalActive && selection != .profileEdit {
                         NavigationLink {
                             Navigation(selection: selection)
                         } label: {
@@ -117,7 +117,7 @@ struct ClubManagementView: View {
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                                 .foregroundColor(Color.primary)
                         }
-                    } else {
+                    } else if selection == .rentalActive     {
                         Toggle(isOn: $rentalToggle) {
                             Text(selection.title)
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))

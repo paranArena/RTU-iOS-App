@@ -36,7 +36,7 @@ struct RentalAndItemManagement: View {
             ButtonHeaderSelection()
             
             if headerSelection == .rentalManagement {
-                RentalManagementSelected()
+                RentalManagementSelected(manageVM: managementVM)
             } else {
                 ProductManageView(managementVM: managementVM)
             }

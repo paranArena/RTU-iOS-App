@@ -65,7 +65,23 @@ struct MemberManagementView: View {
             Text("멤버를 추방하시겠습니까?")
         }
         .alert("", isPresented: $isShowingSignUpAlert) {
-           
+            Button("Cancel", role: .cancel) { }
+            Button("OK") {
+                if selection == .signUpCancel {
+                    Task {
+                        await managementVM.rejectClubJoin(memberId: selectedCellID)
+                        await managementVM.searchClubJoinsAll()
+                    }
+                } else {
+                    Task {
+                        await managementVM.acceptClubJoin(memberId: selectedCellID)
+                        await managementVM.searchClubJoinsAll()
+                        await managementVM.searchClubMembersAll()
+                    }
+                }
+            }
+        } message: {
+            Text(selection == .signUpOk ? "가입신청을 승인하시겠습니까?" : "가입신청을 거부하시겠습니까?") 
         }
         
         .onAppear {

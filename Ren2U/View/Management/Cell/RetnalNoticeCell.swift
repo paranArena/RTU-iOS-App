@@ -9,10 +9,10 @@ import SwiftUI
 import Kingfisher
 
 struct RetnalNoticeCell: View {
-    
+
     @State private var isShowingRequestButton = false
     @State private var offset: CGSize = .zero
-    
+
     var body: some View {
         HStack {
             KFImage(URL(string: "")!).onFailure { err in
@@ -22,22 +22,22 @@ struct RetnalNoticeCell: View {
             .frame(width: 80, height: 80)
             .cornerRadius(15)
             .isHidden(hidden: isShowingRequestButton)
-            
-            
+
+
             Spacer()
-            
+
             HStack(alignment: .center, spacing: 0) {
                 Button {
-                    
+
                 } label: {
                     Text("확인")
                 }
                 .frame(width: 80, height: 80)
                 .background(Color.navy_1E2F97)
                 .foregroundColor(Color.white)
-                
+
                 Button {
-                    
+
                 } label: {
                     Text("거부")
                 }
@@ -47,7 +47,7 @@ struct RetnalNoticeCell: View {
             }
             .offset(x : 180)
             .padding(.leading, -180)
-            
+
         }
         .offset(x: isShowingRequestButton ? -160 : 0)
         .animation(.spring(), value: isShowingRequestButton)
@@ -65,7 +65,7 @@ struct RetnalNoticeCell: View {
                 }
         )
     }
-    
+
     func getTime() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY.MM.dd"

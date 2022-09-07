@@ -16,6 +16,7 @@ class ManagementViewModel: ObservableObject {
     @Published var members = [UserAndRoleData]()
     @Published var products = [ProductResponseData]()
     @Published var notices = [NoticeCellData]()
+    @Published var rentals = [ClubRentalData]()
     
     
     init(clubData: ClubData) {
@@ -27,6 +28,7 @@ class ManagementViewModel: ObservableObject {
             await searchClubJoinsAll()
             await searchClubProductsAll()
             await searchNotificationssAll()
+            await getClubRentals()
         }
     }
     
@@ -66,8 +68,8 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
-    func acceptClubJoin(userData: UserData) async {
-        let url = "\(BASE_URL)/clubs/\(clubData.id)/requests/join/\(userData.id)"
+    func acceptClubJoin(memberId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/requests/join/\(memberId)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).serializingString()
@@ -179,6 +181,25 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    @MainActor
+    func getClubRentals() {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/rentals/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetClubRetnalsResponse.self) { res in
+            switch res.result {
+            case .success(let value):
+                print("[getClubRentals success]")
+                print(value.responseMessage)
+                self.rentals = value.data
+                
+            case .failure(let err):
+                print("[getClubRentals err")
+                print(err)
+            }
+        }
+    }
+    
     //  MARK: PUT
     func updateNotification(groupId: Int, notificationId: Int, noticeData: NoticeCellData) async {
         let url = "\(BASE_URL)/clubs/\(groupId)/notifications/\(notificationId)"
@@ -275,12 +296,6 @@ class ManagementViewModel: ObservableObject {
     func searchClubJoinsAllTask() {
         Task {
             await searchClubJoinsAll()
-        }
-    }
-    
-    func acceptClubJoinTask(userData: UserData) {
-        Task {
-            await acceptClubJoin(userData: userData)
         }
     }
 }

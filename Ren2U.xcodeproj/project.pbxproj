@@ -530,9 +530,9 @@
 			isa = PBXGroup;
 			children = (
 				1563FE8D28ADDF5600F46CC7 /* ClubManagementView.swift */,
+				157190EC28B7023600880F98 /* RentalManagementSelected.swift */,
 				157190E728B6F5F300880F98 /* RentalAndItemManagement.swift */,
 				1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */,
-				157190EC28B7023600880F98 /* RentalManagementSelected.swift */,
 				157190EE28B7024D00880F98 /* ProductManageView.swift */,
 				1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */,
 				1523D5E128BE291C009EB733 /* MemberManagementView.swift */,

@@ -8,8 +8,34 @@
 import Foundation
 
 struct RentalData: Codable {
-    let id: Int
-    let rentalStatus: String
-    let rentDate: String
-    let expDate: String?
+    let id, numbering: Int
+    let name: String
+    let clubId: Int
+    let clubName: String
+    let imagePath: String
+    let rentalPolicy: String
+    let rentalInfo: RentalInfo
+    
+    struct RentalInfo: Codable {
+        var rentalStatus: String
+        let rentDate: String
+        var expDate: String?
+    }
+}
+
+struct ClubRentalData: Codable {
+    let memberName: String
+    let id, numbering: Int
+    let name: String
+    let clubId: Int
+    let clubName: String
+    let imagePath: String
+    let rentalPolicy: String
+    let rentalInfo: RentalInfo
+    
+    struct RentalInfo: Codable {
+        var rentalStatus: String
+        let rentDate: String
+        var expDate: String?
+    }
 }

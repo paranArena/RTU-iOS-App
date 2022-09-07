@@ -17,7 +17,7 @@ extension RentalManagementSelected {
         var title: String {
             switch self {
             case .book:
-                return "에약"
+                return "예약"
             case .rental:
                 return "대여"
             case .return:
@@ -28,6 +28,7 @@ extension RentalManagementSelected {
 }
 struct RentalManagementSelected: View {
     
+    @ObservedObject var manageVM: ManagementViewModel
     @State private var selection: Selection = .book
     @State private var hearderSelectionWidth: CGFloat = .zero
     
@@ -71,10 +72,19 @@ struct RentalManagementSelected: View {
             }
         }
     }
-}
-
-struct RentalManagementSelected_Previews: PreviewProvider {
-    static var previews: some View {
-        RentalManagementSelected()
+    
+    @ViewBuilder
+    private func BookList() -> some View {
+        VStack {
+            ForEach(manageVM.rentals.indices, id: \.self) { i in
+                
+            }
+        }
     }
 }
+
+//struct RentalManagementSelected_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RentalManagementSelected()
+//    }
+//}

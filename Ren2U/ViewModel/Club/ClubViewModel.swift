@@ -184,7 +184,7 @@ class ClubViewModel: ObservableObject {
         let url = "\(BASE_URL)/members/my/rentals"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyRentals.self)
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyRentalsResponse.self)
         let result = await request.result
         
         switch result {
@@ -375,6 +375,23 @@ class ClubViewModel: ObservableObject {
             print(value)
         case .failure(let err):
             print("[leaveClub err]")
+            print(err)
+        }
+    }
+    
+    func cancelRent(clubId: Int, itemId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/cancel"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        
+        let result = await request.result
+        switch result {
+        case .success(let value):
+            print("[cancelRent success]")
+            print(value)
+        case .failure(let err):
+            print("[cancelRent err]")
             print(err)
         }
     }

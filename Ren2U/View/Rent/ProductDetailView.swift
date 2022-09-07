@@ -15,6 +15,7 @@ struct ProductDetailView: View {
     let clubId: Int
     let productId: Int
     
+    @EnvironmentObject var clubVM: ClubViewModel
     @StateObject private var rentVM: RentalViewModel
     @StateObject private var viewModel = ViewModel()
     @Environment(\.isPresented) var isPresented
@@ -27,6 +28,7 @@ struct ProductDetailView: View {
         self.clubId = clubId
         self.productId = productId
         _rentVM = StateObject(wrappedValue: RentalViewModel(clubId: clubId, productId: productId))
+        _clubVM = EnvironmentObject()
     }
     
     
@@ -274,7 +276,10 @@ struct ProductDetailView: View {
         HeightSetterView(viewHeight: $rentalButtonHeight) {
             Button {
                 if let selectedItemId = selectedItemId {
-                    rentVM.requestRent(itemId: selectedItemId)
+                    Task {
+                        rentVM.requestRent(itemId: selectedItemId)
+                        await clubVM.getMyRentals()
+                    }
                 }
             } label: {
                 Capsule()
