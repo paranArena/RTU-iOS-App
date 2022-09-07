@@ -9,6 +9,16 @@ import SwiftUI
 
 //  MARK: GET
 
+struct GetMyClubRoleResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: Data
+    
+    struct Data: Codable {
+        let clubRole: String
+    }
+}
+
 struct SearchClubMembersAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String

@@ -48,6 +48,17 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
     var hashtags: [String]
     var clubRole: String
     
+    var buttonText: String {
+        if clubRole == "USER" {
+            return "탈퇴하기"
+        } else if clubRole == "NONE" {
+            return "가입하기"
+        } else {
+            //USER와 ADMIN까지 포함된다. 
+            return "가입취소"
+        }
+    }
+    
     static func dummyClubAndRoleData() -> ClubAndRoleData {
         return ClubAndRoleData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""], clubRole: "")
     }

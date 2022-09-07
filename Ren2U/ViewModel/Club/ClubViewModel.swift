@@ -65,6 +65,27 @@ class ClubViewModel: ObservableObject {
     //  MARK: GET
     
     @MainActor
+    func getMyClubRole(clubId: Int) async -> String {
+        let url = "\(BASE_URL)/members/my/clubs/\(clubId)/role"
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)"]
+        
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyClubRoleResponse.self)
+        
+        let result = await request.result
+        
+        switch result {
+        case .success(let value):
+            print("[getMyClubRole success]")
+            print(value.responseMessage)
+            return value.data.clubRole
+        case .failure(let err):
+            print("[getMyClubs Error]")
+            print(err)
+            return "err"
+        }
+    }
+    
+    @MainActor
     func getMyClubs() {
         let url = "\(BASE_URL)/members/my/clubs"
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)"]

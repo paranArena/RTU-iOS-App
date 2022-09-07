@@ -37,7 +37,7 @@ struct RentalCell: View {
                 }
                
                 VStack(alignment: .leading) {
-                    Text(rentalItemInfo.name)
+                    Text("\(rentalItemInfo.name)  \(rentalItemInfo.numbering)")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
                     Text(rentalItemInfo.clubName)

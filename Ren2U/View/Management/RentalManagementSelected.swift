@@ -37,7 +37,7 @@ struct RentalManagementSelected: View {
             ButtonRentalSelection()
             
             ScrollView {
-                
+                BookList()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -77,7 +77,7 @@ struct RentalManagementSelected: View {
     private func BookList() -> some View {
         VStack {
             ForEach(manageVM.rentals.indices, id: \.self) { i in
-                
+                BookCell(data: manageVM.rentals[i])
             }
         }
     }

@@ -18,11 +18,13 @@ struct ProductDetailView: View {
     @EnvironmentObject var clubVM: ClubViewModel
     @StateObject private var rentVM: RentalViewModel
     @StateObject private var viewModel = ViewModel()
+    @StateObject private var mapVM = MapViewModel()
+    
     @Environment(\.isPresented) var isPresented
     @State private var rentalButtonHeight: CGFloat = .zero
     @State private var isShowingModel = false
-    @State private var isShowingItemSheet = false
     @State private var selectedItemId: Int?
+    
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
@@ -40,8 +42,11 @@ struct ProductDetailView: View {
                 CarouselImage()
                 
                 Group {
+                    
                     Text("REN2U")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                    
+                    Text("\(mapVM.region.center.distance(from: rentVM.productLocation))")
 
                     Text(rentVM.productDetail.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 26))
@@ -163,29 +168,6 @@ struct ProductDetailView: View {
     }
     
     @ViewBuilder
-    private func OverlayContent() -> some View {
-        VStack(alignment: .center, spacing: 0) {
-            Spacer()
-            ReservationOverlayButton()
-        }
-        .ignoresSafeArea(.all, edges: .bottom)
-    }
-    
-    @ViewBuilder
-    private func ReservationOverlayButton() -> some View {
-        VStack(alignment: .center, spacing: 0) {
-            ItemSheet()
-                .background(Color.gray_F8F9FA)
-                .frame(maxWidth: .infinity)
-                .offset(y: isShowingItemSheet ? 0 : SCREEN_HEIGHT)
-                .cornerRadius(30, corners: [.topRight, .topLeft])
-                .clipped()
-                .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
-                .animation(.default, value: isShowingItemSheet)
-        }
-    }
-    
-    @ViewBuilder
     private func RentalCompleteOverlayButton() -> some View {
         HStack(alignment: .center, spacing: 20) {
             VStack(alignment: .center, spacing: 5) {
@@ -223,6 +205,7 @@ struct ProductDetailView: View {
                 .padding(.horizontal, 10)
             
             VStack(alignment: .leading, spacing: 10) {
+                //  MARK: ITEM CELL
                 ForEach(rentVM.productDetail.items.indices, id: \.self) { i in
                     let id = rentVM.productDetail.items[i].id
                     HStack {
@@ -244,6 +227,7 @@ struct ProductDetailView: View {
                         .background(Capsule().fill(id == selectedItemId ? Color.navy_1E2F97 : Color.clear))
                         
                         Spacer()
+                        
                         
                         Text(rentVM.productDetail.items[i].status)
                             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
@@ -279,6 +263,7 @@ struct ProductDetailView: View {
                     Task {
                         rentVM.requestRent(itemId: selectedItemId)
                         await clubVM.getMyRentals()
+                        await rentVM.getProduct()
                     }
                 }
             } label: {
@@ -341,33 +326,6 @@ struct ProductDetailView: View {
     }
     
     //  MARK: 삭제 예정
-    @ViewBuilder
-    private func ItemSheet() -> some View {
-        VStack {
-            Text("옵션 선택")
-                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-            
-            ForEach(rentVM.productDetail.items.indices, id: \.self) { i in
-                HStack {
-                    
-                    Button {
-                        selectedItemId = rentVM.productDetail.items[i].id
-                    } label: {
-                        Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
-                            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                        
-                        Text("\(rentVM.productDetail.items[i].rentalPolicy)")
-                            .font(.custom(CustomFont.RobotoBold.rawValue, size: 12))
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                            .background(Capsule().fill(Color.yellow_FFB800))
-                    }
-                    Spacer()
-                }
-            }
-        }
-        .background(Color.gray_FFFFFF)
-    }
     
     
     @ViewBuilder

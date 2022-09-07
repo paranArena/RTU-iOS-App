@@ -49,6 +49,7 @@ struct RentalTab: View {
             Button {
                 Task {
                     await clubVM.cancelRent(clubId: selectedClubId, itemId: selectedItemId)
+                    await clubVM.getMyRentals()
                 }
             } label: {
                 Text("예")

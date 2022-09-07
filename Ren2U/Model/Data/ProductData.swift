@@ -53,7 +53,7 @@ struct ProductDetailData: Codable {
     let items: [Item]
     
     static func dummyProductData() -> ProductDetailData {
-        return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [Item(id: 1, numbering: 1, rentalPolicyDto: "", rental: nil)])
+        return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [Item(id: 1, numbering: 1, rentalPolicyDto: "", rentalInfo: nil)])
     }
     
     struct Location: Codable {
@@ -64,13 +64,13 @@ struct ProductDetailData: Codable {
     struct Item: Codable {
         let id, numbering: Int
         let rentalPolicyDto: String
-        let rental: Rental?
+        let rentalInfo: Rental?
         
         enum CodingKeys: String, CodingKey {
             case id
             case numbering
             case rentalPolicyDto = "rentalPolicy"
-            case rental
+            case rentalInfo
         }
 //
         var bgColor: Color {
@@ -90,9 +90,9 @@ struct ProductDetailData: Codable {
         }
         
         var status: String {
-            if rental == nil {
+            if rentalInfo == nil {
                 return "대여 가능"
-            } else if rental?.rentalStatus == "WAIT" {
+            } else if rentalInfo?.rentalStatus == "WAIT" {
                 return "예약중"
             } else {
                 return "처리 필요"
@@ -101,7 +101,6 @@ struct ProductDetailData: Codable {
     }
     
     struct Rental: Codable {
-        let id: Int
         let rentalStatus: String
         let rentDate: String
         let expDate: String?

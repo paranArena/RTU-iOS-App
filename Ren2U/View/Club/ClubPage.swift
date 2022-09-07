@@ -18,6 +18,9 @@ struct ClubPage: View {
     @State private var offset: CGFloat = 0
     @State private var isActive = false
     
+    //  Alter를 위한 변수
+    @State private var isShoiwngAlert = false
+    
     var body: some View {
         
         BounceControllScrollView(baseOffset: 80, offset: $offset) {
@@ -36,8 +39,7 @@ struct ClubPage: View {
                 ClubManagementView(managementVM: ManagementViewModel(clubData: clubData.extractClubData()))
             }, label: {}) 
         )
-        .navigationTitle("")
-        .navigationBarTitleDisplayMode(.inline)
+        .basicNavigationTitle(title: "")
         .toolbar {
             ToolbarItemGroup(placement: .principal) {
                 Text(clubData.name)
@@ -47,6 +49,39 @@ struct ClubPage: View {
                 TrailingToolbar()
             }
         }
+        .alert("", isPresented: $isShoiwngAlert) {
+            Button("cancel", role: .cancel) {}
+            
+            Button {
+                if clubData.clubRole == ClubRole.user.rawValue {
+                    Task {
+                        await clubVM.leaveClub(clubId: clubData.id)
+                        clubData.clubRole = await clubVM.getMyClubRole(clubId: clubData.id)
+                    }
+                } else if clubData.clubRole == ClubRole.wait.rawValue {
+                    Task {
+                        await clubVM.cancelClubJoin(clubId: clubData.id)
+                        clubData.clubRole = await clubVM.getMyClubRole(clubId: clubData.id)
+                    }
+                } else if clubData.clubRole == ClubRole.none.rawValue {
+                    Task {
+                        await clubVM.requestClubJoin(clubId: clubData.id)
+                        clubData.clubRole = await clubVM.getMyClubRole(clubId: clubData.id)
+                    }
+                }
+            } label: {
+                Text("ok")
+            }
+        } message: {
+            if clubData.clubRole == ClubRole.user.rawValue {
+                Text("그룹을 탈퇴하시겠습니까?")
+            } else if clubData.clubRole == ClubRole.wait.rawValue {
+                Text("가입을 취소하시겠습니까?")
+            } else if clubData.clubRole == ClubRole.none.rawValue {
+                Text("그룹에 가입하시겠습니까? ")
+            }
+        }
+
             
     }
     
@@ -175,51 +210,21 @@ struct ClubPage: View {
     
     @ViewBuilder
     private func TrailingToolbar() -> some View {
-        switch clubData.clubRole {
-        case ClubRole.owner.rawValue:
+        if clubData.clubRole == "OWNER" || clubData.clubRole == "ADMIN" {
             Button {
                 isActive = true
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundColor(Color.LabelColor)
             }
-        case ClubRole.user.rawValue:
+        } else {
             Button {
-                Task {
-                    await clubVM.leaveClub(clubId: clubData.id)
-                    clubData.clubRole = ClubRole.none.rawValue
-                }
+                isShoiwngAlert = true
             } label: {
-                Text("탈퇴하기")
+                Text(clubData.buttonText)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .foregroundColor(Color.LabelColor)
             }
-
-        case ClubRole.wait.rawValue:
-            Button {
-                Task {
-                    await clubVM.cancelClubJoin(clubId: clubData.id)
-                    clubData.clubRole = ClubRole.none.rawValue
-                }
-            } label: {
-                Text("가입취소")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                    .foregroundColor(Color.LabelColor)
-            }
-        case ClubRole.none.rawValue:
-            Button {
-                Task {
-                    await clubVM.requestClubJoin(clubId: clubData.id)
-                    clubData.clubRole = ClubRole.wait.rawValue
-                }
-            } label: {
-                Text("가입하기")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                    .foregroundColor(Color.LabelColor)
-            }
-        default:
-            Text("트레일링 바")
-                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
         }
     }
     
