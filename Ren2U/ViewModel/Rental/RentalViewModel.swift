@@ -48,7 +48,6 @@ class RentalViewModel: ObservableObject {
             switch res.result {
             case .success(let value):
                 print("[getProduct success]")
-                print(value)
                 self.productDetail = value.data
             case .failure(let err):
                 print("[getProduct failure]")

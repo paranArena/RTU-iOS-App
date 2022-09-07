@@ -21,6 +21,12 @@ class ManagementViewModel: ObservableObject {
     init(clubData: ClubData) {
         self.clubData = clubData
         print("ManageViewModel init, groupId[\(clubData.id)]")
+        
+        Task {
+            await searchClubMembersAll()
+            await searchClubJoinsAll()
+            await searchClubProductsAll()
+        }
     }
     
     //  MARK: POST
@@ -142,8 +148,6 @@ class ManagementViewModel: ObservableObject {
     func searchClubProductsAll()  {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/products/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
-        
-        print(url)
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchClubProductsAll.self) {
             res in

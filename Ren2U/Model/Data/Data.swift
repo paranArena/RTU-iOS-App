@@ -140,7 +140,7 @@ struct ProductDetailData: Codable {
     let items: [Item]
     
     static func dummyProductData() -> ProductDetailData {
-        return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [Item(id: 1, numbering: 1, rentalPolicyDto: "", rental: nil)])
+        return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [Item(id: 1, numbering: 1, rentalPolicy: "", rental: nil)])
     }
     
     struct Location: Codable {
@@ -150,31 +150,31 @@ struct ProductDetailData: Codable {
     
     struct Item: Codable {
         let id, numbering: Int
-        let rentalPolicyDto: String
+        let rentalPolicy: String
         let rental: Rental?
         
-        enum CodingKeys: String, CodingKey {
-            case id
-            case numbering
-            case rentalPolicyDto = "rentalPolicy"
-            case rental
-        }
-        
+//        enum CodingKeys: String, CodingKey {
+//            case id
+//            case numbering
+//            case rentalPolicy = "rentalPolicy"
+//            case rental
+//        }
+//
         var bgColor: Color {
-            if rentalPolicyDto == "FIFO" {
+            if rentalPolicy == "FIFO" {
                 return Color.yellow_FFB800
             } else {
                 return Color.green_2CA900
             }
         }
-        
-        var rentalPolicy: String {
-            if rentalPolicyDto == "FIFO" {
-                return "선착순"
-            } else {
-                return "기간제"
-            }
-        }
+
+//        var rentalPolicy: String {
+//            if rentalPolicy == "FIFO" {
+//                return "선착순"
+//            } else {
+//                return "기간제"
+//            }
+//        }
     }
     
     struct Rental: Codable {
@@ -182,6 +182,7 @@ struct ProductDetailData: Codable {
         let rentalStatus: String
         let rentDate: String
         let expDate: String?
+        
     }
 }
 

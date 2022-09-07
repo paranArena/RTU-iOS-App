@@ -321,7 +321,8 @@ class ClubViewModel: ObservableObject {
             print("[create club success]")
             print(value.responseMessage)
         case .failure(let err):
-            print("create club failure : \(err)")
+            print("[create club err]")
+            print(err)
         }
     }
     

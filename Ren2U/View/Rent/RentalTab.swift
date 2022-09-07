@@ -41,10 +41,10 @@ struct RentalTab: View {
         }
         .disabled(isShowingModal)
         .overlay(ShadowRectangle())
-//        .overlay(Modal(isShowingModal: $isShowingModal, text: "예약을 취소하시겠습니까?", callback: {
-//            isShowingModal = false
-//            print("예약이 취소되었습니다!")
-//        }))
+        .overlay(Modal(isShowingModal: $isShowingModal, text: "예약을 취소하시겠습니까?", callback: {
+            isShowingModal = false
+            print("예약이 취소되었습니다!")
+        }))
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -112,9 +112,12 @@ struct RentalTab: View {
     private func RentalListSelected() -> some View {
         RefreshableScrollView(threshold: 120) {
             VStack {
-                ForEach(clubVM.rentals.indices, id: \.self) { i in
-                    Text("\(clubVM.rentals[i].id)")
+                ForEach(0..<10, id: \.self) { i in
+                    TempCell(rentalItemInfo: clubVM.products[0].data)
                 }
+//                ForEach(clubVM.rentals.indices, id: \.self) { i in
+//
+//                }
             }
         }
         .refreshable {

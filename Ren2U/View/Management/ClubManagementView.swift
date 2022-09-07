@@ -17,7 +17,6 @@ struct ClubManagementView: View {
     
     @StateObject var managementVM: ManagementViewModel
     
-    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .center, spacing: 80) {
@@ -87,13 +86,6 @@ struct ClubManagementView: View {
                 .cornerRadius(15)
             }
             .padding(.horizontal, 10)
-        }
-        .onAppear {
-            Task {
-                await managementVM.searchClubMembersAll()
-                await managementVM.searchClubJoinsAll()
-                managementVM.searchClubProductsAll()
-            }
         }
         .controllTabbar(isPresented)
         .navigationTitle(" ")

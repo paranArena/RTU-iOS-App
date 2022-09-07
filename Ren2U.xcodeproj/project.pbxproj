@@ -17,6 +17,8 @@
 		151B557528BCAA2F0090A5E8 /* Modal .swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557428BCAA2F0090A5E8 /* Modal .swift */; };
 		151E4E9028C4620400FFB668 /* ManageMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */; };
 		151E4E9228C4948600FFB668 /* SlideResettableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E9128C4948600FFB668 /* SlideResettableScrollView.swift */; };
+		15228AB928C891A600A0B3C5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15228AB828C891A600A0B3C5 /* Alamofire */; };
+		15228ABB28C8970A00A0B3C5 /* TempCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228ABA28C8970A00A0B3C5 /* TempCell.swift */; };
 		1523D5D828BDC986009EB733 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5D728BDC986009EB733 /* Data.swift */; };
 		1523D5E028BE138B009EB733 /* AssetImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DF28BE138A009EB733 /* AssetImages.swift */; };
 		1523D5E228BE291C009EB733 /* MemberManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E128BE291C009EB733 /* MemberManagementView.swift */; };
@@ -67,7 +69,6 @@
 		156386CB288A5B2F006653E8 /* GroupSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386CA288A5B2F006653E8 /* GroupSelected.swift */; };
 		156386D2288A5D1A006653E8 /* ClubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D1288A5D1A006653E8 /* ClubViewModel.swift */; };
 		156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386D3288A5D84006653E8 /* FavoriteGroupCell.swift */; };
-		156386D7288A5E58006653E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 156386D6288A5E58006653E8 /* Kingfisher */; };
 		156386DC288A6E0B006653E8 /* HorizontalClubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386DB288A6E0B006653E8 /* HorizontalClubCell.swift */; };
 		1563FE8E28ADDF5600F46CC7 /* ClubManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE8D28ADDF5600F46CC7 /* ClubManagementView.swift */; };
 		1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */; };
@@ -87,11 +88,12 @@
 		157190F128B7043100880F98 /* PlusCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F028B7043100880F98 /* PlusCircle.swift */; };
 		157190F328B7053200880F98 /* ItemPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F228B7053200880F98 /* ItemPhoto.swift */; };
 		157190F628B7072200880F98 /* RightArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F528B7072200880F98 /* RightArrow.swift */; };
-		15788D2B289B883600F604CC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 15788D2A289B883600F604CC /* HidableTabView */; };
 		15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15799D3F28C789A70032D884 /* ManageProductCell.swift */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationVM.swift */; };
-		15934A9C28A4DC0000BC97E3 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 15934A9B28A4DC0000BC97E3 /* Introspect */; };
+		1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16C28C8914700D83FCC /* HidableTabView */; };
+		1589C17028C8915300D83FCC /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16F28C8915300D83FCC /* Introspect */; };
+		1589C17328C8917C00D83FCC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C17228C8917C00D83FCC /* Kingfisher */; };
 		159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086728AC72170008EC16 /* RentalDatePicker.swift */; };
 		159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */; };
 		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
@@ -100,7 +102,6 @@
 		15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */; };
 		15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B63DA328AF38EA000AB82D /* ViewExtensions .swift */; };
 		15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel.swift */; };
-		15BDC4252881225100514EF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15BDC4242881225100514EF1 /* Alamofire */; };
 		15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C03144289CD5E500D0354E /* RentalTabVM.swift */; };
 		15CFAD2A28B7456E0004CDF7 /* ItemInformation2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFAD2928B7456E0004CDF7 /* ItemInformation2.swift */; };
 		15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C580287FF15A008BB89B /* NavigationBarColor.swift */; };
@@ -157,6 +158,7 @@
 		151B557428BCAA2F0090A5E8 /* Modal .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modal .swift"; sourceTree = "<group>"; };
 		151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMemberCell.swift; sourceTree = "<group>"; };
 		151E4E9128C4948600FFB668 /* SlideResettableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideResettableScrollView.swift; sourceTree = "<group>"; };
+		15228ABA28C8970A00A0B3C5 /* TempCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempCell.swift; sourceTree = "<group>"; };
 		1523D5D728BDC986009EB733 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1523D5DF28BE138A009EB733 /* AssetImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImages.swift; sourceTree = "<group>"; };
 		1523D5E128BE291C009EB733 /* MemberManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberManagementView.swift; sourceTree = "<group>"; };
@@ -274,10 +276,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				156386D7288A5E58006653E8 /* Kingfisher in Frameworks */,
-				15934A9C28A4DC0000BC97E3 /* Introspect in Frameworks */,
-				15788D2B289B883600F604CC /* HidableTabView in Frameworks */,
-				15BDC4252881225100514EF1 /* Alamofire in Frameworks */,
+				1589C17328C8917C00D83FCC /* Kingfisher in Frameworks */,
+				15228AB928C891A600A0B3C5 /* Alamofire in Frameworks */,
+				1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */,
+				1589C17028C8915300D83FCC /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				150072F3289A2042005B6A93 /* RentalItemHCell.swift */,
+				15228ABA28C8970A00A0B3C5 /* TempCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -729,10 +732,10 @@
 			);
 			name = Ren2U;
 			packageProductDependencies = (
-				15BDC4242881225100514EF1 /* Alamofire */,
-				156386D6288A5E58006653E8 /* Kingfisher */,
-				15788D2A289B883600F604CC /* HidableTabView */,
-				15934A9B28A4DC0000BC97E3 /* Introspect */,
+				1589C16C28C8914700D83FCC /* HidableTabView */,
+				1589C16F28C8915300D83FCC /* Introspect */,
+				1589C17228C8917C00D83FCC /* Kingfisher */,
+				15228AB828C891A600A0B3C5 /* Alamofire */,
 			);
 			productName = Ren2U;
 			productReference = 15FAF130287D5DFF00B35570 /* Ren2U.app */;
@@ -807,10 +810,11 @@
 			);
 			mainGroup = 15FAF127287D5DFF00B35570;
 			packageReferences = (
-				15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				15788D29289B883600F604CC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */,
-				15934A9A28A4DC0000BC97E3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				15E49BCE28C8906400AC4257 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				1589C16B28C8914700D83FCC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */,
+				1589C16E28C8915300D83FCC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				1589C17128C8917C00D83FCC /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				15228AB728C891A600A0B3C5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 15FAF131287D5DFF00B35570 /* Products */;
 			projectDirPath = "";
@@ -884,6 +888,7 @@
 				156673DC28C1B6660011535D /* CellWithTwoSlideButton.swift in Sources */,
 				154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
+				15228ABB28C8970A00A0B3C5 /* TempCell.swift in Sources */,
 				154553D528A35CC3005E7FDB /* ItemVM.swift in Sources */,
 				153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */,
 				1563FE9928ADFBA700F46CC7 /* RetnalNoticeCell.swift in Sources */,
@@ -1301,15 +1306,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		15228AB728C891A600A0B3C5 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				minimumVersion = 5.0.0;
 			};
 		};
-		15788D29289B883600F604CC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */ = {
+		1589C16B28C8914700D83FCC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliMert/HidableTabView-SwiftUI.git";
 			requirement = {
@@ -1317,7 +1322,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		15934A9A28A4DC0000BC97E3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+		1589C16E28C8915300D83FCC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
@@ -1325,7 +1330,15 @@
 				minimumVersion = 0.1.4;
 			};
 		};
-		15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		1589C17128C8917C00D83FCC /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		15E49BCE28C8906400AC4257 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1336,25 +1349,25 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		156386D6288A5E58006653E8 /* Kingfisher */ = {
+		15228AB828C891A600A0B3C5 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 156386D5288A5E58006653E8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
+			package = 15E49BCE28C8906400AC4257 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
-		15788D2A289B883600F604CC /* HidableTabView */ = {
+		1589C16C28C8914700D83FCC /* HidableTabView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 15788D29289B883600F604CC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */;
+			package = 1589C16B28C8914700D83FCC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */;
 			productName = HidableTabView;
 		};
-		15934A9B28A4DC0000BC97E3 /* Introspect */ = {
+		1589C16F28C8915300D83FCC /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 15934A9A28A4DC0000BC97E3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			package = 1589C16E28C8915300D83FCC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
-		15BDC4242881225100514EF1 /* Alamofire */ = {
+		1589C17228C8917C00D83FCC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 15BDC4232881225100514EF1 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
+			package = 1589C17128C8917C00D83FCC /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

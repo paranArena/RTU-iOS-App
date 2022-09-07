@@ -354,7 +354,7 @@ struct ProductDetailView: View {
                         Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
                             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                         
-                        Text("\(rentVM.productDetail.items[i].rentalPolicyDto)")
+                        Text("\(rentVM.productDetail.items[i].rentalPolicy)")
                             .font(.custom(CustomFont.RobotoBold.rawValue, size: 12))
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)
