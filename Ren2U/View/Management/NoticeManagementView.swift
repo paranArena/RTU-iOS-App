@@ -18,16 +18,30 @@ struct NoticeManagementView: View {
     @State private var maxY: CGFloat = .zero
     @State var uiTabarController: UITabBarController?
     
+    
+    @State private var isShowingAlert = false
+    @State private var selectedNotificationId = -1
+    
     var body: some View {
         SlideResettableScrollView(selectedCellId: $selectedCellId) {
             VStack {
-                let clubId = managementVM.clubData.id
-                ForEach(clubVM.notices[clubId]?.indices ?? 0..<0, id: \.self) { i in
-                    let noticeInfo = clubVM.notices[clubId]![i]
-                    let groupName = clubVM.getGroupNameByGroupId(groupId: clubId)
-                    ManageNoticeCell(noticeInfo: noticeInfo, groupName: groupName, groupID: clubId, selectedCellID: $selectedCellId, managementVM: managementVM)
+                ForEach(managementVM.notices.indices, id: \.self) { i in
+                    let noticeInfo = managementVM.notices[i]
+                    let clubName = managementVM.clubData.name
+                    ManageNoticeCell(noticeInfo: noticeInfo, groupName: clubName, selectedCellID: $selectedCellId, isShowingAlert: $isShowingAlert, managementVM: managementVM)
                 }
             }
+        }
+        .alert("", isPresented: $isShowingAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("OK") {
+                Task {
+                    await managementVM.deleteNotification(groupID: managementVM.clubData.id, notificationID: selectedCellId)
+                    managementVM.searchNotificationssAll()
+                }
+            }
+        } message: {
+            Text("공지사항을 삭제하시겠습니까?")
         }
         .frame(maxWidth: .infinity)
         .overlay(alignment: .bottomTrailing) {

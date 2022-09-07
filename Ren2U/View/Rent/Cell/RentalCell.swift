@@ -1,14 +1,13 @@
 //
-//  RentalItemHCell.swift
+//  TempCell.swift
 //  Ren2U
 //
-//  Created by 노우영 on 2022/08/03.
+//  Created by 노우영 on 2022/09/07.
 //
-
 import SwiftUI
 import Kingfisher
 
-struct RentalItemHCell: View {
+struct RentalCell: View {
     
     enum CancelOption {
         case `default`
@@ -17,28 +16,28 @@ struct RentalItemHCell: View {
         case no
     }
     
-    let rentalItemInfo: ProductResponseData
+    let rentalItemInfo: RentalData
 
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-                if let thumbnailPath = rentalItemInfo.imagePath {
-                    KFImage(URL(string: thumbnailPath))
-                        .onFailure { err in
-                            print(err.errorDescription ?? "KFImage Optional err")
-                        }
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .cornerRadius(20)
-                    
-                }
+//                if let thumbnailPath = rentalItemInfo.imagePath {
+//                    KFImage(URL(string: thumbnailPath))
+//                        .onFailure { err in
+//                            print(err.errorDescription ?? "KFImage Optional err")
+//                        }
+//                        .resizable()
+//                        .frame(width: 80, height: 80)
+//                        .cornerRadius(20)
+//
+//                }
                
                 VStack(alignment: .leading) {
-                    Text(rentalItemInfo.name)
+                    Text("Product name")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
-                    Text("\(rentalItemInfo.clubName)")
+                    Text("Club name")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(.gray_ADB5BD)
                         .lineLimit(1)
@@ -46,13 +45,17 @@ struct RentalItemHCell: View {
                 
                 Spacer()
                 
-                VStack(alignment: .center, spacing: 5) {
-                    Text(self.itemStatusText)
+                Button {
+                    
+                } label: {
+                    Text("예약취소")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                    Text("\(rentalItemInfo.left)/\(rentalItemInfo.max)")
-                        .font(.custom(CustomFont.RobotoMedium.rawValue, size: 16))
+                        .foregroundColor(.navy_1E2F97)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
                 }
-                .foregroundColor(self.FGColor)
+                .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
+
             }
             .padding(.horizontal, 10)
             Divider()
@@ -84,22 +87,6 @@ struct RentalItemHCell: View {
                 .padding(.vertical, 8)
                 .padding(.horizontal, 16)
                 .capsuleStrokeAndForegroundColor(color: Color.navy_1E2F97)
-        }
-    }
-    
-    private var itemStatusText: String {
-        if rentalItemInfo.left == 0 {
-            return "대여불가"
-        } else {
-            return "남은 수량"
-        }
-    }
-    
-    private var FGColor: Color {
-        if rentalItemInfo.left == 0 {
-            return Color.red_EB1808
-        } else {
-            return Color.gray_868E96
         }
     }
 }

@@ -25,6 +25,22 @@ struct ProductResponseData: Codable {
     static func dummyProductResponseData() -> ProductResponseData {
         return ProductResponseData(id: 0, name: "", category: "", left: 1, max: 1, clubName: "", imagePath: "", clubId: 1)
     }
+    
+    var status: String {
+        if left == 0 {
+            return "대여불가"
+        } else {
+            return "남은 수량"
+        }
+    }
+    
+    var fgColor: Color {
+        if left == 0 {
+            return Color.red_EB1808
+        } else {
+            return Color.gray_868E96
+        }
+    }
 }
 
 struct ProductDetailData: Codable {
@@ -72,6 +88,16 @@ struct ProductDetailData: Codable {
                 return "기간제"
             }
         }
+        
+        var status: String {
+            if rental == nil {
+                return "대여 가능"
+            } else if rental?.rentalStatus == "WAIT" {
+                return "예약중"
+            } else {
+                return "처리 필요"
+            }
+        }
     }
     
     struct Rental: Codable {
@@ -79,6 +105,5 @@ struct ProductDetailData: Codable {
         let rentalStatus: String
         let rentDate: String
         let expDate: String?
-        
     }
 }

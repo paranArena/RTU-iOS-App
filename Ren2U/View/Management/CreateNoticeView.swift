@@ -30,6 +30,7 @@ struct CreateNoticeView: View {
                 Button {
                     Task {
                         await managementVM.createNotification(notice: raw)
+                        managementVM.searchNotificationssAll()
                         groupVM.getMyNotifications()
                     }
                     dismiss()

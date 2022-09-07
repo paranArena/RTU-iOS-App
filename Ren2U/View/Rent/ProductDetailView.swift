@@ -14,14 +14,8 @@ struct ProductDetailView: View {
     
     let clubId: Int
     let productId: Int
+    
     @StateObject private var rentVM: RentalViewModel
-    
-    init(clubId: Int, productId: Int) {
-        self.clubId = clubId
-        self.productId = productId
-        _rentVM = StateObject(wrappedValue: RentalViewModel(clubId: clubId, productId: productId))
-    }
-    
     @StateObject private var viewModel = ViewModel()
     @Environment(\.isPresented) var isPresented
     @State private var rentalButtonHeight: CGFloat = .zero
@@ -29,7 +23,14 @@ struct ProductDetailView: View {
     @State private var isShowingItemSheet = false
     @State private var selectedItemId: Int?
     
+    init(clubId: Int, productId: Int) {
+        self.clubId = clubId
+        self.productId = productId
+        _rentVM = StateObject(wrappedValue: RentalViewModel(clubId: clubId, productId: productId))
+    }
     
+    
+
     
     var body: some View {
         BounceControllScrollView(baseOffset: -10, offset: $viewModel.offset) {
@@ -229,6 +230,7 @@ struct ProductDetailView: View {
                         } label: {
                             Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                                .foregroundColor(id == selectedItemId ? Color.white : Color.primary)
                             
                             Text("\(rentVM.productDetail.items[i].rentalPolicy)")
                                 .font(.custom(CustomFont.RobotoBold.rawValue, size: 12))
@@ -236,21 +238,16 @@ struct ProductDetailView: View {
                                 .padding(.vertical, 5)
                                 .background(Capsule().fill(rentVM.productDetail.items[i].bgColor))
                         }
+                        .frame(maxWidth:. infinity, alignment: .leading)
+                        .background(Capsule().fill(id == selectedItemId ? Color.navy_1E2F97 : Color.clear))
                         
                         Spacer()
                         
-                        if let item = rentVM.productDetail.items[i].rental {
-                            Text("예약중")
-                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                            if let expData = item.expDate {
-                                Text("~\(expData)")
-                            }
-                        } else {
-                            Text("대여 가능")
-                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                        }
+                        Text(rentVM.productDetail.items[i].status)
+                            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                     }
-                    .padding(.horizontal, 10)
+                    .padding(.trailing, 10)
                     Divider()
                 }
             }

@@ -96,7 +96,7 @@ struct RentalTab: View {
                     NavigationLink(isActive: $clubVM.products[i].isActive) {
                         ProductDetailView(clubId: clubVM.products[i].data.clubId, productId: clubVM.products[i].data.id)
                     } label: {
-                        RentalItemHCell(rentalItemInfo: clubVM.products[i].data)
+                        ProductCell(rentalItemInfo: clubVM.products[i].data)
                     }
                     .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.products[i].data.clubId != tabVM.selectedClubId)
                     .isHidden(hidden: isSearchBarFocused && !clubVM.products[i].data.name.contains(searchText))
@@ -112,12 +112,9 @@ struct RentalTab: View {
     private func RentalListSelected() -> some View {
         RefreshableScrollView(threshold: 120) {
             VStack {
-                ForEach(0..<10, id: \.self) { i in
-                    TempCell(rentalItemInfo: clubVM.products[0].data)
+                ForEach(clubVM.rentals.indices, id:\.self) { i in
+                    RentalCell(rentalItemInfo: clubVM.rentals[i])
                 }
-//                ForEach(clubVM.rentals.indices, id: \.self) { i in
-//
-//                }
             }
         }
         .refreshable {

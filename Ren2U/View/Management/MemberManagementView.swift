@@ -26,9 +26,20 @@ extension MemberManagementView {
 }
 struct MemberManagementView: View {
     
+    enum AlertSelection {
+        case signUpOk
+        case signUpCancel
+    }
+    
     @ObservedObject var managementVM: ManagementViewModel
     @State private var buttonSelection: Selection = .member
     @State private var selectedCellID = 0
+    
+    
+    @State private var isShowingAlert = false
+    
+    @State private var isShowingSignUpAlert = false 
+    @State private var selection: AlertSelection = .signUpCancel
     
     var body: some View {
         VStack {
@@ -42,6 +53,21 @@ struct MemberManagementView: View {
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
         }
+        .alert("", isPresented: $isShowingAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("OK") {
+                Task {
+                    await managementVM.removeMember(memberId: selectedCellID)
+                    await managementVM.searchClubMembersAll()
+                }
+            }
+        } message: {
+            Text("멤버를 추방하시겠습니까?")
+        }
+        .alert("", isPresented: $isShowingSignUpAlert) {
+           
+        }
+        
         .onAppear {
             UITabBar.hideTabBar()
         }
@@ -80,7 +106,7 @@ struct MemberManagementView: View {
         SlideResettableScrollView(selectedCellId: $selectedCellID) {
             VStack {
                 ForEach(managementVM.members.indices, id: \.self) { index in
-                    ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, managementVM: managementVM)
+                    ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, isShowingAlert: $isShowingAlert, managementVM: managementVM)
                 }
             }
         }
@@ -91,15 +117,15 @@ struct MemberManagementView: View {
         SlideResettableScrollView(selectedCellId: $selectedCellID) {
             VStack {
                 ForEach(managementVM.applicants.indices, id: \.self) { index in
-                    ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, managementVM: managementVM)
+                    ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, isShowingSignUp: $isShowingSignUpAlert, alertSelection: $selection, managementVM: managementVM)
                 }
             }
         }
     }
 }
 
-struct MemberManament_Previews: PreviewProvider {
-    static var previews: some View {
-        MemberManagementView(managementVM:  ManagementViewModel(clubData: ClubData.dummyClubData()))
-    }
-}
+//struct MemberManament_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MemberManagementView(managementVM:  ManagementViewModel(clubData: ClubData.dummyClubData()))
+//    }
+//}

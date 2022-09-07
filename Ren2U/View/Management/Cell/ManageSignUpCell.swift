@@ -12,6 +12,8 @@ struct ManageSignUpCell: View {
     
     let userData: UserData
     @Binding var selectedCellID: Int
+    @Binding var isShowingSignUp: Bool
+    @Binding var alertSelection: MemberManagementView.AlertSelection
     @ObservedObject var managementVM: ManagementViewModel
 
     
@@ -35,9 +37,11 @@ struct ManageSignUpCell: View {
                     .foregroundColor(.navy_1E2F97)
             }
         } okCallback: {
-            managementVM.acceptClubJoinTask(userData: userData)
+            alertSelection = .signUpOk
+            isShowingSignUp = true
         } cancelCallback: {
-            print("회원가입 거절 임시 출력 함수")
+            alertSelection = .signUpCancel
+            isShowingSignUp = true 
         }
     }
     

@@ -12,10 +12,10 @@ import UIKit
 class ManagementViewModel: ObservableObject {
     
     @Published var clubData = ClubData.dummyClubData()
-    
     @Published var applicants = [UserData]()
     @Published var members = [UserAndRoleData]()
     @Published var products = [ProductResponseData]()
+    @Published var notices = [NoticeCellData]()
     
     
     init(clubData: ClubData) {
@@ -26,6 +26,7 @@ class ManagementViewModel: ObservableObject {
             await searchClubMembersAll()
             await searchClubJoinsAll()
             await searchClubProductsAll()
+            await searchNotificationssAll()
         }
     }
     
@@ -48,13 +49,7 @@ class ManagementViewModel: ObservableObject {
             }
 
             for (key, value) in param {
-                if key == "hashtags" {
-                    for v in value as! [String] {
-                        multipart.append(Data(v.utf8), withName: key)
-                    }
-                } else {
                     multipart.append(Data(String("\(value)").utf8), withName: key)
-                }
             }
             
 
@@ -164,6 +159,26 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    @MainActor
+    func searchNotificationssAll() {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/notifications/search/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchNotificationsAllResponse.self) { res in
+            
+            switch res.result {
+            case .success(let value):
+                print("[searchNotificationsAll success]")
+                print(value.responseMessage)
+                self.notices = value.data.reversed()
+                
+            case .failure(let err):
+                print("[searchNotificationsAll err")
+                print(err)
+            }
+        }
+    }
+    
     //  MARK: PUT
     func updateNotification(groupId: Int, notificationId: Int, noticeData: NoticeCellData) async {
         let url = "\(BASE_URL)/clubs/\(groupId)/notifications/\(notificationId)"
@@ -189,6 +204,23 @@ class ManagementViewModel: ObservableObject {
     }
     
     //  MARK: DELETE
+    func rejectClubJoin(memberId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/requests/join/\(memberId)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        
+        let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
+        
+        switch result {
+        case .success(_):
+            print("[rejectClubJoin Success]")
+        case .failure(_):
+            print("[rejectClubJoin err]")
+        }
+        
+    }
+    
     func deleteNotification(groupID: Int, notificationID: Int) async {
         let url = "\(BASE_URL)/clubs/\(groupID)/notifications/\(notificationID)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
@@ -222,6 +254,22 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    func removeMember(memberId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/members/\(memberId)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
+        
+        switch result {
+        case .success(_):
+            print("[removeMember success")
+        case .failure(_):
+            print("[removeMember err")
+        }
+        
+    }
+    
     //  MARK: TASK
     
     func searchClubJoinsAllTask() {
@@ -235,11 +283,4 @@ class ManagementViewModel: ObservableObject {
             await acceptClubJoin(userData: userData)
         }
     }
-    
-    func deleteNotificationTask(groupID: Int, notificationID: Int) {
-        Task {
-            await deleteNotification(groupID: groupID, notificationID: notificationID)
-        }
-    }
-    
 }

@@ -12,20 +12,14 @@ struct ManageNoticeCell: View {
     
     let noticeInfo: NoticeCellData
     let groupName: String
-    let groupID: Int
     @Binding var selectedCellID: Int
-    
+    @Binding var isShowingAlert: Bool
     @ObservedObject var managementVM: ManagementViewModel
-    @EnvironmentObject var groupVM: ClubViewModel
   
     var body: some View {
         
-        
-        CellWithTwoSlideButton(okMessage: "비공개", cancelMessage: "삭제", cellID: noticeInfo.id, selectedID: $selectedCellID) {
-            
+        CellWithOneSlideButton(okMessage: "삭제", cellID: noticeInfo.id, selectedID: $selectedCellID) {
             HStack {
-                
-                
                 KFImage(URL(string: noticeInfo.imagePath)).onFailure { err in
                     print(err.errorDescription ?? "KFImage err")
                     }
@@ -50,24 +44,47 @@ struct ManageNoticeCell: View {
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     .foregroundColor(Color.gray_ADB5BD)
             }
-        } okCallback: {
-            print("비공개 임시 출력")
-            print("cellID: \(noticeInfo.id)")
-            print("selectedID: \(selectedCellID)")
-        } cancelCallback: {
-            managementVM.deleteNotificationTask(groupID: groupID, notificationID: noticeInfo.id)
-            let index = groupVM.notices[groupID]?.firstIndex(where: { noticeData in
-                noticeData.id == noticeInfo.id
-            })
-            groupVM.notices[groupID]?.remove(at: index!)
+        } callback: {
+            isShowingAlert = true
         }
-    }
-    
-    func getDate(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        let result = dateFormatter.string(from: date)
-        return result
+
+        
+//        CellWithTwoSlideButton(okMessage: "비공개", cancelMessage: "삭제", cellID: noticeInfo.id, selectedID: $selectedCellID) {
+//
+//            HStack {
+//
+//
+//                KFImage(URL(string: noticeInfo.imagePath)).onFailure { err in
+//                    print(err.errorDescription ?? "KFImage err")
+//                    }
+//                    .resizable()
+//                    .cornerRadius(15)
+//                    .frame(width: 80, height: 80)
+//                    .isHidden(hidden: noticeInfo.imagePath.isEmpty)
+//
+//                VStack(alignment: .leading, spacing: 0) {
+//                    Spacer()
+//                    Text(noticeInfo.title)
+//                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+//                    Text(groupName)
+//                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+//                        .foregroundColor(Color.gray_ADB5BD)
+//                    Spacer()
+//                }
+//
+//                Spacer()
+//
+//                Text("\(noticeInfo.updatedAt)")
+//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+//                    .foregroundColor(Color.gray_ADB5BD)
+//            }
+//        } okCallback: {
+//            print("비공개 임시 출력")
+//            print("cellID: \(noticeInfo.id)")
+//            print("selectedID: \(selectedCellID)")
+//        } cancelCallback: {
+//            isShowingAlert = true
+//        }
     }
 }
 

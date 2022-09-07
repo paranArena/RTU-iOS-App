@@ -1,13 +1,14 @@
 //
-//  TempCell.swift
+//  RentalItemHCell.swift
 //  Ren2U
 //
-//  Created by 노우영 on 2022/09/07.
+//  Created by 노우영 on 2022/08/03.
 //
+
 import SwiftUI
 import Kingfisher
 
-struct TempCell: View {
+struct ProductCell: View {
     
     enum CancelOption {
         case `default`
@@ -45,17 +46,13 @@ struct TempCell: View {
                 
                 Spacer()
                 
-                Button {
-                    
-                } label: {
-                    Text("예약취소")
+                VStack(alignment: .center, spacing: 5) {
+                    Text(rentalItemInfo.status)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(.navy_1E2F97)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
+                    Text("\(rentalItemInfo.left)/\(rentalItemInfo.max)")
+                        .font(.custom(CustomFont.RobotoMedium.rawValue, size: 16))
                 }
-                .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
-
+                .foregroundColor(rentalItemInfo.fgColor)
             }
             .padding(.horizontal, 10)
             Divider()
@@ -89,22 +86,7 @@ struct TempCell: View {
                 .capsuleStrokeAndForegroundColor(color: Color.navy_1E2F97)
         }
     }
-    
-    private var itemStatusText: String {
-        if rentalItemInfo.left == 0 {
-            return "대여불가"
-        } else {
-            return "남은 수량"
-        }
-    }
-    
-    private var FGColor: Color {
-        if rentalItemInfo.left == 0 {
-            return Color.red_EB1808
-        } else {
-            return Color.gray_868E96
-        }
-    }
+
 }
 
 //struct RentalItemHCell_Previews: PreviewProvider {

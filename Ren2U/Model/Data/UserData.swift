@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-//  MARK: USER
 struct UserAndRoleData: Codable, Identifiable {
     let id: Int
     let email: String
