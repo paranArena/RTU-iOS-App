@@ -140,7 +140,7 @@ struct ProductDetailData: Codable {
     let items: [Item]
     
     static func dummyProductData() -> ProductDetailData {
-        return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [Item(id: 1, numbering: 1, rentalPolicy: "", rental: nil)])
+        return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [Item(id: 1, numbering: 1, rentalPolicyDto: "", rental: nil)])
     }
     
     struct Location: Codable {
@@ -150,18 +150,40 @@ struct ProductDetailData: Codable {
     
     struct Item: Codable {
         let id, numbering: Int
-        let rentalPolicy: String
+        let rentalPolicyDto: String
         let rental: Rental?
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case numbering
+            case rentalPolicyDto = "rentalPolicy"
+            case rental
+        }
+        
+        var bgColor: Color {
+            if rentalPolicyDto == "FIFO" {
+                return Color.yellow_FFB800
+            } else {
+                return Color.green_2CA900
+            }
+        }
+        
+        var rentalPolicy: String {
+            if rentalPolicyDto == "FIFO" {
+                return "선착순"
+            } else {
+                return "기간제"
+            }
+        }
     }
     
     struct Rental: Codable {
         let id: Int
         let rentalStatus: String
         let rentDate: String
-        let expData: String?
+        let expDate: String?
     }
 }
-
 
 //  MARK: TEMP
 struct LikeGroupInfo: Codable {

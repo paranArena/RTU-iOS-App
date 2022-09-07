@@ -46,12 +46,4 @@ extension String {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter.date(from: self)
     }
-    
-    func translateRentalPolicy() -> String {
-        if self == "FIFO" {
-            return "선착순"
-        } else {
-            return "기간제"
-        }
-    }
 }

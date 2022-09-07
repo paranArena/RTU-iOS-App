@@ -81,8 +81,6 @@ struct MemberManagementView: View {
             VStack {
                 ForEach(managementVM.members.indices, id: \.self) { index in
                     ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, managementVM: managementVM)
-                    
-                    Divider()
                 }
             }
         }
@@ -94,8 +92,6 @@ struct MemberManagementView: View {
             VStack {
                 ForEach(managementVM.applicants.indices, id: \.self) { index in
                     ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, managementVM: managementVM)
-                    
-                    Divider()
                 }
             }
         }

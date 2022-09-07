@@ -15,6 +15,7 @@ class ClubViewModel: ObservableObject {
     
     @Published var notices = [Int: [NoticeCellData]]() // Vstack 한개 그룹 이동 후 사용될 정보
     @Published var products = [ProductCellData]()
+    @Published var rentals = [RentalData]()
     
     //  MARK: LOCAL
     
@@ -179,21 +180,22 @@ class ClubViewModel: ObservableObject {
     }
     
     @MainActor
-    func getMyRentals() {
+    func getMyRentals()  async {
         let url = "\(BASE_URL)/members/my/rentals"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
-            switch res.result {
-            case .success(let value):
-                print("getMyRentals success")
-                print(value)
-            case .failure(let err):
-                print("getMyRentals err")
-                print(err)
-            }
-        }
+        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyRentals.self)
+        let result = await request.result
         
+        switch result {
+        case .success(let value):
+            print("[getMyRentals success")
+            print(value.responseMessage)
+            self.rentals = value.data
+        case .failure(let err):
+            print("[getMyRentals err]")
+            print(err)
+        }
     }
     
     @MainActor

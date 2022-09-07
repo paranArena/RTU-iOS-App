@@ -19,6 +19,7 @@ struct ReturnInfo: Codable {
         self.itemName = itemName
     }
     
+    
     static func dummyReturnInfo() -> ReturnInfo {
         return ReturnInfo(imageSource: "https://picsum.photos/id/1058/200/300", itemName: "운동장")
     }

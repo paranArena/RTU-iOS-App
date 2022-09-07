@@ -10,7 +10,7 @@ import HidableTabView
 
 struct RentalTab: View {
     
-    @EnvironmentObject var groupViewModel: ClubViewModel
+    @EnvironmentObject var clubVM: ClubViewModel
     @EnvironmentObject var tabVM: AmongTabsViewModel
     
     @State private var rentalSelection: Selection = .rentalItem
@@ -92,14 +92,14 @@ struct RentalTab: View {
     private func RentalItemSelected() -> some View {
         RefreshableScrollView(threshold: offset) {
             VStack {
-                ForEach(groupViewModel.products.indices, id: \.self) { i in
-                    NavigationLink(isActive: $groupViewModel.products[i].isActive) {
-                        ProductDetailView(clubId: groupViewModel.products[i].data.clubId, productId: groupViewModel.products[i].data.id)
+                ForEach(clubVM.products.indices, id: \.self) { i in
+                    NavigationLink(isActive: $clubVM.products[i].isActive) {
+                        ProductDetailView(clubId: clubVM.products[i].data.clubId, productId: clubVM.products[i].data.id)
                     } label: {
-                        RentalItemHCell(rentalItemInfo: groupViewModel.products[i].data)
+                        RentalItemHCell(rentalItemInfo: clubVM.products[i].data)
                     }
-                    .isHidden(hidden: tabVM.selectedClubId != nil && groupViewModel.products[i].data.clubId != tabVM.selectedClubId)
-                    .isHidden(hidden: isSearchBarFocused && !groupViewModel.products[i].data.name.contains(searchText))
+                    .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.products[i].data.clubId != tabVM.selectedClubId)
+                    .isHidden(hidden: isSearchBarFocused && !clubVM.products[i].data.name.contains(searchText))
                 }
             }
         }
@@ -112,7 +112,9 @@ struct RentalTab: View {
     private func RentalListSelected() -> some View {
         RefreshableScrollView(threshold: 120) {
             VStack {
-                Text("대여목록")
+                ForEach(clubVM.rentals.indices, id: \.self) { i in
+                    Text("\(clubVM.rentals[i].id)")
+                }
             }
         }
         .refreshable {
@@ -129,7 +131,7 @@ struct RentalTab: View {
                     .foregroundColor(.gray_495057)
                 
                 HStack(spacing: 10) {
-                    Text(groupViewModel.getGroupNameByGroupId(groupId: clubId))
+                    Text(clubVM.getGroupNameByGroupId(groupId: clubId))
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 13))
                         .foregroundColor(.gray_495057)
                     

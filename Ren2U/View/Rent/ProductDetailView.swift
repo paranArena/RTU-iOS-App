@@ -24,6 +24,7 @@ struct ProductDetailView: View {
     
     @StateObject private var viewModel = ViewModel()
     @Environment(\.isPresented) var isPresented
+    @State private var rentalButtonHeight: CGFloat = .zero
     @State private var isShowingModel = false
     @State private var isShowingItemSheet = false
     @State private var selectedItemId: Int?
@@ -79,6 +80,7 @@ struct ProductDetailView: View {
                 }
             }
         }
+        .padding(.bottom, rentalButtonHeight)
 //        .overlay(OverlayContent())
         .overlay(alignment: .bottom) {
             RentalButton()
@@ -224,7 +226,6 @@ struct ProductDetailView: View {
                         
                         Button {
                             selectedItemId = id
-                            print(selectedItemId)
                         } label: {
                             Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
@@ -233,7 +234,7 @@ struct ProductDetailView: View {
                                 .font(.custom(CustomFont.RobotoBold.rawValue, size: 12))
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 5)
-                                .background(Capsule().fill(Color.yellow_FFB800))
+                                .background(Capsule().fill(rentVM.productDetail.items[i].bgColor))
                         }
                         
                         Spacer()
@@ -241,7 +242,7 @@ struct ProductDetailView: View {
                         if let item = rentVM.productDetail.items[i].rental {
                             Text("예약중")
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                            if let expData = item.expData {
+                            if let expData = item.expDate {
                                 Text("~\(expData)")
                             }
                         } else {
@@ -273,26 +274,28 @@ struct ProductDetailView: View {
     
     @ViewBuilder
     private func RentalButton() -> some View {
-        Button {
-            if let selectedItemId = selectedItemId {
-                rentVM.requestRent(itemId: selectedItemId)
+        HeightSetterView(viewHeight: $rentalButtonHeight) {
+            Button {
+                if let selectedItemId = selectedItemId {
+                    rentVM.requestRent(itemId: selectedItemId)
+                }
+            } label: {
+                Capsule()
+                    .fill(selectedItemId == nil ? Color.BackgroundColor : Color.navy_1E2F97)
+                    .overlay(Text("대여하기")
+                        .foregroundColor(selectedItemId == nil ? Color.navy_1E2F97 : Color.white)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20)))
+                
+                    .frame(height: 40)
             }
-        } label: {
-            Capsule()
-                .fill(selectedItemId == nil ? Color.BackgroundColor : Color.navy_1E2F97)
-                .overlay(Text("대여하기")
-                    .foregroundColor(selectedItemId == nil ? Color.navy_1E2F97 : Color.white)
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20)))
-            
-                .frame(height: 40)
+            .overlay(Capsule().stroke(Color.navy_1E2F97, lineWidth: 2))
+            .padding(.horizontal, 20)
+            .frame(maxWidth: .infinity)
+            .padding(.top, 20)
+            .background(Color.BackgroundColor)
+            .clipped()
+            .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
         }
-        .overlay(Capsule().stroke(Color.navy_1E2F97, lineWidth: 2))
-        .padding(.horizontal, 20)
-        .frame(maxWidth: .infinity)
-        .padding(.top, 20)
-        .background(Color.BackgroundColor)
-        .clipped()
-        .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
     }
             
     
@@ -351,7 +354,7 @@ struct ProductDetailView: View {
                         Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
                             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                         
-                        Text("\(rentVM.productDetail.items[i].rentalPolicy)")
+                        Text("\(rentVM.productDetail.items[i].rentalPolicyDto)")
                             .font(.custom(CustomFont.RobotoBold.rawValue, size: 12))
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)

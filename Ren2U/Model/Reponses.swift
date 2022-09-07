@@ -63,6 +63,13 @@ struct GetProductResponse: Codable {
     let responseMessage: String
     let data: ProductDetailData
 }
+
+struct GetMyRentals: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [RentalData]
+}
+
 //  MARK: POST
 
 struct VerifyEmailCodeResponse: Codable {

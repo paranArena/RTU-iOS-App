@@ -56,7 +56,7 @@ struct Ren2UTab: View {
         .foregroundColor(.LabelColor)
         .onAppear {
             authVM.getMyInfo()
-            funcCount = 3
+            funcCount = 4
             Task {
                 await groupVM.getMyClubsAsync()
                 funcCount -= 1
@@ -66,6 +66,10 @@ struct Ren2UTab: View {
                 funcCount -= 1
             }
             Task { await groupVM.getMyProducts()
+                funcCount -= 1
+            }
+            Task {
+                await groupVM.getMyRentals()
                 funcCount -= 1
             }
         }
