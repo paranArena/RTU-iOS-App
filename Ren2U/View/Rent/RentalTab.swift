@@ -94,7 +94,7 @@ struct RentalTab: View {
             VStack {
                 ForEach(groupViewModel.products.indices, id: \.self) { i in
                     NavigationLink(isActive: $groupViewModel.products[i].isActive) {
-                        Item(itemInfo: groupViewModel.products[i].data)
+                        ProductDetailView(clubId: groupViewModel.products[i].data.clubId, productId: groupViewModel.products[i].data.id)
                     } label: {
                         RentalItemHCell(rentalItemInfo: groupViewModel.products[i].data)
                     }

@@ -124,6 +124,42 @@ struct ProductResponseData: Codable {
     let clubName: String
     let imagePath: String
     let clubId: Int
+    
+    static func dummyProductResponseData() -> ProductResponseData {
+        return ProductResponseData(id: 0, name: "", category: "", left: 1, max: 1, clubName: "", imagePath: "", clubId: 1)
+    }
+}
+
+struct ProductDetailData: Codable {
+    let id: Int
+    let name, category: String
+    let location: Location
+    let fifoRentalPeriod, reserveRentalPeriod, price: Int
+    let caution: String
+    let imagePath: String
+    let items: [Item]
+    
+    static func dummyProductData() -> ProductDetailData {
+        return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [Item(id: 1, numbering: 1, rentalPolicy: "", rental: nil)])
+    }
+    
+    struct Location: Codable {
+        let name: String
+        let latitude, longitude: Double
+    }
+    
+    struct Item: Codable {
+        let id, numbering: Int
+        let rentalPolicy: String
+        let rental: Rental?
+    }
+    
+    struct Rental: Codable {
+        let id: Int
+        let rentalStatus: String
+        let rentDate: String
+        let expData: String?
+    }
 }
 
 

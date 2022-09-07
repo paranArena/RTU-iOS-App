@@ -48,7 +48,7 @@ struct RentalComplete: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var mapViewModel = MapViewModel()
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.279952, longitude: 127.046147), span: MapDetails.defaultSpan)
-    let itemInfo: ProductResponseData
+    let itemInfo: ProductDetailData
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -57,10 +57,10 @@ struct RentalComplete: View {
             
             Text("물품이름 : \(itemInfo.name)")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-            
-            Text("대여기간 : ")
-                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                .padding(.bottom, 30)
+//
+//            Text("대여기간 : \(itemInfo. )")
+//                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+//                .padding(.bottom, 30)
             
             Map(coordinateRegion: $region, interactionModes: [], showsUserLocation: false, userTrackingMode: .constant(.none), annotationItems: [ItemLocation.dummyItemLocation()]) { item in
                 MapAnnotation(coordinate: item.coordinate) {
@@ -80,7 +80,7 @@ struct RentalComplete: View {
             }
             
             HStack(alignment: .center, spacing: 0) {
-                Text("성호관 201호")
+                Text(itemInfo.location.name)
                     .font(.custom(CustomFont.RobotoBold.rawValue, size: 22))
                     .foregroundColor(Color.navy_1E2F97)
                 Text("에서 물품을 픽업해주세요!")

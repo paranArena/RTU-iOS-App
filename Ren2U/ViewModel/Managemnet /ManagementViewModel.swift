@@ -79,23 +79,7 @@ class ManagementViewModel: ObservableObject {
             print("클럽 가입 수락 실패 : \(err)")
         }
     }
-    
-    @MainActor
-    func searchClubProductsAll(clubId: Int) {
-        let url = "\(BASE_URL)/clubs/\(clubData.id)/products/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
-        
-        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseString { res in
-            switch res.result {
-            case .success(let value):
-                print("[searchClubProductsAll success]")
-                print(value)
-            case .failure(let err):
-                print("[searchClubProductsAll err]")
-                print(err)
-            }
-        }
-    }
+
     
     func applyRent(clubId: Int, itemId: Int) {
         let url = "\(BASE_URL)/clubs/\(clubId)/apply/rent/\(itemId)"
@@ -159,6 +143,8 @@ class ManagementViewModel: ObservableObject {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/products/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
+        print(url)
+        
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchClubProductsAll.self) {
             res in
             
@@ -167,7 +153,7 @@ class ManagementViewModel: ObservableObject {
                 print("[searchClubProductsAll success]")
                 self.products = value.data
             case .failure(let err):
-                print("[searchClubProductsAll failure")
+                print("[searchClubProductsAll failure]")
                 print(err)
             }
             

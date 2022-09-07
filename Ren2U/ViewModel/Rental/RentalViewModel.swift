@@ -26,17 +26,29 @@ struct ReturnInfo: Codable {
 
 class RentalViewModel: ObservableObject {
     
+    var clubId = -1
+    var productId = -1 
+    @Published var productDetail = ProductDetailData.dummyProductData()
+    
+    init(clubId: Int, productId: Int) {
+        self.clubId = clubId
+        self.productId = productId
+        getProduct()
+    }
+    
     //  MARK: GET
-    func getProduct(clubId: Int, productId: Int) {
-        let url = "\(BASE_URL)/clubs/\(5)/products/\(2)"
+    func getProduct() {
+        let url = "\(BASE_URL)/clubs/\(clubId)/products/\(productId)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
-            
+        print(url)
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetProductResponse.self) { res in
             switch res.result {
             case .success(let value):
                 print("[getProduct success]")
                 print(value)
+                self.productDetail = value.data
             case .failure(let err):
                 print("[getProduct failure]")
                 print(err)
@@ -45,11 +57,13 @@ class RentalViewModel: ObservableObject {
     }
     
     //  MARK: POST
-    func requestRent(clubId: Int, itemId: Int) {
+    func requestRent(itemId: Int) {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/request"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
+        print(url)
+        
+        AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
             
             switch res.result {
             case .success(let value):

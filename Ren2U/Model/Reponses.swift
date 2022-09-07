@@ -57,6 +57,12 @@ struct SearchClubProductsAll: Codable {
     let data: [ProductResponseData]
 }
 
+
+struct GetProductResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: ProductDetailData
+}
 //  MARK: POST
 
 struct VerifyEmailCodeResponse: Codable {

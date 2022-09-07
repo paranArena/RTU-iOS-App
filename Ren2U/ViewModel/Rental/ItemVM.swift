@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-extension Item {
+extension ProductDetailView {
     enum Selection: Int {
         case `default`
         case none
@@ -40,7 +40,7 @@ extension Item {
     }
 }
 
-extension Item {
+extension ProductDetailView {
     class ViewModel: ObservableObject {
         @Published var date: Date = Date.now
         @Published var selection: Selection = .default
