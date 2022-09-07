@@ -23,3 +23,11 @@ enum Category: String, CaseIterable {
     case event = "행사"
     case etc = "기타" 
 }
+
+enum ClubRole: String {
+    case owner = "OWNER"
+    case admin = "ADMIN"
+    case user = "USER"
+    case wait = "WAIT"
+    case none = "NONE"
+}
