@@ -87,7 +87,9 @@ struct ClubPage: View {
     
     @ViewBuilder
     private func Thumbnail() -> some View {
-        Group{
+        HStack {
+            
+            Spacer()
             if let thumbnaulPath = clubData.thumbnailPath {
                 KFImage(URL(string: thumbnaulPath))
                     .onFailure { err in
@@ -96,14 +98,15 @@ struct ClubPage: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: 200, height: 200)
+                    .cornerRadius(15)
             } else {
                 Image(AssetImages.DefaultGroupImage.rawValue)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 200, height: 200)
             }
+            Spacer()
         }
-        .frame(maxWidth: .infinity, alignment: .center)
     }
     
     @ViewBuilder

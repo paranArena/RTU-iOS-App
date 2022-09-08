@@ -20,7 +20,7 @@ struct GroupSelected: View {
     var body: some View {
         RefreshableScrollView(threshold: refreshThreshold) {
             VStack(alignment: .leading) {
-                GroupFavorites()
+//                GroupFavorites()
                 JoinedGroup()
             }
         }
@@ -36,32 +36,32 @@ struct GroupSelected: View {
             await groupVM.getMyProducts()
         }
     }
-    
-    @ViewBuilder
-    private func GroupFavorites() -> some View {
-        VStack(alignment: .leading) {
-            Text("즐겨찾기")
-                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                .padding(.horizontal, 20)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
-                    ForEach(groupVM.joinedClubs.indices, id: \.self) { index in
-                        let compareGroupId = groupVM.joinedClubs[index].id
-                        Button {
-                            self.groupInfo = groupVM.joinedClubs[index]
-                            self.isActive = true
-                        } label: {
-                            FavoriteGroupCell(info: $groupVM.joinedClubs[index])
-                        }
-                        .isHidden(hidden: !groupVM.likesGroupId.contains(where: { Int($0.groupId)! == compareGroupId }))
-                    }
-                }
-                .padding(.horizontal, 20)
-            }
-        }
-        .padding(.bottom, 30)
-        .isHidden(hidden: groupVM.likesGroupId.isEmpty)
-    }
+//
+//    @ViewBuilder
+//    private func GroupFavorites() -> some View {
+//        VStack(alignment: .leading) {
+//            Text("즐겨찾기")
+//                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+//                .padding(.horizontal, 20)
+//            ScrollView(.horizontal, showsIndicators: false) {
+//                HStack(spacing: 15) {
+//                    ForEach(groupVM.joinedClubs.indices, id: \.self) { index in
+//                        let compareGroupId = groupVM.joinedClubs[index].id
+//                        Button {
+//                            self.groupInfo = groupVM.joinedClubs[index]
+//                            self.isActive = true
+//                        } label: {
+//                            FavoriteGroupCell(info: $groupVM.joinedClubs[index])
+//                        }
+//                        .isHidden(hidden: !groupVM.likesGroupId.contains(where: { Int($0.groupId)! == compareGroupId }))
+//                    }
+//                }
+//                .padding(.horizontal, 20)
+//            }
+//        }
+//        .padding(.bottom, 30)
+//        .isHidden(hidden: groupVM.likesGroupId.isEmpty)
+//    }
     
     @ViewBuilder
     private func JoinedGroup() -> some View {

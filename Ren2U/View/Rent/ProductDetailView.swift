@@ -24,7 +24,11 @@ struct ProductDetailView: View {
     @State private var rentalButtonHeight: CGFloat = .zero
     @State private var isShowingModel = false
     @State private var selectedItemId: Int?
+    @State private var selctedItem: ProductDetailData.Item?
+    @State private var callback: () -> () = { print("callback") }
     
+    //alert
+    @State private var isShowingAlert = false
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
@@ -105,6 +109,19 @@ struct ProductDetailView: View {
         .ignoresSafeArea(.container, edges: .top)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
+        .alert("", isPresented: $isShowingAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button {
+                callback()
+                isShowingAlert = false
+            } label: {
+                Text("OK")
+            }
+
+        } message: {
+            
+        }
+
 //        .sheet(isPresented: $viewModel.isShowingRental) {
 //            RentalSheet(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)
 //        }
@@ -211,6 +228,7 @@ struct ProductDetailView: View {
                     HStack {
                         
                         Button {
+                            selctedItem = rentVM.productDetail.items[i]
                             selectedItemId = id
                         } label: {
                             Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
@@ -259,17 +277,56 @@ struct ProductDetailView: View {
     private func RentalButton() -> some View {
         HeightSetterView(viewHeight: $rentalButtonHeight) {
             Button {
-                if let selectedItemId = selectedItemId {
-                    Task {
-                        await rentVM.requestRent(itemId: selectedItemId)
-                        await clubVM.getMyRentals()
-                        await rentVM.getProduct()
+                
+                if let rentalInfo = selctedItem!.rentalInfo  {
+                    //  대여자가 내가 아닐 경우 아무것도 하지 않음
+                    if !rentalInfo.meRental {
+                        callback = {
+                            #if DEBUG
+                            print("대여불가능")
+                            #endif
+                        }
+                    } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
+                        callback = {
+                            Task {
+                                print("2번 콜백")
+                                await rentVM.applyRent(itemId: selectedItemId ?? -1)
+                                await clubVM.getMyRentals()
+                                await rentVM.getProduct()
+                                selctedItem = nil
+                                selectedItemId = nil
+                            }
+                        }
+                    } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
+                        callback = {
+                            Task {
+                                print("3번 콜백")
+                                await rentVM.returnRent(itemId: selectedItemId ?? 0)
+                                await clubVM.getMyRentals()
+                                await rentVM.getProduct()
+                                selctedItem = nil
+                                selectedItemId = nil
+                            }
+                        }
+                    }
+                } else {
+                    callback = {
+                        Task {
+                            await rentVM.requestRent(itemId: selectedItemId ?? -1)
+                            await clubVM.getMyRentals()
+                            await rentVM.getProduct()
+                            selctedItem = nil
+                            selectedItemId = nil
+                        }
                     }
                 }
+                
+                isShowingAlert = true
+                
             } label: {
                 Capsule()
                     .fill(selectedItemId == nil ? Color.BackgroundColor : Color.navy_1E2F97)
-                    .overlay(Text("대여하기")
+                    .overlay(Text(selctedItem?.buttonText ?? "대여하기")
                         .foregroundColor(selectedItemId == nil ? Color.navy_1E2F97 : Color.white)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20)))
                 
@@ -282,6 +339,7 @@ struct ProductDetailView: View {
             .background(Color.BackgroundColor)
             .clipped()
             .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
+            .disabled(selctedItem == nil)
         }
     }
             

@@ -332,10 +332,10 @@
 			isa = PBXGroup;
 			children = (
 				152C6F5528C8550C00AA420A /* Data */,
+				15FA688028BC717900B3DF0B /* Group */,
 				1525F60328B739EF00C7CA51 /* enums.swift */,
 				151B557028BCA1AA0090A5E8 /* Reponses.swift */,
 				15FA687828BC5A2400B3DF0B /* Param.swift */,
-				15FA688028BC717900B3DF0B /* Group */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -360,9 +360,9 @@
 		151B556D28BC9EBC0090A5E8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				15C03143289CD5A900D0354E /* Rental */,
 				1523D5E328BE29BE009EB733 /* Managemnet  */,
 				1525F5FF28B7365D00C7CA51 /* ItemRegistration */,
-				15C03143289CD5A900D0354E /* Rental */,
 				15868738287EBB270003C2DC /* Auth */,
 				156386D0288A5D06006653E8 /* Club */,
 				152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */,

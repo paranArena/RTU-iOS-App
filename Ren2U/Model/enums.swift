@@ -31,3 +31,9 @@ enum ClubRole: String {
     case wait = "WAIT"
     case none = "NONE"
 }
+
+enum RentalStatus: String {
+    case wait = "WAIT"
+    case rent = "RENT"
+    case cancel = "CANCEL"
+}

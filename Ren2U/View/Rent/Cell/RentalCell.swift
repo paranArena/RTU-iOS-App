@@ -48,20 +48,20 @@ struct RentalCell: View {
                 }
                 
                 Spacer()
-                
-                Button {
-                    selectedItemId = rentalItemInfo.id
-                    selectedClubId = rentalItemInfo.clubId
-                    isShowingRentalCancelAlert = true 
-                } label: {
-                    Text("예약취소")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(.navy_1E2F97)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
+                if rentalItemInfo.rentalInfo.rentalStatus == "WAIT" {
+                    Button {
+                        selectedItemId = rentalItemInfo.id
+                        selectedClubId = rentalItemInfo.clubId
+                        isShowingRentalCancelAlert = true
+                    } label: {
+                        Text("예약취소")
+                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                            .foregroundColor(.navy_1E2F97)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                    }
+                    .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
                 }
-                .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
-
             }
             .padding(.horizontal, 10)
             Divider()

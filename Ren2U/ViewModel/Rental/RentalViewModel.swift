@@ -87,20 +87,38 @@ class RentalViewModel: ObservableObject {
         }
     }
     
-    func returnRent(itemId: Int) async {
+    //  MARK: PUT
+    func applyRent(itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/apply"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
+        AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
             
             switch res.result {
             case .success(let value):
-                print("[returnRent success]")
+                print("[applyRent success]")
                 print(value)
             case .failure(let err):
-                print("[returnRent failure]")
+                print("[applyRent failure]")
                 print(err)
             }
+        }
+    }
+    
+    func returnRent(itemId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/return"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
+            
+        switch result {
+        case .success(let value):
+            print("[returnRent success]")
+            print(value)
+        case .failure(let err):
+            print("[returnRent failure]")
+            print(err)
         }
     }
 }

@@ -315,7 +315,6 @@ class ClubViewModel: ObservableObject {
             "introduction": club.introduction,
             "hashtags": club.hashtags
         ]
-      
         
         let task = AF.upload(multipartFormData: { multipart in
             if let image = club.thumbnail.jpegData(compressionQuality: 1) {
@@ -323,7 +322,13 @@ class ClubViewModel: ObservableObject {
             }
 
             for (key, value) in param {
+                
                 if key == "hashtags" {
+                    #if DEBUG
+                    print("Hashtag")
+                    print(value)
+                    #endif
+
                     for v in value as! [String] {
                         multipart.append(Data(v.utf8), withName: key)
                     }

@@ -92,10 +92,26 @@ struct ProductDetailData: Codable {
         var status: String {
             if rentalInfo == nil {
                 return "대여 가능"
-            } else if rentalInfo?.rentalStatus == "WAIT" {
+            } else if rentalInfo!.rentalStatus == "WAIT" {
                 return "예약중"
+            } else if  rentalInfo!.rentalStatus == "RENT" {
+                return "대여 불가"
             } else {
-                return "처리 필요"
+                return "에러"
+            }
+        }
+        
+        var buttonText: String {
+            if self == nil || rentalInfo == nil {
+                return "대여하기"
+            } else if !rentalInfo!.meRental {
+                return "대여불가"
+            } else if rentalInfo!.rentalStatus == "WAIT" {
+                return "대여확정"
+            } else if rentalInfo!.rentalStatus == "RENT" {
+                return "반납하기"
+            } else {
+                return "에러"
             }
         }
     }
@@ -104,5 +120,6 @@ struct ProductDetailData: Codable {
         let rentalStatus: String
         let rentDate: String
         let expDate: String?
+        let meRental: Bool
     }
 }
