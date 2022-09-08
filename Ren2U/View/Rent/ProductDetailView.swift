@@ -29,6 +29,7 @@ struct ProductDetailView: View {
     
     //alert
     @State private var isShowingAlert = false
+    @State private var isShowingDistanceAlert = false
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
@@ -109,18 +110,21 @@ struct ProductDetailView: View {
         .ignoresSafeArea(.container, edges: .top)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
+        .alert("거리가 너무 멉니다", isPresented: $isShowingDistanceAlert) {
+            Button("확인", role: .cancel) {}
+        }
         .alert("", isPresented: $isShowingAlert) {
-            Button("Cancel", role: .cancel) {}
+            Button("취소", role: .cancel) {}
             Button {
                 callback()
                 isShowingAlert = false
             } label: {
-                Text("OK")
+                Text("확인")
             }
-
         } message: {
             
         }
+
 
 //        .sheet(isPresented: $viewModel.isShowingRental) {
 //            RentalSheet(itemInfo: itemInfo, isRentalTerminal: $viewModel.isRentalTerminal)
@@ -221,7 +225,7 @@ struct ProductDetailView: View {
                 .foregroundColor(Color.gray_495057)
                 .padding(.horizontal, 10)
             
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 0) {
                 //  MARK: ITEM CELL
                 ForEach(rentVM.productDetail.items.indices, id: \.self) { i in
                     let id = rentVM.productDetail.items[i].id
@@ -242,16 +246,14 @@ struct ProductDetailView: View {
                                 .background(Capsule().fill(rentVM.productDetail.items[i].bgColor))
                         }
                         .frame(maxWidth:. infinity, alignment: .leading)
-                        .background(Capsule().fill(id == selectedItemId ? Color.navy_1E2F97 : Color.clear))
-                        
                         Spacer()
-                        
-                        
                         Text(rentVM.productDetail.items[i].status)
                             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .foregroundColor(id == selectedItemId ? Color.white : Color.primary)
                     }
-                    .padding(.trailing, 10)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 10)
+                    .background(id == selectedItemId ? Color.navy_1E2F97 : Color.clear)
                     Divider()
                 }
             }
@@ -287,17 +289,23 @@ struct ProductDetailView: View {
                             #endif
                         }
                     } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-                        callback = {
-                            Task {
-                                print("2번 콜백")
-                                await rentVM.applyRent(itemId: selectedItemId ?? -1)
-                                await clubVM.getMyRentals()
-                                await rentVM.getProduct()
-                                selctedItem = nil
-                                selectedItemId = nil
+                        if mapVM.region.center.distance(from: rentVM.productLocation) > 30 {
+                            isShowingDistanceAlert = true
+                        } else {
+                            isShowingAlert = true
+                            callback = {
+                                Task {
+                                    print("2번 콜백")
+                                    await rentVM.applyRent(itemId: selectedItemId ?? -1)
+                                    await clubVM.getMyRentals()
+                                    await rentVM.getProduct()
+                                    selctedItem = nil
+                                    selectedItemId = nil
+                                }
                             }
                         }
                     } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
+                        isShowingAlert = true
                         callback = {
                             Task {
                                 print("3번 콜백")
@@ -310,6 +318,7 @@ struct ProductDetailView: View {
                         }
                     }
                 } else {
+                    isShowingAlert = true
                     callback = {
                         Task {
                             await rentVM.requestRent(itemId: selectedItemId ?? -1)
@@ -320,8 +329,6 @@ struct ProductDetailView: View {
                         }
                     }
                 }
-                
-                isShowingAlert = true
                 
             } label: {
                 Capsule()

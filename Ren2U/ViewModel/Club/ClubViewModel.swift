@@ -422,6 +422,23 @@ class ClubViewModel: ObservableObject {
         }
     }
     
+    //  MARK: PUT
+    func returnRent(clubId: Int, itemId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/return"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        
+        let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
+            
+        switch result {
+        case .success(let value):
+            print("[returnRent success]")
+            print(value)
+        case .failure(let err):
+            print("[returnRent failure]")
+            print(err)
+        }
+    }
     //  MARK: TASK
     func createClubTask(club: CreateClubFormdata) {
         Task {

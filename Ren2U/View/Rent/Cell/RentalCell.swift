@@ -16,10 +16,12 @@ struct RentalCell: View {
         case no
     }
     
+    @EnvironmentObject var clubVM: ClubViewModel
     let rentalItemInfo: RentalData
     @Binding var selectedClubId: Int
     @Binding var selectedItemId: Int
-    @Binding var isShowingRentalCancelAlert: Bool
+    @Binding var isShowingAlert: Bool
+    @Binding var callback: () -> ()
 
     
     var body: some View {
@@ -52,9 +54,32 @@ struct RentalCell: View {
                     Button {
                         selectedItemId = rentalItemInfo.id
                         selectedClubId = rentalItemInfo.clubId
-                        isShowingRentalCancelAlert = true
+                        isShowingAlert = true
+                        callback = {
+                            Task {
+                                await clubVM.cancelRent(clubId: selectedClubId, itemId: selectedItemId)
+                                await clubVM.getMyRentals()
+                            }
+                        }
                     } label: {
                         Text("예약취소")
+                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                            .foregroundColor(.navy_1E2F97)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                    }
+                    .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
+                } else {
+                    Button {
+                        isShowingAlert = true
+                        callback = {
+                            Task {
+                                await clubVM.returnRent(clubId: rentalItemInfo.clubId, itemId: rentalItemInfo.id)
+                                await clubVM.getMyRentals()
+                            }
+                        }
+                    } label: {
+                        Text("반납하기")
                             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                             .foregroundColor(.navy_1E2F97)
                             .padding(.horizontal, 10)

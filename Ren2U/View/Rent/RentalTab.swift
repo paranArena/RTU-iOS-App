@@ -21,9 +21,10 @@ struct RentalTab: View {
     @State private var isShowingModal = false
     
     // 예약 취소를 위한 값들
-    @State private var isShowingRentalCancelAlert = false
+    @State private var isShowingAlert = false
     @State private var selectedClubId = -1
     @State private var selectedItemId = -1
+    @State private var callback: () -> () = { print("callback") }
     
     let spacing: CGFloat = 10
     
@@ -43,14 +44,10 @@ struct RentalTab: View {
                 
             }
         }
-        .alert("", isPresented: $isShowingRentalCancelAlert, actions: {
+        .alert("", isPresented: $isShowingAlert, actions: {
             Button("아니오", role: .cancel) {}
-            
             Button {
-                Task {
-                    await clubVM.cancelRent(clubId: selectedClubId, itemId: selectedItemId)
-                    await clubVM.getMyRentals()
-                }
+                callback()
             } label: {
                 Text("예")
             }
@@ -126,6 +123,7 @@ struct RentalTab: View {
             clubVM.getMyClubs()
             clubVM.getMyNotifications()
             await clubVM.getMyProducts()
+            await clubVM.getMyRentals()
         }
     }
     
@@ -133,13 +131,16 @@ struct RentalTab: View {
     private func RentalListSelected() -> some View {
         RefreshableScrollView(threshold: 120) {
             VStack {
-                ForEach(clubVM.rentals.indices, id:\.self) { i in
-                    RentalCell(rentalItemInfo: clubVM.rentals[i], selectedClubId: $selectedClubId, selectedItemId: $selectedItemId, isShowingRentalCancelAlert: $isShowingRentalCancelAlert)
+                ForEach(clubVM.rentals.indices, id:\.self) { i in                    RentalCell(rentalItemInfo: clubVM.rentals[i], selectedClubId: $selectedClubId, selectedItemId: $selectedItemId, isShowingAlert: $isShowingAlert, callback: $callback)
                 }
             }
         }
         .refreshable {
             //  MARK: 추후에 비동기 함수 추가
+            clubVM.getMyClubs()
+            clubVM.getMyNotifications()
+            await clubVM.getMyProducts()
+            await clubVM.getMyRentals()
         }
     }
     

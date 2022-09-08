@@ -18,11 +18,12 @@ struct BookCell: View {
                 print(err.errorDescription ?? "KFImage err")
             }
             .resizable()
+            .scaledToFill()
             .frame(width: 80, height: 80)
             .cornerRadius(15)
             
             VStack(alignment: .leading) {
-                Text(data.name)
+                Text("\(data.name) - \(data.numbering)")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                 
                 Text(data.memberName)

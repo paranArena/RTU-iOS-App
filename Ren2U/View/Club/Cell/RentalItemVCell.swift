@@ -18,8 +18,9 @@ struct RentalItemVCell: View {
                 print(err.errorDescription ?? "")
                 }
                 .resizable()
-                .cornerRadius(15)
+                .scaledToFill()
                 .frame(width: 110, height: 110)
+                .cornerRadius(15)
             
             Text(rentalItem.name)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))

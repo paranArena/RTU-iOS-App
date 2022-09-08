@@ -7,29 +7,10 @@
 
 import SwiftUI
 
-extension RentalManagementSelected {
-    
-    enum Selection: Int, CaseIterable {
-        case book
-        case rental
-        case `return`
-        
-        var title: String {
-            switch self {
-            case .book:
-                return "예약"
-            case .rental:
-                return "대여"
-            case .return:
-                return "반납"
-            }
-        }
-    }
-}
 struct RentalManagementSelected: View {
     
     @ObservedObject var manageVM: ManagementViewModel
-    @State private var selection: Selection = .book
+    @State private var filter: RentalStatus = .rent
     @State private var hearderSelectionWidth: CGFloat = .zero
     
     var body: some View {
@@ -48,15 +29,15 @@ struct RentalManagementSelected: View {
     private func ButtonRentalSelection() -> some View {
         VStack {
             HStack(alignment: .center, spacing: 0) {
-                ForEach(Selection.allCases, id: \.rawValue) { option in
+                ForEach(RentalStatus.allCases, id: \.rawValue) { option in
                     WidthSetterView(viewWidth: $hearderSelectionWidth) {
                         Button {
-                            self.selection = option
+                            self.filter = option
                         } label: {
                             Text(option.title)
                                 .frame(maxWidth: .infinity)
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                                .foregroundColor(self.selection == option ? .navy_1E2F97 : .gray_ADB5BD)
+                                .foregroundColor(self.filter == option ? .navy_1E2F97 : .gray_ADB5BD)
                         }
                     }
                 }
@@ -66,8 +47,8 @@ struct RentalManagementSelected: View {
                 Rectangle()
                     .fill(Color.navy_1E2F97)
                     .frame(width: hearderSelectionWidth * 0.6, height: 2)
-                    .padding(.leading, hearderSelectionWidth * CGFloat(selection.rawValue) + hearderSelectionWidth * 0.2)
-                    .animation(.spring(), value: selection)
+                    .padding(.leading, hearderSelectionWidth * CGFloat(filter.value) + hearderSelectionWidth * 0.2)
+                    .animation(.spring(), value: filter)
                 Spacer()
             }
         }
@@ -78,6 +59,7 @@ struct RentalManagementSelected: View {
         VStack {
             ForEach(manageVM.rentals.indices, id: \.self) { i in
                 BookCell(data: manageVM.rentals[i])
+                    .isHidden(hidden: manageVM.rentals[i].rentalInfo.rentalStatus != filter.rawValue)
             }
         }
     }
