@@ -105,8 +105,9 @@ struct ClubTab: View {
             }
         }
         .refreshable {
-            await clubVM.getMyClubsAsync()
-            await clubVM.getMyNotificationsAsync()
+            clubVM.getMyClubs()
+            clubVM.getMyNotifications()
+            await clubVM.getMyProducts()
         }
     }
 }

@@ -10,7 +10,10 @@ import SwiftUI
 struct CreateNoticeView: View {
     
     @State private var raw = NotificationModel(title: "", content: "")
+    
     @State private var isShowingImagePicker = false
+    @State private var isShowingImage = false
+    
     @ObservedObject var managementVM: ManagementViewModel
     @EnvironmentObject var groupVM: ClubViewModel
     @Environment(\.dismiss) var dismiss
@@ -22,6 +25,29 @@ struct CreateNoticeView: View {
             Divider()
             
             EditorPlaceholder(placeholder: "내용을 입력해주세요", text: $raw.content)
+            
+            Spacer()
+            
+            
+            
+            HStack {
+                
+                Button {
+                    isShowingImage = true
+                } label: {
+                    if let image = raw.image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 80, height: 80)
+                            .cornerRadius(15)
+                    }
+                }
+                
+                Spacer()
+                
+                ImagePickerButton()
+            }
         }
         .padding(.horizontal, 10)
         .basicNavigationTitle(title: "공지사항 등록")
@@ -40,33 +66,31 @@ struct CreateNoticeView: View {
                 }
             }
         }
-        .overlay(
-            ImagePickerButton()
-        )
         .sheet(isPresented: $isShowingImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $raw.image)
         }
+        .sheet(isPresented: $isShowingImage) {
+            Image(uiImage: raw.image!)
+                .resizable()
+                .scaledToFill()
+                .frame(width: SCREEN_WIDTH, height: SCREEN_WIDTH)
+                .cornerRadius(30)
+                
+        }
+        .avoidSafeArea()
     }
     
     @ViewBuilder
     private func ImagePickerButton() -> some View{
-        VStack {
-            Spacer()
-            
-            Button {
-                isShowingImagePicker = true
-            } label: {
-                Image(systemName: "camera")
-                    .resizable()
-                    .foregroundColor(.gray_ADB5BD)
-                    .frame(width: 24, height: 24)
-            }
+        Button {
+            isShowingImagePicker = true
+        } label: {
+            Image(systemName: "camera")
+                .resizable()
+                .foregroundColor(.gray_ADB5BD)
+                .frame(width: 30, height: 30)
         }
-        .frame(width: SCREEN_WIDTH, alignment: .leading)
-        .padding(.leading, 20)
-        .padding(.bottom, SAFE_AREA_BOTTOM_HEIGHT)
-        .ignoresSafeArea(.all, edges: .bottom)
-        .overlay(ShadowRectangle())
+        .padding(.horizontal, 20)
     }
 }
 

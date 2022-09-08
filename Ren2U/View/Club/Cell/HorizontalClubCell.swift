@@ -23,6 +23,7 @@ struct HorizontalClubCell: View {
                             print(err.errorDescription ?? "KFImage Optional err")
                         }
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 90, height: 90)
                         .cornerRadius(20)
                 } else {

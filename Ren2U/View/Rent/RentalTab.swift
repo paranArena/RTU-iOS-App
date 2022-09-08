@@ -123,7 +123,9 @@ struct RentalTab: View {
             }
         }
         .refreshable {
-            //  MARK: 추후에 비동기 함수 추가
+            clubVM.getMyClubs()
+            clubVM.getMyNotifications()
+            await clubVM.getMyProducts()
         }
     }
     

@@ -23,8 +23,9 @@ struct ManageProductCell: View {
                             print(err.errorDescription ?? "KFImage Optional err")
                         }
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 80, height: 80)
-                        .cornerRadius(20)
+                        .cornerRadius(15)
                     
                 }
                

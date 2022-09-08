@@ -20,8 +20,9 @@ struct NoticeCell: View {
                     print(err.errorDescription ?? "KFImage err")
                     }
                     .resizable()
-                    .cornerRadius(15)
+                    .scaledToFill()
                     .frame(width: 80, height: 80)
+                    .cornerRadius(15)
                     .isHidden(hidden: noticeInfo.imagePath.isEmpty)
                 
                 VStack(alignment: .leading, spacing: 0) {

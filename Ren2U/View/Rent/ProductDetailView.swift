@@ -261,7 +261,7 @@ struct ProductDetailView: View {
             Button {
                 if let selectedItemId = selectedItemId {
                     Task {
-                        rentVM.requestRent(itemId: selectedItemId)
+                        await rentVM.requestRent(itemId: selectedItemId)
                         await clubVM.getMyRentals()
                         await rentVM.getProduct()
                     }

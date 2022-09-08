@@ -70,22 +70,20 @@ class RentalViewModel: ObservableObject {
     }
     
     //  MARK: POST
-    func requestRent(itemId: Int) {
+    func requestRent(itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/request"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        print(url)
+        let request = AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
         
-        AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
-            
-            switch res.result {
-            case .success(let value):
-                print("[requestRent success]")
-                print(value)
-            case .failure(let err):
-                print("[requestRent failure]")
-                print(err)
-            }
+        switch result {
+        case .success(_):
+            print("[requestRent success]")
+//            print(value)
+        case .failure(let err):
+            print("[requestRent failure]")
+            print(err)
         }
     }
     
