@@ -108,12 +108,17 @@ struct SignUp: View {
         
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                let emailIndex = Field.email.rawValue
-                
-                BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[emailIndex])
-                    .onChange(of: viewModel.text[emailIndex]) { _ in
-                        viewModel.isOverlappedEmail = false
-                        authViewModel.isCheckEmailDuplicate = false
+                TextField("", text: $viewModel.authField.email)
+                    .frame(maxWidth: .infinity)
+                    .font(.custom(CustomFont.RobotoRegular.rawValue, size: 18))
+                    .overlay(alignment: .bottom)  {
+                        Rectangle()
+                            .frame(maxWidth: .infinity, maxHeight: 1)
+                            .foregroundColor(viewModel.authField.emailBottomLineColor)
+                    }
+                    .onChange(of: viewModel.authField.email) { _ in
+                        viewModel.authField.isDuplicatedEmail = false
+                        viewModel.authField.isCheckedEmailDuplicate = false
                     }
 
                 Text("@ajou.ac.kr")
@@ -121,72 +126,131 @@ struct SignUp: View {
                 
                 Button {
                     Task {
-                        let email = viewModel.text[emailIndex]
-                        viewModel.isOverlappedEmail = await !authViewModel.checkEmailDuplicate(email: email)
+                        let email = viewModel.authField.email
+                        viewModel.authField.isCheckedEmailDuplicate = true
+                        viewModel.authField.isDuplicatedEmail = await authViewModel.checkEmailDuplicate(email: email)
                     }
                 } label: {
                     Text("중복확인")
                         .padding(5)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .overlay(Capsule().stroke(viewModel.text[Field.email.rawValue].isEmpty ? Color.gray_ADB5BD : Color.navy_1E2F97, lineWidth: 1))
-                        .foregroundColor(viewModel.text[Field.email.rawValue].isEmpty ? .gray_ADB5BD : .navy_1E2F97)
+                        .overlay(Capsule().stroke(viewModel.authField.checkEmailButtonCondition ? Color.navy_1E2F97 : Color.gray_ADB5BD, lineWidth: 1))
+                        .foregroundColor(viewModel.authField.checkEmailButtonCondition ? .navy_1E2F97 : .gray_ADB5BD)
                         .padding(.leading, 19)
                 }
-                .disabled(viewModel.isOverlappedEmail || viewModel.text[Field.email.rawValue].isEmpty)
+                .disabled(viewModel.authField.isCheckedEmailDuplicate || !viewModel.authField.checkEmailButtonCondition)
             }
             
             Group {
-                if authViewModel.isCheckEmailDuplicate && !viewModel.isOverlappedEmail {
+                if viewModel.authField.isCheckedEmailDuplicate && viewModel.authField.isDuplicatedEmail {
                     Text("이미 가입된 이메일입니다.")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                         .foregroundColor(.red_EB1808)
-                } else if authViewModel.isCheckEmailDuplicate && viewModel.isOverlappedEmail {
+                } else if viewModel.authField.isCheckedEmailDuplicate && !viewModel.authField.isDuplicatedEmail {
                     Text("사용할 수 있는 이메일입니다.")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                         .foregroundColor(.green_2CA900)
+                    
                 } else {
                     Text("")
                 }
             }
             .padding(.bottom, -10)
-            
         }
     }
     
     @ViewBuilder
     private func Password() -> some View {
-        PasswordTextField(text: $viewModel.text[Field.password.rawValue], isShowingPassword: $viewModel.isShowingPassword)
-            .overlay(BottomLine())
+        
+        Group {
+            TextField("", text: $viewModel.authField.password)
+                .isHidden(hidden: !viewModel.authField.isShowingPassword)
+            
+            SecureField("", text: $viewModel.authField.password)
+                .isHidden(hidden: viewModel.authField.isShowingPassword)
+        }
+        .font(.custom(CustomFont.RobotoRegular.rawValue, size: 18))
+        .overlay(alignment: .trailing) {
+            Button {
+                viewModel.authField.isShowingPassword.toggle()
+            } label: {
+                Text("보기")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                    .foregroundColor(.gray_ADB5BD)
+            }
+
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .frame(maxWidth: .infinity, maxHeight: 1)
+                .foregroundColor(viewModel.authField.passwordBottomeLineColor)
+        }
+            
     }
     
     @ViewBuilder
     private func PasswordCheck() -> some View {
         
         VStack(alignment: .leading, spacing: 0) {
-            PasswordTextField(text: $viewModel.text[Field.passwordCheck.rawValue], isShowingPassword: $viewModel.isShowingPasswordCheck)
-                .overlay(BottomLine())
-            Message()
+            Group {
+                TextField("", text: $viewModel.authField.passwordCheck)
+                    .isHidden(hidden: !viewModel.authField.isShowingPasswordCheck)
+                
+                SecureField("", text: $viewModel.authField.passwordCheck)
+                    .isHidden(hidden: viewModel.authField.isShowingPasswordCheck)
+            }
+            .font(.custom(CustomFont.RobotoRegular.rawValue, size: 18))
+            .overlay(alignment: .trailing) {
+                Button {
+                    viewModel.authField.isShowingPasswordCheck.toggle()
+                } label: {
+                    Text("보기")
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                        .foregroundColor(.gray_ADB5BD)
+                }
+
+            }
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .frame(maxWidth: .infinity, maxHeight: 1)
+                    .foregroundColor(viewModel.authField.passwordCheckBottomeLineColor)
+            }
         }
     }
     
     @ViewBuilder
     private func Name() -> some View {
-        BottomLinePlaceholder(placeholder: "", text: $viewModel.text[Field.name.rawValue])
+        TextField("", text: $viewModel.authField.name)
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .frame(maxWidth: .infinity, maxHeight: 1)
+                    .foregroundColor(viewModel.authField.nameBottomLineColor)
+            }
     }
     
     @ViewBuilder
     private func Major() -> some View {
-        BottomLinePlaceholder(placeholder: "", text: $viewModel.text[Field.major.rawValue])
+        TextField("", text: $viewModel.authField.major)
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .frame(maxWidth: .infinity, maxHeight: 1)
+                    .foregroundColor(viewModel.authField.majorBottomLineColor)
+            }
     }
     
     @ViewBuilder
     private func StudentId() -> some View {
-        BottomLinePlaceholder(placeholder: "", text: $viewModel.text[Field.studentId.rawValue])
+        TextField("", text: $viewModel.authField.studentId)
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .frame(maxWidth: .infinity, maxHeight: 1)
+                    .foregroundColor(viewModel.authField.studentIdLineColor)
+            }
     }
     
     @ViewBuilder
     private func PhoneNumber() -> some View {
-        BottomLinePlaceholder(placeholder: "'-'를 제외한 숫자로 된 전화번호를 입력하세요", text: $viewModel.text[Field.phoneNumber.rawValue])
+        BottomLinePlaceholder(placeholder: "'-'를 제외한 숫자로 된 전화번호를 입력하세요", text: $viewModel.authField.phoneNumber)
             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
     }
     
@@ -196,46 +260,16 @@ struct SignUp: View {
             Spacer()
 
             NavigationLink {
-                Certification(email: viewModel.text[Field.email.rawValue], isActive: $isActive, user: viewModel.getUserInfo())
+                Certification(email: viewModel.authField.email, isActive: $isActive, user: viewModel.getUserInfo())
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)
                     .padding(.top, 49)
-                    .foregroundColor(viewModel.isFilledAll(textArray: viewModel.text) ? .navy_1E2F97 : .gray_E9ECEF)
+                    .foregroundColor(viewModel.authField.checkAll ? .navy_1E2F97 : .gray_E9ECEF)
                     .padding(.top, 20)
             }
-            .disabled(!viewModel.isFilledAll(textArray: viewModel.text))
+            .disabled(!viewModel.authField.checkAll)
             
-            Spacer()
-        }
-    }
-    
-    @ViewBuilder
-    private func BottomLine() ->  some View {
-        VStack {
-            Spacer()
-            Rectangle()
-                .frame(height: 1)
-                .foregroundColor(!viewModel.text[Field.password.rawValue].isEmpty
-                                 && viewModel.text[Field.password.rawValue] == viewModel.text[Field.passwordCheck.rawValue]
-                                 ? .navy_1E2F97 : .gray_ADB5BD)
-        }
-    }
-    
-    @ViewBuilder
-    private func Message() -> some View {
-        HStack {
-            if viewModel.isFilledAny(text1: viewModel.text[Field.password.rawValue],
-                                     text2: viewModel.text[Field.passwordCheck.rawValue]) {
-                Text(viewModel.isFilledAnyAndEqualText(text1: viewModel.text[Field.password.rawValue],
-                                           text2: viewModel.text[Field.passwordCheck.rawValue])
-                     ? "비밀번호가 일치합니다" : "비밀번호가 일치하지 않습니다.")
-                .foregroundColor(viewModel.isFilledAnyAndEqualText(text1: viewModel.text[Field.password.rawValue],
-                                                       text2: viewModel.text[Field.passwordCheck.rawValue])
-                                 ? Color.green_2CA900 : Color.red_EB1808)
-                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
-                .padding(.bottom, -10)
-            }
             Spacer()
         }
     }

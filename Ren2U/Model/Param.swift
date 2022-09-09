@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 struct AuthField  {
     var email: String = ""
@@ -16,6 +17,9 @@ struct AuthField  {
     var major: String = ""
     var studentId: String = ""
     var phoneNumber: String = ""
+    
+    var isShowingPassword = false
+    var isShowingPasswordCheck = false
     
     var isDuplicatedEmail = false
     var isCheckedEmailDuplicate = false
@@ -28,7 +32,7 @@ struct AuthField  {
             return true
         }
     }
-    
+
     var checkEmailCondition: Bool {
         if !isDuplicatedEmail && isCheckedEmailDuplicate {
             return true
@@ -37,8 +41,24 @@ struct AuthField  {
         }
     }
     
+    var isEqualPassword: Bool {
+        if password == passwordCheck && checkPasswordCondition{
+            return true
+        } else {
+            return false
+        }
+    }
+    
     var checkPasswordCondition: Bool {
-        if password.count < 8 || password.count > 30 || password != passwordCheck {
+        if password.count < 8 || password.count > 30 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    var checkPasswordCheckCondition: Bool {
+        if passwordCheck.count < 8 || passwordCheck.count > 30 {
             return false
         } else {
             return true
@@ -78,11 +98,45 @@ struct AuthField  {
     }
     
     var checkAll: Bool {
-        if checkEmailCondition && checkPasswordCondition && checkNameContion && checkMajorCondition && checkStudentIdCondition && chekcPhonumberCondition {
+        if !isDuplicatedEmail && isCheckedEmailDuplicate && checkNameContion && checkMajorCondition && checkStudentIdCondition && chekcPhonumberCondition && isEqualPassword {
             return true
         } else {
             return false
         }
+    }
+    
+    //  MARK: COLOR
+    var emailBottomLineColor: Color {
+        if isCheckedEmailDuplicate && !isDuplicatedEmail {
+            return Color.navy_1E2F97
+        } else {
+            return Color.gray_DEE2E6
+        }
+    }
+    
+    var passwordBottomeLineColor: Color {
+        if checkPasswordCondition { return Color.navy_1E2F97 }
+        else { return Color.gray_DEE2E6 }
+    }
+    
+    var passwordCheckBottomeLineColor: Color {
+        if checkPasswordCheckCondition { return Color.navy_1E2F97 }
+        else { return Color.gray_DEE2E6 }
+    }
+    
+    var nameBottomLineColor: Color {
+        if checkNameContion { return Color.navy_1E2F97 }
+        else { return Color.gray_DEE2E6 }
+    }
+    
+    var majorBottomLineColor: Color {
+        if checkMajorCondition { return Color.navy_1E2F97 }
+        else { return Color.gray_DEE2E6 }
+    }
+    
+    var studentIdLineColor: Color {
+        if checkStudentIdCondition { return Color.navy_1E2F97 }
+        else { return Color.gray_DEE2E6 }
     }
 }
 

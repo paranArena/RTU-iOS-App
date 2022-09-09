@@ -13,6 +13,7 @@ struct CreateNoticeView: View {
     
     @State private var isShowingImagePicker = false
     @State private var isShowingImage = false
+    @State private var isShowingAlert = false
     
     @ObservedObject var managementVM: ManagementViewModel
     @EnvironmentObject var groupVM: ClubViewModel
@@ -47,15 +48,23 @@ struct CreateNoticeView: View {
         }
         .padding(.horizontal, 10)
         .basicNavigationTitle(title: "공지사항 등록")
+        .alert("제목과 내용은 필수입니다.", isPresented: $isShowingAlert) {
+            Button("확인", role: .cancel) {}
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    Task {
-                        await managementVM.createNotification(notice: raw)
-                        managementVM.searchNotificationsAll()
-                        groupVM.getMyNotifications()
+                    
+                    if raw.title.isEmpty || raw.content.isEmpty {
+                        isShowingAlert = true
+                    } else {
+                        Task {
+                            await managementVM.createNotification(notice: raw)
+                            managementVM.searchNotificationsAll()
+                            groupVM.getMyNotifications()
+                        }
+                        dismiss()
                     }
-                    dismiss()
                 } label: {
                     Text("완료")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))

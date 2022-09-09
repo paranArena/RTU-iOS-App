@@ -11,45 +11,15 @@ import SwiftUI
 extension SignUp {
     class ViewModel: ObservableObject {
         
-        @Published var isOverlappedEmail = false
-        @Published var text = [String] (repeating: "", count: 7)
-        @Published var isConfirmed = [Bool](repeating: false, count: 7)
-        @Published var isShowingPassword = false
-        @Published var isShowingPasswordCheck = false
-        @Published var goCeritification = false
-
-        func isFilledAll(textArray: [String]) -> Bool {
-            
-            guard self.isOverlappedEmail else { return false }
-            guard self.text[SignUp.Field.password.rawValue] == self.text[SignUp.Field.passwordCheck.rawValue] else { return false }
-            
-            for i in 0 ..< text.count {
-                if textArray[i].isEmpty {
-                    return false
-                }
-            }
-            return true
-        }
+//        @Published var isOverlappedEmail = false
+//        @Published var text = [String] (repeating: "", count: 7)
+//        @Published var isConfirmed = [Bool](repeating: false, count: 7)
+//        @Published var isShowingPassword = false
+//        @Published var isShowingPasswordCheck = false
         
-        func isFilledAny(text1: String, text2: String) -> Bool {
-            guard !text1.isEmpty && !text2.isEmpty else { return false }
-            return true
-        }
-        
-        func isFilledAnyAndEqualText(text1: String, text2: String) -> Bool {
-            guard isFilledAny(text1: text1, text2: text2) && text1 == text2 else { return false }
-            return true
-        }
-        
-        func isNextFieldIsEmpty(curIndex: Int) -> Bool {
-            guard self.text[curIndex + 1].isEmpty else { return false }
-            return true
-        }
+        @Published var authField = AuthField()
         
         func changeFocus(curIndex: Int) -> SignUp.Field? {
-            guard curIndex < text.count - 1 else { return nil }
-            guard self.text[curIndex + 1].isEmpty else { return nil }
-            
             switch curIndex {
             case SignUp.Field.email.rawValue:
                 return .password
@@ -71,9 +41,9 @@ extension SignUp {
         }
         
         func getUserInfo() -> User {
-            return User(email: text[SignUp.Field.email.rawValue], password: text[SignUp.Field.password.rawValue],
-                        name: text[SignUp.Field.name.rawValue], major: text[SignUp.Field.major.rawValue],
-                        studentId: text[SignUp.Field.studentId.rawValue], phoneNumber: text[SignUp.Field.studentId.rawValue], imageSource: "")
+            return User(email: authField.email, password: authField.password,
+                        name: authField.name, major: authField.major,
+                        studentId: authField.studentId, phoneNumber: authField.phoneNumber, imageSource: "")
         }
 
     }
