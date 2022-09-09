@@ -70,8 +70,6 @@ struct SignUp: View {
                 }
 
                 CertificatinoViewButton()
-                    .isHidden(hidden: focusedField != nil)
-                
                 Spacer()
             }
             .padding(.horizontal, 20)
@@ -108,12 +106,15 @@ struct SignUp: View {
     @ViewBuilder
     private func Email() -> some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             HStack {
                 let emailIndex = Field.email.rawValue
                 
                 BottomLineTextfield(placeholder: "", placeholderLocation: .none, placeholderSize: 14, isConfirmed: $viewModel.isOverlappedEmail, text: $viewModel.text[emailIndex])
-                    .onChange(of: viewModel.text[emailIndex]) { _ in viewModel.isOverlappedEmail = false }
+                    .onChange(of: viewModel.text[emailIndex]) { _ in
+                        viewModel.isOverlappedEmail = false
+                        authViewModel.isCheckEmailDuplicate = false
+                    }
 
                 Text("@ajou.ac.kr")
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
@@ -133,6 +134,22 @@ struct SignUp: View {
                 }
                 .disabled(viewModel.isOverlappedEmail || viewModel.text[Field.email.rawValue].isEmpty)
             }
+            
+            Group {
+                if authViewModel.isCheckEmailDuplicate && !viewModel.isOverlappedEmail {
+                    Text("이미 가입된 이메일입니다.")
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                        .foregroundColor(.red_EB1808)
+                } else if authViewModel.isCheckEmailDuplicate && viewModel.isOverlappedEmail {
+                    Text("사용할 수 있는 이메일입니다.")
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                        .foregroundColor(.green_2CA900)
+                } else {
+                    Text("")
+                }
+            }
+            .padding(.bottom, -10)
+            
         }
     }
     
@@ -144,9 +161,12 @@ struct SignUp: View {
     
     @ViewBuilder
     private func PasswordCheck() -> some View {
-        PasswordTextField(text: $viewModel.text[Field.passwordCheck.rawValue], isShowingPassword: $viewModel.isShowingPasswordCheck)
-        .overlay(BottomLine())
-        .overlay(Message())
+        
+        VStack(alignment: .leading, spacing: 0) {
+            PasswordTextField(text: $viewModel.text[Field.passwordCheck.rawValue], isShowingPassword: $viewModel.isShowingPasswordCheck)
+                .overlay(BottomLine())
+            Message()
+        }
     }
     
     @ViewBuilder
@@ -213,8 +233,8 @@ struct SignUp: View {
                 .foregroundColor(viewModel.isFilledAnyAndEqualText(text1: viewModel.text[Field.password.rawValue],
                                                        text2: viewModel.text[Field.passwordCheck.rawValue])
                                  ? Color.green_2CA900 : Color.red_EB1808)
-                .font(.system(size: 12))
-                .offset(y: 30)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                .padding(.bottom, -10)
             }
             Spacer()
         }

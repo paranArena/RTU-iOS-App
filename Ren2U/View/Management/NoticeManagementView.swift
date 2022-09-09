@@ -37,7 +37,7 @@ struct NoticeManagementView: View {
             Button("OK") {
                 Task {
                     await managementVM.deleteNotification(groupID: managementVM.clubData.id, notificationID: selectedCellId)
-                    managementVM.searchNotificationssAll()
+                    managementVM.searchNotificationsAll()
                 }
             }
         } message: {

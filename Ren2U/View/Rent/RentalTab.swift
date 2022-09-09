@@ -131,7 +131,8 @@ struct RentalTab: View {
     private func RentalListSelected() -> some View {
         RefreshableScrollView(threshold: 120) {
             VStack {
-                ForEach(clubVM.rentals.indices, id:\.self) { i in                    RentalCell(rentalItemInfo: clubVM.rentals[i], selectedClubId: $selectedClubId, selectedItemId: $selectedItemId, isShowingAlert: $isShowingAlert, callback: $callback)
+                ForEach(clubVM.rentals.indices, id:\.self) { i in
+                    RentalCell(rentalItemInfo: clubVM.rentals[i], selectedClubId: $selectedClubId, selectedItemId: $selectedItemId, isShowingAlert: $isShowingAlert, callback: $callback)
                 }
             }
         }

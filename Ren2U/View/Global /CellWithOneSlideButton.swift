@@ -37,6 +37,10 @@ struct CellWithOneSlideButton<Content: View> : View {
                 
                 HStack(alignment: .center, spacing: 0) {
                     Button {
+                        withAnimation {
+                            self.offset = .zero
+                            self.isShowingRequestButton = false
+                        }
                         callback()
                     } label: {
                         Text(okMessage)

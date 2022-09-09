@@ -27,8 +27,8 @@ class ManagementViewModel: ObservableObject {
             await searchClubMembersAll()
             await searchClubJoinsAll()
             await searchClubProductsAll()
-            await searchNotificationssAll()
-            await getClubRentals()
+            await searchNotificationsAll()
+            await searcClubRentalsAll()
         }
     }
     
@@ -162,7 +162,7 @@ class ManagementViewModel: ObservableObject {
     }
     
     @MainActor
-    func searchNotificationssAll() {
+    func searchNotificationsAll() {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/notifications/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
@@ -182,19 +182,22 @@ class ManagementViewModel: ObservableObject {
     }
     
     @MainActor
-    func getClubRentals() {
+    func searcClubRentalsAll() {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/rentals/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetClubRetnalsResponse.self) { res in
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetClubRetnalsResponse.self, decoder: decoder) { res in
             switch res.result {
             case .success(let value):
-                print("[getClubRentals success]")
+                print("[searchClubRentalsAll success]")
                 print(value.responseMessage)
                 self.rentals = value.data
                 
             case .failure(let err):
-                print("[getClubRentals err")
+                print("[searchClubRentalsAll err]")
                 print(err)
             }
         }
@@ -263,6 +266,7 @@ class ManagementViewModel: ObservableObject {
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        
         let result = await request.result
         
         switch result {

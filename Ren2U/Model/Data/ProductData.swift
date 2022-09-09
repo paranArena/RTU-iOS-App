@@ -102,7 +102,7 @@ struct ProductDetailData: Codable {
         }
         
         var buttonText: String {
-            if self == nil || rentalInfo == nil {
+            if rentalInfo == nil {
                 return "대여하기"
             } else if !rentalInfo!.meRental {
                 return "대여불가"
@@ -110,6 +110,20 @@ struct ProductDetailData: Codable {
                 return "대여확정"
             } else if rentalInfo!.rentalStatus == "RENT" {
                 return "반납하기"
+            } else {
+                return "에러"
+            }
+        }
+        
+        var alertMessage: String {
+            if rentalInfo == nil {
+                return "아이템을 예약하시겠습니까?"
+            } else if !rentalInfo!.meRental {
+                return "대여불가"
+            } else if rentalInfo!.rentalStatus == "WAIT" {
+                return "아이템을 대여하시겠습니까?"
+            } else if rentalInfo!.rentalStatus == "RENT" {
+                return "아이템을 반납하시겠습니까?"
             } else {
                 return "에러"
             }

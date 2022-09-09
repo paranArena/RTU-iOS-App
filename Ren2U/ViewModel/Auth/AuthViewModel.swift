@@ -14,6 +14,8 @@ class AuthViewModel: ObservableObject {
     @Published var jwt: String?
     @Published var userData: UserData?
     
+    @Published var isCheckEmailDuplicate = false
+    
     init() {
         self.jwt = UserDefaults.standard.string(forKey: JWT_KEY)
     }
@@ -37,6 +39,7 @@ class AuthViewModel: ObservableObject {
         case .success(let value):
             print("[checkEmailDuplicate success]")
             print(value)
+            isCheckEmailDuplicate = true 
             return value
         case .failure(let err):
             print("[checkEmailDuplicate err]")

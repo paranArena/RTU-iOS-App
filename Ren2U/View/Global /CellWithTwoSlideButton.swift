@@ -55,8 +55,10 @@ struct CellWithTwoSlideButton<Content: View>: View {
                     .foregroundColor(Color.white)
                     
                     Button {
-//                        self.offset = .zero
-//                        self.isShowingRequestButton = false
+                        withAnimation {
+                            self.offset = .zero
+                            self.isShowingRequestButton = false
+                        }
                         cancelCallback()
                     } label: {
                         Text(cancelMessage)

@@ -24,14 +24,9 @@ struct CreateNoticeView: View {
                 .padding(.top, 20)
             Divider()
             
-            EditorPlaceholder(placeholder: "내용을 입력해주세요", text: $raw.content)
-            
-            Spacer()
-            
-            
             
             HStack {
-                
+                ImagePickerButton()
                 Button {
                     isShowingImage = true
                 } label: {
@@ -43,11 +38,12 @@ struct CreateNoticeView: View {
                             .cornerRadius(15)
                     }
                 }
-                
-                Spacer()
-                
-                ImagePickerButton()
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 10)
+            .padding(.bottom, 5)
+            
+            EditorPlaceholder(placeholder: "내용을 입력해주세요", text: $raw.content)
         }
         .padding(.horizontal, 10)
         .basicNavigationTitle(title: "공지사항 등록")
@@ -56,7 +52,7 @@ struct CreateNoticeView: View {
                 Button {
                     Task {
                         await managementVM.createNotification(notice: raw)
-                        managementVM.searchNotificationssAll()
+                        managementVM.searchNotificationsAll()
                         groupVM.getMyNotifications()
                     }
                     dismiss()
@@ -70,12 +66,12 @@ struct CreateNoticeView: View {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $raw.image)
         }
         .sheet(isPresented: $isShowingImage) {
-            Image(uiImage: raw.image!)
-                .resizable()
-                .scaledToFill()
-                .frame(width: SCREEN_WIDTH, height: SCREEN_WIDTH)
-                .cornerRadius(30)
-                
+            ZStack {
+                Image(uiImage: raw.image!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: SCREEN_WIDTH, height: SCREEN_WIDTH)
+            }
         }
         .avoidSafeArea()
     }
@@ -89,8 +85,11 @@ struct CreateNoticeView: View {
                 .resizable()
                 .foregroundColor(.gray_ADB5BD)
                 .frame(width: 30, height: 30)
+                .padding(.vertical, 20)
         }
         .padding(.horizontal, 20)
+        .frame(width: 80, height: 80)
+        .background(RoundedRectangle(cornerRadius: 15).stroke(Color.gray_ADB5BD, lineWidth: 2))
     }
 }
 

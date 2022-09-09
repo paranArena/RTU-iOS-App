@@ -15,7 +15,7 @@ struct ManageProductCell: View {
     @Binding var selectedId: Int
     
     var body: some View {
-        CellWithTwoSlideButton(okMessage: "수정", cancelMessage: "삭제", cellID: productData.id, selectedID: $selectedId) {
+        CellWithOneSlideButton(okMessage: "삭제", cellID: productData.id, selectedID: $selectedId) {
             HStack(alignment: .center, spacing: 5) {
                 if let thumbnailPath = productData.imagePath {
                     KFImage(URL(string: thumbnailPath))
@@ -51,14 +51,12 @@ struct ManageProductCell: View {
             }
             .frame(maxWidth: .infinity)
             .background(Color.BackgroundColor)
-        } okCallback: {
-            print("ManageProductCell okCallBack")
-        } cancelCallback: {
+        } callback: {
             Task {
                 await manageVM.deleteProduct(productId: productData.id)
+                manageVM.searchClubProductsAll()
             }
         }
-
     }
 }
 

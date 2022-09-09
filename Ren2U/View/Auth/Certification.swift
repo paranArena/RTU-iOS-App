@@ -24,7 +24,7 @@ struct Certification: View {
                     .multilineTextAlignment(.center)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                 
-                Text("4자리 숫자를 입력해주세요.")
+                Text("6자리 숫자를 입력해주세요.")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .foregroundColor(.gray_495057)
                     .padding(.top, 50)
@@ -112,10 +112,10 @@ struct Certification: View {
                 .resizable().frame(width: 86, height: 86)
                 .padding(.top, 49)
                 .foregroundColor(viewModel.isReachedMaxLength(num: viewModel.certificationNum)
-                                 ? .navy_1E2F97 : .gray_E9ECEF)
+                                 ? (viewModel.timeRemaining <= 0 ? .gray_E9ECEF : .navy_1E2F97) : .gray_E9ECEF)
                 .padding(.top, 50)
         }
-        .disabled(!viewModel.isReachedMaxLength(num: viewModel.certificationNum))
+        .disabled(!viewModel.isReachedMaxLength(num: viewModel.certificationNum) || viewModel.timeRemaining <= 0)
     }
     
     @ViewBuilder

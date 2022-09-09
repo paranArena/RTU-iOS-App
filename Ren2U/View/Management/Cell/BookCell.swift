@@ -22,6 +22,7 @@ struct BookCell: View {
             .frame(width: 80, height: 80)
             .cornerRadius(15)
             
+            
             VStack(alignment: .leading) {
                 Text("\(data.name) - \(data.numbering)")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
@@ -33,11 +34,22 @@ struct BookCell: View {
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     .foregroundColor(.gray_868E96)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
-            VStack {
+            Group {
                 Text("픽업까지")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
             }
+            .isHidden(hidden: data.rentalInfo.rentalStatus != RentalStatus.wait.rawValue)
+            
+            VStack {
+                Text("반납예정")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                
+                Text("\(data.rentalInfo.expDate!)")
+                    .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
+            }
+            .isHidden(hidden: data.rentalInfo.rentalStatus != RentalStatus.rent.rawValue)
 
         }
         .frame(maxWidth: .infinity)

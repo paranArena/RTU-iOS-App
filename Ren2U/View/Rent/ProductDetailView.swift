@@ -30,6 +30,7 @@ struct ProductDetailView: View {
     //alert
     @State private var isShowingAlert = false
     @State private var isShowingDistanceAlert = false
+    @State private var alertMessage = ""
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
@@ -94,21 +95,13 @@ struct ProductDetailView: View {
             }
         }
         .padding(.bottom, rentalButtonHeight)
-//        .overlay(OverlayContent())
+        .isHidden(hidden: rentVM.isLoading)
         .overlay(alignment: .bottom) {
             RentalButton()
         }
-//        .overlay(Modal())
         .avoidSafeArea()
-        .onAppear {
-            let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithTransparentBackground()
-            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        }
         .controllTabbar(isPresented)
-        .ignoresSafeArea(.container, edges: .top)
-        .navigationTitle("")
+        .navigationTitle(rentVM.productDetail.name)
         .navigationBarTitleDisplayMode(.inline)
         .alert("거리가 너무 멉니다", isPresented: $isShowingDistanceAlert) {
             Button("확인", role: .cancel) {}
@@ -122,7 +115,7 @@ struct ProductDetailView: View {
                 Text("확인")
             }
         } message: {
-            
+            Text("\(alertMessage)")
         }
 
 
@@ -234,6 +227,7 @@ struct ProductDetailView: View {
                         Button {
                             selctedItem = rentVM.productDetail.items[i]
                             selectedItemId = id
+                            alertMessage = rentVM.productDetail.items[i].alertMessage
                         } label: {
                             Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
@@ -305,15 +299,19 @@ struct ProductDetailView: View {
                             }
                         }
                     } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
-                        isShowingAlert = true
-                        callback = {
-                            Task {
-                                print("3번 콜백")
-                                await rentVM.returnRent(itemId: selectedItemId ?? 0)
-                                await clubVM.getMyRentals()
-                                await rentVM.getProduct()
-                                selctedItem = nil
-                                selectedItemId = nil
+                        if mapVM.region.center.distance(from: rentVM.productLocation) > 30 {
+                            isShowingDistanceAlert = true
+                        } else {
+                            isShowingAlert = true
+                            callback = {
+                                Task {
+                                    print("3번 콜백")
+                                    await rentVM.returnRent(itemId: selectedItemId ?? 0)
+                                    await clubVM.getMyRentals()
+                                    await rentVM.getProduct()
+                                    selctedItem = nil
+                                    selectedItemId = nil
+                                }
                             }
                         }
                     }
@@ -343,6 +341,7 @@ struct ProductDetailView: View {
             .padding(.horizontal, 20)
             .frame(maxWidth: .infinity)
             .padding(.top, 20)
+            .padding(.bottom, 5)
             .background(Color.BackgroundColor)
             .clipped()
             .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)

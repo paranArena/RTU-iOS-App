@@ -29,7 +29,9 @@ struct ReturnInfo: Codable {
 class RentalViewModel: ObservableObject {
     
     var clubId = -1
-    var productId = -1 
+    var productId = -1
+    
+    @Published var isLoading = true
     @Published var productDetail = ProductDetailData.dummyProductData()
     var productLocation = CLLocationCoordinate2D(latitude: 127, longitude: 31)
     
@@ -54,10 +56,9 @@ class RentalViewModel: ObservableObject {
         let url = "\(BASE_URL)/clubs/\(clubId)/products/\(productId)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        print(url)
-        
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetProductResponse.self)
         let result = await request.result
+        isLoading = false
         
         switch result {
         case .success(let value):

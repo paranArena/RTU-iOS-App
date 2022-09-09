@@ -45,30 +45,8 @@ struct MyPageTab: View {
 //
                     Text("\(authVM.userData?.name ?? "")")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-                    
-                    HStack {
-                        VStack {
-                            Text("50")
-                                .font(.custom(CustomFont.RobotoMedium.rawValue, size: 30))
-                            
-                            Text("총 대여횟수")
-                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 10))
-                                .foregroundColor(.gray_868E96)
-                        }
-                        
-                        
-                        Spacer()
-                        
-                        VStack {
-                            Text("50")
-                                .font(.custom(CustomFont.RobotoMedium.rawValue, size: 30))
-                            
-                            Text("기간 내 반납")
-                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 10))
-                                .foregroundColor(.gray_868E96)
-                        }
-                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 20)

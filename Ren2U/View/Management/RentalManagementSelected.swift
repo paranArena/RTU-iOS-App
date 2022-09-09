@@ -60,6 +60,7 @@ struct RentalManagementSelected: View {
             ForEach(manageVM.rentals.indices, id: \.self) { i in
                 BookCell(data: manageVM.rentals[i])
                     .isHidden(hidden: manageVM.rentals[i].rentalInfo.rentalStatus != filter.rawValue)
+                    .padding(.horizontal)
             }
         }
     }

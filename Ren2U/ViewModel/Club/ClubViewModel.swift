@@ -324,11 +324,7 @@ class ClubViewModel: ObservableObject {
             for (key, value) in param {
                 
                 if key == "hashtags" {
-                    #if DEBUG
-                    print("Hashtag")
-                    print(value)
-                    #endif
-
+                    multipart.append(Data(String("").utf8), withName: key)
                     for v in value as! [String] {
                         multipart.append(Data(v.utf8), withName: key)
                     }

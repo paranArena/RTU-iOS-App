@@ -22,6 +22,7 @@ struct RentalCell: View {
     @Binding var selectedItemId: Int
     @Binding var isShowingAlert: Bool
     @Binding var callback: () -> ()
+    @State private var isShowingDistanceAlert = false
 
     
     var body: some View {
@@ -90,6 +91,9 @@ struct RentalCell: View {
             }
             .padding(.horizontal, 10)
             Divider()
+        }
+        .alert("거리가 너무 멉니다", isPresented: $isShowingDistanceAlert) {
+            Button("확인", role: .cancel) {}
         }
     }
     
