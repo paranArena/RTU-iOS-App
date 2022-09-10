@@ -15,8 +15,6 @@ struct Certification: View {
     @EnvironmentObject var authModel: AuthViewModel
     @StateObject var viewModel = ViewModel()
     
-    let user: User
-    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -102,10 +100,6 @@ struct Certification: View {
             Task {
                 viewModel.isConfirmed = await authModel.verifyEmailCode(email: email, code: viewModel.certificationNum)
                 viewModel.certificationNum = ""
-                
-                if viewModel.isConfirmed {
-                    viewModel.isSingUpSeccussActive = await authModel.signUp(user: user)
-                }
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
@@ -130,8 +124,8 @@ struct Certification: View {
     }
 }
 
-struct Certification_Previews: PreviewProvider {
-    static var previews: some View {
-        Certification(email: "email", isActive: .constant(true), user: User.dummyUser())
-    }
-}
+//struct Certification_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Certification(email: "email", isActive: .constant(true), user: User.dummyUser())
+//    }
+//}

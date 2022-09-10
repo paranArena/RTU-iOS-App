@@ -66,6 +66,21 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
+
+    func quitService() {
+        let url = "\(BASE_URL)/members/my/quit"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyInfoResponse.self) { res in
+            switch res.result {
+            case .success(_):
+                print("[quitService success]")
+                self.logout()
+            case .failure(_):
+                print("[quitService err]")
+            }
+        }
+    }
     
     
     //  MARK: POST
@@ -163,7 +178,7 @@ class AuthViewModel: ObservableObject {
             }
 
         case .failure(let err):
-            print("[verfyEmailCode filure]")
+            print("[verfyEmailCode failure]")
             print(err)
         }
         

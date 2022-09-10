@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import MapKit
 
 extension Profile {
     enum Field: Int, CaseIterable {
@@ -38,20 +39,24 @@ struct Profile: View {
     @EnvironmentObject var authVM: AuthViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.isPresented) var isPresented
-    @State private var isShowingModal = false
+    
+    @State private var isShowingAlert = false
+    @State private var alertTitle = ""
+    @State private var callback: () -> () = { print("callback")}
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 20) {
             
-            
-            
-            KFImage(URL(string: "https://picsum.photos/seed/picsum/200/300")!)
-                .onFailure { err in
-                    print(err.errorDescription ?? "KFImage err")
-                }
-                .resizable()
-                .frame(width: 120, height: 120)
-                .clipShape(Circle())
+            HStack(alignment: .center) {
+                KFImage(URL(string: "https://picsum.photos/seed/picsum/200/300")!)
+                    .onFailure { err in
+                        print(err.errorDescription ?? "KFImage err")
+                    }
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+            }
+            .frame(maxWidth: .infinity)
             
             ForEach(Field.allCases, id: \.rawValue) { field in
                 ProfileField(field: field)
@@ -59,49 +64,33 @@ struct Profile: View {
             
             
             Button {
-                
-            } label: {
-                Text("사진 변경")
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                    .foregroundColor(.navy_1E2F97)
-            }
-            
-            Button {
-                self.isShowingModal.toggle()
+                isShowingAlert = true
+                alertTitle = "탈퇴하시겠습니까?"
+                callback = authVM.quitService
             } label: {
                 Text("탈퇴하기")
+                    .padding(.leading, 15)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                     .foregroundColor(.gray_495057)
             }
-            .frame(width: SCREEN_WIDTH - 40, height: 30, alignment: .leading)
-            .padding(.leading, 15)
+            .frame(maxWidth: .infinity, maxHeight: 30, alignment: .leading)
             .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray_F1F2F3))
 
             
         }
+        .padding(.horizontal, 15)
         .basicNavigationTitle(title: "프로필 확인")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    self.presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("완료")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
-                }
-            }
-        }
         .controllTabbar(isPresented)
-        .disabled(isShowingModal)
-        .navigationBarBackButtonHidden(isShowingModal)
-        .overlay(Modal(isShowingModal: $isShowingModal, text: "탈퇴하시겠습니까?", callback: {
-            print("Yes! on Ended ")
-        }))
+        .alert(alertTitle, isPresented: $isShowingAlert) {
+            Button("취소", role: .cancel) {}
+            Button("예") { callback() }
+        }
     }
     
     
     @ViewBuilder
     private func ProfileField(field: Field) -> some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 10) {
             Text(field.title)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
             
@@ -109,19 +98,26 @@ struct Profile: View {
             Group {
                 switch field {
                 case .email:
-                    Text("??")
+                    Text(authVM.userData!.email)
                 case .name:
-                    Text("??")
+                    Text(authVM.userData!.name)
                 case .major:
-                    Text("??")
+                    Text(authVM.userData!.major)
                 case .studentId:
-                    Text("??")
+                    Text(authVM.userData!.studentId)
                 case .phoneNumber:
-                    Text("??")
+                    Text(authVM.userData!.phoneNumber)
                 }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(Color.gray_DEE2E6)
+                    .frame(height: 1)
             }
             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

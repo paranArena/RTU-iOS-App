@@ -17,9 +17,11 @@ struct ProductManageView: View {
     @State private var isShowingAlert = false
     
     var body: some View {
-        SlideResettableScrollView(selectedCellId: $selectedCellId) {
-            ForEach(managementVM.products.indices, id: \.self) { i in
-                ManageProductCell(manageVM: managementVM, productData: managementVM.products[i], selectedId: $selectedCellId, callback: $callback, isShowingAlert: $isShowingAlert)
+        ScrollView {
+            SwipeResettableView(selectedCellId: $selectedCellId) {
+                ForEach(managementVM.products.indices, id: \.self) { i in
+                    ManageProductCell(manageVM: managementVM, productData: managementVM.products[i], selectedId: $selectedCellId, callback: $callback, isShowingAlert: $isShowingAlert)
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

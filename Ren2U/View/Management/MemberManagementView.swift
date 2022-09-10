@@ -35,6 +35,7 @@ struct MemberManagementView: View {
     @State private var buttonSelection: Selection = .member
     @State private var selectedCellID = 0
     
+    @State private var maxY: CGFloat = .zero
     
     @State private var isShowingAlert = false
     
@@ -42,8 +43,11 @@ struct MemberManagementView: View {
     @State private var selection: AlertSelection = .signUpCancel
     
     var body: some View {
-        VStack {
-            SelectionButton()
+        VStack(spacing: 10) {
+            
+            MaxYSetterView(viewMaxY: $maxY) {
+                SelectionButton()
+            }
             
             Group {
                 ForEach(Selection.allCases, id: \.rawValue) { selection in
@@ -53,7 +57,7 @@ struct MemberManagementView: View {
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
         }
-        .alert("", isPresented: $isShowingAlert) {
+        .alert("멤버를 추방하시겠습니까?", isPresented: $isShowingAlert) {
             Button("Cancel", role: .cancel) { }
             Button("OK") {
                 Task {
@@ -61,10 +65,8 @@ struct MemberManagementView: View {
                     await managementVM.searchClubMembersAll()
                 }
             }
-        } message: {
-            Text("멤버를 추방하시겠습니까?")
         }
-        .alert("", isPresented: $isShowingSignUpAlert) {
+        .alert(selection == .signUpOk ? "가입신청을 승인하시겠습니까?" : "가입신청을 거부하시겠습니까?", isPresented: $isShowingSignUpAlert) {
             Button("Cancel", role: .cancel) { }
             Button("OK") {
                 if selection == .signUpCancel {
@@ -80,10 +82,7 @@ struct MemberManagementView: View {
                     }
                 }
             }
-        } message: {
-            Text(selection == .signUpOk ? "가입신청을 승인하시겠습니까?" : "가입신청을 거부하시겠습니까?") 
         }
-        
         .onAppear {
             UITabBar.hideTabBar()
         }
@@ -119,10 +118,12 @@ struct MemberManagementView: View {
     
     @ViewBuilder
     private func Members() -> some View {
-        SlideResettableScrollView(selectedCellId: $selectedCellID) {
-            VStack {
-                ForEach(managementVM.members.indices, id: \.self) { index in
-                    ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+        RefreshableScrollView(threshold: maxY + 10) {
+            SwipeResettableView(selectedCellId: $selectedCellID) {
+                VStack {
+                    ForEach(managementVM.members.indices, id: \.self) { index in
+                        ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+                    }
                 }
             }
         }
@@ -130,10 +131,12 @@ struct MemberManagementView: View {
     
     @ViewBuilder
     private func Applicant() -> some View {
-        SlideResettableScrollView(selectedCellId: $selectedCellID) {
-            VStack {
-                ForEach(managementVM.applicants.indices, id: \.self) { index in
-                    ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, isShowingSignUp: $isShowingSignUpAlert, alertSelection: $selection, managementVM: managementVM)
+        RefreshableScrollView(threshold: maxY + 10) {
+            SwipeResettableView(selectedCellId: $selectedCellID) {
+                VStack {
+                    ForEach(managementVM.applicants.indices, id: \.self) { index in
+                        ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, isShowingSignUp: $isShowingSignUpAlert, alertSelection: $selection, managementVM: managementVM)
+                    }
                 }
             }
         }

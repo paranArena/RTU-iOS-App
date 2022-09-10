@@ -16,6 +16,10 @@ struct ClubTab: View {
     @State private var offset: CGFloat = .zero
     let spacing: CGFloat = 10
     
+    @State private var isShowingAlert = false
+    @State private var selectedId = -1
+    @State private var callback: () -> () = { print("callback")}
+    
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
@@ -97,8 +101,7 @@ struct ClubTab: View {
                     
                     ForEach(clubVM.notices[id]?.indices ?? 0..<0, id: \.self) { j in
                         let title = clubVM.notices[id]![j].title
-                        
-                        NoticeCell(noticeInfo: clubVM.notices[id]![j], groupName: groupName)
+                        ReportableNoticeHCell(noticeInfo: clubVM.notices[id]![j], groupName: groupName, selectedId: $selectedId, callback: $callback)
                             .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
                     }
                 }

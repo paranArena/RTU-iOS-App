@@ -19,6 +19,10 @@ struct RefreshableScrollView<Content: View>: View {
     @Environment(\.refresh) private var refresh
     @State private var startoffset: CGFloat = .zero
     @State private var isRefreshing = false
+    
+    
+    // 렌더링 되면서 threshold에 생기는 문제 방지
+    @State private var isScrolled = false
 
     init(threshold: CGFloat, c: @escaping () -> Content ) {
         self.threshold = threshold
@@ -45,8 +49,9 @@ struct RefreshableScrollView<Content: View>: View {
                     })
                     .onPreferenceChange(ViewOffsetKey.self) {
                         detector.send($0)
-                        if $0 > (threshold+50) && (startoffset == threshold) {
-                            startoffset = $0 // Offset이 threshold를 넘겼을 때 게속 refresh 되는 것을 방지
+                        if $0 > (threshold+50)  && startoffset < threshold + 50 {
+                            print("refreshing")
+//                            startoffset = $0 // Offset이 threshold를 넘겼을 때 게속 refresh 되는 것을 방지
                             isRefreshing = true
                             simpleSuccess() // 핸드폰에 진동 주기
                             Task {
@@ -62,6 +67,8 @@ struct RefreshableScrollView<Content: View>: View {
             .allowsHitTesting(!isRefreshing)
             .onReceive(publisher) {
                 startoffset = $0
+                print("startoffset :  \(startoffset)")
+                print("threshold: \(threshold)")
             }
         }
     }

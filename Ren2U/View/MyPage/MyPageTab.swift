@@ -13,8 +13,8 @@ import Introspect
 extension MyPageTab {
     enum Content: Int, CaseIterable {
         case checkProfile
-        case alarm
-        case notice
+//        case alarm
+//        case notice
         case term
         case logout
     }
@@ -24,6 +24,10 @@ extension MyPageTab {
 struct MyPageTab: View {
     
     @EnvironmentObject var authVM: AuthViewModel
+    
+    @State private var isShowingAlert = false
+    @State private var alertTitle = ""
+    @State private var callback: () -> () = { print("callback")}
     
     var body: some View {
         
@@ -66,8 +70,13 @@ struct MyPageTab: View {
             .background(Color.gray_DEE2E6)
             .cornerRadius(15)
             
-            
-            Spacer() 
+            Text("개발자 연락처\n nou0ggid@gmail.com")
+                .multilineTextAlignment(.trailing)
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                .foregroundColor(.gray_868E96)
+                .padding(.vertical, 20)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                
         }
         .basicNavigationTitle(title: "")
         .padding(.horizontal, 10)
@@ -79,10 +88,10 @@ struct MyPageTab: View {
         switch content {
         case .checkProfile:
             ProfileNavigation()
-        case .alarm:
-            AlaramNavigation()
-        case .notice:
-            NoticeNavigation()
+//        case .alarm:
+//            AlaramNavigation()
+//        case .notice:
+//            NoticeNavigation()
         case .term:
             TermNavigation()
         case .logout:

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SlideResettableScrollView<Content: View>: View {
+struct SwipeResettableView<Content: View>: View {
     
     
     @Binding var selectedCellId: Int
@@ -18,15 +18,13 @@ struct SlideResettableScrollView<Content: View>: View {
     @State private var maxY: CGFloat = .zero
     
     var body: some View {
-        ScrollView {
-            MaxYSetterView(viewMaxY: $maxY) {
-                content()
-                    .onChange(of: maxY) { _ in
-                        if selectedCellId != impossibleId {
-                            selectedCellId = impossibleId
-                        }
+        MaxYSetterView(viewMaxY: $maxY) {
+            content()
+                .onChange(of: maxY) { _ in
+                    if selectedCellId != impossibleId {
+                        selectedCellId = impossibleId
                     }
-            }
+                }
         }
     }
 }

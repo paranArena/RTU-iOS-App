@@ -18,12 +18,33 @@ struct Login: View {
     
         NavigationView {
             VStack(alignment: .center, spacing: 10) {
+                
+                Spacer()
+                
                 GreetingText()
                 Email()
                 Password()
                 MissInput()
                 LoginButton()
                 AuthHelp()
+                
+                Spacer()
+                
+                
+                VStack(alignment: .trailing, spacing: 0) {
+                    Text("개발자 연락처")
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                        .foregroundColor(.gray_868E96)
+                    
+                    Text("nou0ggid@gmail.com")
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                        .tint(Color.navy_1E2F97)
+                }
+                .padding(.horizontal, -30)
+                .frame(maxWidth: .infinity, alignment: .bottomTrailing)
+                
+        
+                
             }
             .navigationTitle(" ")
             .navigationBarHidden(true)

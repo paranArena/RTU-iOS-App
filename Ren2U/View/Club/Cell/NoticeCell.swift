@@ -1,8 +1,8 @@
 //
-//  NoticeCell.swift
+//  NoticeHCell.swift
 //  Ren2U
 //
-//  Created by 노우영 on 2022/07/25.
+//  Created by 노우영 on 2022/09/10.
 //
 
 import SwiftUI
@@ -11,9 +11,10 @@ import Kingfisher
 struct NoticeCell: View {
     
     let noticeInfo: NoticeCellData
-    let groupName: String 
+    let groupName: String
     
     var body: some View {
+        
         VStack {
             HStack {
                 KFImage(URL(string: noticeInfo.imagePath)).onFailure { err in
@@ -50,8 +51,9 @@ struct NoticeCell: View {
     }
 }
 
-//struct NoticeCell_Previews: PreviewProvider {
+
+//struct NoticeHCell_Previews: PreviewProvider {
 //    static var previews: some View {
-//        NoticeCell(noti)
+//        NoticeHCell()
 //    }
 //}

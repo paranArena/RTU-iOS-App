@@ -23,12 +23,14 @@ struct NoticeManagementView: View {
     @State private var selectedNotificationId = -1
     
     var body: some View {
-        SlideResettableScrollView(selectedCellId: $selectedCellId) {
-            VStack {
-                ForEach(managementVM.notices.indices, id: \.self) { i in
-                    let noticeInfo = managementVM.notices[i]
-                    let clubName = managementVM.clubData.name
-                    ManageNoticeCell(noticeInfo: noticeInfo, groupName: clubName, selectedCellID: $selectedCellId, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+        ScrollView {
+            SwipeResettableView(selectedCellId: $selectedCellId) {
+                VStack {
+                    ForEach(managementVM.notices.indices, id: \.self) { i in
+                        let noticeInfo = managementVM.notices[i]
+                        let clubName = managementVM.clubData.name
+                        ManageNoticeCell(noticeInfo: noticeInfo, groupName: clubName, selectedCellID: $selectedCellId, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+                    }
                 }
             }
         }

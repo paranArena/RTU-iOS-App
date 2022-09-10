@@ -49,6 +49,7 @@ struct SignUp: View {
     @FocusState private var focusedField: SignUp.Field?
     @Binding var isActive: Bool
     
+    @State private var isCeritificationActive = false
     var body: some View {
         
         ScrollView(showsIndicators: false) {
@@ -74,6 +75,9 @@ struct SignUp: View {
             }
             .padding(.horizontal, 20)
         }
+        .background(NavigationLink(destination: Certification(email: viewModel.authField.email, isActive: $isActive), isActive: $isCeritificationActive, label: {
+            
+        }))
         .animation(.spring(), value: focusedField)
         .interactiveDismissDisabled()
         .navigationTitle(" ")
@@ -257,10 +261,9 @@ struct SignUp: View {
     @ViewBuilder
     private func CertificatinoViewButton() -> some View {
         HStack {
-            Spacer()
-
-            NavigationLink {
-                Certification(email: viewModel.authField.email, isActive: $isActive, user: viewModel.getUserInfo())
+            Button {
+                isCeritificationActive = true
+                Task { await authViewModel.signUp(user: viewModel.getUserInfo()) }
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)
@@ -269,9 +272,8 @@ struct SignUp: View {
                     .padding(.top, 20)
             }
             .disabled(!viewModel.authField.checkAll)
-            
-            Spacer()
         }
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 }
 
