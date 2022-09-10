@@ -79,6 +79,9 @@ struct GroupSelected: View {
                     } label: {
                         HorizontalClubCell(info: groupVM.joinedClubs[index])
                     }
+                    .padding(.bottom, 10)
+                    
+                    Divider()
                 }
             }
         }

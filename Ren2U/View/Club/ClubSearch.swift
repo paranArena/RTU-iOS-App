@@ -21,10 +21,7 @@ struct ClubSearch: View {
     @State private var groupInfoIndex: Int?
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
-    
-    //  Alert
-    @State private var isShowingAlert = false
-    @State private var selectedCLubId = 0
+    @State private var alert = Alert()
     
     var body: some View {
         
@@ -41,28 +38,22 @@ struct ClubSearch: View {
                             groupInfoIndex = i
                             isActive = true
                         } label: {
-                            HorizontalClubCell(info: clubData[i])
-                                .overlay(alignment: .trailing) {
-                                    OverlayFinder(index: i)
-                                }
+                            HStack {
+                                HorizontalClubCell(info: clubData[i])
+                                    .frame(maxWidth: .infinity)
+                                OverlayFinder(index: i)
+                            }
                         }
+                        
+                        Divider() 
                     }
                 }
             }
         }
-        .alert("", isPresented: $isShowingAlert, actions: {
-            Button("아니오", role: .cancel) {}
-            Button {
-                Task {
-                    await clubVM.requestClubJoin(clubId: selectedCLubId)
-                }
-            } label: {
-                Text("예")
-            }
-
-        }, message: {
-            Text("그룹에 가입하시겠습니까?")
-        })
+        .alert(alert.title, isPresented: $alert.isPresented) {
+            Button("아니요", role: .cancel) {}
+            Button("예") { alert.callback() }
+        }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background {
             NavigationLink(isActive: $isActive) {
@@ -120,23 +111,27 @@ struct ClubSearch: View {
     
     @ViewBuilder
     private func ApplicatedGroupOverlay() -> some View {
-        HStack {
-            Spacer()
-            Text("요청완료")
-                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                .foregroundColor(Color.white)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(Capsule().fill(Color.navy_1E2F97))
-        }
-        .padding()
+        Text("요청완료")
+            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+            .foregroundColor(Color.white)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .background(Capsule().fill(Color.navy_1E2F97))
+            .padding()
     }
     
     @ViewBuilder
     private func NoneOverlay(index: Int) -> some View {
         Button {
-            selectedCLubId = clubData[index].id
-            isShowingAlert = true
+            alert.title = "그룹에 가입하시겠습니까?"
+            alert.isPresented = true
+            alert.callback = {
+                Task {
+                    let cludId = clubData[index].id
+                    await clubVM.requestClubJoin(clubId: cludId)
+                    clubData[index].clubRole = await clubVM.getMyClubRole(clubId: cludId)
+                }
+            }
         } label: {
             Text("가입 요청")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))

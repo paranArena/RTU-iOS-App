@@ -123,7 +123,7 @@ struct MyPageTab: View {
     @ViewBuilder
     private func TermNavigation() -> some View {
         NavigationLink("이용약관") {
-            Text("Emptry View")
+            ToS()
         }
     }
     

@@ -18,8 +18,10 @@ struct ClubTab: View {
     
     @State private var isShowingAlert = false
     @State private var selectedId = -1
+    @State private var altertTitle = "" 
     @State private var callback: () -> () = { print("callback")}
     
+    @State private var alertTest = true
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
@@ -57,6 +59,10 @@ struct ClubTab: View {
         .navigationTitle("")
         .navigationBarHidden(true)
         .animation(.spring(), value: vm.groupSelection)
+        .alert(altertTitle, isPresented: $isShowingAlert) {
+            Button("아니요", role: .cancel) {}
+            Button("예") { callback() }
+        }
     }
     
     @ViewBuilder
@@ -101,7 +107,8 @@ struct ClubTab: View {
                     
                     ForEach(clubVM.notices[id]?.indices ?? 0..<0, id: \.self) { j in
                         let title = clubVM.notices[id]![j].title
-                        ReportableNoticeHCell(noticeInfo: clubVM.notices[id]![j], groupName: groupName, selectedId: $selectedId, callback: $callback)
+                        
+                        ReportableNoticeHCell(noticeInfo: clubVM.notices[id]![j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, title: $altertTitle, callback: $callback)
                             .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
                     }
                 }

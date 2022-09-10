@@ -15,11 +15,28 @@ struct RentalData: Codable {
     let imagePath: String?
     let rentalPolicy: String
     let rentalInfo: RentalInfo
+    let location: Location
     
     struct RentalInfo: Codable {
         var rentalStatus: String
         let rentDate: String
         var expDate: String?
+        
+        var alertMeesage: String {
+            if rentalStatus == RentalStatus.wait.rawValue {
+                return "예약을 취소하시겠습니까?"
+            } else if rentalStatus == RentalStatus.rent.rawValue {
+                return "아이템을 반납하시겠습니까?"
+            } else {
+                return "에러"
+            }
+        }
+    }
+    
+    struct Location: Codable {
+        let name: String
+        let latitude: Double
+        let longitude: Double
     }
 }
 

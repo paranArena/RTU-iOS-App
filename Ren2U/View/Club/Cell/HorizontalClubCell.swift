@@ -34,7 +34,9 @@ struct HorizontalClubCell: View {
                 
                 VStack(alignment: .leading) {
                     Text(info.name)
+                        .lineLimit(1)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                     HStack(spacing: 0) {
                         ForEach(info.hashtags.indices, id: \.self) { i in
@@ -44,12 +46,11 @@ struct HorizontalClubCell: View {
                                 .lineLimit(1)
                         }
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
             .padding(.top, 10)
             .padding(.horizontal, 20)
-            
-            Divider()
         }
     }
 }

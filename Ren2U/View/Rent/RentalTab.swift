@@ -21,10 +21,10 @@ struct RentalTab: View {
     @State private var isShowingModal = false
     
     // 예약 취소를 위한 값들
-    @State private var isShowingAlert = false
     @State private var selectedClubId = -1
     @State private var selectedItemId = -1
-    @State private var callback: () -> () = { print("callback") }
+    @State private var alert = Alert()
+    @State private var singleButtonAlert = Alert()
     
     let spacing: CGFloat = 10
     
@@ -44,17 +44,15 @@ struct RentalTab: View {
                 
             }
         }
-        .alert("", isPresented: $isShowingAlert, actions: {
+        .alert("", isPresented: $alert.isPresented) {
             Button("아니오", role: .cancel) {}
-            Button {
-                callback()
-            } label: {
-                Text("예")
-            }
-
-        }, message: {
-            Text("예약을 취소하시겠습니까?")
-        })
+            Button("예") { alert.callback() }
+        } message: {
+            Text(alert.title)
+        }
+        .alert(singleButtonAlert.title, isPresented: $singleButtonAlert.isPresented) {
+            Button("확인", role: .cancel) {}
+        }
         .disabled(isShowingModal)
         .overlay(ShadowRectangle())
         .overlay(Modal(isShowingModal: $isShowingModal, text: "예약을 취소하시겠습니까?", callback: {
@@ -132,7 +130,7 @@ struct RentalTab: View {
         RefreshableScrollView(threshold: 120) {
             VStack {
                 ForEach(clubVM.rentals.indices, id:\.self) { i in
-                    RentalCell(rentalItemInfo: clubVM.rentals[i], selectedClubId: $selectedClubId, selectedItemId: $selectedItemId, isShowingAlert: $isShowingAlert, callback: $callback)
+                    RentalCell(rentalItemInfo: clubVM.rentals[i], alert: $alert, singleButtonAlert: $singleButtonAlert)
                 }
             }
         }

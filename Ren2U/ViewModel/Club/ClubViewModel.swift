@@ -299,6 +299,26 @@ class ClubViewModel: ObservableObject {
         }
     }
     
+    func reportNotification(clubId: Int, notificationId: Int) {
+        let url = "\(BASE_URL)/clubs/\(clubId)/notifications/\(notificationId)/report"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+
+        AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
+            switch res.result {
+            case .success(let value):
+                #if DEBUG
+                print("[reportNotification success")
+                print(value)
+                #endif
+            case .failure(let err):
+                #if DEBUG
+                print("[reportNotification err]")
+                print(err)
+                #endif
+            }
+        }
+    }
+    
     
     
     //  MARK: POST

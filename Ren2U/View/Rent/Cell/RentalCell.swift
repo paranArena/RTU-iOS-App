@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import Kingfisher
+import CoreLocation
 
 struct RentalCell: View {
     
@@ -16,12 +17,11 @@ struct RentalCell: View {
         case no
     }
     
+    @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var clubVM: ClubViewModel
     let rentalItemInfo: RentalData
-    @Binding var selectedClubId: Int
-    @Binding var selectedItemId: Int
-    @Binding var isShowingAlert: Bool
-    @Binding var callback: () -> ()
+    @Binding var alert: Alert
+    @Binding var singleButtonAlert: Alert
     @State private var isShowingDistanceAlert = false
 
     
@@ -53,10 +53,12 @@ struct RentalCell: View {
                 Spacer()
                 if rentalItemInfo.rentalInfo.rentalStatus == "WAIT" {
                     Button {
-                        selectedItemId = rentalItemInfo.id
-                        selectedClubId = rentalItemInfo.clubId
-                        isShowingAlert = true
-                        callback = {
+                        let selectedItemId = rentalItemInfo.id
+                        let selectedClubId = rentalItemInfo.clubId
+                        
+                        alert.isPresented = true
+                        alert.title = rentalItemInfo.rentalInfo.alertMeesage
+                        alert.callback = {
                             Task {
                                 await clubVM.cancelRent(clubId: selectedClubId, itemId: selectedItemId)
                                 await clubVM.getMyRentals()
@@ -72,12 +74,23 @@ struct RentalCell: View {
                     .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
                 } else {
                     Button {
-                        isShowingAlert = true
-                        callback = {
-                            Task {
-                                await clubVM.returnRent(clubId: rentalItemInfo.clubId, itemId: rentalItemInfo.id)
-                                await clubVM.getMyRentals()
+                        if locationManager.isAuthorized {
+                            let coreLocatino = CLLocationCoordinate2D(latitude: rentalItemInfo.location.latitude, longitude: rentalItemInfo.location.longitude)
+                            
+                            if locationManager.region.center.distance(from: coreLocatino) > 30 {
+                                locationManager.isPresentedDistanceAlert = true
+                            } else {
+                                alert.isPresented = true
+                                alert.title = rentalItemInfo.rentalInfo.alertMeesage
+                                alert.callback = {
+                                    Task {
+                                        await clubVM.returnRent(clubId: rentalItemInfo.clubId, itemId: rentalItemInfo.id)
+                                        await clubVM.getMyRentals()
+                                    }
+                                }
                             }
+                        } else {
+                            locationManager.isPresentedAlert = true
                         }
                     } label: {
                         Text("반납하기")

@@ -10,11 +10,15 @@ import Kingfisher
 
 struct ReportableNoticeHCell: View {
     
+    
     let noticeInfo: NoticeCellData
     let groupName: String
     
     @EnvironmentObject var clubVM: ClubViewModel
     @Binding var selectedId: Int
+    
+    @Binding var isShowingAlert: Bool
+    @Binding var title: String
     @Binding var callback: () -> ()
     
     var body: some View {
@@ -52,7 +56,9 @@ struct ReportableNoticeHCell: View {
             }
             .frame(height: 110)
         } callback: {
-            
+            isShowingAlert = true
+            title = NoticeCellData.reportTitle
+            callback = { clubVM.reportNotification(clubId: noticeInfo.clubId, notificationId: noticeInfo.id) }
         }
 
     }

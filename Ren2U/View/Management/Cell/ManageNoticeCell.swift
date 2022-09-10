@@ -41,7 +41,7 @@ struct ManageNoticeCell: View {
                 
                 Spacer()
                 
-                Text("\(noticeInfo.updatedAt)")
+                Text("\(noticeInfo.updateText)")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     .foregroundColor(Color.gray_ADB5BD)
             }

@@ -44,4 +44,6 @@ struct NoticeCellData: Codable, Equatable, Identifiable {
         case createdAtDto = "createdAt"
         case updatedAtDto = "updatedAt"
     }
+    
+    static let reportTitle = "공지사항 신고를 접수하시겠습니까?"
 }

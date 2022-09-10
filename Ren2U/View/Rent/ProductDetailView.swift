@@ -18,7 +18,7 @@ struct ProductDetailView: View {
     @EnvironmentObject var clubVM: ClubViewModel
     @StateObject private var rentVM: RentalViewModel
     @StateObject private var viewModel = ViewModel()
-    @StateObject private var mapVM = MapViewModel()
+    @EnvironmentObject private var locationManager: LocationManager
     
     @Environment(\.isPresented) var isPresented
     @State private var rentalButtonHeight: CGFloat = .zero
@@ -29,7 +29,6 @@ struct ProductDetailView: View {
     
     //alert
     @State private var isShowingAlert = false
-    @State private var isShowingDistanceAlert = false
     @State private var alertMessage = ""
     
     init(clubId: Int, productId: Int) {
@@ -61,7 +60,7 @@ struct ProductDetailView: View {
                     Text("REN2U")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                     
-                    Text("\(mapVM.region.center.distance(from: rentVM.productLocation))")
+                    Text("\(locationManager.region.center.distance(from: rentVM.productLocation))")
 
                     Text(rentVM.productDetail.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 26))
@@ -112,9 +111,6 @@ struct ProductDetailView: View {
         .controllTabbar(isPresented)
         .navigationTitle(rentVM.productDetail.name)
         .navigationBarTitleDisplayMode(.inline)
-        .alert("거리가 너무 멉니다", isPresented: $isShowingDistanceAlert) {
-            Button("확인", role: .cancel) {}
-        }
         .alert("", isPresented: $isShowingAlert) {
             Button("취소", role: .cancel) {}
             Button {
@@ -292,36 +288,44 @@ struct ProductDetailView: View {
                             #endif
                         }
                     } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-                        if mapVM.region.center.distance(from: rentVM.productLocation) > 30 {
-                            isShowingDistanceAlert = true
-                        } else {
-                            isShowingAlert = true
-                            callback = {
-                                Task {
-                                    print("2번 콜백")
-                                    await rentVM.applyRent(itemId: selectedItemId ?? -1)
-                                    await clubVM.getMyRentals()
-                                    await rentVM.getProduct()
-                                    selctedItem = nil
-                                    selectedItemId = nil
+                        if locationManager.isAuthorized {
+                            if locationManager.region.center.distance(from: rentVM.productLocation) > 30 {
+                                locationManager.isPresentedDistanceAlert = true
+                            } else {
+                                isShowingAlert = true
+                                callback = {
+                                    Task {
+                                        print("2번 콜백")
+                                        await rentVM.applyRent(itemId: selectedItemId ?? -1)
+                                        await clubVM.getMyRentals()
+                                        await rentVM.getProduct()
+                                        selctedItem = nil
+                                        selectedItemId = nil
+                                    }
                                 }
                             }
+                        } else {
+                            locationManager.isPresentedAlert = true
                         }
                     } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
-                        if mapVM.region.center.distance(from: rentVM.productLocation) > 30 {
-                            isShowingDistanceAlert = true
-                        } else {
-                            isShowingAlert = true
-                            callback = {
-                                Task {
-                                    print("3번 콜백")
-                                    await rentVM.returnRent(itemId: selectedItemId ?? 0)
-                                    await clubVM.getMyRentals()
-                                    await rentVM.getProduct()
-                                    selctedItem = nil
-                                    selectedItemId = nil
+                        if locationManager.isAuthorized {
+                            if locationManager.region.center.distance(from: rentVM.productLocation) > 30 {
+                                locationManager.isPresentedDistanceAlert = true 
+                            } else {
+                                isShowingAlert = true
+                                callback = {
+                                    Task {
+                                        print("3번 콜백")
+                                        await rentVM.returnRent(itemId: selectedItemId ?? 0)
+                                        await clubVM.getMyRentals()
+                                        await rentVM.getProduct()
+                                        selctedItem = nil
+                                        selectedItemId = nil
+                                    }
                                 }
                             }
+                        } else {
+                            locationManager.isPresentedAlert = true
                         }
                     }
                 } else {

@@ -63,6 +63,7 @@ class AuthViewModel: ObservableObject {
             case .failure(let err):
                 print("[getMyInfo err]")
                 print(err)
+                self.logout()
             }
         }
     }

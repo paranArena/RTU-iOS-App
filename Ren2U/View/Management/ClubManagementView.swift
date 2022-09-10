@@ -16,6 +16,7 @@ struct ClubManagementView: View {
     @Environment(\.isPresented) var isPresented
     
     @StateObject var managementVM: ManagementViewModel
+    @State private var tmp = false
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -52,6 +53,7 @@ struct ClubManagementView: View {
             }
         }
     }
+    
     
     //  나중에 추가
     @ViewBuilder

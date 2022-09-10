@@ -47,6 +47,7 @@ class ManagementViewModel: ObservableObject {
             
         let task = AF.upload(multipartFormData: { multipart in
             if let image = notice.image {
+                print("이미지를 넣었어요")
                 multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "\(self.clubData.id).\(notice.title).image", mimeType: "image/jpeg")
             }
 
@@ -215,7 +216,6 @@ class ManagementViewModel: ObservableObject {
                 print("[searchClubRentalsAll success]")
                 print(value.responseMessage)
                 self.rentals = value.data
-                print(value.data)
                 
             case .failure(let err):
                 print("[searchClubRentalsAll err]")

@@ -11,6 +11,7 @@ struct ContentView: View {
     
     
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var locationManager: LocationManager
     
     var body: some View {
         Group {
@@ -18,6 +19,14 @@ struct ContentView: View {
             Login().isHidden(hidden: authViewModel.jwt != nil)
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
+        .alert("더 가까이 이동해주세요", isPresented: $locationManager.isPresentedDistanceAlert) {
+            Button("확인", role: .cancel) {} 
+        }
+        .alert("위치 권한", isPresented: $locationManager.isPresentedAlert) {
+            Button("확인", role: .cancel) {}
+        } message: {
+            Text("위치서비스를 사용할 수 없습니다.\n기기의 '설정 > Ren2U > 위치'에서 위치 서비스를 켜주세요.")
+        }
     }
 }
 
