@@ -13,6 +13,8 @@ struct ManageProductCell: View {
     @ObservedObject var manageVM: ManagementViewModel
     let productData: ProductResponseData
     @Binding var selectedId: Int
+    @Binding var callback: () -> ()
+    @Binding var isShowingAlert: Bool
     
     var body: some View {
         CellWithOneSlideButton(okMessage: "삭제", cellID: productData.id, selectedID: $selectedId) {
@@ -52,9 +54,13 @@ struct ManageProductCell: View {
             .frame(maxWidth: .infinity)
             .background(Color.BackgroundColor)
         } callback: {
-            Task {
-                await manageVM.deleteProduct(productId: productData.id)
-                manageVM.searchClubProductsAll()
+            
+            isShowingAlert = true
+            callback = {
+                Task {
+                    await manageVM.deleteProduct(productId: productData.id)
+                    manageVM.searchClubProductsAll()
+                }
             }
         }
     }

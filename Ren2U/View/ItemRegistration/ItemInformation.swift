@@ -10,6 +10,7 @@ import SwiftUI
 struct ItemInformation: View {
     
     @ObservedObject var itemVM: ItemViewModel
+    @ObservedObject var managementVM: ManagementViewModel
     @Binding var isActive: Bool
     let additionalPadding: CGFloat = 30
     
@@ -31,7 +32,7 @@ struct ItemInformation: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
             
             NavigationLink {
-                ItemCategory(category: $itemVM.category)
+                ItemCategory(category: $itemVM.category, managementVM: managementVM)
             } label: {
                 Text(itemVM.categoryString)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
@@ -76,7 +77,7 @@ struct ItemInformation: View {
             Spacer() 
             
             NavigationLink {
-                ItemInformation2(itemVM: itemVM, isActive: $isActive)
+                ItemInformation2(itemVM: itemVM, managementVM: managementVM, isActive: $isActive)
             } label: {
                 RightArrow(isDisabled: !itemVM.isAllItemInformationFilled)
             }

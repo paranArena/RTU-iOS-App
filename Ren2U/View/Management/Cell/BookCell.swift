@@ -11,7 +11,7 @@ import Kingfisher
 struct BookCell: View {
 
     let data: ClubRentalData
-
+    
     var body: some View {
         HStack {
             KFImage(URL(string: data.imagePath)!).onFailure { err in
@@ -30,15 +30,18 @@ struct BookCell: View {
                 Text(data.memberName)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 
-                Text(data.rentalInfo.rentDate)
+                Text(data.rentalInfo.rentDate.toDate().toYMDformat())
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     .foregroundColor(.gray_868E96)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            Group {
+            VStack {
                 Text("픽업까지")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                
+                Text("\(data.rentalInfo.rentDate.toDate().getTemp())")
+                    .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
             }
             .isHidden(hidden: data.rentalInfo.rentalStatus != RentalStatus.wait.rawValue)
             
@@ -46,7 +49,7 @@ struct BookCell: View {
                 Text("반납예정")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 
-                Text("\(data.rentalInfo.expDate!)")
+                Text(data.rentalInfo.expDate?.toDate().toReturnString() ?? "에러")
                     .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
             }
             .isHidden(hidden: data.rentalInfo.rentalStatus != RentalStatus.rent.rawValue)

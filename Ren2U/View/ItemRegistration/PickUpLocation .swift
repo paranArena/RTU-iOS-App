@@ -10,6 +10,7 @@ import SwiftUI
 struct PickUpLocation: View {
     
     @ObservedObject var itemVM: ItemViewModel
+    @ObservedObject var managementVM: ManagementViewModel
     @Binding var isActive: Bool
     
     var body: some View {
@@ -67,7 +68,7 @@ struct PickUpLocation: View {
             Spacer()
             
             NavigationLink {
-                ItemCaution(itemVM: itemVM, isActive: $isActive)
+                ItemCaution(itemVM: itemVM, managementVM: managementVM, isActive: $isActive)
             } label: {
                 RightArrow(isDisabled: !itemVM.isItemCautionAbleToGo)
             }

@@ -14,7 +14,7 @@ struct RentalItemVCell: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            KFImage(URL(string: rentalItem.imagePath)).onFailure { err in
+            KFImage(URL(string: rentalItem.imagePath ?? "")).onFailure { err in
                 print(err.errorDescription ?? "")
                 }
                 .resizable()

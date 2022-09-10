@@ -63,6 +63,7 @@
 		154553D528A35CC3005E7FDB /* ItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D428A35CC3005E7FDB /* ItemVM.swift */; };
 		154B6B4428C31215004962B9 /* DoubleWheelPicker .swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */; };
 		1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */; };
+		1556E42C28CC5AE0007D1BDF /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1556E42B28CC5AE0007D1BDF /* DateExtension.swift */; };
 		155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CED5E28A0EA380032C1BA /* GroupTabVM.swift */; };
 		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
 		156386C0288A5249006653E8 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* HomeTab.swift */; };
@@ -207,6 +208,7 @@
 		154553D428A35CC3005E7FDB /* ItemVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemVM.swift; sourceTree = "<group>"; };
 		154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoubleWheelPicker .swift"; sourceTree = "<group>"; };
 		1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
+		1556E42B28CC5AE0007D1BDF /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		155CED5E28A0EA380032C1BA /* GroupTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTabVM.swift; sourceTree = "<group>"; };
 		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
 		156386BF288A5249006653E8 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				15FAF168287D607800B35570 /* Extension.swift */,
 				152C6F5028C83F1A00AA420A /* ColorExtension.swift */,
 				152C6F5328C842E600AA420A /* StringExtension.swift */,
+				1556E42B28CC5AE0007D1BDF /* DateExtension.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				1514A0FE28B753BB0040F681 /* PickUpLocationMap .swift in Sources */,
 				15D774F4288E2B8A00428465 /* NoticeCell.swift in Sources */,
 				151E4E9028C4620400FFB668 /* ManageMemberCell.swift in Sources */,
+				1556E42C28CC5AE0007D1BDF /* DateExtension.swift in Sources */,
 				15F3672F289261300073E094 /* ShadowRectangle.swift in Sources */,
 				15D774F6288E37A900428465 /* RentalItemVCell.swift in Sources */,
 				154B6B4428C31215004962B9 /* DoubleWheelPicker .swift in Sources */,

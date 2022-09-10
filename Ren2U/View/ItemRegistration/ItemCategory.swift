@@ -10,6 +10,7 @@ import SwiftUI
 struct ItemCategory: View {
     
     @Binding var category: Category?
+    @ObservedObject var managementVM: ManagementViewModel
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -32,8 +33,8 @@ struct ItemCategory: View {
     }
 }
 
-struct ItemCategory_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemCategory(category: .constant(.book))
-    }
-}
+//struct ItemCategory_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemCategory(category: .constant(.book))
+//    }
+//}

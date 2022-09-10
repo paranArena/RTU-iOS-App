@@ -38,6 +38,7 @@ extension ItemInformation2 {
 struct ItemInformation2: View {
     
     @ObservedObject var itemVM: ItemViewModel
+    @ObservedObject var managementVM: ManagementViewModel
     @Binding var isActive: Bool
     
     @State private var isActive2 = false
@@ -87,7 +88,7 @@ struct ItemInformation2: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(Color.BackgroundColor)
         .background(NavigationLink(isActive: $isActive2, destination: {
-            PickUpLocation(itemVM: itemVM, isActive: $isActive)
+            PickUpLocation(itemVM: itemVM, managementVM: managementVM, isActive: $isActive)
         }, label: {}))
         .onTapGesture {
             self.pickerSelection = nil

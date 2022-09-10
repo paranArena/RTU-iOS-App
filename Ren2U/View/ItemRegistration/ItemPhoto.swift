@@ -11,6 +11,7 @@ struct ItemPhoto: View {
     
     
     @StateObject var itemVM: ItemViewModel
+    @ObservedObject var managementVM: ManagementViewModel
     @Binding var isActive: Bool
     
     @State private var isPhotoNotSelected = true
@@ -33,7 +34,7 @@ struct ItemPhoto: View {
             }
             
             NavigationLink {
-                ItemInformation(itemVM: itemVM, isActive: $isActive)
+                ItemInformation(itemVM: itemVM, managementVM: managementVM, isActive: $isActive)
             } label: {
                 RightArrow(isDisabled: !itemVM.isImageSelected)
             }

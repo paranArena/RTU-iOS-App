@@ -42,10 +42,10 @@ extension String {
     }
     
     func toDate() -> Date {
-        let decoder = JSONDecoder()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-        return dateFormatter.date(from: self) ?? Date.now
+        dateFormatter.locale = Locale(identifier: "ko_KR") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        
+        return dateFormatter.date(from: self)!
     }
 }

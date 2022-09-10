@@ -19,7 +19,7 @@ struct ProductResponseData: Codable {
     let category: String
     let left, max: Int
     let clubName: String
-    let imagePath: String
+    let imagePath: String?
     let clubId: Int
     
     static func dummyProductResponseData() -> ProductResponseData {
@@ -49,7 +49,7 @@ struct ProductDetailData: Codable {
     let location: Location
     let fifoRentalPeriod, reserveRentalPeriod, price: Int
     let caution: String
-    let imagePath: String
+    let imagePath: String?
     let items: [Item]
     
     static func dummyProductData() -> ProductDetailData {

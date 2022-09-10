@@ -45,7 +45,16 @@ struct ProductDetailView: View {
     var body: some View {
         BounceControllScrollView(baseOffset: -10, offset: $viewModel.offset) {
             VStack(alignment: .leading, spacing: 10) {
-                CarouselImage()
+//                CarouselImage()
+                
+                KFImage(URL(string: rentVM.productDetail.imagePath ?? ""))
+                    .onFailure { err in
+                        print(err.errorDescription ?? "KFImage Optional err")
+                    }
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: SCREEN_WIDTH, height: 300)
+                    .clipped()
                 
                 Group {
                     
@@ -128,7 +137,7 @@ struct ProductDetailView: View {
     private func CarouselImage() -> some View {
         TabView(selection: $viewModel.imageSelection) {
             ForEach(0..<5, id:\.self) { i in
-                KFImage(URL(string: rentVM.productDetail.imagePath))
+                KFImage(URL(string: rentVM.productDetail.imagePath ?? ""))
                     .onFailure { err in
                         print(err.errorDescription ?? "KFImage Optional err")
                     }

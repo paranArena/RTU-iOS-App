@@ -107,7 +107,7 @@ struct ClubManagementView: View {
         VStack(alignment: .center, spacing: 0) {
             ForEach(ManageSelection.allCases, id : \.rawValue) { selection in
                 HStack {
-                    if selection != .rentalActive && selection != .profileEdit {
+                    if selection != .profileEdit {
                         NavigationLink {
                             Navigation(selection: selection)
                         } label: {
@@ -117,14 +117,14 @@ struct ClubManagementView: View {
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                                 .foregroundColor(Color.primary)
                         }
-                    } else if selection == .rentalActive     {
-                        Toggle(isOn: $rentalToggle) {
-                            Text(selection.title)
-                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                        }
-                        .padding(.vertical, 8)
-                        .padding(.leading, 20)
-                        .toggleStyle(CustomToggleStyle())
+//                    } else if selection == .rentalActive     {
+//                        Toggle(isOn: $rentalToggle) {
+//                            Text(selection.title)
+//                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+//                        }
+//                        .padding(.vertical, 8)
+//                        .padding(.leading, 20)
+//                        .toggleStyle(CustomToggleStyle())
                     }
                     
                     Spacer()
@@ -148,8 +148,8 @@ struct ClubManagementView: View {
             NoticeManagementView(managementVM: managementVM)
         case .memberManagement:
             MemberManagementView(managementVM: managementVM)
-        case .rentalActive:
-            Text("Empty View")
+//        case .rentalActive:
+//            Text("Empty View")
         }
     }
 }

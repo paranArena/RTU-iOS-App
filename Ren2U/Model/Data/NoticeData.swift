@@ -20,5 +20,28 @@ struct NoticeCellData: Codable, Equatable, Identifiable {
     let title: String
     let isPublic: Bool?
     let imagePath: String
-    let createdAt, updatedAt: String
+   
+    let createdAtDto, updatedAtDto: String
+    
+    var createdAt: Date {
+        createdAtDto.toDate()
+    }
+    
+    var updatedAt: Date {
+        updatedAtDto.toDate()
+    }
+    
+    var updateText: String {
+        return updatedAt.toYMDformat()
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case clubId
+        case title
+        case isPublic
+        case imagePath
+        case createdAtDto = "createdAt"
+        case updatedAtDto = "updatedAt"
+    }
 }

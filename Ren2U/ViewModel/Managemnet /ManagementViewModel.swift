@@ -187,14 +187,35 @@ class ManagementViewModel: ObservableObject {
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+            let container = try decoder.singleValueContainer()
+            let dateStr = try container.decode(String.self)
+
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+            if let date = formatter.date(from: dateStr) {
+                return date
+            }
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
+            if let date = formatter.date(from: dateStr) {
+                return date
+            }
+            throw DateError.invalidDate
+        })
+
         
-        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetClubRetnalsResponse.self, decoder: decoder) { res in
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchClubRentalsAllResponse.self) { res in
             switch res.result {
             case .success(let value):
                 print("[searchClubRentalsAll success]")
                 print(value.responseMessage)
                 self.rentals = value.data
+                print(value.data)
                 
             case .failure(let err):
                 print("[searchClubRentalsAll err]")

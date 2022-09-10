@@ -14,7 +14,7 @@ struct Ren2UTab: View {
     
     @EnvironmentObject var groupVM: ClubViewModel
     @EnvironmentObject var authVM: AuthViewModel
-    @State private var tabSelection: Int = Selection.home.rawValue
+    @State private var tabSelection: Int = Selection.group.rawValue
     @State private var funcCount = 1
     
     init() {
@@ -78,8 +78,8 @@ struct Ren2UTab: View {
     @ViewBuilder
     private func Content(selection: Selection) -> some View {
         switch selection {
-        case .home:
-            HomeTab()
+//        case .home:
+//            HomeTab()
         case .group:
             ClubTab(tabSelection: $tabSelection)
         case .rent:
@@ -92,12 +92,12 @@ struct Ren2UTab: View {
     @ViewBuilder
     private func TabItem(selection: Selection) -> some View {
         switch selection {
-        case .home:
-            Label {
-                Text(Selection.home.title)
-            } icon: {
-                Image(systemName: Selection.home.imageSource)
-            }
+//        case .home:
+//            Label {
+//                Text(Selection.home.title)
+//            } icon: {
+//                Image(systemName: Selection.home.imageSource)
+//            }
         case .group:
             Label {
                 Text(Selection.group.title)
@@ -122,15 +122,15 @@ struct Ren2UTab: View {
 
 extension Ren2UTab {
     enum Selection: Int, CaseIterable {
-        case home
+//        case home
         case group
         case rent
         case myPage
         
         var title: String {
             switch self {
-            case .home:
-                return "홈"
+//            case .home:
+//                return "홈"
             case .group:
                 return "그룹"
             case .rent:
@@ -141,8 +141,8 @@ extension Ren2UTab {
         }
         var imageSource: String {
             switch self {
-            case .home:
-                return "house"
+//            case .home:
+//                return "house"
             case .group:
                 return "person.2"
             case .rent:

@@ -34,20 +34,15 @@ struct SearchBar: View {
                     .strokeBorder(Color.gray_DEE2E6, lineWidth: 2)
             }
             
-            Group {
-                if isFoucsed {
-                    Button {
-                        focused = nil
-                        isFoucsed = false
-                        text = "" 
-                    } label: {
-                        Text("취소")
-                            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                    }
-                } else {
-                    Image(systemName: "bell")
-                }
+            Button {
+                focused = nil
+                isFoucsed = false
+                text = "" 
+            } label: {
+                Text("취소")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
             }
+            .isHidden(hidden: !isFoucsed)
             .frame(minWidth: 30)
         }
     }

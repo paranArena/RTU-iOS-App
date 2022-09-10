@@ -12,7 +12,7 @@ struct RentalData: Codable {
     let name: String
     let clubId: Int
     let clubName: String
-    let imagePath: String
+    let imagePath: String?
     let rentalPolicy: String
     let rentalInfo: RentalInfo
     

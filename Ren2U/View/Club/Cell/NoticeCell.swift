@@ -37,13 +37,9 @@ struct NoticeCell: View {
                 
                 Spacer()
                 
-                Text("\(noticeInfo.updatedAt)")
+                Text("\(noticeInfo.updateText)")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     .foregroundColor(Color.gray_ADB5BD)
-                
-//                Image(systemName: "n.circle.fill")
-//                    .foregroundStyle(noticeInfo.isShown ? Color.BackgroundColor : Color.red_EB1808,
-//                                     noticeInfo.isShown ? Color.BackgroundColor : Color.gray_ADB5BD)
           
             }
             .padding(.horizontal)
@@ -51,13 +47,6 @@ struct NoticeCell: View {
             Divider()
         }
         .frame(height: 110)
-    }
-    
-    func getDate(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        let result = dateFormatter.string(from: date)
-        return result
     }
 }
 

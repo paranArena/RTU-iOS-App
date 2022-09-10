@@ -11,6 +11,7 @@ import Introspect
 struct ItemCaution: View {
     
     @ObservedObject var itemVM: ItemViewModel
+    @ObservedObject var managementVM: ManagementViewModel
     @Binding var isActive: Bool
     @State private var viewHeight: CGFloat = .zero
     @Environment(\.presentationMode) var presentationMode
@@ -41,6 +42,8 @@ struct ItemCaution: View {
                 Task {
                     isActive = false
                     await itemVM.createProduct()
+                    managementVM.searchClubProductsAll()
+                    
                 }
             } label: {
                 RightArrow(isDisabled: itemVM.caution.isEmpty)

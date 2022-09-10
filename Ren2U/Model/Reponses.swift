@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+
+class CustomDecoder: JSONDecoder {
+    let dateFormatter = DateFormatter()
+
+    override init() {
+        super.init()
+        dateDecodingStrategy = .iso8601
+    }
+}
+
+
 //  MARK: GET
 
 struct GetMyClubRoleResponse: Codable {
@@ -80,7 +91,7 @@ struct GetMyRentalsResponse: Codable {
     let data: [RentalData]
 }
 
-struct GetClubRetnalsResponse: Codable {
+struct SearchClubRentalsAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
     let data: [ClubRentalData]

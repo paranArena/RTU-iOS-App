@@ -13,10 +13,13 @@ struct ProductManageView: View {
     @State private var selectedCellId = -1
     @ObservedObject var managementVM: ManagementViewModel
     
+    @State private var callback: () -> () = { print("callback")}
+    @State private var isShowingAlert = false
+    
     var body: some View {
         SlideResettableScrollView(selectedCellId: $selectedCellId) {
             ForEach(managementVM.products.indices, id: \.self) { i in
-                ManageProductCell(manageVM: managementVM, productData: managementVM.products[i], selectedId: $selectedCellId)
+                ManageProductCell(manageVM: managementVM, productData: managementVM.products[i], selectedId: $selectedCellId, callback: $callback, isShowingAlert: $isShowingAlert)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -24,11 +27,17 @@ struct ProductManageView: View {
         .navigationBarTitleDisplayMode(.inline)
         .overlay(alignment: .bottomTrailing) {
             NavigationLink(isActive: $isActive) {
-                ItemPhoto(itemVM: ItemViewModel(clubId: managementVM.clubData.id), isActive: $isActive)
+                ItemPhoto(itemVM: ItemViewModel(clubId: managementVM.clubData.id), managementVM: managementVM, isActive: $isActive)
             } label: {
                 PlusCircle()
             }
         }
+        .alert("물품을 삭제하시겠습니까?", isPresented: $isShowingAlert, actions: {
+            Button("취소", role: .cancel) {}
+            Button("예") {
+                callback()
+            }
+        })
         .avoidSafeArea()
     }
 }

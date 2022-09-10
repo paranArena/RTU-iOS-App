@@ -14,7 +14,7 @@ extension ClubManagementView {
         case rentalManagement
         case notice
         case memberManagement
-        case rentalActive
+//        case rentalActive
         
         var title: String {
             switch self {
@@ -26,8 +26,8 @@ extension ClubManagementView {
                 return "공지사항"
             case .memberManagement:
                 return "멤버 관리"
-            case .rentalActive:
-                return "대여목록 활성화"
+//            case .rentalActive:
+//                return "대여목록 활성화"
             }
         }
     }
