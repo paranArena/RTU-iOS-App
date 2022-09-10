@@ -52,9 +52,7 @@ struct ReportableNoticeHCell: View {
                         .foregroundColor(Color.gray_ADB5BD)
               
                 }
-                .padding(.horizontal)
             }
-            .frame(height: 110)
         } callback: {
             isShowingAlert = true
             title = NoticeCellData.reportTitle

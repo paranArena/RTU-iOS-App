@@ -22,23 +22,19 @@ struct RentalCell: View {
     let rentalItemInfo: RentalData
     @Binding var alert: Alert
     @Binding var singleButtonAlert: Alert
-    @State private var isShowingDistanceAlert = false
 
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-                if let thumbnailPath = rentalItemInfo.imagePath {
-                    KFImage(URL(string: thumbnailPath))
-                        .onFailure { err in
-                            print(err.errorDescription ?? "KFImage Optional err")
-                        }
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 80, height: 80)
-                        .cornerRadius(15)
-
-                }
+                KFImage(URL(string: rentalItemInfo.imagePath ?? "")).onFailure { err in
+                    print(err.errorDescription ?? "KFImage err")
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(15)
+                    .isHidden(hidden: rentalItemInfo.imagePath?.isEmpty ?? true)
                
                 VStack(alignment: .leading) {
                     Text("\(rentalItemInfo.name)  \(rentalItemInfo.numbering)")
@@ -102,11 +98,9 @@ struct RentalCell: View {
                     .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
                 }
             }
+            .frame(minHeight: 80)
             .padding(.horizontal, 10)
             Divider()
-        }
-        .alert("거리가 너무 멉니다", isPresented: $isShowingDistanceAlert) {
-            Button("확인", role: .cancel) {}
         }
     }
     

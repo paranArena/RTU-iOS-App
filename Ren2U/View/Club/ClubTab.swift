@@ -100,16 +100,18 @@ struct ClubTab: View {
     @ViewBuilder
     private func NoticeSelected() -> some View {
         RefreshableScrollView(threshold: offset) {
-            VStack {
-                ForEach(clubVM.joinedClubs.indices, id: \.self) { i in
-                    let id = clubVM.joinedClubs[i].id
-                    let groupName = clubVM.getGroupNameByGroupId(groupId: id)
-                    
-                    ForEach(clubVM.notices[id]?.indices ?? 0..<0, id: \.self) { j in
-                        let title = clubVM.notices[id]![j].title
+            Group {
+                VStack {
+                    ForEach(clubVM.joinedClubs.indices, id: \.self) { i in
+                        let id = clubVM.joinedClubs[i].id
+                        let groupName = clubVM.getGroupNameByGroupId(groupId: id)
                         
-                        ReportableNoticeHCell(noticeInfo: clubVM.notices[id]![j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, title: $altertTitle, callback: $callback)
-                            .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
+                        ForEach(clubVM.notices[id]?.indices ?? 0..<0, id: \.self) { j in
+                            let title = clubVM.notices[id]![j].title
+                            
+                            ReportableNoticeHCell(noticeInfo: clubVM.notices[id]![j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, title: $altertTitle, callback: $callback)
+                                .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
+                        }
                     }
                 }
             }

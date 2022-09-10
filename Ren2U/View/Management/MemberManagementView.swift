@@ -119,12 +119,21 @@ struct MemberManagementView: View {
     @ViewBuilder
     private func Members() -> some View {
         RefreshableScrollView(threshold: maxY + 10) {
-            SwipeResettableView(selectedCellId: $selectedCellID) {
-                VStack {
-                    ForEach(managementVM.members.indices, id: \.self) { index in
-                        ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+            Group {
+                SwipeResettableView(selectedCellId: $selectedCellID) {
+                    VStack {
+                        ForEach(managementVM.members.indices, id: \.self) { index in
+                            ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+                        }
                     }
+                    .isHidden(hidden: managementVM.members.isEmpty)
                 }
+                
+                Text("등록된 멤버가 없습니다.")
+                    .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                    .foregroundColor(.gray_DEE2E6)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .isHidden(hidden: !managementVM.members.isEmpty)
             }
         }
     }
@@ -132,12 +141,21 @@ struct MemberManagementView: View {
     @ViewBuilder
     private func Applicant() -> some View {
         RefreshableScrollView(threshold: maxY + 10) {
-            SwipeResettableView(selectedCellId: $selectedCellID) {
-                VStack {
-                    ForEach(managementVM.applicants.indices, id: \.self) { index in
-                        ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, isShowingSignUp: $isShowingSignUpAlert, alertSelection: $selection, managementVM: managementVM)
+            Group {
+                SwipeResettableView(selectedCellId: $selectedCellID) {
+                    VStack {
+                        ForEach(managementVM.applicants.indices, id: \.self) { index in
+                            ManageSignUpCell(userData: managementVM.applicants[index], selectedCellID: $selectedCellID, isShowingSignUp: $isShowingSignUpAlert, alertSelection: $selection, managementVM: managementVM)
+                        }
                     }
                 }
+                .isHidden(hidden: managementVM.applicants.isEmpty)
+                
+                Text("가입 신청 명단이 없습니다.")
+                    .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                    .foregroundColor(.gray_DEE2E6)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .isHidden(hidden: !managementVM.applicants.isEmpty)
             }
         }
     }

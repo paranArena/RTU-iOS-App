@@ -93,16 +93,16 @@ class RentalViewModel: ObservableObject {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/apply"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
+        let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
             
-            switch res.result {
-            case .success(let value):
-                print("[applyRent success]")
-                print(value)
-            case .failure(let err):
-                print("[applyRent failure]")
-                print(err)
-            }
+        switch result {
+        case .success(let value):
+            print("[applyRent success]")
+            print(value)
+        case .failure(let err):
+            print("[applyRent failure]")
+            print(err)
         }
     }
     

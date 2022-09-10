@@ -18,10 +18,19 @@ struct ProductManageView: View {
     
     var body: some View {
         ScrollView {
-            SwipeResettableView(selectedCellId: $selectedCellId) {
-                ForEach(managementVM.products.indices, id: \.self) { i in
-                    ManageProductCell(manageVM: managementVM, productData: managementVM.products[i], selectedId: $selectedCellId, callback: $callback, isShowingAlert: $isShowingAlert)
+            Group {
+                SwipeResettableView(selectedCellId: $selectedCellId) {
+                    ForEach(managementVM.products.indices, id: \.self) { i in
+                        ManageProductCell(manageVM: managementVM, productData: managementVM.products[i], selectedId: $selectedCellId, callback: $callback, isShowingAlert: $isShowingAlert)
+                    }
                 }
+                .isHidden(hidden: managementVM.products.isEmpty)
+                
+                Text("관리 중인 물품이 없습니다.")
+                    .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                    .foregroundColor(.gray_DEE2E6)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .isHidden(hidden: !managementVM.products.isEmpty)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

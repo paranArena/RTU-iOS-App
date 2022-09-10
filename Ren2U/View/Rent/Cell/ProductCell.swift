@@ -23,17 +23,13 @@ struct ProductCell: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-                if let thumbnailPath = rentalItemInfo.imagePath {
-                    KFImage(URL(string: thumbnailPath))
-                        .onFailure { err in
-                            print(err.errorDescription ?? "KFImage Optional err")
-                        }
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 80, height: 80)
-                        .cornerRadius(15)
-                    
-                }
+                KFImage(URL(string: rentalItemInfo.imagePath ?? "")).onFailure { err in
+                    print(err.errorDescription ?? "KFImage err")
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(15)
                
                 VStack(alignment: .leading) {
                     Text(rentalItemInfo.name)
@@ -55,7 +51,9 @@ struct ProductCell: View {
                 }
                 .foregroundColor(rentalItemInfo.fgColor)
             }
+            .frame(maxHeight: 80)
             .padding(.horizontal, 10)
+            
             Divider()
         }
     }

@@ -19,9 +19,18 @@ struct GroupSelected: View {
     
     var body: some View {
         RefreshableScrollView(threshold: refreshThreshold) {
-            VStack(alignment: .leading) {
-//                GroupFavorites()
-                JoinedGroup()
+            Group {
+                VStack(alignment: .leading) {
+    //                GroupFavorites()
+                    JoinedGroup()
+                }
+                .isHidden(hidden: groupVM.joinedClubs.isEmpty)
+                
+                Text("가입된 그룹이 없습니다.")
+                    .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                    .foregroundColor(.gray_DEE2E6)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .isHidden(hidden: !groupVM.joinedClubs.isEmpty)
             }
         }
         .frame(maxWidth: .infinity)

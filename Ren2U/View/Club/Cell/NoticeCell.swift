@@ -10,7 +10,6 @@ import Kingfisher
 
 struct NoticeCell: View {
     
-
     let noticeInfo: NoticeCellData
     let groupName: String
     

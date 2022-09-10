@@ -25,12 +25,21 @@ struct NoticeManagementView: View {
     var body: some View {
         ScrollView {
             SwipeResettableView(selectedCellId: $selectedCellId) {
-                VStack {
-                    ForEach(managementVM.notices.indices, id: \.self) { i in
-                        let noticeInfo = managementVM.notices[i]
-                        let clubName = managementVM.clubData.name
-                        ManageNoticeCell(noticeInfo: noticeInfo, groupName: clubName, selectedCellID: $selectedCellId, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+                Group {
+                    VStack {
+                        ForEach(managementVM.notices.indices, id: \.self) { i in
+                            let noticeInfo = managementVM.notices[i]
+                            let clubName = managementVM.clubData.name
+                            ManageNoticeCell(noticeInfo: noticeInfo, groupName: clubName, selectedCellID: $selectedCellId, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+                        }
                     }
+                    .isHidden(hidden: managementVM.notices.isEmpty)
+                    
+                    Text("등록된 공지사항이 없습니다.")
+                        .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                        .foregroundColor(.gray_DEE2E6)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        .isHidden(hidden: !managementVM.notices.isEmpty)
                 }
             }
         }

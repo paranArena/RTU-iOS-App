@@ -105,16 +105,26 @@ struct RentalTab: View {
     @ViewBuilder
     private func RentalItemSelected() -> some View {
         RefreshableScrollView(threshold: offset) {
-            VStack {
-                ForEach(clubVM.products.indices, id: \.self) { i in
-                    NavigationLink(isActive: $clubVM.products[i].isActive) {
-                        ProductDetailView(clubId: clubVM.products[i].data.clubId, productId: clubVM.products[i].data.id)
-                    } label: {
-                        ProductCell(rentalItemInfo: clubVM.products[i].data)
+            Group {
+                VStack {
+                    ForEach(clubVM.products.indices, id: \.self) { i in
+                        NavigationLink(isActive: $clubVM.products[i].isActive) {
+                            ProductDetailView(clubId: clubVM.products[i].data.clubId, productId: clubVM.products[i].data.id)
+                        } label: {
+                            ProductCell(rentalItemInfo: clubVM.products[i].data)
+                        }
+                        .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.products[i].data.clubId != tabVM.selectedClubId)
+                        .isHidden(hidden: isSearchBarFocused && !clubVM.products[i].data.name.contains(searchText))
                     }
-                    .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.products[i].data.clubId != tabVM.selectedClubId)
-                    .isHidden(hidden: isSearchBarFocused && !clubVM.products[i].data.name.contains(searchText))
                 }
+                .isHidden(hidden: clubVM.products.isEmpty)
+                
+                Text("대여할 수 있는 물품이 없습니다.")
+                    .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                    .foregroundColor(.gray_DEE2E6)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .isHidden(hidden: !clubVM.products.isEmpty)
+                    
             }
         }
         .refreshable {
@@ -128,10 +138,20 @@ struct RentalTab: View {
     @ViewBuilder
     private func RentalListSelected() -> some View {
         RefreshableScrollView(threshold: 120) {
-            VStack {
-                ForEach(clubVM.rentals.indices, id:\.self) { i in
-                    RentalCell(rentalItemInfo: clubVM.rentals[i], alert: $alert, singleButtonAlert: $singleButtonAlert)
+            Group {
+                VStack {
+                    ForEach(clubVM.rentals.indices, id:\.self) { i in
+                        RentalCell(rentalItemInfo: clubVM.rentals[i], alert: $alert, singleButtonAlert: $singleButtonAlert)
+                            .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.rentals[i].clubId != tabVM.selectedClubId)
+                    }
                 }
+                .isHidden(hidden: clubVM.rentals.isEmpty)
+                
+                Text("대여 중인 물품이 없습니다.")
+                    .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                    .foregroundColor(.gray_DEE2E6)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .isHidden(hidden: !clubVM.rentals.isEmpty)
             }
         }
         .refreshable {
