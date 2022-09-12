@@ -61,8 +61,6 @@ struct ProductDetailView: View {
                     
                     Text("REN2U")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-                    
-                    Text("\(locationManager.region.center.distance(from: rentVM.productLocation))")
 
                     Text(rentVM.productDetail.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 26))

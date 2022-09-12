@@ -40,9 +40,7 @@ struct Profile: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.isPresented) var isPresented
     
-    @State private var isShowingAlert = false
-    @State private var alertTitle = ""
-    @State private var callback: () -> () = { print("callback")}
+    @State private var alert = Alert()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -62,28 +60,24 @@ struct Profile: View {
                 ProfileField(field: field)
             }
             
-            
-            Button {
-                isShowingAlert = true
-                alertTitle = "탈퇴하시겠습니까?"
-                callback = authVM.quitService
-            } label: {
-                Text("탈퇴하기")
-                    .padding(.leading, 15)
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-                    .foregroundColor(.gray_495057)
+            VStack(alignment: .leading, spacing: 10) {
+                ChangePasswordButton()
+                Divider()
+                    .padding(.horizontal, 10)
+                ServiceQuitButton()
             }
-            .frame(maxWidth: .infinity, maxHeight: 30, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 10)
             .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray_F1F2F3))
-
-            
         }
         .padding(.horizontal, 15)
         .basicNavigationTitle(title: "프로필 확인")
         .controllTabbar(isPresented)
-        .alert(alertTitle, isPresented: $isShowingAlert) {
+        .alert("", isPresented: $alert.isPresented) {
             Button("취소", role: .cancel) {}
-            Button("예") { callback() }
+            Button("예") { alert.callback() }
+        } message: {
+            Text(alert.title)
         }
     }
     
@@ -118,6 +112,33 @@ struct Profile: View {
             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    @ViewBuilder
+    private func ChangePasswordButton() -> some View {
+        NavigationLink {
+            PasswordResetView()
+        } label: {
+            Text("비밀번호 변경")
+                .padding(.leading, 15)
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                .foregroundColor(.gray_495057)
+        }
+
+    }
+    
+    @ViewBuilder
+    private func ServiceQuitButton() -> some View {
+        Button {
+            alert.isPresented = true
+            alert.title = "탈퇴하시겠습니까?"
+            alert.callback = authVM.quitService
+        } label: {
+            Text("탈퇴하기")
+                .padding(.leading, 15)
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                .foregroundColor(.gray_495057)
+        }
     }
 }
 

@@ -12,9 +12,7 @@ struct ClubNotifications: View {
     @EnvironmentObject var clubVM: ClubViewModel
     
     @State private var selectedCellId = -1
-    
     @State private var alert = Alert()
-    @State private var isShowingAlert = false
     
     var body: some View {
         RefreshableScrollView(threshold: 20) {
@@ -26,7 +24,7 @@ struct ClubNotifications: View {
                             NavigationLink {
                                 NotificationDetailView(clubId: clubVM.clubNotice[i].clubId, notificationId: clubVM.clubNotice[i].id)
                             } label: {
-                                ReportableNoticeHCell(noticeInfo: clubVM.clubNotice[i], groupName: groupName, selectedId: $selectedCellId, isShowingAlert: $isShowingAlert, title: $alert.title, callback: $alert.callback)
+                                ReportableNoticeHCell(noticeInfo: clubVM.clubNotice[i], groupName: groupName, selectedId: $selectedCellId, isShowingAlert: $alert.isPresented, title: $alert.title, callback: $alert.callback)
                             }
                         }
                     }
@@ -39,6 +37,12 @@ struct ClubNotifications: View {
                     .padding(.horizontal)
                     .isHidden(hidden: !clubVM.clubNotice.isEmpty)
             }
+        }
+        .alert("", isPresented: $alert.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") { alert.callback() }
+        } message: {
+            Text(alert.title)
         }
         .basicNavigationTitle(title: "공지사항")
         .overlay(alignment: .bottom) {
