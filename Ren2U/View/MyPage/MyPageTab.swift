@@ -16,6 +16,7 @@ extension MyPageTab {
 //        case alarm
 //        case notice
         case term
+        case privacy
         case logout
     }
 }
@@ -94,11 +95,19 @@ struct MyPageTab: View {
 //            NoticeNavigation()
         case .term:
             TermNavigation()
+        case .privacy:
+            PrivacyNavigation()
         case .logout:
             LogoutButton()
         }
     }
     
+    @ViewBuilder
+    private func PrivacyNavigation() -> some View {
+        NavigationLink("개인정보처리 방침") {
+            PrivacyPolicy() 
+        }
+    }
     @ViewBuilder
     private func ProfileNavigation() -> some View {
         NavigationLink("프로필 확인") {
