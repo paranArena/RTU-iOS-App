@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RentalSheet: View {
     
-    let itemInfo: ProductResponseData
+    let itemInfo: ProductPreviewDto
     @StateObject var viewModel = ViewModel()
     @Binding var isRentalTerminal: Bool
     @Environment(\.presentationMode) var presentationMode

@@ -13,11 +13,26 @@ class ClubViewModel: ObservableObject {
     @Published var likesGroupId = [LikeGroupInfo]()
     @Published var joinedClubs = [ClubAndRoleData]() // VStack에서 나열될 그룹들
     
-    @Published var notices = [Int: [NoticeCellData]]() // Vstack 한개 그룹 이동 후 사용될 정보
-    @Published var products = [ProductCellData]()
+    @Published var notices = [NotificationPreview]() // Vstack 한개 그룹 이동 후 사용될 정보
+    @Published var products = [ProductPreviewData]()
     @Published var rentals = [RentalData]()
     
+    @Published var clubNotice = [NotificationPreview]()
+    
+    @Published var oneButtonAlert = OneButtonAlert() 
+    
     //  MARK: LOCAL
+    
+    func checkClubRequiredInformation(clubData: CreateClubFormdata) -> Bool {
+        if clubData.name.isEmpty || clubData.introduction.isEmpty {
+            oneButtonAlert.isPresented = true
+            oneButtonAlert.title = "그룹 생성 불가"
+            oneButtonAlert.message = "그룹 이름, 소개글은 필수입니다."
+            return false
+        } else {
+            return true
+        }
+    }
     
     func getGroupNameByGroupId(groupId: Int) -> String {
         if let fooOffset = joinedClubs.firstIndex(where: {$0.id == groupId }) {
@@ -121,28 +136,18 @@ class ClubViewModel: ObservableObject {
             print(err)
         }
     }
-    
+
     @MainActor
     func getMyNotifications() {
         let url = "\(BASE_URL)/members/my/notifications"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
-        
+
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyNotificationsResponse.self) { res in
             switch res.result {
             case .success(let value):
                 print("[getMyNotificationsSuccess]")
                 print(value.responseMessage)
-                self.notices.removeAll()
-                
-                for i in 0..<value.data.count {
-                    let clubId = value.data[i].clubId
-                    
-                    if self.notices[clubId] == nil {
-                        self.notices[clubId] = [NoticeCellData]()
-                    }
-                    
-                    self.notices[clubId]!.append(value.data[i])
-                }
+                self.notices = value.data
             case .failure(let err):
                 print("[getMyNotificationsErr")
                 print(err)
@@ -164,17 +169,7 @@ class ClubViewModel: ObservableObject {
         case .success(let value):
             print("[getMyNotificationsSuccess]")
             print(value.responseMessage)
-            notices.removeAll()
-            
-            for i in 0..<value.data.count {
-                let clubId = value.data[i].clubId
-                
-                if notices[clubId] == nil {
-                    notices[clubId] = [NoticeCellData]()
-                }
-                
-                notices[clubId]!.append(value.data[i])
-            }
+            notices = value.data
         case .failure(let err):
             print("[getMyNotificationsErr")
             print(err)
@@ -193,7 +188,7 @@ class ClubViewModel: ObservableObject {
         case .success(let value):
             print("[getMyProducts success]")
             print(value.responseMessage)
-            self.products = value.data.map { ProductCellData(data: $0) }
+            self.products = value.data.map { ProductPreviewData(data: $0) }
         case .failure(let err):
             print("[getMyProducts err")
             print(err)
@@ -291,8 +286,8 @@ class ClubViewModel: ObservableObject {
             switch res.result {
             case .success(let value):
                 print("searchNotificationAll success, GroupId: \(clubId)")
-                self.notices[clubId] = value.data
-                self.notices[clubId] = self.notices[clubId]!.reversed()
+                print(value.data)
+                self.clubNotice = value.data
             case .failure(let err):
                 print("searchNotificationsAll failure, GroupId: \(clubId) : \(err)")
             }
@@ -323,6 +318,7 @@ class ClubViewModel: ObservableObject {
     
     //  MARK: POST
     
+    @MainActor
     func createClub(club: CreateClubFormdata) async {
         let url = "\(BASE_URL)/clubs"
         let hearders: HTTPHeaders = [
@@ -356,15 +352,33 @@ class ClubViewModel: ObservableObject {
         }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingDecodable(CreateClubResponse.self)
         
         
-        let result = await task.result
+        let response = await task.response
         
-        switch result {
-        case .success(let value):
-            print("[create club success]")
-            print(value.responseMessage)
-        case .failure(let err):
-            print("[create club err]")
-            print(err)
+        if response.response!.statusCode == 400 {
+            if let data = response.data {
+                let error = try? JSONDecoder().decode(ErrorBody.self, from: data)
+                if let code = error?.code {
+                    switch code {
+                    case "DUP_CLUB_NAME":
+                        oneButtonAlert.title = "그룹 생성 실패"
+                        oneButtonAlert.message = "이미 사용하고 있는 이름입니다."
+                        oneButtonAlert.isPresented = true
+                    default:
+                        oneButtonAlert.title = "그룹 생성 실패"
+                        oneButtonAlert.message = "그룹 생성에 실패했습니다."
+                        oneButtonAlert.isPresented = true
+                    }
+                }
+            }
+        } else {
+            switch response.result {
+            case .success(let value):
+                print("[create club success]")
+                print(value.responseMessage)
+            case .failure(let err):
+                print("[create club err]")
+                print(err)
+            }
         }
     }
     

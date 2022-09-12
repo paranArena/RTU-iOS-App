@@ -33,11 +33,17 @@ class RentalViewModel: ObservableObject {
     
     @Published var isLoading = true
     @Published var productDetail = ProductDetailData.dummyProductData()
-    var productLocation = CLLocationCoordinate2D(latitude: 127, longitude: 31)
+    @Published var oneButtonAlert = OneButtonAlert()
+    @Published var productLocation = CLLocationCoordinate2D(latitude: 127, longitude: 31)
+    @Published var isRentalTerminal = false
+    
+//    @Binding var productPreview: ProductCellData
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
         self.productId = productId
+        
+        
         Task {
             await getProduct()
             setLocation()
@@ -71,20 +77,43 @@ class RentalViewModel: ObservableObject {
     }
     
     //  MARK: POST
+    @MainActor
     func requestRent(itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/request"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
-        let request = AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).serializingString()
-        let result = await request.result
         
-        switch result {
-        case .success(_):
-            print("[requestRent success]")
-//            print(value)
-        case .failure(let err):
-            print("[requestRent failure]")
-            print(err)
+        let request = AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        
+        let response = await request.response
+        
+        if response.response!.statusCode == 400 {
+            print(response.debugDescription)
+            if let data = response.data {
+                let error = try? JSONDecoder().decode(ErrorBody.self, from: data)
+                if let code = error?.code {
+                    switch code {
+                    case "ALREADY_USED":
+                        oneButtonAlert.title = "예약 실패"
+                        oneButtonAlert.message = "이미 예약했습니다."
+                        oneButtonAlert.isPresented = true
+                    default:
+                        oneButtonAlert.title = "예약 실패"
+                        oneButtonAlert.message = "예약에 실패했습니다."
+                        oneButtonAlert.isPresented = true
+                    }
+                }
+            }
+        } else {
+            switch response.result {
+                case .success(let value):
+                    self.isRentalTerminal = true
+                    print("[requestRent success]")
+                    print(value)
+                case .failure(let err):
+                    print("[requestRent failure]")
+                    print(err)
+            }
         }
     }
     

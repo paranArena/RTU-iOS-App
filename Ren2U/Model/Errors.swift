@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+struct ErrorBody: Decodable {
+    let code: String
+    let message: String 
+}
+
 enum DateError: String, Error {
     case invalidDate
 }

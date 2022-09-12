@@ -20,7 +20,7 @@ struct ItemPhoto: View {
     
     var body: some View {
         VStack {
-            Text("대여물품의 사진을 선택해주세요.")
+            Text("대여물품의 대표사진을 선택해주세요.")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             
             ItemImages()
@@ -42,26 +42,36 @@ struct ItemPhoto: View {
             
         }
         .basicNavigationTitle(title: "물품 등록")
+        
         .sheet(isPresented: $itemVM.showPicker, content: {
-            ImagesPicker(sourceType: .photoLibrary, selectedImage: $itemVM.image)
+            ImagePicker(sourceType: .photoLibrary, selectedImage: $itemVM.image)
         })
+        .avoidSafeArea()
     }
     
     @ViewBuilder
     private func ItemImages() -> some View {
-        
-        let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 4)
-        
-        LazyVGrid(columns: columns, spacing: 10) {
-            ForEach(itemVM.image.indices, id: \.self) { i in
-                Image(uiImage: itemVM.image[i])
+        ZoomableScrollView {
+            if let image = itemVM.image {
+                Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: photoLength, height: photoLength)
-                    .cornerRadius(15)
+                    .frame(maxWidth: 300, maxHeight: 300)
+                    .clipped()
             }
         }
-        .padding(.horizontal, 20)
+        .frame(maxWidth: 300, maxHeight: 300)
+        //  이미지 여러장 등록할 때 이용
+        //        let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 4)
+//        LazyVGrid(columns: columns, spacing: 10) {
+//            ForEach(itemVM.image.indices, id: \.self) { i in
+//                Image(uiImage: itemVM.image[i])
+//                    .resizable()
+//                    .scaledToFill()
+//                    .frame(width: photoLength, height: photoLength)
+//                    .cornerRadius(15)
+//            }
+//        }
     }
 }
 

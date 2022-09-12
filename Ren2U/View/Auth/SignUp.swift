@@ -145,20 +145,10 @@ struct SignUp: View {
                 .disabled(viewModel.authField.isCheckedEmailDuplicate || !viewModel.authField.checkEmailButtonCondition)
             }
             
-            Group {
-                if viewModel.authField.isCheckedEmailDuplicate && viewModel.authField.isDuplicatedEmail {
-                    Text("이미 가입된 이메일입니다.")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
-                        .foregroundColor(.red_EB1808)
-                } else if viewModel.authField.isCheckedEmailDuplicate && !viewModel.authField.isDuplicatedEmail {
-                    Text("사용할 수 있는 이메일입니다.")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
-                        .foregroundColor(.green_2CA900)
-                    
-                } else {
-                    Text("")
-                }
-            }
+            Text(viewModel.authField.wrongEmail)
+                .foregroundColor(viewModel.authField.wrongEmailColor)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                .padding(.bottom, -10)
             .padding(.bottom, -10)
         }
     }
@@ -166,30 +156,36 @@ struct SignUp: View {
     @ViewBuilder
     private func Password() -> some View {
         
-        Group {
-            TextField("", text: $viewModel.authField.password)
-                .isHidden(hidden: !viewModel.authField.isShowingPassword)
-            
-            SecureField("", text: $viewModel.authField.password)
-                .isHidden(hidden: viewModel.authField.isShowingPassword)
-        }
-        .font(.custom(CustomFont.RobotoRegular.rawValue, size: 18))
-        .overlay(alignment: .trailing) {
-            Button {
-                viewModel.authField.isShowingPassword.toggle()
-            } label: {
-                Text("보기")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                    .foregroundColor(.gray_ADB5BD)
+        VStack(alignment: .leading, spacing: 0) {
+            Group {
+                TextField("", text: $viewModel.authField.password)
+                    .isHidden(hidden: !viewModel.authField.isShowingPassword)
+                
+                SecureField("", text: $viewModel.authField.password)
+                    .isHidden(hidden: viewModel.authField.isShowingPassword)
             }
+            .font(.custom(CustomFont.RobotoRegular.rawValue, size: 18))
+            .overlay(alignment: .trailing) {
+                Button {
+                    viewModel.authField.isShowingPassword.toggle()
+                } label: {
+                    Text("보기")
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                        .foregroundColor(.gray_ADB5BD)
+                }
 
-        }
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: 1)
-                .foregroundColor(viewModel.authField.passwordBottomeLineColor)
-        }
+            }
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .frame(maxWidth: .infinity, maxHeight: 1)
+                    .foregroundColor(viewModel.authField.passwordBottomeLineColor)
+            }
             
+            Text(viewModel.authField.wrongPassword)
+                .foregroundColor(viewModel.authField.wrongPasswordColor)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                .padding(.bottom, -10)
+        }
     }
     
     @ViewBuilder
@@ -219,17 +215,29 @@ struct SignUp: View {
                     .frame(maxWidth: .infinity, maxHeight: 1)
                     .foregroundColor(viewModel.authField.passwordCheckBottomeLineColor)
             }
+            
+            Text(viewModel.authField.wrongPasswordCheck)
+                .foregroundColor(viewModel.authField.wrongPasswordCheckColor)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                .padding(.bottom, -10)
         }
     }
     
     @ViewBuilder
     private func Name() -> some View {
-        TextField("", text: $viewModel.authField.name)
-            .overlay(alignment: .bottom) {
-                Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight: 1)
-                    .foregroundColor(viewModel.authField.nameBottomLineColor)
-            }
+        VStack(alignment: .leading, spacing: 0) {
+            TextField("", text: $viewModel.authField.name)
+                .overlay(alignment: .bottom) {
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: 1)
+                        .foregroundColor(viewModel.authField.nameBottomLineColor)
+                }
+            
+            Text(viewModel.authField.wrongName)
+                .foregroundColor(viewModel.authField.wrongNameColor)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                .padding(.bottom, -10)
+        }
     }
     
     @ViewBuilder
@@ -244,18 +252,28 @@ struct SignUp: View {
     
     @ViewBuilder
     private func StudentId() -> some View {
-        TextField("", text: $viewModel.authField.studentId)
-            .overlay(alignment: .bottom) {
-                Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight: 1)
-                    .foregroundColor(viewModel.authField.studentIdLineColor)
-            }
+        VStack(alignment: .leading, spacing: 0) {
+            TextField("", text: $viewModel.authField.studentId)
+                .keyboardType(.numberPad)
+                .overlay(alignment: .bottom) {
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: 1)
+                        .foregroundColor(viewModel.authField.studentIdLineColor)
+                }
+            
+            
+            Text(viewModel.authField.wrongStudentId)
+                .foregroundColor(viewModel.authField.wrongStudentIdColor)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
+                .padding(.bottom, -10)
+        }
     }
     
     @ViewBuilder
     private func PhoneNumber() -> some View {
         BottomLinePlaceholder(placeholder: "'-'를 제외한 숫자로 된 전화번호를 입력하세요", text: $viewModel.authField.phoneNumber)
             .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+            .keyboardType(.numberPad)
     }
     
     @ViewBuilder
@@ -263,7 +281,9 @@ struct SignUp: View {
         HStack {
             Button {
                 isCeritificationActive = true
-                Task { await authViewModel.signUp(user: viewModel.getUserInfo()) }
+                Task {
+                    authViewModel.requestEmailCode(email: viewModel.authField.email)
+                }
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)

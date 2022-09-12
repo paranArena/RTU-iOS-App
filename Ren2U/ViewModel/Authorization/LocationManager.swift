@@ -13,6 +13,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     let message = "위치서비스를 사용할 수 없습니다.\n기기의 '설정 > Ren2U > 위치'에서 위치 서비스를 켜주세요."
     
+    var locationManager: CLLocationManager?
     @Published var isPresentedDistanceAlert = false
     @Published var isPresentedAlert = false
     @Published var authorisationStatus: CLAuthorizationStatus = .notDetermined
@@ -42,13 +43,20 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    var locationManager: CLLocationManager?
     
     override init() {
         super.init()
         checkIfLocationServicesIsEnabled()
     }
     
+    func requestAuthorization() -> Bool {
+        if isAuthorized {
+            return true
+        } else {
+            isPresentedAlert = true
+            return false
+        }
+    }
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             self.locationManager = CLLocationManager()

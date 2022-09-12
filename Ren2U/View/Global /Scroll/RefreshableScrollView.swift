@@ -20,9 +20,9 @@ struct RefreshableScrollView<Content: View>: View {
     @State private var startoffset: CGFloat = .zero
     @State private var isRefreshing = false
     
+    @State private var isRefreshable = false
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    // 렌더링 되면서 threshold에 생기는 문제 방지
-    @State private var isScrolled = false
 
     init(threshold: CGFloat, c: @escaping () -> Content ) {
         self.threshold = threshold
@@ -49,8 +49,7 @@ struct RefreshableScrollView<Content: View>: View {
                     })
                     .onPreferenceChange(ViewOffsetKey.self) {
                         detector.send($0)
-                        if $0 > (threshold+50)  && startoffset < threshold + 50 {
-                            print("refreshing")
+                        if $0 > (threshold+50)  && startoffset < threshold + 50 && isRefreshable{
 //                            startoffset = $0 // Offset이 threshold를 넘겼을 때 게속 refresh 되는 것을 방지
                             isRefreshing = true
                             simpleSuccess() // 핸드폰에 진동 주기
@@ -59,7 +58,6 @@ struct RefreshableScrollView<Content: View>: View {
                                 withAnimation {
                                     isRefreshing = false
                                 }
-                                print("RefreshableScrollView End")
                             }
                         }
                     }
@@ -69,6 +67,11 @@ struct RefreshableScrollView<Content: View>: View {
                 startoffset = $0
                 print("startoffset :  \(startoffset)")
                 print("threshold: \(threshold)")
+            }
+            .onReceive(timer) { _ in
+                print("call timer")
+                isRefreshable = true
+                timer.upstream.connect().cancel()
             }
         }
     }

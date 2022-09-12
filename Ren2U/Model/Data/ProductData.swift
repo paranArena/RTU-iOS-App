@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI 
 
-struct ProductCellData {
-    let data: ProductResponseData
+struct ProductPreviewData {
+    let data: ProductPreviewDto
     var isActive = false
 }
 
-struct ProductResponseData: Codable {
+struct ProductPreviewDto: Codable {
     let id: Int
     let name: String
     let category: String
@@ -22,8 +22,8 @@ struct ProductResponseData: Codable {
     let imagePath: String?
     let clubId: Int
     
-    static func dummyProductResponseData() -> ProductResponseData {
-        return ProductResponseData(id: 0, name: "", category: "", left: 1, max: 1, clubName: "", imagePath: "", clubId: 1)
+    static func dummyProductResponseData() -> ProductPreviewDto {
+        return ProductPreviewDto(id: 0, name: "", category: "", left: 1, max: 1, clubName: "", imagePath: "", clubId: 1)
     }
     
     var status: String {
@@ -101,6 +101,36 @@ struct ProductDetailData: Codable {
             }
         }
         
+        var mainButtonFillColor: Color {
+            if rentalInfo == nil {
+                return Color.navy_1E2F97
+            } else if rentalInfo!.meRental {
+                return Color.navy_1E2F97
+            } else {
+                return Color.clear
+            }
+        }
+        
+        var mainButtonFGColor: Color {
+            if rentalInfo == nil {
+                return Color.white
+            } else if rentalInfo!.meRental {
+                return Color.white
+            } else {
+                return Color.navy_1E2F97
+            }
+        }
+        
+        var mainButtonDisable: Bool {
+            if rentalInfo == nil {
+                return false
+            } else if rentalInfo!.meRental {
+                return false
+            } else {
+                return true 
+            }
+        }
+        
         var buttonText: String {
             if rentalInfo == nil {
                 return "대여하기"
@@ -114,6 +144,8 @@ struct ProductDetailData: Codable {
                 return "에러"
             }
         }
+        
+        
         
         var alertMessage: String {
             if rentalInfo == nil {

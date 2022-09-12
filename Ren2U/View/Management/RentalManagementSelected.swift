@@ -58,9 +58,13 @@ struct RentalManagementSelected: View {
     private func BookList() -> some View {
         VStack {
             ForEach(manageVM.rentals.indices, id: \.self) { i in
-                BookCell(data: manageVM.rentals[i])
-                    .isHidden(hidden: manageVM.rentals[i].rentalInfo.rentalStatus != filter.rawValue)
-                    .padding(.horizontal)
+                Group {
+                    BookCell(data: manageVM.rentals[i])
+                        .padding(.horizontal)
+                    
+                    Divider()
+                }
+                .isHidden(hidden: manageVM.rentals[i].rentalInfo.rentalStatus != filter.rawValue)
             }
         }
     }

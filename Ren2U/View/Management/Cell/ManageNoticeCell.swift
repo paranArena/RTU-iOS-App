@@ -10,7 +10,7 @@ import Kingfisher
 
 struct ManageNoticeCell: View {
     
-    let noticeInfo: NoticeCellData
+    let noticeInfo: NotificationPreview
     let groupName: String
     @Binding var selectedCellID: Int
     @Binding var isShowingAlert: Bool

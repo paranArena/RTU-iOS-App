@@ -114,7 +114,7 @@ struct RentalTab: View {
                             ProductCell(rentalItemInfo: clubVM.products[i].data)
                         }
                         .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.products[i].data.clubId != tabVM.selectedClubId)
-                        .isHidden(hidden: isSearchBarFocused && !clubVM.products[i].data.name.contains(searchText))
+                        .isHidden(hidden: isSearchBarFocused && !clubVM.products[i].data.name.contains(searchText) && !clubVM.products[i].data.clubName.contains(searchText))
                     }
                 }
                 .isHidden(hidden: clubVM.products.isEmpty)
@@ -143,6 +143,7 @@ struct RentalTab: View {
                     ForEach(clubVM.rentals.indices, id:\.self) { i in
                         RentalCell(rentalItemInfo: clubVM.rentals[i], alert: $alert, singleButtonAlert: $singleButtonAlert)
                             .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.rentals[i].clubId != tabVM.selectedClubId)
+                            .isHidden(hidden: isSearchBarFocused && !clubVM.rentals[i].clubName.contains(searchText) && !clubVM.rentals[i].name.contains(searchText))
                     }
                 }
                 .isHidden(hidden: clubVM.rentals.isEmpty)
@@ -155,7 +156,6 @@ struct RentalTab: View {
             }
         }
         .refreshable {
-            //  MARK: 추후에 비동기 함수 추가
             clubVM.getMyClubs()
             clubVM.getMyNotifications()
             await clubVM.getMyProducts()

@@ -59,7 +59,6 @@ struct Certification: View {
             }
         })
         .onAppear {
-            authModel.requestEmailCode(email: email)
             viewModel.startTimer()
         }
         .toolbar {

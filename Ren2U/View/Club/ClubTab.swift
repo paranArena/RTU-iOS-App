@@ -21,7 +21,9 @@ struct ClubTab: View {
     @State private var altertTitle = "" 
     @State private var callback: () -> () = { print("callback")}
     
-    @State private var alertTest = true
+    
+    @State private var isActiveNotificationDetail = false
+    @State private var selectedNotificationLinkIndex = 0
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
@@ -54,6 +56,13 @@ struct ClubTab: View {
                 .padding(.bottom, -10)
             }
         }
+        .background(
+            NavigationLink(isActive: $isActiveNotificationDetail , destination: {
+                let clubId = clubVM.notices[selectedNotificationLinkIndex].clubId
+                let notificationId = clubVM.notices[selectedNotificationLinkIndex].id
+                NotificationDetailView(clubId: clubId, notificationId: notificationId)
+            }, label: { })
+        )
         .overlay(ShadowRectangle())
         .showTabBar(animated: false)
         .navigationTitle("")
@@ -101,15 +110,15 @@ struct ClubTab: View {
     private func NoticeSelected() -> some View {
         RefreshableScrollView(threshold: offset) {
             Group {
-                VStack {
-                    ForEach(clubVM.joinedClubs.indices, id: \.self) { i in
-                        let id = clubVM.joinedClubs[i].id
-                        let groupName = clubVM.getGroupNameByGroupId(groupId: id)
-                        
-                        ForEach(clubVM.notices[id]?.indices ?? 0..<0, id: \.self) { j in
-                            let title = clubVM.notices[id]![j].title
-                            
-                            ReportableNoticeHCell(noticeInfo: clubVM.notices[id]![j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, title: $altertTitle, callback: $callback)
+                VStack {       
+                    ForEach(clubVM.notices.indices, id: \.self) { j in
+                        let title = clubVM.notices[j].title
+                        let groupName = clubVM.getGroupNameByGroupId(groupId: clubVM.notices[j].clubId)
+                        Button {
+                            isActiveNotificationDetail = true
+                            selectedNotificationLinkIndex = j
+                        } label: {
+                            ReportableNoticeHCell(noticeInfo: clubVM.notices[j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, title: $altertTitle, callback: $callback)
                                 .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
                         }
                     }

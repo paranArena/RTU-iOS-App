@@ -43,9 +43,12 @@ extension String {
     
     func toDate() -> Date {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_KR") // set locale to reliable US_POSIX
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        var date = dateFormatter.date(from: self) ?? Date.now
+        date.addTimeInterval(60*60*9)
         
-        return dateFormatter.date(from: self)!
+        return date
     }
 }

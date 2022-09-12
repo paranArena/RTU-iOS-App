@@ -63,19 +63,19 @@ struct GetMyInfoResponse: Codable {
 struct GetMyNotificationsResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [NoticeCellData]
+    let data: [NotificationPreview]
 }
 
 struct GetMyProductsResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [ProductResponseData]
+    let data: [ProductPreviewDto]
 }
 
 struct SearchClubProductsAll: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [ProductResponseData]
+    let data: [ProductPreviewDto]
 }
 
 
@@ -97,6 +97,12 @@ struct SearchClubRentalsAllResponse: Codable {
     let data: [ClubRentalData]
 }
 
+struct GetNotificationResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: NotificationDetailData
+}
+
 //  MARK: POST
 
 struct VerifyEmailCodeResponse: Codable {
@@ -114,7 +120,7 @@ struct CreateClubResponse: Codable {
 struct CreateNotificationResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: NoticeDetailData
+    let data: NotificationDetailData
 }
 
 struct GetSearchClubsAllResponse: Codable {
@@ -132,7 +138,7 @@ struct SearchClubsWithNameResponse: Codable {
 struct SearchNotificationsAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [NoticeCellData]
+    let data: [NotificationPreview]
 }
 
 
@@ -148,5 +154,11 @@ struct SearchClubJoinsAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
     let data: [UserData]
+}
+
+struct RequestRentResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: RentalInfo
 }
 

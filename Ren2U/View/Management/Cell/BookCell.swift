@@ -11,17 +11,27 @@ import Kingfisher
 struct BookCell: View {
 
     let data: ClubRentalData
+    @State private var remainTime: Int
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    init(data: ClubRentalData) {
+        self.data = data
+        remainTime = data.rentalInfo.remainTime
+        remainTime = max(remainTime, 0)
+    }
     
     var body: some View {
         HStack {
-            KFImage(URL(string: data.imagePath)!).onFailure { err in
-                print(err.errorDescription ?? "KFImage err")
-            }
-            .resizable()
-            .scaledToFill()
-            .frame(width: 80, height: 80)
-            .cornerRadius(15)
             
+            if let imagePath = data.imagePath {
+                KFImage(URL(string: imagePath)).onFailure { err in
+                    print(err.errorDescription ?? "KFImage err")
+                }
+                .resizable()
+                .scaledToFill()
+                .frame(width: 80, height: 80)
+                .cornerRadius(15)
+            }
             
             VStack(alignment: .leading) {
                 Text("\(data.name) - \(data.numbering)")
@@ -30,7 +40,7 @@ struct BookCell: View {
                 Text(data.memberName)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 
-                Text(data.rentalInfo.rentDate.toDate().toYMDformat())
+                Text(data.rentalInfo.rentDate.toYMDformat())
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                     .foregroundColor(.gray_868E96)
             }
@@ -40,7 +50,7 @@ struct BookCell: View {
                 Text("픽업까지")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 
-                Text("\(data.rentalInfo.rentDate.toDate().getTemp())")
+                Text(remainTime.toRemainTime())
                     .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
             }
             .isHidden(hidden: data.rentalInfo.rentalStatus != RentalStatus.wait.rawValue)
@@ -56,6 +66,10 @@ struct BookCell: View {
 
         }
         .frame(maxWidth: .infinity)
+        .onReceive(timer) { time in
+            remainTime -= 1
+            remainTime = max(0, remainTime)
+        }
     }
 }
 

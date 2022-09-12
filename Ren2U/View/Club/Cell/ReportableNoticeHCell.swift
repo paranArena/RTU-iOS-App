@@ -11,7 +11,7 @@ import Kingfisher
 struct ReportableNoticeHCell: View {
     
     
-    let noticeInfo: NoticeCellData
+    let noticeInfo: NotificationPreview
     let groupName: String
     
     @EnvironmentObject var clubVM: ClubViewModel
@@ -55,7 +55,7 @@ struct ReportableNoticeHCell: View {
             }
         } callback: {
             isShowingAlert = true
-            title = NoticeCellData.reportTitle
+            title = NotificationPreview.reportTitle
             callback = { clubVM.reportNotification(clubId: noticeInfo.clubId, notificationId: noticeInfo.id) }
         }
 

@@ -10,7 +10,6 @@ import CoreLocation
 
 
 //  MARK: CLLocationCoordinate2D
-
 extension CLLocationCoordinate2D {
     
     func distance(from: CLLocationCoordinate2D) -> CLLocationDistance {
@@ -68,6 +67,12 @@ extension Int {
         } else {
             return Color.gray_868E96
         }
+    }
+    
+    func toRemainTime() -> String {
+        let sec = self % 60
+        let min = Int(self / 60)
+        return "\(min)분 \(sec)초"
     }
 }
 

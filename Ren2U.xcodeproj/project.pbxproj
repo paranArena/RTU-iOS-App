@@ -48,6 +48,8 @@
 		152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */; };
 		152D463028C606E5008F26E0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152D462F28C606E5008F26E0 /* LocationManager.swift */; };
 		15382ECA28C1A338004D7977 /* ManageNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15382EC928C1A338004D7977 /* ManageNoticeCell.swift */; };
+		15394C0C28CDC7C900E4944A /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15394C0B28CDC7C900E4944A /* ZoomableScrollView.swift */; };
+		15394C0F28CDCABF00E4944A /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15394C0E28CDCABF00E4944A /* PhotoManager.swift */; };
 		153C1A6E288CDED600F89B2E /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */; };
 		153C1A70288CE3A900F89B2E /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */; };
 		153C1A72288CE48900F89B2E /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A71288CE48900F89B2E /* Roboto-Regular.ttf */; };
@@ -106,6 +108,10 @@
 		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
 		159F1B26288BA16000012113 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B25288BA16000012113 /* CustomFont.swift */; };
 		159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */; };
+		15A84D5B28CDF8DD00B3EB84 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A84D5A28CDF8DD00B3EB84 /* Annotation.swift */; };
+		15A84D5D28CE120D00B3EB84 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A84D5C28CE120D00B3EB84 /* NotificationDetailView.swift */; };
+		15A84D5F28CE12A500B3EB84 /* SimpleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A84D5E28CE12A500B3EB84 /* SimpleLine.swift */; };
+		15A84D6128CE1C6C00B3EB84 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A84D6028CE1C6C00B3EB84 /* NotificationViewModel.swift */; };
 		15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */; };
 		15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B63DA328AF38EA000AB82D /* ViewExtensions .swift */; };
 		15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel.swift */; };
@@ -196,6 +202,8 @@
 		152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmongTabsViewModel.swift; sourceTree = "<group>"; };
 		152D462F28C606E5008F26E0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		15382EC928C1A338004D7977 /* ManageNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageNoticeCell.swift; sourceTree = "<group>"; };
+		15394C0B28CDC7C900E4944A /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
+		15394C0E28CDCABF00E4944A /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		153C1A71288CE48900F89B2E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -252,6 +260,10 @@
 		159F1B23288B9F9A00012113 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		159F1B24288BA0C200012113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		159F1B25288BA16000012113 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		15A84D5A28CDF8DD00B3EB84 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
+		15A84D5C28CE120D00B3EB84 /* NotificationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
+		15A84D5E28CE12A500B3EB84 /* SimpleLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLine.swift; sourceTree = "<group>"; };
+		15A84D6028CE1C6C00B3EB84 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSignUpCell.swift; sourceTree = "<group>"; };
 		15B63DA328AF38EA000AB82D /* ViewExtensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewExtensions .swift"; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -372,13 +384,14 @@
 		151B556D28BC9EBC0090A5E8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				15394C0D28CDCAA200E4944A /* Authorization */,
 				15C03143289CD5A900D0354E /* Rental */,
 				1523D5E328BE29BE009EB733 /* Managemnet  */,
 				1525F5FF28B7365D00C7CA51 /* ItemRegistration */,
 				15868738287EBB270003C2DC /* Auth */,
 				156386D0288A5D06006653E8 /* Club */,
 				152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */,
-				152D462F28C606E5008F26E0 /* LocationManager.swift */,
+				15A84D6028CE1C6C00B3EB84 /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -388,6 +401,7 @@
 			children = (
 				1570663528A53139002F7365 /* BounceControllScrollView.swift */,
 				1570663728A5413B002F7365 /* RefreshableScrollView.swift */,
+				15394C0B28CDC7C900E4944A /* ZoomableScrollView.swift */,
 			);
 			path = Scroll;
 			sourceTree = "<group>";
@@ -414,6 +428,7 @@
 				1514A10128B75CDA0040F681 /* HeightSetterView.swift */,
 				157190E928B6FE0F00880F98 /* WidthSetterView .swift */,
 				156673DD28C1C6860011535D /* MaxYSetterView.swift */,
+				15A84D5E28CE12A500B3EB84 /* SimpleLine.swift */,
 			);
 			path = PreferenceSetter;
 			sourceTree = "<group>";
@@ -459,8 +474,28 @@
 				15228ABC28C89FA200A0B3C5 /* ProductData.swift */,
 				15228ABE28C8A06300A0B3C5 /* NoticeData.swift */,
 				15228AC028C8A08D00A0B3C5 /* ClubData.swift */,
+				15A84D5A28CDF8DD00B3EB84 /* Annotation.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		15394C0A28CDC7B200E4944A /* Swipe */ = {
+			isa = PBXGroup;
+			children = (
+				151E4E9128C4948600FFB668 /* SwipeResettableView.swift */,
+				156673DB28C1B6660011535D /* CellWithTwoSlideButton.swift */,
+				15FD7CCC28C8EF7D007C4E96 /* CellWithOneSlideButton.swift */,
+			);
+			path = Swipe;
+			sourceTree = "<group>";
+		};
+		15394C0D28CDCAA200E4944A /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				152D462F28C606E5008F26E0 /* LocationManager.swift */,
+				15394C0E28CDCABF00E4944A /* PhotoManager.swift */,
+			);
+			path = Authorization;
 			sourceTree = "<group>";
 		};
 		153C1A6C288CDDF200F89B2E /* Others */ = {
@@ -519,6 +554,7 @@
 				156386CA288A5B2F006653E8 /* GroupSelected.swift */,
 				153C1A7A288CF7D600F89B2E /* ClubProfile.swift */,
 				152980EF288D39E500537A80 /* ClubPage.swift */,
+				15A84D5C28CE120D00B3EB84 /* NotificationDetailView.swift */,
 				156386C7288A588D006653E8 /* Cell */,
 			);
 			path = Club;
@@ -666,11 +702,11 @@
 			isa = PBXGroup;
 			children = (
 				159F1B24288BA0C200012113 /* Info.plist */,
+				15F7606A289BA3FB0045055B /* Resources */,
 				15FAF160287D5EC100B35570 /* Global */,
 				151B556B28BC9D8C0090A5E8 /* Model */,
 				151B556C28BC9DAC0090A5E8 /* View */,
 				151B556D28BC9EBC0090A5E8 /* ViewModel */,
-				15F7606A289BA3FB0045055B /* Resources */,
 			);
 			path = Ren2U;
 			sourceTree = "<group>";
@@ -707,12 +743,10 @@
 		15FAF166287D606700B35570 /* Global  */ = {
 			isa = PBXGroup;
 			children = (
-				15FD7CCC28C8EF7D007C4E96 /* CellWithOneSlideButton.swift */,
-				156673DB28C1B6660011535D /* CellWithTwoSlideButton.swift */,
+				15394C0A28CDC7B200E4944A /* Swipe */,
 				151E4E9328C4948B00FFB668 /* Scroll */,
 				15246E1D28C0AA8E0021D4F0 /* PreferenceSetter */,
 				1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */,
-				151E4E9128C4948600FFB668 /* SwipeResettableView.swift */,
 				15F3672C289252B70073E094 /* SearchBar.swift */,
 				152C3E84287E6D6C000BFC97 /* BottomLinePlaceholder.swift */,
 				152C3E82287E63D0000BFC97 /* BottomLineTextField.swift */,
@@ -911,10 +945,12 @@
 				153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */,
 				1563FE9928ADFBA700F46CC7 /* BookCell.swift in Sources */,
 				15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */,
+				15A84D5B28CDF8DD00B3EB84 /* Annotation.swift in Sources */,
 				156386C0288A5249006653E8 /* HomeTab.swift in Sources */,
 				150072F9289A3DFD005B6A93 /* ProductDetailView.swift in Sources */,
 				1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */,
 				156386C2288A5252006653E8 /* ClubTab.swift in Sources */,
+				15A84D5F28CE12A500B3EB84 /* SimpleLine.swift in Sources */,
 				158011792893992A006016AD /* ImagePicker.swift in Sources */,
 				152D463028C606E5008F26E0 /* LocationManager.swift in Sources */,
 				1525F60428B739EF00C7CA51 /* enums.swift in Sources */,
@@ -922,6 +958,7 @@
 				15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */,
 				15382ECA28C1A338004D7977 /* ManageNoticeCell.swift in Sources */,
 				159F1B21288B88DB00012113 /* Variables.swift in Sources */,
+				15A84D6128CE1C6C00B3EB84 /* NotificationViewModel.swift in Sources */,
 				155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */,
 				1570663628A53139002F7365 /* BounceControllScrollView.swift in Sources */,
 				157190EA28B6FE0F00880F98 /* WidthSetterView .swift in Sources */,
@@ -939,6 +976,7 @@
 				15D774F6288E37A900428465 /* RentalItemVCell.swift in Sources */,
 				154B6B4428C31215004962B9 /* DoubleWheelPicker .swift in Sources */,
 				156386DC288A6E0B006653E8 /* HorizontalClubCell.swift in Sources */,
+				15394C0F28CDCABF00E4944A /* PhotoManager.swift in Sources */,
 				153C1A7B288CF7D600F89B2E /* ClubProfile.swift in Sources */,
 				15667BCF28CCDA5F00AE9A2D /* ToS.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
@@ -953,6 +991,7 @@
 				1523D5EF28BE33C4009EB733 /* EditorPlaceholder.swift in Sources */,
 				151E4E9228C4948600FFB668 /* SwipeResettableView.swift in Sources */,
 				15FAF169287D607800B35570 /* Extension.swift in Sources */,
+				15394C0C28CDC7C900E4944A /* ZoomableScrollView.swift in Sources */,
 				1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */,
 				1563FE9528ADF62E00F46CC7 /* ReturnNoticeCell.swift in Sources */,
 				1570663828A5413B002F7365 /* RefreshableScrollView.swift in Sources */,
@@ -971,6 +1010,7 @@
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
 				1525F5FE28B7362C00C7CA51 /* ItemInformation.swift in Sources */,
+				15A84D5D28CE120D00B3EB84 /* NotificationDetailView.swift in Sources */,
 				159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */,
 				15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */,
 				1525F60128B7366B00C7CA51 /* ItemViewModel.swift in Sources */,
@@ -1156,13 +1196,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ren2U/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "카메라에 접근합니다";
+				INFOPLIST_KEY_NSCameraUsageDescription = "물품과 공지사항 사진 등록을 위해 카메라를 사용합니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "물품 등록과 대여를 위해 위치 정보를 조회합니다. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1174,7 +1214,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1190,13 +1230,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ren2U/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "카메라에 접근합니다";
+				INFOPLIST_KEY_NSCameraUsageDescription = "물품과 공지사항 사진 등록을 위해 카메라를 사용합니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "물품 등록과 대여를 위해 위치 정보를 조회합니다. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1208,7 +1248,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

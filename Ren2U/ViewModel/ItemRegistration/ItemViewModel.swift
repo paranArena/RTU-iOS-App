@@ -12,7 +12,8 @@ class ItemViewModel: ObservableObject {
     
     let clubId: Int
     
-    @Published var image = [UIImage]()
+    // 나중에 이미지 여러장 등록할 때 이용 UIImage 배열로 변경
+    @Published var image: UIImage?
     @Published var showPicker = false
     
     @Published var itemName = ""
@@ -33,12 +34,11 @@ class ItemViewModel: ObservableObject {
     
     init(clubId: Int) {
         self.clubId = clubId
-        image = [UIImage]()
         print("ItemViewModel init")
     }
     
     var isImageSelected: Bool {
-        guard image.isEmpty else { return true }
+        guard image == nil else { return true }
         return false
     }
     
@@ -96,7 +96,7 @@ class ItemViewModel: ObservableObject {
         
         
         let task = AF.upload(multipartFormData: { multipart in
-            if let image = self.image[0].jpegData(compressionQuality: 1) {
+            if let image = self.image!.jpegData(compressionQuality: 1) {
                 multipart.append(image, withName: "image", fileName: "\(self.itemName).thumbnail", mimeType: "image/jpeg")
             }
 

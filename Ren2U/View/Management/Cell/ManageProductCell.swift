@@ -11,7 +11,7 @@ import Kingfisher
 struct ManageProductCell: View {
     
     @ObservedObject var manageVM: ManagementViewModel
-    let productData: ProductResponseData
+    let productData: ProductPreviewDto
     @Binding var selectedId: Int
     @Binding var callback: () -> ()
     @Binding var isShowingAlert: Bool
@@ -28,6 +28,7 @@ struct ManageProductCell: View {
                         .scaledToFill()
                         .frame(width: 80, height: 80)
                         .cornerRadius(15)
+                        .isHidden(hidden: thumbnailPath.isEmpty)
                     
                 }
                

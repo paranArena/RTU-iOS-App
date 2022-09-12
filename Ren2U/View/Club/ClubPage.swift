@@ -32,6 +32,10 @@ struct ClubPage: View {
                 RentalItem()
                 Spacer()
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .onAppear {
+            clubVM.searchNotificationsAll(clubId: clubData.id)
         }
         .overlay(ShadowRectangle())
         .background(
@@ -50,7 +54,7 @@ struct ClubPage: View {
             }
         }
         .alert("", isPresented: $isShoiwngAlert) {
-            Button("cancel", role: .cancel) {}
+            Button("취소", role: .cancel) {}
             
             Button {
                 if clubData.clubRole == ClubRole.user.rawValue {
@@ -70,7 +74,7 @@ struct ClubPage: View {
                     }
                 }
             } label: {
-                Text("ok")
+                Text("확인")
             }
         } message: {
             if clubData.clubRole == ClubRole.user.rawValue {
@@ -88,17 +92,14 @@ struct ClubPage: View {
     @ViewBuilder
     private func Thumbnail() -> some View {
         HStack {
-            
             Spacer()
             if let thumbnaulPath = clubData.thumbnailPath {
                 KFImage(URL(string: thumbnaulPath))
-                    .onFailure { err in
-                        print(err.errorDescription ?? "KFImage Optional err")
-                    }
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 200, height: 200)
+                    .frame(width: SCREEN_WIDTH - 40, height: SCREEN_WIDTH - 40)
                     .cornerRadius(15)
+                    .clipped()
             } else {
                 Image(AssetImages.DefaultGroupImage.rawValue)
                     .resizable()
@@ -156,11 +157,17 @@ struct ClubPage: View {
             }
             .padding(.horizontal)
             
-            ForEach(clubVM.notices[clubData.id]?.reversed().indices ?? 0..<0, id: \.self) { i in
-                if (i < 5) {
-                    NoticeCell(noticeInfo: clubVM.notices[clubData.id]![i], groupName: clubVM.getGroupNameByGroupId(groupId: clubData.id))
+            ForEach(clubVM.clubNotice.indices, id: \.self) { i in
+                if i < 5 {
+                    NoticeCell(noticeInfo: clubVM.notices[i], groupName: clubVM.getGroupNameByGroupId(groupId: clubData.id))
                 }
             }
+            
+            Text("공지사항이 없습니다.")
+                .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                .foregroundColor(.gray_DEE2E6)
+                .isHidden(hidden: !clubVM.clubNotice.isEmpty)
+                .padding(.horizontal)
             
 //            ForEach(groupModel.notices) { notice in
 //                NoticeCell(noticeInfo: notice)

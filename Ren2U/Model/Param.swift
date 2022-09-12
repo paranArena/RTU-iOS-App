@@ -106,6 +106,7 @@ struct AuthField  {
     }
     
     //  MARK: COLOR
+    
     var emailBottomLineColor: Color {
         if isCheckedEmailDuplicate && !isDuplicatedEmail {
             return Color.navy_1E2F97
@@ -137,6 +138,106 @@ struct AuthField  {
     var studentIdLineColor: Color {
         if checkStudentIdCondition { return Color.navy_1E2F97 }
         else { return Color.gray_DEE2E6 }
+    }
+    
+    var wrongEmailColor: Color {
+        if checkEmailCondition && !isDuplicatedEmail {
+            return Color.green_2CA900
+        } else {
+            return Color.red_EB1808
+        }
+    }
+    
+    var wrongPasswordColor: Color {
+        if password.count < 8 || password.count > 30 {
+            return Color.red_EB1808
+        } else {
+            return Color.green_2CA900
+        }
+    }
+    
+    var wrongPasswordCheckColor: Color {
+        if password != passwordCheck {
+            return Color.red_EB1808
+        } else {
+            return Color.green_2CA900
+        }
+    }
+    
+    var wrongNameColor: Color {
+        if checkNameContion {
+            return Color.green_2CA900
+        } else {
+            return Color.red_EB1808
+        }
+    }
+    
+    var wrongStudentIdColor: Color {
+        if checkStudentIdCondition {
+            return Color.green_2CA900
+        } else {
+            return Color.red_EB1808
+        }
+    }
+    
+    //  MARK: STRING
+    
+    var wrongEmail: String {
+        if !isCheckedEmailDuplicate {
+            if email.count > 0 && email.count < 6 {
+                return "이메일이 너무 짧습니다."
+            } else if email.count > 30 {
+                return "이메일이 너무 깁니다."
+            } else {
+                return " "
+            }
+        } else {
+            if isDuplicatedEmail {
+                return "이미 가입된 이메일입니다."
+            } else {
+                return "사용할 수 있는 이메일입니다."
+            }
+        }
+    }
+    
+    var wrongPassword: String {
+        if password.count > 0 && password.count < 8 {
+            return "비밀번호가 너무 짧습니다."
+        } else if password.count > 30 {
+            return "비밀번호가 너무 깁니다."
+        } else {
+            return " "
+        }
+    }
+    
+    var wrongPasswordCheck: String {
+        if passwordCheck.count < 8 || password.count < 8 {
+            return ""
+        } else if password != passwordCheck {
+            return "비밀번호가 일치하지 않습니다."
+        } else {
+            return "비밀번호가 일치합니다."
+        }
+    }
+    
+    var wrongName: String {
+        if name.count > 0 && name.count < 2 {
+            return "이름이 너무 짧습니다."
+        } else if name.count > 10 {
+            return "이름이 너무 깁니다."
+        } else {
+            return " " 
+        }
+    }
+    
+    var wrongStudentId: String {
+        if studentId.count > 0 && studentId.count < 6 {
+            return "학번이 너무 짧습니다."
+        } else if studentId.count > 15 {
+            return "학번이 너무 깁니다."
+        } else {
+            return " "
+        }
     }
 }
 

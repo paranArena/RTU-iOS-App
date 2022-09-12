@@ -18,7 +18,7 @@ struct ProductDetailView: View {
     @EnvironmentObject var clubVM: ClubViewModel
     @StateObject private var rentVM: RentalViewModel
     @StateObject private var viewModel = ViewModel()
-    @EnvironmentObject private var locationManager: LocationManager
+    @EnvironmentObject var locationManager: LocationManager
     
     @Environment(\.isPresented) var isPresented
     @State private var rentalButtonHeight: CGFloat = .zero
@@ -30,6 +30,7 @@ struct ProductDetailView: View {
     //alert
     @State private var isShowingAlert = false
     @State private var alertMessage = ""
+
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
@@ -97,8 +98,8 @@ struct ProductDetailView: View {
                 Caution()
                     .padding(.horizontal, 10)
 
-                NavigationLink("", isActive: $viewModel.isRentalTerminal) {
-                    RentalComplete(itemInfo: rentVM.productDetail)
+                NavigationLink("", isActive: $rentVM.isRentalTerminal) {
+                    RentalComplete(itemInfo: rentVM.productDetail, itemNumber: selectedItemId ?? 0)
                 }
             }
         }
@@ -111,6 +112,9 @@ struct ProductDetailView: View {
         .controllTabbar(isPresented)
         .navigationTitle(rentVM.productDetail.name)
         .navigationBarTitleDisplayMode(.inline)
+        .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
+            OneButtonAlert.okButton
+        } message: { Text(rentVM.oneButtonAlert.message) }
         .alert("", isPresented: $isShowingAlert) {
             Button("취소", role: .cancel) {}
             Button {
@@ -288,7 +292,7 @@ struct ProductDetailView: View {
                             #endif
                         }
                     } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-                        if locationManager.isAuthorized {
+                        if locationManager.requestAuthorization() {
                             if locationManager.region.center.distance(from: rentVM.productLocation) > 30 {
                                 locationManager.isPresentedDistanceAlert = true
                             } else {
@@ -304,13 +308,11 @@ struct ProductDetailView: View {
                                     }
                                 }
                             }
-                        } else {
-                            locationManager.isPresentedAlert = true
                         }
                     } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
-                        if locationManager.isAuthorized {
+                        if locationManager.requestAuthorization() {
                             if locationManager.region.center.distance(from: rentVM.productLocation) > 30 {
-                                locationManager.isPresentedDistanceAlert = true 
+                                locationManager.isPresentedDistanceAlert = true
                             } else {
                                 isShowingAlert = true
                                 callback = {
@@ -324,8 +326,6 @@ struct ProductDetailView: View {
                                     }
                                 }
                             }
-                        } else {
-                            locationManager.isPresentedAlert = true
                         }
                     }
                 } else {
@@ -343,9 +343,9 @@ struct ProductDetailView: View {
                 
             } label: {
                 Capsule()
-                    .fill(selectedItemId == nil ? Color.BackgroundColor : Color.navy_1E2F97)
+                    .fill(selctedItem?.mainButtonFillColor ?? Color.BackgroundColor)
                     .overlay(Text(selctedItem?.buttonText ?? "대여하기")
-                        .foregroundColor(selectedItemId == nil ? Color.navy_1E2F97 : Color.white)
+                        .foregroundColor(selctedItem?.mainButtonFGColor ?? Color.navy_1E2F97)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20)))
                 
                     .frame(height: 40)
@@ -358,7 +358,7 @@ struct ProductDetailView: View {
             .background(Color.BackgroundColor)
             .clipped()
             .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
-            .disabled(selctedItem == nil)
+            .disabled(selctedItem?.mainButtonDisable ?? true)
         }
     }
             

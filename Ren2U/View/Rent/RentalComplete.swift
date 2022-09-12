@@ -10,65 +10,37 @@ import HidableTabView
 import MapKit
 import CoreLocation
 
-struct ItemLocation: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate: CLLocationCoordinate2D
-    let tintColor: Color
-    
-    static func dummyItemLocation() -> ItemLocation {
-        return ItemLocation(name: "우산", coordinate: CLLocationCoordinate2D(latitude: 37.279952, longitude: 127.046147), tintColor: .red)
-    }
-}
-
-extension RentalComplete {
-    
-    enum MapDetails {
-        static let startingLocation = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-    }
-    
-    class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-        
-        @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation,
-                                                   span: MapDetails.defaultSpan)
-        
-        var locationManager: CLLocationManager?
-    
-        
-        override init() {
-            super.init()
-        }
-    }
-
-}
 
 struct RentalComplete: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var mapViewModel = MapViewModel()
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.279952, longitude: 127.046147), span: MapDetails.defaultSpan)
     let itemInfo: ProductDetailData
+    let itemNumber: Int
+    let span =  MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             Text("예약이 완료되었습니다!")
                 .font(.custom(CustomFont.NSKRBlack.rawValue, size: 24))
             
-            Text("물품이름 : \(itemInfo.name)")
+            Text("물품이름 : \(itemInfo.name) - \(itemNumber)")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
 //
 //            Text("대여기간 : \(itemInfo. )")
 //                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
 //                .padding(.bottom, 30)
+            let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+            let region = MKCoordinateRegion(center: itemLocation, span: span)
+            let anonotaions: [Annotation] = [Annotation(coordinate: itemLocation)]
             
-            Map(coordinateRegion: $region, interactionModes: [], showsUserLocation: false, userTrackingMode: .constant(.none), annotationItems: [ItemLocation.dummyItemLocation()]) { item in
-                MapAnnotation(coordinate: item.coordinate) {
-                    Image(systemName: "mappin.circle")
-                        .foregroundColor(Color.navy_1E2F97)
+            Map(coordinateRegion: .constant(region), showsUserLocation: true, annotationItems: anonotaions) { annotation in
+                MapAnnotation(coordinate: annotation.coordinate) {
+                    Image(systemName: "mappin.and.ellipse")
+                        .foregroundColor(.navy_1E2F97)
                 }
             }
-            .frame(width: 300, height: 200)
+            
+            .frame(maxWidth: 400, maxHeight: 400)
             .padding(.bottom, 30)
             
             HStack(alignment: .center, spacing: 0) {
@@ -80,7 +52,7 @@ struct RentalComplete: View {
             }
             
             HStack(alignment: .center, spacing: 0) {
-                Text(itemInfo.location.name)
+                Text("\(itemInfo.location.name)")
                     .font(.custom(CustomFont.RobotoBold.rawValue, size: 22))
                     .foregroundColor(Color.navy_1E2F97)
                 Text("에서 물품을 픽업해주세요!")
@@ -97,8 +69,13 @@ struct RentalComplete: View {
                     .padding(.vertical, 12)
                     .capsuleStrokeAndForegroundColor(color: Color.navy_1E2F97)
             }
+            .padding(.bottom, 5)
         }
         .navigationBarHidden(true)
+        .onAppear {
+            UITabBar.hideTabBar()
+        }
+        .avoidSafeArea()
     }
 }
 

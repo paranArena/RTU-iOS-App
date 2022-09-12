@@ -7,14 +7,37 @@
 
 import SwiftUI
 
-struct NoticeDetailData: Codable {
+struct NotificationDetailData: Codable {
     let id: Int
     let title, content: String
     let imagePath: String
-    let createdAt, updatedAt: String
+    let createdAtDto, updatedAtDto: String
+    let clubName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case content
+        case imagePath
+        case createdAtDto = "createdAt"
+        case updatedAtDto = "updatedAt"
+        case clubName
+    }
+    
+    static func dummyNotificationDetailData() -> NotificationDetailData {
+        return NotificationDetailData(id: 1, title: "", content: "", imagePath: "", createdAtDto: "", updatedAtDto: "", clubName: "")
+    }
+    
+    var createdAt: Date {
+        createdAtDto.toDate()
+    }
+    
+    var updatedAt: Date {
+        updatedAtDto.toDate()
+    }
 }
 
-struct NoticeCellData: Codable, Equatable, Identifiable {
+struct NotificationPreview: Codable, Equatable, Identifiable {
     let id: Int
     let clubId: Int
     let title: String

@@ -46,13 +46,34 @@ struct ClubRentalData: Codable {
     let name: String
     let clubId: Int
     let clubName: String
-    let imagePath: String
+    let imagePath: String?
     let rentalPolicy: String
     let rentalInfo: RentalInfo
     
     struct RentalInfo: Codable {
         var rentalStatus: String
-        let rentDate: String
+        let rentDateDto: String
         var expDate: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case rentalStatus
+            case rentDateDto = "rentDate"
+            case expDate
+        }
+        
+        var rentDate: Date {
+            return rentDateDto.toDate()
+        }
+        
+        var remainTime: Int {
+            return Int(60*10 - Date.now.timeIntervalSince(rentDate))
+        }
     }
+}
+
+struct RentalInfo: Codable {
+    let rentalStatus: String
+    let rentDate: String
+    let expDate: String?
+    let meRental: Bool? 
 }

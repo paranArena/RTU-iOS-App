@@ -17,7 +17,7 @@ struct ProductCell: View {
         case no
     }
     
-    let rentalItemInfo: ProductResponseData
+    let rentalItemInfo: ProductPreviewDto
 
     
     var body: some View {

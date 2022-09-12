@@ -10,7 +10,7 @@ import Kingfisher
 
 struct RentalItemVCell: View {
     
-    let rentalItem: ProductResponseData
+    let rentalItem: ProductPreviewDto
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {

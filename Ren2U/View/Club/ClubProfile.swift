@@ -40,6 +40,11 @@ struct ClubProfile: View {
             }
             .animation(.spring(), value: focusField)
         }
+        .alert(clubVM.oneButtonAlert.title, isPresented: $clubVM.oneButtonAlert.isPresented) {
+            OneButtonAlert.okButton
+        } message: {
+            Text(clubVM.oneButtonAlert.message)
+        }
         .controllTabbar(isPresented)
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear(perform: {
@@ -231,9 +236,18 @@ struct ClubProfile: View {
     private func CreateCompleteButton() -> some View {
         Button {
             if viewModel.mode == .post {
-                clubVM.createClubTask(club: CreateClubFormdata(name: viewModel.clubProfileData.name.removeWhiteSpace(), introduction: viewModel.clubProfileData.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.clubProfileData.hashtags))
+                let data = CreateClubFormdata(name: viewModel.clubProfileData.name.removeWhiteSpace(), introduction: viewModel.clubProfileData.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.clubProfileData.hashtags)
+                if clubVM.checkClubRequiredInformation(clubData: data) {
+                    Task {
+                        await clubVM.createClub(club: data)
+                        if !clubVM.oneButtonAlert.isPresented {
+                            clubVM.getMyClubs()
+                            presentationMode.wrappedValue.dismiss()
+                            
+                        }
+                    }
+                }
             }
-            presentationMode.wrappedValue.dismiss()
         } label: {
             Text("완료")
                 .foregroundColor(Color.LabelColor)

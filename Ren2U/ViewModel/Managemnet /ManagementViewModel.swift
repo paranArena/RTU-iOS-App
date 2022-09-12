@@ -14,8 +14,8 @@ class ManagementViewModel: ObservableObject {
     @Published var clubData = ClubData.dummyClubData()
     @Published var applicants = [UserData]()
     @Published var members = [UserAndRoleData]()
-    @Published var products = [ProductResponseData]()
-    @Published var notices = [NoticeCellData]()
+    @Published var products = [ProductPreviewDto]()
+    @Published var notices = [NotificationPreview]()
     @Published var rentals = [ClubRentalData]()
     
     
@@ -28,9 +28,11 @@ class ManagementViewModel: ObservableObject {
             await searchClubJoinsAll()
             await searchClubProductsAll()
             await searchNotificationsAll()
-            await searcClubRentalsAll()
+            await searchClubRentalsAll()
         }
     }
+    
+    //  MARK: LOCAL
     
     //  MARK: POST
     func createNotification(notice: NotificationModel) async {
@@ -183,7 +185,7 @@ class ManagementViewModel: ObservableObject {
     }
     
     @MainActor
-    func searcClubRentalsAll() {
+    func searchClubRentalsAll() {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/rentals/search/all"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
@@ -225,7 +227,7 @@ class ManagementViewModel: ObservableObject {
     }
     
     //  MARK: PUT
-    func updateNotification(groupId: Int, notificationId: Int, noticeData: NoticeCellData) async {
+    func updateNotification(groupId: Int, notificationId: Int, noticeData: NotificationPreview) async {
         let url = "\(BASE_URL)/clubs/\(groupId)/notifications/\(notificationId)"
         let hearders: HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",
