@@ -25,6 +25,7 @@ struct ProductDetailView: View {
     @State private var isShowingModel = false
     @State private var selectedItemId: Int?
     @State private var selctedItem: ProductDetailData.Item?
+    @State private var selectedNumbering = 0
     @State private var callback: () -> () = { print("callback") }
     
     //alert
@@ -99,7 +100,7 @@ struct ProductDetailView: View {
                     .padding(.horizontal, 10)
 
                 NavigationLink("", isActive: $rentVM.isRentalTerminal) {
-                    RentalComplete(itemInfo: rentVM.productDetail, itemNumber: selectedItemId ?? 0)
+                    RentalComplete(itemInfo: rentVM.productDetail, itemNumber: selectedNumbering)
                 }
             }
         }
@@ -236,6 +237,7 @@ struct ProductDetailView: View {
                         Button {
                             selctedItem = rentVM.productDetail.items[i]
                             selectedItemId = id
+                            selectedNumbering = rentVM.productDetail.items[i].numbering
                             alertMessage = rentVM.productDetail.items[i].alertMessage
                         } label: {
                             Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")

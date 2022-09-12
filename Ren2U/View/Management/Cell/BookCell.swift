@@ -11,27 +11,22 @@ import Kingfisher
 struct BookCell: View {
 
     let data: ClubRentalData
-    @State private var remainTime: Int
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var remainTime: Int
+    @State private var min = ""
+    @State private var sec = ""
     
     init(data: ClubRentalData) {
         self.data = data
         remainTime = data.rentalInfo.remainTime
-        remainTime = max(remainTime, 0)
+        remainTime = max(0, remainTime)
+        print("\(data.rentalInfo.remainTime)")
     }
     
     var body: some View {
         HStack {
             
-            if let imagePath = data.imagePath {
-                KFImage(URL(string: imagePath)).onFailure { err in
-                    print(err.errorDescription ?? "KFImage err")
-                }
-                .resizable()
-                .scaledToFill()
-                .frame(width: 80, height: 80)
-                .cornerRadius(15)
-            }
+            PreviewImage(imagePath: data.imagePath)
             
             VStack(alignment: .leading) {
                 Text("\(data.name) - \(data.numbering)")
@@ -50,7 +45,7 @@ struct BookCell: View {
                 Text("픽업까지")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 
-                Text(remainTime.toRemainTime())
+                Text("\(min) \(sec)")
                     .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
             }
             .isHidden(hidden: data.rentalInfo.rentalStatus != RentalStatus.wait.rawValue)
@@ -66,9 +61,16 @@ struct BookCell: View {
 
         }
         .frame(maxWidth: .infinity)
-        .onReceive(timer) { time in
+        .onReceive(timer) { _ in
+            print(remainTime)
             remainTime -= 1
             remainTime = max(0, remainTime)
+            min = "\(remainTime / 60)분"
+            sec = "\(remainTime % 60)초"
+
+            if remainTime == 0 {
+                timer.upstream.connect().cancel()
+            }
         }
     }
 }
