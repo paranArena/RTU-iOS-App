@@ -100,6 +100,7 @@
 		15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15799D3F28C789A70032D884 /* ManageProductCell.swift */; };
 		157C267F28CF3E60009115D8 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C267E28CF3E60009115D8 /* SignUpViewModel.swift */; };
 		157C268128CF3E6A009115D8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268028CF3E6A009115D8 /* LoginViewModel.swift */; };
+		157C268528CF5B4B009115D8 /* PreviewImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268428CF5B4B009115D8 /* PreviewImage.swift */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationVM.swift */; };
 		1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16C28C8914700D83FCC /* HidableTabView */; };
@@ -259,6 +260,7 @@
 		15799D3F28C789A70032D884 /* ManageProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProductCell.swift; sourceTree = "<group>"; };
 		157C267E28CF3E60009115D8 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		157C268028CF3E6A009115D8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		157C268428CF5B4B009115D8 /* PreviewImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewImage.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		15868739287EBB3F0003C2DC /* CertificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationVM.swift; sourceTree = "<group>"; };
 		159F086728AC72170008EC16 /* RentalDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDatePicker.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				157190F028B7043100880F98 /* PlusCircle.swift */,
 				157190F528B7072200880F98 /* RightArrow.swift */,
 				15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */,
+				157C268428CF5B4B009115D8 /* PreviewImage.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				1523D5E228BE291C009EB733 /* MemberManagementView.swift in Sources */,
 				1563FE9328ADEF9000F46CC7 /* SignUpNoticeCell.swift in Sources */,
 				1523D5E828BE2C8D009EB733 /* NoticeManagementView.swift in Sources */,
+				157C268528CF5B4B009115D8 /* PreviewImage.swift in Sources */,
 				15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */,
 				152C6F5428C842E600AA420A /* StringExtension.swift in Sources */,
 				157190F128B7043100880F98 /* PlusCircle.swift in Sources */,

@@ -115,12 +115,14 @@ class ItemViewModel: ObservableObject {
         }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingString()
         
         
-        let result = await task.result
+        let response = await task.response
         
-        switch result {
+        switch response.result {
         case .success(let value):
             print("creatProduct success : \(value)")
+            print(response.debugDescription)
         case .failure(let err):
+            print(response.debugDescription)
             print("createProduct failure : \(err)")
         }
     }

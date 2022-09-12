@@ -63,7 +63,7 @@ struct NoticeManagementView: View {
             }
         }
         .avoidSafeArea()
-        .animation(.spring(), value: clubVM.notices[managementVM.clubData.id])
+        .animation(.spring(), value: clubVM.clubNotice)
         .basicNavigationTitle(title: "공지사항")
         .frame(maxWidth: .infinity, maxHeight: SCREEN_HEIGHT - 100)
         .onAppear {

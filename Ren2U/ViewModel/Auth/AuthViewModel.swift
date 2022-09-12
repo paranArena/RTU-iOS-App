@@ -73,9 +73,10 @@ class AuthViewModel: ObservableObject {
 
     func quitService() {
         let url = "\(BASE_URL)/members/my/quit"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt ?? "")]
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyInfoResponse.self) { res in
+            print(res.debugDescription)
             switch res.result {
             case .success(_):
                 print("[quitService success]")

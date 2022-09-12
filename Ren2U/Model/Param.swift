@@ -144,6 +144,11 @@ struct AuthField  {
         else { return Color.gray_DEE2E6 }
     }
     
+    var phoneNumberColor: Color {
+        if chekcPhonumberCondition { return Color.navy_1E2F97 }
+        else { return Color.gray_DEE2E6 }
+    }
+    
     var wrongEmailColor: Color {
         if checkEmailCondition && !isDuplicatedEmail {
             return Color.green_2CA900

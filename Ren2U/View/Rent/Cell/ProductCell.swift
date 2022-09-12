@@ -23,13 +23,7 @@ struct ProductCell: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 5) {
-                KFImage(URL(string: rentalItemInfo.imagePath ?? "")).onFailure { err in
-                    print(err.errorDescription ?? "KFImage err")
-                    }
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 80, height: 80)
-                    .cornerRadius(15)
+                PreviewImage(imagePath: rentalItemInfo.imagePath)
                
                 VStack(alignment: .leading) {
                     Text(rentalItemInfo.name)
@@ -51,7 +45,7 @@ struct ProductCell: View {
                 }
                 .foregroundColor(rentalItemInfo.fgColor)
             }
-            .frame(maxHeight: 80)
+            .frame(minHeight: 80)
             .padding(.horizontal, 10)
             
             Divider()

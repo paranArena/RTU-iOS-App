@@ -276,9 +276,19 @@ struct SignUp: View {
     
     @ViewBuilder
     private func PhoneNumber() -> some View {
-        BottomLinePlaceholder(placeholder: "'-'를 제외한 숫자로 된 전화번호를 입력하세요", text: $viewModel.authField.phoneNumber)
-            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-            .keyboardType(.numberPad)
+        HStack {
+            Text("010)")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+            
+            TextField("'-'를 제외한 숫자로 된 8자리 전화번호를 입력하세요.", text: $viewModel.authField.phoneNumber)
+                .keyboardType(.numberPad)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(viewModel.authField.phoneNumberColor)
+                .frame(maxHeight: 1)
+        }
     }
     
     @ViewBuilder

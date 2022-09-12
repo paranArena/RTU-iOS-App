@@ -28,8 +28,13 @@ struct ClubPage: View {
                 Thumbnail()
                 Tags()
                 Introduction()
-                Notice()
-                RentalItem()
+                
+                Group {
+                    Notice()
+                    RentalItem()
+                }
+                .isHidden(hidden: clubData.clubRole == ClubRole.wait.rawValue || clubData.clubRole == ClubRole.none.rawValue)
+                
                 Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

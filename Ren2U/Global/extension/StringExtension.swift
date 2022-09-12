@@ -23,22 +23,7 @@ extension String {
     }
     
     func removeWhiteSpace() -> String {
-        let parsedString = self.components(separatedBy: .whitespaces)
-        var whiteSpaceRemovedString = ""
-        
-        for i in 0..<parsedString.count {
-            if parsedString[i] == "" {
-                continue
-            }
-            
-            whiteSpaceRemovedString.append(contentsOf: parsedString[i])
-            if i < parsedString.count - 1 {
-                whiteSpaceRemovedString.append(contentsOf: " ")
-            }
-        }
-        
-        print(whiteSpaceRemovedString)
-        return whiteSpaceRemovedString
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     func toDate() -> Date {

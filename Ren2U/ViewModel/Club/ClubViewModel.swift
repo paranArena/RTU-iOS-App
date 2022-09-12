@@ -25,9 +25,9 @@ class ClubViewModel: ObservableObject {
     
     func checkClubRequiredInformation(clubData: CreateClubFormdata) -> Bool {
         if clubData.name.isEmpty || clubData.introduction.isEmpty {
-            oneButtonAlert.isPresented = true
             oneButtonAlert.title = "그룹 생성 불가"
             oneButtonAlert.message = "그룹 이름, 소개글은 필수입니다."
+            oneButtonAlert.isPresented = true
             return false
         } else {
             return true
@@ -82,7 +82,7 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func getMyClubRole(clubId: Int) async -> String {
         let url = "\(BASE_URL)/members/my/clubs/\(clubId)/role"
-        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)"]
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )"]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyClubRoleResponse.self)
         
@@ -103,7 +103,7 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func getMyClubs() {
         let url = "\(BASE_URL)/members/my/clubs"
-        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)"]
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )"]
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyClubsResponse.self) { res in
             switch res.result {
@@ -121,7 +121,7 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func getMyClubsAsync() async {
         let url = "\(BASE_URL)/members/my/clubs"
-        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)"]
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )"]
         
         let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyClubsResponse.self)
         let response = await task.result
@@ -140,7 +140,7 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func getMyNotifications() {
         let url = "\(BASE_URL)/members/my/notifications"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
 
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyNotificationsResponse.self) { res in
             switch res.result {
@@ -158,12 +158,10 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func getMyNotificationsAsync() async {
         let url = "\(BASE_URL)/members/my/notifications"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyNotificationsResponse.self)
         let result = await request.result
-        
-        notices.removeAll()
         
         switch result {
         case .success(let value):
@@ -179,7 +177,7 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func getMyProducts() async {
         let url = "\(BASE_URL)/members/my/products"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
 
         let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyProductsResponse.self)
         let result = await task.result
@@ -198,14 +196,14 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func getMyRentals()  async {
         let url = "\(BASE_URL)/members/my/rentals"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyRentalsResponse.self)
         let result = await request.result
         
         switch result {
         case .success(let value):
-            print("[getMyRentals success")
+            print("[getMyRentals success]")
             print(value.responseMessage)
             self.rentals = value.data
         case .failure(let err):
@@ -218,7 +216,7 @@ class ClubViewModel: ObservableObject {
     func searchClubsAll() async -> [ClubAndRoleData] {
         
         let url = "\(BASE_URL)/clubs/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
 
         let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetSearchClubsAllResponse.self)
         let result = await task.result
@@ -237,7 +235,7 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func searchClubsWithName(groupName: String) async -> ClubAndRoleData? {
         let url = "\(BASE_URL)/clubs/search?name=\(groupName)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         if let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let encodedURL = URL(string: encoded) {
             let task = AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchClubsWithNameResponse.self)
@@ -257,7 +255,7 @@ class ClubViewModel: ObservableObject {
     @MainActor
     func searchClubsWithHashTag(hashTag: String) async -> [ClubAndRoleData] {
         let url = "\(BASE_URL)/clubs/search?hashtag=\(hashTag)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         if let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let encodedURL = URL(string: encoded) {
             
@@ -280,7 +278,7 @@ class ClubViewModel: ObservableObject {
     func searchNotificationsAll(clubId: Int) {
 
         let url = "\(BASE_URL)/clubs/\(clubId)/notifications/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
 
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: SearchNotificationsAllResponse.self) { res in
             switch res.result {
@@ -296,7 +294,7 @@ class ClubViewModel: ObservableObject {
     
     func reportNotification(clubId: Int, notificationId: Int) {
         let url = "\(BASE_URL)/clubs/\(clubId)/notifications/\(notificationId)/report"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
 
         AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).responseString() { res in
             switch res.result {
@@ -322,7 +320,7 @@ class ClubViewModel: ObservableObject {
     func createClub(club: CreateClubFormdata) async {
         let url = "\(BASE_URL)/clubs"
         let hearders: HTTPHeaders = [
-            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")",
             "Content-type": "multipart/form-data"
         ]
         
@@ -385,7 +383,7 @@ class ClubViewModel: ObservableObject {
     func requestClubJoin(clubId: Int) async {
         
         let url = "\(BASE_URL)/clubs/\(clubId)/requests/join"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let task = AF.request(url, method: .post, encoding: JSONEncoding.default, headers:  hearders).serializingDecodable(requestClubJoinResponse.self)
         let result = await task.result
@@ -403,7 +401,7 @@ class ClubViewModel: ObservableObject {
     //  MARK: DELETE
     func cancelClubJoin(clubId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/requests/join/cancel"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
         
@@ -420,7 +418,7 @@ class ClubViewModel: ObservableObject {
     
     func leaveClub(clubId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/requests/leave"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
         
@@ -437,7 +435,7 @@ class ClubViewModel: ObservableObject {
     
     func cancelRent(clubId: Int, itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/cancel"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
         
@@ -455,7 +453,7 @@ class ClubViewModel: ObservableObject {
     //  MARK: PUT
     func returnRent(clubId: Int, itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/return"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
         let result = await request.result
