@@ -19,7 +19,7 @@ class ClubViewModel: ObservableObject {
     
     @Published var clubNotice = [NotificationPreview]()
     
-    @Published var oneButtonAlert = OneButtonAlert() 
+    @Published var oneButtonAlert = OneButtonAlert()
     
     //  MARK: LOCAL
     
@@ -106,6 +106,7 @@ class ClubViewModel: ObservableObject {
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )"]
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyClubsResponse.self) { res in
+            print(res.debugDescription)
             switch res.result {
             case .success(let value):
                 print("[getMyClubs success]")
@@ -233,7 +234,7 @@ class ClubViewModel: ObservableObject {
     }
     
     @MainActor
-    func searchClubsWithName(groupName: String) async -> ClubAndRoleData? {
+    func searchClubsWithName(groupName: String) async -> [ClubAndRoleData] {
         let url = "\(BASE_URL)/clubs/search?name=\(groupName)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
@@ -249,7 +250,7 @@ class ClubViewModel: ObservableObject {
             }
         }
         
-        return nil
+        return [ClubAndRoleData]() 
     }
     
     @MainActor

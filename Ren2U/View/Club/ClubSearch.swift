@@ -58,7 +58,7 @@ struct ClubSearch: View {
         .background {
             NavigationLink(isActive: $isActive) {
                 if let index = groupInfoIndex {
-                    ClubPage(tabSelection: $tabSelection, clubData: $clubData[index])
+                    ClubPage(tabSelection: $tabSelection, clubData: $clubData[index], clubActive: $isActive)
                 }
             } label: { }
         }
@@ -77,9 +77,10 @@ struct ClubSearch: View {
             if searchDelay == 10 && !search.isEmpty {
                 Task {
                     clubData = await clubVM.searchClubsWithHashTag(hashTag: search)
-                    if let groupSearchedByName = await clubVM.searchClubsWithName(groupName: search) {
-                        clubData.append(groupSearchedByName)
-                    }
+                    clubData.append(contentsOf: await clubVM.searchClubsWithName(groupName: search))
+//                    if let groupSearchedByName = await clubVM.searchClubsWithName(groupName: search) {
+//                        clubData.append(groupSearchedByName)
+//                    }
                 }
             }
         }

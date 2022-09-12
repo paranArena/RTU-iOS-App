@@ -143,6 +143,24 @@ class AuthViewModel: ObservableObject {
 
     }
     
+    func requestEmailCode2(email: String) {
+        let url = "\(BASE_URL)/members/email/requestCode"
+        let param: [String: Any] = [
+            "email" : "\(email)"
+        ]
+        
+        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).responseString { res in
+            switch res.result {
+            case .success(let value):
+                print("[requestEmailCode success]")
+                print(value)
+            case .failure(let err):
+                print("[requestEmailCode err]")
+                print(err)
+            }
+        }
+    }
+    
     func requestEmailCode(email: String) {
         let url = "\(BASE_URL)/members/email/requestCode"
         let param: [String: Any] = [
@@ -194,5 +212,27 @@ class AuthViewModel: ObservableObject {
     func logout() {
         UserDefaults.standard.setValue(nil, forKey: JWT_KEY)
         self.jwt = nil
+    }
+    
+    //  MARK: PUT
+    
+    func passwordResetWithVerificationCode(email: String, code: String, password: String) async -> Bool {
+        let url = "\(BASE_URL)/members/password/reset/verify"
+        let param: [String: Any] = [
+            "email" : "\(email)",
+            "code" : "\(code)",
+            "password" : "\(password)"
+        ]
+        
+        let response = AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default).serializingString()
+        
+        switch await response.result {
+        case .success(let value):
+            print("[passwordResetWithVerificationCode success]")
+            return true
+        case .failure(let err):
+            print("[passwordResetWithVerificationCode err]")
+            return false
+        }
     }
 }

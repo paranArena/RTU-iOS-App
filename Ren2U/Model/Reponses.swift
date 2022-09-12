@@ -138,7 +138,7 @@ struct GetSearchClubsAllResponse: Codable {
 struct SearchClubsWithNameResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: ClubAndRoleData
+    let data: [ClubAndRoleData]
 }
 
 struct SearchNotificationsAllResponse: Codable {

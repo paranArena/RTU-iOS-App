@@ -34,10 +34,19 @@ struct RentalCell: View {
                     Text("\(rentalItemInfo.name)  \(rentalItemInfo.numbering)")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     
-                    Text(rentalItemInfo.clubName)
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(.gray_ADB5BD)
-                        .lineLimit(1)
+                    HStack {
+                        Text(rentalItemInfo.clubName)
+                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                            .foregroundColor(.gray_ADB5BD)
+                            .lineLimit(1)
+                        
+                        if let expDate = rentalItemInfo.rentalInfo.expDate {
+                            Text("반납일 : \(expDate.toDate().toYMDformat())")
+                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                                .foregroundColor(.gray_ADB5BD)
+                                .lineLimit(1)
+                        }
+                    }
                 }
                 
                 Spacer()

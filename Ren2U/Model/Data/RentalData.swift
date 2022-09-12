@@ -31,6 +31,14 @@ struct RentalData: Codable {
                 return "에러"
             }
         }
+        
+        var toDate: Date {
+            return rentDate.toDate()
+        }
+        
+        var time: Int {
+            return Int(60*10 - Date.now.timeIntervalSince(rentDate.toDate()))
+        }
     }
     
     struct Location: Codable {

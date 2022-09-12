@@ -16,7 +16,7 @@ struct RentalComplete: View {
     @Environment(\.presentationMode) var presentationMode
     let itemInfo: ProductDetailData
     let itemNumber: Int
-    let span =  MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+    let span =  MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01) 
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {

@@ -20,6 +20,7 @@ struct ClubPage: View {
     
     //  Alter를 위한 변수
     @State private var isShoiwngAlert = false
+    @Binding var clubActive: Bool
     
     var body: some View {
         
@@ -45,7 +46,7 @@ struct ClubPage: View {
         .overlay(ShadowRectangle())
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                ClubManagementView(managementVM: ManagementViewModel(clubData: clubData.extractClubData()))
+                ClubManagementView(managementVM: ManagementViewModel(clubData: clubData.extractClubData()), clubActive: $clubActive)
             }, label: {}) 
         )
         .basicNavigationTitle(title: "")

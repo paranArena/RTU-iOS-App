@@ -123,9 +123,14 @@ struct Login: View {
     @ViewBuilder
     private func AuthHelp() -> some View {
         HStack {
-            Text("비밀번호 찾기")
-                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-                .foregroundColor(Color.gray_495057)
+            
+            NavigationLink {
+                ResetPassWordWithCode()
+            } label: {
+                Text("비밀번호 찾기")
+                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
+                    .foregroundColor(Color.gray_495057)
+            }
             
             Text("|")
                 .foregroundColor(Color.gray_E9ECEF)

@@ -120,7 +120,7 @@ class RentalViewModel: ObservableObject {
     //  MARK: PUT
     func applyRent(itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/apply"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
         let result = await request.result
@@ -137,7 +137,7 @@ class RentalViewModel: ObservableObject {
     
     func returnRent(itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/return"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
         let result = await request.result

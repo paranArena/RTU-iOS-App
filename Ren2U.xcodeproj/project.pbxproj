@@ -104,7 +104,10 @@
 		157C268728CF8120009115D8 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268628CF8120009115D8 /* PasswordResetView.swift */; };
 		157C268928CF8246009115D8 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268828CF8246009115D8 /* PasswordViewModel.swift */; };
 		157C268C28CF8944009115D8 /* PasswordReset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268B28CF8944009115D8 /* PasswordReset.swift */; };
-		157C268E28CF8F47009115D8 /* ProductMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268D28CF8F47009115D8 /* ProductMap.swift */; };
+		157C268E28CF8F47009115D8 /* ItemMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268D28CF8F47009115D8 /* ItemMap.swift */; };
+		157C269028CF98B4009115D8 /* ItemMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268F28CF98B4009115D8 /* ItemMapViewModel.swift */; };
+		157C269228CFB2BE009115D8 /* NavyCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269128CFB2BE009115D8 /* NavyCapsule.swift */; };
+		157C269428CFBB6C009115D8 /* ResetPassWordWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationVM.swift */; };
 		1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16C28C8914700D83FCC /* HidableTabView */; };
@@ -268,7 +271,10 @@
 		157C268628CF8120009115D8 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		157C268828CF8246009115D8 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		157C268B28CF8944009115D8 /* PasswordReset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordReset.swift; sourceTree = "<group>"; };
-		157C268D28CF8F47009115D8 /* ProductMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMap.swift; sourceTree = "<group>"; };
+		157C268D28CF8F47009115D8 /* ItemMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMap.swift; sourceTree = "<group>"; };
+		157C268F28CF98B4009115D8 /* ItemMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMapViewModel.swift; sourceTree = "<group>"; };
+		157C269128CFB2BE009115D8 /* NavyCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavyCapsule.swift; sourceTree = "<group>"; };
+		157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWordWithCode.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		15868739287EBB3F0003C2DC /* CertificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationVM.swift; sourceTree = "<group>"; };
 		159F086728AC72170008EC16 /* RentalDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDatePicker.swift; sourceTree = "<group>"; };
@@ -356,7 +362,7 @@
 				154553CC28A34B25005E7FDB /* RentalSheet.swift */,
 				154553D028A351AA005E7FDB /* RentalComplete.swift */,
 				159F086728AC72170008EC16 /* RentalDatePicker.swift */,
-				157C268D28CF8F47009115D8 /* ProductMap.swift */,
+				157C268D28CF8F47009115D8 /* ItemMap.swift */,
 				150072F7289A3DE6005B6A93 /* Cell */,
 			);
 			path = Rent;
@@ -668,6 +674,7 @@
 				157190F528B7072200880F98 /* RightArrow.swift */,
 				15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */,
 				157C268428CF5B4B009115D8 /* PreviewImage.swift */,
+				157C269128CFB2BE009115D8 /* NavyCapsule.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -679,6 +686,7 @@
 				15C03144289CD5E500D0354E /* RentalTabVM.swift */,
 				154553D428A35CC3005E7FDB /* ItemVM.swift */,
 				159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */,
+				157C268F28CF98B4009115D8 /* ItemMapViewModel.swift */,
 			);
 			path = Rental;
 			sourceTree = "<group>";
@@ -691,6 +699,7 @@
 				152C3E80287E5E84000BFC97 /* SignUp.swift */,
 				152C3E86287E7750000BFC97 /* Certification.swift */,
 				152CA1D0288F84EE00DDC0E2 /* SignUpSuccess.swift */,
+				157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1005,6 +1014,7 @@
 				15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */,
 				15382ECA28C1A338004D7977 /* ManageNoticeCell.swift in Sources */,
 				159F1B21288B88DB00012113 /* Variables.swift in Sources */,
+				157C269028CF98B4009115D8 /* ItemMapViewModel.swift in Sources */,
 				15A84D6128CE1C6C00B3EB84 /* NotificationViewModel.swift in Sources */,
 				155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */,
 				1570663628A53139002F7365 /* BounceControllScrollView.swift in Sources */,
@@ -1072,6 +1082,7 @@
 				1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */,
 				15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */,
 				157190F328B7053200880F98 /* ItemPhoto.swift in Sources */,
+				157C269228CFB2BE009115D8 /* NavyCapsule.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
 				157C268128CF3E6A009115D8 /* LoginViewModel.swift in Sources */,
 				152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */,
@@ -1082,9 +1093,10 @@
 				15228AC128C8A08D00A0B3C5 /* ClubData.swift in Sources */,
 				15BBB9FF28CF028300DCEF92 /* RepresentativeImage.swift in Sources */,
 				156673DE28C1C6860011535D /* MaxYSetterView.swift in Sources */,
+				157C269428CFBB6C009115D8 /* ResetPassWordWithCode.swift in Sources */,
 				151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */,
 				1514A10028B7594F0040F681 /* ItemCaution.swift in Sources */,
-				157C268E28CF8F47009115D8 /* ProductMap.swift in Sources */,
+				157C268E28CF8F47009115D8 /* ItemMap.swift in Sources */,
 				156386C6288A5263006653E8 /* MyPageTab.swift in Sources */,
 				15F3673728927E770073E094 /* TransparentDivider.swift in Sources */,
 				1509797928CAE5180074307F /* Errors.swift in Sources */,

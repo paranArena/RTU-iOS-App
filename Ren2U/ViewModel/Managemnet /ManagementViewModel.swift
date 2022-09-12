@@ -19,6 +19,8 @@ class ManagementViewModel: ObservableObject {
     @Published var rentals = [ClubRentalData]()
     
     
+    @Published var alert = Alert()
+    
     init(clubData: ClubData) {
         self.clubData = clubData
         print("ManageViewModel init, groupId[\(clubData.id)]")
@@ -33,6 +35,16 @@ class ManagementViewModel: ObservableObject {
     }
     
     //  MARK: LOCAL
+    
+    func showDeleteClub() {
+        alert.title = "클럽을 삭제하시겠습니까?"
+        alert.isPresented = true
+        alert.callback = {
+            Task {
+                await self.deleteClub()
+            }
+        }
+    }
     
     //  MARK: POST
     
@@ -236,6 +248,7 @@ class ManagementViewModel: ObservableObject {
     }
     
     //  MARK: DELETE
+    
     func rejectClubJoin(memberId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/requests/join/\(memberId)"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
@@ -299,6 +312,22 @@ class ManagementViewModel: ObservableObject {
             print("[removeMember success")
         case .failure(_):
             print("[removeMember err")
+        }
+        
+    }
+    
+    func deleteClub() async {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
+        
+        let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
+        let result = await request.result
+        
+        switch result {
+        case .success(_):
+            print("[deleteClub success")
+        case .failure(_):
+            print("[deleteClub err")
         }
         
     }

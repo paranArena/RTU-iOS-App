@@ -12,6 +12,7 @@ struct RentalTab: View {
     
     @EnvironmentObject var clubVM: ClubViewModel
     @EnvironmentObject var tabVM: AmongTabsViewModel
+    @EnvironmentObject var locationManager: LocationManager
     
     @State private var rentalSelection: Selection = .rentalItem
     @State private var searchText = ""
@@ -20,6 +21,9 @@ struct RentalTab: View {
     @State private var cancelSelection: CancelSelection = .none
     @State private var isShowingModal = false
     
+    
+    @State private var selectedRentData: RentalData?
+    @State private var isActiveMap = false
     // 예약 취소를 위한 값들
     @State private var selectedClubId = -1
     @State private var selectedItemId = -1
@@ -46,7 +50,9 @@ struct RentalTab: View {
         }
         .alert("", isPresented: $alert.isPresented) {
             Button("아니오", role: .cancel) {}
-            Button("예") { alert.callback() }
+            Button("예") {
+                alert.callback()
+            }
         } message: {
             Text(alert.title)
         }
@@ -69,6 +75,14 @@ struct RentalTab: View {
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         }
+        .background(
+            NavigationLink(isActive: $isActiveMap) {
+                if let selectedRentData = selectedRentData {
+                    ItemMap(itemInfo: selectedRentData)
+                }
+            } label: { }
+
+        )
     }
     
     @ViewBuilder
@@ -141,9 +155,16 @@ struct RentalTab: View {
             Group {
                 VStack {
                     ForEach(clubVM.rentals.indices, id:\.self) { i in
-                        RentalCell(rentalItemInfo: clubVM.rentals[i], alert: $alert, singleButtonAlert: $singleButtonAlert)
-                            .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.rentals[i].clubId != tabVM.selectedClubId)
-                            .isHidden(hidden: isSearchBarFocused && !clubVM.rentals[i].clubName.contains(searchText) && !clubVM.rentals[i].name.contains(searchText))
+                        Button {
+                            if locationManager.requestAuthorization() {
+                                selectedRentData = clubVM.rentals[i]
+                                isActiveMap = true
+                            }
+                        } label: {
+                            RentalCell(rentalItemInfo: clubVM.rentals[i], alert: $alert, singleButtonAlert: $singleButtonAlert)
+                                .isHidden(hidden: tabVM.selectedClubId != nil && clubVM.rentals[i].clubId != tabVM.selectedClubId)
+                                .isHidden(hidden: isSearchBarFocused && !clubVM.rentals[i].clubName.contains(searchText) && !clubVM.rentals[i].name.contains(searchText))
+                        }
                     }
                 }
                 .isHidden(hidden: clubVM.rentals.isEmpty)

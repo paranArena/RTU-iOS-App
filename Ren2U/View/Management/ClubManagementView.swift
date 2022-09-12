@@ -16,12 +16,31 @@ struct ClubManagementView: View {
     @Environment(\.isPresented) var isPresented
     
     @StateObject var managementVM: ManagementViewModel
+    @EnvironmentObject var clubVM: ClubViewModel
     @State private var tmp = false
+    
+    @Binding var clubActive: Bool
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .center, spacing: 80) {
+            VStack(alignment: .center, spacing: 20) {
                 ManagingNavigation()
+                
+                Button {
+                    Task {
+                        managementVM.showDeleteClub()
+                    }
+                } label: {
+                    Text("클럽 삭제")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 20)
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                        .foregroundColor(Color.primary)
+                        .background(Color.gray_DEE2E6)
+                        .cornerRadius(15)
+                }
+
                 
                 //  MARK: 알림 기능 추가 후 주석 제거
 //                VStack(alignment: .center, spacing: 10) {
@@ -42,6 +61,18 @@ struct ClubManagementView: View {
 //                .cornerRadius(15)
             }
             .padding(.horizontal, 10)
+        }
+        .alert("", isPresented: $managementVM.alert.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") {
+                Task {
+                    managementVM.alert.callback()
+                    clubActive = false
+                    clubVM.getMyClubs()
+                }
+            }
+        } message: {
+            Text("\(managementVM.alert.title)")
         }
         .controllTabbar(isPresented)
         .navigationTitle(" ")
