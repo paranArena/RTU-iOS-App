@@ -10,7 +10,7 @@ import SwiftUI
 struct RentalManagementSelected: View {
     
     @ObservedObject var manageVM: ManagementViewModel
-    @State private var filter: RentalStatus = .rent
+    @State private var filter: RentalStatus = .wait
     @State private var hearderSelectionWidth: CGFloat = .zero
     
     var body: some View {

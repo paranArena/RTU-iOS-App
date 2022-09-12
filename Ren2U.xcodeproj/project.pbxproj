@@ -98,6 +98,8 @@
 		157190F328B7053200880F98 /* ItemPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F228B7053200880F98 /* ItemPhoto.swift */; };
 		157190F628B7072200880F98 /* RightArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F528B7072200880F98 /* RightArrow.swift */; };
 		15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15799D3F28C789A70032D884 /* ManageProductCell.swift */; };
+		157C267F28CF3E60009115D8 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C267E28CF3E60009115D8 /* SignUpViewModel.swift */; };
+		157C268128CF3E6A009115D8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268028CF3E6A009115D8 /* LoginViewModel.swift */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586873A287EBB3F0003C2DC /* CertificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15868739287EBB3F0003C2DC /* CertificationVM.swift */; };
 		1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16C28C8914700D83FCC /* HidableTabView */; };
@@ -115,6 +117,8 @@
 		15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */; };
 		15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B63DA328AF38EA000AB82D /* ViewExtensions .swift */; };
 		15BBB9FC28CEF58D00DCEF92 /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBB9FB28CEF58C00DCEF92 /* PrivacyPolicy.swift */; };
+		15BBB9FF28CF028300DCEF92 /* RepresentativeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */; };
+		15BBBA0128CF059C00DCEF92 /* ClubNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBBA0028CF059C00DCEF92 /* ClubNotifications.swift */; };
 		15BDC4222881218500514EF1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* AuthViewModel.swift */; };
 		15C03145289CD5E500D0354E /* RentalTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C03144289CD5E500D0354E /* RentalTabVM.swift */; };
 		15CFAD2A28B7456E0004CDF7 /* ItemInformation2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFAD2928B7456E0004CDF7 /* ItemInformation2.swift */; };
@@ -253,6 +257,8 @@
 		157190F228B7053200880F98 /* ItemPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPhoto.swift; sourceTree = "<group>"; };
 		157190F528B7072200880F98 /* RightArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightArrow.swift; sourceTree = "<group>"; };
 		15799D3F28C789A70032D884 /* ManageProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProductCell.swift; sourceTree = "<group>"; };
+		157C267E28CF3E60009115D8 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		157C268028CF3E6A009115D8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		15868739287EBB3F0003C2DC /* CertificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationVM.swift; sourceTree = "<group>"; };
 		159F086728AC72170008EC16 /* RentalDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDatePicker.swift; sourceTree = "<group>"; };
@@ -268,6 +274,8 @@
 		15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSignUpCell.swift; sourceTree = "<group>"; };
 		15B63DA328AF38EA000AB82D /* ViewExtensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewExtensions .swift"; sourceTree = "<group>"; };
 		15BBB9FB28CEF58C00DCEF92 /* PrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
+		15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentativeImage.swift; sourceTree = "<group>"; };
+		15BBBA0028CF059C00DCEF92 /* ClubNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubNotifications.swift; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		15C03144289CD5E500D0354E /* RentalTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalTabVM.swift; sourceTree = "<group>"; };
 		15CFAD2928B7456E0004CDF7 /* ItemInformation2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInformation2.swift; sourceTree = "<group>"; };
@@ -386,6 +394,8 @@
 		151B556D28BC9EBC0090A5E8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				157C267E28CF3E60009115D8 /* SignUpViewModel.swift */,
+				157C268028CF3E6A009115D8 /* LoginViewModel.swift */,
 				15394C0D28CDCAA200E4944A /* Authorization */,
 				15C03143289CD5A900D0354E /* Rental */,
 				1523D5E328BE29BE009EB733 /* Managemnet  */,
@@ -557,6 +567,7 @@
 				153C1A7A288CF7D600F89B2E /* ClubProfile.swift */,
 				152980EF288D39E500537A80 /* ClubPage.swift */,
 				15A84D5C28CE120D00B3EB84 /* NotificationDetailView.swift */,
+				15BBBA0028CF059C00DCEF92 /* ClubNotifications.swift */,
 				156386C7288A588D006653E8 /* Cell */,
 			);
 			path = Club;
@@ -627,6 +638,16 @@
 				15B63DA328AF38EA000AB82D /* ViewExtensions .swift */,
 			);
 			path = Modifier;
+			sourceTree = "<group>";
+		};
+		15BBB9FD28CF024600DCEF92 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				157190F028B7043100880F98 /* PlusCircle.swift */,
+				157190F528B7072200880F98 /* RightArrow.swift */,
+				15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		15C03143289CD5A900D0354E /* Rental */ = {
@@ -746,6 +767,7 @@
 		15FAF166287D606700B35570 /* Global  */ = {
 			isa = PBXGroup;
 			children = (
+				15BBB9FD28CF024600DCEF92 /* Image */,
 				15394C0A28CDC7B200E4944A /* Swipe */,
 				151E4E9328C4948B00FFB668 /* Scroll */,
 				15246E1D28C0AA8E0021D4F0 /* PreferenceSetter */,
@@ -758,8 +780,6 @@
 				15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */,
 				15F3672E289261300073E094 /* ShadowRectangle.swift */,
 				15F3673628927E770073E094 /* TransparentDivider.swift */,
-				157190F028B7043100880F98 /* PlusCircle.swift */,
-				157190F528B7072200880F98 /* RightArrow.swift */,
 				158011782893992A006016AD /* ImagePicker.swift */,
 				1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */,
 				151B557428BCAA2F0090A5E8 /* Modal .swift */,
@@ -978,11 +998,13 @@
 				1556E42C28CC5AE0007D1BDF /* DateExtension.swift in Sources */,
 				15F3672F289261300073E094 /* ShadowRectangle.swift in Sources */,
 				15D774F6288E37A900428465 /* RentalItemVCell.swift in Sources */,
+				15BBBA0128CF059C00DCEF92 /* ClubNotifications.swift in Sources */,
 				154B6B4428C31215004962B9 /* DoubleWheelPicker .swift in Sources */,
 				156386DC288A6E0B006653E8 /* HorizontalClubCell.swift in Sources */,
 				15394C0F28CDCABF00E4944A /* PhotoManager.swift in Sources */,
 				153C1A7B288CF7D600F89B2E /* ClubProfile.swift in Sources */,
 				15667BCF28CCDA5F00AE9A2D /* ToS.swift in Sources */,
+				157C267F28CF3E60009115D8 /* SignUpViewModel.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
 				15FA687B28BC62B800B3DF0B /* Profile.swift in Sources */,
 				15FA687928BC5A2400B3DF0B /* Param.swift in Sources */,
@@ -1024,12 +1046,14 @@
 				15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */,
 				157190F328B7053200880F98 /* ItemPhoto.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
+				157C268128CF3E6A009115D8 /* LoginViewModel.swift in Sources */,
 				152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15228ABF28C8A06300A0B3C5 /* NoticeData.swift in Sources */,
 				152C6F5128C83F1A00AA420A /* ColorExtension.swift in Sources */,
 				15D4C583287FF7C0008BB89B /* SignUpVM.swift in Sources */,
 				15228AC128C8A08D00A0B3C5 /* ClubData.swift in Sources */,
+				15BBB9FF28CF028300DCEF92 /* RepresentativeImage.swift in Sources */,
 				156673DE28C1C6860011535D /* MaxYSetterView.swift in Sources */,
 				151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */,
 				1514A10028B7594F0040F681 /* ItemCaution.swift in Sources */,

@@ -50,14 +50,15 @@ struct NotificationDetailView: View {
                         .frame(maxWidth: .infinity)
                 }
                 
-                if !notificationVM.notificationDetail.imagePath.isEmpty {
-                    KFImage(URL(string: notificationVM.notificationDetail.imagePath))
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: SCREEN_WIDTH - 40, maxHeight: SCREEN_WIDTH - 40)
-                        .cornerRadius(15)
-                        .clipped()
-                }
+//                if !notificationVM.notificationDetail.imagePath.isEmpty {
+//                    KFImage(URL(string: notificationVM.notificationDetail.imagePath))
+//                        .resizable()
+//                        .scaledToFill()
+//                        .frame(maxWidth: SCREEN_WIDTH - 40, maxHeight: SCREEN_WIDTH - 40)
+//                        .cornerRadius(15)
+//                        .clipped()
+//                }
+                RepresentativeImage(url: notificationVM.notificationDetail.imagePath)
                 
                 Text(notificationVM.notificationDetail.content)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))

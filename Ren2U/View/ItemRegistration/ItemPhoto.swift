@@ -57,6 +57,7 @@ struct ItemPhoto: View {
                     .resizable()
                     .scaledToFill()
                     .frame(maxWidth: 300, maxHeight: 300)
+                    .cornerRadius(20)
                     .clipped()
             }
         }

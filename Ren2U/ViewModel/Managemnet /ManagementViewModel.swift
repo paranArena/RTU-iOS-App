@@ -35,6 +35,7 @@ class ManagementViewModel: ObservableObject {
     //  MARK: LOCAL
     
     //  MARK: POST
+    
     func createNotification(notice: NotificationModel) async {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/notifications"
         let hearders: HTTPHeaders = [
@@ -86,22 +87,6 @@ class ManagementViewModel: ObservableObject {
         }
     }
 
-    
-    func applyRent(clubId: Int, itemId: Int) {
-        let url = "\(BASE_URL)/clubs/\(clubId)/apply/rent/\(itemId)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
-        
-        AF.request(url, method: .post, encoding: JSONEncoding.default, headers: hearders).responseString { res in
-            switch res.result {
-            case .success(let value):
-                print("[applyRent success]")
-                print(value)
-            case .failure(let err):
-                print("[applyRent err]")
-                print(err)
-            }
-        }
-    }
     
     //  MARK: GET
     

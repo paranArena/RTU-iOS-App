@@ -65,8 +65,6 @@ struct RefreshableScrollView<Content: View>: View {
             .allowsHitTesting(!isRefreshing)
             .onReceive(publisher) {
                 startoffset = $0
-                print("startoffset :  \(startoffset)")
-                print("threshold: \(threshold)")
             }
             .onReceive(timer) { _ in
                 print("call timer")

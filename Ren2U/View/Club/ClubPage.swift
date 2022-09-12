@@ -93,19 +93,7 @@ struct ClubPage: View {
     private func Thumbnail() -> some View {
         HStack {
             Spacer()
-            if let thumbnaulPath = clubData.thumbnailPath {
-                KFImage(URL(string: thumbnaulPath))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: SCREEN_WIDTH - 40, height: SCREEN_WIDTH - 40)
-                    .cornerRadius(15)
-                    .clipped()
-            } else {
-                Image(AssetImages.DefaultGroupImage.rawValue)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 200, height: 200)
-            }
+            RepresentativeImage(url: clubData.thumbnailPath)
             Spacer()
         }
     }
@@ -148,8 +136,8 @@ struct ClubPage: View {
                     .foregroundColor(Color.gray_495057)
                 Spacer()
                 
-                Button {
-                    
+                NavigationLink {
+                    ClubNotifications()
                 } label: {
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.gray_495057)
@@ -159,7 +147,7 @@ struct ClubPage: View {
             
             ForEach(clubVM.clubNotice.indices, id: \.self) { i in
                 if i < 5 {
-                    NoticeCell(noticeInfo: clubVM.notices[i], groupName: clubVM.getGroupNameByGroupId(groupId: clubData.id))
+                    NoticeCell(noticeInfo: clubVM.clubNotice[i], groupName: clubVM.getGroupNameByGroupId(groupId: clubData.id))
                 }
             }
             

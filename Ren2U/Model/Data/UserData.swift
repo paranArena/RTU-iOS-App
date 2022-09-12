@@ -8,6 +8,21 @@
 import Foundation
 import SwiftUI
 
+struct User: Codable {
+    var email: String
+    var password: String
+    var name: String
+    var major: String
+    var studentId: String
+    var phoneNumber: String
+    var imageSource: String
+    
+    static func dummyUser() -> User {
+        return  User(email: "temp", password: "12345", name: "Page", major: "소프트웨어학과",
+                     studentId: "201820767", phoneNumber: "01012345678", imageSource: "https://picsum.photos/seed/picsum/200/300")
+    }
+}
+
 struct UserAndRoleData: Codable, Identifiable {
     let id: Int
     let email: String
@@ -29,6 +44,11 @@ struct UserData: Codable, Identifiable {
     static func dummyUserData() -> UserData {
         return UserData(id: 123, email: "nou0jid", name: "노우영", phoneNumber: "01064330824", studentId: "201820767", major: "소프트웨어학과")
     }
+}
+
+struct DuplicateCheckData: Codable {
+    let phoneNumber: Bool
+    let studentId: Bool
 }
 
 //  MARK: TEMP

@@ -33,18 +33,18 @@ enum ClubRole: String {
 }
 
 enum RentalStatus: String, CaseIterable {
-    case rent = "RENT"
     case wait = "WAIT"
-    case cancel = "CANCEL"
+    case rent = "RENT"
+//    case cancel = "CANCEL"
     
     var value: Int {
         switch self {
-        case .rent:
-            return 0
         case .wait:
+            return 0
+        case .rent:
             return 1
-        case .cancel:
-            return 2
+//        case .cancel:
+//            return 2
         }
     }
     
@@ -54,8 +54,8 @@ enum RentalStatus: String, CaseIterable {
             return "예약"
         case .rent:
             return "대여"
-        case .cancel:
-            return "취소"
+//        case .cancel:
+//            return "취소"
         }
     }
 }

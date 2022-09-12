@@ -51,6 +51,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func requestAuthorization() -> Bool {
         if isAuthorized {
+            region = MKCoordinateRegion(center: (locationManager?.location!.coordinate)!,
+                                        span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004))
             return true
         } else {
             isPresentedAlert = true

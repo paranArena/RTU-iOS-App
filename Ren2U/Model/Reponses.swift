@@ -20,6 +20,12 @@ class CustomDecoder: JSONDecoder {
 
 //  MARK: GET
 
+struct CheckPhoneStudentIdDuplicateResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: DuplicateCheckData 
+}
+
 struct GetMyClubRoleResponse: Codable {
     let statusCode: Int
     let responseMessage: String

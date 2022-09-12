@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Certification: View {
     
-    let email: String
+    let user: User
     @Binding var isActive: Bool
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var authModel: AuthViewModel
@@ -97,8 +97,12 @@ struct Certification: View {
     private func GoSignUpSuccessButton() -> some View {
         Button {
             Task {
-                viewModel.isConfirmed = await authModel.verifyEmailCode(email: email, code: viewModel.certificationNum)
-                viewModel.certificationNum = ""
+                if await authModel.signUp(user: user, verificationCode: viewModel.certificationNum) {
+                    viewModel.isSingUpSeccussActive = true
+                } else {
+                    viewModel.certificationNum = ""
+                    viewModel.isConfirmed = false
+                }
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")

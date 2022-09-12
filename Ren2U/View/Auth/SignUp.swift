@@ -75,9 +75,14 @@ struct SignUp: View {
             }
             .padding(.horizontal, 20)
         }
-        .background(NavigationLink(destination: Certification(email: viewModel.authField.email, isActive: $isActive), isActive: $isCeritificationActive, label: {
+        .background(NavigationLink(destination: Certification(user: viewModel.authField.extractUser() , isActive: $isActive), isActive: $isCeritificationActive, label: {
             
         }))
+        .alert(viewModel.oneButtonAlert.title, isPresented: $viewModel.oneButtonAlert.isPresented) {
+            OneButtonAlert.okButton
+        } message: {
+            Text(viewModel.oneButtonAlert.message)
+        }
         .animation(.spring(), value: focusedField)
         .interactiveDismissDisabled()
         .navigationTitle(" ")
@@ -280,9 +285,11 @@ struct SignUp: View {
     private func CertificatinoViewButton() -> some View {
         HStack {
             Button {
-                isCeritificationActive = true
                 Task {
-                    authViewModel.requestEmailCode(email: viewModel.authField.email)
+                    if await !viewModel.checkPhoneStudentIdDuplicate() {
+                        authViewModel.requestEmailCode(email: viewModel.authField.email)
+                        isCeritificationActive = true 
+                    }
                 }
             } label: {
                 Image(systemName: "arrow.right.circle.fill")

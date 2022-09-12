@@ -6,18 +6,13 @@
 //
 
 import SwiftUI
-
+import Alamofire
 
 extension SignUp {
     class ViewModel: ObservableObject {
         
-//        @Published var isOverlappedEmail = false
-//        @Published var text = [String] (repeating: "", count: 7)
-//        @Published var isConfirmed = [Bool](repeating: false, count: 7)
-//        @Published var isShowingPassword = false
-//        @Published var isShowingPasswordCheck = false
-        
         @Published var authField = AuthField()
+        @Published var oneButtonAlert = OneButtonAlert()
         
         func changeFocus(curIndex: Int) -> SignUp.Field? {
             switch curIndex {
@@ -44,6 +39,39 @@ extension SignUp {
             return User(email: authField.email, password: authField.password,
                         name: authField.name, major: authField.major,
                         studentId: authField.studentId, phoneNumber: authField.phoneNumber, imageSource: "")
+        }
+        
+        @MainActor
+        func checkPhoneStudentIdDuplicate() async -> Bool{
+            let url = "\(BASE_URL)/members/duplicate/010\(authField.phoneNumber)/\(authField.studentId)/exists"
+            let request = AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(CheckPhoneStudentIdDuplicateResponse.self)
+            
+            let result = await request.result
+            switch result {
+            case .success(let value):
+                print("checkPhoneStudentIdDuplicate success")
+                let value1 = value.data.studentId
+                let value2 = value.data.phoneNumber
+                
+                if value1 {
+                    oneButtonAlert.title = "학번 중복"
+                    oneButtonAlert.message = "본인의 학번일 경우 개발자에게 문의 해주세요."
+                    oneButtonAlert.isPresented = true
+                    return true
+                }
+                
+                if value2 {
+                    oneButtonAlert.title = "휴대폰 번호 중복"
+                    oneButtonAlert.message = "본인의 번호일 경우 개발자에게 문의 해주세요."
+                    oneButtonAlert.isPresented = true
+                    return true
+                }
+                
+                return false
+                
+            case .failure(_):
+                return true
+            }
         }
 
     }

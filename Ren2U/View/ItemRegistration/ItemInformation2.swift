@@ -59,11 +59,11 @@ struct ItemInformation2: View {
                 
                 //  MARK: 선착순 수량 버튼
                 PickerSet(selection: Field.fifoCount)
-                Divider()
-                    .isHidden(hidden: pickerSelection != nil)
-                
-                //  MARK: 기간제 수량 버튼
-                PickerSet(selection: Field.reserveCount)
+//                Divider()
+//                    .isHidden(hidden: pickerSelection != nil)
+//
+//                //  MARK: 기간제 수량 버튼
+//                PickerSet(selection: Field.reserveCount)
             }
             
             Group {
@@ -75,14 +75,13 @@ struct ItemInformation2: View {
                 
                 //  MARK: 대여기간 선착순 버튼
                 PickerSet(selection: Field.fifoPeriod)
-                Divider()
-                    .isHidden(hidden: pickerSelection != nil)
-                //  MARK: 대여기간 기간제 버튼
-                PickerSet(selection: Field.reservePeriod)
+//                Divider()
+//                    .isHidden(hidden: pickerSelection != nil)
+//                //  MARK: 대여기간 기간제 버튼
+//                PickerSet(selection: Field.reservePeriod)
             }
             
             GoNextButton()
-                .isHidden(hidden: pickerSelection != nil)
         }
         .animation(.easeInOut, value: self.pickerSelection)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -133,9 +132,11 @@ struct ItemInformation2: View {
             itemVM.reserveRentalPeriod = integerPicker[3][0] * 10 + integerPicker[3][1]
             isActive2 = true
         } label: {
-            RightArrow(isDisabled: false)
+            RightArrow(isDisabled: (integerPicker[0][0] == 0 && integerPicker[0][1] == 0) || (integerPicker[2][0] == 0 && integerPicker[2][1] == 0))
+                .isHidden(hidden: pickerSelection != nil)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        .disabled((integerPicker[0][0] == 0 && integerPicker[0][1] == 0) || (integerPicker[2][0] == 0 && integerPicker[2][1] == 0))
 
     }
 

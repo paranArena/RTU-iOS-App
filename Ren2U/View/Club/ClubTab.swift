@@ -22,8 +22,9 @@ struct ClubTab: View {
     @State private var callback: () -> () = { print("callback")}
     
     
+    @State private var selectedNotificationLinkIndex: Int?
     @State private var isActiveNotificationDetail = false
-    @State private var selectedNotificationLinkIndex = 0
+    
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
@@ -57,12 +58,13 @@ struct ClubTab: View {
             }
         }
         .background(
-            NavigationLink(isActive: $isActiveNotificationDetail , destination: {
-                let clubId = clubVM.notices[selectedNotificationLinkIndex].clubId
-                let notificationId = clubVM.notices[selectedNotificationLinkIndex].id
-                NotificationDetailView(clubId: clubId, notificationId: notificationId)
-            }, label: { })
+            NavigationLink(isActive: $isActiveNotificationDetail, destination: {
+                if let selectedNotificationLinkIndex = selectedNotificationLinkIndex {
+                    NotificationDetailView(clubId: clubVM.notices[selectedNotificationLinkIndex].clubId, notificationId: clubVM.notices[selectedNotificationLinkIndex].id)
+                }
+            }, label: {})
         )
+
         .overlay(ShadowRectangle())
         .showTabBar(animated: false)
         .navigationTitle("")

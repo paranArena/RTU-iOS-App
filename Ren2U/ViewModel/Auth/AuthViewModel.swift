@@ -14,7 +14,6 @@ class AuthViewModel: ObservableObject {
     @Published var jwt: String?
     @Published var userData: UserData?
     
-    @Published var isCheckEmailDuplicate = false
     
     init() {
         self.jwt = UserDefaults.standard.string(forKey: JWT_KEY)
@@ -30,16 +29,20 @@ class AuthViewModel: ObservableObject {
     
     @MainActor
     func checkEmailDuplicate(email: String) async -> Bool{
-        let url = "\(BASE_URL)/members/\(email)@ajou.ac.kr/exists"
+        let url = "\(BASE_URL)/members/email/\(email)@ajou.ac.kr/exists"
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(Bool.self)
         
-        let result = await request.result
+        let response = await request.response
 //          email이 존재하면 true, 아니면 false 반환
-        switch result {
+        
+        if response.response?.statusCode == 404 {
+            print(response.debugDescription)
+        }
+        
+        switch response.result {
         case .success(let value):
             print("[checkEmailDuplicate success]")
             print(value)
-            isCheckEmailDuplicate = true 
             return value
         case .failure(let err):
             print("[checkEmailDuplicate err]")
@@ -86,16 +89,17 @@ class AuthViewModel: ObservableObject {
     
     //  MARK: POST
     
-    func signUp(user: User) async -> Bool {
+    func signUp(user: User, verificationCode: String) async -> Bool {
         var result = false
         let url = "\(BASE_URL)/signup"
         let param: [String: Any] = [
             "email" : "\(user.email)@ajou.ac.kr",
             "password" : user.password,
             "name" : user.name,
-            "phoneNumber" : user.phoneNumber,
+            "phoneNumber" : "010\(user.phoneNumber)",
             "studentId" : user.studentId,
-            "major" : user.major
+            "major" : user.major,
+            "verificationCode" : verificationCode
         ]
         
         let task = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingString()
