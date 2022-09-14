@@ -10,17 +10,26 @@ import SwiftUI
 @main
 struct Ren2UApp: App {
     
-    @StateObject var authModel = AuthModel()
+    @StateObject var authModel = AuthViewModel()
+    @StateObject var groupModel = ClubViewModel()
+    @StateObject var tabVM = AmongTabsViewModel()
+    @StateObject var locationManager = LocationManager() 
     
     init() {
         // 네비게이션 바 틴트 컬러 변경 
         Theme.navigationBarColors(tintColor: .label)
+        
+        // 폰트 이름 출력
+//        FontName.printPontNames()
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(authModel)
+                .environmentObject(groupModel)
+                .environmentObject(tabVM)
+                .environmentObject(locationManager)
         }
     }
 }
