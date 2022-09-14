@@ -125,6 +125,16 @@ struct ClubTab: View {
                         }
                     }
                 }
+                .isHidden(hidden: clubVM.notices.isEmpty)
+                
+                
+                Text("생성된 공지사항이 없습니다.")
+                    .font(.custom(CustomFont.NSKRBold.rawValue, size: 20))
+                    .foregroundColor(.gray_DEE2E6)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .isHidden(hidden: !clubVM.notices.isEmpty)
+                
+                
             }
         }
         .refreshable {
