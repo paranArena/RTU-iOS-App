@@ -33,8 +33,6 @@ class NotificationViewModel: ObservableObject {
             print("[getNotification success")
             print(value.responseMessage)
             self.notificationDetail = value.data
-            print(value.data)
-            print(value.data.updatedAt)
         case .failure(let err):
             print("[getNotification err]")
             print(err)

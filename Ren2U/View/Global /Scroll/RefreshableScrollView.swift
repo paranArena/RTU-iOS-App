@@ -67,7 +67,6 @@ struct RefreshableScrollView<Content: View>: View {
                 startoffset = $0
             }
             .onReceive(timer) { _ in
-                print("call timer")
                 isRefreshable = true
                 timer.upstream.connect().cancel()
             }

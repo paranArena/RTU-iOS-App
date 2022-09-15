@@ -34,30 +34,8 @@ struct NotificationDetailView: View {
                         SimpleLine(color: Color.gray_DEE2E6)
                     }
                 
-                HStack {
-                    
-                    Text("")
-                        .frame(maxWidth: .infinity)
-                    
-                    Text(notificationVM.notificationDetail.clubName)
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(Color.gray_868E96)
-                        .frame(maxWidth: .infinity)
-                    
-                    Text("\(notificationVM.notificationDetail.updatedAt.toYMDformat())")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(Color.gray_868E96)
-                        .frame(maxWidth: .infinity)
-                }
+                Info()
                 
-//                if !notificationVM.notificationDetail.imagePath.isEmpty {
-//                    KFImage(URL(string: notificationVM.notificationDetail.imagePath))
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(maxWidth: SCREEN_WIDTH - 40, maxHeight: SCREEN_WIDTH - 40)
-//                        .cornerRadius(15)
-//                        .clipped()
-//                }
                 RepresentativeImage(url: notificationVM.notificationDetail.imagePath)
                 
                 Text(notificationVM.notificationDetail.content)
@@ -72,6 +50,26 @@ struct NotificationDetailView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.horizontal, 20)
         .basicNavigationTitle(title: "공지사항")
+    }
+    
+    @ViewBuilder
+    private func Info() -> some View {
+        HStack {
+            
+            Text("")
+                .frame(maxWidth: .infinity)
+            
+            Text(notificationVM.notificationDetail.clubName)
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                .foregroundColor(Color.gray_868E96)
+                .frame(maxWidth: .infinity)
+            
+            Text("\(notificationVM.notificationDetail.updatedAt.toYMDformat())")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                .foregroundColor(Color.gray_868E96)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+        
     }
 }
 

@@ -33,29 +33,7 @@ struct MyPageTab: View {
     var body: some View {
         
         VStack {
-            HStack {
-                KFImage(URL(string: "https://picsum.photos/seed/picsum/200/300")!)
-                    .onFailure { err in
-                        print(err.errorDescription ?? "KFImage err")
-                    }
-                    .resizable()
-                    .frame(width: 120, height: 120)
-                    .clipShape(Circle())
-                    .padding(.trailing, 30)
-                
-                VStack(alignment: .trailing, spacing: 0) {
-                    Text("\(authVM.userData?.major ?? "") \(authVM.userData?.studentId.substring(from: 2, to: 3) ?? "") 학번")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                        .foregroundColor(.gray_868E96)
-//
-                    Text("\(authVM.userData?.name ?? "")")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-                }
-                .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            MyInfo()
             
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(Content.allCases, id: \.rawValue) { content in
@@ -103,15 +81,48 @@ struct MyPageTab: View {
     }
     
     @ViewBuilder
+    private func MyInfo() -> some View {
+        HStack {
+            KFImage(URL(string: "https://picsum.photos/seed/picsum/200/300")!)
+                .onFailure { err in
+                    print(err.errorDescription ?? "KFImage err")
+                }
+                .resizable()
+                .frame(width: 120, height: 120)
+                .clipShape(Circle())
+                .padding(.trailing, 30)
+            
+            VStack(alignment: .trailing, spacing: 0) {
+                Text("\(authVM.userData?.major ?? "") \(authVM.userData?.studentId.substring(from: 2, to: 3) ?? "") 학번")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+                    .foregroundColor(.gray_868E96)
+//
+                Text("\(authVM.userData?.name ?? "")")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 20)
+    }
+    
+    @ViewBuilder
     private func PrivacyNavigation() -> some View {
-        NavigationLink("개인정보처리 방침") {
-            PrivacyPolicy() 
+        NavigationLink {
+            PrivacyPolicy()
+        } label: {
+            Text("개인정보처리 방침")
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     @ViewBuilder
     private func ProfileNavigation() -> some View {
-        NavigationLink("프로필 확인") {
-            Profile() 
+        NavigationLink {
+            Profile()
+        } label: {
+            Text("프로필 확인")
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     
@@ -131,15 +142,21 @@ struct MyPageTab: View {
     
     @ViewBuilder
     private func TermNavigation() -> some View {
-        NavigationLink("이용약관") {
+        NavigationLink {
             ToS()
+        } label: {
+            Text("이용약관")
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     
     @ViewBuilder
     private func LogoutButton() -> some View {
-        Button("로그아웃") {
+        Button {
             loginManager.isLogined = false
+        } label: {
+            Text("로그아웃")
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
