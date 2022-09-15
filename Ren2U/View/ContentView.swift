@@ -12,11 +12,12 @@ struct ContentView: View {
     
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var loginManager: LoginManager
     
     var body: some View {
         Group {
-            Ren2UTab().isHidden(hidden: authViewModel.jwt == nil)
-            Login().isHidden(hidden: authViewModel.jwt != nil)
+            Ren2UTab().isHidden(hidden: !loginManager.isLogined)
+            Login().isHidden(hidden: loginManager.isLogined)
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
         .alert("더 가까이 이동해주세요", isPresented: $locationManager.isPresentedDistanceAlert) {

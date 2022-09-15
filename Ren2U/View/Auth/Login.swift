@@ -7,50 +7,37 @@
 
 import SwiftUI
 
+
 struct Login: View {
     
+    @EnvironmentObject var loginManager: LoginManager
     @EnvironmentObject var authModel: AuthViewModel
-    @StateObject var viewModel = ViewModel()
+    @StateObject var loginVM = LoginViewModel() 
     @FocusState var focus: Field?
-    @State private var isActive = false
+    
+    enum Field: Int, CaseIterable {
+        case email
+        case password
+    }
     
     var body: some View {
     
         NavigationView {
             VStack(alignment: .center, spacing: 10) {
-                
-                Spacer()
-                
                 GreetingText()
                 Email()
                 Password()
                 MissInput()
                 LoginButton()
                 AuthHelp()
-                
-                Spacer()
-                
-                
-                VStack(alignment: .trailing, spacing: 0) {
-                    Text("개발자 연락처")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-                        .foregroundColor(.gray_868E96)
-                    
-                    Text("nou0ggid@gmail.com")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-                        .tint(Color.navy_1E2F97)
-                }
-                .padding(.horizontal, -30)
-                .frame(maxWidth: .infinity, alignment: .bottomTrailing)
-                
-        
-                
+                DeveloperContact()
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .navigationTitle(" ")
             .navigationBarHidden(true)
             .padding(.horizontal, 40)
             .onAppear {
-                viewModel.initValue()
+                loginVM.clearFields()
             }
         }
         .navigationViewStyle(.stack)
@@ -59,23 +46,18 @@ struct Login: View {
     @ViewBuilder
     private func GreetingText() -> some View {
         VStack {
-            HStack {
-                Text("Welcome!")
-                    .font(.custom(CustomFont.RobotoBlack.rawValue, size: 36))
-                Spacer()
-            }
+            Text("Welcome!")
+                .font(.custom(CustomFont.RobotoBlack.rawValue, size: 36))
             
-            HStack {
-                Text("로그인 후 다양한 '가치'를 누려보세요!")
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                Spacer()
-            }
+            Text("로그인 후 다양한 '가치'를 누려보세요!")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
     }
     
     @ViewBuilder
     private func Email() -> some View {
-        CapsulePlaceholder(text: $viewModel.account.email, placeholder: Text("E-mail"),
+        CapsulePlaceholder(text: $loginVM.account.email , placeholder: Text("E-mail"),
                            color: .gray_ADB5BD)
             .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
             .padding(.top, 46)
@@ -85,7 +67,7 @@ struct Login: View {
     
     @ViewBuilder
     private func Password() -> some View {
-        CapsuleSecurePlaceholder(text: $viewModel.account.password, placeholder: Text("Password"))
+        CapsuleSecurePlaceholder(text: $loginVM.account.password, placeholder: Text("Password"))
             .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
             .padding(.top, 19)
             .focused($focus, equals: .password)
@@ -94,11 +76,11 @@ struct Login: View {
     @ViewBuilder
     private func MissInput() -> some View {
         HStack {
-            Text(viewModel.authenticationInfo)
+            Text(loginVM.missInput.rawValue)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .foregroundColor(.red_EB1808)
-            Spacer()
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading)
         .padding(.top, 0)
     }
@@ -107,17 +89,16 @@ struct Login: View {
     private func LoginButton() -> some View {
         Button {
             Task {
-                viewModel.isWroungAccount = await authModel.login(account: viewModel.account)
-                print(viewModel.isWroungAccount)
+                loginManager.isLogined = await loginVM.login()
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable()
                 .frame(width: 86, height: 86)
                 .padding(.top, 21)
-                .foregroundColor(!viewModel.account.email.isEmpty && !viewModel.account.password.isEmpty ? .navy_1E2F97 : .gray_E9ECEF)
+                .foregroundColor(loginVM.account.buttonFGColor)
         }
-        .disabled(viewModel.account.email.isEmpty || viewModel.account.password.isEmpty)
+        .disabled(loginVM.account.isDisable)
     }
     
     @ViewBuilder
@@ -135,8 +116,8 @@ struct Login: View {
             Text("|")
                 .foregroundColor(Color.gray_E9ECEF)
             
-            NavigationLink(isActive: $isActive) {
-                SignUp(isActive: $isActive)
+            NavigationLink(isActive: $loginVM.isActiveSignUpView) {
+                SignUp(isActive: $loginVM.isActiveSignUpView)
             } label: {
                 Text("회원 가입")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
@@ -145,10 +126,25 @@ struct Login: View {
         }
         .padding(.top, 21)
     }
-}
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        Login()
+    
+    @ViewBuilder
+    private func DeveloperContact() -> some View {
+        VStack(alignment: .trailing, spacing: 0) {
+            Text("개발자 연락처")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                .foregroundColor(.gray_868E96)
+            
+            Text("nou0ggid@gmail.com")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                .tint(Color.navy_1E2F97)
+        }
+        .padding(.horizontal, -30)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
     }
 }
+
+//struct SwiftUIView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Login()
+//    }
+//}

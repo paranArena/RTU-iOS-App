@@ -92,6 +92,7 @@ extension View {
                 ToolbarItem(placement: .principal) {
                     Text(title)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
+                        .frame(maxWidth: .infinity)
                 }
             }
     }

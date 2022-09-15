@@ -11,51 +11,15 @@ import Alamofire
 
 class AuthViewModel: ObservableObject {
     
-    @Published var jwt: String?
     @Published var userData: UserData?
-    
-    
-    init() {
-        self.jwt = UserDefaults.standard.string(forKey: JWT_KEY)
-    }
-    
-    
-    private func setToken(token: String) {
-        UserDefaults.standard.setValue(token, forKey: JWT_KEY)
-        self.jwt = token
-    }
     
     //  MARK: GET
     
-    @MainActor
-    func checkEmailDuplicate(email: String) async -> Bool{
-        let url = "\(BASE_URL)/members/email/\(email)@ajou.ac.kr/exists"
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(Bool.self)
-        
-        let response = await request.response
-//          email이 존재하면 true, 아니면 false 반환
-        
-        if response.response?.statusCode == 404 {
-            print(response.debugDescription)
-        }
-        
-        switch response.result {
-        case .success(let value):
-            print("[checkEmailDuplicate success]")
-            print(value)
-            return value
-        case .failure(let err):
-            print("[checkEmailDuplicate err]")
-            print(err)
-        }
-
-        return true
-    }
     
     @MainActor
     func getMyInfo() {
         let url = "\(BASE_URL)/members/my/info"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyInfoResponse.self) { res in
             switch res.result {
@@ -66,21 +30,19 @@ class AuthViewModel: ObservableObject {
             case .failure(let err):
                 print("[getMyInfo err]")
                 print(err)
-                self.logout()
             }
         }
     }
 
     func quitService() {
         let url = "\(BASE_URL)/members/my/quit"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: self.jwt ?? "")]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyInfoResponse.self) { res in
             print(res.debugDescription)
             switch res.result {
             case .success(_):
                 print("[quitService success]")
-                self.logout()
             case .failure(_):
                 print("[quitService err]")
             }
@@ -119,30 +81,6 @@ class AuthViewModel: ObservableObject {
         return result
     }
     
-    @MainActor
-    func login(account: Account) async -> Bool {
-        let url = "\(BASE_URL)/authenticate"
-        let param: [String: Any] = [
-            "email" : account.email,
-            "password" : account.password
-        ]
-
-
-
-        let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self)
-        let response = await request.result
-
-        switch response {
-        case .success(let value):
-            self.setToken(token: value.token)
-            return false
-        case .failure(let err):
-            print("login err: \(err)")
-            return true
-        }
-
-    }
-    
     func requestEmailCode2(email: String) {
         let url = "\(BASE_URL)/members/email/requestCode"
         let param: [String: Any] = [
@@ -159,59 +97,6 @@ class AuthViewModel: ObservableObject {
                 print(err)
             }
         }
-    }
-    
-    func requestEmailCode(email: String) {
-        let url = "\(BASE_URL)/members/email/requestCode"
-        let param: [String: Any] = [
-            "email" : "\(email)@ajou.ac.kr"
-        ]
-        
-        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).responseString { res in
-            switch res.result {
-            case .success(let value):
-                print("[requestEmailCode success]")
-                print(value)
-            case .failure(let err):
-                print("[requestEmailCode err]")
-                print(err)
-            }
-        }
-    }
-    
-    func verifyEmailCode(email: String, code: String) async -> Bool {
-        let url = "\(BASE_URL)/members/email/verifyCode"
-        let param: [String: Any] = [
-            "email" : "\(email)@ajou.ac.kr",
-            "code" : code
-        ]
-        
-        print("url : \(url)")
-        print("email : \(email)")
-        print("code : \(code)")
-        let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(VerifyEmailCodeResponse.self)
-        let result = await request.result
-        
-        switch result {
-        case .success(let value):
-            print("[verifyEmailCodeSuccess]")
-            if value.responseMessage == "이메일 검증 성공" {
-                return true
-            } else {
-                return false
-            }
-
-        case .failure(let err):
-            print("[verfyEmailCode failure]")
-            print(err)
-        }
-        
-        return false
-    }
-    
-    func logout() {
-        UserDefaults.standard.setValue(nil, forKey: JWT_KEY)
-        self.jwt = nil
     }
     
     //  MARK: PUT

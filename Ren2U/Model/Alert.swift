@@ -20,3 +20,5 @@ struct OneButtonAlert {
     var message = ""
     static let okButton = Button("확인", role: .cancel) { }
 }
+
+
