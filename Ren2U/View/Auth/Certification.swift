@@ -27,7 +27,7 @@ struct Certification: View {
                 ResendButton()
                 GoSignUpSuccessButton()
                 
-                NavigationLink(isActive: $authModel.isSingUpSeccussActive) {
+                NavigationLink(isActive: $authModel.isActiveSignUpSuccess) {
                     SignUpSuccess(isActive: $isActive)
                 } label: { }
 
@@ -68,13 +68,13 @@ struct Certification: View {
     
     @ViewBuilder
     private func CertificationTextField() -> some View {
-        CapsulePlaceholder(text: $authModel.certificationNum, placeholder: Text(""), color: .gray_ADB5BD)
+        CapsulePlaceholder(text: $authModel.authField.code, placeholder: Text(""), color: .gray_ADB5BD)
             .keyboardType(.numberPad)
             .font(.custom(CustomFont.RobotoMedium.rawValue, size: 36))
             .multilineTextAlignment(.center)
             .overlay(TimerOverlay())
-            .onTapGesture { authModel.certificationNum = "" }
-            .onChange(of: authModel.certificationNum) { _ in
+            .onTapGesture { authModel.authField.clearCode() }
+            .onChange(of: authModel.authField.code ) { _ in
                 authModel.endEditingIfLengthLimitReached()
             }
     }
@@ -93,22 +93,17 @@ struct Certification: View {
     private func GoSignUpSuccessButton() -> some View {
         Button {
             Task {
-                if await authModel.signUp() { 
-                    authModel.isSingUpSeccussActive = true
-                } else {
-                    authModel.certificationNum = ""
-                    authModel.isConfirmed = false
-                }
+                await authModel.signUp()
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable().frame(width: 86, height: 86)
                 .padding(.top, 49)
-                .foregroundColor(authModel.isReachedMaxLength(num: authModel.certificationNum)
+                .foregroundColor(authModel.isReachedMaxLength(num: authModel.authField.code)
                                  ? (authModel.timeRemaining <= 0 ? .gray_E9ECEF : .navy_1E2F97) : .gray_E9ECEF)
                 .padding(.top, 50)
         }
-        .disabled(!authModel.isReachedMaxLength(num: authModel.certificationNum) || authModel.timeRemaining <= 0)
+        .disabled(!authModel.isReachedMaxLength(num: authModel.authField.code) || authModel.timeRemaining <= 0)
     }
     
     @ViewBuilder

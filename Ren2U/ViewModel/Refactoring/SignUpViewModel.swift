@@ -13,23 +13,68 @@ class SignUpViewModel: ObservableObject {
     @Published var authField = AuthField()
     
     //  MARK: NavitaionLink
-    @Published var isActive = false
+    @Published var isActiveCertificationView = false
     
     //  MARK: ALERT
     @Published var isDulpicatedStudentId = false
     @Published var isDuplicatedPhoneNumber = false
     
-    // MARK: CertificationVM
+    // MARK: For CertificationView
     let certificationNumLengthLimit = 6
     let time: Double = 5*60
     
     @Published var startTime = Date.now
     @Published var timeRemaining: Double = 5*60
     @Published var isConfirmed: Bool = true
-    @Published var certificationNum = ""
     @Published var timer = Timer()
-    @Published var isSingUpSeccussActive: Bool = false
+    @Published var isActiveSignUpSuccess: Bool = false
     
+    //  MARK: LOCAL
+    
+    func startTimer() {
+        self.timer.invalidate()
+        startTime = Date.now
+        timeRemaining = time
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { Timer in
+            if self.timeRemaining > 0 {
+                self.timeRemaining -= 1
+            } else {
+                self.timer.invalidate()
+            }
+        })
+    }
+    
+    func endEditingIfLengthLimitReached() {
+        if self.authField.code.count == self.certificationNumLengthLimit { UIApplication.shared.endEditing() }
+    }
+    
+    func isReachedMaxLength(num: String) -> Bool {
+        guard num.count == certificationNumLengthLimit else { return false }
+        return true
+    }
+    
+    func getTimeString(time: Double) -> String {
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format: "%02i:%02i", minutes, seconds)
+    }
+    
+    func setTimeRemaining() {
+        let curTime = Date.now
+        let diffTime = curTime.distance(to: startTime)
+        let result = Double(diffTime.formatted())!
+        timeRemaining = 5*60 + result
+        
+        if timeRemaining < 0 {
+            timeRemaining = 0
+        }
+    }
+    
+    func resend() {
+        requestEmailCode()
+        startTimer()
+        authField.clearCode()
+    }
     func changeFocus(curIndex: Int) -> SignUp.Field? {
         switch curIndex {
         case SignUp.Field.email.rawValue:
@@ -51,24 +96,33 @@ class SignUpViewModel: ObservableObject {
         }
     }
     
+    //  MARK: get
+    
     @MainActor
     func checkPhoneStudentIdDuplicate() async {
         let url = "\(BASE_URL)/members/duplicate/010\(authField.phoneNumber)/\(authField.studentId)/exists"
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(CheckPhoneStudentIdDuplicateResponse.self)
         
-        let result = await request.result
-        switch result {
-        case .success(let value):
-            print("checkPhoneStudentIdDuplicate success")
-            isDulpicatedStudentId = value.data.studentId
-            isDuplicatedPhoneNumber = value.data.phoneNumber
-            
-            if !isDulpicatedStudentId && !isDulpicatedStudentId {
-                isActive = true
-                requestEmailCode()
+        let resposne = await request.response
+        
+        if let statusCode = resposne.response?.statusCode {
+            switch statusCode {
+            case 200:
+                print("[checkPhoneStudentIdDuplicate success]")
+                if let value = resposne.value {
+                    isDulpicatedStudentId = value.data.studentId
+                    isDuplicatedPhoneNumber = value.data.phoneNumber
+                    
+                    if !isDulpicatedStudentId && !isDulpicatedStudentId {
+                        isActiveCertificationView = true
+                        requestEmailCode()
+                    }
+                }
+                
+            default:
+                print("[checkPhoneStudentIdDuplicated unexpected result")
+                print(resposne.debugDescription)
             }
-        case .failure(_):
-            print("checkPhoneStudentIdDuplicate err")
         }
     }
     
@@ -104,6 +158,8 @@ class SignUpViewModel: ObservableObject {
         return true
     }
     
+    //  MARK: post
+    
     func requestEmailCode() {
         let url = "\(BASE_URL)/members/email/requestCode"
         let param: [String: Any] = [
@@ -122,8 +178,10 @@ class SignUpViewModel: ObservableObject {
         }
     }
     
-    func signUp() async -> Bool {
-        var result = false
+    
+    @MainActor
+    func signUp() async {
+        
         let url = "\(BASE_URL)/signup"
         let param: [String: Any] = [
             "email" : "\(authField.email)@ajou.ac.kr",
@@ -136,71 +194,19 @@ class SignUpViewModel: ObservableObject {
         ]
         
         let task = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingString()
-        let response = await task.result
+        let response = await task.response
+        authField.clearCode()
         
-        switch response {
-        case .success(_):
-            print("signUp success")
-            result = true
-        case .failure(let err):
-            print("signUp err")
-            print(err)
-            result = false
-        }
-        
-        return result
-    }
-    
-    
-    func setValueForCode() {
-        startTime = Date.now
-        timeRemaining = time
-    }
-    
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { Timer in
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
-            } else {
-                self.timer.invalidate()
+        if let statusCode = response.response?.statusCode {
+            switch statusCode {
+            case 200:
+                print("[signUp status code \(statusCode)")
+                isActiveSignUpSuccess = true
+            default:
+                isConfirmed = false
+                print("[signUp unexpected result : \(statusCode)]")
+                print(response.debugDescription)
             }
-        })
-    }
-    
-    func resetTimer() {
-        self.timeRemaining = 5*60
-        self.startTime = Date.now
-    }
-    
-    func endEditingIfLengthLimitReached() {
-        if self.certificationNum.count == self.certificationNumLengthLimit { UIApplication.shared.endEditing() }
-    }
-    
-    func isReachedMaxLength(num: String) -> Bool {
-        guard num.count == certificationNumLengthLimit else { return false }
-        return true
-    }
-    
-    func getTimeString(time: Double) -> String {
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format: "%02i:%02i", minutes, seconds)
-    }
-    
-    func setTimeRemaining() {
-        let curTime = Date.now
-        let diffTime = curTime.distance(to: startTime)
-        let result = Double(diffTime.formatted())!
-        timeRemaining = 5*60 + result
-        
-        if timeRemaining < 0 {
-            timeRemaining = 0
         }
-    }
-    
-    func resend() {
-        requestEmailCode()
-        resetTimer()
-        certificationNum = ""
     }
 }

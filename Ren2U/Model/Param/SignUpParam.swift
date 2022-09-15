@@ -22,6 +22,10 @@ struct AuthField  {
     
     var emailDuplication: EmailDuplication = .none
     
+    mutating func clearCode() {
+        self.code = "" 
+    }
+    
     enum EmailDuplication {
         case none
         case duplicated

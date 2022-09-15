@@ -50,37 +50,6 @@ class AuthViewModel: ObservableObject {
     }
     
     
-    //  MARK: POST
-    
-    func signUp(user: User, verificationCode: String) async -> Bool {
-        var result = false
-        let url = "\(BASE_URL)/signup"
-        let param: [String: Any] = [
-            "email" : "\(user.email)@ajou.ac.kr",
-            "password" : user.password,
-            "name" : user.name,
-            "phoneNumber" : "010\(user.phoneNumber)",
-            "studentId" : user.studentId,
-            "major" : user.major,
-            "verificationCode" : verificationCode
-        ]
-        
-        let task = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingString()
-        let response = await task.result
-        
-        switch response {
-        case .success(_):
-            print("signUp success")
-            result = true
-        case .failure(let err):
-            print("signUp err")
-            print(err)
-            result = false
-        }
-        
-        return result
-    }
-    
     func requestEmailCode2(email: String) {
         let url = "\(BASE_URL)/members/email/requestCode"
         let param: [String: Any] = [
@@ -112,10 +81,10 @@ class AuthViewModel: ObservableObject {
         let response = AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default).serializingString()
         
         switch await response.result {
-        case .success(let value):
+        case .success(_):
             print("[passwordResetWithVerificationCode success]")
             return true
-        case .failure(let err):
+        case .failure(_):
             print("[passwordResetWithVerificationCode err]")
             return false
         }

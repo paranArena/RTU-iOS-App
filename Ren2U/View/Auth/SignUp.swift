@@ -73,16 +73,22 @@ struct SignUp: View {
             }
             .padding(.horizontal, 20)
         }
-        .background(NavigationLink(destination: Certification(isActive: $isActive, authModel: signUpVM), isActive: $signUpVM.isActive , label: {
+        .basicNavigationTitle(title: "회원가입")
+        .background(NavigationLink(destination: Certification(isActive: $isActive, authModel: signUpVM), isActive: $signUpVM.isActiveCertificationView , label: {
             
         }))
         .animation(.spring(), value: focusedField)
         .interactiveDismissDisabled()
-        .navigationTitle(" ")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItemGroup(placement: .principal) {
-                Text("회원가입").font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))}}
+        .alert("회원가입 실패", isPresented: $signUpVM.isDuplicatedPhoneNumber) {
+            Button("확인", role: .cancel) {}
+        } message: {
+            Text("이미 가입된 휴대폰 번호입니다. 본인의 번호라면 개발자에게 문의해주세요.")
+        }
+        .alert("회원가입 실패", isPresented: $signUpVM.isDulpicatedStudentId) {
+            Button("확인", role: .cancel) {}
+        } message: {
+            Text("이미 가입된 학번입니다. 본인의 번호라면 개발자에게 문의해주세요.")
+        }
     }
     
     @ViewBuilder
