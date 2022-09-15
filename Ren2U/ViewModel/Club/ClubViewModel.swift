@@ -106,7 +106,7 @@ class ClubViewModel: ObservableObject {
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )"]
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyClubsResponse.self) { res in
-            print(res.debugDescription)
+//            print(res.debugDescription)
             switch res.result {
             case .success(let value):
                 print("[getMyClubs success]")
@@ -265,7 +265,7 @@ class ClubViewModel: ObservableObject {
             
             switch result {
             case .success(let value):
-                print("SearchCLubsWithHashTag Success")
+                print("SearchClubsWithHashTag Success")
                 return value.data
             case .failure(let err):
                 print("SearchClubWithHashTag Error : \(err)")
@@ -285,7 +285,7 @@ class ClubViewModel: ObservableObject {
             switch res.result {
             case .success(let value):
                 print("searchNotificationAll success, GroupId: \(clubId)")
-                print(value.data)
+//                print(value.data)
                 self.clubNotice = value.data
             case .failure(let err):
                 print("searchNotificationsAll failure, GroupId: \(clubId) : \(err)")

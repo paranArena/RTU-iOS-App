@@ -110,7 +110,7 @@ struct MyPageTab: View {
     @ViewBuilder
     private func PrivacyNavigation() -> some View {
         NavigationLink {
-            PrivacyPolicy()
+            PrivacyPolicy() 
         } label: {
             Text("개인정보처리 방침")
                 .frame(maxWidth: .infinity, alignment: .leading)
