@@ -13,6 +13,7 @@ class LoginViewModel: ObservableObject {
     @Published var account = Account()
     @Published var missInput = MissInput.default
     @Published var isActiveSignUpView = false
+    let tmp = 10 
     
     enum MissInput: String {
         case `default` = ""

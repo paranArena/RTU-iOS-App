@@ -75,6 +75,7 @@ class SignUpViewModel: ObservableObject {
         startTimer()
         authField.clearCode()
     }
+    
     func changeFocus(curIndex: Int) -> SignUp.Field? {
         switch curIndex {
         case SignUp.Field.email.rawValue:
