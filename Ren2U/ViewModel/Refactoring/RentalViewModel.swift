@@ -56,47 +56,49 @@ class RentalViewModel: ObservableObject {
         productLocation  = CLLocationCoordinate2D(latitude: productDetail.location.latitude, longitude: productDetail.location.longitude)
     }
     
-//    func setAlert() {
-//        if let rentalInfo = selectedItem!.rentalInfo  {
-//            //  대여자가 내가 아닐 경우 아무것도 하지 않음
-//            if !rentalInfo.meRental {
-//                alert.callback = {
-//                    #if DEBUG
-//                    print("대여불가능")
-//                    #endif
-//                }
-//            } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-//                alert.isPresented = true
-//                alert.callback = {
-//                    Task {
-//                        await applyRent(itemId: rentVM.selectedItem?.id ?? 0)
-//                    }
-//                }
-//            } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
-//                alert.isShowingAlert = true
-//                alert.callback = {
-//                    Task {
-//                        await rentVM.returnRent(itemId: rentVM.selectedItem?.id ?? 0)
-//                        await clubVM.getMyRentals()
-//                    }
-//                }
-//            }
-//        } else {
-//            alert.isPresented = true
-//            alert.callback = {
-//                Task {
-//                    await rentVM.requestRent(itemId: rentVM.selectedItem?.id ?? -1)
-//                }
-//            }
-//        }
-//    }
+    func setAlert() {
+        if let rentalInfo = selectedItem?.rentalInfo  {
+            //  대여자가 내가 아닐 경우 아무것도 하지 않음
+            if !rentalInfo.meRental {
+                alert.callback = {
+                    #if DEBUG
+                    print("대여불가능")
+                    #endif
+                }
+            } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
+                alert.title = selectedItem?.alertMessage ?? "에러"
+                alert.isPresented = true
+                alert.callback = {
+                    Task {
+                        await self.applyRent()
+                    }
+                }
+            } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
+                alert.title = selectedItem?.alertMessage ?? "에러"
+                alert.isPresented = true
+                alert.callback = {
+                    Task {
+                        await self.returnRent()
+                    }
+                }
+            }
+        } else {
+            alert.title = selectedItem?.alertMessage ?? "에러"
+            alert.isPresented = true
+            alert.callback = {
+                Task {
+                    await self.requestRent()
+                }
+            }
+        }
+    }
     
     //  MARK: GET
     
     @MainActor
-    func getProduct() async {
+    private func getProduct() async {
         let url = "\(BASE_URL)/clubs/\(clubId)/products/\(productId)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetProductResponse.self)
         let result = await request.result
@@ -114,8 +116,8 @@ class RentalViewModel: ObservableObject {
     
     //  MARK: POST
     @MainActor
-    func requestRent(itemId: Int) async {
-        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/request"
+    private func requestRent() async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(selectedItem?.id ?? -1)/request"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         
@@ -157,8 +159,8 @@ class RentalViewModel: ObservableObject {
     }
     
     //  MARK: PUT
-    func applyRent(itemId: Int) async {
-        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/apply"
+    private func applyRent() async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(selectedItem?.id ?? -1)/apply"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
@@ -178,8 +180,8 @@ class RentalViewModel: ObservableObject {
         await getProduct()
     }
     
-    func returnRent(itemId: Int) async {
-        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/return"
+    private func returnRent() async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(selectedItem?.id ?? -1)/return"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
