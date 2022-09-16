@@ -17,7 +17,11 @@ struct Alert {
 struct OneButtonAlert {
     var title = ""
     var isPresented = false
-    var message = ""
+    var messageText = ""
+    
+    var message: Text {
+        return Text(messageText)
+    }
     static let okButton = Button("확인", role: .cancel) { }
 }
 

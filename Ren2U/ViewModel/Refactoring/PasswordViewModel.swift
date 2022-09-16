@@ -50,7 +50,7 @@ class PasswordViewModel: ObservableObject {
     
     private func showAlert() {
         oneButtonAlert.title = "변경 불가능"
-        oneButtonAlert.message = "비밀번호를 다시 입력해주세요."
+        oneButtonAlert.messageText = "비밀번호를 다시 입력해주세요."
         oneButtonAlert.isPresented = true
     }
 }

@@ -30,14 +30,15 @@ class RentalViewModel: ObservableObject {
     
     var clubId = -1
     var productId = -1
+    @Published var selectedItem: ItemData?
     
     @Published var isLoading = true
     @Published var productDetail = ProductDetailData.dummyProductData()
-    @Published var oneButtonAlert = OneButtonAlert()
     @Published var productLocation = CLLocationCoordinate2D(latitude: 127, longitude: 31)
     @Published var isRentalTerminal = false
     
-//    @Binding var productPreview: ProductCellData
+    @Published var oneButtonAlert = OneButtonAlert()
+    @Published var alert = Alert() 
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
@@ -54,6 +55,41 @@ class RentalViewModel: ObservableObject {
     func setLocation() {
         productLocation  = CLLocationCoordinate2D(latitude: productDetail.location.latitude, longitude: productDetail.location.longitude)
     }
+    
+//    func setAlert() {
+//        if let rentalInfo = selectedItem!.rentalInfo  {
+//            //  대여자가 내가 아닐 경우 아무것도 하지 않음
+//            if !rentalInfo.meRental {
+//                alert.callback = {
+//                    #if DEBUG
+//                    print("대여불가능")
+//                    #endif
+//                }
+//            } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
+//                alert.isPresented = true
+//                alert.callback = {
+//                    Task {
+//                        await applyRent(itemId: rentVM.selectedItem?.id ?? 0)
+//                    }
+//                }
+//            } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
+//                alert.isShowingAlert = true
+//                alert.callback = {
+//                    Task {
+//                        await rentVM.returnRent(itemId: rentVM.selectedItem?.id ?? 0)
+//                        await clubVM.getMyRentals()
+//                    }
+//                }
+//            }
+//        } else {
+//            alert.isPresented = true
+//            alert.callback = {
+//                Task {
+//                    await rentVM.requestRent(itemId: rentVM.selectedItem?.id ?? -1)
+//                }
+//            }
+//        }
+//    }
     
     //  MARK: GET
     
@@ -95,11 +131,11 @@ class RentalViewModel: ObservableObject {
                     switch code {
                     case "ALREADY_USED":
                         oneButtonAlert.title = "예약 실패"
-                        oneButtonAlert.message = "이미 예약했습니다."
+                        oneButtonAlert.messageText = "이미 예약했습니다."
                         oneButtonAlert.isPresented = true
                     default:
                         oneButtonAlert.title = "예약 실패"
-                        oneButtonAlert.message = "예약에 실패했습니다."
+                        oneButtonAlert.messageText = "예약에 실패했습니다."
                         oneButtonAlert.isPresented = true
                     }
                 }
@@ -115,6 +151,9 @@ class RentalViewModel: ObservableObject {
                     print(err)
             }
         }
+        
+        self.selectedItem = nil
+        await getProduct()
     }
     
     //  MARK: PUT
@@ -133,6 +172,10 @@ class RentalViewModel: ObservableObject {
             print("[applyRent failure]")
             print(err)
         }
+        
+        
+        self.selectedItem = nil
+        await getProduct()
     }
     
     func returnRent(itemId: Int) async {
@@ -150,5 +193,9 @@ class RentalViewModel: ObservableObject {
             print("[returnRent failure]")
             print(err)
         }
+        
+        
+        self.selectedItem = nil
+        await getProduct()
     }
 }

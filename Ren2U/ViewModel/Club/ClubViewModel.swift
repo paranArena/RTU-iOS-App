@@ -26,7 +26,7 @@ class ClubViewModel: ObservableObject {
     func checkClubRequiredInformation(clubData: CreateClubFormdata) -> Bool {
         if clubData.name.isEmpty || clubData.introduction.isEmpty {
             oneButtonAlert.title = "그룹 생성 불가"
-            oneButtonAlert.message = "그룹 이름, 소개글은 필수입니다."
+            oneButtonAlert.messageText = "그룹 이름, 소개글은 필수입니다."
             oneButtonAlert.isPresented = true
             return false
         } else {
@@ -360,11 +360,11 @@ class ClubViewModel: ObservableObject {
                     switch code {
                     case "DUP_CLUB_NAME":
                         oneButtonAlert.title = "그룹 생성 실패"
-                        oneButtonAlert.message = "이미 사용하고 있는 이름입니다."
+                        oneButtonAlert.messageText = "이미 사용하고 있는 이름입니다."
                         oneButtonAlert.isPresented = true
                     default:
                         oneButtonAlert.title = "그룹 생성 실패"
-                        oneButtonAlert.message = "그룹 생성에 실패했습니다."
+                        oneButtonAlert.messageText = "그룹 생성에 실패했습니다."
                         oneButtonAlert.isPresented = true
                     }
                 }

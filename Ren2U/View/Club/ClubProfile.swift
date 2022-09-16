@@ -43,7 +43,7 @@ struct ClubProfile: View {
         .alert(clubVM.oneButtonAlert.title, isPresented: $clubVM.oneButtonAlert.isPresented) {
             OneButtonAlert.okButton
         } message: {
-            Text(clubVM.oneButtonAlert.message)
+            clubVM.oneButtonAlert.message
         }
         .controllTabbar(isPresented)
         .navigationBarTitleDisplayMode(.inline)

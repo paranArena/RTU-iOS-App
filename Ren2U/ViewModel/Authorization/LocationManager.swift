@@ -12,8 +12,10 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     let message = "위치서비스를 사용할 수 없습니다.\n기기의 '설정 > Ren2U > 위치'에서 위치 서비스를 켜주세요."
+    let available4RentalDistance = 30 
     
     var locationManager: CLLocationManager?
+    
     @Published var isPresentedDistanceAlert = false
     @Published var isPresentedAlert = false
     @Published var authorisationStatus: CLAuthorizationStatus = .notDetermined
@@ -47,6 +49,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     override init() {
         super.init()
         checkIfLocationServicesIsEnabled()
+    }
+    
+    func checkDistance(productRegion: CLLocationCoordinate2D) -> Bool {
+        if requestAuthorization() {
+            if self.region.center.distance(from: productRegion) <= 30 {
+              return true 
+            } else {
+                isPresentedDistanceAlert = true
+            }
+        }
+        
+        return false
     }
     
     func requestAuthorization() -> Bool {

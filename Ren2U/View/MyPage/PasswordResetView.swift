@@ -28,7 +28,7 @@ struct PasswordResetView: View {
         .alert(pwVM.oneButtonAlert.title, isPresented: $pwVM.oneButtonAlert.isPresented) {
             OneButtonAlert.okButton
         } message: {
-            Text(pwVM.oneButtonAlert.message)
+            pwVM.oneButtonAlert.message
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 10)
