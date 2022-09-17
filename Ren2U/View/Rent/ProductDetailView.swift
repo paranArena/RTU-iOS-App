@@ -73,14 +73,17 @@ struct ProductDetailView: View {
         .avoidSafeArea()
         .controllTabbar(isPresented)
         .basicNavigationTitle(title: rentVM.productDetail.name)
+        .onAppear {
+            rentVM.selectedItem = nil
+        }
         .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
-            OneButtonAlert.okButton
+            OneButtonAlert.noActionButton
         } message: { rentVM.oneButtonAlert.message }
         .alert("", isPresented: $rentVM.alert.isPresented) {
             Button("취소", role: .cancel) {}
             Button("확인")  {
                 Task {
-                    rentVM.alert.callback()
+                    await rentVM.alert.callback()
                     await clubVM.getMyRentals()
                 }
             }

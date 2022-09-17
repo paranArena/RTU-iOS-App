@@ -12,7 +12,7 @@ struct ContentView: View {
     
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var locationManager: LocationManager
-    @EnvironmentObject var loginManager: LoginManager
+    @EnvironmentObject var loginManager: AuthViewModel
     
     var body: some View {
         Group {

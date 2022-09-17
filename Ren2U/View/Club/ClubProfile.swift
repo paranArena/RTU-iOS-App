@@ -41,7 +41,7 @@ struct ClubProfile: View {
             .animation(.spring(), value: focusField)
         }
         .alert(clubVM.oneButtonAlert.title, isPresented: $clubVM.oneButtonAlert.isPresented) {
-            OneButtonAlert.okButton
+            OneButtonAlert.noActionButton
         } message: {
             clubVM.oneButtonAlert.message
         }

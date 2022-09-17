@@ -16,7 +16,6 @@ struct RentalComplete: View {
     @Environment(\.presentationMode) var presentationMode
     let itemInfo: ProductDetailData
     let itemNumber: Int
-    let span =  MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01) 
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -30,7 +29,7 @@ struct RentalComplete: View {
 //                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
 //                .padding(.bottom, 30)
             let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
-            let region = MKCoordinateRegion(center: itemLocation, span: span)
+            let region = MKCoordinateRegion(center: itemLocation, span: DEFAULT_SPAN)
             let anonotaions: [Annotation] = [Annotation(coordinate: itemLocation)]
             
             Map(coordinateRegion: .constant(region), showsUserLocation: true, annotationItems: anonotaions) { annotation in
@@ -71,7 +70,7 @@ struct RentalComplete: View {
             }
             .padding(.bottom, 5)
         }
-        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden()
         .onAppear {
             UITabBar.hideTabBar()
         }

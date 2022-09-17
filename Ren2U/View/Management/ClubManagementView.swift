@@ -66,7 +66,7 @@ struct ClubManagementView: View {
             Button("취소", role: .cancel) {}
             Button("확인") {
                 Task {
-                    managementVM.alert.callback()
+                    await managementVM.alert.callback()
                     clubActive = false
                     clubVM.getMyClubs()
                 }

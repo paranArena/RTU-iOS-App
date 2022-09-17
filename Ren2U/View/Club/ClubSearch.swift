@@ -52,7 +52,7 @@ struct ClubSearch: View {
         }
         .alert(alert.title, isPresented: $alert.isPresented) {
             Button("아니요", role: .cancel) {}
-            Button("예") { alert.callback() }
+            Button("예") { Task { await alert.callback() }}
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background {

@@ -14,7 +14,7 @@ struct Ren2UApp: App {
     @StateObject var groupModel = ClubViewModel()
     @StateObject var tabVM = AmongTabsViewModel()
     @StateObject var locationManager = LocationManager()
-    @StateObject var loginManager = LoginManager()
+    @StateObject var loginManager = AuthViewModel()
     
     init() {
         // 네비게이션 바 틴트 컬러 변경 

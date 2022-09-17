@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Login: View {
     
-    @EnvironmentObject var loginManager: LoginManager
+    @EnvironmentObject var loginManager: AuthViewModel
     @EnvironmentObject var authModel: AuthViewModel
     @StateObject var loginVM = LoginViewModel() 
     @FocusState var focus: Field?

@@ -26,7 +26,7 @@ struct PasswordResetView: View {
             
         }
         .alert(pwVM.oneButtonAlert.title, isPresented: $pwVM.oneButtonAlert.isPresented) {
-            OneButtonAlert.okButton
+            OneButtonAlert.noActionButton
         } message: {
             pwVM.oneButtonAlert.message
         }

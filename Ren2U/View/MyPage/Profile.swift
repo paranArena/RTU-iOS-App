@@ -75,7 +75,7 @@ struct Profile: View {
         .controllTabbar(isPresented)
         .alert("", isPresented: $alert.isPresented) {
             Button("취소", role: .cancel) {}
-            Button("예") { alert.callback() }
+            Button("예") { Task { await alert.callback() }}
         } message: {
             Text(alert.title)
         }

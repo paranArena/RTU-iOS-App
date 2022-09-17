@@ -98,7 +98,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 authorisationStatus = .denied
             case .authorizedAlways, .authorizedWhenInUse:
                 authorisationStatus = .authorizedWhenInUse
-                region = MKCoordinateRegion(center: locationManager.location!.coordinate,
+            region = MKCoordinateRegion(center: locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 120, longitude: 10),
                                             span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004))
             @unknown default:
                 break

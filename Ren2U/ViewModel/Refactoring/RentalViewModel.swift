@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import CoreLocation
 
-
+//  Return management view에 쓰이는 model. 추후 삭제
 struct ReturnInfo: Codable {
     var imageSource: String
     var itemName: String
@@ -26,19 +26,22 @@ struct ReturnInfo: Codable {
     }
 }
 
+//  ItemMap, ProductDetailView에서 사용
 class RentalViewModel: ObservableObject {
     
     var clubId = -1
     var productId = -1
     @Published var selectedItem: ItemData?
-    
     @Published var isLoading = true
     @Published var productDetail = ProductDetailData.dummyProductData()
     @Published var productLocation = CLLocationCoordinate2D(latitude: 127, longitude: 31)
     @Published var isRentalTerminal = false
     
+    //  MARK: For Alert
     @Published var oneButtonAlert = OneButtonAlert()
-    @Published var alert = Alert() 
+    @Published var alert = Alert()
+  
+    init() { }
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
@@ -47,13 +50,31 @@ class RentalViewModel: ObservableObject {
         
         Task {
             await getProduct()
-            setLocation()
+            await setLocation()
         }
     }
     
     //  MARK: LOCAL
+    
+    @MainActor
     func setLocation() {
         productLocation  = CLLocationCoordinate2D(latitude: productDetail.location.latitude, longitude: productDetail.location.longitude)
+    }
+    
+    func setAlert(rentalData: RentalData) {
+        if rentalData.rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
+            alert.title = rentalData.rentalInfo.alertMeesage
+            alert.isPresented = true
+            alert.callback = {
+                await self.applyRent(clubId: rentalData.clubId, itemId: rentalData.id)
+            }
+        } else {
+            alert.title = rentalData.rentalInfo.alertMeesage
+            alert.isPresented = true
+            alert.callback = {
+                await self.returnRent(clubId: rentalData.clubId, itemId: rentalData.id)
+            }
+        }
     }
     
     func setAlert() {
@@ -69,26 +90,20 @@ class RentalViewModel: ObservableObject {
                 alert.title = selectedItem?.alertMessage ?? "에러"
                 alert.isPresented = true
                 alert.callback = {
-                    Task {
-                        await self.applyRent()
-                    }
+                    await self.applyRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
                 }
             } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
                 alert.title = selectedItem?.alertMessage ?? "에러"
                 alert.isPresented = true
                 alert.callback = {
-                    Task {
-                        await self.returnRent()
-                    }
+                    await self.returnRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
                 }
             }
         } else {
             alert.title = selectedItem?.alertMessage ?? "에러"
             alert.isPresented = true
             alert.callback = {
-                Task {
-                    await self.requestRent()
-                }
+                await self.requestRent()
             }
         }
     }
@@ -125,63 +140,66 @@ class RentalViewModel: ObservableObject {
         
         let response = await request.response
         
-        if response.response!.statusCode == 400 {
-            print(response.debugDescription)
-            if let data = response.data {
-                let error = try? JSONDecoder().decode(ErrorBody.self, from: data)
-                if let code = error?.code {
-                    switch code {
-                    case "ALREADY_USED":
-                        oneButtonAlert.title = "예약 실패"
-                        oneButtonAlert.messageText = "이미 예약했습니다."
-                        oneButtonAlert.isPresented = true
-                    default:
-                        oneButtonAlert.title = "예약 실패"
-                        oneButtonAlert.messageText = "예약에 실패했습니다."
-                        oneButtonAlert.isPresented = true
+        if let statusCode = response.response?.statusCode {
+            switch statusCode {
+            case 200:
+                self.isRentalTerminal = true
+                print("[requestRent success]")
+            case 400:
+                if let data = response.data {
+                    let error = try? JSONDecoder().decode(ErrorBody.self, from: data)
+                    if let code = error?.code {
+                        switch code {
+                        case "ALREADY_USED":
+                            oneButtonAlert.title = "예약 실패"
+                            oneButtonAlert.messageText = "이미 예약했습니다."
+                            oneButtonAlert.isPresented = true
+                        default:
+                            oneButtonAlert.title = "예약 실패"
+                            oneButtonAlert.messageText = "예약에 실패했습니다."
+                            oneButtonAlert.isPresented = true
+                        }
                     }
                 }
-            }
-        } else {
-            switch response.result {
-                case .success(let value):
-                    self.isRentalTerminal = true
-                    print("[requestRent success]")
-                    print(value)
-                case .failure(let err):
-                    print("[requestRent failure]")
-                    print(err)
+            default:
+                oneButtonAlert.title = "예약 실패"
+                oneButtonAlert.messageText = "예약에 실패했습니다."
+                oneButtonAlert.isPresented = true
             }
         }
         
-        self.selectedItem = nil
         await getProduct()
     }
     
     //  MARK: PUT
-    private func applyRent() async {
-        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(selectedItem?.id ?? -1)/apply"
+    private func applyRent(clubId: Int, itemId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/apply"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
-        let result = await request.result
-            
-        switch result {
-        case .success(let value):
-            print("[applyRent success]")
-            print(value)
-        case .failure(let err):
-            print("[applyRent failure]")
-            print(err)
+        let response = await request.response
+        
+        if let statusCode = response.response?.statusCode {
+            switch statusCode {
+            case 200:
+                print("[applyRent success]")
+                oneButtonAlert.title = "대여 성공"
+                oneButtonAlert.messageText = ""
+                oneButtonAlert.isPresented = true
+            default:
+                print("[applyRent failure]")
+                print(response.debugDescription)
+                oneButtonAlert.title = "대여 실패"
+                oneButtonAlert.messageText = ""
+                oneButtonAlert.isPresented = true
+            }
         }
         
-        
-        self.selectedItem = nil
         await getProduct()
     }
     
-    private func returnRent() async {
-        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(selectedItem?.id ?? -1)/return"
+    private func returnRent(clubId: Int, itemId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/return"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
@@ -197,7 +215,6 @@ class RentalViewModel: ObservableObject {
         }
         
         
-        self.selectedItem = nil
         await getProduct()
     }
 }

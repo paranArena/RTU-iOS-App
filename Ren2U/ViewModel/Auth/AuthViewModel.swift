@@ -12,6 +12,20 @@ import Alamofire
 class AuthViewModel: ObservableObject {
     
     @Published var userData: UserData?
+    @Published var isLogined = false
+    
+    init() {
+        if UserDefaults.standard.string(forKey: JWT_KEY) == nil {
+            isLogined = false
+        } else {
+            isLogined = true
+        }
+    }
+    
+    func logout() {
+        UserDefaults.standard.set(nil, forKey: JWT_KEY)
+        isLogined = false
+    }
     
     //  MARK: GET
     

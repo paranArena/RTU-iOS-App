@@ -8,6 +8,32 @@
 import SwiftUI
 import HidableTabView
 
+extension RentalTab {
+    enum Selection: Int, CaseIterable {
+        case rentalItem
+        case rentalList
+        
+        var title: String {
+            switch self {
+            case .rentalItem:
+                return "대여물품"
+            case .rentalList:
+                return "대여목록"
+            }
+        }
+    }
+}
+
+extension RentalTab {
+    enum CancelSelection: Int, CaseIterable {
+        case `default`
+        case none
+        case yes
+        case no
+    }
+}
+
+
 struct RentalTab: View {
     
     @EnvironmentObject var clubVM: ClubViewModel
@@ -51,7 +77,7 @@ struct RentalTab: View {
         .alert("", isPresented: $alert.isPresented) {
             Button("아니오", role: .cancel) {}
             Button("예") {
-                alert.callback()
+                Task { await alert.callback() } 
             }
         } message: {
             Text(alert.title)

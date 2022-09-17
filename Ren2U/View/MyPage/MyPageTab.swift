@@ -25,7 +25,7 @@ extension MyPageTab {
 struct MyPageTab: View {
     
     @EnvironmentObject var authVM: AuthViewModel
-    @EnvironmentObject var loginManager: LoginManager
+    @EnvironmentObject var loginManager: AuthViewModel
     @State private var isShowingAlert = false
     @State private var alertTitle = ""
     @State private var callback: () -> () = { print("callback")}
@@ -153,7 +153,10 @@ struct MyPageTab: View {
     @ViewBuilder
     private func LogoutButton() -> some View {
         Button {
+            loginManager.logout()
             loginManager.isLogined = false
+            print(UserDefaults.standard.value(forKey: JWT_KEY))
+            print("로그아웃")
         } label: {
             Text("로그아웃")
                 .frame(maxWidth: .infinity, alignment: .leading)

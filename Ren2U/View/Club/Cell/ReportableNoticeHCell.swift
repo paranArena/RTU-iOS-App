@@ -19,7 +19,7 @@ struct ReportableNoticeHCell: View {
     
     @Binding var isShowingAlert: Bool
     @Binding var title: String
-    @Binding var callback: () -> ()
+    @Binding var callback: () async -> ()
     
     var body: some View {
         

@@ -40,7 +40,7 @@ struct ClubNotifications: View {
         }
         .alert("", isPresented: $alert.isPresented) {
             Button("취소", role: .cancel) {}
-            Button("확인") { alert.callback() }
+            Button("확인") { Task { await alert.callback() }}
         } message: {
             Text(alert.title)
         }

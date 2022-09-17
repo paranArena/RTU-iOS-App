@@ -12,29 +12,27 @@ import CoreLocation
 struct ItemMap: View {
     
     let itemInfo: RentalData
+    let itemLocation: CLLocationCoordinate2D
     
     @EnvironmentObject var locationManager: LocationManager
-    @Environment(\.isPresented) var isPresented
     @EnvironmentObject var clubVM: ClubViewModel
-    @StateObject var itemVM = ItemMapViewModel()
+    @StateObject var rentVM = RentalViewModel()
     @Environment(\.dismiss) var dismiss
+    @Environment(\.isPresented) var isPresented
     
     @State private var remainTime = 10
     @State private var min = ""
     @State private var sec = ""
     @State private var region: MKCoordinateRegion
     
-    let span =  MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-    
     init(itemInfo: RentalData) {
         self.itemInfo = itemInfo
-        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
-        self._region = State<MKCoordinateRegion>(initialValue: MKCoordinateRegion(center: itemLocation, span: span))
+        self.itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+        self._region = State<MKCoordinateRegion>(initialValue: MKCoordinateRegion(center: itemLocation, span: DEFAULT_SPAN))
         remainTime = itemInfo.rentalInfo.time
     }
     
     var body: some View {
-        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
         let anotaions: [Annotation] = [Annotation(coordinate: itemLocation)]
         
         VStack {
@@ -67,13 +65,17 @@ struct ItemMap: View {
         }
         .basicNavigationTitle(title: itemInfo.name)
         .controllTabbar(isPresented)
-        .alert("", isPresented: $itemVM.alert.isPresented) {
-            Button("취소", role: .cancel) {}
-            Button("확인") { itemVM.alert.callback() }
-        } message: {
-            Text(itemVM.alert.title)
-        }
         .avoidSafeArea()
+        .alert("", isPresented: $rentVM.alert.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") {
+                Task { await rentVM.alert.callback() }} 
+        }
+        .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
+            Button("확인") { dismiss() }
+        } message: {
+            rentVM.oneButtonAlert.message
+        }
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 remainTime = Int(60*10 - Date.now.timeIntervalSince(itemInfo.rentalInfo.toDate))
@@ -93,20 +95,8 @@ struct ItemMap: View {
     private func ReturnButton() -> some View {
         let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
         Button {
-            if locationManager.requestAuthorization() {
-                if locationManager.region.center.distance(from: itemLocation) > 30 {
-                    locationManager.isPresentedDistanceAlert = true
-                } else {
-                    itemVM.alert.callback = {
-                        Task {
-                            await itemVM.returnRent(clubId: itemInfo.clubId, itemId: itemInfo.id)
-                            await clubVM.getMyRentals()
-                            dismiss()
-                        }
-                    }
-                    itemVM.alert.title = "아이템을 반납하시겠습니까?"
-                    itemVM.alert.isPresented = true
-                }
+            if locationManager.checkDistance(productRegion: itemLocation) {
+                rentVM.setAlert(rentalData: itemInfo)
             }
         } label: {
             NavyCapsule(text: "반납하기")
@@ -119,23 +109,9 @@ struct ItemMap: View {
         let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
         
         Button {
-            if itemInfo.rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-                if locationManager.requestAuthorization() {
-                    if locationManager.region.center.distance(from: itemLocation) > 30 {
-                        locationManager.isPresentedDistanceAlert = true
-                    } else {
-                        itemVM.alert.callback = {
-                            Task {
-                                await itemVM.applyRent(clubId: itemInfo.clubId, itemId: itemInfo.id)
-                                await clubVM.getMyRentals()
-                                dismiss()
-                            }
-                        }
-                        itemVM.alert.title = "아이템을 대여하시겠습니까?"
-                        itemVM.alert.isPresented = true
-                    }
-                }
-            } 
+            if locationManager.checkDistance(productRegion: itemLocation) {
+                rentVM.setAlert(rentalData: itemInfo)
+            }
         } label: {
             NavyCapsule(text: "대여확정")
         }

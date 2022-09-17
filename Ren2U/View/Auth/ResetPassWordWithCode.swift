@@ -61,12 +61,12 @@ struct ResetPassWordWithCode: View {
             .isHidden(hidden: !isRequested)
         }
         .alert("변경 실패", isPresented: $isPresented2) {
-            OneButtonAlert.okButton
+            OneButtonAlert.noActionButton
         } message: {
             Text("비밀번호 변경에 실패했습니다.")
         }
         .alert("비밀번호 변경 불가능", isPresented: $isPresented) {
-            OneButtonAlert.okButton
+            OneButtonAlert.noActionButton
         } message: {
             Text("8~30자리 동일한 비밀번호를 입력해주세요")
         }
