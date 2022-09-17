@@ -24,8 +24,7 @@ extension MyPageTab {
 
 struct MyPageTab: View {
     
-    @EnvironmentObject var authVM: AuthViewModel
-    @EnvironmentObject var loginManager: AuthViewModel
+    @EnvironmentObject var myPageVM: MyPageViewModel
     @State private var isShowingAlert = false
     @State private var alertTitle = ""
     @State private var callback: () -> () = { print("callback")}
@@ -93,11 +92,11 @@ struct MyPageTab: View {
                 .padding(.trailing, 30)
             
             VStack(alignment: .trailing, spacing: 0) {
-                Text("\(authVM.userData?.major ?? "") \(authVM.userData?.studentId.substring(from: 2, to: 3) ?? "") 학번")
+                Text("\(myPageVM.userData?.major ?? "") \(myPageVM.userData?.studentId.substring(from: 2, to: 3) ?? "") 학번")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                     .foregroundColor(.gray_868E96)
 //
-                Text("\(authVM.userData?.name ?? "")")
+                Text("\(myPageVM.userData?.name ?? "")")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -153,10 +152,8 @@ struct MyPageTab: View {
     @ViewBuilder
     private func LogoutButton() -> some View {
         Button {
-            loginManager.logout()
-            loginManager.isLogined = false
-            print(UserDefaults.standard.value(forKey: JWT_KEY))
-            print("로그아웃")
+            myPageVM.logout()
+            myPageVM.isLogined = false
         } label: {
             Text("로그아웃")
                 .frame(maxWidth: .infinity, alignment: .leading)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GroupSelected: View {
+struct ClubSelected: View {
     
     @EnvironmentObject var groupVM: ClubViewModel
     @State private var offset: CGFloat = 0 
@@ -15,7 +15,7 @@ struct GroupSelected: View {
     let refreshThreshold: CGFloat
     
     @State private var isActive = false
-    @State private var groupInfo: ClubAndRoleData = ClubAndRoleData.dummyClubAndRoleData()
+    @State private var clubData: ClubAndRoleData = ClubAndRoleData.dummyClubAndRoleData()
     
     var body: some View {
         RefreshableScrollView(threshold: refreshThreshold) {
@@ -31,14 +31,13 @@ struct GroupSelected: View {
                     .foregroundColor(.gray_DEE2E6)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .isHidden(hidden: !groupVM.joinedClubs.isEmpty)
+                
+                NavigationLink(isActive: $isActive, destination: {
+                    ClubPage(tabSelection: $tabSelection, clubData: $clubData, clubActive: $isActive)
+                }, label: { })
             }
         }
         .frame(maxWidth: .infinity)
-        .background(
-            NavigationLink(isActive: $isActive, destination: {
-                ClubPage(tabSelection: $tabSelection, clubData: $groupInfo, clubActive: $isActive)
-            }, label: { })
-        )
         .refreshable {
             groupVM.getMyClubs()
             groupVM.getMyNotifications()
@@ -83,10 +82,10 @@ struct GroupSelected: View {
             VStack(alignment: .center, spacing: 0) {
                 ForEach(groupVM.joinedClubs.indices, id: \.self) { index in
                     Button {
-                        self.groupInfo = groupVM.joinedClubs[index]
+                        self.clubData = groupVM.joinedClubs[index]
                         self.isActive = true
                     } label: {
-                        HorizontalClubCell(info: groupVM.joinedClubs[index])
+                        HorizontalClubCell(clubData: groupVM.joinedClubs[index])
                     }
                     .padding(.bottom, 10)
                     

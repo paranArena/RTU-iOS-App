@@ -10,17 +10,17 @@ import CoreAudio
 
 struct ClubSearch: View {
     
-    @EnvironmentObject var clubVM: ClubViewModel
+    @StateObject private var clubSearchVM = ClubSearchViewModel()
     @Binding var search: String
     @Binding var tabSelection: Int
     
-    @State private var clubData = [ClubAndRoleData]()
+    
     @State private var isActive = false
     @State private var offset: CGFloat = .zero
     @State private var searchDelay = 0
-    @State private var groupInfoIndex: Int?
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
+    @State private var selectedClubData = ClubAndRoleData.dummyClubAndRoleData()
     @State private var alert = Alert()
     
     var body: some View {
@@ -33,14 +33,12 @@ struct ClubSearch: View {
             
             BounceControllScrollView(baseOffset: 100, offset: $offset) {
                 VStack {
-                    ForEach(clubData.indices, id: \.self) { i in
-                        Button {
-                            groupInfoIndex = i
-                            isActive = true
+                    ForEach(clubSearchVM.clubData.indices, id: \.self) { i in
+                        NavigationLink {
+                            ClubPage(tabSelection: $tabSelection, clubData: $clubSearchVM.clubData[i], clubActive: $isActive)
                         } label: {
-                            HStack {
-                                HorizontalClubCell(info: clubData[i])
-                                    .frame(maxWidth: .infinity)
+                            HStack(spacing: 0) {
+                                HorizontalClubCell(clubData: clubSearchVM.clubData[i])
                                 OverlayFinder(index: i)
                             }
                         }
@@ -55,17 +53,10 @@ struct ClubSearch: View {
             Button("예") { Task { await alert.callback() }}
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background {
-            NavigationLink(isActive: $isActive) {
-                if let index = groupInfoIndex {
-                    ClubPage(tabSelection: $tabSelection, clubData: $clubData[index], clubActive: $isActive)
-                }
-            } label: { }
-        }
         .onAppear {
             Task {
                 if search.isEmpty {
-                    clubData = await clubVM.searchClubsAll()
+                    await clubSearchVM.searchClubsAll()
                 }
             }
         }
@@ -76,11 +67,7 @@ struct ClubSearch: View {
             searchDelay += 1
             if searchDelay == 10 && !search.isEmpty {
                 Task {
-                    clubData = await clubVM.searchClubsWithHashTag(hashTag: search)
-                    clubData.append(contentsOf: await clubVM.searchClubsWithName(groupName: search))
-//                    if let groupSearchedByName = await clubVM.searchClubsWithName(groupName: search) {
-//                        clubData.append(groupSearchedByName)
-//                    }
+                    clubSearchVM.searchWithText(text: search)
                 }
             }
         }
@@ -90,7 +77,7 @@ struct ClubSearch: View {
     @ViewBuilder
     private func OverlayFinder(index: Int) -> some View {
         
-        switch clubData[index].clubRole {
+        switch clubSearchVM.clubData[index].clubRole {
         case ClubRole.admin.rawValue, ClubRole.owner.rawValue, ClubRole.user.rawValue:
             JoindeClubOverlay()
         case ClubRole.wait.rawValue:
@@ -128,9 +115,9 @@ struct ClubSearch: View {
             alert.isPresented = true
             alert.callback = {
                 Task {
-                    let cludId = clubData[index].id
-                    await clubVM.requestClubJoin(clubId: cludId)
-                    clubData[index].clubRole = await clubVM.getMyClubRole(clubId: cludId)
+                    let cludId = clubSearchVM.clubData[index].id
+                    await clubSearchVM.requestClubJoin(clubId: cludId)
+                    clubSearchVM.clubData[index].clubRole = await clubSearchVM.getMyClubRole(clubId: cludId)
                 }
             }
         } label: {

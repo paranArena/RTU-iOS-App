@@ -8,8 +8,11 @@
 import Foundation
 
 struct PasswordReset: Codable {
+    
+    var email = ""
     var password = ""
     var passwordCheck = ""
+    var code = "" 
     
     var checkCondition: Bool {
         if password.count < 8 || passwordCheck.count < 8 || password.count > 30 || passwordCheck.count > 30 || password != passwordCheck {

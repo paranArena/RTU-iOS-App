@@ -59,6 +59,14 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
         }
     }
     
+    var oneLineHashtag: String {
+        var result = ""
+        for hashtag in hashtags {
+            result.append("#\(hashtag) ")
+        }
+        return result
+    }
+    
     static func dummyClubAndRoleData() -> ClubAndRoleData {
         return ClubAndRoleData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""], clubRole: "")
     }

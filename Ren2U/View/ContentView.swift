@@ -10,9 +10,9 @@ import SwiftUI
 struct ContentView: View {
     
     
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var authViewModel: MyPageViewModel
     @EnvironmentObject var locationManager: LocationManager
-    @EnvironmentObject var loginManager: AuthViewModel
+    @EnvironmentObject var loginManager: MyPageViewModel
     
     var body: some View {
         Group {

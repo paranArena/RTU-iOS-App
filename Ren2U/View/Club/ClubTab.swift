@@ -46,7 +46,7 @@ struct ClubTab: View {
                     })
                 
                 ZStack {
-                    GroupSelected(tabSelection: $tabSelection, refreshThreshold: offset)
+                    ClubSelected(tabSelection: $tabSelection, refreshThreshold: offset)
                         .isHidden(hidden: vm.isSearchBarFocused)
                         .overlay(CreateGroupButton())
                         .offset(x: vm.groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)

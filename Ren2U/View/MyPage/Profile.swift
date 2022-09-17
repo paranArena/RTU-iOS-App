@@ -36,7 +36,7 @@ extension Profile {
 
 struct Profile: View {
     
-    @EnvironmentObject var authVM: AuthViewModel
+    @EnvironmentObject var authVM: MyPageViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.isPresented) var isPresented
     

@@ -10,24 +10,19 @@ import Alamofire
 
 struct ResetPassWordWithCode: View {
     
+    @StateObject var pwVM = PasswordViewModel()
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var authVM: AuthViewModel
-    @State private var email = "" 
     @State private var isRequested = false
-    
-    @State private var code = ""
-    @State private var passwordReset = PasswordReset()
-    
     @State private var isPresented = false
-    
     @State private var isPresented2 = false
+    
     var body: some View {
         List {
             Group {
-                TextField("email", text: $email)
+                TextField("email", text: $pwVM.input.email)
                 
                 Button {
-                    authVM.requestEmailCode2(email: email)
+                    pwVM.requestEmailCode(email: pwVM.input.email)
                     isRequested = true
                 } label: {
                     Text("인증번호 보내기")
@@ -36,16 +31,16 @@ struct ResetPassWordWithCode: View {
             .isHidden(hidden: isRequested)
             
             Group {
-                TextField("인증코드", text: $code)
-                SecureField("새 비밀번호", text: $passwordReset.password)
-                SecureField("비밀번호 확인", text: $passwordReset.passwordCheck)
+                TextField("인증코드", text: $pwVM.input.code)
+                SecureField("새 비밀번호", text: $pwVM.input.password)
+                SecureField("비밀번호 확인", text: $pwVM.input.passwordCheck)
                 
                 Button {
-                    if !passwordReset.checkCondition {
+                    if !pwVM.input.checkCondition {
                         isPresented = true
                     } else {
                         Task {
-                            if await authVM.passwordResetWithVerificationCode(email: email, code: code, password: passwordReset.password) {
+                            if await pwVM.passwordResetWithVerificationCode(email: pwVM.input.email, code: pwVM.input.code, password: pwVM.input.password) {
                                 dismiss()
                             } else {
                                 
