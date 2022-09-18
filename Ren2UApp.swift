@@ -10,10 +10,10 @@ import SwiftUI
 @main
 struct Ren2UApp: App {
     
-    @StateObject var authModel = AuthViewModel()
+    @StateObject var myPageVM = MyPageViewModel()
     @StateObject var groupModel = ClubViewModel()
     @StateObject var tabVM = AmongTabsViewModel()
-    @StateObject var locationManager = LocationManager() 
+    @StateObject var locationManager = LocationManager()
     
     init() {
         // 네비게이션 바 틴트 컬러 변경 
@@ -26,7 +26,7 @@ struct Ren2UApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(authModel)
+                .environmentObject(myPageVM)
                 .environmentObject(groupModel)
                 .environmentObject(tabVM)
                 .environmentObject(locationManager)

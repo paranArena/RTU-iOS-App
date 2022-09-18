@@ -19,7 +19,7 @@ struct ClubTab: View {
     @State private var isShowingAlert = false
     @State private var selectedId = -1
     @State private var altertTitle = "" 
-    @State private var callback: () -> () = { print("callback")}
+    @State private var callback: () async -> () = { print("callback")}
     
     
     @State private var selectedNotificationLinkIndex: Int?
@@ -46,7 +46,7 @@ struct ClubTab: View {
                     })
                 
                 ZStack {
-                    GroupSelected(tabSelection: $tabSelection, refreshThreshold: offset)
+                    ClubSelected(tabSelection: $tabSelection, refreshThreshold: offset)
                         .isHidden(hidden: vm.isSearchBarFocused)
                         .overlay(CreateGroupButton())
                         .offset(x: vm.groupSelection == Selection.group ? 0 : -SCREEN_WIDTH)
@@ -72,7 +72,7 @@ struct ClubTab: View {
         .animation(.spring(), value: vm.groupSelection)
         .alert(altertTitle, isPresented: $isShowingAlert) {
             Button("아니요", role: .cancel) {}
-            Button("예") { callback() }
+            Button("예") { Task { await callback() }}
         }
     }
     

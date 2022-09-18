@@ -9,34 +9,25 @@ import SwiftUI
 
 struct Certification: View {
     
-    let user: User
     @Binding var isActive: Bool
     @Environment(\.scenePhase) var scenePhase
-    @EnvironmentObject var authModel: AuthViewModel
-    @StateObject var viewModel = ViewModel()
+    @ObservedObject var authModel: SignUpViewModel
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                Text("이메일로\n인증번호가 발송되었습니다.")
-                    .multilineTextAlignment(.center)
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                 
-                Text("6자리 숫자를 입력해주세요.")
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                    .foregroundColor(.gray_495057)
-                    .padding(.top, 50)
-                
+                Guide()
                 CertificationTextField()
                 
-                Text(viewModel.isConfirmed ? " " : "인증번호가 일치하지 않습니다.")
+                Text(authModel.isConfirmed ? " " : "인증번호가 일치하지 않습니다.")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .foregroundColor(.red_EB1808)
                 
                 ResendButton()
                 GoSignUpSuccessButton()
                 
-                NavigationLink(isActive: $viewModel.isSingUpSeccussActive) {
+                NavigationLink(isActive: $authModel.isActiveSignUpSuccess) {
                     SignUpSuccess(isActive: $isActive)
                 } label: { }
 
@@ -45,11 +36,11 @@ struct Certification: View {
             .padding(.horizontal, 28)
             .padding(.top, 40)
         }
-        .navigationTitle(" ")
+        .basicNavigationTitle(title: "이메일 인증")
         .onChange(of: scenePhase, perform: { scenePhsae in
             switch scenePhsae {
             case .active:
-                viewModel.setTimeRemaining()
+                authModel.setTimeRemaining()
             case .inactive:
                 break
             case .background:
@@ -59,34 +50,39 @@ struct Certification: View {
             }
         })
         .onAppear {
-            viewModel.startTimer()
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .principal) {
-                Text("이메일 인증")
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-            }
+            authModel.startTimer()
         }
     }
     
     @ViewBuilder
+    private func Guide() -> some View {
+        Text("이메일로\n인증번호가 발송되었습니다.")
+            .multilineTextAlignment(.center)
+            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
+        
+        Text("6자리 숫자를 입력해주세요.")
+            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+            .foregroundColor(.gray_495057)
+            .padding(.top, 50)
+    }
+    
+    @ViewBuilder
     private func CertificationTextField() -> some View {
-        CapsulePlaceholder(text: $viewModel.certificationNum, placeholder: Text(""), color: .gray_ADB5BD)
+        CapsulePlaceholder(text: $authModel.authField.code, placeholder: Text(""), color: .gray_ADB5BD)
             .keyboardType(.numberPad)
             .font(.custom(CustomFont.RobotoMedium.rawValue, size: 36))
             .multilineTextAlignment(.center)
             .overlay(TimerOverlay())
-            .onTapGesture { viewModel.certificationNum = "" }
-            .onChange(of: viewModel.certificationNum) { _ in
-                viewModel.endEditingIfLengthLimitReached()
+            .onTapGesture { authModel.authField.clearCode() }
+            .onChange(of: authModel.authField.code ) { _ in
+                authModel.endEditingIfLengthLimitReached()
             }
     }
     
     @ViewBuilder
     private func ResendButton() -> some View {
         Button {
-            viewModel.resetTimer()
-            viewModel.certificationNum = ""
+            authModel.resend()
         } label: {Text("인증번호 재발송")}
             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
             .foregroundColor(.gray_495057)
@@ -97,29 +93,24 @@ struct Certification: View {
     private func GoSignUpSuccessButton() -> some View {
         Button {
             Task {
-                if await authModel.signUp(user: user, verificationCode: viewModel.certificationNum) {
-                    viewModel.isSingUpSeccussActive = true
-                } else {
-                    viewModel.certificationNum = ""
-                    viewModel.isConfirmed = false
-                }
+                await authModel.signUp()
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable().frame(width: 86, height: 86)
                 .padding(.top, 49)
-                .foregroundColor(viewModel.isReachedMaxLength(num: viewModel.certificationNum)
-                                 ? (viewModel.timeRemaining <= 0 ? .gray_E9ECEF : .navy_1E2F97) : .gray_E9ECEF)
+                .foregroundColor(authModel.isReachedMaxLength(num: authModel.authField.code)
+                                 ? (authModel.timeRemaining <= 0 ? .gray_E9ECEF : .navy_1E2F97) : .gray_E9ECEF)
                 .padding(.top, 50)
         }
-        .disabled(!viewModel.isReachedMaxLength(num: viewModel.certificationNum) || viewModel.timeRemaining <= 0)
+        .disabled(!authModel.isReachedMaxLength(num: authModel.authField.code) || authModel.timeRemaining <= 0)
     }
     
     @ViewBuilder
     private func TimerOverlay() -> some View {
         HStack {
             Spacer()
-            Text("\(viewModel.getTimeString(time: viewModel.timeRemaining))")
+            Text("\(authModel.getTimeString(time: authModel.timeRemaining))")
                 .font(.custom(CustomFont.RobotoMedium.rawValue, size: 16))
                 .padding(.trailing, 10)
                 .foregroundColor(.red_EB1808)

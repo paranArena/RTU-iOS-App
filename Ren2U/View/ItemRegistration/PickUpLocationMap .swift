@@ -22,12 +22,10 @@ struct PickUpLocationMap: View {
 
             
             Button {
-                if locationManager.requestAuthorization() {
-                    itemVM.locationLongtitude = locationManager.region.center.longitude
-                    itemVM.locationLatitude = locationManager.region.center.latitude
-                    itemVM.isSelectedLocation = true
-                    self.presentationMode.wrappedValue.dismiss()
-                }
+                itemVM.locationLongtitude = locationManager.region.center.longitude
+                itemVM.locationLatitude = locationManager.region.center.latitude
+                itemVM.isSelectedLocation = true
+                self.presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("선택된 장소에서 픽업")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))

@@ -41,9 +41,9 @@ struct ClubProfile: View {
             .animation(.spring(), value: focusField)
         }
         .alert(clubVM.oneButtonAlert.title, isPresented: $clubVM.oneButtonAlert.isPresented) {
-            OneButtonAlert.okButton
+            OneButtonAlert.noActionButton
         } message: {
-            Text(clubVM.oneButtonAlert.message)
+            clubVM.oneButtonAlert.message
         }
         .controllTabbar(isPresented)
         .navigationBarTitleDisplayMode(.inline)
@@ -102,7 +102,6 @@ struct ClubProfile: View {
                     focusField = .tagsText
                 }
         }
-        .overlay(ChangeImageButton())
         .isHidden(hidden: (focusField != nil && focusField != .groupName))
         .onTapGesture {
             focusField = .groupName
@@ -188,7 +187,6 @@ struct ClubProfile: View {
             TextEditor(text: $viewModel.clubProfileData.introduction)
                 .focused($focusField, equals: .introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-                .submitLabel(.done)
                 .frame(height: 100)
                 .overlay{
                     RoundedRectangle(cornerRadius: 20)
@@ -221,10 +219,6 @@ struct ClubProfile: View {
                         .padding(.horizontal, 10)
                         .padding(.bottom, 5)
                 }
-//                .sheet(isPresented: $viewModel.showImagePicker) {
-//                    ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.selectedUIImage?)
-//                        .ignoresSafeArea(.all)
-//                }
             }
         }
         .sheet(isPresented: $viewModel.showImagePicker) {

@@ -37,8 +37,6 @@ struct MemberManagementView: View {
     
     @State private var maxY: CGFloat = .zero
     
-    @State private var isShowingAlert = false
-    
     @State private var isShowingSignUpAlert = false 
     @State private var selection: AlertSelection = .signUpCancel
     
@@ -56,15 +54,6 @@ struct MemberManagementView: View {
                 }
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
-        }
-        .alert("멤버를 추방하시겠습니까?", isPresented: $isShowingAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("OK") {
-                Task {
-                    await managementVM.removeMember(memberId: selectedCellID)
-                    await managementVM.searchClubMembersAll()
-                }
-            }
         }
         .alert(selection == .signUpOk ? "가입신청을 승인하시겠습니까?" : "가입신청을 거부하시겠습니까?", isPresented: $isShowingSignUpAlert) {
             Button("Cancel", role: .cancel) { }
@@ -123,7 +112,7 @@ struct MemberManagementView: View {
                 SwipeResettableView(selectedCellId: $selectedCellID) {
                     VStack {
                         ForEach(managementVM.members.indices, id: \.self) { index in
-                            ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+                            ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID,  managementVM: managementVM)
                         }
                     }
                     .isHidden(hidden: managementVM.members.isEmpty)

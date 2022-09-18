@@ -19,7 +19,7 @@ struct ManageSignUpCell: View {
     
     var body: some View {
         
-        CellWithTwoSlideButton(okMessage: "확인", cancelMessage: "거부", cellID: userData.id, selectedID: $selectedCellID) {
+        CellWithTwoSlideButton(okMessage: "확인", cancelMessage: "거부", okButtonHidden: false, cellID: userData.id, selectedID: $selectedCellID) {
             HStack {
                 VStack(alignment: .leading) {
                     Text(userData.name)

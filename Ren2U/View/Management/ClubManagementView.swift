@@ -28,7 +28,7 @@ struct ClubManagementView: View {
                 
                 Button {
                     Task {
-                        managementVM.showDeleteClub()
+                        managementVM.alertDeleteClub()
                     }
                 } label: {
                     Text("클럽 삭제")
@@ -62,15 +62,21 @@ struct ClubManagementView: View {
             }
             .padding(.horizontal, 10)
         }
-        .alert("", isPresented: $managementVM.alert.isPresented) {
+        .alert("", isPresented: $managementVM.deleteClubAlert.isPresented) {
             Button("취소", role: .cancel) {}
             Button("확인") {
                 Task {
-                    managementVM.alert.callback()
-                    clubActive = false
+                    await managementVM.deleteClubAlert.callback()
                     clubVM.getMyClubs()
+                    clubActive = false
                 }
             }
+        } message: {
+            Text(managementVM.deleteClubAlert.title)
+        }
+        .alert("", isPresented: $managementVM.alert.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") { Task { await managementVM.alert.callback() }}
         } message: {
             Text("\(managementVM.alert.title)")
         }
