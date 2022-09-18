@@ -62,5 +62,7 @@ class MyPageViewModel: ObservableObject {
                 print("[quitService err]")
             }
         }
+        
+        isLogined = false
     }
 }

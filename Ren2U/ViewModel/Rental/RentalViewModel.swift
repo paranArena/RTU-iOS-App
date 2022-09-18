@@ -36,6 +36,7 @@ class RentalViewModel: ObservableObject {
     @Published var productDetail = ProductDetailData.dummyProductData()
     @Published var productLocation = CLLocationCoordinate2D(latitude: 127, longitude: 31)
     @Published var isRentalTerminal = false
+    @Published var isPresentedMap = false
     
     //  MARK: For Alert
     @Published var oneButtonAlert = OneButtonAlert()

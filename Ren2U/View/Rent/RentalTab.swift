@@ -59,12 +59,16 @@ struct RentalTab: View {
     let spacing: CGFloat = 10
     
     var body: some View {
-        VStack(alignment: .center, spacing: spacing) {
+        VStack(alignment: .center, spacing: 10) {
             SearchBar(text: $searchText, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
+            
             FilterView()
+
+            
             Group {
                 RentalSelectionButton()
+                    
                 ZStack {
                     ForEach(Selection.allCases, id: \.rawValue) { selection in
                         Content(selection: selection)
@@ -237,6 +241,7 @@ struct RentalTab: View {
                 .background(Capsule().stroke(Color.gray_495057, lineWidth: 1))
             }
         }
+        .isHidden(hidden: tabVM.selectedClubId == nil)
         .padding(.horizontal)
         .frame(maxWidth: .infinity, alignment: .leading)
     }

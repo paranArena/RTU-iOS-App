@@ -75,10 +75,7 @@ struct ClubProfile: View {
                     .frame(width: SCREEN_WIDTH, height: 215)
             }
         } else {
-            KFImage(URL(string: viewModel.clubProfileData.thumbnailPath!))
-                .onFailure { err in
-                    print(err.errorDescription ?? "KFImage Optional err")
-                }
+            KFImage(URL(string: viewModel.clubProfileData.thumbnailPath ?? ""))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 200, height: 200)

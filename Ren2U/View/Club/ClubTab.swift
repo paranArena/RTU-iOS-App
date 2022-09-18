@@ -28,13 +28,12 @@ struct ClubTab: View {
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
-        VStack(alignment: .center, spacing: spacing) {
+        VStack(alignment: .center, spacing: 10) {
             
             SearchBar(text: $vm.searchText, isFoucsed: $vm.isSearchBarFocused)
                 .padding(.horizontal, 20)
 
             ClubSearch(search: $vm.searchText, tabSelection: $tabSelection)
-                .padding(.bottom, -10)
                 .isHidden(hidden: !vm.isSearchBarFocused || vm.groupSelection == .notice)
             
             Group {
@@ -54,7 +53,6 @@ struct ClubTab: View {
                         .offset(x: vm.groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
                         .isHidden(hidden: vm.isSearchBarFocused && vm.groupSelection == .group)
                 }
-                .padding(.bottom, -10)
             }
         }
         .background(
@@ -66,7 +64,6 @@ struct ClubTab: View {
         )
 
         .overlay(ShadowRectangle())
-        .showTabBar(animated: false)
         .navigationTitle("")
         .navigationBarHidden(true)
         .animation(.spring(), value: vm.groupSelection)

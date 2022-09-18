@@ -12,40 +12,15 @@ class PasswordViewModel: ObservableObject {
     
     @Published var input = PasswordReset()
     @Published var oneButtonAlert = OneButtonAlert()
+    @Published var dismissAlert = OneButtonAlert()
+    
+    @Published var isCodeRequested = false
     //  MARK: PUT
     
+    init() {}
     
-    func checkCondition() {
-        print("????????")
-        if input.checkCondition {
-            Task {
-                await resetPassword()
-            }
-        } else {
-            showAlert()
-        }
-    }
-    
-    @MainActor
-    func resetPassword() async {
-        
-        let url = "\(BASE_URL)/info/password"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
-        
-        let param: [String: Any] = [
-            "password": input.password
-        ]
-          
-        let request = AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default, headers: hearders).serializingString()
-        let response = await request.response
-        
-        switch response.result {
-        case .success(_):
-            print("[resetPassword success]")
-        case .failure(let err):
-            print("[resetPassword err]")
-            print(err)
-        }
+    init(email: String) {
+        self.input.email = email
     }
     
     private func showAlert() {
@@ -61,7 +36,10 @@ class PasswordViewModel: ObservableObject {
             "email" : "\(email)"
         ]
         
+        self.isCodeRequested = true
+        
         AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).responseString { res in
+            print(res.debugDescription)
             switch res.result {
             case .success(let value):
                 print("[requestEmailCode success]")
@@ -73,23 +51,47 @@ class PasswordViewModel: ObservableObject {
         }
     }
     
-    func passwordResetWithVerificationCode(email: String, code: String, password: String) async -> Bool {
-        let url = "\(BASE_URL)/members/password/reset/verify"
+    @MainActor
+    func passwordResetWithVerificationCode() async {
+        let url = "\(BASE_URL)/password/reset/verify"
         let param: [String: Any] = [
-            "email" : "\(email)",
-            "code" : "\(code)",
-            "password" : "\(password)"
+            "email" : "\(input.email)",
+            "code" : "\(input.code)",
+            "password" : "\(input.password)"
         ]
-
-        let response = AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default).serializingString()
-
-        switch await response.result {
-        case .success(_):
-            print("[passwordResetWithVerificationCode success]")
-            return true
-        case .failure(_):
-            print("[passwordResetWithVerificationCode err]")
-            return false
+        
+        if !input.checkCondition {
+            showAlert()
+            return
+        }
+        
+        let request = AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default).serializingString()
+        let response = await request.response
+        
+        if let statusCode = response.response?.statusCode {
+            print(response.debugDescription)
+            switch statusCode {
+            case 200:
+                dismissAlert.title = "변경 성공"
+                dismissAlert.isPresented = true
+                dismissAlert.messageText = "비밀번호를 변경했습니다."
+                break
+            default:
+                if let data = response.data {
+                    let error = try? JSONDecoder().decode(ErrorBody.self, from: data)
+                    if let code = error?.code {
+                        switch code {
+                        case "WRONG_VERIFICATION_CODE":
+                            print("print4")
+                            oneButtonAlert.title = "인증번호 에러"
+                            oneButtonAlert.isPresented = true
+                            oneButtonAlert.messageText = "인증번호를 확인해주세요."
+                        default:
+                            showAlert()
+                        }
+                    }
+                }
+            }
         }
     }
 }
