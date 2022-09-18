@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 import HidableTabView
 import Introspect
+import MapKit
 
 struct ProductDetailView: View {
     
@@ -46,19 +47,22 @@ struct ProductDetailView: View {
                 Group {
                     Text("REN2U")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-
-                    Text(rentVM.productDetail.name)
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 26))
+                    
+                    HStack {
+                        Text(rentVM.productDetail.name)
+                            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 26))
+                    }
 
                     Divider()
                     
                     ProductCategory()
                     ProductPrice()
+                    RentalDuration()
+                    Caution()
                 }
                 .padding(.horizontal, 10)
-                    
+                
                 ItemList()
-                Caution()
 
                 NavigationLink("", isActive: $rentVM.isRentalTerminal) {
                     RentalComplete(itemInfo: rentVM.productDetail, itemNumber: rentVM.selectedItem?.numbering ?? 0)
@@ -119,6 +123,20 @@ struct ProductDetailView: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
         }
     }
+    
+    @ViewBuilder
+    private func RentalDuration() -> some View {
+        HStack {
+            Text("대여기간")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                .foregroundColor(Color.gray_495057)
+            
+            Spacer()
+            
+            Text("\(rentVM.productDetail.fifoRentalPeriod)일")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+        }
+    }
 
 //    @ViewBuilder
 //    private func CarouselImage() -> some View {
@@ -158,14 +176,18 @@ struct ProductDetailView: View {
                         } label: {
                             Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                                .lineLimit(1)
                                 .foregroundColor(id == rentVM.selectedItem?.id ? Color.white : Color.primary)
+                                .fixedSize(horizontal: false, vertical: true)
                             
                             Text("\(rentVM.productDetail.items[i].rentalPolicy)")
                                 .font(.custom(CustomFont.RobotoBold.rawValue, size: 12))
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 5)
                                 .background(Capsule().fill(rentVM.productDetail.items[i].bgColor))
-                                .frame(maxWidth:. infinity, alignment: .leading)
+//                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Spacer()
                             
                             Text(rentVM.productDetail.items[i].status)
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
@@ -194,7 +216,6 @@ struct ProductDetailView: View {
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .background(RoundedRectangle(cornerRadius: 15).fill(Color.gray_F5F5F5))
         }
-        .padding(.horizontal, 10)
     }
     
     @ViewBuilder

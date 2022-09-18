@@ -12,14 +12,16 @@ import UIKit
 class ManagementViewModel: ObservableObject {
     
     @Published var clubData = ClubData.dummyClubData()
+    
     @Published var applicants = [UserData]()
-    @Published var members = [UserAndRoleData]()
+    @Published var members = [MemberAndRoleData]()
     @Published var products = [ProductPreviewDto]()
     @Published var notices = [NotificationPreview]()
     @Published var rentals = [ClubRentalData]()
     
     
     @Published var alert = Alert()
+    @Published var deleteClubAlert = Alert() 
     
     init(clubData: ClubData) {
         self.clubData = clubData
@@ -36,14 +38,34 @@ class ManagementViewModel: ObservableObject {
     
     //  MARK: LOCAL
     
-    func showDeleteClub() {
-        alert.title = "클럽을 삭제하시겠습니까?"
+    func alertGrant(memberAndRoleData: MemberAndRoleData) {
+        alert.title = memberAndRoleData.alertMessage
+        alert.isPresented = true
+        let memberId = memberAndRoleData.id
+        
+        if memberAndRoleData.clubRole == ClubRole.user.rawValue {
+            alert.callback = { await self.grantAdmin(memberId: memberId) }
+        } else if memberAndRoleData.clubRole == ClubRole.admin.rawValue {
+            alert.callback = { await self.grantUser(memberId: memberId) }
+        } else {
+            alert.callback = { print("에러")}
+        }
+    }
+    
+    func alertDeleteMember(memberId: Int) {
+        alert.title = "멤버를 추방하시겠습니까?"
         alert.isPresented = true
         alert.callback = {
             Task {
-                await self.deleteClub()
+                await self.removeMember(memberId: memberId)
             }
         }
+    }
+    
+    func alertDeleteClub() {
+        deleteClubAlert.title = "클럽을 삭제하시겠습니까?"
+        deleteClubAlert.isPresented = true
+        deleteClubAlert.callback = { await self.deleteClub() }
     }
     
     //  MARK: POST
@@ -62,8 +84,7 @@ class ManagementViewModel: ObservableObject {
             
         let task = AF.upload(multipartFormData: { multipart in
             if let image = notice.image {
-                print("이미지를 넣었어요")
-                multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "\(self.clubData.id).\(notice.title).image", mimeType: "image/jpeg")
+                multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "notification.image.\(self.clubData).\(notice.title)", mimeType: "image/jpeg")
             }
 
             for (key, value) in param {
@@ -247,11 +268,47 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    func grantAdmin(memberId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/members/\(memberId)/role/admin"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
+        
+        let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GrantAdminResponse.self)
+        let response = await request.response
+        
+        if let statusCode = response.response?.statusCode {
+            print("[grantAdmin] statusCode: \(statusCode)")
+            switch statusCode {
+            case 200:
+                await searchClubMembersAll()
+            default:
+                print(response.debugDescription)
+            }
+        }
+    }
+    
+    func grantUser(memberId: Int) async {
+        let url = "\(BASE_URL)/clubs/\(clubData.id)/members/\(memberId)/role/user"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
+        
+        let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GrantAdminResponse.self)
+        let response = await request.response
+        
+        if let statusCode = response.response?.statusCode {
+            print("[grantUser] statusCode : \(statusCode)")
+            switch statusCode {
+            case 200:
+                await searchClubMembersAll()
+            default:
+                print(response.debugDescription)
+            }
+        }
+    }
+    
     //  MARK: DELETE
     
     func rejectClubJoin(memberId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/requests/join/\(memberId)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
+        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
         
         
         let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
@@ -305,15 +362,16 @@ class ManagementViewModel: ObservableObject {
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingString()
-        let result = await request.result
+        let response = await request.response
         
-        switch result {
-        case .success(_):
-            print("[removeMember success")
-        case .failure(_):
-            print("[removeMember err")
+        if let statusCode = response.response?.statusCode {
+            switch statusCode {
+            case 200:
+                await self.searchClubMembersAll()
+            default:
+                print("에러")
+            }
         }
-        
     }
     
     func deleteClub() async {

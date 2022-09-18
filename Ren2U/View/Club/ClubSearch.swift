@@ -32,7 +32,7 @@ struct ClubSearch: View {
                 .padding(.horizontal, 20)
             
             BounceControllScrollView(baseOffset: 100, offset: $offset) {
-                VStack {
+                VStack(spacing: 10) {
                     ForEach(clubSearchVM.clubData.indices, id: \.self) { i in
                         NavigationLink {
                             ClubPage(tabSelection: $tabSelection, clubData: $clubSearchVM.clubData[i], clubActive: $isActive)

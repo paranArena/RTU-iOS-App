@@ -40,21 +40,11 @@ struct HorizontalClubCell: View {
                         .foregroundColor(.gray_ADB5BD)
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
-//                    HStack(spacing: 0) {
-//                        ForEach(info.hashtags.indices, id: \.self) { i in
-//                            Text("#\(info.hashtags[i]) ")
-//                                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-//                                .foregroundColor(.gray_ADB5BD)
-//                                .lineLimit(0)
-//                        }
-//                    }
-//                    .frame(maxWidth: .infinity)
+                    
                 }
             }
-            .padding(.top, 10)
             .padding(.horizontal, 20)
         }
-        .frame(maxHeight: 110)
     }
 }
 

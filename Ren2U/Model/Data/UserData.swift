@@ -23,7 +23,7 @@ struct User: Codable {
     }
 }
 
-struct UserAndRoleData: Codable, Identifiable {
+struct MemberAndRoleData: Codable, Identifiable {
     let id: Int
     let email: String
     let name: String
@@ -31,6 +31,34 @@ struct UserAndRoleData: Codable, Identifiable {
     let studentId: String
     let major: String
     let clubRole: String
+    
+    var grantButtonText: String {
+        if clubRole == ClubRole.user.rawValue {
+            return "권한부여"
+        } else if clubRole == ClubRole.admin.rawValue {
+            return "권한제거"
+        } else {
+            return "에러"
+        }
+    }
+    
+    var grantButtonHidden: Bool {
+        if clubRole == ClubRole.owner.rawValue {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    var alertMessage: String {
+        if clubRole == ClubRole.user.rawValue {
+            return "관리자 권한을 주시겠습니까?"
+        } else if clubRole == ClubRole.admin.rawValue {
+            return "관리자 권한을 제거하시겠습니까?"
+        } else {
+            return "에러"
+        }
+    }
 }
 
 struct UserData: Codable, Identifiable {

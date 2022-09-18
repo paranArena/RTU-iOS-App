@@ -333,7 +333,7 @@ class ClubViewModel: ObservableObject {
         
         let task = AF.upload(multipartFormData: { multipart in
             if let image = club.thumbnail.jpegData(compressionQuality: 1) {
-                multipart.append(image, withName: "thumbnail", fileName: "\(club.name).thumbnail", mimeType: "image/jpeg")
+                multipart.append(image, withName: "thumbnail", fileName: "club.thumbnail.\(club.name)", mimeType: "image/jpeg")
             }
 
             for (key, value) in param {

@@ -39,7 +39,7 @@ struct GetMyClubRoleResponse: Codable {
 struct SearchClubMembersAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [UserAndRoleData]
+    let data: [MemberAndRoleData]
 }
 
 
@@ -155,6 +155,12 @@ struct requestClubJoinResponse: Codable {
     let data: String? 
 }
 
+//  MARK: PUT
+struct GrantAdminResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: String?
+}
 
 struct SearchClubJoinsAllResponse: Codable {
     let statusCode: Int

@@ -11,18 +11,21 @@ struct CellWithTwoSlideButton<Content: View>: View {
     
     let okMessage: String
     let cancelMessage: String
+    let okButtonHidden: Bool
     let cellID: Int
     @Binding var selectedID: Int
     var content: () -> Content
     let okCallback: () -> ()
     let cancelCallback: () -> ()
     
+    
     @State private var isShowingRequestButton = false
     @State private var offset: CGFloat = .zero
     
-    init(okMessage: String, cancelMessage: String, cellID: Int, selectedID: Binding<Int>, content: @escaping () -> Content, okCallback: @escaping () -> (), cancelCallback: @escaping () -> ()) {
+    init(okMessage: String, cancelMessage: String, okButtonHidden: Bool, cellID: Int, selectedID: Binding<Int>, content: @escaping () -> Content, okCallback: @escaping () -> (), cancelCallback: @escaping () -> ()) {
         self.okMessage = okMessage
         self.cancelMessage = cancelMessage
+        self.okButtonHidden = okButtonHidden
         self.cellID = cellID
         self._selectedID = selectedID
         self.content = content
@@ -53,6 +56,8 @@ struct CellWithTwoSlideButton<Content: View>: View {
                     .frame(width: 80, height: 80)
                     .background(Color.navy_1E2F97)
                     .foregroundColor(Color.white)
+                    .opacity(okButtonHidden ? 0 : 1)
+                    .disabled(okButtonHidden)
                     
                     Button {
                         withAnimation {

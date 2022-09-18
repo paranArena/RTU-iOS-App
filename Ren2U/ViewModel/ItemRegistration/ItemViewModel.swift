@@ -11,6 +11,7 @@ import Alamofire
 class ItemViewModel: ObservableObject {
     
     let clubId: Int
+    let clubName: String
     
     // 나중에 이미지 여러장 등록할 때 이용 UIImage 배열로 변경
     @Published var image: UIImage?
@@ -32,8 +33,9 @@ class ItemViewModel: ObservableObject {
     @Published var isActive = false
     @Published var isDonation = false
     
-    init(clubId: Int) {
+    init(clubId: Int, clubName: String ) {
         self.clubId = clubId
+        self.clubName = clubName
         print("ItemViewModel init")
     }
     
@@ -97,7 +99,7 @@ class ItemViewModel: ObservableObject {
         
         let task = AF.upload(multipartFormData: { multipart in
             if let image = self.image!.jpegData(compressionQuality: 1) {
-                multipart.append(image, withName: "image", fileName: "\(self.itemName).thumbnail", mimeType: "image/jpeg")
+                multipart.append(image, withName: "image", fileName: "item.image.\(self.clubName).\(self.itemName)", mimeType: "image/jpeg")
             }
 
             for (key, value) in param {

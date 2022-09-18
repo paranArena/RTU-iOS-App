@@ -38,7 +38,7 @@ struct ProductManageView: View {
         .navigationBarTitleDisplayMode(.inline)
         .overlay(alignment: .bottomTrailing) {
             NavigationLink(isActive: $isActive) {
-                ItemPhoto(itemVM: ItemViewModel(clubId: managementVM.clubData.id), managementVM: managementVM, isActive: $isActive)
+                ItemPhoto(itemVM: ItemViewModel(clubId: managementVM.clubData.id, clubName: managementVM.clubData.name), managementVM: managementVM, isActive: $isActive)
             } label: {
                 PlusCircle()
             }
