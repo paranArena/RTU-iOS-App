@@ -70,9 +70,16 @@ struct ItemMap: View {
             Button("취소", role: .cancel) {}
             Button("확인") {
                 Task { await rentVM.alert.callback() }} 
+        } message: {
+            Text(rentVM.alert.title)
         }
         .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
-            Button("확인") { dismiss() }
+            Button("확인") {
+                Task {
+                    clubVM.getMyRentals
+                }
+                dismiss()
+            }
         } message: {
             rentVM.oneButtonAlert.message
         }

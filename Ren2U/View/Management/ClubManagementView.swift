@@ -31,7 +31,7 @@ struct ClubManagementView: View {
                         managementVM.alertDeleteClub()
                     }
                 } label: {
-                    Text("클럽 삭제")
+                    Text("그룹 삭제")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 8)
                         .padding(.horizontal, 20)
@@ -155,6 +155,7 @@ struct ClubManagementView: View {
                                 .padding(.horizontal, 20)
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                                 .foregroundColor(Color.primary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
 //                    } else if selection == .rentalActive     {
 //                        Toggle(isOn: $rentalToggle) {

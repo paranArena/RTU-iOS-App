@@ -36,12 +36,12 @@ struct ProductDetailView: View {
     
     var body: some View {
         BounceControllScrollView(baseOffset: -10, offset: $offset) {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 15) {
                 
                 KFImage(URL(string: rentVM.productDetail.imagePath ?? ""))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: SCREEN_WIDTH, height: 300)
+                    .frame(width: SCREEN_WIDTH, height: SCREEN_WIDTH)
                     .clipped()
                 
                 Group {

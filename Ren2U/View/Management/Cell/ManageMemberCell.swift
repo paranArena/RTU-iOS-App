@@ -21,8 +21,8 @@ struct ManageMemberCell: View {
 
                 Image(AssetImages.DefaultGroupImage.rawValue)
                     .resizable()
-                    .cornerRadius(15)
                     .frame(width: 80, height: 80)
+                    .clipShape(Circle())
 
                 VStack(alignment: .leading, spacing: 0) {
                     Text(memberInfo.name)
