@@ -15,26 +15,30 @@ struct SwipeCell<Content: View, Button: View> : View {
     let button: () -> Button
     let buttonWidthSize: CGFloat
     
-    @State private var isShowingRequestButton = false
-    @State private var offset: CGFloat = .zero
+    @Binding private var isShowingRequestButton: Bool
+    @Binding private var offset: CGFloat
     
-    init(cellId: Int, selectedCellId: Binding<Int>, buttonWidthSize: CGFloat, content: @escaping () -> Content, button: @escaping () -> Button) {
+    init(cellId: Int, selectedCellId: Binding<Int>, buttonWidthSize: CGFloat, isShowingRequestButton: Binding<Bool>, offset: Binding<CGFloat>, content: @escaping () -> Content, button: @escaping () -> Button) {
         self.cellId = cellId
         self._selectedCellId = selectedCellId
         self.buttonWidthSize = buttonWidthSize
         self.content = content
         self.button = button
+        self._isShowingRequestButton = isShowingRequestButton
+        self._offset = offset
     }
     
     
     var body: some View {
-        VStack {
-            HStack {
-                content()
-                Spacer()
-                button() 
-            }
+        HStack {
+            content()
+            Spacer()
+            button()
+                .offset(x: buttonWidthSize)
+                .padding(.leading, -1 * buttonWidthSize)
+                .disabled(selectedCellId != cellId)
         }
+        .offset(x: isShowingRequestButton ? max(-1 * buttonWidthSize, offset) : max(-1 * buttonWidthSize, offset))
         .gesture(
             DragGesture()
                 .onChanged {
@@ -46,7 +50,7 @@ struct SwipeCell<Content: View, Button: View> : View {
                         if !self.isShowingRequestButton {
                             self.offset = min(offset, 0)
                         } else {
-                            self.offset = min(0, max(-160 + offset, -160))
+                            self.offset = min(0, max(-1 * buttonWidthSize + offset, -1 * buttonWidthSize))
                         }
                     }
                 }
@@ -56,7 +60,7 @@ struct SwipeCell<Content: View, Button: View> : View {
                         if !isShowingRequestButton {
                             if translationWidth <= -80 {
                                 self.isShowingRequestButton = true
-                                self.offset = -160
+                                self.offset = -1 * buttonWidthSize
                             } else {
                                 self.offset = 0
                             }
@@ -65,7 +69,7 @@ struct SwipeCell<Content: View, Button: View> : View {
                                 self.isShowingRequestButton = false
                                 self.offset = 0
                             } else {
-                                self.offset = -160
+                                self.offset = -1 * buttonWidthSize
                             }
                         }
                     }
