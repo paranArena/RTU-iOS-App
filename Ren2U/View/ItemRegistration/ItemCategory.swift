@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ItemCategory: View {
     
-    @Binding var category: Category?
-    @ObservedObject var managementVM: ManagementViewModel
+    @Binding var category: String
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             ForEach(Category.allCases, id: \.rawValue) { category in
                 Button {
-                    self.category = category
+                    self.category = category.rawValue
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text(category.rawValue)

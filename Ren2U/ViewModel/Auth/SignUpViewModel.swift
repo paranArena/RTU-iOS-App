@@ -10,7 +10,7 @@ import Alamofire
 
 class SignUpViewModel: ObservableObject {
     
-    @Published var authField = AuthField()
+    @Published var authField = AccountParam()
     
     //  MARK: NavitaionLink
     @Published var isActiveCertificationView = false

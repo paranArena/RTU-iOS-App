@@ -45,10 +45,10 @@ struct ProductPreviewDto: Codable {
 
 struct ProductDetailData: Codable {
     let id: Int
-    let name, category: String
-    let location: Location
-    let fifoRentalPeriod, reserveRentalPeriod, price: Int
-    let caution: String
+    var name, category: String
+    var location: Location
+    var fifoRentalPeriod, reserveRentalPeriod, price: Int
+    var caution: String
     let imagePath: String?
     let items: [ItemData]
     
@@ -57,7 +57,7 @@ struct ProductDetailData: Codable {
     }
     
     struct Location: Codable {
-        let name: String
+        var name: String
         let latitude, longitude: Double
     }
 }

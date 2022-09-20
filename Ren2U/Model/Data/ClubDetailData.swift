@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ClubProfileData {
+struct ClubDetailParam {
     var name: String
     var introduction: String
     var thumbnail: UIImage?
     var hashtags: [String]
     var thumbnailPath: String?
     
-    init(clubData: ClubData) {
+    init(clubData: ClubDetailData) {
         self.name = clubData.name
         self.introduction = clubData.introduction
         self.hashtags = clubData.hashtags
@@ -28,15 +28,15 @@ struct ClubProfileData {
     }
 }
 
-struct ClubData: Codable, Hashable {
+struct ClubDetailData: Codable, Hashable {
     let id: Int
     var name: String
     var introduction: String
     var thumbnailPath: String?
     var hashtags: [String]
     
-    static func dummyClubData() -> ClubData {
-        return ClubData(id: 1, name: "오류", introduction: "오류", hashtags: ["오류"])
+    static func dummyClubData() -> ClubDetailData {
+        return ClubDetailData(id: -1, name: "", introduction: "", hashtags: [])
     }
 }
 
@@ -71,7 +71,7 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
         return ClubAndRoleData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""], clubRole: "")
     }
     
-    func extractClubData() -> ClubData {
-        return ClubData(id: id, name: name, introduction: introduction, thumbnailPath: thumbnailPath, hashtags: hashtags)
+    func extractClubData() -> ClubDetailData {
+        return ClubDetailData(id: id, name: name, introduction: introduction, thumbnailPath: thumbnailPath, hashtags: hashtags)
     }
 }

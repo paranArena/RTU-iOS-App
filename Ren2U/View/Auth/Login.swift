@@ -11,7 +11,6 @@ import SwiftUI
 struct Login: View {
     
     @EnvironmentObject var loginManager: MyPageViewModel
-    @EnvironmentObject var authModel: MyPageViewModel
     @StateObject var loginVM = LoginViewModel() 
     @FocusState var focus: Field?
     
@@ -96,9 +95,9 @@ struct Login: View {
                 .resizable()
                 .frame(width: 86, height: 86)
                 .padding(.top, 21)
-                .foregroundColor(loginVM.account.buttonFGColor)
+                .foregroundColor(loginVM.account.fgColorLoginButton)
         }
-        .disabled(loginVM.account.isDisable)
+        .disabled(loginVM.account.isDisableLoginButton)
     }
     
     @ViewBuilder

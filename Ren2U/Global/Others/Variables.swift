@@ -14,8 +14,8 @@ let SCREEN_HEIGHT = UIScreen.main.bounds.height
 let SAFE_AREA_TOP_HEIGHT: CGFloat = 44
 let SAFE_AREA_BOTTOM_HEIGHT: CGFloat = 34 
 
-//let BASE_URL = "http://15.165.38.225:8080"
-let BASE_URL = "https://ren2u.shop"
+let BASE_URL = "http://15.165.38.225:8080"
+//let BASE_URL = "https://ren2u.shop"
 
 let JWT_KEY = "jwt"
 

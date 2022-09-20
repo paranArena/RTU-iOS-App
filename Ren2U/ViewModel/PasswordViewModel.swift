@@ -11,6 +11,8 @@ import Alamofire
 class PasswordViewModel: ObservableObject {
     
     @Published var input = PasswordReset()
+    @Published var myInfoparam = UpdateMyInfoParam()
+    
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var dismissAlert = OneButtonAlert()
     

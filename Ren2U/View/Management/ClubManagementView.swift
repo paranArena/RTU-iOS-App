@@ -190,6 +190,8 @@ struct ClubManagementView: View {
             MemberManagementView(managementVM: managementVM)
 //        case .rentalActive:
 //            Text("Empty View")
+        case .coupon:
+            CouponManagementView(managementVM: managementVM)
         }
     }
 }

@@ -59,3 +59,10 @@ enum RentalStatus: String, CaseIterable {
         }
     }
 }
+
+enum ClubField: Int, CaseIterable {
+    case groupName
+    case tagsText
+    case introduction
+}
+

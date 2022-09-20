@@ -11,7 +11,7 @@ import UIKit
 
 class ManagementViewModel: ObservableObject {
     
-    @Published var clubData = ClubData.dummyClubData()
+    @Published var clubData = ClubDetailData.dummyClubData()
     
     @Published var applicants = [UserData]()
     @Published var members = [MemberAndRoleData]()
@@ -23,7 +23,7 @@ class ManagementViewModel: ObservableObject {
     @Published var alert = Alert()
     @Published var deleteClubAlert = Alert() 
     
-    init(clubData: ClubData) {
+    init(clubData: ClubDetailData) {
         self.clubData = clubData
         print("ManageViewModel init, groupId[\(clubData.id)]")
         

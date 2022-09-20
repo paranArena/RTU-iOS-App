@@ -22,7 +22,7 @@ struct ClubProfile: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.isPresented) var isPresented
     @StateObject var viewModel: ViewModel
-    @FocusState var focusField: Field?
+    @FocusState var focusField: ClubField?
 
     var body: some View {
         BounceControllScrollView(baseOffset: 80, offset: $viewModel.offset) {
@@ -114,11 +114,11 @@ struct ClubProfile: View {
                     .foregroundColor(Color.gray_495057)
                 
                 ZStack(alignment: .leading) {
-                    if viewModel.isShowingTagPlaceholder {
-                        Text("#렌탈 #서비스는 #REN2U")
-                            .foregroundColor(.gray_ADB5BD)
-                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
-                    }
+                    
+                    Text("#렌탈 #서비스는 #REN2U")
+                        .foregroundColor(.gray_ADB5BD)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
+                        .isHidden(hidden: !viewModel.isShowingTagPlaceholder)
                     
                     TextField("", text: $viewModel.tagsText)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
@@ -129,14 +129,7 @@ struct ClubProfile: View {
                             viewModel.showTagPlaceHolder(newValue: newValue)
                         }
                 }
-                .overlay(
-                    VStack {
-                        Spacer()
-                        Rectangle()
-                            .frame(height: 1)
-                            .foregroundColor(Color.gray_ADB5BD)
-                    }
-                )
+                .overlay(alignment: .bottom) { SimpleLine(color: Color.gray_ADB5BD) } 
                 
                 Text("#과 띄어쓰기를 포함해 영어는 최대 36글자, 한글은 24글자까지 가능합니다.")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))

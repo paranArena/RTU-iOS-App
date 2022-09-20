@@ -32,9 +32,9 @@ struct ItemInformation: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
             
             NavigationLink {
-                ItemCategory(category: $itemVM.category, managementVM: managementVM)
+                ItemCategory(category: $itemVM.category)
             } label: {
-                Text(itemVM.categoryString)
+                Text(itemVM.category)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                     .frame(width: 150, height: 30)
                     .foregroundColor(.primary)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AuthField  {
+struct AccountParam  {
     var email: String = ""
     var password: String = ""
     var passwordCheck: String = ""
@@ -22,9 +22,15 @@ struct AuthField  {
     
     var emailDuplication: EmailDuplication = .none
     
+    mutating func clearLogin() {
+        self.email = ""
+        self.password = ""
+    }
+    
     mutating func clearCode() {
         self.code = "" 
     }
+    
     
     enum EmailDuplication {
         case none
@@ -40,6 +46,22 @@ struct AuthField  {
             case .notDuplicated:
                 return "사용할 수 있는 이메일입니다."
             }
+        }
+    }
+    
+    var fgColorLoginButton: Color {
+        if email.isEmpty || password.isEmpty {
+            return Color.gray_E9ECEF
+        } else {
+            return Color.navy_1E2F97
+        }
+    }
+    
+    var isDisableLoginButton: Bool {
+        if email.isEmpty || password.isEmpty {
+            return true
+        } else {
+            return false
         }
     }
     

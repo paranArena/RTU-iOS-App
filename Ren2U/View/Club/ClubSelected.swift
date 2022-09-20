@@ -79,7 +79,7 @@ struct ClubSelected: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .padding(.horizontal, 20)
             
-            VStack(alignment: .center, spacing: 0) {
+            VStack(alignment: .center, spacing: 10) {
                 ForEach(groupVM.joinedClubs.indices, id: \.self) { index in
                     Button {
                         self.clubData = groupVM.joinedClubs[index]

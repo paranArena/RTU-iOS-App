@@ -10,7 +10,7 @@ import Alamofire
 
 class LoginViewModel: ObservableObject {
     
-    @Published var account = Account()
+    @Published var account = AccountParam()
     @Published var missInput = MissInput.default
     @Published var isActiveSignUpView = false
     let tmp = 10 
@@ -25,7 +25,7 @@ class LoginViewModel: ObservableObject {
     }
     
     func clearFields() {
-        account.clear()
+        account.clearLogin()
     }
     
     @MainActor

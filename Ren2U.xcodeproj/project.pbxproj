@@ -22,7 +22,7 @@
 		15228ABB28C8970A00A0B3C5 /* RentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228ABA28C8970A00A0B3C5 /* RentalCell.swift */; };
 		15228ABD28C89FA200A0B3C5 /* ProductData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228ABC28C89FA200A0B3C5 /* ProductData.swift */; };
 		15228ABF28C8A06300A0B3C5 /* NoticeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228ABE28C8A06300A0B3C5 /* NoticeData.swift */; };
-		15228AC128C8A08D00A0B3C5 /* ClubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228AC028C8A08D00A0B3C5 /* ClubData.swift */; };
+		15228AC128C8A08D00A0B3C5 /* ClubDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228AC028C8A08D00A0B3C5 /* ClubDetailData.swift */; };
 		1523D5D828BDC986009EB733 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5D728BDC986009EB733 /* UserData.swift */; };
 		1523D5E028BE138B009EB733 /* AssetImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5DF28BE138A009EB733 /* AssetImages.swift */; };
 		1523D5E228BE291C009EB733 /* MemberManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E128BE291C009EB733 /* MemberManagementView.swift */; };
@@ -63,9 +63,13 @@
 		154553D328A35412005E7FDB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553D228A35412005E7FDB /* NotoSansKR-Black.otf */; };
 		154B6B4428C31215004962B9 /* DoubleWheelPicker .swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */; };
 		1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */; };
+		1554576228D9A3EA00DDAD9B /* UpdateClubInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576128D9A3E900DDAD9B /* UpdateClubInfoViewModel.swift */; };
+		1554576528D9A80000DDAD9B /* UpdateClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576428D9A80000DDAD9B /* UpdateClubView.swift */; };
+		1554576828D9B3C600DDAD9B /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576728D9B3C600DDAD9B /* ImageViewModel.swift */; };
+		1554576A28D9BFAC00DDAD9B /* CouponManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576928D9BFAC00DDAD9B /* CouponManagementView.swift */; };
+		1554576C28D9C3D400DDAD9B /* NotificationParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576B28D9C3D400DDAD9B /* NotificationParam.swift */; };
 		1556E42C28CC5AE0007D1BDF /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1556E42B28CC5AE0007D1BDF /* DateExtension.swift */; };
-		155A36B228D17F6900848592 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155A36B128D17F6900848592 /* Account.swift */; };
-		155A36B728D18DD900848592 /* SignUpParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155A36B628D18DD900848592 /* SignUpParam.swift */; };
+		155A36B728D18DD900848592 /* AccountParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155A36B628D18DD900848592 /* AccountParam.swift */; };
 		155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CED5E28A0EA380032C1BA /* GroupTabVM.swift */; };
 		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
 		156386C0288A5249006653E8 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* HomeTab.swift */; };
@@ -109,6 +113,8 @@
 		157C269428CFBB6C009115D8 /* ResetPassWordWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */; };
 		157F53A728D844030087F8A3 /* SwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F53A628D844030087F8A3 /* SwipeCell.swift */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
+		1586640E28D95F1C00E4E902 /* UpdateProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */; };
+		1586641128D9629C00E4E902 /* UpdateProductView .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586641028D9629C00E4E902 /* UpdateProductView .swift */; };
 		1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16C28C8914700D83FCC /* HidableTabView */; };
 		1589C17028C8915300D83FCC /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16F28C8915300D83FCC /* Introspect */; };
 		1589C17328C8917C00D83FCC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C17228C8917C00D83FCC /* Kingfisher */; };
@@ -188,7 +194,7 @@
 		15228ABA28C8970A00A0B3C5 /* RentalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCell.swift; sourceTree = "<group>"; };
 		15228ABC28C89FA200A0B3C5 /* ProductData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductData.swift; sourceTree = "<group>"; };
 		15228ABE28C8A06300A0B3C5 /* NoticeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeData.swift; sourceTree = "<group>"; };
-		15228AC028C8A08D00A0B3C5 /* ClubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubData.swift; sourceTree = "<group>"; };
+		15228AC028C8A08D00A0B3C5 /* ClubDetailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubDetailData.swift; sourceTree = "<group>"; };
 		1523D5D728BDC986009EB733 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		1523D5DF28BE138A009EB733 /* AssetImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImages.swift; sourceTree = "<group>"; };
 		1523D5E128BE291C009EB733 /* MemberManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberManagementView.swift; sourceTree = "<group>"; };
@@ -229,9 +235,13 @@
 		154553D228A35412005E7FDB /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoubleWheelPicker .swift"; sourceTree = "<group>"; };
 		1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
+		1554576128D9A3E900DDAD9B /* UpdateClubInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClubInfoViewModel.swift; sourceTree = "<group>"; };
+		1554576428D9A80000DDAD9B /* UpdateClubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClubView.swift; sourceTree = "<group>"; };
+		1554576728D9B3C600DDAD9B /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		1554576928D9BFAC00DDAD9B /* CouponManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponManagementView.swift; sourceTree = "<group>"; };
+		1554576B28D9C3D400DDAD9B /* NotificationParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationParam.swift; sourceTree = "<group>"; };
 		1556E42B28CC5AE0007D1BDF /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		155A36B128D17F6900848592 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		155A36B628D18DD900848592 /* SignUpParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpParam.swift; sourceTree = "<group>"; };
+		155A36B628D18DD900848592 /* AccountParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountParam.swift; sourceTree = "<group>"; };
 		155CED5E28A0EA380032C1BA /* GroupTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTabVM.swift; sourceTree = "<group>"; };
 		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
 		156386BF288A5249006653E8 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
@@ -275,6 +285,8 @@
 		157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWordWithCode.swift; sourceTree = "<group>"; };
 		157F53A628D844030087F8A3 /* SwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCell.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductViewModel.swift; sourceTree = "<group>"; };
+		1586641028D9629C00E4E902 /* UpdateProductView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdateProductView .swift"; sourceTree = "<group>"; };
 		159F086728AC72170008EC16 /* RentalDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDatePicker.swift; sourceTree = "<group>"; };
 		159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDetailVM.swift; sourceTree = "<group>"; };
 		159F1B20288B88DB00012113 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
@@ -410,14 +422,17 @@
 		151B556D28BC9EBC0090A5E8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1554576128D9A3E900DDAD9B /* UpdateClubInfoViewModel.swift */,
+				1554576628D9B3B700DDAD9B /* Image */,
 				15F937C628D5884D00D41F0C /* BeforeRefactoring */,
 				15394C0D28CDCAA200E4944A /* Authorization */,
 				15F937C528D5882700D41F0C /* Auth */,
 				15F937C728D58D5F00D41F0C /* Club */,
 				15C03143289CD5A900D0354E /* Rental */,
-				1523D5E328BE29BE009EB733 /* Managemnet  */,
+				1523D5E328BE29BE009EB733 /* Management */,
 				1525F5FF28B7365D00C7CA51 /* ItemRegistration */,
-				15868738287EBB270003C2DC /* MyPage */,
+				157C268828CF8246009115D8 /* PasswordViewModel.swift */,
+				15BDC4212881218500514EF1 /* MyPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -432,12 +447,13 @@
 			path = Scroll;
 			sourceTree = "<group>";
 		};
-		1523D5E328BE29BE009EB733 /* Managemnet  */ = {
+		1523D5E328BE29BE009EB733 /* Management */ = {
 			isa = PBXGroup;
 			children = (
 				1523D5E428BE29E9009EB733 /* ManagementViewModel.swift */,
+				1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */,
 			);
-			path = "Managemnet ";
+			path = Management;
 			sourceTree = "<group>";
 		};
 		15246BDE28851550000BDFC8 /* SubView */ = {
@@ -500,7 +516,7 @@
 				15228ABC28C89FA200A0B3C5 /* ProductData.swift */,
 				15A57C4828D45C670084E75A /* ItemData.swift */,
 				15228ABE28C8A06300A0B3C5 /* NoticeData.swift */,
-				15228AC028C8A08D00A0B3C5 /* ClubData.swift */,
+				15228AC028C8A08D00A0B3C5 /* ClubDetailData.swift */,
 				15A84D5A28CDF8DD00B3EB84 /* Annotation.swift */,
 			);
 			path = Data;
@@ -542,6 +558,23 @@
 				1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		1554576328D9A7F400DDAD9B /* Update */ = {
+			isa = PBXGroup;
+			children = (
+				1586641028D9629C00E4E902 /* UpdateProductView .swift */,
+				1554576428D9A80000DDAD9B /* UpdateClubView.swift */,
+			);
+			path = Update;
+			sourceTree = "<group>";
+		};
+		1554576628D9B3B700DDAD9B /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				1554576728D9B3C600DDAD9B /* ImageViewModel.swift */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		156386BB288A51EE006653E8 /* Home */ = {
@@ -615,6 +648,8 @@
 				1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */,
 				1523D5E128BE291C009EB733 /* MemberManagementView.swift */,
 				1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */,
+				1554576928D9BFAC00DDAD9B /* CouponManagementView.swift */,
+				1554576328D9A7F400DDAD9B /* Update */,
 				1563FE9128ADEE1600F46CC7 /* Cell */,
 			);
 			path = Management;
@@ -623,19 +658,11 @@
 		157C268A28CF8932009115D8 /* Param */ = {
 			isa = PBXGroup;
 			children = (
-				155A36B128D17F6900848592 /* Account.swift */,
 				157C268B28CF8944009115D8 /* PasswordReset.swift */,
-				155A36B628D18DD900848592 /* SignUpParam.swift */,
+				155A36B628D18DD900848592 /* AccountParam.swift */,
+				1554576B28D9C3D400DDAD9B /* NotificationParam.swift */,
 			);
 			path = Param;
-			sourceTree = "<group>";
-		};
-		15868738287EBB270003C2DC /* MyPage */ = {
-			isa = PBXGroup;
-			children = (
-				15BDC4212881218500514EF1 /* MyPageViewModel.swift */,
-			);
-			path = MyPage;
 			sourceTree = "<group>";
 		};
 		159F1B22288B9F7000012113 /* Font */ = {
@@ -701,7 +728,6 @@
 			children = (
 				157C268028CF3E6A009115D8 /* LoginViewModel.swift */,
 				157C267E28CF3E60009115D8 /* SignUpViewModel.swift */,
-				157C268828CF8246009115D8 /* PasswordViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -986,7 +1012,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				152980F0288D39E500537A80 /* ClubPage.swift in Sources */,
-				155A36B228D17F6900848592 /* Account.swift in Sources */,
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
 				152C6F5728C8551500AA420A /* RentalData.swift in Sources */,
@@ -1015,6 +1040,7 @@
 				1563FE9928ADFBA700F46CC7 /* BookCell.swift in Sources */,
 				15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */,
 				157F53A728D844030087F8A3 /* SwipeCell.swift in Sources */,
+				1554576A28D9BFAC00DDAD9B /* CouponManagementView.swift in Sources */,
 				15A84D5B28CDF8DD00B3EB84 /* Annotation.swift in Sources */,
 				156386C0288A5249006653E8 /* HomeTab.swift in Sources */,
 				15A57C4928D45C670084E75A /* ItemData.swift in Sources */,
@@ -1023,6 +1049,7 @@
 				15A84D5F28CE12A500B3EB84 /* SimpleLine.swift in Sources */,
 				158011792893992A006016AD /* ImagePicker.swift in Sources */,
 				152D463028C606E5008F26E0 /* LocationManager.swift in Sources */,
+				1586641128D9629C00E4E902 /* UpdateProductView .swift in Sources */,
 				1525F60428B739EF00C7CA51 /* enums.swift in Sources */,
 				15FA688228BC718500B3DF0B /* GroupManagementExtension.swift in Sources */,
 				15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */,
@@ -1031,6 +1058,7 @@
 				15A84D6128CE1C6C00B3EB84 /* NotificationViewModel.swift in Sources */,
 				155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */,
 				1570663628A53139002F7365 /* BounceControllScrollView.swift in Sources */,
+				1554576528D9A80000DDAD9B /* UpdateClubView.swift in Sources */,
 				15BBB9FC28CEF58D00DCEF92 /* PrivacyPolicy.swift in Sources */,
 				157190EA28B6FE0F00880F98 /* WidthSetterView .swift in Sources */,
 				151B557528BCAA2F0090A5E8 /* Modal .swift in Sources */,
@@ -1051,11 +1079,12 @@
 				153C1A7B288CF7D600F89B2E /* ClubProfile.swift in Sources */,
 				15667BCF28CCDA5F00AE9A2D /* ToS.swift in Sources */,
 				157C267F28CF3E60009115D8 /* SignUpViewModel.swift in Sources */,
-				155A36B728D18DD900848592 /* SignUpParam.swift in Sources */,
+				155A36B728D18DD900848592 /* AccountParam.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
 				15FA687B28BC62B800B3DF0B /* Profile.swift in Sources */,
 				15FA687928BC5A2400B3DF0B /* Param.swift in Sources */,
 				1563FE9B28AE059D00F46CC7 /* ReturnManagement.swift in Sources */,
+				1554576C28D9C3D400DDAD9B /* NotificationParam.swift in Sources */,
 				156386D4288A5D84006653E8 /* FavoriteGroupCell.swift in Sources */,
 				150072F4289A2042005B6A93 /* ProductCell.swift in Sources */,
 				15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */,
@@ -1078,6 +1107,7 @@
 				1563FE8E28ADDF5600F46CC7 /* ClubManagementView.swift in Sources */,
 				15FAF15F287D5E1800B35570 /* Login.swift in Sources */,
 				157190E828B6F5F300880F98 /* RentalAndItemManagement.swift in Sources */,
+				1586640E28D95F1C00E4E902 /* UpdateProductViewModel.swift in Sources */,
 				15F937C928D58E0700D41F0C /* ClubSearchViewModel.swift in Sources */,
 				157C268C28CF8944009115D8 /* PasswordReset.swift in Sources */,
 				1525F60628B73B4700C7CA51 /* ItemCategory.swift in Sources */,
@@ -1096,13 +1126,15 @@
 				15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */,
 				157190F328B7053200880F98 /* ItemPhoto.swift in Sources */,
 				157C269228CFB2BE009115D8 /* NavyCapsule.swift in Sources */,
+				1554576228D9A3EA00DDAD9B /* UpdateClubInfoViewModel.swift in Sources */,
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
+				1554576828D9B3C600DDAD9B /* ImageViewModel.swift in Sources */,
 				157C268128CF3E6A009115D8 /* LoginViewModel.swift in Sources */,
 				152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15228ABF28C8A06300A0B3C5 /* NoticeData.swift in Sources */,
 				152C6F5128C83F1A00AA420A /* ColorExtension.swift in Sources */,
-				15228AC128C8A08D00A0B3C5 /* ClubData.swift in Sources */,
+				15228AC128C8A08D00A0B3C5 /* ClubDetailData.swift in Sources */,
 				15BBB9FF28CF028300DCEF92 /* RepresentativeImage.swift in Sources */,
 				156673DE28C1C6860011535D /* MaxYSetterView.swift in Sources */,
 				157C269428CFBB6C009115D8 /* ResetPassWordWithCode.swift in Sources */,
