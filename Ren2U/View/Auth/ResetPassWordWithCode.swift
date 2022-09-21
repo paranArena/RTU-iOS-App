@@ -41,6 +41,7 @@ struct ResetPassWordWithCode: View {
             }
             .isHidden(hidden: !pwVM.isCodeRequested)
         }
+//        .navigationBarBackButtonHidden()
         .alert(pwVM.dismissAlert.title, isPresented: $pwVM.dismissAlert.isPresented) {
             Button("확인") { dismiss() }
         } message: {

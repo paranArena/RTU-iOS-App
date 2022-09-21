@@ -73,7 +73,7 @@ class ManagementViewModel: ObservableObject {
     func createNotification(notice: NotificationModel) async {
         let url = "\(BASE_URL)/clubs/\(clubData.id)/notifications"
         let hearders: HTTPHeaders = [
-            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")",
             "Content-type": "multipart/form-data"
         ]
         
