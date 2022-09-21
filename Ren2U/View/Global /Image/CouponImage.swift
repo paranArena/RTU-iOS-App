@@ -11,6 +11,7 @@ import Kingfisher
 struct CouponImage: View {
     
     let url: String
+    let size: CGFloat
     
     var body: some View {
         
@@ -18,7 +19,7 @@ struct CouponImage: View {
             Image(AssetImages.DefaultCouponImage.rawValue)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 200, height: 200)
+                .frame(width: size, height: size)
                 .clipShape(RoundedCorner(radius: 15, corners: .allCorners))
                 .isHidden(hidden: !url.isEmpty)
             
@@ -26,7 +27,7 @@ struct CouponImage: View {
             KFImage(URL(string: url))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 200, height: 200)
+                .frame(width: size, height: size)
                 .clipShape(RoundedCorner(radius: 15, corners: .allCorners))
                 .isHidden(hidden: url.isEmpty)
         }

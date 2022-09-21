@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ManageMemberCell: View {
     
-    let memberInfo: MemberAndRoleData
+    let memberInfo: MemberPreviewData
     @Binding var selectedCellID: Int
     
     @ObservedObject var managementVM: ManagementViewModel

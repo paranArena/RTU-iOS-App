@@ -9,30 +9,19 @@ import SwiftUI
 
 struct CouponManagementView: View {
     
-    @ObservedObject var managementVM: ManagementViewModel
-    @StateObject var couponVM = CouponViewModel()
+    @ObservedObject var couponVM: CouponViewModel
     
     var body: some View {
         ScrollView {
             VStack {
-                Text("tmp")
-                Text("tmp")
-                Text("tmp")
-                Text("tmp")
-                Text("tmp")
-                Text("tmp")
-                Text("tmp")
-                Text("tmp")
-                Text("tmp")
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .overlay(alignment: .bottomTrailing) {
-                NavigationLink {
-                    CreateCouponView(couponVM: couponVM)
-                } label: {
-                    PlusCircleImage()
+                ForEach(couponVM.clubCoupons.indices) { i in
+                    CouponPreviewCell(data: couponVM.clubCoupons[i])
+                    Divider()
+                        .padding(.horizontal, -10)
                 }
             }
+            .padding(.horizontal)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .alert(couponVM.oneButtonAlert.title, isPresented: $couponVM.oneButtonAlert.isPresented) {
             OneButtonAlert.noActionButton
@@ -43,6 +32,13 @@ struct CouponManagementView: View {
         .avoidSafeArea()
         .onAppear {
             UITabBar.hideTabBar()
+        }
+        .overlay(alignment: .bottomTrailing) {
+            NavigationLink {
+                CreateCouponView(couponVM: couponVM)
+            } label: {
+                PlusCircleImage()
+            }
         }
     }
 }

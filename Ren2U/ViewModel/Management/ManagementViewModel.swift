@@ -14,7 +14,7 @@ class ManagementViewModel: ObservableObject {
     @Published var clubData = ClubDetailData.dummyClubData()
     
     @Published var applicants = [UserData]()
-    @Published var members = [MemberAndRoleData]()
+    @Published var members = [MemberPreviewData]()
     @Published var products = [ProductPreviewDto]()
     @Published var notices = [NotificationPreview]()
     @Published var rentals = [ClubRentalData]()
@@ -38,7 +38,7 @@ class ManagementViewModel: ObservableObject {
     
     //  MARK: LOCAL
     
-    func alertGrant(memberAndRoleData: MemberAndRoleData) {
+    func alertGrant(memberAndRoleData: MemberPreviewData) {
         alert.title = memberAndRoleData.alertMessage
         alert.isPresented = true
         let memberId = memberAndRoleData.id

@@ -11,7 +11,16 @@ import Combine
 
 class CouponViewModel: ObservableObject {
     
+    let clubId: Int
+    var couponId = 0 
+    
     @Published var coupon = CouponParam()
+    
+    // CouponPreviewCell
+    @Published var clubCoupons = [CouponPreviewData]()
+    
+    // CouponDetailView
+    
     @Published var isShowingLocationPikcer = false
     
     @Published var alert = Alert()
@@ -21,8 +30,10 @@ class CouponViewModel: ObservableObject {
     var couponService = CouponeService.shared
     var imageService = ImageService.shared
     
-    init() {
-        
+    init(clubId: Int) {
+        print("Coupon view model init")
+        self.clubId = clubId
+        getClubCouponsAdmin()
     }
     
     @MainActor
@@ -42,6 +53,19 @@ class CouponViewModel: ObservableObject {
         coupon.clearAll()
     }
     
+    func getClubCouponsAdmin() {
+        couponService.getClubCouponsAdmin(clubId: self.clubId)
+            .sink { dataResponse in
+                if let error = dataResponse.error {
+                    self.showAlert(with: error)
+                    print(dataResponse.debugDescription)
+                } else {
+                    self.clubCoupons = dataResponse.value?.data ?? [CouponPreviewData]()
+                }
+            }
+            .store(in: &cancellableSet)
+    }
+    
     func postCouponAdmin(clubId: Int) {
         
         let testParam: [String: Any] = [
@@ -56,6 +80,19 @@ class CouponViewModel: ObservableObject {
         ]
         
         couponService.createCouponAdmin(clubId: clubId, param: testParam)
+            .sink { dataResponse in
+                if let error = dataResponse.error {
+                    self.showAlert(with: error)
+                    print(dataResponse.debugDescription)
+                } else {
+                    print(dataResponse.value?.responseMessage ?? "")
+                }
+            }.store(in: &cancellableSet)
+    }
+    
+    func grantCouponAdmin(param: [Int]) {
+        let param = ["membersId" : param]
+        couponService.grantCouponAdmin(clubId: clubId, couponId: couponId, param: param)
             .sink { dataResponse in
                 if let error = dataResponse.error {
                     self.showAlert(with: error)

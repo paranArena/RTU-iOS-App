@@ -47,7 +47,7 @@ struct GetMyClubRoleResponse: Codable {
 struct SearchClubMembersAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [MemberAndRoleData]
+    let data: [MemberPreviewData]
 }
 
 

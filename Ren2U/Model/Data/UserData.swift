@@ -23,7 +23,12 @@ struct User: Codable {
     }
 }
 
-struct MemberAndRoleData: Codable, Identifiable {
+struct CouponMemberData: Codable {
+    var isSelected = false
+    let data: MemberPreviewData
+}
+
+struct MemberPreviewData: Codable, Identifiable {
     let id: Int
     let email: String
     let name: String

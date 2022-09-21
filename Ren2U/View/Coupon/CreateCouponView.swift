@@ -21,7 +21,7 @@ struct CreateCouponView: View {
             VStack(alignment: .center, spacing: 30) {
                 
                 VStack(alignment: .center, spacing: 10) {
-                    CouponImage(url: couponVM.coupon.imagePath)
+                    CouponImage(url: couponVM.coupon.imagePath, size: 200)
                     ChangeImageButton()
                 }
                 .frame(maxWidth: .infinity)
@@ -113,7 +113,7 @@ struct CreateCouponView: View {
             Button {
                 couponVM.isShowingLocationPikcer = true
             } label: {
-                ShowMapLabel(bgColor: couponVM.coupon.showMapButtonBGColor, fgColor: couponVM.coupon.showMapButtonFGColor)
+                GrayRoundedRectangle(bgColor: couponVM.coupon.showMapButtonBGColor, fgColor: couponVM.coupon.showMapButtonFGColor, text: "지도에서 장소 표시")
             }
 //            .background(
 //                NavigationLink(isActive: $couponVM.isShowingLocationPikcer) {

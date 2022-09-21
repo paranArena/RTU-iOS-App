@@ -16,6 +16,7 @@ struct ClubManagementView: View {
     @Environment(\.isPresented) var isPresented
     
     @StateObject var managementVM: ManagementViewModel
+    @StateObject var couponVM: CouponViewModel
     @EnvironmentObject var clubVM: ClubViewModel
     @State private var tmp = false
     
@@ -191,7 +192,7 @@ struct ClubManagementView: View {
 //        case .rentalActive:
 //            Text("Empty View")
         case .coupon:
-            CouponManagementView(managementVM: managementVM)
+            CouponManagementView(couponVM: couponVM)
         }
     }
 }

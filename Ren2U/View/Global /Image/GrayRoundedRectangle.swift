@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct ShowMapLabel: View {
+struct GrayRoundedRectangle: View {
     
     let bgColor: Color
     let fgColor: Color
+    let text: String
     
     var body: some View {
-        Text("지도에서 장소 표시")
+        Text(text)
             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
             .frame(width: 150, height: 30)
             .foregroundColor(fgColor)
