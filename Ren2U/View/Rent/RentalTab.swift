@@ -91,10 +91,6 @@ struct RentalTab: View {
         }
         .disabled(isShowingModal)
         .overlay(ShadowRectangle())
-        .overlay(Modal(isShowingModal: $isShowingModal, text: "예약을 취소하시겠습니까?", callback: {
-            isShowingModal = false
-            print("예약이 취소되었습니다!")
-        }))
         .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)

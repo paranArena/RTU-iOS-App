@@ -59,7 +59,7 @@ struct NoticeManagementView: View {
             NavigationLink {
                 CreateNoticeView(managementVM: managementVM)
             } label: {
-                PlusCircle()
+                PlusCircleImage()
             }
         }
         .avoidSafeArea()

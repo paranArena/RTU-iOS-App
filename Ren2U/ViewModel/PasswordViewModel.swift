@@ -80,7 +80,7 @@ class PasswordViewModel: ObservableObject {
                 break
             default:
                 if let data = response.data {
-                    let error = try? JSONDecoder().decode(ErrorBody.self, from: data)
+                    let error = try? JSONDecoder().decode(ServerError.self, from: data)
                     if let code = error?.code {
                         switch code {
                         case "WRONG_VERIFICATION_CODE":

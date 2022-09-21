@@ -1,18 +1,19 @@
 //
-//  PickUpLocationMap .swift
+//  CouponLocationView .swift
 //  Ren2U
 //
-//  Created by 노우영 on 2022/08/25.
+//  Created by 노우영 on 2022/09/21.
 //
 
 import SwiftUI
+import CoreLocation
 import MapKit
 
-struct PickUpLocationMap: View {
+struct CouponLocationView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var locationManager: LocationManager
-    @ObservedObject var itemVM: ItemViewModel
+    @ObservedObject var couponVM: CouponViewModel
     
     var body: some View {
         VStack {
@@ -21,12 +22,11 @@ struct PickUpLocationMap: View {
 
             
             Button {
-                itemVM.locationLongtitude = locationManager.region.center.longitude
-                itemVM.locationLatitude = locationManager.region.center.latitude
-                itemVM.isSelectedLocation = true
+                couponVM.coupon.latitude = locationManager.region.center.latitude
+                couponVM.coupon.longitude = locationManager.region.center.longitude
                 self.presentationMode.wrappedValue.dismiss()
             } label: {
-                Text("선택된 장소에서 픽업")
+                Text("선택된 장소로 설정")
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                     .foregroundColor(locationManager.fgColor)
                     .padding(.vertical, 10)
@@ -42,8 +42,8 @@ struct PickUpLocationMap: View {
     }
 }
 
-//struct PickUpLocationMap_Previews: PreviewProvider {
+//struct CouponLocationView__Previews: PreviewProvider {
 //    static var previews: some View {
-//        PickUpLocationMap(itemVM: ItemViewModel())
+//        CouponLocationView_()
 //    }
 //}

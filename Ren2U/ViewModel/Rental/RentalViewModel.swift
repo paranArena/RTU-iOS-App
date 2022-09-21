@@ -154,7 +154,7 @@ class RentalViewModel: ObservableObject {
                 print("[requestRent success]")
             case 400:
                 if let data = response.data {
-                    let error = try? JSONDecoder().decode(ErrorBody.self, from: data)
+                    let error = try? JSONDecoder().decode(ServerError.self, from: data)
                     if let code = error?.code {
                         switch code {
                         case "ALREADY_USED":

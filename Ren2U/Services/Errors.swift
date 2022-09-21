@@ -5,9 +5,15 @@
 //  Created by 노우영 on 2022/09/09.
 //
 
-import SwiftUI
+import Foundation
+import Alamofire
 
-struct ErrorBody: Decodable {
+struct NetworkError: Error {
+    let initialError: AFError
+    let serverError: ServerError?
+}
+
+struct ServerError: Decodable {
     let code: String
     let message: String 
 }

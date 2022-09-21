@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PlusCircle: View {
+struct PlusCircleImage: View {
     var body: some View {
         Image(systemName: "plus.circle")
             .resizable()
@@ -21,6 +21,6 @@ struct PlusCircle: View {
 
 struct PlusButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlusCircle()
+        PlusCircleImage()
     }
 }

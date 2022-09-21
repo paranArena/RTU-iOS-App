@@ -63,6 +63,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         return false
     }
     
+    func resetRegion() {
+        region = MKCoordinateRegion(center: (locationManager?.location!.coordinate)!,
+                                    span: DEFAULT_SPAN)
+    }
+    
     func requestAuthorization() -> Bool {
         if isAuthorized {
             region = MKCoordinateRegion(center: (locationManager?.location!.coordinate)!,

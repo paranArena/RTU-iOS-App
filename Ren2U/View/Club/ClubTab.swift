@@ -25,6 +25,7 @@ struct ClubTab: View {
     @State private var selectedNotificationLinkIndex: Int?
     @State private var isActiveNotificationDetail = false
     
+    
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
@@ -99,7 +100,7 @@ struct ClubTab: View {
                 NavigationLink {
                     ClubProfile(viewModel: ClubProfile.ViewModel(mode: .post))
                 } label: {
-                    PlusCircle()
+                    PlusCircleImage()
                 }
             }
         }
