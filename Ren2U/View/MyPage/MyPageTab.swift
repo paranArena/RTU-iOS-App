@@ -13,6 +13,7 @@ import Introspect
 extension MyPageTab {
     enum Content: Int, CaseIterable {
         case checkProfile
+        case coupon
 //        case alarm
 //        case notice
         case term
@@ -66,6 +67,14 @@ struct MyPageTab: View {
         switch content {
         case .checkProfile:
             ProfileNavigation()
+        case .coupon:
+            NavigationLink {
+                MyCouponView()
+            } label: {
+                Text("쿠폰함")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+
 //        case .alarm:
 //            AlaramNavigation()
 //        case .notice:
@@ -73,7 +82,12 @@ struct MyPageTab: View {
         case .term:
             TermNavigation()
         case .privacy:
-            PrivacyNavigation()
+            NavigationLink {
+                PrivacyPolicy()
+            } label: {
+                Text("개인정보처리 방침")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         case .logout:
             LogoutButton()
         }
@@ -106,15 +120,6 @@ struct MyPageTab: View {
         .padding(.bottom, 20)
     }
     
-    @ViewBuilder
-    private func PrivacyNavigation() -> some View {
-        NavigationLink {
-            PrivacyPolicy() 
-        } label: {
-            Text("개인정보처리 방침")
-                .frame(maxWidth: .infinity, alignment: .leading)
-        }
-    }
     @ViewBuilder
     private func ProfileNavigation() -> some View {
         NavigationLink {

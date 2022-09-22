@@ -15,15 +15,17 @@ class CouponViewModel: ObservableObject {
     var couponId = 0 
     
     @Published var coupon = CouponParam()
-    @Published var couponMembers = [CouponMembersData]()
-    @Published var couponeMebersHistories = [CouponMembersData]()
     
     // CouponPreviewCell
     @Published var clubCoupons = [CouponPreviewData]()
     
     // CouponDetailView
+    @Published var couponMembers = [CouponMembersData]()
+    @Published var couponeMebersHistories = [CouponMembersData]()
     @Published var couponDetailData: CouponDetailAdminData?
     @Published var isShowingLocationPikcer = false
+    let couponTitle = CouponTitle()
+    @Published var selectedTitle = ""
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
@@ -36,7 +38,7 @@ class CouponViewModel: ObservableObject {
     init(clubId: Int) {
         print("Coupon view model init")
         self.clubId = clubId
-        
+        self.selectedTitle = couponTitle.title[0]
         Task { await getClubCouponsAdmin() }
     }
     
@@ -96,6 +98,7 @@ class CouponViewModel: ObservableObject {
                 self.showAlert(with: error)
             } else {
                 print("getCouponMembersAdmin success")
+                print(response.value?.data)
                 self.couponMembers = response.value?.data ?? [CouponMembersData]()
             }
         }

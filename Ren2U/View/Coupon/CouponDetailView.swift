@@ -7,20 +7,55 @@
 
 import SwiftUI
 
+struct CouponTitle: Title {
+    var title: [String] = ["미사용", "사용완료"]
+    
+    func getTitleOffset(title: String) -> Int {
+        var value = 0
+        for i in 0..<self.title.count {
+            if self.title[i] == title {
+                value = i
+            }
+        }
+        return value
+    }
+    
+    func getTitleColor(title: String, index: Int) -> Color {
+        if self.title[index] == title {
+            return Color.navy_1E2F97
+        } else {
+            return Color.gray_ADB5BD
+        }
+    }
+    
+    
+}
+
 struct CouponDetailView: View {
+    
     @ObservedObject var couponVM: CouponViewModel
     @ObservedObject var managementVM: ManagementViewModel
+    let couponTitle = CouponTitle()
     
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 30) {
-                CouponImage(url: couponVM.couponDetailData?.imagePath ?? "", size: 200)
                 
+                CouponImage(url: couponVM.couponDetailData?.imagePath ?? "", size: 200)
                 CouponCount()
                 Period()
                 Location()
                 Information()
                 GrantCoupon()
+                
+                TitleSelector(titles: couponVM.couponTitle, selectedTitle: $couponVM.selectedTitle)
+                
+                UnusedCouponMembers()
+                    .isHidden(hidden: couponVM.selectedTitle != couponVM.couponTitle.title[0])
+                UsedCouponMebers()
+                    .isHidden(hidden: couponVM.selectedTitle != couponVM.couponTitle.title[1])
+                
+
             }
             .padding(.horizontal)
         }
@@ -92,14 +127,15 @@ struct CouponDetailView: View {
             Text("세부정보")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .foregroundColor(.gray_495057)
+                .frame(maxWidth: .infinity)
             
             Text(couponVM.couponDetailData?.information ?? "")
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .padding(.vertical, 5)
                 .padding(.horizontal, 5)
-                .background(RoundedCorner(radius: 15, corners: .allCorners).fill(Color.gray_E9ECEF))
+                .background(RoundedCorner(radius: 10, corners: .allCorners).fill(Color.gray_E9ECEF))
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     @ViewBuilder
@@ -117,6 +153,31 @@ struct CouponDetailView: View {
 
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    @ViewBuilder
+    private func UnusedCouponMembers() -> some View {
+        VStack {
+            ForEach(couponVM.couponMembers.indices, id: \.self) { i in
+                CouponMemberCell(memberInfo: couponVM.couponMembers[i].memberPreviewDto)
+                
+                Divider()
+                    .padding(.horizontal, -10)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func UsedCouponMebers() -> some View {
+        VStack {
+            ForEach(couponVM.couponeMebersHistories.indices, id: \.self) { i in
+                CouponMemberCell(memberInfo: couponVM.couponeMebersHistories[i].memberPreviewDto)
+                
+                
+                Divider()
+                    .padding(.horizontal, -10)
+            }
+        }
     }
 }
 

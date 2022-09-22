@@ -17,7 +17,7 @@ struct GrantCouponView: View {
         ScrollView {
             VStack {
                 TopButton()
-                ForEach(managementVM.members.indices) { i in
+                ForEach(managementVM.members.indices, id: \.self) { i in
                     HStack(alignment: .center, spacing: 10) {
                         Button {
                             managementVM.members[i].isSelected.toggle()

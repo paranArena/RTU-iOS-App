@@ -69,7 +69,7 @@ struct CouponDetailAdminData: Codable {
     }
 }
 
-struct CouponMembersData: Codable {
+struct CouponMembersData: Codable, Identifiable {
     let id: Int
     let memberPreviewDto: MemberPreviewDto
 }
@@ -79,11 +79,27 @@ struct MemberPreviewDto: Codable {
     let name: String
     let major: String
     let studentId: String
+    
+    var year: String {
+        return studentId.substring(from: 3, to: 4)
+    }
 }
 
 //  MARK: RESPONSES
 
 struct GetClubCouponsAdminResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [CouponPreviewData]
+}
+
+struct GetMyCouponsAllResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: [CouponPreviewData]
+}
+
+struct GetMyCouponHistoriesAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
     let data: [CouponPreviewData]

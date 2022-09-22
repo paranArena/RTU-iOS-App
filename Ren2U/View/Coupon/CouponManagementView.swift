@@ -15,12 +15,14 @@ struct CouponManagementView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(couponVM.clubCoupons.indices) { i in
+                ForEach(couponVM.clubCoupons.indices, id: \.self) { i in
                     NavigationLink {
                         CouponDetailView(couponVM: couponVM, managementVM: managementVM)
                             .onAppear {
                                 couponVM.getCouponAdmin(couponId: couponVM.clubCoupons[i].id)
                                 couponVM.couponId = couponVM.clubCoupons[i].id
+                                couponVM.getCouponMembersAdmin(couponId: couponVM.couponId)
+                                couponVM.getCouponMembersHistoriesAdmin(couponId: couponVM.couponId)
                             }
                     } label: {
                         CouponPreviewCell(data: couponVM.clubCoupons[i], managementVM: managementVM)

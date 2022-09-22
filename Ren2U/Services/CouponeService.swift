@@ -14,8 +14,10 @@ class CouponeService {
     private init() { }
     
     //  MARK: GET
+
     
     func getClubCouponsAdmin(clubId: Int) async -> DataResponse<GetClubCouponsAdminResponse, NetworkError> {
+        
         let url = "\(BASE_URL)/clubs/\(clubId)/coupons/admin"
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
         let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetClubCouponsAdminResponse.self).response
@@ -40,7 +42,7 @@ class CouponeService {
     }
     
     func getCouponMembersAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponMembersAdmin, NetworkError> {
-        let url = "\(BASE_URL)/clubs/\(clubId)/coupon/\(couponId)/admin"
+        let url = "\(BASE_URL)/clubs/\(clubId)/coupons/\(couponId)/couponMembers/admin"
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
         let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetCouponMembersAdmin.self).response
         
@@ -51,7 +53,7 @@ class CouponeService {
     }
     
     func getCouponMembersHistoriesAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponMembersHistoriesAdmin, NetworkError> {
-        let url = "\(BASE_URL)/clubs/\(clubId)/coupon/\(couponId)/histories/admin"
+        let url = "\(BASE_URL)/clubs/\(clubId)/coupons/\(couponId)/histories/admin"
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
         let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetCouponMembersHistoriesAdmin.self).response
         
