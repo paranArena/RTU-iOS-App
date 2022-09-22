@@ -111,8 +111,8 @@ struct MemberManagementView: View {
             Group {
                 SwipeResettableView(selectedCellId: $selectedCellID) {
                     VStack {
-                        ForEach(managementVM.members.indices, id: \.self) { index in
-                            ManageMemberCell(memberInfo: managementVM.members[index], selectedCellID: $selectedCellID,  managementVM: managementVM)
+                        ForEach(managementVM.members.indices) { index in
+                            MemberSwipeCell(memberInfo: managementVM.members[index].data, selectedCellID: $selectedCellID,  managementVM: managementVM)
                         }
                     }
                     .isHidden(hidden: managementVM.members.isEmpty)

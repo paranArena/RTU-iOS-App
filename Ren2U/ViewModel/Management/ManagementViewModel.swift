@@ -14,10 +14,22 @@ class ManagementViewModel: ObservableObject {
     @Published var clubData = ClubDetailData.dummyClubData()
     
     @Published var applicants = [UserData]()
-    @Published var members = [MemberPreviewData]()
     @Published var products = [ProductPreviewDto]()
     @Published var notices = [NotificationPreview]()
     @Published var rentals = [ClubRentalData]()
+    
+    // MemberManagementView, GrantCouponView 
+    @Published var members = [CouponMemberData]()
+    
+    var selectedMemberCount: Int {
+        var result = 0
+        for member in members {
+            if member.isSelected {
+                result += 1
+            }
+        }
+        return result
+    }
     
     
     @Published var alert = Alert()
@@ -37,6 +49,18 @@ class ManagementViewModel: ObservableObject {
     }
     
     //  MARK: LOCAL
+    
+    func selectAllMembers() {
+        for i in 0..<members.count {
+            members[i].isSelected = true
+        }
+    }
+    
+    func unselectAllMembers() {
+        for i in 0..<members.count {
+            members[i].isSelected = false
+        }
+    }
     
     func alertGrant(memberAndRoleData: MemberPreviewData) {
         alert.title = memberAndRoleData.alertMessage
@@ -135,7 +159,9 @@ class ManagementViewModel: ObservableObject {
         case .success(let value):
             print("[searchClubMembersAll success]")
             print(value.responseMessage)
-            self.members = value.data
+            self.members = value.data.map { member in
+                CouponMemberData(data: member)
+            }
         case .failure(let err):
             print("[seaerchClubMembersAll err]")
             print(err)

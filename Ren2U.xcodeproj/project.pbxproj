@@ -15,10 +15,14 @@
 		1514A10028B7594F0040F681 /* ItemCaution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FF28B7594F0040F681 /* ItemCaution.swift */; };
 		1514A10228B75CDA0040F681 /* HeightSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A10128B75CDA0040F681 /* HeightSetterView.swift */; };
 		151B557128BCA1AA0090A5E8 /* Reponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B557028BCA1AA0090A5E8 /* Reponses.swift */; };
-		151E4E9028C4620400FFB668 /* ManageMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */; };
+		151E4E9028C4620400FFB668 /* MemberSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E8F28C4620400FFB668 /* MemberSwipeCell.swift */; };
 		151E4E9228C4948600FFB668 /* SwipeResettableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E4E9128C4948600FFB668 /* SwipeResettableView.swift */; };
-		15206E4328DB3CF50091DA74 /* CouponPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4228DB3CF50091DA74 /* CouponPreviewData.swift */; };
+		15206E4328DB3CF50091DA74 /* CouponData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4228DB3CF50091DA74 /* CouponData.swift */; };
 		15206E4628DB4D3F0091DA74 /* CouponPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4528DB4D3F0091DA74 /* CouponPreviewCell.swift */; };
+		15206E4828DB5E1E0091DA74 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4728DB5E1E0091DA74 /* LocationData.swift */; };
+		15206E4A28DB5E6E0091DA74 /* CouponDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4928DB5E6E0091DA74 /* CouponDetailView.swift */; };
+		15206E4C28DB66E10091DA74 /* GrantCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4B28DB66E10091DA74 /* GrantCouponView.swift */; };
+		15206E4E28DB687C0091DA74 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4D28DB687C0091DA74 /* MemberCell.swift */; };
 		15228AB928C891A600A0B3C5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15228AB828C891A600A0B3C5 /* Alamofire */; };
 		15228ABB28C8970A00A0B3C5 /* RentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228ABA28C8970A00A0B3C5 /* RentalCell.swift */; };
 		15228ABD28C89FA200A0B3C5 /* ProductData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228ABC28C89FA200A0B3C5 /* ProductData.swift */; };
@@ -198,10 +202,14 @@
 		1514A0FF28B7594F0040F681 /* ItemCaution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCaution.swift; sourceTree = "<group>"; };
 		1514A10128B75CDA0040F681 /* HeightSetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightSetterView.swift; sourceTree = "<group>"; };
 		151B557028BCA1AA0090A5E8 /* Reponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reponses.swift; sourceTree = "<group>"; };
-		151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMemberCell.swift; sourceTree = "<group>"; };
+		151E4E8F28C4620400FFB668 /* MemberSwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSwipeCell.swift; sourceTree = "<group>"; };
 		151E4E9128C4948600FFB668 /* SwipeResettableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeResettableView.swift; sourceTree = "<group>"; };
-		15206E4228DB3CF50091DA74 /* CouponPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponPreviewData.swift; sourceTree = "<group>"; };
+		15206E4228DB3CF50091DA74 /* CouponData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponData.swift; sourceTree = "<group>"; };
 		15206E4528DB4D3F0091DA74 /* CouponPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponPreviewCell.swift; sourceTree = "<group>"; };
+		15206E4728DB5E1E0091DA74 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		15206E4928DB5E6E0091DA74 /* CouponDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponDetailView.swift; sourceTree = "<group>"; };
+		15206E4B28DB66E10091DA74 /* GrantCouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrantCouponView.swift; sourceTree = "<group>"; };
+		15206E4D28DB687C0091DA74 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		15228ABA28C8970A00A0B3C5 /* RentalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCell.swift; sourceTree = "<group>"; };
 		15228ABC28C89FA200A0B3C5 /* ProductData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductData.swift; sourceTree = "<group>"; };
 		15228ABE28C8A06300A0B3C5 /* NoticeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeData.swift; sourceTree = "<group>"; };
@@ -547,7 +555,8 @@
 				15228ABE28C8A06300A0B3C5 /* NoticeData.swift */,
 				15228AC028C8A08D00A0B3C5 /* ClubDetailData.swift */,
 				15A84D5A28CDF8DD00B3EB84 /* Annotation.swift */,
-				15206E4228DB3CF50091DA74 /* CouponPreviewData.swift */,
+				15206E4228DB3CF50091DA74 /* CouponData.swift */,
+				15206E4728DB5E1E0091DA74 /* LocationData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -559,6 +568,8 @@
 				1554576928D9BFAC00DDAD9B /* CouponManagementView.swift */,
 				153687AA28DAC16600E0D554 /* CreateCouponView.swift */,
 				153687B428DAD75A00E0D554 /* CouponLocationView .swift */,
+				15206E4928DB5E6E0091DA74 /* CouponDetailView.swift */,
+				15206E4B28DB66E10091DA74 /* GrantCouponView.swift */,
 			);
 			path = Coupon;
 			sourceTree = "<group>";
@@ -682,8 +693,9 @@
 				1563FE9828ADFBA700F46CC7 /* BookCell.swift */,
 				15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */,
 				15382EC928C1A338004D7977 /* ManageNoticeCell.swift */,
-				151E4E8F28C4620400FFB668 /* ManageMemberCell.swift */,
+				151E4E8F28C4620400FFB668 /* MemberSwipeCell.swift */,
 				15799D3F28C789A70032D884 /* ManageProductCell.swift */,
+				15206E4D28DB687C0091DA74 /* MemberCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1074,7 +1086,7 @@
 				157190EF28B7024D00880F98 /* ProductManageView.swift in Sources */,
 				1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */,
 				15667BCD28CC98D500AE9A2D /* Alert.swift in Sources */,
-				15206E4328DB3CF50091DA74 /* CouponPreviewData.swift in Sources */,
+				15206E4328DB3CF50091DA74 /* CouponData.swift in Sources */,
 				157190ED28B7023600880F98 /* RentalManagementSelected.swift in Sources */,
 				1523D5EA28BE2CE7009EB733 /* CreateNoticeView.swift in Sources */,
 				154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */,
@@ -1096,6 +1108,7 @@
 				15228ABB28C8970A00A0B3C5 /* RentalCell.swift in Sources */,
 				153687B528DAD75A00E0D554 /* CouponLocationView .swift in Sources */,
 				153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */,
+				15206E4E28DB687C0091DA74 /* MemberCell.swift in Sources */,
 				1563FE9928ADFBA700F46CC7 /* BookCell.swift in Sources */,
 				15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */,
 				157F53A728D844030087F8A3 /* SwipeCell.swift in Sources */,
@@ -1126,7 +1139,7 @@
 				1523D5E528BE29E9009EB733 /* ManagementViewModel.swift in Sources */,
 				1514A0FE28B753BB0040F681 /* PickUpLocationMap .swift in Sources */,
 				15D774F4288E2B8A00428465 /* ReportableNoticeHCell.swift in Sources */,
-				151E4E9028C4620400FFB668 /* ManageMemberCell.swift in Sources */,
+				151E4E9028C4620400FFB668 /* MemberSwipeCell.swift in Sources */,
 				1556E42C28CC5AE0007D1BDF /* DateExtension.swift in Sources */,
 				153687AF28DAC6D700E0D554 /* CouponImage.swift in Sources */,
 				15F3672F289261300073E094 /* ShadowRectangle.swift in Sources */,
@@ -1176,12 +1189,14 @@
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
 				1525F5FE28B7362C00C7CA51 /* ItemInformation.swift in Sources */,
+				15206E4C28DB66E10091DA74 /* GrantCouponView.swift in Sources */,
 				15A84D5D28CE120D00B3EB84 /* NotificationDetailView.swift in Sources */,
 				153687AD28DAC1DD00E0D554 /* UpdatedImagePicker.swift in Sources */,
 				159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */,
 				15BDC4222881218500514EF1 /* MyPageViewModel.swift in Sources */,
 				1525F60128B7366B00C7CA51 /* ItemViewModel.swift in Sources */,
 				1523D5D828BDC986009EB733 /* UserData.swift in Sources */,
+				15206E4A28DB5E6E0091DA74 /* CouponDetailView.swift in Sources */,
 				157C268928CF8246009115D8 /* PasswordViewModel.swift in Sources */,
 				153687A428DAB0CF00E0D554 /* CouponeService.swift in Sources */,
 				1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */,
@@ -1197,6 +1212,7 @@
 				152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15228ABF28C8A06300A0B3C5 /* NoticeData.swift in Sources */,
+				15206E4828DB5E1E0091DA74 /* LocationData.swift in Sources */,
 				152C6F5128C83F1A00AA420A /* ColorExtension.swift in Sources */,
 				15228AC128C8A08D00A0B3C5 /* ClubDetailData.swift in Sources */,
 				15BBB9FF28CF028300DCEF92 /* RepresentativeImage.swift in Sources */,

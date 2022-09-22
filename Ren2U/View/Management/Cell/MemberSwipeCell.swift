@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ManageMemberCell: View {
+struct MemberSwipeCell: View {
     
     let memberInfo: MemberPreviewData
     @Binding var selectedCellID: Int

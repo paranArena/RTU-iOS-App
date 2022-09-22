@@ -26,6 +26,14 @@ struct User: Codable {
 struct CouponMemberData: Codable {
     var isSelected = false
     let data: MemberPreviewData
+    
+    var selectButtonStrokeColor: Color {
+        if isSelected {
+            return Color.navy_1E2F97
+        } else {
+            return Color.gray_ADB5BD
+        }
+    }
 }
 
 struct MemberPreviewData: Codable, Identifiable {

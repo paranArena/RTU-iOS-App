@@ -91,9 +91,9 @@ struct RentalTab: View {
         }
         .disabled(isShowingModal)
         .overlay(ShadowRectangle())
-        .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
+        .animation(.spring(), value: rentalSelection)
         .onAppear {
             let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()

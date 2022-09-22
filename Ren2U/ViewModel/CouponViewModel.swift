@@ -20,7 +20,7 @@ class CouponViewModel: ObservableObject {
     @Published var clubCoupons = [CouponPreviewData]()
     
     // CouponDetailView
-    
+    @Published var couponDetailData: CouponDetailData?
     @Published var isShowingLocationPikcer = false
     
     @Published var alert = Alert()
@@ -33,7 +33,10 @@ class CouponViewModel: ObservableObject {
     init(clubId: Int) {
         print("Coupon view model init")
         self.clubId = clubId
-        getClubCouponsAdmin()
+        
+        Task {
+            await getClubCouponsAdmin()
+        }
     }
     
     @MainActor
@@ -53,17 +56,16 @@ class CouponViewModel: ObservableObject {
         coupon.clearAll()
     }
     
+    @MainActor
     func getClubCouponsAdmin() {
-        couponService.getClubCouponsAdmin(clubId: self.clubId)
-            .sink { dataResponse in
-                if let error = dataResponse.error {
-                    self.showAlert(with: error)
-                    print(dataResponse.debugDescription)
-                } else {
-                    self.clubCoupons = dataResponse.value?.data ?? [CouponPreviewData]()
-                }
+        Task {
+            let response = await couponService.getClubCouponsAdmin(clubId: self.clubId)
+            if let error = response.error {
+                self.showAlert(with: error)
+            } else {
+                self.clubCoupons = response.value?.data ?? [CouponPreviewData]()
             }
-            .store(in: &cancellableSet)
+        }
     }
     
     func postCouponAdmin(clubId: Int) {

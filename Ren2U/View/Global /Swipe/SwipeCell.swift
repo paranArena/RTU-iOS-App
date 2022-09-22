@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct SwipeCell<Content: View, Button: View> : View {
-    
+
     let cellId: Int
     @Binding var selectedCellId: Int
     let content: () -> Content
     let button: () -> Button
     let buttonWidthSize: CGFloat
-    
+
     @Binding private var isShowingRequestButton: Bool
     @Binding private var offset: CGFloat
-    
+
     init(cellId: Int, selectedCellId: Binding<Int>, buttonWidthSize: CGFloat, isShowingRequestButton: Binding<Bool>, offset: Binding<CGFloat>, content: @escaping () -> Content, button: @escaping () -> Button) {
         self.cellId = cellId
         self._selectedCellId = selectedCellId
@@ -27,8 +27,8 @@ struct SwipeCell<Content: View, Button: View> : View {
         self._isShowingRequestButton = isShowingRequestButton
         self._offset = offset
     }
-    
-    
+
+
     var body: some View {
         HStack {
             content()
@@ -44,7 +44,7 @@ struct SwipeCell<Content: View, Button: View> : View {
                 .onChanged {
                     selectedCellId = cellId
                     let translationWidth = $0.translation.width
-                    
+
                     withAnimation {
                         self.offset = translationWidth
                         if !self.isShowingRequestButton {

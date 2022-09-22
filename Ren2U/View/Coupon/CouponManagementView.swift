@@ -10,12 +10,17 @@ import SwiftUI
 struct CouponManagementView: View {
     
     @ObservedObject var couponVM: CouponViewModel
+    @ObservedObject var managementVM: ManagementViewModel
     
     var body: some View {
         ScrollView {
             VStack {
                 ForEach(couponVM.clubCoupons.indices) { i in
-                    CouponPreviewCell(data: couponVM.clubCoupons[i])
+                    NavigationLink {
+                        CouponDetailView(couponVM: couponVM, managementVM: managementVM)
+                    } label: {
+                        CouponPreviewCell(data: couponVM.clubCoupons[i], managementVM: managementVM)
+                    }
                     Divider()
                         .padding(.horizontal, -10)
                 }

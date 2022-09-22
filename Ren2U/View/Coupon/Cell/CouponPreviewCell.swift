@@ -11,6 +11,7 @@ import Kingfisher
 struct CouponPreviewCell: View {
     
     let data: CouponPreviewData
+    @ObservedObject var managementVM: ManagementViewModel
     
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
