@@ -16,11 +16,13 @@ struct CouponDetailView: View {
             VStack(alignment: .center, spacing: 30) {
                 CouponImage(url: couponVM.couponDetailData?.imagePath ?? "", size: 200)
                 
+                CouponCount()
                 Period()
                 Location()
                 Information()
                 GrantCoupon()
             }
+            .padding(.horizontal)
         }
         .basicNavigationTitle(title: couponVM.couponDetailData?.name ?? "")
         .avoidSafeArea()
@@ -93,8 +95,11 @@ struct CouponDetailView: View {
             
             Text(couponVM.couponDetailData?.information ?? "")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                .padding(.vertical, 5)
+                .padding(.horizontal, 5)
                 .background(RoundedCorner(radius: 15, corners: .allCorners).fill(Color.gray_E9ECEF))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     @ViewBuilder

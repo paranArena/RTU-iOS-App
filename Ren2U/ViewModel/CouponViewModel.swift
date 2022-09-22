@@ -15,16 +15,19 @@ class CouponViewModel: ObservableObject {
     var couponId = 0 
     
     @Published var coupon = CouponParam()
+    @Published var couponMembers = [CouponMembersData]()
+    @Published var couponeMebersHistories = [CouponMembersData]()
     
     // CouponPreviewCell
     @Published var clubCoupons = [CouponPreviewData]()
     
     // CouponDetailView
-    @Published var couponDetailData: CouponDetailData?
+    @Published var couponDetailData: CouponDetailAdminData?
     @Published var isShowingLocationPikcer = false
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
+    @Published var callbackButton = CallbackAlert()
     
     private var cancellableSet: Set<AnyCancellable> = []
     var couponService = CouponeService.shared
@@ -34,9 +37,7 @@ class CouponViewModel: ObservableObject {
         print("Coupon view model init")
         self.clubId = clubId
         
-        Task {
-            await getClubCouponsAdmin()
-        }
+        Task { await getClubCouponsAdmin() }
     }
     
     @MainActor
@@ -56,11 +57,15 @@ class CouponViewModel: ObservableObject {
         coupon.clearAll()
     }
     
+    
+    //  MARK: GET
+    
     @MainActor
     func getClubCouponsAdmin() {
         Task {
             let response = await couponService.getClubCouponsAdmin(clubId: self.clubId)
             if let error = response.error {
+                print(response.debugDescription)
                 self.showAlert(with: error)
             } else {
                 self.clubCoupons = response.value?.data ?? [CouponPreviewData]()
@@ -68,9 +73,54 @@ class CouponViewModel: ObservableObject {
         }
     }
     
+    @MainActor
+    func getCouponAdmin(couponId: Int) {
+        Task {
+            let response = await couponService.getCouponAdmin(clubId: clubId, couponId: couponId)
+            if let error = response.error {
+                print(response.debugDescription)
+                self.showAlert(with: error)
+            } else {
+                print("getCouponAdmin success")
+                self.couponDetailData = response.value?.data ?? nil
+            }
+        }
+    }
+    
+    @MainActor
+    func getCouponMembersAdmin(couponId: Int) {
+        Task {
+            let response = await couponService.getCouponMembersAdmin(clubId: clubId, couponId: couponId)
+            if let error = response.error {
+                print(response.debugDescription)
+                self.showAlert(with: error)
+            } else {
+                print("getCouponMembersAdmin success")
+                self.couponMembers = response.value?.data ?? [CouponMembersData]()
+            }
+        }
+    }
+    
+    @MainActor
+    func getCouponMembersHistoriesAdmin(couponId: Int) {
+        Task {
+            let response = await couponService.getCouponMembersHistoriesAdmin(clubId: clubId, couponId: couponId)
+            if let error = response.error {
+                print(response.debugDescription)
+                self.showAlert(with: error)
+            } else {
+                print("getCouponMembersHistoriesAdmin success")
+                self.couponeMebersHistories = response.value?.data ?? [CouponMembersData]()
+            }
+        }
+    }
+    
+    
+    //  MARK: POST
+    
     func postCouponAdmin(clubId: Int) {
         
-        let testParam: [String: Any] = [
+        let param: [String: Any] = [
             "name": coupon.name,
             "locationName": coupon.location,
             "latitude": coupon.latitude!,
@@ -81,29 +131,37 @@ class CouponViewModel: ObservableObject {
             "expDate": coupon.expDate!.toJsonValue()
         ]
         
-        couponService.createCouponAdmin(clubId: clubId, param: testParam)
-            .sink { dataResponse in
-                if let error = dataResponse.error {
-                    self.showAlert(with: error)
-                    print(dataResponse.debugDescription)
-                } else {
-                    print(dataResponse.value?.responseMessage ?? "")
-                }
-            }.store(in: &cancellableSet)
+        Task {
+            let response = await couponService.grantCouponAdmin(clubId: clubId, couponId: couponId, param: param)
+            if let error = response.error {
+                print(response.debugDescription)
+                await self.showAlert(with: error)
+            } else {
+                print("postCouponAdmin success")
+            }
+        }
     }
     
-    func grantCouponAdmin(param: [Int]) {
-        let param = ["membersId" : param]
-        couponService.grantCouponAdmin(clubId: clubId, couponId: couponId, param: param)
-            .sink { dataResponse in
-                if let error = dataResponse.error {
-                    self.showAlert(with: error)
-                    print(dataResponse.debugDescription)
-                } else {
-                    print(dataResponse.value?.responseMessage ?? "")
-                }
-            }.store(in: &cancellableSet)
+    @MainActor
+    func grantCouponAdmin(param: [Int], dismiss: @escaping () -> ()) {
+        let param = ["memberIds" : param]
+        
+        Task {
+            let response = await couponService.grantCouponAdmin(clubId: clubId, couponId: couponId, param: param)
+            
+            print(response.debugDescription)
+            if let error = response.error {
+                print(response.debugDescription)
+                self.showAlert(with: error)
+            } else {
+                self.callbackButton.title = "성공"
+                self.callbackButton.isPresented = true
+                self.callbackButton.messageText = "쿠폰을 발급했습니다."
+                self.callbackButton.callback = dismiss
+            }
+        }
     }
+ 
     
     private func showAlertNeedMoreInformation() {
         oneButtonAlert.title = "쿠폰 생성 실패"
@@ -111,6 +169,7 @@ class CouponViewModel: ObservableObject {
         oneButtonAlert.isPresented = true
     }
     
+    @MainActor
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
         oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message

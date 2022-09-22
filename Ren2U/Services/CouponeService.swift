@@ -28,41 +28,63 @@ class CouponeService {
         
     }
     
-//    func getCouponUser(clubId: Int, couponId: Int) -> AnyPublisher
+    func getCouponAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponAdminResponse, NetworkError> {
+        let url = "\(BASE_URL)/clubs/\(clubId)/coupons/\(couponId)/admin"
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetCouponAdminResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    func getCouponMembersAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponMembersAdmin, NetworkError> {
+        let url = "\(BASE_URL)/clubs/\(clubId)/coupon/\(couponId)/admin"
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetCouponMembersAdmin.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    func getCouponMembersHistoriesAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponMembersHistoriesAdmin, NetworkError> {
+        let url = "\(BASE_URL)/clubs/\(clubId)/coupon/\(couponId)/histories/admin"
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetCouponMembersHistoriesAdmin.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
     
     //  MARK: POST
     
-    func createCouponAdmin(clubId: Int, param: [String: Any]) -> AnyPublisher<DataResponse<DefaultPostResponse, NetworkError>, Never> {
+    func createCouponAdmin(clubId: Int, param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError> {
         let url = "\(BASE_URL)/clubs/\(clubId)/coupon/admin"
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
         
-        return AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: hearders)
-            .validate()
-            .publishDecodable(type: DefaultPostResponse.self)
-            .map { resonse in
-                resonse.mapError { err in
-                    let serverError = resonse.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0)}
-                    return NetworkError(initialError: err, serverError: serverError)
-                }
+        let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(DefaultPostResponse.self).response
+        
+        return response.mapError { err in
+                let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+                return NetworkError(initialError: err, serverError: serverError)
             }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
     }
     
-    func grantCouponAdmin(clubId: Int, couponId: Int, param: [String: Any]) -> AnyPublisher<DataResponse<DefaultPostResponse, NetworkError>, Never> {
+    func grantCouponAdmin(clubId: Int, couponId: Int, param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError> {
         let url = "\(BASE_URL)/clubs/\(clubId)/coupons/\(couponId)/admin"
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
         
-        return AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: hearders)
-            .validate()
-            .publishDecodable(type: DefaultPostResponse.self)
-            .map { resonse in
-                resonse.mapError { err in
-                    let serverError = resonse.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0)}
-                    return NetworkError(initialError: err, serverError: serverError)
-                }
+        
+        let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(DefaultPostResponse.self).response
+        
+        return response.mapError { err in
+                let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+                return NetworkError(initialError: err, serverError: serverError)
             }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
     }
 }

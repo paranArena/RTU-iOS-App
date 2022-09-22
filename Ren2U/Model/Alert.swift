@@ -22,7 +22,19 @@ struct OneButtonAlert {
     var message: Text {
         return Text(messageText)
     }
+    
     static let noActionButton = Button("확인", role: .cancel) {}
+}
+
+struct CallbackAlert {
+    var title = ""
+    var isPresented = false
+    var messageText = ""
+    var callback: () async -> () = { print("callback") }
+    
+    var message: Text {
+        return Text(messageText)
+    }
 }
 
 

@@ -11,33 +11,12 @@ struct GrantCouponView: View {
     
     @ObservedObject var managementVM: ManagementViewModel
     @ObservedObject var couponVM: CouponViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ScrollView {
-            
-            HStack {
-                Text("\(managementVM.selectedMemberCount)개 선택")
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 15))
-                
-                Spacer()
-                
-                Button {
-                    managementVM.selectAllMembers()
-                } label: {
-                    Text("전체선택")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 15))
-                }
-                
-                Button {
-                    managementVM.unselectAllMembers()
-                } label: {
-                    Text("선택해제")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 15))
-                }
-
-            }
-            
             VStack {
+                TopButton()
                 ForEach(managementVM.members.indices) { i in
                     HStack(alignment: .center, spacing: 10) {
                         Button {
@@ -65,6 +44,44 @@ struct GrantCouponView: View {
         .padding(.horizontal, 10)
         .basicNavigationTitle(title: "멤버 선택")
         .avoidSafeArea()
+        .onDisappear {
+            managementVM.unselectAllMembers()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    couponVM.grantCouponAdmin(param: managementVM.getSelectedMembersId()) { dismiss() }
+                } label: {
+                    Text("발급")
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func TopButton() -> some View {
+        HStack {
+            Text("\(managementVM.selectedMemberCount)개 선택")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 15))
+            
+            Spacer()
+            
+            Button {
+                managementVM.selectAllMembers()
+            } label: {
+                Text("전체선택")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 15))
+            }
+            
+            Button {
+                managementVM.unselectAllMembers()
+            } label: {
+                Text("선택해제")
+                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 15))
+            }
+
+        }
     }
 }
 

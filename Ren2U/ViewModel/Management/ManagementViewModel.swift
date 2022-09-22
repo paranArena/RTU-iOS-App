@@ -31,7 +31,7 @@ class ManagementViewModel: ObservableObject {
         return result
     }
     
-    
+    //  MARK: Alert
     @Published var alert = Alert()
     @Published var deleteClubAlert = Alert() 
     
@@ -48,8 +48,7 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
-    //  MARK: LOCAL
-    
+    //  MARK: For GrantCouponView
     func selectAllMembers() {
         for i in 0..<members.count {
             members[i].isSelected = true
@@ -62,6 +61,18 @@ class ManagementViewModel: ObservableObject {
         }
     }
     
+    func getSelectedMembersId() -> [Int] {
+        var membersId = [Int]()
+        for member in members {
+            if member.isSelected {
+                membersId.append(member.data.id)
+            }
+        }
+        
+        return membersId
+    }
+    
+    //  MARK: Alert
     func alertGrant(memberAndRoleData: MemberPreviewData) {
         alert.title = memberAndRoleData.alertMessage
         alert.isPresented = true

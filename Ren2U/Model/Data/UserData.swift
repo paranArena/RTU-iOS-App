@@ -23,6 +23,7 @@ struct User: Codable {
     }
 }
 
+
 struct CouponMemberData: Codable {
     var isSelected = false
     let data: MemberPreviewData
@@ -72,6 +73,10 @@ struct MemberPreviewData: Codable, Identifiable {
             return "에러"
         }
     }
+    
+    var year: String {
+        return studentId.substring(from: 3, to: 4)
+    }
 }
 
 struct UserData: Codable, Identifiable {
@@ -91,6 +96,8 @@ struct DuplicateCheckData: Codable {
     let phoneNumber: Bool
     let studentId: Bool
 }
+
+//  MARK: Response
 
 //  MARK: TEMP
 struct LikeGroupInfo: Codable {

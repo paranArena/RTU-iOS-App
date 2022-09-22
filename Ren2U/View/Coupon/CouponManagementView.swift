@@ -18,6 +18,10 @@ struct CouponManagementView: View {
                 ForEach(couponVM.clubCoupons.indices) { i in
                     NavigationLink {
                         CouponDetailView(couponVM: couponVM, managementVM: managementVM)
+                            .onAppear {
+                                couponVM.getCouponAdmin(couponId: couponVM.clubCoupons[i].id)
+                                couponVM.couponId = couponVM.clubCoupons[i].id
+                            }
                     } label: {
                         CouponPreviewCell(data: couponVM.clubCoupons[i], managementVM: managementVM)
                     }

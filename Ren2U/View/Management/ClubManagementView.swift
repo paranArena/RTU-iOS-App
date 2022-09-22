@@ -63,6 +63,15 @@ struct ClubManagementView: View {
             }
             .padding(.horizontal, 10)
         }
+        .alert(couponVM.callbackButton.title, isPresented: $couponVM.callbackButton.isPresented) {
+            Button("확인") {
+                Task {
+                    await couponVM.callbackButton.callback()
+                }
+            }
+        } message: {
+            couponVM.callbackButton.message
+        }
         .alert("", isPresented: $managementVM.deleteClubAlert.isPresented) {
             Button("취소", role: .cancel) {}
             Button("확인") {

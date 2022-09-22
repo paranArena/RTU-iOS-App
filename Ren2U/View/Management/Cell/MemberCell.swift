@@ -22,9 +22,16 @@ struct MemberCell: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text(memberInfo.name)
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                Text(memberInfo.major)
-                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                    .foregroundColor(Color.gray_ADB5BD)
+                
+                HStack(alignment: .center, spacing: 5) {
+                    Text(memberInfo.major)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                        .foregroundColor(Color.gray_ADB5BD)
+                    
+                    Text(memberInfo.year)
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                        .foregroundColor(Color.gray_ADB5BD)
+                }
             }
 
             Spacer()
