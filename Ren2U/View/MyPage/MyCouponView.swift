@@ -15,8 +15,26 @@ struct MyCouponView: View {
     var body: some View {
         ScrollView {
             VStack {
-                
+                ForEach(myCouponVM.myCoupons.indices, id: \.self) { i in
+                    let cludId = myCouponVM.myCoupons[i].clubId
+                    let couponId = myCouponVM.myCoupons[i].id
+                    Button {
+                        myCouponVM.getCouponUser(clubId: cludId, couponId: couponId)
+                    } label: {
+                        MyCouponPreviewCell(data: myCouponVM.myCoupons[i])
+                    }
+
+                    NavigationLink {
+                        UseCouponView(myCouponVM: myCouponVM)
+                    } label: {
+                        MyCouponPreviewCell(data: myCouponVM.myCoupons[i])
+                    }
+                    
+                    Divider()
+                        .padding(.horizontal, -10)
+                }
             }
+            .padding(.horizontal)
         }
         .basicNavigationTitle(title: "쿠폰함")
         .controllTabbar(isPresented)

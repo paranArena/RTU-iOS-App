@@ -10,12 +10,17 @@ import SwiftUI
 class MyCouponViewModel: ObservableObject {
     
     @Published var myCoupons = [CouponPreviewData]()
-    @Published var myCouponHistories = [CouponPreviewData]() 
+    @Published var myCouponHistories = [CouponPreviewData]()
+    
+    //UserCoupon View
+    @Published var couponDetailUserData: CouponDetailUserData?
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var callbackButton = CallbackAlert()
+    
     var myService = MyService.shared
+    var couponService = CouponeService.shared
     
     init() {
         Task {
@@ -46,6 +51,19 @@ class MyCouponViewModel: ObservableObject {
                 self.showAlert(with: error)
             } else {
                 self.myCouponHistories = response.value?.data ?? [CouponPreviewData]()
+            }
+        }
+    }
+    
+    @MainActor
+    func getCouponUser(clubId: Int, couponId: Int) {
+        Task {
+            let response = await couponService.getCouponUser(clubId: clubId, couponId: couponId)
+            if let error = response.error {
+                print(response.debugDescription)
+                self.showAlert(with: error)
+            } else {
+                self.couponDetailUserData = response.value?.data
             }
         }
     }

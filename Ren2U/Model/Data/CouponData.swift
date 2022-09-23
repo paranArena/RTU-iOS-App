@@ -69,6 +69,35 @@ struct CouponDetailAdminData: Codable {
     }
 }
 
+struct CouponDetailUserData: Codable {
+    let id: Int
+    let name: String
+    let imagePath: String
+    let actDateDto, expDateDto: String
+    let information: String
+    let location: LocationData
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case imagePath, information, location
+        case actDateDto = "actDate"
+        case expDateDto = "expDate"
+    }
+    
+    var actDate: String {
+        return self.actDateDto.toDate().toYMDformat()
+    }
+    
+    var expDate: String {
+        return self.expDateDto.toDate().toYMDformat()
+    }
+    
+    var period: String {
+        return "\(self.actDate) ~ \(self.expDate)"
+    }
+}
+
 struct CouponMembersData: Codable, Identifiable {
     let id: Int
     let memberPreviewDto: MemberPreviewDto
@@ -93,6 +122,19 @@ struct GetClubCouponsAdminResponse: Codable {
     let data: [CouponPreviewData]
 }
 
+
+struct GetCouponAdminResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: CouponDetailAdminData
+}
+
+struct GetCouponUserResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: CouponDetailUserData
+}
+
 struct GetMyCouponsAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
@@ -103,12 +145,6 @@ struct GetMyCouponHistoriesAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
     let data: [CouponPreviewData]
-}
-
-struct GetCouponAdminResponse: Codable {
-    let statusCode: Int
-    let responseMessage: String
-    let data: CouponDetailAdminData
 }
 
 struct GetCouponMembersAdmin: Codable {
