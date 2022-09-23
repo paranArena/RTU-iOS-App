@@ -14,6 +14,7 @@ class MyCouponViewModel: ObservableObject {
     
     //UserCoupon View
     @Published var couponDetailUserData: CouponDetailUserData?
+    @Published var isActiveUseCouponView = false
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
@@ -27,6 +28,14 @@ class MyCouponViewModel: ObservableObject {
             await getMyCouponsAll()
             await getMyCouponHistoriesAll()
         }
+    }
+    
+    func alertUseCouponUser(clubId: Int, couponId: Int) {
+        alert.title = "쿠폰을 사용하시겠습니까?"
+        alert.callback = {
+            self.useCouponUser(clubId: clubId, couponId: couponId)
+        }
+        alert.isPresented = true
     }
     
     @MainActor
@@ -64,6 +73,20 @@ class MyCouponViewModel: ObservableObject {
                 self.showAlert(with: error)
             } else {
                 self.couponDetailUserData = response.value?.data
+            }
+        }
+    }
+    
+    
+    //  MARK: PUT
+    func useCouponUser(clubId: Int, couponId: Int) {
+        Task {
+            let response = await couponService.useCouponUser(clubId: clubId, couponId: couponId)
+            if let error = response.error {
+                print(response.debugDescription)
+                await self.showAlert(with: error)
+            } else {
+                print("useCouponUser success")
             }
         }
     }

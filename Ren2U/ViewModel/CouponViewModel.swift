@@ -164,7 +164,6 @@ class CouponViewModel: ObservableObject {
             }
         }
     }
- 
     
     private func showAlertNeedMoreInformation() {
         oneButtonAlert.title = "쿠폰 생성 실패"

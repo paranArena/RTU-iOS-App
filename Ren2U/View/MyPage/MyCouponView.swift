@@ -18,17 +18,17 @@ struct MyCouponView: View {
                 ForEach(myCouponVM.myCoupons.indices, id: \.self) { i in
                     let cludId = myCouponVM.myCoupons[i].clubId
                     let couponId = myCouponVM.myCoupons[i].id
+                    
                     Button {
                         myCouponVM.getCouponUser(clubId: cludId, couponId: couponId)
+                        myCouponVM.isActiveUseCouponView = true
                     } label: {
                         MyCouponPreviewCell(data: myCouponVM.myCoupons[i])
                     }
-
-                    NavigationLink {
+                    
+                    NavigationLink(isActive: $myCouponVM.isActiveUseCouponView) {
                         UseCouponView(myCouponVM: myCouponVM)
-                    } label: {
-                        MyCouponPreviewCell(data: myCouponVM.myCoupons[i])
-                    }
+                    } label: { }
                     
                     Divider()
                         .padding(.horizontal, -10)
@@ -39,6 +39,17 @@ struct MyCouponView: View {
         .basicNavigationTitle(title: "쿠폰함")
         .controllTabbar(isPresented)
         .avoidSafeArea()
+        .alert(myCouponVM.oneButtonAlert.title, isPresented: $myCouponVM.oneButtonAlert.isPresented) {
+            OneButtonAlert.noActionButton
+        } message: {
+            myCouponVM.oneButtonAlert.message
+        }
+        .alert("", isPresented: $myCouponVM.alert.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") { Task { await myCouponVM.alert.callback() }}
+        } message: {
+            Text(myCouponVM.alert.title)
+        }
     }
 }
 

@@ -10,4 +10,5 @@ import Foundation
 enum AssetImages: String {
     case DefaultGroupImage
     case DefaultCouponImage
+    case MapMarker
 }

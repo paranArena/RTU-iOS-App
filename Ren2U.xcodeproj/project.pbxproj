@@ -614,7 +614,6 @@
 		153C1A6C288CDDF200F89B2E /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				1523D5DF28BE138A009EB733 /* AssetImages.swift */,
 				159F1B20288B88DB00012113 /* Variables.swift */,
 				15D4C580287FF15A008BB89B /* NavigationBarColor.swift */,
 			);
@@ -912,6 +911,7 @@
 		15FAF160287D5EC100B35570 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				1523D5DF28BE138A009EB733 /* AssetImages.swift */,
 				152C6F5228C842C600AA420A /* extension */,
 				159F1B22288B9F7000012113 /* Font */,
 				15B63DA228AF38C3000AB82D /* Modifier */,
