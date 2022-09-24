@@ -71,15 +71,17 @@ struct CouponDetailAdminData: Codable {
 
 struct CouponDetailUserData: Codable {
     let id: Int
+    let clubId: Int
     let name: String
+    let clubName: String
     let imagePath: String
     let actDateDto, expDateDto: String
     let information: String
     let location: LocationData
     
     enum CodingKeys: String, CodingKey {
-        case id
-        case name
+        case id, clubId
+        case name, clubName
         case imagePath, information, location
         case actDateDto = "actDate"
         case expDateDto = "expDate"

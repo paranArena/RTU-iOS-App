@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import UIKit
+import SwiftUI
 
 class ManagementViewModel: ObservableObject {
     
@@ -74,7 +75,7 @@ class ManagementViewModel: ObservableObject {
     
     //  MARK: Alert
     func alertGrant(memberAndRoleData: MemberPreviewData) {
-        alert.title = memberAndRoleData.alertMessage
+        alert.message = Text(memberAndRoleData.alertMessage)
         alert.isPresented = true
         let memberId = memberAndRoleData.id
         
@@ -88,7 +89,7 @@ class ManagementViewModel: ObservableObject {
     }
     
     func alertDeleteMember(memberId: Int) {
-        alert.title = "멤버를 추방하시겠습니까?"
+        alert.message = Text("멤버를 추방하시겠습니까?")
         alert.isPresented = true
         alert.callback = {
             Task {
@@ -98,7 +99,7 @@ class ManagementViewModel: ObservableObject {
     }
     
     func alertDeleteClub() {
-        deleteClubAlert.title = "클럽을 삭제하시겠습니까?"
+        deleteClubAlert.message = Text("클럽을 삭제하시겠습니까?")
         deleteClubAlert.isPresented = true
         deleteClubAlert.callback = { await self.deleteClub() }
     }

@@ -18,7 +18,7 @@ struct ClubTab: View {
     
     @State private var isShowingAlert = false
     @State private var selectedId = -1
-    @State private var altertTitle = "" 
+    @State private var altertTitle = Text("")
     @State private var callback: () async -> () = { print("callback")}
     
     
@@ -118,7 +118,7 @@ struct ClubTab: View {
                             isActiveNotificationDetail = true
                             selectedNotificationLinkIndex = j
                         } label: {
-                            ReportableNoticeHCell(noticeInfo: clubVM.notices[j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, title: $altertTitle, callback: $callback)
+                            ReportableNoticeHCell(noticeInfo: clubVM.notices[j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, message: $altertTitle, callback: $callback)
                                 .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
                         }
                     }

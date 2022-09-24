@@ -69,13 +69,13 @@ class RentalViewModel: ObservableObject {
     
     func setAlert(rentalData: RentalData) {
         if rentalData.rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-            alert.title = "아이템을 대여하시겠습니까?"
+            alert.message = Text("아이템을 대여하시겠습니까?")
             alert.isPresented = true
             alert.callback = {
                 await self.applyRent(clubId: rentalData.clubId, itemId: rentalData.id)
             }
         } else {
-            alert.title = rentalData.rentalInfo.alertMeesage
+            alert.message = Text("rentalData.rentalInfo.alertMeesage")
             alert.isPresented = true
             alert.callback = {
                 await self.returnRent(clubId: rentalData.clubId, itemId: rentalData.id)
@@ -94,20 +94,20 @@ class RentalViewModel: ObservableObject {
                     #endif
                 }
             } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-                alert.title = selectedItem?.alertMessage ?? "에러"
+                alert.message = Text(selectedItem?.alertMessage ?? "에러")
                 alert.isPresented = true
                 alert.callback = {
                     await self.applyRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
                 }
             } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
-                alert.title = selectedItem?.alertMessage ?? "에러"
+                alert.message = Text(selectedItem?.alertMessage ?? "에러")
                 alert.isPresented = true
                 alert.callback = {
                     await self.returnRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
                 }
             }
         } else {
-            alert.title = selectedItem?.alertMessage ?? "에러"
+            alert.message = Text(selectedItem?.alertMessage ?? "에러")
             alert.isPresented = true
             alert.callback = {
                 await self.requestRent()

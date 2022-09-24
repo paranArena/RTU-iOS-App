@@ -71,7 +71,7 @@ struct ItemMap: View {
             Button("확인") {
                 Task { await rentVM.alert.callback() }} 
         } message: {
-            Text(rentVM.alert.title)
+            rentVM.alert.message
         }
         .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
             Button("확인") {

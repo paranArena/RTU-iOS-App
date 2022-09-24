@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Alert {
-    var title = ""
+    var message = Text("")
     var isPresented = false
     var callback: () async -> () = { print("callback") }
 }

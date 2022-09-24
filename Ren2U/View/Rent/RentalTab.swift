@@ -84,9 +84,9 @@ struct RentalTab: View {
                 Task { await alert.callback() } 
             }
         } message: {
-            Text(alert.title)
+            alert.message
         }
-        .alert(singleButtonAlert.title, isPresented: $singleButtonAlert.isPresented) {
+        .alert(singleButtonAlert.message, isPresented: $singleButtonAlert.isPresented) {
             Button("확인", role: .cancel) {}
         }
         .disabled(isShowingModal)

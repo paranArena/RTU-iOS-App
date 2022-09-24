@@ -13,7 +13,7 @@ let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
 let SAFE_AREA_TOP_HEIGHT: CGFloat = 44
 let SAFE_AREA_BOTTOM_HEIGHT: CGFloat = 34 
-
+d
 let BASE_URL = "http://15.165.38.225:8080"
 //let BASE_URL = "https://ren2u.shop"
 

@@ -7,6 +7,8 @@
 
 import SwiftUI
 import HidableTabView
+import MapKit
+import CoreLocation
 
 struct UseCouponView: View {
     
@@ -17,14 +19,15 @@ struct UseCouponView: View {
             VStack(alignment: .center, spacing: 30) {
                 CouponImage(url: myCouponVM.couponDetailUserData?.imagePath ?? "", size: 200)
                 
+                IssuedClub()
                 UsePeriod()
                 UseLocation()
                 Information()
+                UseCouponButton()
+                
+                Map(coordinateRegion: $myCouponVM.mapRegion, showsUserLocation: true, userTrackingMode: .none)
             }
             .padding(.horizontal)
-        }
-        .overlay(alignment: .bottom) {
-            UseCouponButton()
         }
         .basicNavigationTitle(title: myCouponVM.couponDetailUserData?.name ?? "")
         .onDisappear {
@@ -36,15 +39,18 @@ struct UseCouponView: View {
         .avoidSafeArea()
     }
     
-//    @ViewBuilder
-//    private func IssuedGroup() {
-//        HStack {
-//            Text("발급그룹")
-//                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-//
-//            Text(myCouponVM.couponDetailUserData.)
-//        }
-//    }
+    @ViewBuilder
+    private func IssuedClub() -> some View {
+        HStack {
+            Text("발급그룹")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+            
+            Spacer()
+            
+            Text(myCouponVM.couponDetailUserData?.clubName ?? "" )
+                .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
+        }
+    }
     
     @ViewBuilder
     private func UsePeriod() -> some View{
@@ -88,6 +94,8 @@ struct UseCouponView: View {
             Text(myCouponVM.couponDetailUserData?.information ?? "")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .frame(maxWidth: .infinity, minHeight: 200, alignment: .topLeading)
+                .padding(.horizontal, 5)
+                .padding(.vertical, 6)
                 .background(RoundedCorner(radius: 5, corners: .allCorners).fill(Color.gray_E9ECEF))
         }
         .frame(alignment: .leading)
@@ -96,7 +104,7 @@ struct UseCouponView: View {
     @ViewBuilder
     private func UseCouponButton() -> some View {
         Button {
-//                myCouponVM.useCouponUser(clubId: myCouponVM.couponDetailUserData., couponId: couponId)
+            myCouponVM.alertUseCouponUser()
         } label: {
             VStack {
                 Text("쿠폰 사용 시\n 관계자에게 보여주세요.")
@@ -105,7 +113,7 @@ struct UseCouponView: View {
             }
         }
         .padding(.horizontal, 80)
-        .padding(.vertical, 10)
+        .padding(.vertical, 6)
         .background(Capsule().fill(Color.navy_1E2F97))
     }
 }

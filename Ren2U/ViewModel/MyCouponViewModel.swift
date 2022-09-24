@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import CoreLocation
+import MapKit
 
 class MyCouponViewModel: ObservableObject {
     
     @Published var myCoupons = [CouponPreviewData]()
     @Published var myCouponHistories = [CouponPreviewData]()
     
-    //UserCoupon View
+    //UseCoupon View
     @Published var couponDetailUserData: CouponDetailUserData?
+    @Published var mapRegion = MKCoordinateRegion(center: DEFA, span: DEFAULT_SPAN)
     @Published var isActiveUseCouponView = false
     
     @Published var alert = Alert()
@@ -30,10 +33,10 @@ class MyCouponViewModel: ObservableObject {
         }
     }
     
-    func alertUseCouponUser(clubId: Int, couponId: Int) {
-        alert.title = "쿠폰을 사용하시겠습니까?"
+    func alertUseCouponUser() {
+        alert.message = Text("쿠폰을 사용하시겠습니까?\n 쿠폰 사용 시 관계자에게 보여주세요")
         alert.callback = {
-            self.useCouponUser(clubId: clubId, couponId: couponId)
+            self.useCouponUser() 
         }
         alert.isPresented = true
     }
@@ -73,20 +76,27 @@ class MyCouponViewModel: ObservableObject {
                 self.showAlert(with: error)
             } else {
                 self.couponDetailUserData = response.value?.data
+                
+                if let location = couponDetailUserData?.location {
+                    let region = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+                    mapRegion = MKCoordinateRegion(center: region, span: DEFAULT_SPAN)
+                }
             }
         }
     }
     
     
     //  MARK: PUT
-    func useCouponUser(clubId: Int, couponId: Int) {
+    func useCouponUser() {
         Task {
-            let response = await couponService.useCouponUser(clubId: clubId, couponId: couponId)
-            if let error = response.error {
-                print(response.debugDescription)
-                await self.showAlert(with: error)
-            } else {
-                print("useCouponUser success")
+            if let data = self.couponDetailUserData {
+                let response = await couponService.useCouponUser(clubId: data.clubId, couponId: data.id)
+                if let error = response.error {
+                    print(response.debugDescription)
+                    await self.showAlert(with: error)
+                } else {
+                    print("useCouponUser success")
+                }
             }
         }
     }

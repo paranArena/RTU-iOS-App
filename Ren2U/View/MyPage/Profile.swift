@@ -77,7 +77,7 @@ struct Profile: View {
             Button("취소", role: .cancel) {}
             Button("예") { Task { await alert.callback() }}
         } message: {
-            Text(alert.title)
+            alert.message
         }
     }
     
@@ -132,7 +132,7 @@ struct Profile: View {
     private func ServiceQuitButton() -> some View {
         Button {
             alert.isPresented = true
-            alert.title = "탈퇴하시겠습니까?"
+            alert.message = Text("탈퇴하시겠습니까?")
             alert.callback = myPageVM.quitService
         } label: {
             Text("탈퇴하기")

@@ -48,7 +48,7 @@ struct MyCouponView: View {
             Button("취소", role: .cancel) {}
             Button("확인") { Task { await myCouponVM.alert.callback() }}
         } message: {
-            Text(myCouponVM.alert.title)
+            myCouponVM.alert.message
         }
     }
 }

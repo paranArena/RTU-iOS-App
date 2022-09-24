@@ -82,13 +82,13 @@ struct ClubManagementView: View {
                 }
             }
         } message: {
-            Text(managementVM.deleteClubAlert.title)
+            managementVM.deleteClubAlert.message
         }
         .alert("", isPresented: $managementVM.alert.isPresented) {
             Button("취소", role: .cancel) {}
             Button("확인") { Task { await managementVM.alert.callback() }}
         } message: {
-            Text("\(managementVM.alert.title)")
+            Text("\(managementVM.alert.message)")
         }
         .controllTabbar(isPresented)
         .navigationTitle(" ")

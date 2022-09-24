@@ -50,7 +50,7 @@ class CouponViewModel: ObservableObject {
             return
         }
         
-        alert.title = "쿠폰을 생성하시겠습니까?"
+        alert.message = Text("쿠폰을 생성하시겠습니까?")
         alert.isPresented = true
         alert.callback = { self.postCouponAdmin(clubId: 42)}
     }
