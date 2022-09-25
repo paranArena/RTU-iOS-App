@@ -58,14 +58,19 @@ class MyCouponDetailViewModel: ObservableObject {
     
     
     //  MARK: PUT
+    
+    @MainActor
     func useCouponUser() async {
         let data = self.couponDetailUserData
         let response = await couponService.useCouponUser(clubId: data.clubId, couponId: data.id)
         if let error = response.error {
             print(response.debugDescription)
-            await self.showAlert(with: error)
+            self.showAlert(with: error)
         } else {
             print("useCouponUser success")
+            oneButtonAlert.title = "쿠폰 사용"
+            oneButtonAlert.messageText = "쿠폰을 사용했습니다."
+            oneButtonAlert.isPresented = true
         }
     }
     

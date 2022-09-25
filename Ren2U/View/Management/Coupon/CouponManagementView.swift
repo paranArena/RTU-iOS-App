@@ -18,13 +18,7 @@ struct CouponManagementView: View {
                 SwipeResettableView(selectedCellId: $couponVM.selectedCouponId) {
                     ForEach(couponVM.clubCoupons.indices, id: \.self) { i in
                         NavigationLink {
-                            CouponDetailView(couponVM: couponVM, managementVM: managementVM)
-                               .onAppear {
-                                   couponVM.getCouponAdmin(couponId: couponVM.clubCoupons[i].id)
-                                   couponVM.couponId = couponVM.clubCoupons[i].id
-                                   couponVM.getCouponMembersAdmin(couponId: couponVM.couponId)
-                                   couponVM.getCouponMembersHistoriesAdmin(couponId: couponVM.couponId)
-                               }
+                            CouponDetailAdminView(managementVM: _managementVM, couponVM: _couponVM, clubId: couponVM.clubId, couponId: couponVM.clubCoupons[i].id)
                         } label: {
                             CouponPreviewCell(data: couponVM.clubCoupons[i], couponVM: couponVM)
                         }

@@ -13,15 +13,18 @@ struct CreateCouponView: View {
     @Environment(\.dismiss) var dismiss
     
     @EnvironmentObject var locationManager: LocationManager
+    
     @StateObject var createCouponVM: CreateCouponViewModel
     @ObservedObject var couponVM: CouponViewModel
     @State private var isShowingImagePicker = false
     
+    // post에 사용
     init(clubId: Int, couponVM: ObservedObject<CouponViewModel>, method: Method) {
         self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, method: method))
         self._couponVM = couponVM
     }
     
+    // put에 사용
     init(clubId: Int, couponId: Int, couponDetailData: CouponDetailAdminData, couponVM: ObservedObject<CouponViewModel>, method: Method) {
         self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, couponId: couponId, couponDetailAdminData: couponDetailData, method: method))
         self._couponVM = couponVM
@@ -44,12 +47,7 @@ struct CreateCouponView: View {
                     Text("사용가능 기한")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                         .foregroundColor(.gray_495057)
-                    
-                    
-//                    if #available(iOS 16.0, *) {
-//                        MultiDatePicker("Dates", selection: $createCouponVM.dates)
-//                    }
-//
+                
                     RentalDatePicker(viewModel: DateViewModel(startDate: $createCouponVM.coupon.actDate, endDate: $createCouponVM.coupon.expDate))
                         .padding(.horizontal, 30)
                 }

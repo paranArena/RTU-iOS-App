@@ -31,43 +31,53 @@ struct CouponTitle: Title {
     
 }
 
-struct CouponDetailView: View {
+struct CouponDetailAdminView: View {
     
-    @ObservedObject var couponVM: CouponViewModel
     @ObservedObject var managementVM: ManagementViewModel
+    @ObservedObject var couponVM: CouponViewModel
+    @StateObject var couponDetailAdminVM: CouponDetailAdminViewModel
+    
+    init(managementVM: ObservedObject<ManagementViewModel>, couponVM: ObservedObject<CouponViewModel>, clubId: Int, couponId: Int) {
+        self._managementVM = managementVM
+        self._couponVM = couponVM
+        self._couponDetailAdminVM = StateObject(wrappedValue: CouponDetailAdminViewModel(clubId: clubId, couponId: couponId))
+    }
     let couponTitle = CouponTitle()
     
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 30) {
                 
-                CouponImage(url: couponVM.couponDetailData?.imagePath ?? "", size: 200)
+                CouponImage(url: couponDetailAdminVM.couponDetailData?.imagePath ?? "", size: 200)
                 CouponCount()
                 Period()
                 Location()
                 Information()
                 GrantCoupon()
                 
-                TitleSelector(titles: couponVM.couponTitle, selectedTitle: $couponVM.selectedTitle)
+                TitleSelector(titles: couponDetailAdminVM.couponTitle, selectedTitle: $couponDetailAdminVM.selectedTitle)
                 
                 UnusedCouponMembers()
-                    .isHidden(hidden: couponVM.selectedTitle != couponVM.couponTitle.title[0])
+                    .isHidden(hidden: couponDetailAdminVM.selectedTitle != couponDetailAdminVM.couponTitle.title[0])
                 UsedCouponMebers()
-                    .isHidden(hidden: couponVM.selectedTitle != couponVM.couponTitle.title[1])
+                    .isHidden(hidden: couponDetailAdminVM.selectedTitle != couponDetailAdminVM.couponTitle.title[1])
                 
 
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 10)
         }
-        .basicNavigationTitle(title: couponVM.couponDetailData?.name ?? "")
+        .basicNavigationTitle(title: couponDetailAdminVM.couponDetailData?.name ?? "")
         .avoidSafeArea()
-        .onDisappear {
-            couponVM.couponDetailData = nil
+        .alert("", isPresented: $couponDetailAdminVM.callbackAlert.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") { Task { await couponDetailAdminVM.callbackAlert.callback() }}
+        } message: {
+            couponDetailAdminVM.callbackAlert.message
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    CreateCouponView(clubId: couponVM.clubId, couponId: couponVM.couponId, couponDetailData: couponVM.couponDetailData ?? CouponDetailAdminData.dummyData(), couponVM: _couponVM, method: .put)
+                    CreateCouponView(clubId: couponDetailAdminVM.clubId, couponId: couponDetailAdminVM.couponId, couponDetailData: couponDetailAdminVM.couponDetailData ?? CouponDetailAdminData.dummyData(), couponVM: _couponVM, method: .put)
                 } label: {
                     Text("수정")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
@@ -86,7 +96,7 @@ struct CouponDetailView: View {
                 
                 Spacer()
                 
-                Text("\(couponVM.couponDetailData?.allCouponCount ?? 0)장")
+                Text("\(couponDetailAdminVM.couponDetailData?.allCouponCount ?? 0)장")
                     .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
             }
             
@@ -97,7 +107,7 @@ struct CouponDetailView: View {
                 
                 Spacer()
                 
-                Text("\(couponVM.couponDetailData?.leftCouponCount ?? 0)장")
+                Text("\(couponDetailAdminVM.couponDetailData?.leftCouponCount ?? 0)장")
                     .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
             }
         }
@@ -112,7 +122,7 @@ struct CouponDetailView: View {
             
             Spacer()
             
-            Text(couponVM.couponDetailData?.period ?? "")
+            Text(couponDetailAdminVM.couponDetailData?.period ?? "")
                 .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
         }
     }
@@ -126,7 +136,7 @@ struct CouponDetailView: View {
             
             Spacer()
             
-            Text(couponVM.couponDetailData?.location.name ?? "")
+            Text(couponDetailAdminVM.couponDetailData?.location.name ?? "")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
         }
     }
@@ -139,7 +149,7 @@ struct CouponDetailView: View {
                 .foregroundColor(.gray_495057)
                 .frame(maxWidth: .infinity)
             
-            Text(couponVM.couponDetailData?.information ?? "")
+            Text(couponDetailAdminVM.couponDetailData?.information ?? "")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .padding(.vertical, 5)
@@ -156,7 +166,7 @@ struct CouponDetailView: View {
                 .foregroundColor(.gray_495057)
             
             NavigationLink {
-                GrantCouponView(managementVM: managementVM, couponVM: couponVM)
+                GrantCouponView(managementVM: managementVM, couponDetailAdminVM: couponDetailAdminVM)
             } label: {
                 GrayRoundedRectangle(bgColor: Color.gray_F1F2F3, fgColor: Color.black, text: "멤버선택")
             }
@@ -168,20 +178,23 @@ struct CouponDetailView: View {
     @ViewBuilder
     private func UnusedCouponMembers() -> some View {
         VStack {
-            ForEach(couponVM.couponMembers.indices, id: \.self) { i in
-                CouponMemberCell(memberInfo: couponVM.couponMembers[i].memberPreviewDto)
-                
-                Divider()
-                    .padding(.horizontal, -10)
+            SwipeResettableView(selectedCellId: $couponDetailAdminVM.selectedUnsedCouponId) {
+                ForEach(couponDetailAdminVM.couponMembers.indices, id: \.self) { i in
+                    UnusedCouponCell(couponDetailAdminVM: couponDetailAdminVM, data: couponDetailAdminVM.couponMembers[i])
+                        .padding(.leading, 10)
+                    
+                    Divider()
+                }
             }
         }
+        .padding(.horizontal, -10)
     }
     
     @ViewBuilder
     private func UsedCouponMebers() -> some View {
         VStack {
-            ForEach(couponVM.couponeMebersHistories.indices, id: \.self) { i in
-                CouponMemberCell(memberInfo: couponVM.couponeMebersHistories[i].memberPreviewDto)
+            ForEach(couponDetailAdminVM.couponeMebersHistories.indices, id: \.self) { i in
+                CouponMemberCell(data: couponDetailAdminVM.couponeMebersHistories[i].memberPreviewDto)
                 
                 
                 Divider()

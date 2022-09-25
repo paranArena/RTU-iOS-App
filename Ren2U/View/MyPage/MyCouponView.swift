@@ -31,6 +31,8 @@ struct MyCouponView: View {
                         .padding(.horizontal, -10)
                 }
                 
+                UsedCouponPreviews()
+                
                 NavigationLink(isActive: $myCouponVM.isActiveUseCouponView) {
                     UseCouponView(myCouponDetailVM: MyCouponDetailViewModel(clubId: myCouponVM.selectedClubId, couponId: myCouponVM.selectedCouponId), myCouponVM: myCouponVM)
                 } label: { }
@@ -50,6 +52,17 @@ struct MyCouponView: View {
             Button("확인") { Task { await myCouponVM.alert.callback() }}
         } message: {
             myCouponVM.alert.message
+        }
+    }
+    
+    @ViewBuilder
+    private func UsedCouponPreviews() -> some View {
+        VStack {
+            ForEach(myCouponVM.myCouponHistories.indices, id: \.self) { i in
+                MyCouponHistoryCell(data: myCouponVM.myCouponHistories[i])
+                Divider()
+                    .padding(.horizontal, -10)
+            }
         }
     }
 }

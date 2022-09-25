@@ -10,7 +10,7 @@ import SwiftUI
 struct GrantCouponView: View {
     
     @ObservedObject var managementVM: ManagementViewModel
-    @ObservedObject var couponVM: CouponViewModel
+    @ObservedObject var couponDetailAdminVM: CouponDetailAdminViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -50,7 +50,7 @@ struct GrantCouponView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    couponVM.grantCouponAdmin(param: managementVM.getSelectedMembersId()) { dismiss() }
+                    Task { await couponDetailAdminVM.grantCouponAdmin(param: managementVM.getSelectedMembersId()) { dismiss() } }
                 } label: {
                     Text("발급")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))

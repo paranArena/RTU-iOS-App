@@ -14,6 +14,7 @@ struct UseCouponView: View {
     
     @StateObject var myCouponDetailVM: MyCouponDetailViewModel
     @ObservedObject var myCouponVM: MyCouponViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ScrollView {
@@ -33,7 +34,7 @@ struct UseCouponView: View {
         }
         .avoidSafeArea()
         .alert(myCouponDetailVM.oneButtonAlert.title, isPresented: $myCouponDetailVM.oneButtonAlert.isPresented) {
-            OneButtonAlert.noActionButton
+            Button("확인") { dismiss() }
         } message: {
             myCouponDetailVM.oneButtonAlert.message
         }

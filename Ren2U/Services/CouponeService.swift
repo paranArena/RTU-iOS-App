@@ -88,6 +88,18 @@ class CouponeService {
             }
     }
     
+    func deleteCouponMemberAdmin(clubId: Int, couponMemberId: Int) async -> DataResponse<DefaultPostResponse, NetworkError> {
+        let url = "\(BASE_URL)/clubs/\(clubId)/couponMembers/\(couponMemberId)/admin"
+        let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
+        
+        let response = await AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(DefaultPostResponse.self).response
+        
+        return response.mapError { err in
+                let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+                return NetworkError(initialError: err, serverError: serverError)
+            }
+    }
+    
     //  MARK: POST
     
     func createCouponAdmin(clubId: Int, param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError> {

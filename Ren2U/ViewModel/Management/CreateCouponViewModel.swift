@@ -112,8 +112,6 @@ class CreateCouponViewModel: ObservableObject {
     
     private func updateCouponAdmin() async {
         
-        print("updateCouponAdmin in view model called!")
-        
         let param: [String: Any] = [
             "name": coupon.name,
             "locationName": coupon.location,
@@ -126,8 +124,7 @@ class CreateCouponViewModel: ObservableObject {
         ]
         
         let response = await couponService.updateCouponAdmin(clubId: clubId, couponId: couponId!, param: param)
-        
-        print(response.debugDescription)
+
         if let error = response.error {
            print(response.debugDescription)
            await self.showAlert(with: error)

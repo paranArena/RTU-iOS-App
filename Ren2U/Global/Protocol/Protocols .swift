@@ -10,5 +10,5 @@ import Foundation
 protocol BaseViewModel {
     var callbackAlert: CallbackAlert { get set }
     var oneButtonAlert: OneButtonAlert { get set }
-    @MainActor func showAlert()
+    @MainActor func showAlert(with error: NetworkError)
 }
