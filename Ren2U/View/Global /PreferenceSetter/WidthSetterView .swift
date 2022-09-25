@@ -12,13 +12,14 @@ struct WidthSetterView<Content: View> : View {
     @Binding var viewWidth: CGFloat
     var content: () -> Content
     
+    @MainActor
     var body: some View {
         content()
             .background(GeometryReader {
                 Color.clear.preference(key: ViewWidthKey.self, value: $0.frame(in: .global).width)
             })
-            .onPreferenceChange(ViewWidthKey.self) {
-                viewWidth = $0 
+            .onPreferenceChange(ViewWidthKey.self) { newValue in
+                viewWidth = newValue
             }
     }
 }

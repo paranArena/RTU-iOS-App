@@ -48,7 +48,7 @@ struct ClubSearch: View {
                 }
             }
         }
-        .alert(alert.title, isPresented: $alert.isPresented) {
+        .alert(alert.message, isPresented: $alert.isPresented) {
             Button("아니요", role: .cancel) {}
             Button("예") { Task { await alert.callback() }}
         }
@@ -111,7 +111,7 @@ struct ClubSearch: View {
     @ViewBuilder
     private func NoneOverlay(index: Int) -> some View {
         Button {
-            alert.title = "그룹에 가입하시겠습니까?"
+            alert.message = Text("그룹에 가입하시겠습니까?")
             alert.isPresented = true
             alert.callback = {
                 Task {

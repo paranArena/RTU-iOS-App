@@ -56,7 +56,7 @@ struct RentalCell: View {
                         let selectedClubId = rentalItemInfo.clubId
                         
                         alert.isPresented = true
-                        alert.title = rentalItemInfo.rentalInfo.alertMeesage
+                        alert.message = Text(rentalItemInfo.rentalInfo.alertMeesage)
                         alert.callback = {
                             Task {
                                 await clubVM.cancelRent(clubId: selectedClubId, itemId: selectedItemId)
@@ -80,7 +80,7 @@ struct RentalCell: View {
                                 locationManager.isPresentedDistanceAlert = true
                             } else {
                                 alert.isPresented = true
-                                alert.title = rentalItemInfo.rentalInfo.alertMeesage
+                                alert.message = Text(rentalItemInfo.rentalInfo.alertMeesage) 
                                 alert.callback = {
                                     Task {
                                         await clubVM.returnRent(clubId: rentalItemInfo.clubId, itemId: rentalItemInfo.id)

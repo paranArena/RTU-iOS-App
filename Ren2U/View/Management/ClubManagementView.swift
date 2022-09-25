@@ -16,6 +16,7 @@ struct ClubManagementView: View {
     @Environment(\.isPresented) var isPresented
     
     @StateObject var managementVM: ManagementViewModel
+    @StateObject var couponVM: CouponViewModel
     @EnvironmentObject var clubVM: ClubViewModel
     @State private var tmp = false
     
@@ -31,7 +32,7 @@ struct ClubManagementView: View {
                         managementVM.alertDeleteClub()
                     }
                 } label: {
-                    Text("클럽 삭제")
+                    Text("그룹 삭제")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 8)
                         .padding(.horizontal, 20)
@@ -62,6 +63,15 @@ struct ClubManagementView: View {
             }
             .padding(.horizontal, 10)
         }
+        .alert(couponVM.callbackButton.title, isPresented: $couponVM.callbackButton.isPresented) {
+            Button("확인") {
+                Task {
+                    await couponVM.callbackButton.callback()
+                }
+            }
+        } message: {
+            couponVM.callbackButton.message
+        }
         .alert("", isPresented: $managementVM.deleteClubAlert.isPresented) {
             Button("취소", role: .cancel) {}
             Button("확인") {
@@ -72,13 +82,13 @@ struct ClubManagementView: View {
                 }
             }
         } message: {
-            Text(managementVM.deleteClubAlert.title)
+            managementVM.deleteClubAlert.message
         }
         .alert("", isPresented: $managementVM.alert.isPresented) {
             Button("취소", role: .cancel) {}
             Button("확인") { Task { await managementVM.alert.callback() }}
         } message: {
-            Text("\(managementVM.alert.title)")
+            Text("\(managementVM.alert.message)")
         }
         .controllTabbar(isPresented)
         .navigationTitle(" ")
@@ -155,6 +165,7 @@ struct ClubManagementView: View {
                                 .padding(.horizontal, 20)
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                                 .foregroundColor(Color.primary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
 //                    } else if selection == .rentalActive     {
 //                        Toggle(isOn: $rentalToggle) {
@@ -189,6 +200,8 @@ struct ClubManagementView: View {
             MemberManagementView(managementVM: managementVM)
 //        case .rentalActive:
 //            Text("Empty View")
+        case .coupon:
+            CouponManagementView(couponVM: couponVM, managementVM: managementVM)
         }
     }
 }

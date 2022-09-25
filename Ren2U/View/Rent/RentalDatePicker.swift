@@ -17,7 +17,7 @@ struct DateValue: Identifiable {
 
 struct RentalDatePicker: View {
     
-    @ObservedObject var viewModel: RentalSheet.ViewModel
+    @StateObject var viewModel: DateViewModel
     @State private var width: CGFloat = .zero
 
     
@@ -99,25 +99,8 @@ struct RentalDatePicker: View {
     }
 }
 
-struct Calendar_Previews: PreviewProvider {
-    static var previews: some View {
-        RentalDatePicker(viewModel: RentalSheet.ViewModel())
-    }
-}
-
-extension Date {
-    
-    func getAllDates() -> [Date] {
-        
-        let calendar = Calendar.current
-        
-        let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: self))!
-        
-        let range = calendar.range(of: .day, in: .month, for: startDate)!
-        
-        return range.compactMap { day -> Date in
-            return calendar.date(byAdding: .day, value: day - 1, to: startDate)!
-        }
-        
-    }
-}
+//struct Calendar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RentalDatePicker(viewModel: RentalSheet.ViewModel())
+//    }
+//}

@@ -18,7 +18,7 @@ class ItemViewModel: ObservableObject {
     @Published var showPicker = false
     
     @Published var itemName = ""
-    @Published var category: Category?
+    @Published var category: String = "기타"
     @Published var price = ""
     @Published var fifoCount = 0
     @Published var reserveCount = 0
@@ -44,14 +44,8 @@ class ItemViewModel: ObservableObject {
         return false
     }
     
-    var categoryString: String {
-        guard let category = self.category else { return "선택"}
-        return category.rawValue
-    }
-    
     var isAllItemInformationFilled: Bool {
         guard !itemName.isEmpty else { return false }
-        guard category != nil else { return false }
         guard (isDonation || !price.isEmpty) else { return false }
         return true
     }
@@ -80,7 +74,7 @@ class ItemViewModel: ObservableObject {
             "name": self.itemName,
             
             //  MARK: 수정 필요
-            "category": self.category!.rawValue,
+            "category": self.category,
             "price": self.price,
             
             "fifoRentalPeriod": self.fifoRentalPeriod,

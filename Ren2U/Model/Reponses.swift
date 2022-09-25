@@ -20,6 +20,14 @@ class CustomDecoder: JSONDecoder {
 
 //  MARK: GET
 
+
+
+struct DefaultPostResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: String? 
+}
+
 struct CheckPhoneStudentIdDuplicateResponse: Codable {
     let statusCode: Int
     let responseMessage: String
@@ -39,7 +47,7 @@ struct GetMyClubRoleResponse: Codable {
 struct SearchClubMembersAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [MemberAndRoleData]
+    let data: [MemberPreviewData]
 }
 
 
@@ -109,6 +117,12 @@ struct GetNotificationResponse: Codable {
     let data: NotificationDetailData
 }
 
+struct GetClubInfoResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: ClubDetailData
+}
+
 //  MARK: POST
 
 struct VerifyEmailCodeResponse: Codable {
@@ -120,7 +134,7 @@ struct VerifyEmailCodeResponse: Codable {
 struct CreateClubResponse: Codable {
     var statusCode: Int
     var responseMessage: String
-    var data: ClubData
+    var data: ClubDetailData
 }
 
 struct CreateNotificationResponse: Codable {

@@ -20,4 +20,12 @@ struct PasswordReset: Codable {
         }
         return true 
     }
+    
+}
+
+struct UpdateMyInfoParam: Codable {
+    var name = ""
+    var major = ""
+    var studentId = ""
+    var phoneNumber = "" 
 }

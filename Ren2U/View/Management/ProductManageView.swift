@@ -40,7 +40,7 @@ struct ProductManageView: View {
             NavigationLink(isActive: $isActive) {
                 ItemPhoto(itemVM: ItemViewModel(clubId: managementVM.clubData.id, clubName: managementVM.clubData.name), managementVM: managementVM, isActive: $isActive)
             } label: {
-                PlusCircle()
+                PlusCircleImage()
             }
         }
         .alert("물품을 삭제하시겠습니까?", isPresented: $isShowingAlert, actions: {

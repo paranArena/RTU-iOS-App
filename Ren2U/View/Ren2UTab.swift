@@ -38,13 +38,23 @@ struct Ren2UTab: View {
             
             TabView(selection: $tabSelection) {
                 ForEach(Selection.allCases, id: \.rawValue) { selection in
-                    NavigationView {
-                        Content(selection: selection)
-                    }
-                    .navigationViewStyle(.stack)
-                    .tag(selection.rawValue)
-                    .tabItem {
-                        TabItem(selection: selection)
+                    
+                    if #available(iOS 16.0, *) {
+                        NavigationStack {
+                            Content(selection: selection)
+                        }
+                        .tag(selection.rawValue)
+                        .tabItem {
+                            TabItem(selection: selection)
+                        }
+                    } else {
+                        NavigationView {
+                            Content(selection: selection)
+                        }
+                        .tag(selection.rawValue)
+                        .tabItem {
+                            TabItem(selection: selection)
+                        }
                     }
                 }
             }

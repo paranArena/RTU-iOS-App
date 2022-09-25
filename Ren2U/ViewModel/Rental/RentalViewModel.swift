@@ -36,12 +36,17 @@ class RentalViewModel: ObservableObject {
     @Published var productDetail = ProductDetailData.dummyProductData()
     @Published var productLocation = CLLocationCoordinate2D(latitude: 127, longitude: 31)
     @Published var isRentalTerminal = false
+    @Published var isPresentedMap = false
     
     //  MARK: For Alert
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var alert = Alert()
   
-    init() { }
+    init() {
+        Task {
+            await setLocation()
+        }
+    }
     
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
@@ -61,15 +66,16 @@ class RentalViewModel: ObservableObject {
         productLocation  = CLLocationCoordinate2D(latitude: productDetail.location.latitude, longitude: productDetail.location.longitude)
     }
     
+    
     func setAlert(rentalData: RentalData) {
         if rentalData.rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-            alert.title = rentalData.rentalInfo.alertMeesage
+            alert.message = Text("아이템을 대여하시겠습니까?")
             alert.isPresented = true
             alert.callback = {
                 await self.applyRent(clubId: rentalData.clubId, itemId: rentalData.id)
             }
         } else {
-            alert.title = rentalData.rentalInfo.alertMeesage
+            alert.message = Text("rentalData.rentalInfo.alertMeesage")
             alert.isPresented = true
             alert.callback = {
                 await self.returnRent(clubId: rentalData.clubId, itemId: rentalData.id)
@@ -77,6 +83,7 @@ class RentalViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func setAlert() {
         if let rentalInfo = selectedItem?.rentalInfo  {
             //  대여자가 내가 아닐 경우 아무것도 하지 않음
@@ -87,20 +94,20 @@ class RentalViewModel: ObservableObject {
                     #endif
                 }
             } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
-                alert.title = selectedItem?.alertMessage ?? "에러"
+                alert.message = Text(selectedItem?.alertMessage ?? "에러")
                 alert.isPresented = true
                 alert.callback = {
                     await self.applyRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
                 }
             } else if rentalInfo.rentalStatus == RentalStatus.rent.rawValue {
-                alert.title = selectedItem?.alertMessage ?? "에러"
+                alert.message = Text(selectedItem?.alertMessage ?? "에러")
                 alert.isPresented = true
                 alert.callback = {
                     await self.returnRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
                 }
             }
         } else {
-            alert.title = selectedItem?.alertMessage ?? "에러"
+            alert.message = Text(selectedItem?.alertMessage ?? "에러")
             alert.isPresented = true
             alert.callback = {
                 await self.requestRent()
@@ -147,7 +154,7 @@ class RentalViewModel: ObservableObject {
                 print("[requestRent success]")
             case 400:
                 if let data = response.data {
-                    let error = try? JSONDecoder().decode(ErrorBody.self, from: data)
+                    let error = try? JSONDecoder().decode(ServerError.self, from: data)
                     if let code = error?.code {
                         switch code {
                         case "ALREADY_USED":
@@ -172,6 +179,8 @@ class RentalViewModel: ObservableObject {
     }
     
     //  MARK: PUT
+    
+    @MainActor
     private func applyRent(clubId: Int, itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/apply"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
@@ -198,22 +207,30 @@ class RentalViewModel: ObservableObject {
         await getProduct()
     }
     
+    
+    @MainActor
     private func returnRent(clubId: Int, itemId: Int) async {
         let url = "\(BASE_URL)/clubs/\(clubId)/rentals/\(itemId)/return"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let request = AF.request(url, method: .put, encoding: JSONEncoding.default, headers: hearders).serializingString()
-        let result = await request.result
-            
-        switch result {
-        case .success(let value):
-            print("[returnRent success]")
-            print(value)
-        case .failure(let err):
-            print("[returnRent failure]")
-            print(err)
-        }
+        let response = await request.response
         
+        if let statusCode = response.response?.statusCode {
+            switch statusCode {
+            case 200:
+                print("[returnRent success]")
+                oneButtonAlert.title = "반납 성공"
+                oneButtonAlert.messageText = ""
+                oneButtonAlert.isPresented = true
+            default:
+                print("[returnRent failure]")
+                print(response.debugDescription)
+                oneButtonAlert.title = "반납 실패"
+                oneButtonAlert.messageText = ""
+                oneButtonAlert.isPresented = true
+            }
+        }
         
         await getProduct()
     }

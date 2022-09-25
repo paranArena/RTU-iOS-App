@@ -9,20 +9,6 @@ import Foundation
 import UIKit
 import SwiftUI
 
-//  MARK: NOTIFICATION
-struct NotificationModel {
-    var title: String
-    var content: String
-    var image: UIImage?
-}
-
-struct UpdateNotificationParam {
-    let title: String
-    let content: String
-    let image: UIImage?
-    let isPublic: Bool
-}
-
 struct CreateClubFormdata {
     var name: String
     var introduction: String

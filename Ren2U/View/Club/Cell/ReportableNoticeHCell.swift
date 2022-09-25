@@ -18,7 +18,7 @@ struct ReportableNoticeHCell: View {
     @Binding var selectedId: Int
     
     @Binding var isShowingAlert: Bool
-    @Binding var title: String
+    @Binding var message: Text
     @Binding var callback: () async -> ()
     
     var body: some View {
@@ -55,7 +55,7 @@ struct ReportableNoticeHCell: View {
             }
         } callback: {
             isShowingAlert = true
-            title = NotificationPreview.reportTitle
+            message = Text(NotificationPreview.reportTitle)
             callback = { clubVM.reportNotification(clubId: noticeInfo.clubId, notificationId: noticeInfo.id) }
         }
 

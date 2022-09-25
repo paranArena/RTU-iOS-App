@@ -10,7 +10,7 @@ import SwiftUI
 extension ClubProfile {
     
     class ViewModel: ObservableObject {
-        @Published var clubProfileData = ClubProfileData()
+        @Published var clubProfileData = ClubDetailParam()
         @Published var mode: ClubProfile.Mode
         
         @Published var tagsText = ""
@@ -20,8 +20,8 @@ extension ClubProfile {
         
         @Published var offset: CGFloat = 0
         
-        init(putModeData: ClubData, mode: ClubProfile.Mode) {
-            clubProfileData = ClubProfileData(clubData: putModeData)
+        init(putModeData: ClubDetailData, mode: ClubProfile.Mode) {
+            clubProfileData = ClubDetailParam(clubData: putModeData)
             self.mode = mode
         }
         
@@ -30,7 +30,7 @@ extension ClubProfile {
         }
         
         
-        func showTagPlaceHolder(newValue: ClubProfile.Field?) {
+        func showTagPlaceHolder(newValue: ClubField?) {
             if newValue == .tagsText {
                 self.isShowingTagPlaceholder = false
             } else {
@@ -80,12 +80,4 @@ extension ClubProfile {
         }
     }
 
-}
-
-extension ClubProfile  {
-    enum Field: Int, CaseIterable {
-        case groupName
-        case tagsText
-        case introduction
-    }
 }

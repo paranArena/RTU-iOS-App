@@ -36,12 +36,12 @@ struct ProductDetailView: View {
     
     var body: some View {
         BounceControllScrollView(baseOffset: -10, offset: $offset) {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 15) {
                 
                 KFImage(URL(string: rentVM.productDetail.imagePath ?? ""))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: SCREEN_WIDTH, height: 300)
+                    .frame(width: SCREEN_WIDTH, height: SCREEN_WIDTH)
                     .clipped()
                 
                 Group {
@@ -51,6 +51,8 @@ struct ProductDetailView: View {
                     HStack {
                         Text(rentVM.productDetail.name)
                             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 26))
+                        Spacer()
+                        ShowMapButton()
                     }
 
                     Divider()
@@ -92,7 +94,30 @@ struct ProductDetailView: View {
                 }
             }
         } message: {
-            Text("\(rentVM.alert.title)")
+            rentVM.alert.message
+        }
+    }
+    
+    @ViewBuilder
+    private func ShowMapButton() -> some View {
+        Button {
+            rentVM.isPresentedMap = true
+        } label: {
+            Text("위치보기")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
+                .foregroundColor(.gray_495057)
+            
+        }
+        .sheet(isPresented: $rentVM.isPresentedMap) {
+            VStack {
+                TransparentDivider()
+                Map(coordinateRegion: .constant(MKCoordinateRegion(center: rentVM.productLocation, span: DEFAULT_SPAN)), showsUserLocation: true, annotationItems: [Annotation(coordinate: rentVM.productLocation)]) { annotation in
+                    MapAnnotation(coordinate: annotation.coordinate) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(.navy_1E2F97)
+                    }
+                }
+            }
         }
     }
     
@@ -137,25 +162,6 @@ struct ProductDetailView: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
         }
     }
-
-//    @ViewBuilder
-//    private func CarouselImage() -> some View {
-//        TabView(selection: $viewModel.imageSelection) {
-//            ForEach(0..<5, id:\.self) { i in
-//                KFImage(URL(string: rentVM.productDetail.imagePath ?? ""))
-//                    .onFailure { err in
-//                        print(err.errorDescription ?? "KFImage Optional err")
-//                    }
-//                    .resizable()
-//                    .frame(width: SCREEN_WIDTH, height: 300)
-//                    .tag(i)
-//
-//            }
-//        }
-//        .animation(viewModel.imageSelection == 0 ? nil : .spring(), value: viewModel.imageSelection)
-//        .frame(height: 300)
-//        .tabViewStyle(PageTabViewStyle())
-//    }
     
     
     @ViewBuilder
@@ -247,6 +253,25 @@ struct ProductDetailView: View {
             .disabled(rentVM.selectedItem?.mainButtonDisable ?? true)
         }
     }
+
+//    @ViewBuilder
+//    private func CarouselImage() -> some View {
+//        TabView(selection: $viewModel.imageSelection) {
+//            ForEach(0..<5, id:\.self) { i in
+//                KFImage(URL(string: rentVM.productDetail.imagePath ?? ""))
+//                    .onFailure { err in
+//                        print(err.errorDescription ?? "KFImage Optional err")
+//                    }
+//                    .resizable()
+//                    .frame(width: SCREEN_WIDTH, height: 300)
+//                    .tag(i)
+//
+//            }
+//        }
+//        .animation(viewModel.imageSelection == 0 ? nil : .spring(), value: viewModel.imageSelection)
+//        .frame(height: 300)
+//        .tabViewStyle(PageTabViewStyle())
+//    }
             
 
     //  MARK: 삭제 예정

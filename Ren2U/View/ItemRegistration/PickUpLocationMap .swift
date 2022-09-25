@@ -13,7 +13,6 @@ struct PickUpLocationMap: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var locationManager: LocationManager
     @ObservedObject var itemVM: ItemViewModel
-    @State private var isPresentedAlert = true
     
     var body: some View {
         VStack {
@@ -38,7 +37,7 @@ struct PickUpLocationMap: View {
         }
         .basicNavigationTitle(title: "픽업장소 선택")
         .onAppear {
-            locationManager.requestAuthorization()
+            locationManager.resetRegion()
         }
     }
 }

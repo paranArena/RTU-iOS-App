@@ -67,7 +67,7 @@ struct SignUp: View {
                     }
                     .isHidden(hidden: (field.rawValue) + 2 < focusedField?.rawValue ?? 0)
                 }
-
+                
                 CertificatinoViewButton()
                 Spacer()
             }

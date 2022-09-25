@@ -24,7 +24,7 @@ struct ClubNotifications: View {
                             NavigationLink {
                                 NotificationDetailView(clubId: clubVM.clubNotice[i].clubId, notificationId: clubVM.clubNotice[i].id)
                             } label: {
-                                ReportableNoticeHCell(noticeInfo: clubVM.clubNotice[i], groupName: groupName, selectedId: $selectedCellId, isShowingAlert: $alert.isPresented, title: $alert.title, callback: $alert.callback)
+                                ReportableNoticeHCell(noticeInfo: clubVM.clubNotice[i], groupName: groupName, selectedId: $selectedCellId, isShowingAlert: $alert.isPresented, message: $alert.message, callback: $alert.callback)
                             }
                         }
                     }
@@ -42,7 +42,7 @@ struct ClubNotifications: View {
             Button("취소", role: .cancel) {}
             Button("확인") { Task { await alert.callback() }}
         } message: {
-            Text(alert.title)
+            alert.message
         }
         .basicNavigationTitle(title: "공지사항")
         .overlay(alignment: .bottom) {

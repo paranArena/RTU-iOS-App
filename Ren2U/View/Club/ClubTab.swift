@@ -18,23 +18,23 @@ struct ClubTab: View {
     
     @State private var isShowingAlert = false
     @State private var selectedId = -1
-    @State private var altertTitle = "" 
+    @State private var altertTitle = Text("")
     @State private var callback: () async -> () = { print("callback")}
     
     
     @State private var selectedNotificationLinkIndex: Int?
     @State private var isActiveNotificationDetail = false
     
+    
     var body: some View {
         // horizontal padding 주지 말것! 즐겨찾기 이미지를 좌우 폭에 못 맞추게 된다.
         
-        VStack(alignment: .center, spacing: spacing) {
+        VStack(alignment: .center, spacing: 10) {
             
             SearchBar(text: $vm.searchText, isFoucsed: $vm.isSearchBarFocused)
                 .padding(.horizontal, 20)
 
             ClubSearch(search: $vm.searchText, tabSelection: $tabSelection)
-                .padding(.bottom, -10)
                 .isHidden(hidden: !vm.isSearchBarFocused || vm.groupSelection == .notice)
             
             Group {
@@ -54,7 +54,6 @@ struct ClubTab: View {
                         .offset(x: vm.groupSelection == Selection.notice ? 0 : SCREEN_WIDTH)
                         .isHidden(hidden: vm.isSearchBarFocused && vm.groupSelection == .group)
                 }
-                .padding(.bottom, -10)
             }
         }
         .background(
@@ -66,7 +65,6 @@ struct ClubTab: View {
         )
 
         .overlay(ShadowRectangle())
-        .showTabBar(animated: false)
         .navigationTitle("")
         .navigationBarHidden(true)
         .animation(.spring(), value: vm.groupSelection)
@@ -102,7 +100,7 @@ struct ClubTab: View {
                 NavigationLink {
                     ClubProfile(viewModel: ClubProfile.ViewModel(mode: .post))
                 } label: {
-                    PlusCircle()
+                    PlusCircleImage()
                 }
             }
         }
@@ -120,7 +118,7 @@ struct ClubTab: View {
                             isActiveNotificationDetail = true
                             selectedNotificationLinkIndex = j
                         } label: {
-                            ReportableNoticeHCell(noticeInfo: clubVM.notices[j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, title: $altertTitle, callback: $callback)
+                            ReportableNoticeHCell(noticeInfo: clubVM.notices[j], groupName: groupName, selectedId: $selectedId, isShowingAlert: $isShowingAlert, message: $altertTitle, callback: $callback)
                                 .isHidden(hidden: vm.isSearchBarFocused && !vm.searchText.isEmpty && !groupName.contains(vm.searchText) && !title.contains(vm.searchText))
                         }
                     }

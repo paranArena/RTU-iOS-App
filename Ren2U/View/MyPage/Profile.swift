@@ -36,7 +36,7 @@ extension Profile {
 
 struct Profile: View {
     
-    @EnvironmentObject var authVM: MyPageViewModel
+    @EnvironmentObject var myPageVM: MyPageViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.isPresented) var isPresented
     
@@ -77,7 +77,7 @@ struct Profile: View {
             Button("취소", role: .cancel) {}
             Button("예") { Task { await alert.callback() }}
         } message: {
-            Text(alert.title)
+            alert.message
         }
     }
     
@@ -92,15 +92,15 @@ struct Profile: View {
             Group {
                 switch field {
                 case .email:
-                    Text(authVM.userData!.email)
+                    Text(myPageVM.userData!.email)
                 case .name:
-                    Text(authVM.userData!.name)
+                    Text(myPageVM.userData!.name)
                 case .major:
-                    Text(authVM.userData!.major)
+                    Text(myPageVM.userData!.major)
                 case .studentId:
-                    Text(authVM.userData!.studentId)
+                    Text(myPageVM.userData!.studentId)
                 case .phoneNumber:
-                    Text(authVM.userData!.phoneNumber)
+                    Text(myPageVM.userData!.phoneNumber)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -117,12 +117,13 @@ struct Profile: View {
     @ViewBuilder
     private func ChangePasswordButton() -> some View {
         NavigationLink {
-            PasswordResetView()
+            PasswordResetView(pwVM: PasswordViewModel(email: myPageVM.userData?.email ?? ""))
         } label: {
             Text("비밀번호 변경")
                 .padding(.leading, 15)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                 .foregroundColor(.gray_495057)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
 
     }
@@ -131,13 +132,14 @@ struct Profile: View {
     private func ServiceQuitButton() -> some View {
         Button {
             alert.isPresented = true
-            alert.title = "탈퇴하시겠습니까?"
-            alert.callback = authVM.quitService
+            alert.message = Text("탈퇴하시겠습니까?")
+            alert.callback = myPageVM.quitService
         } label: {
             Text("탈퇴하기")
                 .padding(.leading, 15)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                 .foregroundColor(.gray_495057)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }

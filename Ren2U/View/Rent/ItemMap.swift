@@ -36,7 +36,7 @@ struct ItemMap: View {
         let anotaions: [Annotation] = [Annotation(coordinate: itemLocation)]
         
         VStack {
-            
+
             Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.none), annotationItems: anotaions) { annotation  in
                 MapAnnotation(coordinate: annotation.coordinate) {
                     Image(systemName: "mappin.and.ellipse")
@@ -70,9 +70,16 @@ struct ItemMap: View {
             Button("취소", role: .cancel) {}
             Button("확인") {
                 Task { await rentVM.alert.callback() }} 
+        } message: {
+            rentVM.alert.message
         }
         .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
-            Button("확인") { dismiss() }
+            Button("확인") {
+                Task {
+                    clubVM.getMyRentals
+                }
+                dismiss()
+            }
         } message: {
             rentVM.oneButtonAlert.message
         }

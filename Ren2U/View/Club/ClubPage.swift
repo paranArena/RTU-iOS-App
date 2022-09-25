@@ -46,7 +46,7 @@ struct ClubPage: View {
         .overlay(ShadowRectangle())
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                ClubManagementView(managementVM: ManagementViewModel(clubData: clubData.extractClubData()), clubActive: $clubActive)
+                ClubManagementView(managementVM: ManagementViewModel(clubData: clubData.extractClubData()), couponVM: CouponViewModel(clubId: clubData.id), clubActive: $clubActive)
             }, label: {}) 
         )
         .basicNavigationTitle(title: "")
@@ -218,7 +218,7 @@ struct ClubPage: View {
             Button {
                 isActive = true
             } label: {
-                Image(systemName: "ellipsis")
+                Image(systemName: "text.justify")
                     .foregroundColor(Color.LabelColor)
             }
         } else {

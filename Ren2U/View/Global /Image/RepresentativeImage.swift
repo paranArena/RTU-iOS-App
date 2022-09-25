@@ -17,9 +17,8 @@ struct RepresentativeImage: View {
             KFImage(URL(string: url))
                 .resizable()
                 .scaledToFill()
-                .frame(maxWidth: SCREEN_WIDTH - 40, maxHeight: SCREEN_WIDTH - 40)
+                .frame(width: SCREEN_WIDTH - 40, height: SCREEN_WIDTH - 40)
                 .cornerRadius(20)
-                .clipped()
                 .isHidden(hidden: url.isEmpty)
         } else {
             Image(AssetImages.DefaultGroupImage.rawValue)

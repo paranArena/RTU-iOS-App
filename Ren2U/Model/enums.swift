@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum Method: String {
+    case post
+    case put
+}
+
 enum Category: String, CaseIterable {
     case homeAppliances = "가전제품"
     case habit = "게임/취미"
@@ -59,3 +64,10 @@ enum RentalStatus: String, CaseIterable {
         }
     }
 }
+
+enum ClubField: Int, CaseIterable {
+    case groupName
+    case tagsText
+    case introduction
+}
+

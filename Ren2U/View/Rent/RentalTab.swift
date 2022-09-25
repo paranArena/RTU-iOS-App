@@ -59,12 +59,16 @@ struct RentalTab: View {
     let spacing: CGFloat = 10
     
     var body: some View {
-        VStack(alignment: .center, spacing: spacing) {
+        VStack(alignment: .center, spacing: 10) {
             SearchBar(text: $searchText, isFoucsed: $isSearchBarFocused)
                 .padding(.horizontal, 20)
+            
             FilterView()
+
+            
             Group {
                 RentalSelectionButton()
+                    
                 ZStack {
                     ForEach(Selection.allCases, id: \.rawValue) { selection in
                         Content(selection: selection)
@@ -80,20 +84,16 @@ struct RentalTab: View {
                 Task { await alert.callback() } 
             }
         } message: {
-            Text(alert.title)
+            alert.message
         }
-        .alert(singleButtonAlert.title, isPresented: $singleButtonAlert.isPresented) {
+        .alert(singleButtonAlert.message, isPresented: $singleButtonAlert.isPresented) {
             Button("확인", role: .cancel) {}
         }
         .disabled(isShowingModal)
         .overlay(ShadowRectangle())
-        .overlay(Modal(isShowingModal: $isShowingModal, text: "예약을 취소하시겠습니까?", callback: {
-            isShowingModal = false
-            print("예약이 취소되었습니다!")
-        }))
-        .animation(.spring(), value: rentalSelection)
         .navigationTitle("")
         .navigationBarHidden(true)
+        .animation(.spring(), value: rentalSelection)
         .onAppear {
             let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
@@ -237,6 +237,7 @@ struct RentalTab: View {
                 .background(Capsule().stroke(Color.gray_495057, lineWidth: 1))
             }
         }
+        .isHidden(hidden: tabVM.selectedClubId == nil)
         .padding(.horizontal)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
