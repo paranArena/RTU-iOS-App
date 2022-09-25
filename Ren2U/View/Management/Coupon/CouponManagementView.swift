@@ -15,24 +15,31 @@ struct CouponManagementView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(couponVM.clubCoupons.indices, id: \.self) { i in
-                    NavigationLink {
-                        CouponDetailView(couponVM: couponVM, managementVM: managementVM)
-                            .onAppear {
-                                couponVM.getCouponAdmin(couponId: couponVM.clubCoupons[i].id)
-                                couponVM.couponId = couponVM.clubCoupons[i].id
-                                couponVM.getCouponMembersAdmin(couponId: couponVM.couponId)
-                                couponVM.getCouponMembersHistoriesAdmin(couponId: couponVM.couponId)
-                            }
-                    } label: {
-                        CouponPreviewCell(data: couponVM.clubCoupons[i], managementVM: managementVM)
+                SwipeResettableView(selectedCellId: $couponVM.selectedCouponId) {
+                    ForEach(couponVM.clubCoupons.indices, id: \.self) { i in
+                        NavigationLink {
+                            CouponDetailView(couponVM: couponVM, managementVM: managementVM)
+                               .onAppear {
+                                   couponVM.getCouponAdmin(couponId: couponVM.clubCoupons[i].id)
+                                   couponVM.couponId = couponVM.clubCoupons[i].id
+                                   couponVM.getCouponMembersAdmin(couponId: couponVM.couponId)
+                                   couponVM.getCouponMembersHistoriesAdmin(couponId: couponVM.couponId)
+                               }
+                        } label: {
+                            CouponPreviewCell(data: couponVM.clubCoupons[i], couponVM: couponVM)
+                        }
+
+                        Divider()
                     }
-                    Divider()
-                        .padding(.horizontal, -10)
                 }
             }
-            .padding(.horizontal)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .alert(couponVM.callbackButton.title, isPresented: $couponVM.callbackButton.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") { Task { await couponVM.callbackButton.callback() }}
+        } message: {
+            couponVM.callbackButton.message
         }
         .alert(couponVM.oneButtonAlert.title, isPresented: $couponVM.oneButtonAlert.isPresented) {
             OneButtonAlert.noActionButton

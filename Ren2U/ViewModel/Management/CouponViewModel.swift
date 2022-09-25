@@ -18,6 +18,7 @@ class CouponViewModel: ObservableObject {
     
     // CouponPreviewCell
     @Published var clubCoupons = [CouponPreviewData]()
+    @Published var selectedCouponId = -1 
     
     // CouponDetailView
     @Published var couponMembers = [CouponMembersData]()
@@ -41,24 +42,21 @@ class CouponViewModel: ObservableObject {
         self.selectedTitle = couponTitle.title[0]
         Task { await getClubCouponsAdmin() }
     }
-//
-//    @MainActor
-//    func showAlertPostCouponAdmin() {
-//
-//        if !coupon.isFilledAllParams {
-//            showAlertNeedMoreInformation()
-//            return
-//        }
-//
-//        alert.message = Text("쿠폰을 생성하시겠습니까?")
-//        alert.isPresented = true
-//        alert.callback = { self.postCouponAdmin(clubId: 42)}
-//    }
-//
-//    func clearCouponParam() {
-//        coupon.clearAll()
-//    }
-//
+
+    @MainActor
+    func showAlert(with error: NetworkError) {
+        oneButtonAlert.title = "에러"
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
+        oneButtonAlert.isPresented = true
+    }
+    
+    @MainActor
+    func showDeleteCouponAdminAlert(clubId: Int, couponId: Int) {
+        callbackButton.title = ""
+        callbackButton.messageText = "쿠폰을 삭제하시겠습니까?"
+        callbackButton.isPresented = true
+        callbackButton.callback = { await self.deleteCouponAdmin(clubId: clubId, couponId: couponId) }
+    }
     
     //  MARK: GET
     
@@ -121,32 +119,6 @@ class CouponViewModel: ObservableObject {
     }
     
     
-    //  MARK: POST
-//
-//    func postCouponAdmin(clubId: Int) {
-//
-//        let param: [String: Any] = [
-//            "name": coupon.name,
-//            "locationName": coupon.location,
-//            "latitude": coupon.latitude!,
-//            "longitude": coupon.longitude!,
-//            "information": coupon.information,
-//            "imagePath": coupon.imagePath,
-//            "actDate": coupon.actDate!.toJsonValue(),
-//            "expDate": coupon.expDate!.toJsonValue()
-//        ]
-//
-//        Task {
-//            let response = await couponService.grantCouponAdmin(clubId: clubId, couponId: couponId, param: param)
-//            if let error = response.error {
-//                print(response.debugDescription)
-//                await self.showAlert(with: error)
-//            } else {
-//                print("postCouponAdmin success")
-//            }
-//        }
-//    }
-    
     @MainActor
     func grantCouponAdmin(param: [Int], dismiss: @escaping () -> ()) {
         let param = ["memberIds" : param]
@@ -167,10 +139,15 @@ class CouponViewModel: ObservableObject {
         }
     }
     
-    @MainActor
-    func showAlert(with error: NetworkError) {
-        oneButtonAlert.title = "에러"
-        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
-        oneButtonAlert.isPresented = true
+    //  MARK: DELETE
+    private func deleteCouponAdmin(clubId: Int, couponId: Int) async {
+        let response = await couponService.deleteCouponAdmin(clubId: clubId, couponId: couponId)
+        
+        if let error = response.error {
+            print(response.debugDescription)
+            await self.showAlert(with: error)
+        } else {
+            await getClubCouponsAdmin()
+        }
     }
 }

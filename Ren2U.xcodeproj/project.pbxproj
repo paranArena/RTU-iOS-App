@@ -81,6 +81,7 @@
 		154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D028A351AA005E7FDB /* RentalComplete.swift */; };
 		154553D328A35412005E7FDB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553D228A35412005E7FDB /* NotoSansKR-Black.otf */; };
 		154B6B4428C31215004962B9 /* DoubleWheelPicker .swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */; };
+		155004B928E037D9006B89B4 /* Protocols .swift in Sources */ = {isa = PBXBuildFile; fileRef = 155004B828E037D9006B89B4 /* Protocols .swift */; };
 		1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */; };
 		1554576228D9A3EA00DDAD9B /* UpdateClubInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576128D9A3E900DDAD9B /* UpdateClubInfoViewModel.swift */; };
 		1554576528D9A80000DDAD9B /* UpdateClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576428D9A80000DDAD9B /* UpdateClubView.swift */; };
@@ -276,6 +277,7 @@
 		154553D028A351AA005E7FDB /* RentalComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalComplete.swift; sourceTree = "<group>"; };
 		154553D228A35412005E7FDB /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoubleWheelPicker .swift"; sourceTree = "<group>"; };
+		155004B828E037D9006B89B4 /* Protocols .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocols .swift"; sourceTree = "<group>"; };
 		1550ECAA28B35C6B00BECBE7 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
 		1554576128D9A3E900DDAD9B /* UpdateClubInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClubInfoViewModel.swift; sourceTree = "<group>"; };
 		1554576428D9A80000DDAD9B /* UpdateClubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClubView.swift; sourceTree = "<group>"; };
@@ -622,6 +624,14 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		155004B728E037CE006B89B4 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				155004B828E037D9006B89B4 /* Protocols .swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		1550ECA928B35C3F00BECBE7 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +927,7 @@
 		15FAF160287D5EC100B35570 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				155004B728E037CE006B89B4 /* Protocol */,
 				1523D5DF28BE138A009EB733 /* AssetImages.swift */,
 				152C6F5228C842C600AA420A /* extension */,
 				159F1B22288B9F7000012113 /* Font */,
@@ -1221,6 +1232,7 @@
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
 				1525F5FE28B7362C00C7CA51 /* ItemInformation.swift in Sources */,
+				155004B928E037D9006B89B4 /* Protocols .swift in Sources */,
 				15206E4C28DB66E10091DA74 /* GrantCouponView.swift in Sources */,
 				15A84D5D28CE120D00B3EB84 /* NotificationDetailView.swift in Sources */,
 				153687AD28DAC1DD00E0D554 /* UpdatedImagePicker.swift in Sources */,
