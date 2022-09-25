@@ -14,14 +14,14 @@ class MyCouponViewModel: ObservableObject {
     @Published var myCoupons = [CouponPreviewData]()
     @Published var myCouponHistories = [CouponPreviewData]()
     
-    //UseCoupon View
-    @Published var couponDetailUserData: CouponDetailUserData?
-    @Published var mapRegion = MKCoordinateRegion(center: DEFA, span: DEFAULT_SPAN)
-    @Published var isActiveUseCouponView = false
+    @Published var selectedCouponId = 0
+    @Published var selectedClubId = 0
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var callbackButton = CallbackAlert()
+    
+    @Published var isActiveUseCouponView = false
     
     var myService = MyService.shared
     var couponService = CouponeService.shared
@@ -33,14 +33,6 @@ class MyCouponViewModel: ObservableObject {
         }
     }
     
-    func alertUseCouponUser() {
-        alert.message = Text("쿠폰을 사용하시겠습니까?\n 쿠폰 사용 시 관계자에게 보여주세요")
-        alert.callback = {
-            self.useCouponUser() 
-        }
-        alert.isPresented = true
-    }
-    
     @MainActor
     func getMyCouponsAll() {
         Task {
@@ -49,6 +41,7 @@ class MyCouponViewModel: ObservableObject {
                 print(response.debugDescription)
                 self.showAlert(with: error)
             } else {
+                print("getMyCouponsAll success")
                 self.myCoupons = response.value?.data ?? [CouponPreviewData]()
             }
         }
@@ -67,39 +60,11 @@ class MyCouponViewModel: ObservableObject {
         }
     }
     
-    @MainActor
-    func getCouponUser(clubId: Int, couponId: Int) {
-        Task {
-            let response = await couponService.getCouponUser(clubId: clubId, couponId: couponId)
-            if let error = response.error {
-                print(response.debugDescription)
-                self.showAlert(with: error)
-            } else {
-                self.couponDetailUserData = response.value?.data
-                
-                if let location = couponDetailUserData?.location {
-                    let region = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-                    mapRegion = MKCoordinateRegion(center: region, span: DEFAULT_SPAN)
-                }
-            }
-        }
-    }
+   
     
     
     //  MARK: PUT
-    func useCouponUser() {
-        Task {
-            if let data = self.couponDetailUserData {
-                let response = await couponService.useCouponUser(clubId: data.clubId, couponId: data.id)
-                if let error = response.error {
-                    print(response.debugDescription)
-                    await self.showAlert(with: error)
-                } else {
-                    print("useCouponUser success")
-                }
-            }
-        }
-    }
+   
     
     @MainActor
     func showAlert(with error: NetworkError) {

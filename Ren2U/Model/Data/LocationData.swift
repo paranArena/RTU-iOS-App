@@ -11,4 +11,8 @@ struct LocationData: Codable {
     let name: String
     let latitude: Double
     let longitude: Double
+    
+    static func dummyLocationDate() -> LocationData {
+        return LocationData(name: "아주대", latitude: DEFAULT_REGION.latitude, longitude: DEFAULT_REGION.longitude)
+    }
 }

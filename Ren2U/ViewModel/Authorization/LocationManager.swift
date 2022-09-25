@@ -78,6 +78,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             return false
         }
     }
+    
+    
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             self.locationManager = CLLocationManager()

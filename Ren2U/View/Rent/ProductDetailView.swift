@@ -94,7 +94,7 @@ struct ProductDetailView: View {
                 }
             }
         } message: {
-            Text("\(rentVM.alert.message)")
+            rentVM.alert.message
         }
     }
     

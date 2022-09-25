@@ -14,7 +14,7 @@ class CouponViewModel: ObservableObject {
     let clubId: Int
     var couponId = 0 
     
-    @Published var coupon = CouponParam()
+//    @Published var coupon = CouponParam()
     
     // CouponPreviewCell
     @Published var clubCoupons = [CouponPreviewData]()
@@ -41,24 +41,24 @@ class CouponViewModel: ObservableObject {
         self.selectedTitle = couponTitle.title[0]
         Task { await getClubCouponsAdmin() }
     }
-    
-    @MainActor
-    func showAlertPostCouponAdmin() {
-        
-        if !coupon.isFilledAllParams {
-            showAlertNeedMoreInformation()
-            return
-        }
-        
-        alert.message = Text("쿠폰을 생성하시겠습니까?")
-        alert.isPresented = true
-        alert.callback = { self.postCouponAdmin(clubId: 42)}
-    }
-    
-    func clearCouponParam() {
-        coupon.clearAll()
-    }
-    
+//
+//    @MainActor
+//    func showAlertPostCouponAdmin() {
+//
+//        if !coupon.isFilledAllParams {
+//            showAlertNeedMoreInformation()
+//            return
+//        }
+//
+//        alert.message = Text("쿠폰을 생성하시겠습니까?")
+//        alert.isPresented = true
+//        alert.callback = { self.postCouponAdmin(clubId: 42)}
+//    }
+//
+//    func clearCouponParam() {
+//        coupon.clearAll()
+//    }
+//
     
     //  MARK: GET
     
@@ -120,30 +120,30 @@ class CouponViewModel: ObservableObject {
     
     
     //  MARK: POST
-    
-    func postCouponAdmin(clubId: Int) {
-        
-        let param: [String: Any] = [
-            "name": coupon.name,
-            "locationName": coupon.location,
-            "latitude": coupon.latitude!,
-            "longitude": coupon.longitude!,
-            "information": coupon.information,
-            "imagePath": coupon.imagePath,
-            "actDate": coupon.actDate!.toJsonValue(),
-            "expDate": coupon.expDate!.toJsonValue()
-        ]
-        
-        Task {
-            let response = await couponService.grantCouponAdmin(clubId: clubId, couponId: couponId, param: param)
-            if let error = response.error {
-                print(response.debugDescription)
-                await self.showAlert(with: error)
-            } else {
-                print("postCouponAdmin success")
-            }
-        }
-    }
+//
+//    func postCouponAdmin(clubId: Int) {
+//
+//        let param: [String: Any] = [
+//            "name": coupon.name,
+//            "locationName": coupon.location,
+//            "latitude": coupon.latitude!,
+//            "longitude": coupon.longitude!,
+//            "information": coupon.information,
+//            "imagePath": coupon.imagePath,
+//            "actDate": coupon.actDate!.toJsonValue(),
+//            "expDate": coupon.expDate!.toJsonValue()
+//        ]
+//
+//        Task {
+//            let response = await couponService.grantCouponAdmin(clubId: clubId, couponId: couponId, param: param)
+//            if let error = response.error {
+//                print(response.debugDescription)
+//                await self.showAlert(with: error)
+//            } else {
+//                print("postCouponAdmin success")
+//            }
+//        }
+//    }
     
     @MainActor
     func grantCouponAdmin(param: [Int], dismiss: @escaping () -> ()) {
@@ -163,12 +163,6 @@ class CouponViewModel: ObservableObject {
                 self.callbackButton.callback = dismiss
             }
         }
-    }
-    
-    private func showAlertNeedMoreInformation() {
-        oneButtonAlert.title = "쿠폰 생성 실패"
-        oneButtonAlert.messageText = "모든 정보를 입력해주세요."
-        oneButtonAlert.isPresented = true
     }
     
     @MainActor

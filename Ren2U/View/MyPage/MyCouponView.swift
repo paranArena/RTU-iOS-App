@@ -20,19 +20,20 @@ struct MyCouponView: View {
                     let couponId = myCouponVM.myCoupons[i].id
                     
                     Button {
-                        myCouponVM.getCouponUser(clubId: cludId, couponId: couponId)
+                        myCouponVM.selectedClubId = cludId
+                        myCouponVM.selectedCouponId = couponId
                         myCouponVM.isActiveUseCouponView = true
                     } label: {
                         MyCouponPreviewCell(data: myCouponVM.myCoupons[i])
                     }
                     
-                    NavigationLink(isActive: $myCouponVM.isActiveUseCouponView) {
-                        UseCouponView(myCouponVM: myCouponVM)
-                    } label: { }
-                    
                     Divider()
                         .padding(.horizontal, -10)
                 }
+                
+                NavigationLink(isActive: $myCouponVM.isActiveUseCouponView) {
+                    UseCouponView(myCouponDetailVM: MyCouponDetailViewModel(clubId: myCouponVM.selectedClubId, couponId: myCouponVM.selectedCouponId), myCouponVM: myCouponVM)
+                } label: { }
             }
             .padding(.horizontal)
         }

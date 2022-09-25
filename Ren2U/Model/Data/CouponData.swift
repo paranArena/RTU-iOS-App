@@ -29,11 +29,11 @@ struct CouponPreviewData: Codable, Identifiable {
     }
     
     var actDate: String {
-        return self.actDateDto.toDate().toYMDformat()
+        return self.actDateDto.toDateType2().toYMDformat()
     }
     
     var expDate: String {
-        return self.expDateDto.toDate().toYMDformat()
+        return self.expDateDto.toDateType2().toYMDformat()
     }
 }
 
@@ -79,6 +79,10 @@ struct CouponDetailUserData: Codable {
     let information: String
     let location: LocationData
     
+    static func dummyCouponDetailUserDate() -> CouponDetailUserData {
+        return CouponDetailUserData(id: 0, clubId: 0, name: "", clubName: "", imagePath: "", actDateDto: "", expDateDto: "", information: "", location: LocationData.dummyLocationDate())
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id, clubId
         case name, clubName
@@ -88,11 +92,11 @@ struct CouponDetailUserData: Codable {
     }
     
     var actDate: String {
-        return self.actDateDto.toDate().toYMDformat()
+        return self.actDateDto.toDateType2().toYMDformat()
     }
     
     var expDate: String {
-        return self.expDateDto.toDate().toYMDformat()
+        return self.expDateDto.toDateType2().toYMDformat()
     }
     
     var period: String {

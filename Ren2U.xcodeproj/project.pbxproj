@@ -56,6 +56,7 @@
 		1530D55828DCDEDF004BFB39 /* MyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530D55728DCDEDF004BFB39 /* MyService.swift */; };
 		1530D55A28DCDFA6004BFB39 /* MyCouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530D55928DCDFA6004BFB39 /* MyCouponViewModel.swift */; };
 		1530D55D28DCE1BA004BFB39 /* MyCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530D55C28DCE1BA004BFB39 /* MyCouponView.swift */; };
+		15323BAF28DEDB3E00A89CB1 /* CreateCouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15323BAE28DEDB3E00A89CB1 /* CreateCouponViewModel.swift */; };
 		153687A428DAB0CF00E0D554 /* CouponeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153687A328DAB0CF00E0D554 /* CouponeService.swift */; };
 		153687A628DAB1EB00E0D554 /* CouponParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153687A528DAB1EB00E0D554 /* CouponParam.swift */; };
 		153687A928DABCBE00E0D554 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153687A828DABCBE00E0D554 /* ImageService.swift */; };
@@ -137,6 +138,7 @@
 		1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16C28C8914700D83FCC /* HidableTabView */; };
 		1589C17028C8915300D83FCC /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16F28C8915300D83FCC /* Introspect */; };
 		1589C17328C8917C00D83FCC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C17228C8917C00D83FCC /* Kingfisher */; };
+		159DB00828DECE4F00FCE98D /* MyCouponDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB00728DECE4F00FCE98D /* MyCouponDetailViewModel.swift */; };
 		159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086728AC72170008EC16 /* RentalDatePicker.swift */; };
 		159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */; };
 		159F1B21288B88DB00012113 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B20288B88DB00012113 /* Variables.swift */; };
@@ -249,6 +251,7 @@
 		1530D55728DCDEDF004BFB39 /* MyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyService.swift; sourceTree = "<group>"; };
 		1530D55928DCDFA6004BFB39 /* MyCouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponViewModel.swift; sourceTree = "<group>"; };
 		1530D55C28DCE1BA004BFB39 /* MyCouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponView.swift; sourceTree = "<group>"; };
+		15323BAE28DEDB3E00A89CB1 /* CreateCouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCouponViewModel.swift; sourceTree = "<group>"; };
 		153687A328DAB0CF00E0D554 /* CouponeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponeService.swift; sourceTree = "<group>"; };
 		153687A528DAB1EB00E0D554 /* CouponParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponParam.swift; sourceTree = "<group>"; };
 		153687A828DABCBE00E0D554 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
@@ -327,6 +330,7 @@
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductViewModel.swift; sourceTree = "<group>"; };
 		1586641028D9629C00E4E902 /* UpdateProductView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdateProductView .swift"; sourceTree = "<group>"; };
+		159DB00728DECE4F00FCE98D /* MyCouponDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponDetailViewModel.swift; sourceTree = "<group>"; };
 		159F086728AC72170008EC16 /* RentalDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDatePicker.swift; sourceTree = "<group>"; };
 		159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDetailVM.swift; sourceTree = "<group>"; };
 		159F1B20288B88DB00012113 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
@@ -455,7 +459,6 @@
 				1525F60728B73DA800C7CA51 /* ItemRegistration */,
 				157190EB28B701B400880F98 /* Management */,
 				15FA687428BC594000B3DF0B /* MyPage */,
-				153687A728DABC4100E0D554 /* Coupon */,
 				15FAF135287D5DFF00B35570 /* ContentView.swift */,
 				156386B8288A513B006653E8 /* Ren2UTab.swift */,
 			);
@@ -465,19 +468,16 @@
 		151B556D28BC9EBC0090A5E8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1554576128D9A3E900DDAD9B /* UpdateClubInfoViewModel.swift */,
+				159DB00628DECD5100FCE98D /* Member */,
 				1554576628D9B3B700DDAD9B /* Image */,
 				15F937C628D5884D00D41F0C /* BeforeRefactoring */,
 				15394C0D28CDCAA200E4944A /* Authorization */,
-				15F937C528D5882700D41F0C /* Auth */,
 				15F937C728D58D5F00D41F0C /* Club */,
 				15C03143289CD5A900D0354E /* Rental */,
 				1523D5E328BE29BE009EB733 /* Management */,
 				1525F5FF28B7365D00C7CA51 /* ItemRegistration */,
 				157C268828CF8246009115D8 /* PasswordViewModel.swift */,
-				15BDC4212881218500514EF1 /* MyPageViewModel.swift */,
-				1554576D28D9D15C00DDAD9B /* CouponViewModel.swift */,
-				1530D55928DCDFA6004BFB39 /* MyCouponViewModel.swift */,
+				1554576128D9A3E900DDAD9B /* UpdateClubInfoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -495,8 +495,10 @@
 		1523D5E328BE29BE009EB733 /* Management */ = {
 			isa = PBXGroup;
 			children = (
+				1554576D28D9D15C00DDAD9B /* CouponViewModel.swift */,
 				1523D5E428BE29E9009EB733 /* ManagementViewModel.swift */,
 				1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */,
+				15323BAE28DEDB3E00A89CB1 /* CreateCouponViewModel.swift */,
 			);
 			path = Management;
 			sourceTree = "<group>";
@@ -720,6 +722,7 @@
 		157190EB28B701B400880F98 /* Management */ = {
 			isa = PBXGroup;
 			children = (
+				153687A728DABC4100E0D554 /* Coupon */,
 				1563FE8D28ADDF5600F46CC7 /* ClubManagementView.swift */,
 				157190EC28B7023600880F98 /* RentalManagementSelected.swift */,
 				157190E728B6F5F300880F98 /* RentalAndItemManagement.swift */,
@@ -743,6 +746,18 @@
 				153687A528DAB1EB00E0D554 /* CouponParam.swift */,
 			);
 			path = Param;
+			sourceTree = "<group>";
+		};
+		159DB00628DECD5100FCE98D /* Member */ = {
+			isa = PBXGroup;
+			children = (
+				157C267E28CF3E60009115D8 /* SignUpViewModel.swift */,
+				157C268028CF3E6A009115D8 /* LoginViewModel.swift */,
+				15BDC4212881218500514EF1 /* MyPageViewModel.swift */,
+				1530D55928DCDFA6004BFB39 /* MyCouponViewModel.swift */,
+				159DB00728DECE4F00FCE98D /* MyCouponDetailViewModel.swift */,
+			);
+			path = Member;
 			sourceTree = "<group>";
 		};
 		159F1B22288B9F7000012113 /* Font */ = {
@@ -801,15 +816,6 @@
 				152C3E86287E7750000BFC97 /* Certification.swift */,
 				152CA1D0288F84EE00DDC0E2 /* SignUpSuccess.swift */,
 				157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		15F937C528D5882700D41F0C /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				157C268028CF3E6A009115D8 /* LoginViewModel.swift */,
-				157C267E28CF3E60009115D8 /* SignUpViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1156,6 +1162,7 @@
 				1554576528D9A80000DDAD9B /* UpdateClubView.swift in Sources */,
 				15BBB9FC28CEF58D00DCEF92 /* PrivacyPolicy.swift in Sources */,
 				157190EA28B6FE0F00880F98 /* WidthSetterView .swift in Sources */,
+				15323BAF28DEDB3E00A89CB1 /* CreateCouponViewModel.swift in Sources */,
 				157190F628B7072200880F98 /* RightArrow.swift in Sources */,
 				156386D2288A5D1A006653E8 /* ClubViewModel.swift in Sources */,
 				159F1B26288BA16000012113 /* CustomFont.swift in Sources */,
@@ -1237,6 +1244,7 @@
 				156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */,
 				1554576828D9B3C600DDAD9B /* ImageViewModel.swift in Sources */,
 				157C268128CF3E6A009115D8 /* LoginViewModel.swift in Sources */,
+				159DB00828DECE4F00FCE98D /* MyCouponDetailViewModel.swift in Sources */,
 				152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15228ABF28C8A06300A0B3C5 /* NoticeData.swift in Sources */,

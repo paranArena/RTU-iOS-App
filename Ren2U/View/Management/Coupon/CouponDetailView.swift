@@ -64,6 +64,16 @@ struct CouponDetailView: View {
         .onDisappear {
             couponVM.couponDetailData = nil
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    CreateCouponView(clubId: couponVM.clubId)
+                } label: {
+                    Text("수정")
+                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
+                }
+            }
+        }
     }
     
     @ViewBuilder

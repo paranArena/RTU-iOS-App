@@ -15,15 +15,14 @@ struct CouponParam: Codable {
     var longitude: Double?
     var information = ""
     var imagePath = ""
-    var actDate: Date?
-    var expDate: Date?
+    var actDate = Date.now
+    var expDate = Date.now
     
     var isFilledAllParams: Bool {
         guard !name.isEmpty else { return false }
         guard !location.isEmpty else { return false }
         guard !information.isEmpty else { return false }
         guard (latitude != nil && longitude != nil) else { return false }
-        guard (actDate != nil && expDate != nil) else { return false }
         return true
     }
     
@@ -41,15 +40,5 @@ struct CouponParam: Codable {
         } else {
             return Color.white
         }
-    }
-    mutating func clearAll() {
-        self.name = ""
-        self.location = ""
-        self.latitude = nil
-        self.longitude = nil
-        self.information = ""
-        self.imagePath = ""
-        self.actDate = nil
-        self.expDate = nil
     }
 }

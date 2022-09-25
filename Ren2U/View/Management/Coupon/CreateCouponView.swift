@@ -11,9 +11,13 @@ import Kingfisher
 struct CreateCouponView: View {
     
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var couponVM: CouponViewModel
+    @StateObject var createCouponVM: CreateCouponViewModel
     @State private var isShowingImagePicker = false
     @EnvironmentObject var locationManager: LocationManager
+    
+    init(clubId: Int) {
+        self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId))
+    }
     
     
     var body: some View {
@@ -21,7 +25,7 @@ struct CreateCouponView: View {
             VStack(alignment: .center, spacing: 30) {
                 
                 VStack(alignment: .center, spacing: 10) {
-                    CouponImage(url: couponVM.coupon.imagePath, size: 200)
+                    CouponImage(url: createCouponVM.coupon.imagePath, size: 200)
                     ChangeImageButton()
                 }
                 .frame(maxWidth: .infinity)
@@ -33,43 +37,67 @@ struct CreateCouponView: View {
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                         .foregroundColor(.gray_495057)
                     
-                    RentalDatePicker(viewModel: DateViewModel(startDate: $couponVM.coupon.actDate, endDate: $couponVM.coupon.expDate))
-                        .padding(.horizontal, 30)
                     
+                    if #available(iOS 16.0, *) {
+                        MultiDatePicker("Dates", selection: $createCouponVM.dates)
+                    }
+//                    DatePicker(selection: $createCouponVM.coupon.actDate) {
+//                        EmptyView()
+//                    }
+//
+//                    DatePicker(selection: $createCouponVM.coupon.expDate) {
+//                        EmptyView()
+//                    }
+//                    RentalDatePicker(viewModel: DateViewModel(startDate: $createCouponVM.coupon.actDate, endDate: $createCouponVM.coupon.expDate))
+//                        .padding(.horizontal, 30)
+
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("사용가능 기한 확인")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-                        .foregroundColor(.gray_495057)
-                    
-                    Text("\(couponVM.coupon.actDate?.toJsonValue() ?? "") ~ \(couponVM.coupon.expDate?.toJsonValue() ?? "")")
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
+
+//                VStack(alignment: .leading, spacing: 10) {
+//                    Text("사용가능 기한 확인")
+//                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+//                        .foregroundColor(.gray_495057)
+//
+//                    Text("\(createCouponVM.coupon.actDate.toJsonValue() ?? "") ~ \(createCouponVM.coupon.expDate.toJsonValue() ?? "")")
+//                }
+//                .frame(maxWidth: .infinity, alignment: .leading)
+
                 UseLocation()
                 Information()
             }
         }
         .padding(.horizontal, 10)
         .sheet(isPresented: $isShowingImagePicker) {
-            UpdatedImagePicker(imagePath: $couponVM.coupon.imagePath)
+            UpdatedImagePicker(imagePath: $createCouponVM.coupon.imagePath)
         }
         .basicNavigationTitle(title: "쿠폰 등록")
-        .onDisappear {
-            couponVM.clearCouponParam()
-        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    couponVM.showAlertPostCouponAdmin()
+                    createCouponVM.showAlertPostCouponAdmin()
                 } label: {
                     Text("완료")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
                 }
             }
         }
+        .alert(createCouponVM.callbackAlert.title, isPresented: $createCouponVM.callbackAlert.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") {
+                Task {
+                    await createCouponVM.callbackAlert.callback()
+                }
+            }
+        } message: {
+            createCouponVM.callbackAlert.message
+        }
+        .alert(createCouponVM.oneButtonAlert.title, isPresented: $createCouponVM.oneButtonAlert.isPresented) {
+            OneButtonAlert.noActionButton
+        } message: {
+            createCouponVM.oneButtonAlert.message
+        }
+
     }
     
     @ViewBuilder
@@ -91,7 +119,7 @@ struct CreateCouponView: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                 .foregroundColor(.gray_495057)
             
-            TextField("", text: $couponVM.coupon.name)
+            TextField("", text: $createCouponVM.coupon.name)
                 .background(alignment: .bottom) {
                     SimpleLine(color: Color.gray_DEE2E6)
                 }
@@ -104,22 +132,22 @@ struct CreateCouponView: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                 .foregroundColor(.gray_495057)
             
-            TextField("", text: $couponVM.coupon.location)
+            TextField("", text: $createCouponVM.coupon.location)
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
                 .background(alignment: .bottom) {
                     SimpleLine(color: Color.gray_DEE2E6)
                 }
             
             Button {
-                couponVM.isShowingLocationPikcer = true
+                createCouponVM.isShowingLocationPicker = true
             } label: {
-                GrayRoundedRectangle(bgColor: couponVM.coupon.showMapButtonBGColor, fgColor: couponVM.coupon.showMapButtonFGColor, text: "지도에서 장소 표시")
+                GrayRoundedRectangle(bgColor: createCouponVM.coupon.showMapButtonBGColor, fgColor: createCouponVM.coupon.showMapButtonFGColor, text: "지도에서 장소 표시")
             }
-//            .background(
-//                NavigationLink(isActive: $couponVM.isShowingLocationPikcer) {
-//                    CouponLocationView(couponVM: couponVM)
-//                } label: { }
-//            )
+            .background(
+                NavigationLink(isActive: $createCouponVM.isShowingLocationPicker) {
+                    CouponLocationView(createCouponVM: createCouponVM)
+                } label: { }
+            )
 
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -132,7 +160,7 @@ struct CreateCouponView: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                 .foregroundColor(.gray_495057)
             
-            EditorPlaceholder(placeholder: "", text: $couponVM.coupon.information)
+            EditorPlaceholder(placeholder: "", text: $createCouponVM.coupon.information)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
         }
         .frame(maxWidth: .infinity, alignment: .leading)

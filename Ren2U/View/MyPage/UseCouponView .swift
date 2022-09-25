@@ -12,31 +12,41 @@ import CoreLocation
 
 struct UseCouponView: View {
     
+    @StateObject var myCouponDetailVM: MyCouponDetailViewModel
     @ObservedObject var myCouponVM: MyCouponViewModel
     
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 30) {
-                CouponImage(url: myCouponVM.couponDetailUserData?.imagePath ?? "", size: 200)
-                
+                CouponImage(url: myCouponDetailVM.couponDetailUserData.imagePath, size: 200)
                 IssuedClub()
                 UsePeriod()
                 UseLocation()
                 Information()
                 UseCouponButton()
-                
-                Map(coordinateRegion: $myCouponVM.mapRegion, showsUserLocation: true, userTrackingMode: .none)
             }
             .padding(.horizontal)
         }
-        .basicNavigationTitle(title: myCouponVM.couponDetailUserData?.name ?? "")
-        .onDisappear {
-            myCouponVM.couponDetailUserData = nil 
-        }
+        .basicNavigationTitle(title: myCouponDetailVM.couponDetailUserData.name)
         .onAppear {
             UITabBar.hideTabBar()
         }
         .avoidSafeArea()
+        .alert(myCouponDetailVM.oneButtonAlert.title, isPresented: $myCouponDetailVM.oneButtonAlert.isPresented) {
+            OneButtonAlert.noActionButton
+        } message: {
+            myCouponDetailVM.oneButtonAlert.message
+        }
+        .alert("", isPresented: $myCouponDetailVM.alert.isPresented) {
+            Button("취소", role: .cancel) {}
+            Button("확인") { Task {
+                await myCouponDetailVM.alert.callback()
+                myCouponVM.getMyCouponsAll()
+                
+            }}
+        } message: {
+            myCouponDetailVM.alert.message
+        }
     }
     
     @ViewBuilder
@@ -47,7 +57,7 @@ struct UseCouponView: View {
             
             Spacer()
             
-            Text(myCouponVM.couponDetailUserData?.clubName ?? "" )
+            Text(myCouponDetailVM.couponDetailUserData.clubName)
                 .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
         }
     }
@@ -60,28 +70,44 @@ struct UseCouponView: View {
                .foregroundColor(.gray_495057)
             
             Spacer()
-
-            Text(myCouponVM.couponDetailUserData?.period ?? "")
+            
+            Text(myCouponDetailVM.couponDetailUserData.period)
                 .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
        }
     }
     
     @ViewBuilder
     private func UseLocation() -> some View {
-        HStack {
-           Text("사용가능 위치")
-               .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-               .foregroundColor(.gray_495057)
-            
-            Spacer()
+        Button {
+            myCouponDetailVM.isActiveMap = true
+        } label: {
+            HStack {
+               Text("사용가능 위치")
+                   .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                   .foregroundColor(.gray_495057)
+                
+                Spacer()
 
-            Text(myCouponVM.couponDetailUserData?.location.name ?? "")
-                .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
-            
-            Image(AssetImages.MapMarker.rawValue)
-                .resizable()
-                .frame(width: 15, height: 20)
-       }
+                Text(myCouponDetailVM.couponDetailUserData.location.name)
+                    .font(.custom(CustomFont.RobotoMedium.rawValue, size: 14))
+                
+                Image(AssetImages.MapMarker.rawValue)
+                        .resizable()
+                        .frame(width: 15, height: 20)
+           }
+        }
+        .sheet(isPresented: $myCouponDetailVM.isActiveMap) {
+            VStack {
+                TransparentDivider()
+                Map(coordinateRegion: $myCouponDetailVM.mapRegion, showsUserLocation: true, userTrackingMode: .constant(.none), annotationItems: myCouponDetailVM.annotation) { annotation in
+                    MapAnnotation(coordinate: annotation.coordinate) {
+                        Image(AssetImages.MapMarker.rawValue)
+                            .resizable()
+                            .frame(width: 18, height: 24)
+                    }
+                }
+            }
+        }
     }
     
     @ViewBuilder
@@ -91,7 +117,7 @@ struct UseCouponView: View {
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .foregroundColor(.gray_495057)
             
-            Text(myCouponVM.couponDetailUserData?.information ?? "")
+            Text(myCouponDetailVM.couponDetailUserData.information)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .frame(maxWidth: .infinity, minHeight: 200, alignment: .topLeading)
                 .padding(.horizontal, 5)
@@ -104,7 +130,7 @@ struct UseCouponView: View {
     @ViewBuilder
     private func UseCouponButton() -> some View {
         Button {
-            myCouponVM.alertUseCouponUser()
+            Task { await myCouponDetailVM.alertUseCouponUser() }
         } label: {
             VStack {
                 Text("쿠폰 사용 시\n 관계자에게 보여주세요.")

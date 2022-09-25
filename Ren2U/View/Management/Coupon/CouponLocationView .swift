@@ -13,17 +13,21 @@ struct CouponLocationView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var locationManager: LocationManager
-    @ObservedObject var couponVM: CouponViewModel
+    @ObservedObject var createCouponVM: CreateCouponViewModel
     
     var body: some View {
         VStack {
             Map(coordinateRegion: $locationManager.region, showsUserLocation: false, userTrackingMode: .constant(.none))
-                .overlay(Image(systemName: "checkmark").foregroundColor(.navy_1E2F97))
+                .overlay(
+                    Image(AssetImages.MapMarker.rawValue)
+                        .resizable()
+                        .frame(width: 18, height: 24)
+                )
 
             
             Button {
-                couponVM.coupon.latitude = locationManager.region.center.latitude
-                couponVM.coupon.longitude = locationManager.region.center.longitude
+                createCouponVM.coupon.latitude = locationManager.region.center.latitude
+                createCouponVM.coupon.longitude = locationManager.region.center.longitude
                 self.presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("선택된 장소로 설정")

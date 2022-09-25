@@ -36,7 +36,7 @@ struct ItemMap: View {
         let anotaions: [Annotation] = [Annotation(coordinate: itemLocation)]
         
         VStack {
-            
+
             Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.none), annotationItems: anotaions) { annotation  in
                 MapAnnotation(coordinate: annotation.coordinate) {
                     Image(systemName: "mappin.and.ellipse")
