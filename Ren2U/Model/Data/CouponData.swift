@@ -47,6 +47,10 @@ struct CouponDetailAdminData: Codable {
     let leftCouponCount: Int
     let location: LocationData
     
+    static func dummyData() -> CouponDetailAdminData {
+        return CouponDetailAdminData(id: 0, name: "", imagePath: "", actDateDto: "", expDateDto: "", information: "", allCouponCount: 0, leftCouponCount: 0, location: LocationData.dummyLocationDate())
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -57,11 +61,11 @@ struct CouponDetailAdminData: Codable {
     }
     
     var actDate: String {
-        return self.actDateDto.toDate().toYMDformat()
+        return self.actDateDto.toDateType2().toYMDformat()
     }
     
     var expDate: String {
-        return self.expDateDto.toDate().toYMDformat()
+        return self.expDateDto.toDateType2().toYMDformat()
     }
     
     var period: String {

@@ -15,8 +15,16 @@ struct CouponParam: Codable {
     var longitude: Double?
     var information = ""
     var imagePath = ""
-    var actDate = Date.now
-    var expDate = Date.now
+    var actDate: Date?
+    var expDate: Date?
+    
+    var period: String {
+        if actDate == nil {
+            return ""
+        } else {
+            return "\(actDate?.toYMDformat() ?? "") ~ \(expDate?.toYMDformat() ?? "")"
+        }
+    }
     
     var isFilledAllParams: Bool {
         guard !name.isEmpty else { return false }

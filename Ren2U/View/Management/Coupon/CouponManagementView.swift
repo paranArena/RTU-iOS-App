@@ -46,7 +46,7 @@ struct CouponManagementView: View {
         }
         .overlay(alignment: .bottomTrailing) {
             NavigationLink {
-                CreateCouponView(clubId: couponVM.clubId)
+                CreateCouponView(clubId: couponVM.clubId, couponVM: _couponVM, method: .post)
             } label: {
                 PlusCircleImage()
             }

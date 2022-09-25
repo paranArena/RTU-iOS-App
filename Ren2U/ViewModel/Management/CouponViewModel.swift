@@ -84,7 +84,9 @@ class CouponViewModel: ObservableObject {
                 self.showAlert(with: error)
             } else {
                 print("getCouponAdmin success")
+                print(response.value?.data)
                 self.couponDetailData = response.value?.data ?? nil
+                print(couponDetailData)
             }
         }
     }

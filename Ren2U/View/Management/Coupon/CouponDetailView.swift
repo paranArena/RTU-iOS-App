@@ -67,7 +67,7 @@ struct CouponDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    CreateCouponView(clubId: couponVM.clubId)
+                    CreateCouponView(clubId: couponVM.clubId, couponId: couponVM.couponId, couponDetailData: couponVM.couponDetailData ?? CouponDetailAdminData.dummyData(), couponVM: _couponVM, method: .put)
                 } label: {
                     Text("수정")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))

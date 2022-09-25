@@ -43,4 +43,11 @@ extension String {
         dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         return dateFormatter.date(from: self) ?? Date.now
     }
+    
+    func toDateType3() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        return dateFormatter.date(from: self) ?? Date.now
+    }
 }

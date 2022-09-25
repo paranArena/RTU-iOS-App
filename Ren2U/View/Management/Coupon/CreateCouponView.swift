@@ -11,12 +11,20 @@ import Kingfisher
 struct CreateCouponView: View {
     
     @Environment(\.dismiss) var dismiss
-    @StateObject var createCouponVM: CreateCouponViewModel
-    @State private var isShowingImagePicker = false
-    @EnvironmentObject var locationManager: LocationManager
     
-    init(clubId: Int) {
-        self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId))
+    @EnvironmentObject var locationManager: LocationManager
+    @StateObject var createCouponVM: CreateCouponViewModel
+    @ObservedObject var couponVM: CouponViewModel
+    @State private var isShowingImagePicker = false
+    
+    init(clubId: Int, couponVM: ObservedObject<CouponViewModel>, method: Method) {
+        self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, method: method))
+        self._couponVM = couponVM
+    }
+    
+    init(clubId: Int, couponId: Int, couponDetailData: CouponDetailAdminData, couponVM: ObservedObject<CouponViewModel>, method: Method) {
+        self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, couponId: couponId, couponDetailAdminData: couponDetailData, method: method))
+        self._couponVM = couponVM
     }
     
     
@@ -38,30 +46,24 @@ struct CreateCouponView: View {
                         .foregroundColor(.gray_495057)
                     
                     
-                    if #available(iOS 16.0, *) {
-                        MultiDatePicker("Dates", selection: $createCouponVM.dates)
-                    }
-//                    DatePicker(selection: $createCouponVM.coupon.actDate) {
-//                        EmptyView()
+//                    if #available(iOS 16.0, *) {
+//                        MultiDatePicker("Dates", selection: $createCouponVM.dates)
 //                    }
 //
-//                    DatePicker(selection: $createCouponVM.coupon.expDate) {
-//                        EmptyView()
-//                    }
-//                    RentalDatePicker(viewModel: DateViewModel(startDate: $createCouponVM.coupon.actDate, endDate: $createCouponVM.coupon.expDate))
-//                        .padding(.horizontal, 30)
-
+                    RentalDatePicker(viewModel: DateViewModel(startDate: $createCouponVM.coupon.actDate, endDate: $createCouponVM.coupon.expDate))
+                        .padding(.horizontal, 30)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-//                VStack(alignment: .leading, spacing: 10) {
-//                    Text("사용가능 기한 확인")
-//                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
-//                        .foregroundColor(.gray_495057)
-//
-//                    Text("\(createCouponVM.coupon.actDate.toJsonValue() ?? "") ~ \(createCouponVM.coupon.expDate.toJsonValue() ?? "")")
-//                }
-//                .frame(maxWidth: .infinity, alignment: .leading)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("사용가능 기한 확인")
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
+                        .foregroundColor(.gray_495057)
+
+                    Text(createCouponVM.coupon.period)
+                        .font(.custom(CustomFont.RobotoMedium.rawValue, size: 24))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
 
                 UseLocation()
                 Information()
@@ -75,7 +77,7 @@ struct CreateCouponView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    createCouponVM.showAlertPostCouponAdmin()
+                    createCouponVM.showMethodAlert()
                 } label: {
                     Text("완료")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
@@ -87,6 +89,9 @@ struct CreateCouponView: View {
             Button("확인") {
                 Task {
                     await createCouponVM.callbackAlert.callback()
+                    couponVM.getClubCouponsAdmin()
+                    dismiss()
+                    
                 }
             }
         } message: {
