@@ -39,23 +39,14 @@ struct Ren2UTab: View {
             TabView(selection: $tabSelection) {
                 ForEach(Selection.allCases, id: \.rawValue) { selection in
                     
-                    if #available(iOS 16.0, *) {
-                        NavigationStack {
-                            Content(selection: selection)
-                        }
-                        .tag(selection.rawValue)
-                        .tabItem {
-                            TabItem(selection: selection)
-                        }
-                    } else {
-                        NavigationView {
-                            Content(selection: selection)
-                        }
-                        .tag(selection.rawValue)
-                        .tabItem {
-                            TabItem(selection: selection)
-                        }
+                    NavigationView {
+                        Content(selection: selection)
                     }
+                    .tag(selection.rawValue)
+                    .tabItem {
+                        TabItem(selection: selection)
+                    }
+                    .navigationViewStyle(StackNavigationViewStyle())
                 }
             }
             .isHidden(hidden: funcCount != 0)

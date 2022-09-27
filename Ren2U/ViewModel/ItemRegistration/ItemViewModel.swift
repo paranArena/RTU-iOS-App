@@ -85,12 +85,6 @@ class ItemViewModel: ObservableObject {
             "caution": self.caution
         ]
         
-        for (key, value) in param {
-            print("key : \(key), value: \(value)")
-        }
-        
-        
-        
         let task = AF.upload(multipartFormData: { multipart in
             if let image = self.image!.jpegData(compressionQuality: 1) {
                 multipart.append(image, withName: "image", fileName: "item.image.\(self.clubName).\(self.itemName)", mimeType: "image/jpeg")
@@ -116,10 +110,9 @@ class ItemViewModel: ObservableObject {
         switch response.result {
         case .success(let value):
             print("creatProduct success : \(value)")
-            print(response.debugDescription)
         case .failure(let err):
-            print(response.debugDescription)
             print("createProduct failure : \(err)")
+            print(response.debugDescription)
         }
     }
 }

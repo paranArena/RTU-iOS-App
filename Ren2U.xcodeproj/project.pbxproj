@@ -936,8 +936,8 @@
 		15FAF160287D5EC100B35570 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				155004B728E037CE006B89B4 /* Protocol */,
 				1523D5DF28BE138A009EB733 /* AssetImages.swift */,
+				155004B728E037CE006B89B4 /* Protocol */,
 				152C6F5228C842C600AA420A /* extension */,
 				159F1B22288B9F7000012113 /* Font */,
 				15B63DA228AF38C3000AB82D /* Modifier */,

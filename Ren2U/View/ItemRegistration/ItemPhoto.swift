@@ -20,6 +20,7 @@ struct ItemPhoto: View {
     
     var body: some View {
         VStack {
+
             Text("대여물품의 대표사진을 선택해주세요.")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
             

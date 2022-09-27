@@ -27,9 +27,9 @@ struct EditorPlaceholder: View {
     }
         
 }
-//
-//struct SimplePlaceholder_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SimplePlaceholder()
-//    }
-//}
+
+struct SimplePlaceholder_Previews: PreviewProvider {
+    static var previews: some View {
+        EditorPlaceholder(placeholder: "", text: .constant("텍스트"))
+    }
+}

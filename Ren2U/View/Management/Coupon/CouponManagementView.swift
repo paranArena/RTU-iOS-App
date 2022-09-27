@@ -12,6 +12,9 @@ struct CouponManagementView: View {
     @ObservedObject var couponVM: CouponViewModel
     @ObservedObject var managementVM: ManagementViewModel
     
+    //나중에 삭제 필요 
+    @StateObject var trashCouponDetailAdminVM = CouponDetailAdminViewModel()
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -47,7 +50,7 @@ struct CouponManagementView: View {
         }
         .overlay(alignment: .bottomTrailing) {
             NavigationLink {
-                CreateCouponView(clubId: couponVM.clubId, couponVM: _couponVM, method: .post)
+                CreateCouponView(clubId: couponVM.clubId, couponVM: _couponVM, method: .post, couponDetailAdminVM: trashCouponDetailAdminVM)
             } label: {
                 PlusCircleImage()
             }

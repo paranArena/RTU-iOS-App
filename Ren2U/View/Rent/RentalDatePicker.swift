@@ -17,7 +17,8 @@ struct DateValue: Identifiable {
 
 struct RentalDatePicker: View {
     
-    @StateObject var viewModel: DateViewModel
+    //  호출하는 쪽에서 viewModel 생성후 onChage modifier를 이용해 값 변경 
+    @ObservedObject var viewModel: DateViewModel
     @State private var width: CGFloat = .zero
 
     
@@ -67,6 +68,12 @@ struct RentalDatePicker: View {
             .onAppear {
                 viewModel.setDaysOfMonth()
             }
+//            .onChange(of: viewModel.startDate) { newValue in
+//                actDate = newValue
+//            }
+//            .onChange(of: viewModel.endDate) { newValue in
+//                expDate = newValue
+//            }
         }
     }
     

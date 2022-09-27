@@ -120,7 +120,7 @@ struct MemberPreviewDto: Codable {
     let studentId: String
     
     var year: String {
-        return studentId.substring(from: 3, to: 4)
+        return studentId.substring(from: 2, to: 3)
     }
 }
 
