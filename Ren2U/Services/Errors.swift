@@ -8,12 +8,12 @@
 import Foundation
 import Alamofire
 
-struct NetworkError: Error {
+struct NetworkError: Error{
     let initialError: AFError
     let serverError: ServerError?
 }
 
-struct ServerError: Decodable {
+struct ServerError: Decodable, Equatable{
     let code: String
     let message: String 
 }

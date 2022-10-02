@@ -46,7 +46,7 @@ struct Ren2UTab: View {
                     .tabItem {
                         TabItem(selection: selection)
                     }
-                    .navigationViewStyle(StackNavigationViewStyle())
+                    .navigationViewStyle(.stack)
                 }
             }
             .isHidden(hidden: funcCount != 0)

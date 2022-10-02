@@ -57,7 +57,7 @@ struct NoticeManagementView: View {
         .frame(maxWidth: .infinity)
         .overlay(alignment: .bottomTrailing) {
             NavigationLink {
-                CreateNoticeView(managementVM: managementVM)
+                CreateNoticeView(managementVM: managementVM, notificationVM: NotificationViewModel(clubId: managementVM.clubData.id))
             } label: {
                 PlusCircleImage()
             }

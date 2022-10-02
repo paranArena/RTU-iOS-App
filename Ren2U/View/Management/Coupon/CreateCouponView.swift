@@ -164,7 +164,8 @@ struct CreateCouponView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    @ViewBuilder private func Information() -> some View {
+    @ViewBuilder
+    private func Information() -> some View {
         
         VStack(alignment: .leading, spacing: 10) {
            Text("세부정보")

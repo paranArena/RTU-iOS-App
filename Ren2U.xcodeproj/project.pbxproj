@@ -135,6 +135,7 @@
 		157C268E28CF8F47009115D8 /* ItemMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268D28CF8F47009115D8 /* ItemMap.swift */; };
 		157C269228CFB2BE009115D8 /* NavyCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269128CFB2BE009115D8 /* NavyCapsule.swift */; };
 		157C269428CFBB6C009115D8 /* ResetPassWordWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */; };
+		157EBB1628E9321000A5CF75 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157EBB1528E9321000A5CF75 /* NotificationService.swift */; };
 		157F53A728D844030087F8A3 /* SwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F53A628D844030087F8A3 /* SwipeCell.swift */; };
 		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586640E28D95F1C00E4E902 /* UpdateProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */; };
@@ -184,6 +185,7 @@
 		15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */; };
 		15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF164287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift */; };
 		15FAF169287D607800B35570 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF168287D607800B35570 /* Extension.swift */; };
+		15FD086A28E7350B009E2275 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 15FD086928E7350B009E2275 /* ComposableArchitecture */; };
 		15FD4D6528DD653900F7CC20 /* UseCouponView .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4D6428DD653900F7CC20 /* UseCouponView .swift */; };
 		15FD7CCD28C8EF7D007C4E96 /* CellWithOneSlideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD7CCC28C8EF7D007C4E96 /* CellWithOneSlideButton.swift */; };
 		15FFDA6E28DCE3810058D286 /* MyCouponPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFDA6D28DCE3810058D286 /* MyCouponPreviewCell.swift */; };
@@ -334,6 +336,7 @@
 		157C268D28CF8F47009115D8 /* ItemMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMap.swift; sourceTree = "<group>"; };
 		157C269128CFB2BE009115D8 /* NavyCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavyCapsule.swift; sourceTree = "<group>"; };
 		157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWordWithCode.swift; sourceTree = "<group>"; };
+		157EBB1528E9321000A5CF75 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		157F53A628D844030087F8A3 /* SwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCell.swift; sourceTree = "<group>"; };
 		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductViewModel.swift; sourceTree = "<group>"; };
@@ -394,6 +397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15FD086A28E7350B009E2275 /* ComposableArchitecture in Frameworks */,
 				1589C17328C8917C00D83FCC /* Kingfisher in Frameworks */,
 				15228AB928C891A600A0B3C5 /* Alamofire in Frameworks */,
 				1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */,
@@ -486,6 +490,8 @@
 				1525F5FF28B7365D00C7CA51 /* ItemRegistration */,
 				157C268828CF8246009115D8 /* PasswordViewModel.swift */,
 				1554576128D9A3E900DDAD9B /* UpdateClubInfoViewModel.swift */,
+				15A84D6028CE1C6C00B3EB84 /* NotificationViewModel.swift */,
+				1554576D28D9D15C00DDAD9B /* CouponViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -503,7 +509,6 @@
 		1523D5E328BE29BE009EB733 /* Management */ = {
 			isa = PBXGroup;
 			children = (
-				1554576D28D9D15C00DDAD9B /* CouponViewModel.swift */,
 				1523D5E428BE29E9009EB733 /* ManagementViewModel.swift */,
 				1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */,
 				15323BAE28DEDB3E00A89CB1 /* CreateCouponViewModel.swift */,
@@ -673,6 +678,7 @@
 				153687A328DAB0CF00E0D554 /* CouponeService.swift */,
 				153687A828DABCBE00E0D554 /* ImageService.swift */,
 				1530D55728DCDEDF004BFB39 /* MyService.swift */,
+				157EBB1528E9321000A5CF75 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -842,9 +848,8 @@
 		15F937C628D5884D00D41F0C /* BeforeRefactoring */ = {
 			isa = PBXGroup;
 			children = (
-				15A84D6028CE1C6C00B3EB84 /* NotificationViewModel.swift */,
-				152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */,
 				156386D0288A5D06006653E8 /* Club */,
+				152D462D28C5DF3A008F26E0 /* AmongTabsViewModel.swift */,
 				159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */,
 			);
 			path = BeforeRefactoring;
@@ -993,6 +998,7 @@
 				1589C16F28C8915300D83FCC /* Introspect */,
 				1589C17228C8917C00D83FCC /* Kingfisher */,
 				15228AB828C891A600A0B3C5 /* Alamofire */,
+				15FD086928E7350B009E2275 /* ComposableArchitecture */,
 			);
 			productName = Ren2U;
 			productReference = 15FAF130287D5DFF00B35570 /* Ren2U.app */;
@@ -1071,6 +1077,7 @@
 				1589C16B28C8914700D83FCC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */,
 				1589C16E28C8915300D83FCC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				1589C17128C8917C00D83FCC /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				15FD086828E7350B009E2275 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = 15FAF131287D5DFF00B35570 /* Products */;
 			projectDirPath = "";
@@ -1273,6 +1280,7 @@
 				15228ABF28C8A06300A0B3C5 /* NoticeData.swift in Sources */,
 				15206E4828DB5E1E0091DA74 /* LocationData.swift in Sources */,
 				152C6F5128C83F1A00AA420A /* ColorExtension.swift in Sources */,
+				157EBB1628E9321000A5CF75 /* NotificationService.swift in Sources */,
 				15228AC128C8A08D00A0B3C5 /* ClubDetailData.swift in Sources */,
 				15BBB9FF28CF028300DCEF92 /* RepresentativeImage.swift in Sources */,
 				156673DE28C1C6860011535D /* MaxYSetterView.swift in Sources */,
@@ -1653,6 +1661,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		15FD086828E7350B009E2275 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1675,6 +1691,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1589C17128C8917C00D83FCC /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		15FD086928E7350B009E2275 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15FD086828E7350B009E2275 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

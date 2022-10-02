@@ -43,6 +43,7 @@ struct ItemCaution: View {
                     await itemVM.createProduct()
                     managementVM.searchClubProductsAll()
                 }
+                isActive = false
             } label: {
                 RightArrow(isDisabled: itemVM.caution.isEmpty)
             }

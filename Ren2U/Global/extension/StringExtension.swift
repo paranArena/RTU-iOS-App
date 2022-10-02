@@ -28,11 +28,11 @@ extension String {
     
     func toDate() -> Date {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
-        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+//        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+//        dateFormatter.locale = Locale(identifier: "ko_KR")
         var date = dateFormatter.date(from: self) ?? Date.now
-        date.addTimeInterval(60*60*9)
+//        date.addTimeInterval(60*60*9)
         
         return date
     }

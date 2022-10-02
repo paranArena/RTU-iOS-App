@@ -27,7 +27,7 @@ struct NotificationDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text(notificationVM.notificationDetail.title)
+                Text(notificationVM.notificationDetailData.title)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .overlay(alignment: .bottom) {
@@ -36,9 +36,9 @@ struct NotificationDetailView: View {
                 
                 Info()
                 
-                RepresentativeImage(url: notificationVM.notificationDetail.imagePath)
+                RepresentativeImage(url: notificationVM.notificationDetailData.imagePath)
                 
-                Text(notificationVM.notificationDetail.content)
+                Text(notificationVM.notificationDetailData.content)
                     .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 10)
@@ -59,12 +59,12 @@ struct NotificationDetailView: View {
             Text("")
                 .frame(maxWidth: .infinity)
             
-            Text(notificationVM.notificationDetail.clubName)
+            Text(notificationVM.notificationDetailData.clubName)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 .foregroundColor(Color.gray_868E96)
                 .frame(maxWidth: .infinity)
             
-            Text("\(notificationVM.notificationDetail.updatedAt.toYMDformat())")
+            Text("\(notificationVM.notificationDetailData.updatedAt.toYMDformat())")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                 .foregroundColor(Color.gray_868E96)
                 .frame(maxWidth: .infinity, alignment: .trailing)
