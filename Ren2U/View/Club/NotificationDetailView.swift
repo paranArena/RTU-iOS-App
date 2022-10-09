@@ -11,15 +11,10 @@ import HidableTabView
 
 struct NotificationDetailView: View {
     
-    
-    let clubId: Int
-    let notificationId: Int
     @StateObject var notificationVM: NotificationViewModel
     @Environment(\.isPresented) var isPresented
     
     init(clubId: Int, notificationId: Int) {
-        self.clubId = clubId
-        self.notificationId = notificationId
         _notificationVM = StateObject(wrappedValue: NotificationViewModel(clubId: clubId, notificationId: notificationId))
     }
     

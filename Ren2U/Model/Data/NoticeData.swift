@@ -42,7 +42,7 @@ struct NotificationPreview: Codable, Equatable, Identifiable {
     let clubId: Int
     let title: String
     let isPublic: Bool?
-    let imagePath: String
+    let imagePath: String?
    
     let createdAtDto, updatedAtDto: String
     

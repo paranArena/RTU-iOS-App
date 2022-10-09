@@ -55,16 +55,24 @@ class NotificationViewModel: ObservableObject {
             print(response.debugDescription)
             self.showAlert(with: error)
         } else {
+            print("getNotification success")
             self.notificationDetailData = response.value!.data
         }
+        
+        isLoading = false
     }
     
     func createNotification() async {
-
+        
+        var imagePaths = [String]()
+        if !notificationParam.imagePath.isEmpty {
+            imagePaths.append(notificationParam.imagePath)
+        }
+        
         let param: [String: Any] = [
             "title": notificationParam.title,
             "content": notificationParam.content,
-            "imagePath" : notificationParam.imagePath
+            "imagePaths" : imagePaths
         ]
             
         Task {

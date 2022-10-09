@@ -25,9 +25,11 @@ struct ManageSignUpCell: View {
                     Text(userData.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
                     
-                    Text("\(userData.major) \(userData.studentId.substring(from: 2, to: 3))")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .foregroundColor(.gray_868E96)
+                    if let major = userData.major, let studentId = userData.studentId {
+                        Text("\(major) \(studentId.substring(from: 2, to: 3))")
+                            .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
+                            .foregroundColor(.gray_868E96)
+                    }
                 }
                 
                 Spacer()

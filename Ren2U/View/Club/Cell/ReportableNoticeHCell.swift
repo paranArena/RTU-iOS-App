@@ -26,14 +26,17 @@ struct ReportableNoticeHCell: View {
         CellWithOneSlideButton(okMessage: "신고", cellID: noticeInfo.id, selectedID: $selectedId) {
             VStack {
                 HStack {
-                    KFImage(URL(string: noticeInfo.imagePath)).onFailure { err in
-                        print(err.errorDescription ?? "KFImage err")
-                        }
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 80, height: 80)
-                        .cornerRadius(15)
-                        .isHidden(hidden: noticeInfo.imagePath.isEmpty)
+                    
+                    if let imagePath = noticeInfo.imagePath {
+                        KFImage(URL(string: imagePath)).onFailure { err in
+                            print(err.errorDescription ?? "KFImage err")
+                            }
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 80, height: 80)
+                            .cornerRadius(15)
+                            .isHidden(hidden: imagePath.isEmpty)
+                    }
                     
                     VStack(alignment: .leading, spacing: 0) {
                         Spacer()

@@ -92,15 +92,15 @@ struct Profile: View {
             Group {
                 switch field {
                 case .email:
-                    Text(myPageVM.userData!.email)
+                    Text(myPageVM.userData!.email ?? "")
                 case .name:
                     Text(myPageVM.userData!.name)
                 case .major:
-                    Text(myPageVM.userData!.major)
+                    Text(myPageVM.userData!.major ?? "")
                 case .studentId:
                     Text(myPageVM.userData!.studentId)
                 case .phoneNumber:
-                    Text(myPageVM.userData!.phoneNumber)
+                    Text(myPageVM.userData!.phoneNumber ?? "")
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)

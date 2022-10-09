@@ -39,12 +39,12 @@ struct CouponMemberData: Codable {
 
 struct MemberPreviewData: Codable, Identifiable {
     let id: Int
-    let email: String
+    let email: String?
     let name: String
-    let phoneNumber: String
+    let phoneNumber: String?
     let studentId: String
-    let major: String
-    let clubRole: String
+    let major: String?
+    let clubRole: String?
     
     var grantButtonText: String {
         if clubRole == ClubRole.user.rawValue {
@@ -81,11 +81,11 @@ struct MemberPreviewData: Codable, Identifiable {
 
 struct UserData: Codable, Identifiable {
     var id: Int
-    var email: String
+    var email: String?
     var name: String
-    var phoneNumber: String
+    var phoneNumber: String?
     var studentId: String
-    var major: String
+    var major: String?
     
     static func dummyUserData() -> UserData {
         return UserData(id: 123, email: "nou0jid", name: "노우영", phoneNumber: "01064330824", studentId: "201820767", major: "소프트웨어학과")

@@ -31,7 +31,7 @@ extension String {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
 //        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
 //        dateFormatter.locale = Locale(identifier: "ko_KR")
-        var date = dateFormatter.date(from: self) ?? Date.now
+        let date = dateFormatter.date(from: self) ?? Date.now
 //        date.addTimeInterval(60*60*9)
         
         return date
