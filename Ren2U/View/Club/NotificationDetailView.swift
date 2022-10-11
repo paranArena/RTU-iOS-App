@@ -14,8 +14,9 @@ struct NotificationDetailView: View {
     @StateObject var notificationVM: NotificationViewModel
     @Environment(\.isPresented) var isPresented
     
+    // user mode
     init(clubId: Int, notificationId: Int) {
-        _notificationVM = StateObject(wrappedValue: NotificationViewModel(clubId: clubId, notificationId: notificationId))
+        self._notificationVM = StateObject(wrappedValue: NotificationViewModel(clubId: clubId, notificationId: notificationId))
     }
     
     

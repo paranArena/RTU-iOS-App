@@ -34,7 +34,9 @@ class ManagementViewModel: ObservableObject {
     
     //  MARK: Alert
     @Published var alert = Alert()
-    @Published var deleteClubAlert = Alert() 
+    @Published var deleteClubAlert = Alert()
+    
+    init() { }
     
     init(clubData: ClubDetailData) {
         self.clubData = clubData

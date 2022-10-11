@@ -13,18 +13,12 @@ class NotificationViewModel: ObservableObject {
     var clubId: Int?
     
     @Published var notificationDetailData = NotificationDetailData.dummyNotificationDetailData()
-    @Published var notificationParam = NotificationParam()
     @Published var isLoading = true
     
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var callbackAlert = CallbackAlert()
     
     var notificationService = NotificationService.shared
-    
-    // For Create
-    init(clubId: Int) {
-        self.clubId = clubId
-    }
     
     // For Detail & Update
     init(clubId: Int, notificationId: Int)  {
@@ -60,29 +54,5 @@ class NotificationViewModel: ObservableObject {
         }
         
         isLoading = false
-    }
-    
-    func createNotification() async {
-        
-        var imagePaths = [String]()
-        if !notificationParam.imagePath.isEmpty {
-            imagePaths.append(notificationParam.imagePath)
-        }
-        
-        let param: [String: Any] = [
-            "title": notificationParam.title,
-            "content": notificationParam.content,
-            "imagePaths" : imagePaths
-        ]
-            
-        Task {
-            let response = await notificationService.createNotification(clubId: clubId!, param: param)
-            if let error = response.error {
-                print(response.debugDescription)
-                await self.showAlert(with: error)
-            } else {
-                await self.showAlert(message: response.value!.responseMessage)
-            }
-        }
     }
 }

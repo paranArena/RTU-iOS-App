@@ -39,5 +39,19 @@ class NotificationService {
         }
     }
     
+    func updateNotification(clubId: Int, notificationId: Int, param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError>{
+        
+        let url = "\(BASE_URL)/clubs/\(clubId)/notifications/\(notificationId)"
+        let hearders: HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")",
+        ]
+        
+        let response = await AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(DefaultPostResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
     
 }

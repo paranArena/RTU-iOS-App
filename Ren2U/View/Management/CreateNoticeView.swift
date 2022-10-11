@@ -15,9 +15,23 @@ struct CreateNoticeView: View {
     @State private var isShowingAlert = false
     
     @ObservedObject var managementVM: ManagementViewModel
-    @StateObject var notificationVM: NotificationViewModel
+    @StateObject var notificationVM: CreateNotificationViewModel
     @EnvironmentObject var groupVM: ClubViewModel
     @Environment(\.dismiss) var dismiss
+    
+    // post
+    init(method: Method, clubId: Int, managementVM: ManagementViewModel) {
+        self._notificationVM = StateObject(wrappedValue: CreateNotificationViewModel(clubId: clubId, method: method))
+        self.managementVM = managementVM
+    }
+    
+    // put
+    init(method: Method, clubId: Int, notificationId: Int, managementVM: ManagementViewModel) {
+        self._notificationVM = StateObject(wrappedValue:
+                                            CreateNotificationViewModel(clubId: clubId, notificationId: notificationId,
+                                                                        method: method))
+        self.managementVM = managementVM
+    }
     
     var body: some View {
         VStack {
@@ -49,16 +63,21 @@ struct CreateNoticeView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    
                     if notificationVM.notificationParam.title.isEmpty || notificationVM.notificationParam.content.isEmpty {
                         isShowingAlert = true
                     } else {
-                        Task {
-                            await notificationVM.createNotification()
-                            managementVM.searchNotificationsAll()
-                            groupVM.getMyNotifications()
+                        
+                        if notificationVM.method == .post {
+                            Task {
+                                await notificationVM.createNotification()
+                                managementVM.searchNotificationsAll()
+                                groupVM.getMyNotifications()
+                                dismiss()
+                            }
+                        } else {
+                            notificationVM.showUpdateNoficiationAlert()
                         }
-                        dismiss()
+
                     }
                 } label: {
                     Text("완료")
@@ -70,6 +89,22 @@ struct CreateNoticeView: View {
             UpdatedImagePicker(imagePath: $notificationVM.notificationParam.imagePath)
         }
         .avoidSafeArea()
+        .alert(notificationVM.callbackAlert.title, isPresented: $notificationVM.callbackAlert.isPresented) {
+            Button(role: .cancel) {
+                
+            } label: {
+                Text("취소")
+            }
+            
+            Button("확인") { Task{
+                await notificationVM.callbackAlert.callback()
+                managementVM.searchNotificationsAll()
+                groupVM.getMyNotifications()
+                dismiss()
+            }}
+        } message: {
+            notificationVM.callbackAlert.message
+        }
     }
     
     @ViewBuilder

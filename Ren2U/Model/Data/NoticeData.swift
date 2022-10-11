@@ -35,6 +35,10 @@ struct NotificationDetailData: Codable {
     var updatedAt: Date {
         updatedAtDto.toDate()
     }
+    
+    func toParam() -> NotificationParam {
+        return NotificationParam(title: self.title, content: self.content, imagePath: self.imagePath)
+    }
 }
 
 struct NotificationPreview: Codable, Equatable, Identifiable {
