@@ -31,6 +31,7 @@ struct UseCouponView: View {
         .basicNavigationTitle(title: myCouponDetailVM.couponDetailUserData.name)
         .onAppear {
             UITabBar.hideTabBar()
+            print(myCouponDetailVM.couponDetailUserData.name)
         }
         .avoidSafeArea()
         .alert(myCouponDetailVM.oneButtonAlert.title, isPresented: $myCouponDetailVM.oneButtonAlert.isPresented) {
@@ -43,6 +44,7 @@ struct UseCouponView: View {
             Button("확인") { Task {
                 await myCouponDetailVM.alert.callback()
                 myCouponVM.getMyCouponsAll()
+                myCouponVM.getMyCouponHistoriesAll()
                 
             }}
         } message: {

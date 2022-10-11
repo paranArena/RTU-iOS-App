@@ -30,7 +30,12 @@ struct NoticeManagementView: View {
                         ForEach(managementVM.notices.indices, id: \.self) { i in
                             let noticeInfo = managementVM.notices[i]
                             let clubName = managementVM.clubData.name
-                            ManageNoticeCell(noticeInfo: noticeInfo, groupName: clubName, selectedCellID: $selectedCellId, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+                            
+                            NavigationLink {
+                                NotificationDetailView(clubId: noticeInfo.clubId, notificationId: noticeInfo.id)
+                            } label: {
+                                ManageNoticeCell(noticeInfo: noticeInfo, groupName: clubName, selectedCellID: $selectedCellId, isShowingAlert: $isShowingAlert, managementVM: managementVM)
+                            }
                         }
                     }
                     .isHidden(hidden: managementVM.notices.isEmpty)
@@ -57,7 +62,7 @@ struct NoticeManagementView: View {
         .frame(maxWidth: .infinity)
         .overlay(alignment: .bottomTrailing) {
             NavigationLink {
-                CreateNoticeView(managementVM: managementVM)
+                CreateNoticeView(method: .post, clubId: managementVM.clubData.id, managementVM: managementVM)
             } label: {
                 PlusCircleImage()
             }

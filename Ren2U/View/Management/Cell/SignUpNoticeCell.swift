@@ -16,9 +16,11 @@ struct SignUpNoticeCell: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
-                Text("\(userInfo.major) \(userInfo.name)님이 회원가입을 요청했습니다.")
-                    .lineLimit(1)
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+                if let major = userInfo.major {
+                    Text("\(major) \(userInfo.name)님이 회원가입을 요청했습니다.")
+                        .lineLimit(1)
+                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+                }
                 
                 Text(getTime())
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 12))

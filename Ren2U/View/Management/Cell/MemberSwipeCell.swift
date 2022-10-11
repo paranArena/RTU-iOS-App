@@ -27,7 +27,7 @@ struct MemberSwipeCell: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(memberInfo.name)
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                    Text(memberInfo.major)
+                    Text(memberInfo.major ?? "")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
                         .foregroundColor(Color.gray_ADB5BD)
                 }

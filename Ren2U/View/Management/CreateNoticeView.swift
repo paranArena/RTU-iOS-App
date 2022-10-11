@@ -6,45 +6,54 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CreateNoticeView: View {
     
-    @State private var raw = NotificationModel(title: "", content: "")
     
     @State private var isShowingImagePicker = false
-    @State private var isShowingImage = false
     @State private var isShowingAlert = false
     
     @ObservedObject var managementVM: ManagementViewModel
+    @StateObject var notificationVM: CreateNotificationViewModel
     @EnvironmentObject var groupVM: ClubViewModel
     @Environment(\.dismiss) var dismiss
     
+    // post
+    init(method: Method, clubId: Int, managementVM: ManagementViewModel) {
+        self._notificationVM = StateObject(wrappedValue: CreateNotificationViewModel(clubId: clubId, method: method))
+        self.managementVM = managementVM
+    }
+    
+    // put
+    init(method: Method, clubId: Int, notificationId: Int, managementVM: ManagementViewModel) {
+        self._notificationVM = StateObject(wrappedValue:
+                                            CreateNotificationViewModel(clubId: clubId, notificationId: notificationId,
+                                                                        method: method))
+        self.managementVM = managementVM
+    }
+    
     var body: some View {
         VStack {
-            TextField("제목을 입력해주세요", text: $raw.title)
+            TextField("제목을 입력해주세요", text: $notificationVM.notificationParam.title)
                 .padding(.top, 20)
             Divider()
             
             
             HStack {
                 ImagePickerButton()
-                Button {
-                    isShowingImage = true
-                } label: {
-                    if let image = raw.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 80, height: 80)
-                            .cornerRadius(15)
-                    }
-                }
+                KFImage(URL(string: notificationVM.notificationParam.imagePath))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(15)
+                    .isHidden(hidden: notificationVM.notificationParam.imagePath.isEmpty)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 10)
             .padding(.bottom, 5)
             
-            EditorPlaceholder(placeholder: "내용을 입력해주세요", text: $raw.content)
+            EditorPlaceholder(placeholder: "내용을 입력해주세요", text: $notificationVM.notificationParam.content)
         }
         .padding(.horizontal, 10)
         .basicNavigationTitle(title: "공지사항 등록")
@@ -54,16 +63,21 @@ struct CreateNoticeView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    
-                    if raw.title.isEmpty || raw.content.isEmpty {
+                    if notificationVM.notificationParam.title.isEmpty || notificationVM.notificationParam.content.isEmpty {
                         isShowingAlert = true
                     } else {
-                        Task {
-                            await managementVM.createNotification(notice: raw)
-                            managementVM.searchNotificationsAll()
-                            groupVM.getMyNotifications()
+                        
+                        if notificationVM.method == .post {
+                            Task {
+                                await notificationVM.createNotification()
+                                managementVM.searchNotificationsAll()
+                                groupVM.getMyNotifications()
+                                dismiss()
+                            }
+                        } else {
+                            notificationVM.showUpdateNoficiationAlert()
                         }
-                        dismiss()
+
                     }
                 } label: {
                     Text("완료")
@@ -72,17 +86,25 @@ struct CreateNoticeView: View {
             }
         }
         .sheet(isPresented: $isShowingImagePicker) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: $raw.image)
-        }
-        .sheet(isPresented: $isShowingImage) {
-            ZStack {
-                Image(uiImage: raw.image!)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: SCREEN_WIDTH, height: SCREEN_WIDTH)
-            }
+            UpdatedImagePicker(imagePath: $notificationVM.notificationParam.imagePath)
         }
         .avoidSafeArea()
+        .alert(notificationVM.callbackAlert.title, isPresented: $notificationVM.callbackAlert.isPresented) {
+            Button(role: .cancel) {
+                
+            } label: {
+                Text("취소")
+            }
+            
+            Button("확인") { Task{
+                await notificationVM.callbackAlert.callback()
+                managementVM.searchNotificationsAll()
+                groupVM.getMyNotifications()
+                dismiss()
+            }}
+        } message: {
+            notificationVM.callbackAlert.message
+        }
     }
     
     @ViewBuilder

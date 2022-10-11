@@ -34,7 +34,9 @@ class ManagementViewModel: ObservableObject {
     
     //  MARK: Alert
     @Published var alert = Alert()
-    @Published var deleteClubAlert = Alert() 
+    @Published var deleteClubAlert = Alert()
+    
+    init() { }
     
     init(clubData: ClubDetailData) {
         self.clubData = clubData
@@ -102,43 +104,6 @@ class ManagementViewModel: ObservableObject {
         deleteClubAlert.message = Text("클럽을 삭제하시겠습니까?")
         deleteClubAlert.isPresented = true
         deleteClubAlert.callback = { await self.deleteClub() }
-    }
-    
-    //  MARK: POST
-    
-    func createNotification(notice: NotificationModel) async {
-        let url = "\(BASE_URL)/clubs/\(clubData.id)/notifications"
-        let hearders: HTTPHeaders = [
-            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")",
-            "Content-type": "multipart/form-data"
-        ]
-        
-        let param: [String: Any] = [
-            "title": notice.title,
-            "content": notice.content,
-        ]
-            
-        let task = AF.upload(multipartFormData: { multipart in
-            if let image = notice.image {
-                multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "notification.image.\(self.clubData).\(notice.title)", mimeType: "image/jpeg")
-            }
-
-            for (key, value) in param {
-                    multipart.append(Data(String("\(value)").utf8), withName: key)
-            }
-            
-
-        }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingDecodable(CreateNotificationResponse.self)
-        
-        
-        switch await task.result {
-        case .success(let value):
-            print("[createNotification success]")
-            print(value.responseMessage)
-        case .failure(let err):
-            print("[createNotification err]")
-            print(err)
-        }
     }
     
     func acceptClubJoin(memberId: Int) async {

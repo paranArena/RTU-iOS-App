@@ -9,8 +9,9 @@ import SwiftUI
 
 //  RentalDetail과 RentalDatePicker에서 모두 이용
 class DateViewModel: ObservableObject {
-    @Binding var startDate: Date?
-    @Binding var endDate: Date?
+    
+    @Published var startDate: Date?
+    @Published var endDate: Date?
     @Published var pickUpTime = Date.now
     
     
@@ -18,10 +19,6 @@ class DateViewModel: ObservableObject {
     @Published var currentDate = Date.now
     @Published var rentalDays = [DateValue]()
     
-    init(startDate: Binding<Date?>, endDate: Binding<Date?>) {
-        self._startDate = startDate
-        self._endDate = endDate
-    }
     
     var month: String {
         let formatter = DateFormatter()

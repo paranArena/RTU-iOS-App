@@ -21,7 +21,7 @@ struct CustomPicker: UIViewRepresentable {
 
     //updateUIView(_:context:)
     func updateUIView(_ view: UIPickerView, context: UIViewRepresentableContext<CustomPicker>) {
-        print("updateUIView is called! \(values[0]) \(values[1])")
+//        print("updateUIView is called! \(values[0]) \(values[1])")
     }
     
 
@@ -29,7 +29,7 @@ struct CustomPicker: UIViewRepresentable {
         var parent: CustomPicker
         init(_ pickerView: CustomPicker) {
             self.parent = pickerView
-            print("Coordinator Init, [\(parent.values[0]), \(parent.values[1])")
+//            print("Coordinator Init, [\(parent.values[0]), \(parent.values[1])")
         }
         
         func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -90,7 +90,7 @@ struct CustomPicker: UIViewRepresentable {
     
     //makeUIView(context:)
     func makeUIView(context: UIViewRepresentableContext<CustomPicker>) -> UIPickerView {
-        print("makeUIView called")
+//        print("makeUIView called")
         let picker = UIPickerView(frame: .zero)
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.dataSource = context.coordinator

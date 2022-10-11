@@ -8,10 +8,10 @@
 import Foundation
 import SwiftUI
 
-struct NotificationModel {
-    var title: String
-    var content: String
-    var image: UIImage?
+struct NotificationParam {
+    var title: String = ""
+    var content: String = ""
+    var imagePath: String = ""
 }
 
 struct UpdateNotificationParam {

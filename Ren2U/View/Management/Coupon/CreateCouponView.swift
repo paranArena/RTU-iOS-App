@@ -11,23 +11,26 @@ import Kingfisher
 struct CreateCouponView: View {
     
     @Environment(\.dismiss) var dismiss
-    
     @EnvironmentObject var locationManager: LocationManager
     
+    @StateObject var dateVM = DateViewModel()
     @StateObject var createCouponVM: CreateCouponViewModel
     @ObservedObject var couponVM: CouponViewModel
+    @ObservedObject var couponDetailAdminVM: CouponDetailAdminViewModel
     @State private var isShowingImagePicker = false
     
     // post에 사용
-    init(clubId: Int, couponVM: ObservedObject<CouponViewModel>, method: Method) {
+    init(clubId: Int, couponVM: ObservedObject<CouponViewModel>, method: Method, couponDetailAdminVM: CouponDetailAdminViewModel) {
         self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, method: method))
         self._couponVM = couponVM
+        self._couponDetailAdminVM = ObservedObject(wrappedValue: couponDetailAdminVM)
     }
     
     // put에 사용
-    init(clubId: Int, couponId: Int, couponDetailData: CouponDetailAdminData, couponVM: ObservedObject<CouponViewModel>, method: Method) {
+    init(clubId: Int, couponId: Int, couponDetailData: CouponDetailAdminData, couponVM: ObservedObject<CouponViewModel>, method: Method, couponDetailAdminVM: CouponDetailAdminViewModel) {
         self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, couponId: couponId, couponDetailAdminData: couponDetailData, method: method))
         self._couponVM = couponVM
+        self._couponDetailAdminVM = ObservedObject(wrappedValue: couponDetailAdminVM)
     }
     
     
@@ -47,9 +50,11 @@ struct CreateCouponView: View {
                     Text("사용가능 기한")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                         .foregroundColor(.gray_495057)
-                
-                    RentalDatePicker(viewModel: DateViewModel(startDate: $createCouponVM.coupon.actDate, endDate: $createCouponVM.coupon.expDate))
+                    
+                    RentalDatePicker(viewModel: dateVM)
                         .padding(.horizontal, 30)
+                        .onChange(of: dateVM.startDate) { createCouponVM.coupon.actDate = $0 }
+                        .onChange(of: dateVM.endDate) { createCouponVM.coupon.expDate = $0 }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -90,6 +95,9 @@ struct CreateCouponView: View {
                     couponVM.getClubCouponsAdmin()
                     dismiss()
                     
+                    if createCouponVM.method == .put {
+                        await couponDetailAdminVM.getCouponAdmin()
+                    }
                 }
             }
         } message: {
@@ -156,15 +164,20 @@ struct CreateCouponView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    @ViewBuilder private func Information() -> some View {
+    @ViewBuilder
+    private func Information() -> some View {
         
         VStack(alignment: .leading, spacing: 10) {
            Text("세부정보")
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 12))
                 .foregroundColor(.gray_495057)
             
-            EditorPlaceholder(placeholder: "", text: $createCouponVM.coupon.information)
+            TextEditor(text: $createCouponVM.coupon.information)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
+                .padding(.all, 5)
+                .frame(maxHeight: .infinity)
+                .background(RoundedCorner(radius: 8, corners: .allCorners).stroke(Color.gray_F1F2F3))
+                .padding(.horizontal, 5)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

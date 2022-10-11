@@ -40,11 +40,10 @@ struct ItemCaution: View {
             
             Button {
                 Task {
-                    isActive = false
                     await itemVM.createProduct()
                     managementVM.searchClubProductsAll()
-                    
                 }
+                isActive = false
             } label: {
                 RightArrow(isDisabled: itemVM.caution.isEmpty)
             }
@@ -54,9 +53,6 @@ struct ItemCaution: View {
         .introspectTextView { uiTextView in
             uiTextView.isScrollEnabled = false
             uiTextView.textDragInteraction?.isEnabled = false
-        }
-        .onAppear {
-            print("\(isActive.description)")
         }
     }
 }

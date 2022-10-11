@@ -16,7 +16,7 @@ struct ManageProductCell: View {
     @Binding var callback: () -> ()
     @Binding var isShowingAlert: Bool
     
-    let buttonWidthSize: CGFloat = 160
+    let buttonWidthSize: CGFloat = 80
     @State private var isShowingRequestButton = false
     @State private var offset: CGFloat = .zero
     @State private var isActive = false
@@ -24,9 +24,10 @@ struct ManageProductCell: View {
     var body: some View {
         SwipeCell(cellId: productData.id, selectedCellId: $selectedId, buttonWidthSize: buttonWidthSize, isShowingRequestButton: $isShowingRequestButton, offset: $offset) {
             CellView()
+                .padding(.leading, 10)
         } button: {
             HStack(alignment: .center, spacing: 0) {
-                UpdateButton()
+//                UpdateButton()
                 DeleteButton()
             }
         }

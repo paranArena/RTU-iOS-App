@@ -35,6 +35,10 @@ struct NotificationDetailData: Codable {
     var updatedAt: Date {
         updatedAtDto.toDate()
     }
+    
+    func toParam() -> NotificationParam {
+        return NotificationParam(title: self.title, content: self.content, imagePath: self.imagePath)
+    }
 }
 
 struct NotificationPreview: Codable, Equatable, Identifiable {
@@ -42,7 +46,7 @@ struct NotificationPreview: Codable, Equatable, Identifiable {
     let clubId: Int
     let title: String
     let isPublic: Bool?
-    let imagePath: String
+    let imagePath: String?
    
     let createdAtDto, updatedAtDto: String
     

@@ -19,12 +19,7 @@ struct TitleSelector: View {
     let titles: Title
     @Binding var selectedTitle: String
     @State private var titleWidth: CGFloat = .zero
-    
-    init(titles: Title, selectedTitle: Binding<String>) {
-        self.titles = titles
-        self._selectedTitle = selectedTitle
-    }
-    
+  
     var body: some View {
         VStack {
             HStack(alignment: .center, spacing: 0) {

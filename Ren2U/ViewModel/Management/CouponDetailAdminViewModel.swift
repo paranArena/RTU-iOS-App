@@ -27,6 +27,12 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     
     var couponService = CouponeService.shared
     
+    // CreatCouponView 문제 해결용. 나중에 삭제 필요 
+    init() {
+        self.clubId = -1
+        self.couponId = -1
+    }
+    
     init(clubId: Int, couponId: Int) {
         self.clubId = clubId
         self.couponId = couponId
@@ -55,7 +61,7 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     
     //  MARK: GET
     @MainActor
-    private func getCouponAdmin() async {
+    func getCouponAdmin() async {
         let response = await couponService.getCouponAdmin(clubId: clubId, couponId: couponId)
         if let error = response.error {
             print(response.debugDescription)
@@ -101,6 +107,7 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
         } else {
             print("deleteCouponMemberAdmin success")
             await getCouponMembersAdmin()
+            await self.getCouponAdmin()
         }
     }
     
@@ -122,6 +129,7 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
             self.callbackAlert.messageText = "쿠폰을 발급했습니다."
             self.callbackAlert.callback = dismiss
             await self.getCouponMembersAdmin()
+            await self.getCouponAdmin()
         }
     }
     

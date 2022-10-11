@@ -32,6 +32,8 @@ struct SwipeCell<Content: View, Button: View> : View {
     var body: some View {
         HStack {
             content()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.BackgroundColor)
             Spacer()
             button()
                 .offset(x: buttonWidthSize)

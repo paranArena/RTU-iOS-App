@@ -77,7 +77,7 @@ struct CouponDetailAdminView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    CreateCouponView(clubId: couponDetailAdminVM.clubId, couponId: couponDetailAdminVM.couponId, couponDetailData: couponDetailAdminVM.couponDetailData ?? CouponDetailAdminData.dummyData(), couponVM: _couponVM, method: .put)
+                    CreateCouponView(clubId: couponDetailAdminVM.clubId, couponId: couponDetailAdminVM.couponId, couponDetailData: couponDetailAdminVM.couponDetailData ?? CouponDetailAdminData.dummyData(), couponVM: _couponVM, method: .put, couponDetailAdminVM: couponDetailAdminVM)
                 } label: {
                     Text("수정")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
@@ -147,15 +147,16 @@ struct CouponDetailAdminView: View {
             Text("세부정보")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .foregroundColor(.gray_495057)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             Text(couponDetailAdminVM.couponDetailData?.information ?? "")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .padding(.vertical, 5)
                 .padding(.horizontal, 5)
-                .background(RoundedCorner(radius: 10, corners: .allCorners).fill(Color.gray_E9ECEF))
+                .background(RoundedCorner(radius: 5, corners: .allCorners).fill(Color.gray_E9ECEF))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     @ViewBuilder
