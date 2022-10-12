@@ -9,12 +9,23 @@ import Foundation
 import Combine
 import Alamofire
 
-class CouponeService {
-    static let shared = CouponeService()
-    private init() { }
-    
-    //  MARK: GET
+protocol CouponServiceProtocol {
+    func getClubCouponsAdmin(clubId: Int) async -> DataResponse<GetClubCouponsAdminResponse, NetworkError>
+    func getCouponAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponAdminResponse, NetworkError>
+    func getCouponMembersAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponMembersAdmin, NetworkError>
+    func getCouponMembersHistoriesAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponMembersHistoriesAdmin, NetworkError>
+    func getCouponUser(clubId: Int, couponId: Int) async -> DataResponse<GetCouponUserResponse, NetworkError>
+    func deleteCouponAdmin(clubId: Int, couponId: Int) async -> DataResponse<DefaultPostResponse, NetworkError>
+    func deleteCouponMemberAdmin(clubId: Int, couponMemberId: Int) async -> DataResponse<DefaultPostResponse, NetworkError>
+    func createCouponAdmin(clubId: Int, param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError>
+    func grantCouponAdmin(clubId: Int, couponId: Int, param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError>
+    func useCouponUser(clubId: Int, couponId: Int) async -> DataResponse<DefaultPostResponse, NetworkError>
+    func updateCouponAdmin(clubId: Int, couponId: Int, param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError>
+}
 
+class CouponService: CouponServiceProtocol {
+    static let shared = CouponService()
+    private init() { }
     
     func getClubCouponsAdmin(clubId: Int) async -> DataResponse<GetClubCouponsAdminResponse, NetworkError> {
         

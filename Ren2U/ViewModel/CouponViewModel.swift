@@ -21,7 +21,7 @@ class CouponViewModel: ObservableObject {
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var callbackButton = CallbackAlert()
     
-    var couponService = CouponeService.shared
+    var couponService = CouponService.shared
     var imageService = ImageService.shared
     
     init(clubId: Int) {

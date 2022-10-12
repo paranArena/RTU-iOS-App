@@ -25,7 +25,7 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     @Published var callbackAlert: CallbackAlert = CallbackAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
-    var couponService = CouponeService.shared
+    var couponService = CouponService.shared
     
     // CreatCouponView 문제 해결용. 나중에 삭제 필요 
     init() {

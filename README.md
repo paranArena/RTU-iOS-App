@@ -1,14 +1,42 @@
 # RTU-iOS-App
 
-# Today i learned 
+# Dependency Injection 
+[이곳](https://jacobko.info/swiftui/swiftui-35/)을 참고한 글 
+```swift 
+ class CouponService {
+    static let shared = CouponService()
+    private init() { }
+    //  생략
+}
 
-## 2022. 09. 17 SAT 
+class DetailCouponViewModel: ObservableObject, BaseViewModel {
+    let couponService = CouponService.shard 
+    // 생략
+}
+```
 
-뷰모델에 대한 고민. 
-일차적으로 명확하게 기능이 분류된 것들끼리 나누고 view hierarchy를 벗어날 때 값이 초기화되어야 한다면 이 때 더 나눠볼 수 있다. 
+기존에는 api통신을 하기위한 기능들을 service class에서 만들어 싱글톤으로 이용했다. 싱글톤은 배우는 과정에서는 편하지만 몇가지 문제점이 있다. 
 
-더 나눴을 때의 단점은 view model이 많아진다. viewModel과 view가 1:1 매칭될 때가 많다. 상황에 따라 같은 기능이 여러 파일에 있어 api가 변경될 때마다 해당 기능이 구현된 여러 소스 파일이 변경되어야 한다. 
-더 나누지 않았다면 정보 초기화를 위해 onAppear/onDisappear 시 마다 직접 값을 비워줘야한다. 한개 파일의 코드가 과하게 길어질 수도 있다. 
+1. 싱글톤은 전역으로(GLOBAL) 이용된다.
+   
+   싱글톤이 사용된 인스턴스는 어디서든 접근이 가능하다. 앱이 커지면 많은 전역 변수가 생겨 혼란스러울 수 있다. 그리고 같은 싱글톤 인스턴스가 멀티 쓰레드 환경에서 이용되고 동시에 접근이 된다면 크래시가 발생될 우려가 있다. 
 
-현재 문서 작업을 통해 어떤 기능을 어떤 뷰모델에서 작성하고 있는지 기록하고 있으니 수정 시에 놓칠 우려가 적다. 반면 onAppear, onDisappear는 따로 추적 방안이 없어 전자의 방식으로 이용하기로 했다. 
+2. 이시녈라이저를 커스텀할 수 없다. 
+
+    테스트할 때 패러미터를 이용한 초기화는 중요한데 싱글톤을 이용하면 패러미터를 전달할 수 없다. 
+
+   
+싱글톤의 문제를 피하기 위해서 의존성 주입(Dependency Injection)을 사용했다.
+
+```swift
+protocol CouponServiceProtocol {
+    func getClubCouponsAdmin(clubId: Int) async -> DataResponse<GetClubCouponsAdminResponse, NetworkError>
+    func getCouponAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponAdminResponse, NetworkError>
+    func getCouponMembersAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponMembersAdmin, NetworkError>
+    func getCouponMembersHistoriesAdmin(clubId: Int, couponId: Int) async -> DataResponse<GetCouponMembersHistoriesAdmin, NetworkError>
+    // 생략 
+}
+```
+
+작성중 
 

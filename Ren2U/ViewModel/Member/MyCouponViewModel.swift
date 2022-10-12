@@ -24,7 +24,7 @@ class MyCouponViewModel: ObservableObject {
     @Published var isActiveUseCouponView = false
     
     var myService = MyService.shared
-    var couponService = CouponeService.shared
+    var couponService = CouponService.shared
     
     init() {
         Task {
