@@ -84,8 +84,8 @@ class CouponViewModel: ObservableObject, BaseViewModel {
         self.couponService = couponService
         Task { await getClubCouponsAdmin() }
     }
-}
     // 생략 
+}
 ```
 
 CouponService를 사용하고 있는 viewModel은 프로토콜 타입으로 주입을 받는다. 의존성을 변경할 수 있다고 했는데 여기서 이점이 생긴다. 
@@ -108,7 +108,7 @@ class MockupCouponService: CouponServiceProtocol {
     // 생략 
 }
 ``` 
-api 통신 후 데이터를 보여주는 preview는 사실상 무용지물이 되는데 모겅ㅂ데이터를 보내는 서비스를 하나 만들어주어서 해결할 수 있다. CouponViewModel에 CouponService, MockupCouponService 두가지 의존성이 주입 가능해졌다. 
+api 통신 후 데이터를 보여주는 preview는 사실상 무용지물이 되는데 목업데이터를 보내는 서비스를 하나 만들어주어서 해결할 수 있다. CouponViewModel에 CouponService, MockupCouponService 두가지 의존성이 주입 가능해졌다. 
 
 ```swift
 
@@ -122,4 +122,4 @@ struct MyCouponView_Previews: PreviewProvider {
     }
 }
 ```
-이런식으로 실제 View에는 실제 통신을 위한 서비스를 넣어주고 preview에는 목업데이터를 보내주는 서비스를 넣어서 프리뷰 이용이 가능해진다. 
+실제 뷰에는 통신을 위한 서비스를 넣어주고 프리뷰에는 목업데이터를 보내주는 서비스를 넣어서 프리뷰 이용이 가능해진다. 
