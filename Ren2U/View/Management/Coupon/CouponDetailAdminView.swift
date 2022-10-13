@@ -40,7 +40,7 @@ struct CouponDetailAdminView: View {
     init(managementVM: ObservedObject<ManagementViewModel>, couponVM: ObservedObject<CouponViewModel>, clubId: Int, couponId: Int) {
         self._managementVM = managementVM
         self._couponVM = couponVM
-        self._couponDetailAdminVM = StateObject(wrappedValue: CouponDetailAdminViewModel(clubId: clubId, couponId: couponId))
+        self._couponDetailAdminVM = StateObject(wrappedValue: CouponDetailAdminViewModel(clubId: clubId, couponId: couponId, couponService: CouponService(url: ServerURL.runningServer.url)))
     }
     let couponTitle = CouponTitle()
     

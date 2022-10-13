@@ -35,6 +35,14 @@ struct CouponPreviewData: Codable, Identifiable {
     var expDate: String {
         return self.expDateDto.toDateType2().toYMDformat()
     }
+    
+    static func dummyCouponPreviewDatas() -> [CouponPreviewData] {
+        return [CouponPreviewData(id: 1, clubId: 1, clubName: "클럽1", name: "쿠폰1",
+                                  imagePath: "", actDateDto: "2022.01.01", expDateDto: "2022.12.31"),
+                CouponPreviewData(id: 2, clubId: 2, clubName: "클럽1", name: "쿠폰2",
+                                  imagePath: "", actDateDto: "2022.11.03", expDateDto: "2022.11.04")
+        ]
+    }
 }
 
 struct CouponDetailAdminData: Codable {

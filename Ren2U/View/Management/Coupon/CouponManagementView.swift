@@ -13,7 +13,7 @@ struct CouponManagementView: View {
     @ObservedObject var managementVM: ManagementViewModel
     
     //나중에 삭제 필요 
-    @StateObject var trashCouponDetailAdminVM = CouponDetailAdminViewModel()
+    @StateObject var trashCouponDetailAdminVM = CouponDetailAdminViewModel(couponService: CouponService(url: ServerURL.runningServer.url))
     
     var body: some View {
         ScrollView {

@@ -93,6 +93,7 @@
 		1554576C28D9C3D400DDAD9B /* NotificationParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576B28D9C3D400DDAD9B /* NotificationParam.swift */; };
 		1554576E28D9D15C00DDAD9B /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576D28D9D15C00DDAD9B /* CouponViewModel.swift */; };
 		1556E42C28CC5AE0007D1BDF /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1556E42B28CC5AE0007D1BDF /* DateExtension.swift */; };
+		1559B7E228F7B48E004838BD /* ServerURL .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559B7E128F7B48E004838BD /* ServerURL .swift */; };
 		155A36B728D18DD900848592 /* AccountParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155A36B628D18DD900848592 /* AccountParam.swift */; };
 		155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CED5E28A0EA380032C1BA /* GroupTabVM.swift */; };
 		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
@@ -295,6 +296,7 @@
 		1554576B28D9C3D400DDAD9B /* NotificationParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationParam.swift; sourceTree = "<group>"; };
 		1554576D28D9D15C00DDAD9B /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
 		1556E42B28CC5AE0007D1BDF /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		1559B7E128F7B48E004838BD /* ServerURL .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ServerURL .swift"; sourceTree = "<group>"; };
 		155A36B628D18DD900848592 /* AccountParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountParam.swift; sourceTree = "<group>"; };
 		155CED5E28A0EA380032C1BA /* GroupTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTabVM.swift; sourceTree = "<group>"; };
 		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
@@ -943,6 +945,7 @@
 				15B63DA228AF38C3000AB82D /* Modifier */,
 				1550ECA928B35C3F00BECBE7 /* Styles */,
 				153C1A6C288CDDF200F89B2E /* Others */,
+				1559B7E128F7B48E004838BD /* ServerURL .swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -1258,6 +1261,7 @@
 				15206E4A28DB5E6E0091DA74 /* CouponDetailAdminView.swift in Sources */,
 				157C268928CF8246009115D8 /* PasswordViewModel.swift in Sources */,
 				153687A428DAB0CF00E0D554 /* CouponService.swift in Sources */,
+				1559B7E228F7B48E004838BD /* ServerURL .swift in Sources */,
 				1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */,
 				15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */,
 				157190F328B7053200880F98 /* ItemPhoto.swift in Sources */,

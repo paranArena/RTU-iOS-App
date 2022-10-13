@@ -32,11 +32,7 @@ class Ren2UTests: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
-    
-    func test1() {
-        let result = !loginViewModel.account.isDisable
-        XCTAssertTrue(result)
-    }
+
     
     func test2() {
         print("test2 is called")

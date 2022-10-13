@@ -22,17 +22,19 @@ class CreateCouponViewModel: ObservableObject {
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var callbackAlert = CallbackAlert()
     
-    var couponService = CouponService.shared
+    let couponService: CouponServiceProtocol
     
-    init(clubId: Int, method: Method) {
+    init(clubId: Int, method: Method, couponService: CouponServiceProtocol) {
         self.clubId = clubId
         self.method = method
+        self.couponService = couponService
     }
     
-    init(clubId: Int, couponId: Int, couponDetailAdminData: CouponDetailAdminData, method: Method) {
+    init(clubId: Int, couponId: Int, couponDetailAdminData: CouponDetailAdminData, method: Method, couponService: CouponServiceProtocol) {
         self.clubId = clubId
         self.couponId = couponId
         self.method = method
+        self.couponService = couponService
         coupon.name = couponDetailAdminData.name
         coupon.actDate = couponDetailAdminData.actDate.toDateType3()
         coupon.expDate = couponDetailAdminData.expDate.toDateType3()
@@ -80,7 +82,7 @@ class CreateCouponViewModel: ObservableObject {
     @MainActor
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
-        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
         oneButtonAlert.isPresented = true
     }
     

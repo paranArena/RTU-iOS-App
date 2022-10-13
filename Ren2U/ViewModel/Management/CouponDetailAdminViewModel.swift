@@ -25,18 +25,20 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     @Published var callbackAlert: CallbackAlert = CallbackAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
-    var couponService = CouponService.shared
+    let couponService: CouponServiceProtocol
     
     // CreatCouponView 문제 해결용. 나중에 삭제 필요 
-    init() {
+    init(couponService: CouponServiceProtocol) {
         self.clubId = -1
         self.couponId = -1
+        self.couponService = couponService
     }
     
-    init(clubId: Int, couponId: Int) {
+    init(clubId: Int, couponId: Int, couponService: CouponServiceProtocol) {
         self.clubId = clubId
         self.couponId = couponId
         self.selectedTitle = couponTitle.title[0]
+        self.couponService = couponService
         Task {
             await getCouponAdmin()
             await getCouponMembersAdmin()
@@ -47,7 +49,7 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     @MainActor
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
-        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
         oneButtonAlert.isPresented = true
     }
     

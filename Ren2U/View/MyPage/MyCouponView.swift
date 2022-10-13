@@ -9,8 +9,9 @@ import SwiftUI
 
 struct MyCouponView: View {
     
-    @StateObject var myCouponVM = MyCouponViewModel()
+    @StateObject var myCouponVM = MyCouponViewModel(couponService: CouponService(url: ServerURL.runningServer.url))
     @Environment(\.isPresented) var isPresented
+    
     
     var body: some View {
         ScrollView {
@@ -34,7 +35,7 @@ struct MyCouponView: View {
                 UsedCouponPreviews()
                 
                 NavigationLink(isActive: $myCouponVM.isActiveUseCouponView) {
-                    UseCouponView(myCouponDetailVM: MyCouponDetailViewModel(clubId: myCouponVM.selectedClubId, couponId: myCouponVM.selectedCouponId), myCouponVM: myCouponVM)
+                    UseCouponView(myCouponDetailVM: MyCouponDetailViewModel(clubId: myCouponVM.selectedClubId, couponId: myCouponVM.selectedCouponId, couponService: CouponService(url: ServerURL.runningServer.url)), myCouponVM: myCouponVM)
                 } label: { }
             }
             .padding(.horizontal)

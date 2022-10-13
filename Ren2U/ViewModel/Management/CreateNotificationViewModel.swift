@@ -47,7 +47,7 @@ class CreateNotificationViewModel: ObservableObject, BaseViewModel {
     
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
-        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
         oneButtonAlert.isPresented = true
     }
     
