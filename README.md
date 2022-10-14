@@ -1,7 +1,9 @@
 # RTU-iOS-App
 
 # Dependency Injection 
-[이곳](https://jacobko.info/swiftui/swiftui-35/)을 참고한 글 
+[이곳](https://jacobko.info/swiftui/swiftui-35/)을 참고한 글. 
+
+[노션](https://mud-climb-89a.notion.site/DIP-DI-7fa8616b54574746b3ab055f17565ba5)에는 실제 적용이 아닌 더 이론적인 부분을 작성. 
 ```swift 
  class CouponService {
     static let shared = CouponService()
@@ -9,7 +11,7 @@
     //  생략
 }
 
-class DetailCouponViewModel: ObservableObject, BaseViewModel {
+class CouponViewModel: ObservableObject, BaseViewModel {
     let couponService = CouponService.shard 
     // 생략
 }
