@@ -39,13 +39,8 @@ class MemberServiceTests: XCTestCase {
         ]
         
         Task {
-            var response = await memberService.login(param: correctParam)
-            if response.error != nil {
-                print(response.debugDescription)
-                XCTFail("login fail")
-            }
             
-            response = await memberService.login(param: wrongParam1)
+            var response = await memberService.login(param: wrongParam1)
             if response.error == nil {
                 XCTFail("login fail")
             }
@@ -55,6 +50,43 @@ class MemberServiceTests: XCTestCase {
                 XCTFail("login fail")
             }
             
+            response = await memberService.login(param: correctParam)
+            if response.error != nil {
+                print(response.debugDescription)
+                XCTFail("login fail")
+            } else {
+                UserDefaults.standard.setValue(response.value!.token, forKey: JWT_KEY)
+            }
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testGetMyInfo() {
+        let expectation = XCTestExpectation()
+        
+        Task {
+            let response = await memberService.getMyInfo()
+            
+            if response.error != nil {
+                XCTFail("getMyInfo fail")
+            }
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testGetMyClubs() {
+        let expectation = XCTestExpectation()
+        Task {
+            let response = await memberService.getMyClubs()
+            if response.error != nil {
+                XCTFail("getMyClubs fail")
+            }
             expectation.fulfill()
         }
         

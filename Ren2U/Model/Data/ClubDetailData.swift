@@ -68,7 +68,20 @@ struct ClubAndRoleData: Codable, Identifiable, Hashable {
     }
     
     static func dummyClubAndRoleData() -> ClubAndRoleData {
-        return ClubAndRoleData(id: 1, name: "", introduction: "", thumbnailPath: "", hashtags: [""], clubRole: "")
+        let names: [String] = ["레스터", "리버풀", "토트넘", "첼시", "맨시티", "맨체스터 유나이티드"]
+        let introductions: [String] = ["강등 위기", "챔스 진출", "유로파 진출", "유로파 컨퍼런스 진출", "챔피언스 리그 우승", "유로파 리그 우승", "리그 우승"]
+        let clubRole = ClubRole.allCases.randomElement()!.rawValue
+        
+        return ClubAndRoleData(id: 0, name: names.randomElement()!, introduction: introductions.randomElement()!, thumbnailPath: "", hashtags: [""], clubRole: clubRole)
+    }
+    
+    static func dummyClubAndRoleDatas() -> [ClubAndRoleData] {
+        var datas = [ClubAndRoleData]()
+        for _ in 0..<10 {
+            datas.append(self.dummyClubAndRoleData())
+        }
+        
+        return datas
     }
     
     func extractClubData() -> ClubDetailData {

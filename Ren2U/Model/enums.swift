@@ -29,7 +29,7 @@ enum Category: String, CaseIterable {
     case etc = "기타" 
 }
 
-enum ClubRole: String {
+enum ClubRole: String, CaseIterable {
     case owner = "OWNER"
     case admin = "ADMIN"
     case user = "USER"

@@ -8,5 +8,6 @@
 import Foundation
 
 protocol BaseService {
-    var url: String { get }
+    var url: String? { get }
+    var bearerToken: String? { get }
 }

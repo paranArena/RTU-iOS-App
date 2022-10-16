@@ -46,6 +46,8 @@ struct RentalData: Codable {
         let latitude: Double
         let longitude: Double
     }
+    
+    
 }
 
 struct ClubRentalData: Codable {
@@ -83,5 +85,12 @@ struct RentalInfo: Codable {
     let rentalStatus: String
     let rentDate: String
     let expDate: String?
-    let meRental: Bool? 
+    let meRental: Bool?
+    
+    static func dummyRentalInfo() -> RentalInfo {
+        
+        let meRentals: [Bool] = [true, false]
+        
+        return RentalInfo(rentalStatus: "RENT", rentDate: "2022-09-08T01:59:45.705393", expDate: "2022-09-08T01:59:45.705393", meRental: meRentals.randomElement()!)
+    }
 }
