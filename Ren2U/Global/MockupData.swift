@@ -18,3 +18,5 @@ let PEOPLE_NAMES = ["Jackson", "Liam", "Noah", "Aiden", "Lucas", "Caden", "Mason
 
 let CLUB_NAMES = ["Manchester United", "Manchester City", "Tottenhan Hotspur", "Norwich City", "Netcastle United",
                   "Liverpool", "Arsenal", "Aston Villa", "West Ham", "Leicester"]
+
+let LOCATION_NAMES = ["팔달관", "남제관", "한터 동방", "ANSI 동방", "일신관", "유메야", "원천정보관", "성호관", "커라"]

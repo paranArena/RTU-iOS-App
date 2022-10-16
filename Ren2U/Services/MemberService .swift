@@ -12,12 +12,10 @@ protocol MemberServiceProtocol: BaseService {
     func login(param: [String: Any]) async -> DataResponse<LoginResponse, NetworkError>
     func getMyInfo() async -> DataResponse<GetMyInfoResponse, NetworkError>
     func getMyClubs() async -> DataResponse<GetMyClubsResponse, NetworkError>
-//    func getMyRentals() async -> DataResponse<GetMyRentalsResponse, NetworkError>
+    func getMyRentals() async -> DataResponse<GetMyRentalsResponse, NetworkError>
 }
 
 class MockupMemberService: MemberServiceProtocol {
-
-    
     var bearerToken: String?
     var url: String?
     
@@ -44,6 +42,16 @@ class MockupMemberService: MemberServiceProtocol {
     func getMyClubs() async -> Alamofire.DataResponse<GetMyClubsResponse, NetworkError> {
         let result = Result {
             return GetMyClubsResponse(statusCode: 200, responseMessage: "", data: ClubAndRoleData.dummyClubAndRoleDatas())
+        }.mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
+    
+    func getMyRentals() async -> Alamofire.DataResponse<GetMyRentalsResponse, NetworkError> {
+        let result = Result {
+            return GetMyRentalsResponse(statusCode: 200, responseMessage: "", data: RentalData.dummyRentalDatas())
         }.mapError { _ in
             NetworkError(initialError: nil, serverError: nil)
         }
@@ -95,5 +103,15 @@ class MemberService: MemberServiceProtocol {
         }
     }
     
+    func getMyRentals() async -> Alamofire.DataResponse<GetMyRentalsResponse, NetworkError> {
+        let url = "\(url!)/members/my/rentals"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.bearerToken ?? "")]
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyRentalsResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
 }
 

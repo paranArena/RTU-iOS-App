@@ -90,12 +90,8 @@ class ClubViewModel: ObservableObject {
 
         switch result {
         case .success(let value):
-            print("[getMyClubRole success]")
-            print(value.responseMessage)
             return value.data.clubRole
-        case .failure(let err):
-            print("[getMyClubs Error]")
-            print(err)
+        case .failure(_):
             return "err"
         }
     }
@@ -109,12 +105,9 @@ class ClubViewModel: ObservableObject {
 //            print(res.debugDescription)
             switch res.result {
             case .success(let value):
-                print("[getMyClubs success]")
                 self.joinedClubs = value.data
-                print(value.responseMessage)
-            case .failure(let err):
-                print("[getMyClubs Error]")
-                print(err)
+            case .failure(_):
+                break
             }
         }
     }
@@ -129,12 +122,9 @@ class ClubViewModel: ObservableObject {
         
         switch response {
         case .success(let value):
-            print("[getMyClubs success]")
             self.joinedClubs = value.data
-            print(value.responseMessage)
-        case .failure(let err):
-            print("[getMyClubs Error]")
-            print(err)
+        case .failure(_):
+            break
         }
     }
 
@@ -146,12 +136,9 @@ class ClubViewModel: ObservableObject {
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyNotificationsResponse.self) { res in
             switch res.result {
             case .success(let value):
-                print("[getMyNotificationsSuccess]")
-                print(value.responseMessage)
                 self.notices = value.data
-            case .failure(let err):
-                print("[getMyNotificationsErr")
-                print(err)
+            case .failure(let _):
+                break
             }
         }
     }

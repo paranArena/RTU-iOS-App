@@ -28,32 +28,32 @@ class MemberServiceTests: XCTestCase {
             "password": "qwerqwer"
         ]
         
-        let wrongParam1 = [
+        let passwordMissmatchParam = [
             "email": "ios1@ajou.ac.kr",
             "password": "asdfasdf"
         ]
         
-        let wrongParam2 = [
+        let emailDoesntExistParam = [
             "email": "ios",
             "password": "asdfasdf"
         ]
         
         Task {
             
-            var response = await memberService.login(param: wrongParam1)
+            var response = await memberService.login(param: passwordMissmatchParam)
             if response.error == nil {
-                XCTFail("login fail")
+                XCTFail("login fail : password missmatch case")
             }
             
-            response = await memberService.login(param: wrongParam2)
+            response = await memberService.login(param: emailDoesntExistParam)
             if response.error == nil {
-                XCTFail("login fail")
+                XCTFail("login fail : doesn`t exist email case")
             }
             
             response = await memberService.login(param: correctParam)
             if response.error != nil {
                 print(response.debugDescription)
-                XCTFail("login fail")
+                XCTFail("login fail : correct case")
             } else {
                 UserDefaults.standard.setValue(response.value!.token, forKey: JWT_KEY)
             }
@@ -86,6 +86,19 @@ class MemberServiceTests: XCTestCase {
             let response = await memberService.getMyClubs()
             if response.error != nil {
                 XCTFail("getMyClubs fail")
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testGetMyRentals() {
+        let expectation = XCTestExpectation()
+        Task {
+            let response = await memberService.getMyRentals()
+            if response.error != nil {
+                XCTFail("getMyRentals fail")
             }
             expectation.fulfill()
         }
