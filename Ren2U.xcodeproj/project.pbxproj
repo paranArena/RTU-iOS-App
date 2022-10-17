@@ -934,8 +934,8 @@
 			isa = PBXGroup;
 			children = (
 				15FAF144287D5E0000B35570 /* Ren2UTests.swift */,
-				157B8D4E28F98A7400B9A924 /* CouponServiceTests.swift */,
 				157B8D5428F9934600B9A924 /* MemberServiceTests.swift */,
+				157B8D4E28F98A7400B9A924 /* CouponServiceTests.swift */,
 			);
 			path = Ren2UTests;
 			sourceTree = "<group>";

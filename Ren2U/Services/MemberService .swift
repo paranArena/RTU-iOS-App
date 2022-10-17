@@ -13,6 +13,8 @@ protocol MemberServiceProtocol: BaseService {
     func getMyInfo() async -> DataResponse<GetMyInfoResponse, NetworkError>
     func getMyClubs() async -> DataResponse<GetMyClubsResponse, NetworkError>
     func getMyRentals() async -> DataResponse<GetMyRentalsResponse, NetworkError>
+    func getMyNotifications() async -> DataResponse<GetMyNotificationsResponse, NetworkError>
+    func getMyProducts() async -> DataResponse<GetMyProductsResponse, NetworkError>
 }
 
 class MockupMemberService: MemberServiceProtocol {
@@ -58,6 +60,28 @@ class MockupMemberService: MemberServiceProtocol {
         
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
     }
+    
+    func getMyNotifications() async -> Alamofire.DataResponse<GetMyNotificationsResponse, NetworkError> {
+        let result = Result {
+            return GetMyNotificationsResponse(statusCode: 200, responseMessage: "", data: NotificationPreviewData.dummyNotifications())
+        }.mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0.0, result: result)
+    }
+    
+    func getMyProducts() async -> Alamofire.DataResponse<GetMyProductsResponse, NetworkError> {
+        let result = Result {
+            return GetMyProductsResponse(statusCode: 200, responseMessage: "", data: ProductPreviewDto.dummyProductPreviewDtoDatas())
+        }.mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0.0, result: result)
+    }
+    
+    
 }
 
 class MemberService: MemberServiceProtocol {
@@ -113,5 +137,29 @@ class MemberService: MemberServiceProtocol {
             return NetworkError(initialError: err, serverError: serverError)
         }
     }
+    
+    func getMyNotifications() async -> Alamofire.DataResponse<GetMyNotificationsResponse, NetworkError> {
+        let url = "\(url!)/members/my/notifications"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.bearerToken ?? "")]
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyNotificationsResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    func getMyProducts() async -> Alamofire.DataResponse<GetMyProductsResponse, NetworkError> {
+        let url = "\(url!)/members/my/products"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.bearerToken ?? "")]
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyProductsResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    
 }
 

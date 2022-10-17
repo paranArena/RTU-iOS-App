@@ -11,6 +11,10 @@ import SwiftUI
 struct ProductPreviewData {
     let data: ProductPreviewDto
     var isActive = false
+    
+    static func dummyProductPreviewData() -> [ProductPreviewData] {
+        return ProductPreviewDto.dummyProductPreviewDtoDatas().map { ProductPreviewData(data: $0) }
+    }
 }
 
 struct ProductPreviewDto: Codable {
@@ -23,7 +27,19 @@ struct ProductPreviewDto: Codable {
     let clubId: Int
     
     static func dummyProductResponseData() -> ProductPreviewDto {
-        return ProductPreviewDto(id: 0, name: "", category: "", left: 1, max: 1, clubName: "", imagePath: "", clubId: 1)
+        return ProductPreviewDto(id: Int.random(in: 0..<Int.max), name: PRODUCT_NAMES.randomElement()!,
+                                 category: Category.allCases.randomElement()!.rawValue, left: Int.random(in: 0..<10),
+                                 max: Int.random(in: 10..<30), clubName: CLUB_NAMES.randomElement()!,
+                                 imagePath: "", clubId: Int.random(in: 0..<Int.max))
+    }
+    
+    static func dummyProductPreviewDtoDatas() -> [ProductPreviewDto] {
+        var datas = [ProductPreviewDto]()
+        for _ in 0..<10 {
+            datas.append(dummyProductResponseData())
+        }
+        
+        return datas
     }
     
     var status: String {

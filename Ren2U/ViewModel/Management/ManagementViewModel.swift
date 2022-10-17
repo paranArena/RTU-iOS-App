@@ -16,7 +16,7 @@ class ManagementViewModel: ObservableObject {
     
     @Published var applicants = [UserData]()
     @Published var products = [ProductPreviewDto]()
-    @Published var notices = [NotificationPreview]()
+    @Published var notices = [NotificationPreviewData]()
     @Published var rentals = [ClubRentalData]()
     
     // MemberManagementView, GrantCouponView 
@@ -248,7 +248,7 @@ class ManagementViewModel: ObservableObject {
     }
     
     //  MARK: PUT
-    func updateNotification(groupId: Int, notificationId: Int, noticeData: NotificationPreview) async {
+    func updateNotification(groupId: Int, notificationId: Int, noticeData: NotificationPreviewData) async {
         let url = "\(BASE_URL)/clubs/\(groupId)/notifications/\(notificationId)"
         let hearders: HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY)!)",

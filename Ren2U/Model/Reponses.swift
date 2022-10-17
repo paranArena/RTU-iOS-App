@@ -77,7 +77,7 @@ struct GetMyInfoResponse: Codable {
 struct GetMyNotificationsResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [NotificationPreview]
+    let data: [NotificationPreviewData]
 }
 
 struct GetMyProductsResponse: Codable {
@@ -158,7 +158,7 @@ struct SearchClubsWithNameResponse: Codable {
 struct SearchNotificationsAllResponse: Codable {
     let statusCode: Int
     let responseMessage: String
-    let data: [NotificationPreview]
+    let data: [NotificationPreviewData]
 }
 
 

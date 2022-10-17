@@ -14,6 +14,7 @@ class MemberServiceTests: XCTestCase {
     
     override func setUpWithError() throws {
         memberService = MemberService(url: ServerURL.devServer.url)
+        print("Generated Token : \(memberService.bearerToken)")
     }
     
     override func tearDownWithError() throws {
@@ -55,6 +56,7 @@ class MemberServiceTests: XCTestCase {
                 print(response.debugDescription)
                 XCTFail("login fail : correct case")
             } else {
+                print("token : \(response.value!.token)")
                 UserDefaults.standard.setValue(response.value!.token, forKey: JWT_KEY)
             }
             
@@ -99,6 +101,32 @@ class MemberServiceTests: XCTestCase {
             let response = await memberService.getMyRentals()
             if response.error != nil {
                 XCTFail("getMyRentals fail")
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testGetMyNotifications() {
+        let expectation = XCTestExpectation()
+        Task {
+            let response = await memberService.getMyNotifications()
+            if response.error != nil {
+                XCTFail("getMyNotifications fail")
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testGetMyProducts() {
+        let expectation = XCTestExpectation()
+        Task {
+            let response = await memberService.getMyProducts()
+            if response.error != nil {
+                XCTFail("getMyProducts fail")
             }
             expectation.fulfill()
         }

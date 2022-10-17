@@ -13,11 +13,11 @@ class ClubViewModel: ObservableObject {
     @Published var likesGroupId = [LikeGroupInfo]()
     @Published var joinedClubs = [ClubAndRoleData]() // VStack에서 나열될 그룹들
     
-    @Published var notices = [NotificationPreview]() // Vstack 한개 그룹 이동 후 사용될 정보
+    @Published var notices = [NotificationPreviewData]() // Vstack 한개 그룹 이동 후 사용될 정보
     @Published var products = [ProductPreviewData]()
     @Published var rentals = [RentalData]()
     
-    @Published var clubNotice = [NotificationPreview]()
+    @Published var clubNotice = [NotificationPreviewData]()
     
     @Published var oneButtonAlert = OneButtonAlert()
     
