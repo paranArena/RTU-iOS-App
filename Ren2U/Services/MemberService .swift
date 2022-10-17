@@ -15,6 +15,9 @@ protocol MemberServiceProtocol: BaseService {
     func getMyRentals() async -> DataResponse<GetMyRentalsResponse, NetworkError>
     func getMyNotifications() async -> DataResponse<GetMyNotificationsResponse, NetworkError>
     func getMyProducts() async -> DataResponse<GetMyProductsResponse, NetworkError>
+    func getMyCouponsAll() async -> DataResponse<GetMyCouponsAllResponse, NetworkError>
+    func getMyCouponHistoriesAll() async -> DataResponse<GetMyCouponHistoriesAllResponse, NetworkError>
+    func quitService() async -> DataResponse<DefaultPostResponse, NetworkError>
 }
 
 class MockupMemberService: MemberServiceProtocol {
@@ -81,6 +84,35 @@ class MockupMemberService: MemberServiceProtocol {
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0.0, result: result)
     }
     
+    func getMyCouponsAll() async -> Alamofire.DataResponse<GetMyCouponsAllResponse, NetworkError> {
+        let result = Result {
+            return GetMyCouponsAllResponse(statusCode: 200, responseMessage: "", data: CouponPreviewData.dummyCouponPreviewDatas())
+        }.mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0.0, result: result)
+    }
+    
+    func getMyCouponHistoriesAll() async -> Alamofire.DataResponse<GetMyCouponHistoriesAllResponse, NetworkError> {
+        let result = Result {
+            return GetMyCouponHistoriesAllResponse(statusCode: 200, responseMessage: "", data: CouponPreviewData.dummyCouponPreviewDatas())
+        }.mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0.0, result: result)
+    }
+    
+    func quitService() async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+        let result = Result {
+            return DefaultPostResponse(statusCode: 200, responseMessage: "", data: nil)
+        } .mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
     
 }
 
@@ -160,6 +192,39 @@ class MemberService: MemberServiceProtocol {
         }
     }
     
+    func getMyCouponsAll() async -> Alamofire.DataResponse<GetMyCouponsAllResponse, NetworkError> {
+        let url = "\(url!)/members/my/coupons/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.bearerToken ?? "")]
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyCouponsAllResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
     
+    func getMyCouponHistoriesAll() async -> Alamofire.DataResponse<GetMyCouponHistoriesAllResponse, NetworkError> {
+        let url = "\(url!)/members/my/couponHistories/all"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.bearerToken ?? "")]
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyCouponHistoriesAllResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    func quitService() async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+
+        let url = "\(url!)/members/my/quit"
+        let hearders: HTTPHeaders = [.authorization(bearerToken: self.bearerToken ?? "")]
+        
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(DefaultPostResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
 }
 

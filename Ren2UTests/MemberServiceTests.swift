@@ -133,4 +133,31 @@ class MemberServiceTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
     }
+    
+    func testGetMyCouponsAll() {
+        let expectation = XCTestExpectation()
+        Task {
+            let response = await memberService.getMyCouponsAll()
+            if response.error != nil {
+                XCTFail("getMyCouponsAll fail")
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testGetMyCouponHistoriesAll() {
+        
+        let expectation = XCTestExpectation()
+        Task {
+            let response = await memberService.getMyCouponHistoriesAll()
+            if response.error != nil {
+                XCTFail("getMyCouponHistories fail")
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
 }
