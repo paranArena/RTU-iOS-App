@@ -195,6 +195,8 @@
 		15FD086A28E7350B009E2275 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 15FD086928E7350B009E2275 /* ComposableArchitecture */; };
 		15FD4D6528DD653900F7CC20 /* UseCouponView .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD4D6428DD653900F7CC20 /* UseCouponView .swift */; };
 		15FD7CCD28C8EF7D007C4E96 /* CellWithOneSlideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD7CCC28C8EF7D007C4E96 /* CellWithOneSlideButton.swift */; };
+		15FEDABB28FE4A9E00849311 /* ClubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FEDABA28FE4A9E00849311 /* ClubService.swift */; };
+		15FEDABD28FE4C3A00849311 /* ClubServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FEDABC28FE4C3A00849311 /* ClubServiceTests.swift */; };
 		15FFDA6E28DCE3810058D286 /* MyCouponPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFDA6D28DCE3810058D286 /* MyCouponPreviewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -403,6 +405,8 @@
 		15FAF168287D607800B35570 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		15FD4D6428DD653900F7CC20 /* UseCouponView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UseCouponView .swift"; sourceTree = "<group>"; };
 		15FD7CCC28C8EF7D007C4E96 /* CellWithOneSlideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWithOneSlideButton.swift; sourceTree = "<group>"; };
+		15FEDABA28FE4A9E00849311 /* ClubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubService.swift; sourceTree = "<group>"; };
+		15FEDABC28FE4C3A00849311 /* ClubServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubServiceTests.swift; sourceTree = "<group>"; };
 		15FFDA6D28DCE3810058D286 /* MyCouponPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponPreviewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -680,13 +684,14 @@
 			isa = PBXGroup;
 			children = (
 				157B8D5228F9917C00B9A924 /* BaseService .swift */,
+				157B8D5028F9909A00B9A924 /* MemberService .swift */,
+				15FEDABA28FE4A9E00849311 /* ClubService.swift */,
+				153687A328DAB0CF00E0D554 /* CouponService.swift */,
+				1530D55728DCDEDF004BFB39 /* MyService.swift */,
 				15394C0E28CDCABF00E4944A /* PhotoManager.swift */,
 				152D462F28C606E5008F26E0 /* LocationManager.swift */,
 				1509797828CAE5180074307F /* Errors.swift */,
-				157B8D5028F9909A00B9A924 /* MemberService .swift */,
-				153687A328DAB0CF00E0D554 /* CouponService.swift */,
 				153687A828DABCBE00E0D554 /* ImageService.swift */,
-				1530D55728DCDEDF004BFB39 /* MyService.swift */,
 				157EBB1528E9321000A5CF75 /* NotificationService.swift */,
 			);
 			path = Services;
@@ -936,6 +941,7 @@
 				15FAF144287D5E0000B35570 /* Ren2UTests.swift */,
 				157B8D5428F9934600B9A924 /* MemberServiceTests.swift */,
 				157B8D4E28F98A7400B9A924 /* CouponServiceTests.swift */,
+				15FEDABC28FE4C3A00849311 /* ClubServiceTests.swift */,
 			);
 			path = Ren2UTests;
 			sourceTree = "<group>";
@@ -1170,6 +1176,7 @@
 				153687A628DAB1EB00E0D554 /* CouponParam.swift in Sources */,
 				157190F128B7043100880F98 /* PlusCircleImage.swift in Sources */,
 				156673DC28C1B6660011535D /* CellWithTwoSlideButton.swift in Sources */,
+				15FEDABB28FE4A9E00849311 /* ClubService.swift in Sources */,
 				154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */,
 				15B0892628FBBD3F00EA5DFA /* MockupData.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
@@ -1321,6 +1328,7 @@
 				15FAF145287D5E0000B35570 /* Ren2UTests.swift in Sources */,
 				157B8D5528F9934600B9A924 /* MemberServiceTests.swift in Sources */,
 				157B8D4F28F98A7500B9A924 /* CouponServiceTests.swift in Sources */,
+				15FEDABD28FE4C3A00849311 /* ClubServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

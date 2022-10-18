@@ -10,60 +10,31 @@ import XCTest
 
 class MemberServiceTests: XCTestCase {
     
-    var memberService: MemberServiceProtocol!
+    var memberService: MemberServiceEnable!
     
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         memberService = MemberService(url: ServerURL.devServer.url)
-        print("Generated Token : \(memberService.bearerToken)")
+        await login()
     }
-    
+
     override func tearDownWithError() throws {
-        
+        logout()
     }
-    
-    func testLogin() {
-        let expectation = XCTestExpectation()
-        
+
+    func login() async {
         let correctParam = [
             "email": "ios1@ajou.ac.kr",
             "password": "qwerqwer"
         ]
         
-        let passwordMissmatchParam = [
-            "email": "ios1@ajou.ac.kr",
-            "password": "asdfasdf"
-        ]
-        
-        let emailDoesntExistParam = [
-            "email": "ios",
-            "password": "asdfasdf"
-        ]
-        
-        Task {
-            
-            var response = await memberService.login(param: passwordMissmatchParam)
-            if response.error == nil {
-                XCTFail("login fail : password missmatch case")
-            }
-            
-            response = await memberService.login(param: emailDoesntExistParam)
-            if response.error == nil {
-                XCTFail("login fail : doesn`t exist email case")
-            }
-            
-            response = await memberService.login(param: correctParam)
-            if response.error != nil {
-                print(response.debugDescription)
-                XCTFail("login fail : correct case")
-            } else {
-                print("token : \(response.value!.token)")
-                UserDefaults.standard.setValue(response.value!.token, forKey: JWT_KEY)
-            }
-            
-            expectation.fulfill()
+        let response = await memberService.login(param: correctParam)
+        if let value = response.value {
+            memberService.bearerToken = value.token
         }
-        
-        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func logout() {
+        UserDefaults.standard.setValue(nil, forKey: JWT_KEY)
     }
     
     func testGetMyInfo() {
@@ -155,6 +126,79 @@ class MemberServiceTests: XCTestCase {
             if response.error != nil {
                 XCTFail("getMyCouponHistories fail")
             }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    
+    func testLogin() {
+        let expectation = XCTestExpectation()
+        
+        let correctParam = [
+            "email": "ios1@ajou.ac.kr",
+            "password": "qwerqwer"
+        ]
+        
+        let passwordMissmatchParam = [
+            "email": "ios1@ajou.ac.kr",
+            "password": "asdfasdf"
+        ]
+        
+        let emailDoesntExistParam = [
+            "email": "ios",
+            "password": "asdfasdf"
+        ]
+        
+        Task {
+            
+            var response = await memberService.login(param: passwordMissmatchParam)
+            if response.error == nil {
+                XCTFail("login fail : password missmatch case")
+            }
+            
+            response = await memberService.login(param: emailDoesntExistParam)
+            if response.error == nil {
+                XCTFail("login fail : doesn`t exist email case")
+            }
+            
+            response = await memberService.login(param: correctParam)
+            if response.error != nil {
+                XCTFail("login fail : correct case")
+            } else {
+                UserDefaults.standard.setValue(response.value!.token, forKey: JWT_KEY)
+            }
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testCheckEmailDuplicate() {
+        let expectation = XCTestExpectation()
+        let emails = ["ios1@ajou.ac.kr", "adszsda2da@ajou..ac.kr", "1234"]
+        
+        Task {
+            
+            var response = await memberService.checkEmailDuplicate(email: emails[0])
+            if !response.value! {
+                print(response.debugDescription)
+                XCTFail("fail")
+            }
+            
+            response = await memberService.checkEmailDuplicate(email: emails[1])
+            if response.value! {
+                print(response.debugDescription)
+                XCTFail("fail")
+            }
+            
+            response = await memberService.checkEmailDuplicate(email: emails[2])
+            if response.value! {
+                XCTFail("fail")
+            }
+            
             expectation.fulfill()
         }
         

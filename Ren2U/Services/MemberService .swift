@@ -8,8 +8,9 @@
 import Alamofire
 import Foundation
 
-protocol MemberServiceProtocol: BaseService {
+protocol MemberServiceEnable: BaseServiceEnable {
     func login(param: [String: Any]) async -> DataResponse<LoginResponse, NetworkError>
+    func checkEmailDuplicate(email: String) async -> DataResponse<Bool, NetworkError>
     func getMyInfo() async -> DataResponse<GetMyInfoResponse, NetworkError>
     func getMyClubs() async -> DataResponse<GetMyClubsResponse, NetworkError>
     func getMyRentals() async -> DataResponse<GetMyRentalsResponse, NetworkError>
@@ -20,7 +21,7 @@ protocol MemberServiceProtocol: BaseService {
     func quitService() async -> DataResponse<DefaultPostResponse, NetworkError>
 }
 
-class MockupMemberService: MemberServiceProtocol {
+class MockupMemberService: MemberServiceEnable {
     var bearerToken: String?
     var url: String?
     
@@ -84,7 +85,7 @@ class MockupMemberService: MemberServiceProtocol {
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0.0, result: result)
     }
     
-    func getMyCouponsAll() async -> Alamofire.DataResponse<GetMyCouponsAllResponse, NetworkError> {
+    func getMyCouponsAll() -> Alamofire.DataResponse<GetMyCouponsAllResponse, NetworkError> {
         let result = Result {
             return GetMyCouponsAllResponse(statusCode: 200, responseMessage: "", data: CouponPreviewData.dummyCouponPreviewDatas())
         }.mapError { _ in
@@ -94,7 +95,7 @@ class MockupMemberService: MemberServiceProtocol {
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0.0, result: result)
     }
     
-    func getMyCouponHistoriesAll() async -> Alamofire.DataResponse<GetMyCouponHistoriesAllResponse, NetworkError> {
+    func getMyCouponHistoriesAll() -> Alamofire.DataResponse<GetMyCouponHistoriesAllResponse, NetworkError> {
         let result = Result {
             return GetMyCouponHistoriesAllResponse(statusCode: 200, responseMessage: "", data: CouponPreviewData.dummyCouponPreviewDatas())
         }.mapError { _ in
@@ -104,7 +105,7 @@ class MockupMemberService: MemberServiceProtocol {
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0.0, result: result)
     }
     
-    func quitService() async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+    func quitService() -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
         let result = Result {
             return DefaultPostResponse(statusCode: 200, responseMessage: "", data: nil)
         } .mapError { _ in
@@ -114,11 +115,22 @@ class MockupMemberService: MemberServiceProtocol {
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
     }
     
+    func checkEmailDuplicate(email: String) -> Alamofire.DataResponse<Bool, NetworkError> {
+        let result = Result {
+            return true
+        } .mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
+    
+    
 }
 
-class MemberService: MemberServiceProtocol {
+class MemberService: MemberServiceEnable {
     let url: String?
-    let bearerToken: String?
+    var bearerToken: String?
     
     init(url: String) {
         self.url = url
@@ -226,5 +238,18 @@ class MemberService: MemberServiceProtocol {
             return NetworkError(initialError: err, serverError: serverError)
         }
     }
+    
+    func checkEmailDuplicate(email: String) async -> Alamofire.DataResponse<Bool, NetworkError> {
+        
+        let url = "\(url!)/members/email/\(email)/exists"
+
+        let response = await AF.request(url, method: .get).serializingDecodable(Bool.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
 }
 

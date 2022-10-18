@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BaseService {
+protocol BaseServiceEnable {
     var url: String? { get }
-    var bearerToken: String? { get }
+    var bearerToken: String? { get set }
 }
