@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AccountParam  {
+struct SignUpParam  {
     var email: String = ""
     var password: String = ""
     var passwordCheck: String = ""
@@ -22,6 +22,9 @@ struct AccountParam  {
     
     var emailDuplication: EmailDuplication = .none
     
+    private let minEmailLength = 3
+    private let maxEmailLength = 30
+
     mutating func clearLogin() {
         self.email = ""
         self.password = ""
@@ -67,7 +70,7 @@ struct AccountParam  {
     
     
     var checkEmailButtonCondition: Bool {
-        if email.count < 6 || email.count > 30 {
+        if email.count < minEmailLength || email.count > maxEmailLength {
             return false
         } else {
             return true
@@ -238,7 +241,7 @@ struct AccountParam  {
     
     var wrongEmail: String {
         if emailDuplication == .none {
-            if email.count > 0 && email.count < 6 {
+            if email.count > 0 && email.count < minEmailLength {
                 return "이메일이 너무 짧습니다."
             } else if email.count > 30 {
                 return "이메일이 너무 깁니다."

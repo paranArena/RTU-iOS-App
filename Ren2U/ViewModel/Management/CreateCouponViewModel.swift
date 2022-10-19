@@ -101,13 +101,9 @@ class CreateCouponViewModel: ObservableObject {
         
         let response = await couponService.createCouponAdmin(clubId: clubId, param: param)
         
-        print(response.debugDescription)
         if let error = response.error {
-           print(response.debugDescription)
            await self.showAlert(with: error)
-       } else {
-           print("createCouponAdmin success")
-       }
+       } 
     }
     
     //  MARK: PUT

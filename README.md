@@ -1,3 +1,6 @@
+# MVVM + Service 
+
+
 # Dependency Injection 
 
 [이곳](https://jacobko.info/swiftui/swiftui-35/)을 참고한 글. 
@@ -133,6 +136,4 @@ struct MyCouponView_Previews: PreviewProvider {
 2. 체계적인 명명방법을 정하지 않았다. 어떤 컴포넌트 하나를 찾기 위해서 직관적으로 머리에 떠오르는 단어가 없었다. 컴포넌트를 모아놓은 파일을 보고 찾아봐야했다. 
 
 이후 계획에 없던 기능이 추가되면서 뷰가 꽤 재사용되기 시작했다. 그러나 각각 다른 뷰기 때문에 수정할 때는 많은 어려움이 있을게 예상됐다. 차라리 모든 뷰를 재사용을 고려해서 만들고, 명명 방법을 정하고 시작해야했다. 
-
-# 변경 추적 
 

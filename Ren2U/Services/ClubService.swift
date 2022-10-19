@@ -11,13 +11,23 @@ import Foundation
 protocol ClubServiceEnable: BaseServiceEnable {
     func searchClubsAll() async -> DataResponse<GetSearchClubsAllResponse, NetworkError>
     func searchClubsWithName(groupName: String) async -> DataResponse<SearchClubsWithNameResponse, NetworkError>
+    func searchClubWithHashTag(hashtag: String) async -> DataResponse<GetSearchClubsAllResponse, NetworkError>
 }
 
 class MockupClubService: ClubServiceEnable {
-    
     var url: String?
     var bearerToken: String?
     
+    func searchClubWithHashTag(hashtag: String) async -> DataResponse<GetSearchClubsAllResponse, NetworkError> {
+        let result = Result {
+            return GetSearchClubsAllResponse(statusCode: 200, responseMessage: "", data: ClubAndRoleData.dummyClubAndRoleDatas())
+        } .mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
+
     func searchClubsWithName(groupName: String) async -> Alamofire.DataResponse<SearchClubsWithNameResponse, NetworkError> {
         let result = Result {
             return SearchClubsWithNameResponse(statusCode: 200, responseMessage: "", data: ClubAndRoleData.dummyClubAndRoleDatas())
@@ -48,6 +58,27 @@ class ClubService: ClubServiceEnable {
         self.bearerToken = UserDefaults.standard.string(forKey: JWT_KEY)
     }
     
+    func searchClubWithHashTag(hashtag: String) async -> Alamofire.DataResponse<GetSearchClubsAllResponse, NetworkError> {
+        
+        let url = "\(url!)/clubs/search?hashtag=\(hashtag)"
+        
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: bearerToken!)
+        ]
+        
+        
+        let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+        let encodedURL = URL(string: encoded)!
+        
+        let response = await AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: headers).serializingDecodable(GetSearchClubsAllResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    
     func searchClubsWithName(groupName: String) async -> Alamofire.DataResponse<SearchClubsWithNameResponse, NetworkError> {
         
         let url = "\(url!)/clubs/search?name=\(groupName)"
@@ -74,7 +105,7 @@ class ClubService: ClubServiceEnable {
             .authorization(bearerToken: self.bearerToken!)
         ]
         
-        let response = await AF.request(url, method: .get, headers: headers).serializingDecodable(GetSearchClubsAllResponse.self).response
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).serializingDecodable(GetSearchClubsAllResponse.self).response
         
         return response.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }

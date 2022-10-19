@@ -94,7 +94,7 @@
 		1554576E28D9D15C00DDAD9B /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1554576D28D9D15C00DDAD9B /* CouponViewModel.swift */; };
 		1556E42C28CC5AE0007D1BDF /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1556E42B28CC5AE0007D1BDF /* DateExtension.swift */; };
 		1559B7E228F7B48E004838BD /* ServerURL .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559B7E128F7B48E004838BD /* ServerURL .swift */; };
-		155A36B728D18DD900848592 /* AccountParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155A36B628D18DD900848592 /* AccountParam.swift */; };
+		155A36B728D18DD900848592 /* SignUpParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155A36B628D18DD900848592 /* SignUpParam.swift */; };
 		155CED5F28A0EA380032C1BA /* GroupTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CED5E28A0EA380032C1BA /* GroupTabVM.swift */; };
 		156386B9288A513B006653E8 /* Ren2UTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386B8288A513B006653E8 /* Ren2UTab.swift */; };
 		156386C0288A5249006653E8 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156386BF288A5249006653E8 /* HomeTab.swift */; };
@@ -304,7 +304,7 @@
 		1554576D28D9D15C00DDAD9B /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
 		1556E42B28CC5AE0007D1BDF /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		1559B7E128F7B48E004838BD /* ServerURL .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ServerURL .swift"; sourceTree = "<group>"; };
-		155A36B628D18DD900848592 /* AccountParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountParam.swift; sourceTree = "<group>"; };
+		155A36B628D18DD900848592 /* SignUpParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpParam.swift; sourceTree = "<group>"; };
 		155CED5E28A0EA380032C1BA /* GroupTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTabVM.swift; sourceTree = "<group>"; };
 		156386B8288A513B006653E8 /* Ren2UTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTab.swift; sourceTree = "<group>"; };
 		156386BF288A5249006653E8 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
@@ -780,7 +780,7 @@
 			isa = PBXGroup;
 			children = (
 				157C268B28CF8944009115D8 /* PasswordReset.swift */,
-				155A36B628D18DD900848592 /* AccountParam.swift */,
+				155A36B628D18DD900848592 /* SignUpParam.swift */,
 				1554576B28D9C3D400DDAD9B /* NotificationParam.swift */,
 				153687A528DAB1EB00E0D554 /* CouponParam.swift */,
 			);
@@ -1233,7 +1233,7 @@
 				15667BCF28CCDA5F00AE9A2D /* ToS.swift in Sources */,
 				157C267F28CF3E60009115D8 /* SignUpViewModel.swift in Sources */,
 				155004BB28E045BA006B89B4 /* CouponDetailAdminViewModel.swift in Sources */,
-				155A36B728D18DD900848592 /* AccountParam.swift in Sources */,
+				155A36B728D18DD900848592 /* SignUpParam.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
 				15FA687B28BC62B800B3DF0B /* Profile.swift in Sources */,
 				15FA687928BC5A2400B3DF0B /* Param.swift in Sources */,

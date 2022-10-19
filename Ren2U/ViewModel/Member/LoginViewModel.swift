@@ -10,7 +10,7 @@ import Alamofire
 
 class LoginViewModel: ObservableObject {
     
-    @Published var account = AccountParam()
+    @Published var account = SignUpParam()
     @Published var missInput = MissInput.default
     @Published var isActiveSignUpView = false
     let tmp = 10 
