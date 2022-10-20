@@ -22,6 +22,7 @@ class ClubServiceTests: XCTestCase {
     func testSearchClubsAll() {
         
         let expectation = XCTestExpectation()
+        
         Task {
             let response = await clubService.searchClubsAll()
             if response.error != nil {
@@ -38,7 +39,7 @@ class ClubServiceTests: XCTestCase {
         let expectation = XCTestExpectation()
         
         Task {
-            var response = await clubService.searchClubsWithName(groupName: "한터")
+            let response = await clubService.searchClubsWithName(groupName: "한터")
             for club in response.value!.data {
                 if !club.name.contains("한터") {
                     XCTFail("searchClubsWithName fail")

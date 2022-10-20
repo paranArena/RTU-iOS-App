@@ -137,7 +137,7 @@ class ClubViewModel: ObservableObject {
             switch res.result {
             case .success(let value):
                 self.notices = value.data
-            case .failure(let _):
+            case .failure(_):
                 break
             }
         }

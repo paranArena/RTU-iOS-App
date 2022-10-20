@@ -13,7 +13,13 @@ class LoginViewModel: ObservableObject {
     @Published var account = SignUpParam()
     @Published var missInput = MissInput.default
     @Published var isActiveSignUpView = false
-    let tmp = 10 
+    
+    let memberService: MemberServiceEnable
+    let tmp = 10
+    
+    init(memberService: MemberServiceEnable) {
+        self.memberService = memberService
+    }
     
     enum MissInput: String {
         case `default` = ""
@@ -28,30 +34,22 @@ class LoginViewModel: ObservableObject {
         account.clearLogin()
     }
     
-    @MainActor
-    func login() async -> Bool {
-        let url = "\(BASE_URL)/authenticate"
-        let param: [String: Any] = [
+    func buttonTapped() async -> Bool {
+        let param: [String:Any] = [
             "email" : account.email,
             "password" : account.password
         ]
         
-
-        let request = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self)
-        let response = await request.response
+        let response = await memberService.login(param: param)
         
-        switch response.result {
-        case .success(let value):
-            print("login success")
+        if response.error != nil {
+            self.missInput = .wrong
+        } else if let value = response.value {
             self.setToken(token: value.token)
-            missInput = .default
-            return true
-        case .failure(_):
-            print(response.debugDescription)
-            missInput = .wrong
-            return false
+            self.missInput = .default
+            return true 
         }
-
+        
+        return false
     }
-    
 }

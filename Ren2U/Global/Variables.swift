@@ -22,6 +22,8 @@ let JWT_KEY = "jwt"
 let DEFAULT_REGION = CLLocationCoordinate2D(latitude: 37.28, longitude: 127.0489)
 let DEFAULT_SPAN = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
 
+let AJOU_EMAIL_SUFFIX = "@ajou.ac.kr"
+
 
 public struct ViewOffsetKey: PreferenceKey {
     public typealias Value = CGFloat

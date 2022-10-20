@@ -57,6 +57,9 @@
 		1530D55A28DCDFA6004BFB39 /* MyCouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530D55928DCDFA6004BFB39 /* MyCouponViewModel.swift */; };
 		1530D55D28DCE1BA004BFB39 /* MyCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530D55C28DCE1BA004BFB39 /* MyCouponView.swift */; };
 		15323BAF28DEDB3E00A89CB1 /* CreateCouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15323BAE28DEDB3E00A89CB1 /* CreateCouponViewModel.swift */; };
+		153459B82900E98300CEA4B2 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153459B72900E98300CEA4B2 /* LoginTests.swift */; };
+		153459BA2900EA3F00CEA4B2 /* LoginParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153459B92900EA3F00CEA4B2 /* LoginParam.swift */; };
+		153459BC2901128200CEA4B2 /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153459BB2901128200CEA4B2 /* SignUpTests.swift */; };
 		153687A428DAB0CF00E0D554 /* CouponService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153687A328DAB0CF00E0D554 /* CouponService.swift */; };
 		153687A628DAB1EB00E0D554 /* CouponParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153687A528DAB1EB00E0D554 /* CouponParam.swift */; };
 		153687A928DABCBE00E0D554 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153687A828DABCBE00E0D554 /* ImageService.swift */; };
@@ -185,7 +188,6 @@
 		15FAF136287D5DFF00B35570 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF135287D5DFF00B35570 /* ContentView.swift */; };
 		15FAF138287D5E0000B35570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FAF137287D5E0000B35570 /* Assets.xcassets */; };
 		15FAF13B287D5E0000B35570 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FAF13A287D5E0000B35570 /* Preview Assets.xcassets */; };
-		15FAF145287D5E0000B35570 /* Ren2UTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF144287D5E0000B35570 /* Ren2UTests.swift */; };
 		15FAF14F287D5E0000B35570 /* Ren2UUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF14E287D5E0000B35570 /* Ren2UUITests.swift */; };
 		15FAF151287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF150287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift */; };
 		15FAF15F287D5E1800B35570 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAF15E287D5E1800B35570 /* Login.swift */; };
@@ -267,6 +269,9 @@
 		1530D55928DCDFA6004BFB39 /* MyCouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponViewModel.swift; sourceTree = "<group>"; };
 		1530D55C28DCE1BA004BFB39 /* MyCouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponView.swift; sourceTree = "<group>"; };
 		15323BAE28DEDB3E00A89CB1 /* CreateCouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCouponViewModel.swift; sourceTree = "<group>"; };
+		153459B72900E98300CEA4B2 /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
+		153459B92900EA3F00CEA4B2 /* LoginParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginParam.swift; sourceTree = "<group>"; };
+		153459BB2901128200CEA4B2 /* SignUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
 		153687A328DAB0CF00E0D554 /* CouponService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponService.swift; sourceTree = "<group>"; };
 		153687A528DAB1EB00E0D554 /* CouponParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponParam.swift; sourceTree = "<group>"; };
 		153687A828DABCBE00E0D554 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
@@ -395,7 +400,6 @@
 		15FAF137287D5E0000B35570 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		15FAF13A287D5E0000B35570 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		15FAF140287D5E0000B35570 /* Ren2UTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ren2UTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		15FAF144287D5E0000B35570 /* Ren2UTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UTests.swift; sourceTree = "<group>"; };
 		15FAF14A287D5E0000B35570 /* Ren2UUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ren2UUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15FAF14E287D5E0000B35570 /* Ren2UUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UUITests.swift; sourceTree = "<group>"; };
 		15FAF150287D5E0000B35570 /* Ren2UUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ren2UUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -615,6 +619,25 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		153459B52900E93200CEA4B2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				15FEDABC28FE4C3A00849311 /* ClubServiceTests.swift */,
+				157B8D4E28F98A7400B9A924 /* CouponServiceTests.swift */,
+				157B8D5428F9934600B9A924 /* MemberServiceTests.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		153459B62900E94700CEA4B2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				153459B72900E98300CEA4B2 /* LoginTests.swift */,
+				153459BB2901128200CEA4B2 /* SignUpTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		153687A728DABC4100E0D554 /* Coupon */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,15 +659,6 @@
 				157F53A628D844030087F8A3 /* SwipeCell.swift */,
 			);
 			path = Swipe;
-			sourceTree = "<group>";
-		};
-		153C1A6C288CDDF200F89B2E /* Others */ = {
-			isa = PBXGroup;
-			children = (
-				159F1B20288B88DB00012113 /* Variables.swift */,
-				15D4C580287FF15A008BB89B /* NavigationBarColor.swift */,
-			);
-			path = Others;
 			sourceTree = "<group>";
 		};
 		155004B728E037CE006B89B4 /* Protocol */ = {
@@ -783,6 +797,7 @@
 				155A36B628D18DD900848592 /* SignUpParam.swift */,
 				1554576B28D9C3D400DDAD9B /* NotificationParam.swift */,
 				153687A528DAB1EB00E0D554 /* CouponParam.swift */,
+				153459B92900EA3F00CEA4B2 /* LoginParam.swift */,
 			);
 			path = Param;
 			sourceTree = "<group>";
@@ -790,8 +805,8 @@
 		159DB00628DECD5100FCE98D /* Member */ = {
 			isa = PBXGroup;
 			children = (
-				157C267E28CF3E60009115D8 /* SignUpViewModel.swift */,
 				157C268028CF3E6A009115D8 /* LoginViewModel.swift */,
+				157C267E28CF3E60009115D8 /* SignUpViewModel.swift */,
 				15BDC4212881218500514EF1 /* MyPageViewModel.swift */,
 				1530D55928DCDFA6004BFB39 /* MyCouponViewModel.swift */,
 				159DB00728DECE4F00FCE98D /* MyCouponDetailViewModel.swift */,
@@ -938,10 +953,8 @@
 		15FAF143287D5E0000B35570 /* Ren2UTests */ = {
 			isa = PBXGroup;
 			children = (
-				15FAF144287D5E0000B35570 /* Ren2UTests.swift */,
-				157B8D5428F9934600B9A924 /* MemberServiceTests.swift */,
-				157B8D4E28F98A7400B9A924 /* CouponServiceTests.swift */,
-				15FEDABC28FE4C3A00849311 /* ClubServiceTests.swift */,
+				153459B62900E94700CEA4B2 /* ViewModel */,
+				153459B52900E93200CEA4B2 /* Service */,
 			);
 			path = Ren2UTests;
 			sourceTree = "<group>";
@@ -958,6 +971,8 @@
 		15FAF160287D5EC100B35570 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				15D4C580287FF15A008BB89B /* NavigationBarColor.swift */,
+				159F1B20288B88DB00012113 /* Variables.swift */,
 				15B0892528FBBD3F00EA5DFA /* MockupData.swift */,
 				1523D5DF28BE138A009EB733 /* AssetImages.swift */,
 				1559B7E128F7B48E004838BD /* ServerURL .swift */,
@@ -966,7 +981,6 @@
 				159F1B22288B9F7000012113 /* Font */,
 				15B63DA228AF38C3000AB82D /* Modifier */,
 				1550ECA928B35C3F00BECBE7 /* Styles */,
-				153C1A6C288CDDF200F89B2E /* Others */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -1256,6 +1270,7 @@
 				156386CB288A5B2F006653E8 /* ClubSelected.swift in Sources */,
 				157C268728CF8120009115D8 /* PasswordResetView.swift in Sources */,
 				15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */,
+				153459BA2900EA3F00CEA4B2 /* LoginParam.swift in Sources */,
 				152CA1D1288F84EE00DDC0E2 /* SignUpSuccess.swift in Sources */,
 				15FAF134287D5DFF00B35570 /* Ren2UApp.swift in Sources */,
 				15F3673528926F6F0073E094 /* ClubSearch.swift in Sources */,
@@ -1325,10 +1340,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15FAF145287D5E0000B35570 /* Ren2UTests.swift in Sources */,
 				157B8D5528F9934600B9A924 /* MemberServiceTests.swift in Sources */,
 				157B8D4F28F98A7500B9A924 /* CouponServiceTests.swift in Sources */,
+				153459BC2901128200CEA4B2 /* SignUpTests.swift in Sources */,
 				15FEDABD28FE4C3A00849311 /* ClubServiceTests.swift in Sources */,
+				153459B82900E98300CEA4B2 /* LoginTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

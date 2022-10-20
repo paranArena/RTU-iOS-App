@@ -102,7 +102,6 @@ class ClubSearchViewModel: ObservableObject, BaseViewModel {
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
         let task = AF.request(url, method: .post, encoding: JSONEncoding.default, headers:  hearders).serializingDecodable(requestClubJoinResponse.self)
-        let result = await task.result
     }
 
 }

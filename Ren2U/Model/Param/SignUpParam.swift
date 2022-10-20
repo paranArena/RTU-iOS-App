@@ -34,24 +34,6 @@ struct SignUpParam  {
         self.code = "" 
     }
     
-    
-    enum EmailDuplication {
-        case none
-        case duplicated
-        case notDuplicated
-        
-        var text: String {
-            switch self {
-            case .none:
-                return ""
-            case .duplicated:
-                return "이미 가입된 이메일입니다."
-            case .notDuplicated:
-                return "사용할 수 있는 이메일입니다."
-            }
-        }
-    }
-    
     var fgColorLoginButton: Color {
         if email.isEmpty || password.isEmpty {
             return Color.gray_E9ECEF
@@ -304,6 +286,33 @@ struct SignUpParam  {
             return true
         } else {
             return false
+        }
+    }
+}
+
+extension SignUpParam {
+    enum EmailDuplication {
+        case none
+        case duplicated
+        case notDuplicated
+        
+        var text: String {
+            switch self {
+            case .none:
+                return ""
+            case .duplicated:
+                return "이미 가입된 이메일입니다."
+            case .notDuplicated:
+                return "사용할 수 있는 이메일입니다."
+            }
+        }
+        
+        mutating func setEmailDuplicate(result: Bool) {
+            if result {
+                self = .duplicated
+            } else {
+                self = .notDuplicated
+            }
         }
     }
 }

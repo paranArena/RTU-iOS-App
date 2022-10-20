@@ -95,6 +95,10 @@ struct UserData: Codable, Identifiable {
 struct DuplicateCheckData: Codable {
     let phoneNumber: Bool
     let studentId: Bool
+    
+    static func dummyDuplicateCheckData() -> DuplicateCheckData {
+        return DuplicateCheckData(phoneNumber: false, studentId: false)
+    }
 }
 
 //  MARK: Response

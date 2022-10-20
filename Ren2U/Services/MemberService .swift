@@ -19,11 +19,23 @@ protocol MemberServiceEnable: BaseServiceEnable {
     func getMyCouponsAll() async -> DataResponse<GetMyCouponsAllResponse, NetworkError>
     func getMyCouponHistoriesAll() async -> DataResponse<GetMyCouponHistoriesAllResponse, NetworkError>
     func quitService() async -> DataResponse<DefaultPostResponse, NetworkError>
+    func checkPhoneStudentIdDuplicate(phoneNumber: String, studentId: String) async -> DataResponse<CheckPhoneStudentIdDuplicateResponse, NetworkError>
 }
 
 class MockupMemberService: MemberServiceEnable {
+    
     var bearerToken: String?
     var url: String?
+    
+    func checkPhoneStudentIdDuplicate(phoneNumber: String, studentId: String) async -> Alamofire.DataResponse<CheckPhoneStudentIdDuplicateResponse, NetworkError> {
+        let result = Result {
+            return CheckPhoneStudentIdDuplicateResponse(statusCode: 200, responseMessage: "", data: DuplicateCheckData.dummyDuplicateCheckData())
+        } .mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
     
     func login(param: [String : Any]) async -> Alamofire.DataResponse<LoginResponse, NetworkError> {
         let result = Result {
@@ -129,12 +141,27 @@ class MockupMemberService: MemberServiceEnable {
 }
 
 class MemberService: MemberServiceEnable {
+    
     let url: String?
     var bearerToken: String?
     
     init(url: String) {
         self.url = url
         self.bearerToken = UserDefaults.standard.string(forKey: JWT_KEY)
+    }
+    
+    func checkPhoneStudentIdDuplicate(phoneNumber: String, studentId: String) async -> Alamofire.DataResponse<CheckPhoneStudentIdDuplicateResponse, NetworkError> {
+        let url = "\(url!)/members/duplicate/010\(phoneNumber)/\(studentId)/exists"
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: bearerToken ?? "")
+        ]
+        
+        let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).serializingDecodable(CheckPhoneStudentIdDuplicateResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
     }
     
     
