@@ -11,6 +11,7 @@ import XCTest
 class MemberServiceTests: XCTestCase {
     
     var memberService: MemberServiceEnable!
+    let email = "ios1@ajou.ac.kr"
     
     override func setUp() async throws {
         memberService = MemberService(url: ServerURL.devServer.url)
@@ -201,5 +202,17 @@ class MemberServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
+    func testRequestEmailCode() {
+        let expectation = XCTestExpectation()
+        Task {
+            let response = await memberService.requestEmailCode(email: self.email)
+            if response.error != nil {
+                XCTFail("requestEmailCode fail")
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
     
 }

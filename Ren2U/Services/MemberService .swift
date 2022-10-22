@@ -20,12 +20,37 @@ protocol MemberServiceEnable: BaseServiceEnable {
     func getMyCouponHistoriesAll() async -> DataResponse<GetMyCouponHistoriesAllResponse, NetworkError>
     func quitService() async -> DataResponse<DefaultPostResponse, NetworkError>
     func checkPhoneStudentIdDuplicate(phoneNumber: String, studentId: String) async -> DataResponse<CheckPhoneStudentIdDuplicateResponse, NetworkError>
+    
+    func passwordResetWithVerificationCode(param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError>
+    
+    func requestEmailCode(email: String) async -> DataResponse<DefaultPostResponse, NetworkError>
 }
 
 class MockupMemberService: MemberServiceEnable {
-    
     var bearerToken: String?
     var url: String?
+    
+    func requestEmailCode(email: String) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+        let result = Result {
+            return DefaultPostResponse(statusCode: 200, responseMessage: "", data: nil)
+        } .mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
+    
+    func passwordResetWithVerificationCode(param: [String: Any]) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+        let result = Result {
+            return DefaultPostResponse(statusCode: 200, responseMessage: "", data: nil)
+        } .mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
+    
+    
     
     func checkPhoneStudentIdDuplicate(phoneNumber: String, studentId: String) async -> Alamofire.DataResponse<CheckPhoneStudentIdDuplicateResponse, NetworkError> {
         let result = Result {
@@ -141,7 +166,6 @@ class MockupMemberService: MemberServiceEnable {
 }
 
 class MemberService: MemberServiceEnable {
-    
     let url: String?
     var bearerToken: String?
     
@@ -149,6 +173,39 @@ class MemberService: MemberServiceEnable {
         self.url = url
         self.bearerToken = UserDefaults.standard.string(forKey: JWT_KEY)
     }
+    
+    func requestEmailCode(email: String) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+        
+        let url = "\(self.url!)/members/\(email)/requestCode"
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: self.bearerToken!)
+        ]
+        
+        let response = await AF.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).serializingDecodable(DefaultPostResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    
+    func passwordResetWithVerificationCode(param: [String: Any]) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+        
+        let url = "\(url!)/password/reset/verify"
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: self.bearerToken!)
+        ]
+        
+        let response = await AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default, headers: headers).serializingDecodable(DefaultPostResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    
     
     func checkPhoneStudentIdDuplicate(phoneNumber: String, studentId: String) async -> Alamofire.DataResponse<CheckPhoneStudentIdDuplicateResponse, NetworkError> {
         let url = "\(url!)/members/duplicate/010\(phoneNumber)/\(studentId)/exists"

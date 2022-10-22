@@ -16,7 +16,7 @@ class SignUpViewModel: BaseViewModel {
     @Published var isActiveCertificationView = false
     
     //  MARK: ALERT
-    @Published var isDulpicatedStudentId = false
+    @Published var isDuplicatedStudentId = false
     @Published var isDuplicatedPhoneNumber = false
     
     @Published var callbackAlert: CallbackAlert = CallbackAlert()
@@ -130,10 +130,10 @@ class SignUpViewModel: BaseViewModel {
             case 200:
                 print("[checkPhoneStudentIdDuplicate success]")
                 if let value = resposne.value {
-                    isDulpicatedStudentId = value.data.studentId
+                    isDuplicatedStudentId = value.data.studentId
                     isDuplicatedPhoneNumber = value.data.phoneNumber
                     
-                    if !isDulpicatedStudentId && !isDulpicatedStudentId {
+                    if !isDuplicatedStudentId && !isDuplicatedStudentId {
                         isActiveCertificationView = true
                         requestEmailCode()
                     }
@@ -156,9 +156,9 @@ class SignUpViewModel: BaseViewModel {
         if let error = response.error {
             await self.showAlert(with: error)
         } else if let value = response.value {
-            self.isDulpicatedStudentId = value.data.studentId
+            self.isDuplicatedStudentId = value.data.studentId
             self.isDuplicatedPhoneNumber = value.data.phoneNumber
-            if !isDulpicatedStudentId && !isDulpicatedStudentId {
+            if !isDuplicatedStudentId && !isDuplicatedStudentId {
                 isActiveCertificationView = true
                 requestEmailCode()
             }

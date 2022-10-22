@@ -86,7 +86,7 @@ struct SignUp: View {
         } message: {
             Text("이미 가입된 휴대폰 번호입니다. 본인의 번호라면 개발자에게 문의해주세요.")
         }
-        .alert("회원가입 실패", isPresented: $signUpVM.isDulpicatedStudentId) {
+        .alert("회원가입 실패", isPresented: $signUpVM.isDuplicatedStudentId) {
             Button("확인", role: .cancel) {}
         } message: {
             Text("이미 가입된 학번입니다. 본인의 번호라면 개발자에게 문의해주세요.")

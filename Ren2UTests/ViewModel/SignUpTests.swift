@@ -39,18 +39,15 @@ final class SignUpTests: XCTestCase {
     
     func testGoCertificationButtonTapped() async {
         
-        XCTAssertFalse(vm.isDulpicatedStudentId)
+        XCTAssertFalse(vm.isDuplicatedStudentId)
         XCTAssertFalse(vm.isDuplicatedPhoneNumber)
         
-        vm.param.phoneNumber = "01000000013"
+        vm.param.phoneNumber = "00000013"
         vm.param.studentId = "201800013"
         await vm.goCertificationButtonTapped()
         
-        var actual = vm.isDuplicatedPhoneNumber
-        XCTAssertTrue(actual)
-        
-        actual = vm.isDulpicatedStudentId
-        XCTAssertTrue(actual)
+        XCTAssertTrue(vm.isDuplicatedPhoneNumber)
+        XCTAssertTrue(vm.isDuplicatedStudentId)
     }
 
 //    func testPerformanceExample() throws {
