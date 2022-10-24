@@ -9,7 +9,10 @@ import Alamofire
 import Foundation
 
 protocol MemberServiceEnable: BaseServiceEnable {
+    
+    //  MARK: Deprecated
     func login(param: [String: Any]) async -> DataResponse<LoginResponse, NetworkError>
+    func login(data: LoginParam) async -> DataResponse<LoginResponse, NetworkError>
     func checkEmailDuplicate(email: String) async -> DataResponse<Bool, NetworkError>
     func getMyInfo() async -> DataResponse<GetMyInfoResponse, NetworkError>
     func getMyClubs() async -> DataResponse<GetMyClubsResponse, NetworkError>
@@ -24,11 +27,33 @@ protocol MemberServiceEnable: BaseServiceEnable {
     func passwordResetWithVerificationCode(param: [String: Any]) async -> DataResponse<DefaultPostResponse, NetworkError>
     
     func requestEmailCode(email: String) async -> DataResponse<DefaultPostResponse, NetworkError>
+    func signUp(data: SignUpParam) async -> DataResponse<SignUpResponse, NetworkError>
 }
 
 class MockupMemberService: MemberServiceEnable {
     var bearerToken: String?
     var url: String?
+    
+    func login(data: LoginParam) async -> Alamofire.DataResponse<LoginResponse, NetworkError> {
+        let result = Result {
+            return LoginResponse(token: "")
+        } .mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
+    
+    
+    func signUp(data: SignUpParam) async -> Alamofire.DataResponse<SignUpResponse, NetworkError> {
+        let result = Result {
+            return SignUpResponse(statusCode: 200, responseMessage: "", data: UserData.dummyUserData())
+        } .mapError { _ in
+            NetworkError(initialError: nil, serverError: nil)
+        }
+        
+        return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
+    }
     
     func requestEmailCode(email: String) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
         let result = Result {
@@ -49,7 +74,6 @@ class MockupMemberService: MemberServiceEnable {
         
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
     }
-    
     
     
     func checkPhoneStudentIdDuplicate(phoneNumber: String, studentId: String) async -> Alamofire.DataResponse<CheckPhoneStudentIdDuplicateResponse, NetworkError> {
@@ -174,6 +198,28 @@ class MemberService: MemberServiceEnable {
         self.bearerToken = UserDefaults.standard.string(forKey: JWT_KEY)
     }
     
+    func signUp(data: SignUpParam) async -> Alamofire.DataResponse<SignUpResponse, NetworkError> {
+        
+        let url = "\(self.url!)/signup"
+        let param: [String: Any] = [
+            "email" : data.email,
+            "password" : data.password,
+            "name" : data.name,
+            "phoneNumber" : data.phoneNumber,
+            "studentId" : data.studentId,
+            "major" : data.major,
+            "verificationCode" : data.code
+        ]
+        
+        let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(SignUpResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    
     func requestEmailCode(email: String) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
         
         let url = "\(self.url!)/members/email/requestCode"
@@ -230,9 +276,24 @@ class MemberService: MemberServiceEnable {
             return NetworkError(initialError: err, serverError: serverError)
         }
     }
-
+    
     func login(param: [String : Any]) async -> Alamofire.DataResponse<LoginResponse, NetworkError> {
         let url = "\(url!)/authenticate"
+        
+        let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
+    func login(data: LoginParam) async -> Alamofire.DataResponse<LoginResponse, NetworkError> {
+        let url = "\(url!)/authenticate"
+        let param = [
+            "email" : data.email,
+            "password" : data.password
+        ]
         
         let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self).response
         

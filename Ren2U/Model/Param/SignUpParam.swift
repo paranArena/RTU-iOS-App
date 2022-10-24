@@ -15,7 +15,7 @@ struct SignUpParam  {
     var major: String = ""
     var studentId: String = ""
     var phoneNumber: String = ""
-    var code: String = "" 
+    var code: String = ""
     
     var isShowingPassword = false
     var isShowingPasswordCheck = false

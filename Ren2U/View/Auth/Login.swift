@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Login: View {
     
-    @EnvironmentObject var loginManager: MyPageViewModel
+    @EnvironmentObject var myPageVM: MyPageViewModel
     @StateObject var loginVM = LoginViewModel(memberService: MemberService(url: ServerURL.runningServer.url)) 
     @FocusState var focus: Field?
     
@@ -88,7 +88,7 @@ struct Login: View {
     private func LoginButton() -> some View {
         Button {
             Task {
-                loginManager.isLogined = await loginVM.buttonTapped()
+                myPageVM.isLogined = await loginVM.buttonTapped()
             }
         } label: {
             Image(systemName: "arrow.right.circle.fill")

@@ -8,5 +8,6 @@
 import Foundation
 
 struct LoginParam {
-    
+    var email = ""
+    var password = "" 
 }

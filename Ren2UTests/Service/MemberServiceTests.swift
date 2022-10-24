@@ -12,30 +12,27 @@ class MemberServiceTests: XCTestCase {
     
     var memberService: MemberServiceEnable!
     let email = "ios1@ajou.ac.kr"
-    let emailForCode = "nou0jid@ajou.ac.kr"
+    let tmpEmail = "nou0jid@ajou.ac.kr"
+    let loginParam = LoginParam(email: "ios1@ajou.ac.kr", password: "qwerqwer")
     
     override func setUp() async throws {
         memberService = MemberService(url: ServerURL.devServer.url)
-        await login()
+        await login(data: self.loginParam)
     }
 
     override func tearDownWithError() throws {
         logout()
     }
 
-    func login() async {
-        let correctParam = [
-            "email": "ios1@ajou.ac.kr",
-            "password": "qwerqwer"
-        ]
+    private func login(data: LoginParam) async {
         
-        let response = await memberService.login(param: correctParam)
+        let response = await memberService.login(data: data)
         if let value = response.value {
             memberService.bearerToken = value.token
         }
     }
     
-    func logout() {
+    private func logout() {
         UserDefaults.standard.setValue(nil, forKey: JWT_KEY)
     }
     
@@ -204,7 +201,7 @@ class MemberServiceTests: XCTestCase {
     
     func testRequestEmailCode() async {
         let expectation = XCTestExpectation()
-        let response = await memberService.requestEmailCode(email: self.emailForCode)
+        let response = await memberService.requestEmailCode(email: self.tmpEmail)
         if response.error != nil {
             XCTFail("requestEmailCode fail")
             print(response.debugDescription)
@@ -214,4 +211,37 @@ class MemberServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 4.0)
     }
     
+    func testSignup() async {
+
+        let signUpParam = SignUpParam(email: self.tmpEmail, password: "12345678", passwordCheck: "12345678", name: "iOS테스트", major: "소프트웨어학과", studentId: "201820768", phoneNumber: "01064330824", code: "111111")
+        let expectation = XCTestExpectation()
+        
+        let _ = await self.testRequestEmailCode()
+        let response = await memberService.signUp(data: signUpParam)
+        
+        if response.error != nil {
+            XCTFail("testSignup fail")
+            print(response.debugDescription)
+        } else {
+            //  회원탈퇴를 위해 방금 가입한 계정으로 로그인.
+            let data = LoginParam(email: self.tmpEmail, password: "12345678")
+            await self.login(data: data)
+            await self.testQuitService()
+        }
+
+        expectation.fulfill()
+        wait(for: [expectation], timeout: 1.0)
+    }
+
+    private func testQuitService () async {
+        
+        let expectation = XCTestExpectation()
+        let response = await memberService.quitService()
+        if response.error != nil {
+            XCTFail("testQuitService fail")
+        }
+        
+        expectation.fulfill()
+        wait(for: [expectation], timeout: 1.0)
+    }
 }

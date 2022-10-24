@@ -1,7 +1,10 @@
-# 테스트 
+# Content 
 
-
-
+- [Content](#content)
+- [Dependency Injection](#dependency-injection)
+- [재사용](#재사용)
+  - [UI](#ui)
+  - [Service](#service)
 
 # Dependency Injection 
 
@@ -130,7 +133,9 @@ struct MyCouponView_Previews: PreviewProvider {
 ```
 실제 뷰에는 통신을 위한 서비스를 넣어주고 프리뷰에는 목업데이터를 보내주는 서비스를 넣어서 프리뷰 이용이 가능해진다. 
 
-# 재사용 
+# 재사용
+
+## UI 
 
 디자인이 완성되고 개발을 시작한 것이 아니라 그때 그때 하나의 뷰가 완성되면 하나씩 개발을 시작했다. 처음에는 재사용을 고려했으나 이를 포기한 이유는 두가지가 있다. 
 
@@ -139,3 +144,58 @@ struct MyCouponView_Previews: PreviewProvider {
 
 이후 계획에 없던 기능이 추가되면서 뷰가 꽤 재사용되기 시작했다. 그러나 각각 다른 뷰기 때문에 수정할 때는 많은 어려움이 있을게 예상됐다. 차라리 모든 뷰를 재사용을 고려해서 만들고, 명명 방법을 정하고 시작해야했다. 
 
+## Service 
+
+현재 아키텍처에서 백엔드 API를 사용하는 곳을 `Service`로 분리했다. 뷰모델이 어차피 뷰에 종속되어서 거의 재활용이 안되는 것처럼 API 역시 마찬가지였다. 그런데 테스트 코드를 작성하던 중 이런 재사용성에서 문제가 있는 부분을 발견했다. 
+
+```swift
+func login(param: [String : Any]) async -> Alamofire.DataResponse<LoginResponse, NetworkError> {
+        let url = "\(url!)/authenticate"
+        
+        let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+``` 
+
+만약 로그인 기능을 여러 뷰모델에서 사용하고 있다면 어떤 문제가 있을까? 사용하고 있는 parameter에 변경이 생기면 양쪽 view model에서 패러미터로 사용하고 있는 Dictionary 타입인 `param`을 모두 변경해줘야 한다. 
+
+
+```json 
+{
+    "email": "{{email}}",
+    "password": "{{password}}"
+}
+```
+
+현재 서버에서는 로그인을 위해 저런 형식으로 BODY를 보내주고 있다. 
+
+```json 
+{
+    "ajouEmail": "{{email}}",
+    "password": "{{password}}"
+}
+```
+
+이런식으로 변경이 생겼다면 사용하고있는 뷰모델에서 모두 저렇게 변경을 해줘야한다. 그래서 데이터를 가공해야 하면 사용하는 측에서 가공을 하는게 낫다는 생각이 들었다. 찾아보면 무슨 법칙이나 원칙같은게 있을거 같은데 지식이 얕아 그런것까지느 아직 모르겠다. 
+
+```swift
+func login(data: LoginParam) async -> Alamofire.DataResponse<LoginResponse, NetworkError> {
+        let url = "\(url!)/authenticate"
+        let param = [
+            "email" : data.email,
+            "password" : data.password
+        ]
+        let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(LoginResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+``` 
+
+수정 후, Dictionary에 사용될 데이터들을 가공없이 그대로 보내주고 서비스 코드 내에서 데이터를 변환해서 사용하고 있다. 이제 API에 변경이 생겨도 여러 곳을 수정할 필요가 없어졌다.

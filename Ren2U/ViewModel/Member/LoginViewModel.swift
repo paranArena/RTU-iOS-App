@@ -34,6 +34,7 @@ class LoginViewModel: ObservableObject {
         account.clearLogin()
     }
     
+    @MainActor
     func buttonTapped() async -> Bool {
         let param: [String:Any] = [
             "email" : account.email,
