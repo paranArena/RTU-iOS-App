@@ -176,12 +176,10 @@ class MemberService: MemberServiceEnable {
     
     func requestEmailCode(email: String) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
         
-        let url = "\(self.url!)/members/\(email)/requestCode"
-        let headers: HTTPHeaders = [
-            .authorization(bearerToken: self.bearerToken!)
-        ]
+        let url = "\(self.url!)/members/email/requestCode"
+        let param: [String: Any] = ["email" : email]
         
-        let response = await AF.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).serializingDecodable(DefaultPostResponse.self).response
+        let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(DefaultPostResponse.self).response
         
         return response.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }

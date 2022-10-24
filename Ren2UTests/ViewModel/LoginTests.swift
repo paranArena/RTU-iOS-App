@@ -42,8 +42,6 @@ final class LoginTests: XCTestCase {
         actual = vm.missInput
         expected = LoginViewModel.MissInput.wrong
         XCTAssertEqual(actual, expected)
-        
-        
     }
 
     func testPerformanceExample() throws {

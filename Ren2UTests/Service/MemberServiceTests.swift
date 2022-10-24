@@ -12,6 +12,7 @@ class MemberServiceTests: XCTestCase {
     
     var memberService: MemberServiceEnable!
     let email = "ios1@ajou.ac.kr"
+    let emailForCode = "nou0jid@ajou.ac.kr"
     
     override func setUp() async throws {
         memberService = MemberService(url: ServerURL.devServer.url)
@@ -124,7 +125,6 @@ class MemberServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
-    
     func testLogin() async {
         let expectation = XCTestExpectation()
         
@@ -202,17 +202,16 @@ class MemberServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func testRequestEmailCode() {
+    func testRequestEmailCode() async {
         let expectation = XCTestExpectation()
-        Task {
-            let response = await memberService.requestEmailCode(email: self.email)
-            if response.error != nil {
-                XCTFail("requestEmailCode fail")
-            }
-            expectation.fulfill()
+        let response = await memberService.requestEmailCode(email: self.emailForCode)
+        if response.error != nil {
+            XCTFail("requestEmailCode fail")
+            print(response.debugDescription)
         }
+        expectation.fulfill()
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 4.0)
     }
     
 }
