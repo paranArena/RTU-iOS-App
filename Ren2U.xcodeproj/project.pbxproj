@@ -139,7 +139,7 @@
 		157C268528CF5B4B009115D8 /* PreviewImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268428CF5B4B009115D8 /* PreviewImage.swift */; };
 		157C268728CF8120009115D8 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268628CF8120009115D8 /* PasswordResetView.swift */; };
 		157C268928CF8246009115D8 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268828CF8246009115D8 /* PasswordViewModel.swift */; };
-		157C268C28CF8944009115D8 /* PasswordReset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268B28CF8944009115D8 /* PasswordReset.swift */; };
+		157C268C28CF8944009115D8 /* PasswordResetParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268B28CF8944009115D8 /* PasswordResetParam.swift */; };
 		157C268E28CF8F47009115D8 /* ItemMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268D28CF8F47009115D8 /* ItemMap.swift */; };
 		157C269228CFB2BE009115D8 /* NavyCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269128CFB2BE009115D8 /* NavyCapsule.swift */; };
 		157C269428CFBB6C009115D8 /* ResetPassWordWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */; };
@@ -353,7 +353,7 @@
 		157C268428CF5B4B009115D8 /* PreviewImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewImage.swift; sourceTree = "<group>"; };
 		157C268628CF8120009115D8 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		157C268828CF8246009115D8 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
-		157C268B28CF8944009115D8 /* PasswordReset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordReset.swift; sourceTree = "<group>"; };
+		157C268B28CF8944009115D8 /* PasswordResetParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetParam.swift; sourceTree = "<group>"; };
 		157C268D28CF8F47009115D8 /* ItemMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMap.swift; sourceTree = "<group>"; };
 		157C269128CFB2BE009115D8 /* NavyCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavyCapsule.swift; sourceTree = "<group>"; };
 		157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWordWithCode.swift; sourceTree = "<group>"; };
@@ -799,7 +799,7 @@
 		157C268A28CF8932009115D8 /* Param */ = {
 			isa = PBXGroup;
 			children = (
-				157C268B28CF8944009115D8 /* PasswordReset.swift */,
+				157C268B28CF8944009115D8 /* PasswordResetParam.swift */,
 				155A36B628D18DD900848592 /* SignUpParam.swift */,
 				1554576B28D9C3D400DDAD9B /* NotificationParam.swift */,
 				153687A528DAB1EB00E0D554 /* CouponParam.swift */,
@@ -1288,7 +1288,7 @@
 				157190E828B6F5F300880F98 /* RentalAndItemManagement.swift in Sources */,
 				1586640E28D95F1C00E4E902 /* UpdateProductViewModel.swift in Sources */,
 				15F937C928D58E0700D41F0C /* ClubSearchViewModel.swift in Sources */,
-				157C268C28CF8944009115D8 /* PasswordReset.swift in Sources */,
+				157C268C28CF8944009115D8 /* PasswordResetParam.swift in Sources */,
 				1525F60628B73B4700C7CA51 /* ItemCategory.swift in Sources */,
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
 				157B8D5328F9917C00B9A924 /* BaseService .swift in Sources */,

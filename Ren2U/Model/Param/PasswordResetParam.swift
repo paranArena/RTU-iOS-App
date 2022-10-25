@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PasswordReset: Codable {
+struct PasswordResetParam: Codable {
     
     var email = ""
     var password = ""

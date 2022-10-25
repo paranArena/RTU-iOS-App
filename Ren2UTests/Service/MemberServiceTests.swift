@@ -14,6 +14,8 @@ class MemberServiceTests: XCTestCase {
     let email = "ios1@ajou.ac.kr"
     let tmpEmail = "nou0jid@ajou.ac.kr"
     let loginParam = LoginParam(email: "ios1@ajou.ac.kr", password: "qwerqwer")
+
+    let BASE_EMAIL_CODE = "111111"
     
     override func setUp() async throws {
         memberService = MemberService(url: ServerURL.devServer.url)
@@ -191,7 +193,7 @@ class MemberServiceTests: XCTestCase {
     
     func testCheckPhoneStudentIdDuplicate() async {
         let expectation = XCTestExpectation()
-        let response = await memberService.checkPhoneStudentIdDuplicate(phoneNumber: "01064330824", studentId: "201820767")
+        let response = await memberService.checkPhoneStudentIdDuplicate(phoneNumber: "01064330824", studentId: "201820899")
         if response.error != nil {
             XCTFail("testCheckPhoneStudentIdDuplicated Fail")
         }
@@ -213,7 +215,7 @@ class MemberServiceTests: XCTestCase {
     
     func testSignup() async {
 
-        let signUpParam = SignUpParam(email: self.tmpEmail, password: "12345678", passwordCheck: "12345678", name: "iOS테스트", major: "소프트웨어학과", studentId: "201820768", phoneNumber: "01064330824", code: "111111")
+        let signUpParam = SignUpParam(email: self.tmpEmail, password: "12345678", passwordCheck: "12345678", name: "iOS테스트", major: "소프트웨어학과", studentId: "201820899", phoneNumber: "01064330824", code: "111111")
         let expectation = XCTestExpectation()
         
         let _ = await self.testRequestEmailCode()
@@ -233,7 +235,7 @@ class MemberServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
 
-    private func testQuitService () async {
+    private func testQuitService() async {
         
         let expectation = XCTestExpectation()
         let response = await memberService.quitService()
@@ -243,5 +245,36 @@ class MemberServiceTests: XCTestCase {
         
         expectation.fulfill()
         wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testPasswordResetWithVerificationCode() async {
+        let expectation = XCTestExpectation()
+        
+        let newPassword = "asdfzxcv"
+        await self.testRequestEmailCode()
+        
+        var data = PasswordResetParam(email: loginParam.email, password: newPassword, passwordCheck: newPassword, code: BASE_EMAIL_CODE)
+        var response = await memberService.passwordResetWithVerficationCode(data: data)
+        if response.error != nil {
+            XCTFail("passwordResetWithVerificationCode Fail")
+            return
+        } else {
+            self.logout()
+            await self.login(data: LoginParam(email: loginParam.email, password: newPassword))
+        }
+        
+        expectation.fulfill()
+        wait(for: [expectation], timeout: 1.0)
+        
+        await self.testRequestEmailCode()
+        data = PasswordResetParam(email: loginParam.email, password: loginParam.password, passwordCheck: loginParam.password, code: BASE_EMAIL_CODE)
+        
+        response = await memberService.passwordResetWithVerficationCode(data: data)
+        if response.error != nil {
+            XCTFail("passwordResetWithVerificationCode Fail")
+        } else {
+            self.logout()
+            await self.login(data: LoginParam(email: loginParam.email, password: newPassword))
+        }
     }
 }

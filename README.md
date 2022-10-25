@@ -146,7 +146,7 @@ struct MyCouponView_Previews: PreviewProvider {
 
 ## Service 
 
-현재 아키텍처에서 백엔드 API를 사용하는 곳을 `Service`로 분리했다. 뷰모델이 어차피 뷰에 종속되어서 거의 재활용이 안되는 것처럼 API 역시 마찬가지였다. 그런데 테스트 코드를 작성하던 중 이런 재사용성에서 문제가 있는 부분을 발견했다. 
+현재 아키텍처에서 백엔드 API를 사용하는 곳을 `Service`로 분리했다. 뷰모델이 어차피 뷰에 종속되어서 거의 재활용이 안되는 것처럼 API 역시 마찬가지였다. 그래서 크게 고민하지 않았었는데 테스트 코드를 작성하던 중 이런 재사용성에서 문제가 있는 부분을 발견했다. 
 
 ```swift
 func login(param: [String : Any]) async -> Alamofire.DataResponse<LoginResponse, NetworkError> {
@@ -180,7 +180,7 @@ func login(param: [String : Any]) async -> Alamofire.DataResponse<LoginResponse,
 }
 ```
 
-이런식으로 변경이 생겼다면 사용하고있는 뷰모델에서 모두 저렇게 변경을 해줘야한다. 그래서 데이터를 가공해야 하면 사용하는 측에서 가공을 하는게 낫다는 생각이 들었다. 찾아보면 무슨 법칙이나 원칙같은게 있을거 같은데 지식이 얕아 그런것까지느 아직 모르겠다. 
+이런식으로 변경이 생겼다면 사용하고있는 뷰모델에서 모두 저렇게 변경을 해줘야한다. 그래서 데이터를 가공해야 하면 사용하는 측에서 가공을 하는게 낫다는 생각이 들었다. 찾아보면 무슨 법칙이나 원칙같은게 있을거 같은데 지식이 얕아 그런것까진 아직 모르겠다. 
 
 ```swift
 func login(data: LoginParam) async -> Alamofire.DataResponse<LoginResponse, NetworkError> {
