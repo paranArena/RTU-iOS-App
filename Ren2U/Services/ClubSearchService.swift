@@ -9,6 +9,7 @@ import Alamofire
 import Foundation
 
 protocol ClubServiceEnable: BaseServiceEnable {
+    
     func searchClubsAll() async -> DataResponse<GetSearchClubsAllResponse, NetworkError>
     func searchClubsWithName(groupName: String) async -> DataResponse<SearchClubsWithNameResponse, NetworkError>
     func searchClubWithHashTag(hashtag: String) async -> DataResponse<GetSearchClubsAllResponse, NetworkError>

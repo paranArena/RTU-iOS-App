@@ -223,12 +223,9 @@ struct ClubProfile: View {
                 let data = CreateClubFormdata(name: viewModel.clubProfileData.name.removeWhiteSpace(), introduction: viewModel.clubProfileData.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.clubProfileData.hashtags)
                 if clubVM.checkClubRequiredInformation(clubData: data) {
                     Task {
+                        presentationMode.wrappedValue.dismiss()
                         await clubVM.createClub(club: data)
-                        if !clubVM.oneButtonAlert.isPresented {
-                            clubVM.getMyClubs()
-                            presentationMode.wrappedValue.dismiss()
-                            
-                        }
+                        clubVM.getMyClubs()
                     }
                 }
             }

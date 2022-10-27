@@ -5,6 +5,8 @@
 - [재사용](#재사용)
   - [UI](#ui)
   - [Service](#service)
+- [효율적인 개발](#효율적인-개발)
+  - [Code Snippet](#code-snippet)
 
 # Dependency Injection 
 
@@ -199,3 +201,39 @@ func login(data: LoginParam) async -> Alamofire.DataResponse<LoginResponse, Netw
 ``` 
 
 수정 후, Dictionary에 사용될 데이터들을 가공없이 그대로 보내주고 서비스 코드 내에서 데이터를 변환해서 사용하고 있다. 이제 API에 변경이 생겨도 여러 곳을 수정할 필요가 없어졌다.
+
+# 효율적인 개발 
+
+이펙티브 엔지니어를 읽고 더 적게 일하고 같은 결과물을 만드는게 관심을 두고 있다. 핵심은 같은 일을 반복하는 것에 대한 자동화라고 생각한다. 
+
+## Code Snippet 
+
+코드 스니펫을 사용해서 반복적인 코드를 빠르게 작성할 수 있다. 한개 사례를 살펴보자. 
+
+```swift
+
+protocol BaseViewModel: ObservableObject {
+    var callbackAlert: CallbackAlert { get set }
+    var oneButtonAlert: OneButtonAlert { get set }
+    @MainActor func showAlert(with error: NetworkError)
+}
+``` 
+각 ViewModel은 `BaseViewModel`을 준수해야한다. 이 프로토콜에서 `showAlert`는 `alamofire`와 통신을하고 에러가 발생한 경우 해당 에러를 경고창으로 보여주는 메소드다. 
+
+```swift
+ @MainActor
+ func showAlert(with error: NetworkError) {
+     oneButtonAlert.title = "에러"
+     oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
+     oneButtonAlert.isPresented = true
+ }
+``` 
+모든 뷰모델은 동일한 `showAlert` 구현을 갖고 있다. 코드 스니펫을 이용하기 전에는 뷰모델을 하나 만들고 기존에 작성한 뷰모델 파일에 들어가서 복사 붙여넣기로 코드를 가져왔다. 
+
+<img width="396" alt="스크린샷 2022-10-27 15 43 19" src="https://user-images.githubusercontent.com/83946805/198210180-ccaaea1f-c450-48e1-abc7-f54d1f96e246.png">
+
+xcode에서 코드 스니펫을 만들어 두면 하단에 보이는 **Completion**을 이용해 미리 만들어준 코드를 불러올 수 있다. 
+
+<img width="446" alt="스크린샷 2022-10-27 15 43 48" src="https://user-images.githubusercontent.com/83946805/198210420-e2535ddf-befd-4c88-b664-6d18e29d36a1.png">
+
+간단히 show 타이핑 + Enter 키로 코드를 가져오면 소스 파일을 옮겨갈 필요가 없다. 
