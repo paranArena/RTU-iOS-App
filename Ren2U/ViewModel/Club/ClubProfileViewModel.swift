@@ -12,17 +12,17 @@ class ClubProfileViewModel: BaseViewModel {
     @Published var callbackAlert: CallbackAlert = CallbackAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     @Published var clubProfileParam = ClubProfileParam()
-    @Published var alertCase: AlertCase?
+    var alertCase: AlertCase?
     
     private let clubProfileService: ClubProfileServiceEnable
     
     enum AlertCase {
         case lackOfInformation
-        
+
         var title: String {
             switch self {
             case .lackOfInformation:
-                return "정보 필요"
+                return "그룹 생성 불가"
             }
         }
         
@@ -47,11 +47,14 @@ class ClubProfileViewModel: BaseViewModel {
     }
     
     @MainActor
-    private func showAlert() {
-        oneButtonAlert.title = alertCase!.title
-        oneButtonAlert.messageText = alertCase!.message
-        oneButtonAlert.isPresented = true
-        oneButtonAlert.callback = { self.alertCase = nil }
+    private func showAlert(selectedCase: AlertCase) {
+        alertCase = selectedCase
+        if let alertCase = self.alertCase {
+            oneButtonAlert.title = alertCase.title
+            oneButtonAlert.messageText = alertCase.message
+            oneButtonAlert.isPresented = true
+            oneButtonAlert.callback = { self.alertCase = nil }
+        }
     }
     
     @MainActor
@@ -61,11 +64,10 @@ class ClubProfileViewModel: BaseViewModel {
             if let error = response.error {
                 self.showAlert(with: error)
             } else {
-                
+                closure()
             }
         } else {
-            alertCase = .lackOfInformation
-            showAlert()
+            showAlert(selectedCase: .lackOfInformation)
         }
     }
     

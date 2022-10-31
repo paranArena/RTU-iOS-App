@@ -62,6 +62,16 @@ final class ClubProfileViewModelTests: XCTestCase {
         let expected = ClubProfileViewModel.AlertCase.lackOfInformation
         XCTAssertEqual(actual, expected)
     }
+    
+    @MainActor
+    func testCompleteButtonTappedWhenCreatable() async {
+        vm.clubProfileParam.name = "그룹명"
+        vm.clubProfileParam.introduction = "그룹 소개"
+        await vm.completeButtonTapped { }
+        
+        let actual = vm.alertCase
+        XCTAssertNil(actual)
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
