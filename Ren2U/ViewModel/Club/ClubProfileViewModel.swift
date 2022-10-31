@@ -12,34 +12,60 @@ class ClubProfileViewModel: BaseViewModel {
     @Published var callbackAlert: CallbackAlert = CallbackAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     @Published var clubProfileParam = ClubProfileParam()
+    @Published var alertCase: AlertCase?
     
-    let clubProfileService: ClubProfileServiceEnable
+    private let clubProfileService: ClubProfileServiceEnable
+    
+    enum AlertCase {
+        case lackOfInformation
+        
+        var title: String {
+            switch self {
+            case .lackOfInformation:
+                return "정보 필요"
+            }
+        }
+        
+        var message: String {
+            switch self {
+                
+            case .lackOfInformation:
+                return "그룹명과 소개는 필수입니다."
+            }
+        }
+    }
 
     init(clubService: ClubProfileServiceEnable) {
         self.clubProfileService = clubService
     }
 
     @MainActor
-    func showAlert(with error: NetworkError) {
+    internal func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
         oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
         oneButtonAlert.isPresented = true
     }
     
     @MainActor
-    func completeButtonTapped(closure: @escaping () -> ()) {
+    private func showAlert() {
+        oneButtonAlert.title = alertCase!.title
+        oneButtonAlert.messageText = alertCase!.message
+        oneButtonAlert.isPresented = true
+        oneButtonAlert.callback = { self.alertCase = nil }
+    }
+    
+    @MainActor
+    func completeButtonTapped(closure: @escaping () -> ()) async {
         if self.clubProfileParam.isCreatable {
-            callbackAlert.title = "그룹 생성"
-            callbackAlert.messageText = "그룹을 생성하시겠습니까?"
-            callbackAlert.isPresented = true
-            callbackAlert.callback = {
-                await self.createClub()
-                closure()
+            let response = await clubProfileService.createClub(data: self.clubProfileParam)
+            if let error = response.error {
+                self.showAlert(with: error)
+            } else {
+                
             }
         } else {
-            oneButtonAlert.title = "정보 입력"
-            oneButtonAlert.messageText = "그룹의 이름과 소개는 필수입니다."
-            oneButtonAlert.isPresented = true 
+            alertCase = .lackOfInformation
+            showAlert()
         }
     }
     

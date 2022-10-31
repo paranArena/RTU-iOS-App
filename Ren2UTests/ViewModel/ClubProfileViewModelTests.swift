@@ -53,8 +53,14 @@ final class ClubProfileViewModelTests: XCTestCase {
         }
     }
     
-    func testCompleteButtonTapped() {
+    @MainActor
+    func testCompleteButtonTappedWhenClubNameIsEmpty() async {
+        vm.clubProfileParam.introduction = "그룹 소개"
+        await vm.completeButtonTapped { }
         
+        let actual = vm.alertCase
+        let expected = ClubProfileViewModel.AlertCase.lackOfInformation
+        XCTAssertEqual(actual, expected)
     }
 
     func testPerformanceExample() throws {

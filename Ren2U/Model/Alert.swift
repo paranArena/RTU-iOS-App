@@ -18,6 +18,7 @@ struct OneButtonAlert {
     var title = ""
     var isPresented = false
     var messageText = ""
+    var callback: () async -> () = { } 
     
     var message: Text {
         return Text(messageText)
