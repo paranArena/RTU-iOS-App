@@ -30,7 +30,7 @@ final class LoginTests: XCTestCase {
         //  MARK: CORRET ACOOUNT
         vm.account.email = "ios1@ajou.ac.kr"
         vm.account.password = "qwerqwer"
-        await vm.buttonTapped()
+        let _ = await vm.buttonTapped()
         actual = vm.missInput
         expected = LoginViewModel.MissInput.default
         XCTAssertEqual(actual, expected)
@@ -38,7 +38,7 @@ final class LoginTests: XCTestCase {
         //  MARK: WRONG ACCOUNT
         vm.account.email = "ios1@ajou.ac.kr"
         vm.account.password = "wrong password"
-        await vm.buttonTapped()
+        let _ = await vm.buttonTapped()
         actual = vm.missInput
         expected = LoginViewModel.MissInput.wrong
         XCTAssertEqual(actual, expected)

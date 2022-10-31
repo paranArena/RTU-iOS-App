@@ -10,9 +10,7 @@ import Alamofire
 
 protocol ClubProfileServiceEnable: BaseServiceEnable {
     
-    // 나중에 주석 제거
-//    func createClub(data: ClubDetailData) async -> DataResponse<CreateClubResponse, NetworkError>
-    
+    func createClub(data: ClubProfileParam) async -> DataResponse<CreateClubResponse, NetworkError>
     func getClubInfo(clubId: Int) async -> DataResponse<GetClubInfoResponse, NetworkError>
 }
 
@@ -27,7 +25,7 @@ class MockupClubProfileService: ClubProfileServiceEnable {
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
     }
     
-    func createClub(data: ClubDetailData) async -> Alamofire.DataResponse<CreateClubResponse, NetworkError> {
+    func createClub(data: ClubProfileParam) async -> Alamofire.DataResponse<CreateClubResponse, NetworkError> {
         let result = Result {
             return CreateClubResponse(statusCode: 200, responseMessage: "", data: ClubDetailData.dummyClubData())
         } .mapError { _ in
@@ -49,6 +47,47 @@ class ClubProfileService: ClubProfileServiceEnable {
         self.url = url
         self.bearerToken = UserDefaults.standard.string(forKey: JWT_KEY)
     }
+    
+    func createClub(data: ClubProfileParam) async -> Alamofire.DataResponse<CreateClubResponse, NetworkError> {
+        
+        let url = "\(self.url!)/clubs"
+        let hearders: HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")",
+            "Content-type": "multipart/form-data"
+        ]
+        
+        let param: [String: Any] = [
+            "name": data.name,
+            "introduction": data.introduction,
+            "hashtags": data.hashtags
+        ]
+        
+        let response = await AF.upload(multipartFormData: { multipart in
+            if let image = data.thumbnail.jpegData(compressionQuality: 1) {
+                multipart.append(image, withName: "thumbnail", fileName: "club.thumbnail", mimeType: "image/jpeg")
+            }
+
+            for (key, value) in param {
+                
+                if key == "hashtags" {
+                    multipart.append(Data(String("").utf8), withName: key)
+                    for v in value as! [String] {
+                        multipart.append(Data(v.utf8), withName: key)
+                    }
+                } else {
+                    multipart.append(Data(String("\(value)").utf8), withName: key)
+                }
+            }
+
+        }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingDecodable(CreateClubResponse.self).response
+        
+
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+    }
+    
     
     func getClubInfo(clubId: Int) async -> Alamofire.DataResponse<GetClubInfoResponse, NetworkError> {
         

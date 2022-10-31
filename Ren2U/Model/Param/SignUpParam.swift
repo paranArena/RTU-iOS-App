@@ -25,31 +25,9 @@ struct SignUpParam  {
     private let minEmailLength = 3
     private let maxEmailLength = 30
 
-    mutating func clearLogin() {
-        self.email = ""
-        self.password = ""
-    }
-    
     mutating func clearCode() {
         self.code = "" 
     }
-    
-    var fgColorLoginButton: Color {
-        if email.isEmpty || password.isEmpty {
-            return Color.gray_E9ECEF
-        } else {
-            return Color.navy_1E2F97
-        }
-    }
-    
-    var isDisableLoginButton: Bool {
-        if email.isEmpty || password.isEmpty {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     
     var checkEmailButtonCondition: Bool {
         if email.count < minEmailLength || email.count > maxEmailLength {

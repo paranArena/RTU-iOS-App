@@ -87,9 +87,7 @@ struct Login: View {
     @ViewBuilder
     private func LoginButton() -> some View {
         Button {
-            Task {
-                myPageVM.isLogined = await loginVM.buttonTapped()
-            }
+            Task { myPageVM.isLogined = await loginVM.buttonTapped() }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable()

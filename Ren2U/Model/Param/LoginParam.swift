@@ -6,8 +6,30 @@
 //
 
 import Foundation
+import SwiftUI 
 
-struct LoginParam {
+struct LoginParam: Codable {
     var email = ""
-    var password = "" 
+    var password = ""
+    
+    var fgColorLoginButton: Color {
+        if email.isEmpty || password.isEmpty {
+            return Color.gray_E9ECEF
+        } else {
+            return Color.navy_1E2F97
+        }
+    }
+    
+    var isDisableLoginButton: Bool {
+        if email.isEmpty || password.isEmpty {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    mutating func clear() {
+        self.email = ""
+        self.password = "" 
+    }
 }

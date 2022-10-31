@@ -8,14 +8,16 @@
 import SwiftUI
 import Alamofire
 
-class LoginViewModel: ObservableObject {
+class LoginViewModel: BaseViewModel {
     
-    @Published var account = SignUpParam()
+    @Published var callbackAlert: CallbackAlert = CallbackAlert()
+    @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
+    
+    @Published var account = LoginParam()
     @Published var missInput = MissInput.default
     @Published var isActiveSignUpView = false
     
     let memberService: MemberServiceEnable
-    let tmp = 10
     
     init(memberService: MemberServiceEnable) {
         self.memberService = memberService
@@ -26,22 +28,24 @@ class LoginViewModel: ObservableObject {
         case wrong = "이메일 또는 비밀번호가 틀렸습니다."
     }
     
+    @MainActor
+    func showAlert(with error: NetworkError) {
+        oneButtonAlert.title = "에러"
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
+        oneButtonAlert.isPresented = true
+    }
+    
     private func setToken(token: String) {
         UserDefaults.standard.setValue(token, forKey: JWT_KEY)
     }
     
     func clearFields() {
-        account.clearLogin()
+        account.clear()
     }
     
     @MainActor
     func buttonTapped() async -> Bool {
-        let param: [String:Any] = [
-            "email" : account.email,
-            "password" : account.password
-        ]
-        
-        let response = await memberService.login(param: param)
+        let response = await memberService.login(data: self.account)
         
         if response.error != nil {
             self.missInput = .wrong
