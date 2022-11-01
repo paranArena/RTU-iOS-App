@@ -12,31 +12,27 @@ class ClubProfileViewModel: BaseViewModel {
     @Published var callbackAlert: CallbackAlert = CallbackAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     @Published var clubProfileParam = ClubProfileParam()
+    @Published var isShowingTagPlaceholder = true
+    
     var alertCase: AlertCase?
     
     private let clubProfileService: ClubProfileServiceEnable
-    
-    enum AlertCase {
-        case lackOfInformation
-
-        var title: String {
-            switch self {
-            case .lackOfInformation:
-                return "그룹 생성 불가"
-            }
-        }
-        
-        var message: String {
-            switch self {
-                
-            case .lackOfInformation:
-                return "그룹명과 소개는 필수입니다."
-            }
-        }
-    }
 
     init(clubService: ClubProfileServiceEnable) {
         self.clubProfileService = clubService
+    }
+    
+    func focusFieldChanged(focusedField: Field) {
+        if focusedField == .tag {
+            self.isShowingTagPlaceholder = false
+        } else {
+            guard self.clubProfileParam.hashtagText.isEmpty else { return }
+            isShowingTagPlaceholder = true
+        }
+    }
+    
+    func xmarkTapped(index: Int) {
+        clubProfileParam.hashtags.remove(at: index)
     }
 
     @MainActor
@@ -93,6 +89,35 @@ class ClubProfileViewModel: BaseViewModel {
         if let error = response.error {
             await self.showAlert(with: error)
         } 
+    }
+}
+
+extension ClubProfileViewModel {
+    enum AlertCase {
+        case lackOfInformation
+
+        var title: String {
+            switch self {
+            case .lackOfInformation:
+                return "그룹 생성 불가"
+            }
+        }
+        
+        var message: String {
+            switch self {
+                
+            case .lackOfInformation:
+                return "그룹명과 소개는 필수입니다."
+            }
+        }
+    }
+}
+
+extension ClubProfileViewModel {
+    enum Field: CaseIterable {
+        case name
+        case tag
+        case introduction 
     }
 }
 

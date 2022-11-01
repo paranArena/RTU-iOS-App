@@ -53,12 +53,23 @@ final class ClubProfileViewModelTests: XCTestCase {
         }
     }
     
+    func testXmarkTapped() {
+        let input = ["소프트웨어학과", "미디어학과", "아주대", "#"]
+        let expected = ["소프트웨어학과", "아주대", "#"]
+        
+        vm.clubProfileParam.hashtags = input
+        vm.xmarkTapped(index: 1)
+        
+        let actual: [String] = vm.clubProfileParam.hashtags
+        XCTAssertEqual(actual, expected)
+    }
+    
     @MainActor
     func testCompleteButtonTappedWhenClubNameIsEmpty() async {
         vm.clubProfileParam.introduction = "그룹 소개"
         await vm.completeButtonTapped { }
         
-        let actual = vm.alertCase
+        let actual: ClubProfileViewModel.AlertCase? = vm.alertCase
         let expected = ClubProfileViewModel.AlertCase.lackOfInformation
         XCTAssertEqual(actual, expected)
     }
@@ -69,15 +80,21 @@ final class ClubProfileViewModelTests: XCTestCase {
         vm.clubProfileParam.introduction = "그룹 소개"
         await vm.completeButtonTapped { }
         
-        let actual = vm.alertCase
+        let actual: ClubProfileViewModel.AlertCase? = vm.alertCase
         XCTAssertNil(actual)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testFocusFieldChangedWhenNameFieldFocused() {
+        vm.focusFieldChanged(focusedField: .name)
+        let actual: Bool = vm.isShowingTagPlaceholder
+        let expected: Bool = true
+        XCTAssertEqual(actual, expected)
     }
-
+    
+    func testFocusFieldChangedWhenTagFieldFocused() {
+        vm.focusFieldChanged(focusedField: .tag)
+        let actual: Bool = vm.isShowingTagPlaceholder
+        let expected: Bool = false
+        XCTAssertEqual(actual, expected)
+    }
 }
