@@ -18,7 +18,7 @@ class MyCouponDetailViewModel: ObservableObject {
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
-    @Published var callbackButton = CallbackAlert()
+    @Published var callbackButton = TwoButtonsAlert()
     
     let couponService: CouponServiceProtocol
     var myServiccee = MyService.shared
@@ -50,7 +50,7 @@ class MyCouponDetailViewModel: ObservableObject {
             } else {
                 self.couponDetailUserData = response.value?.data ?? CouponDetailUserData.dummyCouponDetailUserDate()
                 let location = couponDetailUserData.location
-                let region = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+                let region = CLLocationCoordinate2D(latitude: location.latitude ?? DEFAULT_REGION.latitude, longitude: location.longitude ?? DEFAULT_REGION.longitude)
                 mapRegion = MKCoordinateRegion(center: region, span: DEFAULT_SPAN)
                 annotation = [Annotation(coordinate: region)]
             }

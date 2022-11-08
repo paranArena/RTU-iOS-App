@@ -68,12 +68,19 @@ struct ProductDetailData: Codable {
     let imagePath: String?
     let items: [ItemData]
     
+    var isThereLocationRestriction: Bool {
+        if location.longitude == nil && location.latitude == nil {
+            return false
+        }
+        return true
+    }
+    
     static func dummyProductData() -> ProductDetailData {
         return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [ItemData.dummyItemData()])
     }
     
     struct Location: Codable {
         var name: String
-        let latitude, longitude: Double
+        let latitude, longitude: Double?
     }
 }

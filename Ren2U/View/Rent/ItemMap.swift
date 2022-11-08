@@ -16,7 +16,7 @@ struct ItemMap: View {
     
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var clubVM: ClubViewModel
-    @StateObject var rentVM = RentalViewModel()
+    @StateObject var rentVM = RentalViewModel(service: RentService(url: ServerURL.runningServer.url))
     @Environment(\.dismiss) var dismiss
     @Environment(\.isPresented) var isPresented
     
@@ -27,7 +27,7 @@ struct ItemMap: View {
     
     init(itemInfo: RentalData) {
         self.itemInfo = itemInfo
-        self.itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+        self.itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude ?? 0, longitude: itemInfo.location.longitude ?? 0)
         self._region = State<MKCoordinateRegion>(initialValue: MKCoordinateRegion(center: itemLocation, span: DEFAULT_SPAN))
         remainTime = itemInfo.rentalInfo.time
     }
@@ -100,10 +100,10 @@ struct ItemMap: View {
     
     @ViewBuilder
     private func ReturnButton() -> some View {
-        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude ?? 0, longitude: itemInfo.location.longitude ?? 0)
         Button {
             if locationManager.checkDistance(productRegion: itemLocation) {
-                rentVM.setAlert(rentalData: itemInfo)
+                rentVM.rentButtonTapped(rentalData: itemInfo)
             }
         } label: {
             NavyCapsule(text: "반납하기")
@@ -113,11 +113,11 @@ struct ItemMap: View {
     
     @ViewBuilder
     private func RentButton() -> some View {
-        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude ?? 0, longitude: itemInfo.location.longitude ?? 0)
         
         Button {
             if locationManager.checkDistance(productRegion: itemLocation) {
-                rentVM.setAlert(rentalData: itemInfo)
+                rentVM.rentButtonTapped(rentalData: itemInfo)
             }
         } label: {
             NavyCapsule(text: "대여확정")

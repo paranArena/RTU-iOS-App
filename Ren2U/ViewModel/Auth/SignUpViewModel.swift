@@ -19,7 +19,7 @@ class SignUpViewModel: BaseViewModel {
     @Published var isDuplicatedStudentId = false
     @Published var isDuplicatedPhoneNumber = false
     
-    @Published var callbackAlert: CallbackAlert = CallbackAlert()
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
     

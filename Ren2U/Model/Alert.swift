@@ -11,7 +11,7 @@ import SwiftUI
 struct Alert {
     var message = Text("")
     var isPresented = false
-    var callback: () async -> () = { print("callback") }
+    var callback: () async -> () = { }
 }
 
 struct OneButtonAlert {
@@ -27,7 +27,7 @@ struct OneButtonAlert {
     static let noActionButton = Button("확인", role: .cancel) {}
 }
 
-struct CallbackAlert {
+struct TwoButtonsAlert {
     var title = ""
     var isPresented = false
     var messageText = ""
@@ -37,5 +37,4 @@ struct CallbackAlert {
         return Text(messageText)
     }
 }
-
 

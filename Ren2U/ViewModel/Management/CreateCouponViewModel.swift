@@ -20,7 +20,7 @@ class CreateCouponViewModel: ObservableObject {
     @Published var isShowingLocationPicker = false
     
     @Published var oneButtonAlert = OneButtonAlert()
-    @Published var callbackAlert = CallbackAlert()
+    @Published var callbackAlert = TwoButtonsAlert()
     
     let couponService: CouponServiceProtocol
     

@@ -22,7 +22,7 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     
     @Published var selectedUnsedCouponId = -1 
     
-    @Published var callbackAlert: CallbackAlert = CallbackAlert()
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
     let couponService: CouponServiceProtocol
@@ -55,10 +55,10 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     
     @MainActor
     func showDeleteCouponAdminAlert(couponMemberId: Int) {
-        callbackAlert.messageText = "쿠폰을 삭제하시겠습니까?"
-        callbackAlert.isPresented = true
-        callbackAlert.title = ""
-        callbackAlert.callback = { await self.deleteCouponMemberAdmin(couponMemberId: couponMemberId) }
+        twoButtonsAlert.messageText = "쿠폰을 삭제하시겠습니까?"
+        twoButtonsAlert.isPresented = true
+        twoButtonsAlert.title = ""
+        twoButtonsAlert.callback = { await self.deleteCouponMemberAdmin(couponMemberId: couponMemberId) }
     }
     
     //  MARK: GET
@@ -126,10 +126,10 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
             print(response.debugDescription)
             self.showAlert(with: error)
         } else {
-            self.callbackAlert.title = "성공"
-            self.callbackAlert.isPresented = true
-            self.callbackAlert.messageText = "쿠폰을 발급했습니다."
-            self.callbackAlert.callback = dismiss
+            self.twoButtonsAlert.title = "성공"
+            self.twoButtonsAlert.isPresented = true
+            self.twoButtonsAlert.messageText = "쿠폰을 발급했습니다."
+            self.twoButtonsAlert.callback = dismiss
             await self.getCouponMembersAdmin()
             await self.getCouponAdmin()
         }

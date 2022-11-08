@@ -9,7 +9,7 @@ import Foundation
 
 class ClubProfileViewModel: BaseViewModel {
 
-    @Published var callbackAlert: CallbackAlert = CallbackAlert()
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     @Published var clubProfileParam = ClubProfileParam()
     @Published var isShowingTagPlaceholder = true

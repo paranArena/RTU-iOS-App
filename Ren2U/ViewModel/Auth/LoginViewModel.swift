@@ -10,7 +10,7 @@ import Alamofire
 
 class LoginViewModel: BaseViewModel {
     
-    @Published var callbackAlert: CallbackAlert = CallbackAlert()
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
     @Published var account = LoginParam()

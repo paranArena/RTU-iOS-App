@@ -16,7 +16,7 @@ class NotificationViewModel: ObservableObject {
     @Published var isLoading = true
     
     @Published var oneButtonAlert = OneButtonAlert()
-    @Published var callbackAlert = CallbackAlert()
+    @Published var callbackAlert = TwoButtonsAlert()
     
     var notificationService = NotificationService.shared
     

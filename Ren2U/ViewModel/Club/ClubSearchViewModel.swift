@@ -11,7 +11,7 @@ import Alamofire
 class ClubSearchViewModel: ObservableObject, BaseViewModel {
     
     @Published var clubData = [ClubAndRoleData]()
-    @Published var callbackAlert: CallbackAlert = CallbackAlert()
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
     let clubService: ClubServiceEnable

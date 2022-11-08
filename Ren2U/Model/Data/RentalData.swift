@@ -38,6 +38,8 @@ struct RentalData: Codable {
         
         return datas
     }
+    
+    
 }
 
 struct ClubRentalData: Codable {
@@ -68,6 +70,10 @@ struct ClubRentalData: Codable {
         var remainTime: Int {
             return Int(60*10 - Date.now.timeIntervalSince(rentDate))
         }
+    }
+    
+    static func dummyClubRentalDatas() -> [ClubRentalData] {
+        return [ClubRentalData]() 
     }
 }
 

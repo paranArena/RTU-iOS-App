@@ -27,47 +27,65 @@ struct ReturnInfo: Codable {
 }
 
 //  ItemMap, ProductDetailView에서 사용
-class RentalViewModel: ObservableObject {
+class RentalViewModel: BaseViewModel {
     
     var clubId = -1
     var productId = -1
+    let rentService: RentServiceEnable
+    
     @Published var selectedItem: ItemData?
     @Published var isLoading = true
     @Published var productDetail = ProductDetailData.dummyProductData()
+    
     @Published var productLocation = CLLocationCoordinate2D(latitude: 127, longitude: 31)
     @Published var isRentalTerminal = false
     @Published var isPresentedMap = false
     
-    //  MARK: For Alert
     @Published var oneButtonAlert = OneButtonAlert()
+    @Published var twoButtonsAlert = TwoButtonsAlert()
     @Published var alert = Alert()
+    
   
-    init() {
-        Task {
-            await setLocation()
-        }
+    init(service: RentServiceEnable) {
+        rentService = service
     }
     
-    init(clubId: Int, productId: Int) {
+    init(clubId: Int, productId: Int, service: RentServiceEnable) {
         self.clubId = clubId
         self.productId = productId
-        
+        self.rentService = service
         
         Task {
             await getProduct()
-            await setLocation()
         }
     }
     
-    //  MARK: LOCAL
+    @MainActor
+    func showAlert(with error: NetworkError) {
+        oneButtonAlert.title = "에러"
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
+        oneButtonAlert.isPresented = true
+    }
+    
+    @MainActor
+    func showAlert(_ alertCase: AlertCase) {
+        oneButtonAlert.title = alertCase.title
+        oneButtonAlert.messageText = alertCase.message
+    }
+    
+    func itemCellTapped(item: ItemData) {
+        self.selectedItem = item 
+    }
     
     @MainActor
     func setLocation() {
-        productLocation  = CLLocationCoordinate2D(latitude: productDetail.location.latitude, longitude: productDetail.location.longitude)
+        if let latitude = productDetail.location.latitude, let longitude = productDetail.location.longitude {
+            productLocation  = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
     }
     
     
-    func setAlert(rentalData: RentalData) {
+    func rentButtonTapped(rentalData: RentalData) {
         if rentalData.rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
             alert.message = Text("아이템을 대여하시겠습니까?")
             alert.isPresented = true
@@ -84,15 +102,11 @@ class RentalViewModel: ObservableObject {
     }
     
     @MainActor
-    func setAlert() {
+    func rentButtonTapped() {
         if let rentalInfo = selectedItem?.rentalInfo  {
             //  대여자가 내가 아닐 경우 아무것도 하지 않음
             if !rentalInfo.meRental {
-                alert.callback = {
-                    #if DEBUG
-                    print("대여불가능")
-                    #endif
-                }
+                
             } else if rentalInfo.rentalStatus == RentalStatus.wait.rawValue {
                 alert.message = Text(selectedItem?.alertMessage ?? "에러")
                 alert.isPresented = true
@@ -104,18 +118,30 @@ class RentalViewModel: ObservableObject {
                 alert.isPresented = true
                 alert.callback = {
                     await self.returnRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
+                    self.selectedItem = nil
                 }
             }
         } else {
-            alert.message = Text(selectedItem?.alertMessage ?? "에러")
-            alert.isPresented = true
-            alert.callback = {
-                await self.requestRent()
+            
+            // 위치에 제약이 있는 경우 예약 먼저
+            if self.productDetail.isThereLocationRestriction {
+                alert.message = Text(selectedItem?.alertMessage ?? "에러")
+                alert.isPresented = true
+                alert.callback = {
+                    await self.requestRent()
+                }
+            } else {
+                alert.message = Text(selectedItem?.alertMessage ?? "에러")
+                alert.isPresented = true
+                alert.callback = {
+                    let _ = await self.rentService.requesRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
+                    await self.applyRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
+                    self.selectedItem = nil
+                }
             }
         }
     }
     
-    //  MARK: GET
     
     @MainActor
     private func getProduct() async {
@@ -233,5 +259,27 @@ class RentalViewModel: ObservableObject {
         }
         
         await getProduct()
+    }
+}
+
+extension RentalViewModel {
+    enum AlertCase {
+        case apply
+        
+        var title: String {
+            switch self {
+                
+            case .apply:
+                return ""
+            }
+        }
+        
+        var message: String {
+            switch self {
+                
+            case .apply:
+                return "아이템을 예약하시겠습니까?"
+            }
+        }
     }
 }

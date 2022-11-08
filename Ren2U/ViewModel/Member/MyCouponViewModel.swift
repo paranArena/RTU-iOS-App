@@ -19,7 +19,7 @@ class MyCouponViewModel: ObservableObject {
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
-    @Published var callbackButton = CallbackAlert()
+    @Published var callbackButton = TwoButtonsAlert()
     
     @Published var isActiveUseCouponView = false
     

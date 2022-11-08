@@ -68,11 +68,11 @@ struct CouponDetailAdminView: View {
         }
         .basicNavigationTitle(title: couponDetailAdminVM.couponDetailData?.name ?? "")
         .avoidSafeArea()
-        .alert("", isPresented: $couponDetailAdminVM.callbackAlert.isPresented) {
+        .alert("", isPresented: $couponDetailAdminVM.twoButtonsAlert.isPresented) {
             Button("취소", role: .cancel) {}
-            Button("확인") { Task { await couponDetailAdminVM.callbackAlert.callback() }}
+            Button("확인") { Task { await couponDetailAdminVM.twoButtonsAlert.callback() }}
         } message: {
-            couponDetailAdminVM.callbackAlert.message
+            couponDetailAdminVM.twoButtonsAlert.message
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

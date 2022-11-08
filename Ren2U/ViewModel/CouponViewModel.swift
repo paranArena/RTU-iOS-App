@@ -19,7 +19,7 @@ class CouponViewModel: ObservableObject {
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
-    @Published var callbackButton = CallbackAlert()
+    @Published var callbackButton = TwoButtonsAlert()
     
     let couponService: CouponServiceProtocol
     var imageService = ImageService.shared

@@ -168,7 +168,10 @@
 		15A84D5F28CE12A500B3EB84 /* SimpleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A84D5E28CE12A500B3EB84 /* SimpleLine.swift */; };
 		15A84D6128CE1C6C00B3EB84 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A84D6028CE1C6C00B3EB84 /* NotificationViewModel.swift */; };
 		15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */; };
-		15B0892628FBBD3F00EA5DFA /* MockupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B0892528FBBD3F00EA5DFA /* MockupData.swift */; };
+		15AFFAF6291A03EB00EC5513 /* RentService .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFFAF5291A03EA00EC5513 /* RentService .swift */; };
+		15AFFAF8291A140300EC5513 /* RentServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFFAF7291A140300EC5513 /* RentServiceTests.swift */; };
+		15AFFAFA291A14D700EC5513 /* ServiceTestEnable .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFFAF9291A14D700EC5513 /* ServiceTestEnable .swift */; };
+		15B0892628FBBD3F00EA5DFA /* MockupDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B0892528FBBD3F00EA5DFA /* MockupDatas.swift */; };
 		15B63DA428AF38EA000AB82D /* ViewExtensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B63DA328AF38EA000AB82D /* ViewExtensions .swift */; };
 		15BBB9FC28CEF58D00DCEF92 /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBB9FB28CEF58C00DCEF92 /* PrivacyPolicy.swift */; };
 		15BBB9FF28CF028300DCEF92 /* RepresentativeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */; };
@@ -383,7 +386,10 @@
 		15A84D5E28CE12A500B3EB84 /* SimpleLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLine.swift; sourceTree = "<group>"; };
 		15A84D6028CE1C6C00B3EB84 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		15AC7E3928BF2ECE00879106 /* ManageSignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSignUpCell.swift; sourceTree = "<group>"; };
-		15B0892528FBBD3F00EA5DFA /* MockupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupData.swift; sourceTree = "<group>"; };
+		15AFFAF5291A03EA00EC5513 /* RentService .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RentService .swift"; sourceTree = "<group>"; };
+		15AFFAF7291A140300EC5513 /* RentServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentServiceTests.swift; sourceTree = "<group>"; };
+		15AFFAF9291A14D700EC5513 /* ServiceTestEnable .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ServiceTestEnable .swift"; sourceTree = "<group>"; };
+		15B0892528FBBD3F00EA5DFA /* MockupDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupDatas.swift; sourceTree = "<group>"; };
 		15B63DA328AF38EA000AB82D /* ViewExtensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewExtensions .swift"; sourceTree = "<group>"; };
 		15BBB9FB28CEF58C00DCEF92 /* PrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
 		15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentativeImage.swift; sourceTree = "<group>"; };
@@ -638,9 +644,11 @@
 		152E6C49290FA14900CF5846 /* Ren2UServiceTests */ = {
 			isa = PBXGroup;
 			children = (
+				15AFFAF9291A14D700EC5513 /* ServiceTestEnable .swift */,
 				15FEDABC28FE4C3A00849311 /* ClubServiceTests.swift */,
 				157B8D4E28F98A7400B9A924 /* CouponServiceTests.swift */,
 				157B8D5428F9934600B9A924 /* MemberServiceTests.swift */,
+				15AFFAF7291A140300EC5513 /* RentServiceTests.swift */,
 			);
 			path = Ren2UServiceTests;
 			sourceTree = "<group>";
@@ -732,6 +740,7 @@
 				15FEDABA28FE4A9E00849311 /* ClubSearchService.swift */,
 				159333002908FB3D007E2BFD /* ClubProfileService.swift */,
 				153687A328DAB0CF00E0D554 /* CouponService.swift */,
+				15AFFAF5291A03EA00EC5513 /* RentService .swift */,
 				1530D55728DCDEDF004BFB39 /* MyService.swift */,
 				152D462F28C606E5008F26E0 /* LocationManager.swift */,
 				1509797828CAE5180074307F /* Errors.swift */,
@@ -1004,7 +1013,7 @@
 			children = (
 				15D4C580287FF15A008BB89B /* NavigationBarColor.swift */,
 				159F1B20288B88DB00012113 /* Variables.swift */,
-				15B0892528FBBD3F00EA5DFA /* MockupData.swift */,
+				15B0892528FBBD3F00EA5DFA /* MockupDatas.swift */,
 				1523D5DF28BE138A009EB733 /* AssetImages.swift */,
 				1559B7E128F7B48E004838BD /* ServerURL .swift */,
 				155004B728E037CE006B89B4 /* Protocol */,
@@ -1209,6 +1218,7 @@
 				154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */,
 				15206E4628DB4D3F0091DA74 /* CouponPreviewCell.swift in Sources */,
 				15CFAD2A28B7456E0004CDF7 /* ItemInformation2.swift in Sources */,
+				15AFFAFA291A14D700EC5513 /* ServiceTestEnable .swift in Sources */,
 				1550ECAB28B35C6B00BECBE7 /* CustomToggleStyle.swift in Sources */,
 				15FFDA6E28DCE3810058D286 /* MyCouponPreviewCell.swift in Sources */,
 				1523D5E228BE291C009EB733 /* MemberManagementView.swift in Sources */,
@@ -1223,7 +1233,7 @@
 				156673DC28C1B6660011535D /* CellWithTwoSlideButton.swift in Sources */,
 				15FEDABB28FE4A9E00849311 /* ClubSearchService.swift in Sources */,
 				154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */,
-				15B0892628FBBD3F00EA5DFA /* MockupData.swift in Sources */,
+				15B0892628FBBD3F00EA5DFA /* MockupDatas.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
 				15228ABB28C8970A00A0B3C5 /* RentalCell.swift in Sources */,
 				153687B528DAD75A00E0D554 /* CouponLocationView .swift in Sources */,
@@ -1318,6 +1328,7 @@
 				1525F60628B73B4700C7CA51 /* ItemCategory.swift in Sources */,
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
 				157B8D5328F9917C00B9A924 /* BaseService .swift in Sources */,
+				15AFFAF6291A03EB00EC5513 /* RentService .swift in Sources */,
 				1525F5FC28B731A600C7CA51 /* ImagesPicker.swift in Sources */,
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
@@ -1380,6 +1391,7 @@
 				157B8D4F28F98A7500B9A924 /* CouponServiceTests.swift in Sources */,
 				153459BC2901128200CEA4B2 /* SignUpTests.swift in Sources */,
 				15FEDABD28FE4C3A00849311 /* ClubServiceTests.swift in Sources */,
+				15AFFAF8291A140300EC5513 /* RentServiceTests.swift in Sources */,
 				153459B82900E98300CEA4B2 /* LoginTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
