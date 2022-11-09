@@ -16,7 +16,7 @@ struct ItemMap: View {
     
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var clubVM: ClubViewModel
-    @StateObject var rentVM = RentalViewModel(rentService: RentService(url: ServerURL.runningServer.url),
+    @StateObject var rentVM = RentViewModel(rentService: RentService(url: ServerURL.runningServer.url),
                                               clubProductService: ClubProductService(url: ServerURL.runningServer.url))
     @Environment(\.dismiss) var dismiss
     @Environment(\.isPresented) var isPresented

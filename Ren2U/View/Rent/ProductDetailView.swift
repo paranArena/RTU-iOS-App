@@ -19,7 +19,7 @@ struct ProductDetailView: View {
     @Environment(\.isPresented) var isPresented
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var clubVM: ClubViewModel
-    @StateObject private var rentVM: RentalViewModel
+    @StateObject private var rentVM: RentViewModel
     
     @State private var rentalButtonHeight: CGFloat = .zero
     @State private var offset: CGFloat = .zero
@@ -27,7 +27,7 @@ struct ProductDetailView: View {
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
         self.productId = productId
-        _rentVM = StateObject(wrappedValue: RentalViewModel(clubId: clubId, productId: productId,
+        _rentVM = StateObject(wrappedValue: RentViewModel(clubId: clubId, productId: productId,
                                                             rentService: RentService(url: ServerURL.runningServer.url),
                                                             clubProductService: ClubProductService(url: ServerURL.runningServer.url)))
     }

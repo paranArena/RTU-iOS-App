@@ -27,7 +27,7 @@ struct ReturnInfo: Codable {
 }
 
 //  ItemMap, ProductDetailView에서 사용
-class RentalViewModel: BaseViewModel {
+class RentViewModel: BaseViewModel {
     
     var clubId = -1
     var productId = -1
@@ -148,7 +148,7 @@ class RentalViewModel: BaseViewModel {
     }
 }
 
-extension RentalViewModel {
+extension RentViewModel {
     
     enum AlertCase {
         case requestSuccess

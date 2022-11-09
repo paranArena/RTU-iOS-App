@@ -114,7 +114,7 @@
 		1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */; };
 		1563FE9328ADEF9000F46CC7 /* SignUpNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9228ADEF9000F46CC7 /* SignUpNoticeCell.swift */; };
 		1563FE9528ADF62E00F46CC7 /* ReturnNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */; };
-		1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */; };
+		1563FE9728ADF6EE00F46CC7 /* RentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9628ADF6EE00F46CC7 /* RentViewModel.swift */; };
 		1563FE9928ADFBA700F46CC7 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9828ADFBA700F46CC7 /* BookCell.swift */; };
 		1563FE9B28AE059D00F46CC7 /* ReturnManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */; };
 		156673DC28C1B6660011535D /* CellWithTwoSlideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156673DB28C1B6660011535D /* CellWithTwoSlideButton.swift */; };
@@ -335,7 +335,7 @@
 		1563FE8F28ADEE0E00F46CC7 /* ManageRentalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRentalCell.swift; sourceTree = "<group>"; };
 		1563FE9228ADEF9000F46CC7 /* SignUpNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNoticeCell.swift; sourceTree = "<group>"; };
 		1563FE9428ADF62E00F46CC7 /* ReturnNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnNoticeCell.swift; sourceTree = "<group>"; };
-		1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalViewModel.swift; sourceTree = "<group>"; };
+		1563FE9628ADF6EE00F46CC7 /* RentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentViewModel.swift; sourceTree = "<group>"; };
 		1563FE9828ADFBA700F46CC7 /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		1563FE9A28AE059D00F46CC7 /* ReturnManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnManagement.swift; sourceTree = "<group>"; };
 		156673DB28C1B6660011535D /* CellWithTwoSlideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWithTwoSlideButton.swift; sourceTree = "<group>"; };
@@ -897,7 +897,7 @@
 		15C03143289CD5A900D0354E /* Rental */ = {
 			isa = PBXGroup;
 			children = (
-				1563FE9628ADF6EE00F46CC7 /* RentalViewModel.swift */,
+				1563FE9628ADF6EE00F46CC7 /* RentViewModel.swift */,
 			);
 			path = Rental;
 			sourceTree = "<group>";
@@ -1213,7 +1213,7 @@
 				153C1A7D288D0A1F00F89B2E /* ClubProfileExtension.swift in Sources */,
 				15667BCB28CC8A2800AE9A2D /* NoticeCell.swift in Sources */,
 				157190EF28B7024D00880F98 /* ProductManageView.swift in Sources */,
-				1563FE9728ADF6EE00F46CC7 /* RentalViewModel.swift in Sources */,
+				1563FE9728ADF6EE00F46CC7 /* RentViewModel.swift in Sources */,
 				15667BCD28CC98D500AE9A2D /* Alert.swift in Sources */,
 				15206E4328DB3CF50091DA74 /* CouponData.swift in Sources */,
 				157190ED28B7023600880F98 /* RentalManagementSelected.swift in Sources */,
