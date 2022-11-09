@@ -42,7 +42,7 @@ class RentViewModel: BaseViewModel {
     @Published var isRentalTerminal = false
     @Published var isPresentedMap = false
     
-    var alertCase: AlertCase = .requestSuccess
+    var alertCase: AlertCase = .returnSuccess
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var twoButtonsAlert = TwoButtonsAlert()
   
@@ -146,12 +146,16 @@ class RentViewModel: BaseViewModel {
             self.productDetail = value.data
         }
     }
+    
+    @MainActor
+    private func showProductLocation() {
+        self.isRentalTerminal = true
+    }
 }
 
 extension RentViewModel {
     
     enum AlertCase {
-        case requestSuccess
         case requestAttempt
         case applyAttempt
         case applyAttemptWhenNoRestriction
@@ -164,8 +168,6 @@ extension RentViewModel {
     
     var title: String {
         switch alertCase {
-        case .requestSuccess:
-            return "예약 성공"
         case .requestAttempt:
             return "예약"
         case .applyAttempt:
@@ -189,8 +191,6 @@ extension RentViewModel {
         switch alertCase {
         case .requestAttempt:
             return "물품을 예약하시곘습니까?"
-        case .requestSuccess:
-            return "물품을 예약했습니다."
         case .applyAttempt:
             return "물품을 대여하시겠습니까?"
         case .applyAttemptWhenNoRestriction:
@@ -216,15 +216,12 @@ extension RentViewModel {
                 let response = await self.rentService.requesRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)
                 if let error = response.error {
                     await self.showAlert(with: error)
-                } else  {
-                    await self.showAlert(alertCase: .requestSuccess)
                 }
                 
                 await self.refreshProduct()
                 await self.clearSelectedItem()
+                await self.showProductLocation()
             }
-        case .requestSuccess:
-            return { }
         case .applyAttempt:
             return {
                 let response = await self.rentService.applyRent(clubId: self.clubId, itemId: self.selectedItem?.id ?? -1)

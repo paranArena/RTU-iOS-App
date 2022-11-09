@@ -66,10 +66,10 @@ struct ProductDetailView: View {
                 .padding(.horizontal, 10)
                 
                 ItemList()
-
-                NavigationLink("", isActive: $rentVM.isRentalTerminal) {
+                
+                NavigationLink(isActive: $rentVM.isRentalTerminal) {
                     RentalComplete(itemInfo: rentVM.productDetail, itemNumber: rentVM.selectedItem?.numbering ?? 0)
-                }
+                } label: { }
             }
         }
         .padding(.bottom, rentalButtonHeight)
@@ -99,28 +99,27 @@ struct ProductDetailView: View {
     
     @ViewBuilder
     private func ShowMapButton() -> some View {
-        if rentVM.productDetail.isThereLocationRestriction {
-            Button {
-                rentVM.setLocation()
-                rentVM.isPresentedMap = true
-            } label: {
-                Text("위치보기")
-                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
-                    .foregroundColor(.gray_495057)
-                
-            }
-            .sheet(isPresented: $rentVM.isPresentedMap) {
-                VStack {
-                    TransparentDivider()
-                    Map(coordinateRegion: .constant(MKCoordinateRegion(center: rentVM.productLocation, span: DEFAULT_SPAN)), showsUserLocation: true, annotationItems: [Annotation(coordinate: rentVM.productLocation)]) { annotation in
-                        MapAnnotation(coordinate: annotation.coordinate) {
-                            Image(systemName: "mappin.and.ellipse")
-                                .foregroundColor(.navy_1E2F97)
-                        }
+        Button {
+            rentVM.setLocation()
+            rentVM.isPresentedMap = true
+        } label: {
+            Text("위치보기")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 18))
+                .foregroundColor(.gray_495057)
+            
+        }
+        .sheet(isPresented: $rentVM.isPresentedMap) {
+            VStack {
+                TransparentDivider()
+                Map(coordinateRegion: .constant(MKCoordinateRegion(center: rentVM.productLocation, span: DEFAULT_SPAN)), showsUserLocation: true, annotationItems: [Annotation(coordinate: rentVM.productLocation)]) { annotation in
+                    MapAnnotation(coordinate: annotation.coordinate) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(.navy_1E2F97)
                     }
                 }
             }
         }
+        .isHidden(hidden: !rentVM.productDetail.isThereLocationRestriction)
     }
     
     @ViewBuilder
