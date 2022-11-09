@@ -27,7 +27,9 @@ struct ProductDetailView: View {
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
         self.productId = productId
-        _rentVM = StateObject(wrappedValue: RentalViewModel(clubId: clubId, productId: productId, service: RentService(url: ServerURL.runningServer.url)))
+        _rentVM = StateObject(wrappedValue: RentalViewModel(clubId: clubId, productId: productId,
+                                                            rentService: RentService(url: ServerURL.runningServer.url),
+                                                            clubProductService: ClubProductService(url: ServerURL.runningServer.url)))
     }
     
     
@@ -81,20 +83,18 @@ struct ProductDetailView: View {
         .onAppear {
             rentVM.selectedItem = nil
         }
-        .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
-            OneButtonAlert.noActionButton
-        } message: { rentVM.oneButtonAlert.message }
-        .alert("", isPresented: $rentVM.alert.isPresented) {
+        .alert(rentVM.twoButtonsAlert.title, isPresented: $rentVM.twoButtonsAlert.isPresented) {
             Button("취소", role: .cancel) {}
-            Button("확인")  {
+            Button("확인") {
                 Task {
-                    await rentVM.alert.callback()
+                    await rentVM.twoButtonsAlert.callback()
                     await clubVM.getMyRentals()
                 }
             }
-        } message: {
-            rentVM.alert.message
-        }
+        } message: { rentVM.twoButtonsAlert.message }
+        .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
+            Button("확인") { Task { await self.rentVM.oneButtonAlert.callback() }}
+        } message: { rentVM.oneButtonAlert.message }
     }
     
     @ViewBuilder

@@ -131,6 +131,7 @@
 		157190F128B7043100880F98 /* PlusCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F028B7043100880F98 /* PlusCircleImage.swift */; };
 		157190F328B7053200880F98 /* ItemPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F228B7053200880F98 /* ItemPhoto.swift */; };
 		157190F628B7072200880F98 /* RightArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F528B7072200880F98 /* RightArrow.swift */; };
+		15759AC7291B533200EA59C5 /* ClubProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15759AC6291B533200EA59C5 /* ClubProductService.swift */; };
 		15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15799D3F28C789A70032D884 /* ManageProductCell.swift */; };
 		157B8D4F28F98A7500B9A924 /* CouponServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157B8D4E28F98A7400B9A924 /* CouponServiceTests.swift */; };
 		157B8D5128F9909A00B9A924 /* MemberService .swift in Sources */ = {isa = PBXBuildFile; fileRef = 157B8D5028F9909A00B9A924 /* MemberService .swift */; };
@@ -351,6 +352,7 @@
 		157190F028B7043100880F98 /* PlusCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCircleImage.swift; sourceTree = "<group>"; };
 		157190F228B7053200880F98 /* ItemPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPhoto.swift; sourceTree = "<group>"; };
 		157190F528B7072200880F98 /* RightArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightArrow.swift; sourceTree = "<group>"; };
+		15759AC6291B533200EA59C5 /* ClubProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubProductService.swift; sourceTree = "<group>"; };
 		15799D3F28C789A70032D884 /* ManageProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProductCell.swift; sourceTree = "<group>"; };
 		157B8D4E28F98A7400B9A924 /* CouponServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponServiceTests.swift; sourceTree = "<group>"; };
 		157B8D5028F9909A00B9A924 /* MemberService .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MemberService .swift"; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 				157B8D5028F9909A00B9A924 /* MemberService .swift */,
 				15FEDABA28FE4A9E00849311 /* ClubSearchService.swift */,
 				159333002908FB3D007E2BFD /* ClubProfileService.swift */,
+				15759AC6291B533200EA59C5 /* ClubProductService.swift */,
 				153687A328DAB0CF00E0D554 /* CouponService.swift */,
 				15AFFAF5291A03EA00EC5513 /* RentService .swift */,
 				1530D55728DCDEDF004BFB39 /* MyService.swift */,
@@ -1291,6 +1294,7 @@
 				155004BB28E045BA006B89B4 /* CouponDetailAdminViewModel.swift in Sources */,
 				155A36B728D18DD900848592 /* SignUpParam.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
+				15759AC7291B533200EA59C5 /* ClubProductService.swift in Sources */,
 				15FA687B28BC62B800B3DF0B /* Profile.swift in Sources */,
 				15FA687928BC5A2400B3DF0B /* Param.swift in Sources */,
 				1530D55628DCC0E5004BFB39 /* CouponMemberCell.swift in Sources */,

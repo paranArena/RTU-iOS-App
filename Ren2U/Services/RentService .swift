@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 protocol RentServiceEnable: BaseServiceEnable {
-    func requesRent(clubId: Int, itemId: Int) async -> DataResponse<RequestRentResponse, NetworkError>
+    func requesRent(clubId: Int, itemId: Int) async -> DataResponse<String, NetworkError>
     func applyRent(clubId: Int, itemId: Int) async -> DataResponse<DefaultPostResponse, NetworkError>
     func returnRent(clubId: Int, itemId: Int) async -> DataResponse<DefaultPostResponse, NetworkError>
     func cancelRent(clubId: Int, itemId: Int) async -> DataResponse<DefaultPostResponse, NetworkError>
@@ -18,9 +18,9 @@ protocol RentServiceEnable: BaseServiceEnable {
 
 
 class MockupRentService: RentServiceEnable {
-    func requesRent(clubId: Int, itemId: Int) async -> Alamofire.DataResponse<RequestRentResponse, NetworkError> {
+    func requesRent(clubId: Int, itemId: Int) async -> Alamofire.DataResponse<String, NetworkError> {
         let result = Result {
-            return RequestRentResponse(statusCode: 200, responseMessage: "", data: RentalInfo.dummyRentalInfo())
+            return ""
         } .mapError { _ in
             NetworkError(initialError: nil, serverError: nil)
         }
@@ -73,14 +73,14 @@ class MockupRentService: RentServiceEnable {
 }
 
 class RentService: RentServiceEnable {
-    func requesRent(clubId: Int, itemId: Int) async -> Alamofire.DataResponse<RequestRentResponse, NetworkError> {
+    func requesRent(clubId: Int, itemId: Int) async -> Alamofire.DataResponse<String, NetworkError> {
         
         let url = "\(self.url!)/clubs/\(clubId)/rentals/\(itemId)/request"
         let headers: HTTPHeaders = [
             .authorization(bearerToken: self.bearerToken!)
         ]
         
-        let response = await AF.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).serializingDecodable(RequestRentResponse.self).response
+        let response = await AF.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).serializingString().response
         
         return response.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }

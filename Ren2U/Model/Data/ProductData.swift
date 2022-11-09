@@ -76,7 +76,8 @@ struct ProductDetailData: Codable {
     }
     
     static func dummyProductData() -> ProductDetailData {
-        return ProductDetailData(id: 1, name: "", category: "", location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: 1, reserveRentalPeriod: 1, price: 1, caution: "", imagePath: "", items: [ItemData.dummyItemData()])
+        
+        return ProductDetailData(id: 1, name: PRODUCT_NAMES.randomElement()!, category: Category.cook.rawValue, location: Location(name: "", latitude: 0.1, longitude: 0.1), fifoRentalPeriod: (1...10).randomElement()!, reserveRentalPeriod: 0, price: 5000, caution: LYRICS.randomElement()!, imagePath: "", items: [ItemData.dummyItemData()])
     }
     
     struct Location: Codable {
