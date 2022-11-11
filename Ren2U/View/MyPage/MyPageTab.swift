@@ -46,7 +46,7 @@ struct MyPageTab: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 10 )
             .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-            .background(Color.gray_DEE2E6)
+            .background(Color.gray_F1F2F3)
             .cornerRadius(15)
             
             Text("개발자 연락처\n nou0ggid@gmail.com")

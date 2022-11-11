@@ -29,6 +29,8 @@ class ItemViewModel: ObservableObject {
     @Published var locationLongtitude: Double = 0.0
     @Published var locationLatitude: Double = 0.0
     @Published var isSelectedLocation = false
+    @Published var isUseLocation = true
+    
     @Published var caution = ""
     @Published var isActive = false
     @Published var isDonation = false
@@ -70,20 +72,20 @@ class ItemViewModel: ObservableObject {
             "Content-type": "multipart/form-data"
         ]
         
-        let param: [String: Any] = [
+        var param: [String: Any] = [
             "name": self.itemName,
-            
-            //  MARK: 수정 필요
             "category": self.category,
             "price": self.price,
-            
             "fifoRentalPeriod": self.fifoRentalPeriod,
             "reserveRentalPeriod": self.reserveRentalPeriod,
-            "locationName": self.locationDetail,
-            "longitude": self.locationLongtitude,
-            "latitude": self.locationLatitude,
-            "caution": self.caution
+            "locationName": isUseLocation ? self.locationDetail : "" ,
+            "caution": self.caution,
         ]
+        
+        if isUseLocation {
+            param["longitude"] = self.locationLongtitude
+            param["latitude"] = self.locationLatitude
+        }
         
         let task = AF.upload(multipartFormData: { multipart in
             if let image = self.image!.jpegData(compressionQuality: 1) {

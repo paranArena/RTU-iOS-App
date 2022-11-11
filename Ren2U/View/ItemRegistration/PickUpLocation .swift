@@ -34,24 +34,9 @@ struct PickUpLocation: View {
             NavigationLink {
                 PickUpLocationMap(itemVM: itemVM)
             } label: {
-                Group {
-                    Text("지도에서 장소 표시")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                        .foregroundColor(.primary)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.gray_F1F2F3)
-                        .cornerRadius(5)
-                        .isHidden(hidden: itemVM.isSelectedLocation)
-                    
-                    Text("표시 완료")
-                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.navy_1E2F97)
-                        .cornerRadius(5)
-                        .isHidden(hidden: !itemVM.isSelectedLocation)
+                HStack(spacing: 30) {
+                    MapViewer()
+                    LocationToggle()
                 }
             }
             .padding(.bottom, 40)
@@ -70,10 +55,10 @@ struct PickUpLocation: View {
             NavigationLink {
                 ItemCaution(itemVM: itemVM, managementVM: managementVM, isActive: $isActive)
             } label: {
-                RightArrow(isDisabled: !itemVM.isItemCautionAbleToGo)
+                RightArrow(isDisabled: !itemVM.isItemCautionAbleToGo && itemVM.isUseLocation)
             }
             .frame(maxWidth: .infinity, alignment: .center)
-            .disabled(!itemVM.isItemCautionAbleToGo)
+            .disabled(!itemVM.isItemCautionAbleToGo && itemVM.isUseLocation)
 
                 
 
@@ -81,10 +66,57 @@ struct PickUpLocation: View {
         .basicNavigationTitle(title: "물품 등록")
         .padding(.horizontal, 20)
     }
+    
+    @ViewBuilder
+    private func MapViewer() -> some View {
+        Group {
+            Text("지도에서 장소 표시")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+                .foregroundColor(.primary)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(Color.gray_F1F2F3)
+                .cornerRadius(5)
+                .isHidden(hidden: itemVM.isSelectedLocation)
+            
+            Text("표시 완료")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+                .foregroundColor(.white)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(Color.navy_1E2F97)
+                .cornerRadius(5)
+                .isHidden(hidden: !itemVM.isSelectedLocation)
+        }
+    }
+    
+    @ViewBuilder
+    private func LocationToggle() -> some View {
+        HStack(spacing: 10) {
+            Button {
+                itemVM.isUseLocation.toggle()
+            } label: {
+                Circle()
+                    .fill(Color.gray_F1F2F3)
+                    .frame(width: 20, height: 20)
+                    .overlay {
+                        Image(systemName: "checkmark")
+                            .resizable()
+                            .foregroundColor(Color.black)
+                            .isHidden(hidden: itemVM.isUseLocation)
+                            .padding(3)
+                    }
+            }
+            
+            Text("위치기반 비활성화")
+                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
+            
+        }
+    }
 }
-
+//
 //struct PickUpLocation_Previews: PreviewProvider {
 //    static var previews: some View {
-//        PickUpLocation(itemVM: ItemViewModel(), isActive: .constant(true))
+//        PickUpLocation(itemVM: ItemViewModel(clubId: <#Int#>, clubName: <#String#>), managementVM: ManagementViewModel(), isActive: .constant(true))
 //    }
 //}

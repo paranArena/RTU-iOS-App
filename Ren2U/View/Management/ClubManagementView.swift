@@ -183,7 +183,7 @@ struct ClubManagementView: View {
                     .padding(.horizontal, 10)
             }
         }
-        .background(Color.gray_DEE2E6)
+        .background(Color.gray_F1F2F3)
         .cornerRadius(15)
     }
     
