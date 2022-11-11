@@ -72,6 +72,7 @@
 		153687B128DAD43E00E0D554 /* GrayRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153687B028DAD43E00E0D554 /* GrayRoundedRectangle.swift */; };
 		153687B528DAD75A00E0D554 /* CouponLocationView .swift in Sources */ = {isa = PBXBuildFile; fileRef = 153687B428DAD75A00E0D554 /* CouponLocationView .swift */; };
 		15382ECA28C1A338004D7977 /* ManageNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15382EC928C1A338004D7977 /* ManageNoticeCell.swift */; };
+		1538D7D1291E1595009B0964 /* ProductParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1538D7D0291E1595009B0964 /* ProductParam.swift */; };
 		15394C0C28CDC7C900E4944A /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15394C0B28CDC7C900E4944A /* ZoomableScrollView.swift */; };
 		153C1A6E288CDED600F89B2E /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */; };
 		153C1A70288CE3A900F89B2E /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */; };
@@ -293,6 +294,7 @@
 		153687B028DAD43E00E0D554 /* GrayRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayRoundedRectangle.swift; sourceTree = "<group>"; };
 		153687B428DAD75A00E0D554 /* CouponLocationView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CouponLocationView .swift"; sourceTree = "<group>"; };
 		15382EC928C1A338004D7977 /* ManageNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageNoticeCell.swift; sourceTree = "<group>"; };
+		1538D7D0291E1595009B0964 /* ProductParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductParam.swift; sourceTree = "<group>"; };
 		15394C0B28CDC7C900E4944A /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		153C1A6D288CDED600F89B2E /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		153C1A6F288CE3A900F89B2E /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -841,6 +843,7 @@
 				153687A528DAB1EB00E0D554 /* CouponParam.swift */,
 				153459B92900EA3F00CEA4B2 /* LoginParam.swift */,
 				152E6C44290F643200CF5846 /* ClubProfileParam.swift */,
+				1538D7D0291E1595009B0964 /* ProductParam.swift */,
 			);
 			path = Param;
 			sourceTree = "<group>";
@@ -1237,6 +1240,7 @@
 				15FEDABB28FE4A9E00849311 /* ClubSearchService.swift in Sources */,
 				154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */,
 				15B0892628FBBD3F00EA5DFA /* MockupDatas.swift in Sources */,
+				1538D7D1291E1595009B0964 /* ProductParam.swift in Sources */,
 				152C3E87287E7750000BFC97 /* Certification.swift in Sources */,
 				15228ABB28C8970A00A0B3C5 /* RentalCell.swift in Sources */,
 				153687B528DAD75A00E0D554 /* CouponLocationView .swift in Sources */,

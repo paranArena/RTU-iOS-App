@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// legacy 
 struct Alert {
     var message = Text("")
     var isPresented = false
