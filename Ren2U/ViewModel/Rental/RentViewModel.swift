@@ -42,7 +42,7 @@ class RentViewModel: BaseViewModel {
     @Published var isRentalTerminal = false
     @Published var isPresentedMap = false
     
-    var alertCase: AlertCase = .returnSuccess
+    var alertCase: AlertCase?
     @Published var oneButtonAlert = OneButtonAlert()
     @Published var twoButtonsAlert = TwoButtonsAlert()
   
@@ -68,6 +68,7 @@ class RentViewModel: BaseViewModel {
         twoButtonsAlert.isPresented = true
         twoButtonsAlert.callback = {
             await self.callback()
+            self.alertCase = nil
         }
     }
     
@@ -79,6 +80,7 @@ class RentViewModel: BaseViewModel {
         oneButtonAlert.isPresented = true
         oneButtonAlert.callback = {
             await self.callback()
+            self.alertCase = nil
         }
     }
     
@@ -184,6 +186,8 @@ extension RentViewModel {
             return "반납"
         case .returnSuccess:
             return "반납 성공"
+        case .none:
+            return ""
         }
     }
     
@@ -206,6 +210,8 @@ extension RentViewModel {
         case .returnSuccess:
             return "물품을 반납했습니다."
             
+        case .none:
+            return ""
         }
     }
     
@@ -281,6 +287,8 @@ extension RentViewModel {
                 await self.clearSelectedItem()
             }
         case .returnSuccess:
+            return { }
+        case .none:
             return { }
         }
     }

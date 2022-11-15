@@ -8,7 +8,8 @@
 import XCTest
 @testable import Ren2U
 
-final class RentServiceTests: XCTestCase, ServiceTestEnable {
+final class RentServiceTests: XCTestCase{
+    
     
     private func login() async {
         let correctParam = [
