@@ -12,7 +12,7 @@ struct PickUpLocationMap: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var locationManager: LocationManager
-    @ObservedObject var itemVM: ItemViewModel
+    @ObservedObject var itemVM: CreateProductViewModel
     
     var body: some View {
         VStack {

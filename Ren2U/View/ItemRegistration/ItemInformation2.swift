@@ -37,7 +37,7 @@ extension ItemInformation2 {
 }
 struct ItemInformation2: View {
     
-    @ObservedObject var itemVM: ItemViewModel
+    @ObservedObject var itemVM: CreateProductViewModel
     @ObservedObject var managementVM: ManagementViewModel
     @Binding var isActive: Bool
     

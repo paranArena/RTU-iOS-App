@@ -69,7 +69,7 @@ struct ProductDetailData: Codable {
     let items: [ItemData]
     
     var isThereLocationRestriction: Bool {
-        if location.longitude == nil && location.latitude == nil {
+        if location.longitude == 200 && location.latitude == 200 {
             return false
         }
         return true

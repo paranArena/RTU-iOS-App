@@ -8,7 +8,7 @@
 import SwiftUI
 import Alamofire
 
-class ItemViewModel: ObservableObject {
+class CreateProductViewModel: ObservableObject {
     
     let clubId: Int
     let clubName: String
@@ -72,20 +72,17 @@ class ItemViewModel: ObservableObject {
             "Content-type": "multipart/form-data"
         ]
         
-        var param: [String: Any] = [
+        let param: [String: Any] = [
             "name": self.itemName,
             "category": self.category,
             "price": self.price,
             "fifoRentalPeriod": self.fifoRentalPeriod,
             "reserveRentalPeriod": self.reserveRentalPeriod,
             "locationName": isUseLocation ? self.locationDetail : "" ,
+            "longitude" : isUseLocation ? self.locationLongtitude : 200,
+            "latitude" : isUseLocation ? self.locationLatitude : 200,
             "caution": self.caution,
         ]
-        
-        if isUseLocation {
-            param["longitude"] = self.locationLongtitude
-            param["latitude"] = self.locationLatitude
-        }
         
         let task = AF.upload(multipartFormData: { multipart in
             if let image = self.image!.jpegData(compressionQuality: 1) {

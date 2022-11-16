@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ItemInformation: View {
     
-    @ObservedObject var itemVM: ItemViewModel
+    @ObservedObject var itemVM: CreateProductViewModel
     @ObservedObject var managementVM: ManagementViewModel
     @Binding var isActive: Bool
     let additionalPadding: CGFloat = 30
