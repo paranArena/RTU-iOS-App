@@ -35,6 +35,20 @@ struct CouponPreviewData: Codable, Identifiable {
     var expDate: String {
         return self.expDateDto.toDateType2().toYMDformat()
     }
+    
+    static func dummyCouponPReviewData() -> CouponPreviewData {
+        return CouponPreviewData(id: Int.random(in: 0..<Int.max), clubId: Int.random(in: 0..<Int.max),
+                                 clubName: CLUB_NAMES.randomElement()!, name: PEOPLE_NAMES.randomElement()!,
+                                 imagePath: "", actDateDto: DATES_YMD.randomElement()!, expDateDto: DATES_YMD.randomElement()!)
+    }
+    
+    static func dummyCouponPreviewDatas() -> [CouponPreviewData] {
+        var datas = [CouponPreviewData]()
+        for _ in 0..<10 {
+            datas.append(self.dummyCouponPReviewData())
+        }
+        return datas
+    }
 }
 
 struct CouponDetailAdminData: Codable {

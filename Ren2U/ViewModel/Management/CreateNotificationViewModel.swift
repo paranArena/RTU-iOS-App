@@ -16,7 +16,7 @@ class CreateNotificationViewModel: ObservableObject, BaseViewModel {
     var notificationDetailData: NotificationDetailData? 
     
     @Published var notificationParam = NotificationParam()
-    @Published var callbackAlert: CallbackAlert = CallbackAlert()
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
     var notificationService = NotificationService.shared
@@ -47,16 +47,16 @@ class CreateNotificationViewModel: ObservableObject, BaseViewModel {
     
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
-        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
         oneButtonAlert.isPresented = true
     }
     
     @MainActor
     func showUpdateNoficiationAlert() {
-        callbackAlert.title = ""
-        callbackAlert.messageText = "공지사항을 수정하시겠습니까?"
-        callbackAlert.callback = { await self.updateNofication() }
-        callbackAlert.isPresented = true
+        twoButtonsAlert.title = ""
+        twoButtonsAlert.messageText = "공지사항을 수정하시겠습니까?"
+        twoButtonsAlert.callback = { await self.updateNofication() }
+        twoButtonsAlert.isPresented = true
     }
     
     private func updateNofication() async {

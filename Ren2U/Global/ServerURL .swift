@@ -1,0 +1,28 @@
+//
+//  ServerURL .swift
+//  Ren2U
+//
+//  Created by 노우영 on 2022/10/13.
+//
+
+import SwiftUI
+
+//  MARK: Deprecated
+let BASE_URL = "https://ren2u.shop"
+
+enum ServerURL {
+    case runningServer
+    case prodServer
+    case devServer
+    
+    var url: String {
+        switch self {
+        case .runningServer:
+            return "https://ren2u.shop"
+        case .prodServer:
+            return "https://ren2u.shop"
+        case .devServer:
+            return "http://15.165.38.225:8080"
+        }
+    }
+}

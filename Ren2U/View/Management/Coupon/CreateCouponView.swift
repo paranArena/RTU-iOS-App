@@ -21,14 +21,15 @@ struct CreateCouponView: View {
     
     // post에 사용
     init(clubId: Int, couponVM: ObservedObject<CouponViewModel>, method: Method, couponDetailAdminVM: CouponDetailAdminViewModel) {
-        self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, method: method))
+        self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, method: method,
+                                                                               couponService: CouponService(url: ServerURL.runningServer.url)))
         self._couponVM = couponVM
         self._couponDetailAdminVM = ObservedObject(wrappedValue: couponDetailAdminVM)
     }
     
     // put에 사용
     init(clubId: Int, couponId: Int, couponDetailData: CouponDetailAdminData, couponVM: ObservedObject<CouponViewModel>, method: Method, couponDetailAdminVM: CouponDetailAdminViewModel) {
-        self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, couponId: couponId, couponDetailAdminData: couponDetailData, method: method))
+        self._createCouponVM = StateObject(wrappedValue: CreateCouponViewModel(clubId: clubId, couponId: couponId, couponDetailAdminData: couponDetailData, method: method, couponService: CouponService(url: ServerURL.runningServer.url)))
         self._couponVM = couponVM
         self._couponDetailAdminVM = ObservedObject(wrappedValue: couponDetailAdminVM)
     }

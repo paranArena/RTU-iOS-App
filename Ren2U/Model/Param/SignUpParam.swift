@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AccountParam  {
+struct SignUpParam  {
     var email: String = ""
     var password: String = ""
     var passwordCheck: String = ""
@@ -15,59 +15,22 @@ struct AccountParam  {
     var major: String = ""
     var studentId: String = ""
     var phoneNumber: String = ""
-    var code: String = "" 
+    var code: String = ""
     
     var isShowingPassword = false
     var isShowingPasswordCheck = false
     
     var emailDuplication: EmailDuplication = .none
     
-    mutating func clearLogin() {
-        self.email = ""
-        self.password = ""
-    }
-    
+    private let minEmailLength = 3
+    private let maxEmailLength = 30
+
     mutating func clearCode() {
         self.code = "" 
     }
     
-    
-    enum EmailDuplication {
-        case none
-        case duplicated
-        case notDuplicated
-        
-        var text: String {
-            switch self {
-            case .none:
-                return ""
-            case .duplicated:
-                return "이미 가입된 이메일입니다."
-            case .notDuplicated:
-                return "사용할 수 있는 이메일입니다."
-            }
-        }
-    }
-    
-    var fgColorLoginButton: Color {
-        if email.isEmpty || password.isEmpty {
-            return Color.gray_E9ECEF
-        } else {
-            return Color.navy_1E2F97
-        }
-    }
-    
-    var isDisableLoginButton: Bool {
-        if email.isEmpty || password.isEmpty {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    
     var checkEmailButtonCondition: Bool {
-        if email.count < 6 || email.count > 30 {
+        if email.count < minEmailLength || email.count > maxEmailLength {
             return false
         } else {
             return true
@@ -238,7 +201,7 @@ struct AccountParam  {
     
     var wrongEmail: String {
         if emailDuplication == .none {
-            if email.count > 0 && email.count < 6 {
+            if email.count > 0 && email.count < minEmailLength {
                 return "이메일이 너무 짧습니다."
             } else if email.count > 30 {
                 return "이메일이 너무 깁니다."
@@ -301,6 +264,33 @@ struct AccountParam  {
             return true
         } else {
             return false
+        }
+    }
+}
+
+extension SignUpParam {
+    enum EmailDuplication {
+        case none
+        case duplicated
+        case notDuplicated
+        
+        var text: String {
+            switch self {
+            case .none:
+                return ""
+            case .duplicated:
+                return "이미 가입된 이메일입니다."
+            case .notDuplicated:
+                return "사용할 수 있는 이메일입니다."
+            }
+        }
+        
+        mutating func setEmailDuplicate(result: Bool) {
+            if result {
+                self = .duplicated
+            } else {
+                self = .notDuplicated
+            }
         }
     }
 }

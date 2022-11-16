@@ -9,10 +9,19 @@ import SwiftUI
 
 struct LocationData: Codable {
     let name: String
-    let latitude: Double
-    let longitude: Double
+    let latitude: Double?
+    let longitude: Double?
+    
+    var isThereLocationRestriction: Bool {
+        if self.longitude == nil && self.latitude == nil {
+            return false
+        }
+        return true
+    }
     
     static func dummyLocationDate() -> LocationData {
-        return LocationData(name: "아주대", latitude: DEFAULT_REGION.latitude, longitude: DEFAULT_REGION.longitude)
+        return LocationData(name: LOCATION_NAMES.randomElement()!, latitude: DEFAULT_REGION.latitude, longitude: DEFAULT_REGION.longitude)
     }
+    
+    
 }

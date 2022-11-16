@@ -10,14 +10,13 @@ import SwiftUI
 struct ContentView: View {
     
     
-    @EnvironmentObject var authViewModel: MyPageViewModel
+    @EnvironmentObject var myPageVM: MyPageViewModel
     @EnvironmentObject var locationManager: LocationManager
-    @EnvironmentObject var loginManager: MyPageViewModel
     
     var body: some View {
         Group {
-            Ren2UTab().isHidden(hidden: !loginManager.isLogined)
-            Login().isHidden(hidden: loginManager.isLogined)
+            Ren2UTab().isHidden(hidden: !myPageVM.isLogined)
+            Login().isHidden(hidden: myPageVM.isLogined)
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
         .alert("더 가까이 이동해주세요", isPresented: $locationManager.isPresentedDistanceAlert) {

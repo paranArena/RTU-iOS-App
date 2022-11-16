@@ -68,13 +68,13 @@ struct Certification: View {
     
     @ViewBuilder
     private func CertificationTextField() -> some View {
-        CapsulePlaceholder(text: $authModel.authField.code, placeholder: Text(""), color: .gray_ADB5BD)
+        CapsulePlaceholder(text: $authModel.param.code, placeholder: Text(""), color: .gray_ADB5BD)
             .keyboardType(.numberPad)
             .font(.custom(CustomFont.RobotoMedium.rawValue, size: 36))
             .multilineTextAlignment(.center)
             .overlay(TimerOverlay())
-            .onTapGesture { authModel.authField.clearCode() }
-            .onChange(of: authModel.authField.code ) { _ in
+            .onTapGesture { authModel.param.clearCode() }
+            .onChange(of: authModel.param.code ) { _ in
                 authModel.endEditingIfLengthLimitReached()
             }
     }
@@ -99,11 +99,11 @@ struct Certification: View {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable().frame(width: 86, height: 86)
                 .padding(.top, 49)
-                .foregroundColor(authModel.isReachedMaxLength(num: authModel.authField.code)
+                .foregroundColor(authModel.isReachedMaxLength(num: authModel.param.code)
                                  ? (authModel.timeRemaining <= 0 ? .gray_E9ECEF : .navy_1E2F97) : .gray_E9ECEF)
                 .padding(.top, 50)
         }
-        .disabled(!authModel.isReachedMaxLength(num: authModel.authField.code) || authModel.timeRemaining <= 0)
+        .disabled(!authModel.isReachedMaxLength(num: authModel.param.code) || authModel.timeRemaining <= 0)
     }
     
     @ViewBuilder

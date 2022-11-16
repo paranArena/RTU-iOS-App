@@ -31,11 +31,11 @@ struct ManageProductCell: View {
                 DeleteButton()
             }
         }
-        .background(
-            NavigationLink(isActive: $isActive) {
-                UpdateProductView(updateProductVM: UpdateProductViewModel(clubId: productData.clubId, productId: productData.id))
-            } label: {}
-        )
+//        .background(
+//            NavigationLink(isActive: $isActive) {
+//                UpdateProductView(updateProductVM: UpdateProductViewModel(clubId: productData.clubId, productId: productData.id))
+//            } label: {}
+//        )
     }
     
     @ViewBuilder

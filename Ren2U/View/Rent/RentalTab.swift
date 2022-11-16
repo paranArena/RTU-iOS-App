@@ -182,7 +182,7 @@ struct RentalTab: View {
                 VStack {
                     ForEach(clubVM.rentals.indices, id:\.self) { i in
                         Button {
-                            if locationManager.requestAuthorization() {
+                            if locationManager.requestAuthorization() && clubVM.rentals[i].location.isThereLocationRestriction{
                                 selectedRentData = clubVM.rentals[i]
                                 isActiveMap = true
                             }

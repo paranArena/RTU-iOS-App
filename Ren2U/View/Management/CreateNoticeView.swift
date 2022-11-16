@@ -89,7 +89,7 @@ struct CreateNoticeView: View {
             UpdatedImagePicker(imagePath: $notificationVM.notificationParam.imagePath)
         }
         .avoidSafeArea()
-        .alert(notificationVM.callbackAlert.title, isPresented: $notificationVM.callbackAlert.isPresented) {
+        .alert(notificationVM.twoButtonsAlert.title, isPresented: $notificationVM.twoButtonsAlert.isPresented) {
             Button(role: .cancel) {
                 
             } label: {
@@ -97,13 +97,13 @@ struct CreateNoticeView: View {
             }
             
             Button("확인") { Task{
-                await notificationVM.callbackAlert.callback()
+                await notificationVM.twoButtonsAlert.callback()
                 managementVM.searchNotificationsAll()
                 groupVM.getMyNotifications()
                 dismiss()
             }}
         } message: {
-            notificationVM.callbackAlert.message
+            notificationVM.twoButtonsAlert.message
         }
     }
     

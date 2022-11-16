@@ -8,16 +8,20 @@
 import SwiftUI
 import Alamofire
 
-class SignUpViewModel: ObservableObject {
+class SignUpViewModel: BaseViewModel {
     
-    @Published var authField = AccountParam()
+    @Published var param = SignUpParam()
     
     //  MARK: NavitaionLink
     @Published var isActiveCertificationView = false
     
     //  MARK: ALERT
-    @Published var isDulpicatedStudentId = false
+    @Published var isDuplicatedStudentId = false
     @Published var isDuplicatedPhoneNumber = false
+    
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
+    @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
+    
     
     // MARK: For CertificationView
     let certificationNumLengthLimit = 6
@@ -29,6 +33,23 @@ class SignUpViewModel: ObservableObject {
     @Published var timer = Timer()
     @Published var isActiveSignUpSuccess: Bool = false
     
+    let memberService: MemberServiceEnable
+    
+    init(memberSevice: MemberServiceEnable) {
+        self.memberService = memberSevice
+    }
+    
+    @MainActor
+    func showAlert(with error: NetworkError) {
+        oneButtonAlert.title = "에러"
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
+        oneButtonAlert.isPresented = true
+    }
+    
+    @MainActor
+    func showAlert() {
+        
+    }
     //  MARK: LOCAL
     
     func startTimer() {
@@ -45,7 +66,7 @@ class SignUpViewModel: ObservableObject {
     }
     
     func endEditingIfLengthLimitReached() {
-        if self.authField.code.count == self.certificationNumLengthLimit { UIApplication.shared.endEditing() }
+        if self.param.code.count == self.certificationNumLengthLimit { UIApplication.shared.endEditing() }
     }
     
     func isReachedMaxLength(num: String) -> Bool {
@@ -73,7 +94,7 @@ class SignUpViewModel: ObservableObject {
     func resend() {
         requestEmailCode()
         startTimer()
-        authField.clearCode()
+        param.clearCode()
     }
     
     func changeFocus(curIndex: Int) -> SignUp.Field? {
@@ -97,11 +118,9 @@ class SignUpViewModel: ObservableObject {
         }
     }
     
-    //  MARK: get
-    
     @MainActor
     func checkPhoneStudentIdDuplicate() async {
-        let url = "\(BASE_URL)/members/duplicate/010\(authField.phoneNumber)/\(authField.studentId)/exists"
+        let url = "\(BASE_URL)/members/duplicate/010\(param.phoneNumber)/\(param.studentId)/exists"
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(CheckPhoneStudentIdDuplicateResponse.self)
         
         let resposne = await request.response
@@ -111,10 +130,10 @@ class SignUpViewModel: ObservableObject {
             case 200:
                 print("[checkPhoneStudentIdDuplicate success]")
                 if let value = resposne.value {
-                    isDulpicatedStudentId = value.data.studentId
+                    isDuplicatedStudentId = value.data.studentId
                     isDuplicatedPhoneNumber = value.data.phoneNumber
                     
-                    if !isDulpicatedStudentId && !isDulpicatedStudentId {
+                    if !isDuplicatedStudentId && !isDuplicatedStudentId {
                         isActiveCertificationView = true
                         requestEmailCode()
                     }
@@ -127,44 +146,41 @@ class SignUpViewModel: ObservableObject {
         }
     }
     
-    @MainActor
-    func checkEmailDuplicate() async -> Bool{
-        let url = "\(BASE_URL)/members/email/\(authField.email)@ajou.ac.kr/exists"
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default).serializingDecodable(Bool.self)
-        
-        let response = await request.response
-//          email이 존재하면 true, 아니면 false 반환
-        
-        if response.response?.statusCode == 404 {
-            print(response.debugDescription)
-        }
-        
-        switch response.result {
-        case .success(let value):
-            print("[checkEmailDuplicate success]")
-            print(value)
-            
-            if value {
-                authField.emailDuplication = .duplicated
-            } else {
-                authField.emailDuplication = .notDuplicated
-            }
-            return value
-        case .failure(let err):
-            print("[checkEmailDuplicate err]")
-            print(err)
-            authField.emailDuplication = .duplicated
-        }
-
-        return true
+    func emailTextChanged() {
+        self.param.emailDuplication = .none
     }
     
-    //  MARK: post
+    func goCertificationButtonTapped() async {
+        let response = await memberService.checkPhoneStudentIdDuplicate(phoneNumber: self.param.phoneNumber, studentId: self.param.studentId)
+        
+        if let error = response.error {
+            await self.showAlert(with: error)
+        } else if let value = response.value {
+            self.isDuplicatedStudentId = value.data.studentId
+            self.isDuplicatedPhoneNumber = value.data.phoneNumber
+            if !isDuplicatedStudentId && !isDuplicatedStudentId {
+                isActiveCertificationView = true
+                requestEmailCode()
+            }
+        }
+    }
+    
+    func checkDulicateButtonTapped() async {
+        let emailForCheck = "\(self.param.email)\(AJOU_EMAIL_SUFFIX)"
+        let response = await memberService.checkEmailDuplicate(email: emailForCheck)
+        
+        if let error = response.error {
+            await self.showAlert(with: error)
+            param.emailDuplication = .none
+        } else if let value = response.value {
+            param.emailDuplication.setEmailDuplicate(result: value)
+        }
+    }
     
     func requestEmailCode() {
         let url = "\(BASE_URL)/members/email/requestCode"
         let param: [String: Any] = [
-            "email" : "\(authField.email)@ajou.ac.kr"
+            "email" : "\(param.email)@ajou.ac.kr"
         ]
         
         AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).responseString { res in
@@ -185,18 +201,18 @@ class SignUpViewModel: ObservableObject {
         
         let url = "\(BASE_URL)/signup"
         let param: [String: Any] = [
-            "email" : "\(authField.email)@ajou.ac.kr",
-            "password" : authField.password,
-            "name" : authField.name,
-            "phoneNumber" : "010\(authField.phoneNumber)",
-            "studentId" : authField.studentId,
-            "major" : authField.major,
-            "verificationCode" : authField.code
+            "email" : "\(param.email)@ajou.ac.kr",
+            "password" : param.password,
+            "name" : param.name,
+            "phoneNumber" : "010\(param.phoneNumber)",
+            "studentId" : param.studentId,
+            "major" : param.major,
+            "verificationCode" : param.code
         ]
         
         let task = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).serializingString()
         let response = await task.response
-        authField.clearCode()
+        self.param.clearCode()
         
         if let statusCode = response.response?.statusCode {
             switch statusCode {

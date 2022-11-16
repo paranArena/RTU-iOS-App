@@ -8,24 +8,29 @@
 import SwiftUI
 import Alamofire
 
-class ClubSearchViewModel: ObservableObject {
+class ClubSearchViewModel: ObservableObject, BaseViewModel {
     
     @Published var clubData = [ClubAndRoleData]()
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
+    @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
+    
+    let clubService: ClubServiceEnable
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    var isSearchDelayComplted: Bool = false
+    
+    init(clubService: ClubServiceEnable) {
+        self.clubService = clubService
+    }
+    
     
     @MainActor
-    func searchWithText(text: String) {
-        Task {
-            let result1 = await searchClubsWithName(groupName: text)
-            let result2 = await searchClubsWithHashTag(hashTag: text)
-            
-            clubData = result1
-            for data in result2 {
-                if !clubData.contains(data) {
-                    clubData.append(data)
-                }
-            }
-        }
+    func showAlert(with error: NetworkError) {
+        oneButtonAlert.title = "에러"
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
+        oneButtonAlert.isPresented = true
     }
+
     
     @MainActor
     func getMyClubRole(clubId: Int) async -> String {
@@ -49,64 +54,46 @@ class ClubSearchViewModel: ObservableObject {
     }
     
     @MainActor
-    func searchClubsAll() async {
+    func searchWithDelay(text: String) async {
+        guard !isSearchDelayComplted && !text.isEmpty else { return }
+        self.isSearchDelayComplted = true
         
-        let url = "\(BASE_URL)/clubs/search/all"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
-
-        let task = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetSearchClubsAllResponse.self)
-        let result = await task.result
+        self.clearClubData()
+        let responseWithName = await clubService.searchClubsWithName(groupName: text)
+        let responseWithHashtag = await clubService.searchClubWithHashTag(hashtag: text)
         
-        switch result {
-        case .success(let value):
-            print("serachClubsAll success")
-            self.clubData = value.data
-        case .failure(let err):
-            print("serachClubsAll failure")
-            print(err)
+        if let error = responseWithName.error {
+            self.showAlert(with: error)
+        } else {
+            self.clubData.append(contentsOf: responseWithName.value!.data)
+        }
+        
+        if let error = responseWithHashtag.error {
+            self.showAlert(with: error)
+        } else {
+            for club in responseWithHashtag.value!.data {
+                if !clubData.contains(club) {
+                    clubData.append(club)
+                }
+            }
         }
     }
     
     @MainActor
-    func searchClubsWithName(groupName: String) async -> [ClubAndRoleData] {
-        let url = "\(BASE_URL)/clubs/search?name=\(groupName)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
+    func searchBarTapped(text: String) async {
+        guard text.isEmpty else { return }
         
-        if let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let encodedURL = URL(string: encoded) {
-            let task = AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(SearchClubsWithNameResponse.self)
-            let result = await task.result
-            
-            switch result {
-            case .success(let value):
-                return value.data
-            case .failure(let err):
-                print("searchClubsWithName err [\(groupName)] : \(err)")
-            }
+        let response = await clubService.searchClubsAll()
+        if let error = response.error {
+            self.showAlert(with: error)
+        } else {
+            self.clubData = response.value!.data
         }
         
-        return [ClubAndRoleData]()
     }
     
-    @MainActor
-    func searchClubsWithHashTag(hashTag: String) async -> [ClubAndRoleData] {
-        let url = "\(BASE_URL)/clubs/search?hashtag=\(hashTag)"
-        let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
-        
-        if let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let encodedURL = URL(string: encoded) {
-            
-            let task = AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetSearchClubsAllResponse.self)
-            let result = await task.result
-            
-            switch result {
-            case .success(let value):
-                print("SearchClubsWithHashTag Success")
-                return value.data
-            case .failure(let err):
-                print("SearchClubWithHashTag Error : \(err)")
-            }
-        }
-        
-        return [ClubAndRoleData]()
+    func clearClubData() {
+        self.clubData = [ClubAndRoleData]()
     }
     
     func requestClubJoin(clubId: Int) async {
@@ -114,17 +101,7 @@ class ClubSearchViewModel: ObservableObject {
         let url = "\(BASE_URL)/clubs/\(clubId)/requests/join"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "" )]
         
-        let task = AF.request(url, method: .post, encoding: JSONEncoding.default, headers:  hearders).serializingDecodable(requestClubJoinResponse.self)
-        let result = await task.result
-        
-        switch result {
-        case .success(let value):
-            print("[requestClubJoin success]")
-            print(value.responseMessage)
-        case .failure(let err):
-            print("[requestClubJoin err]")
-            print(err)
-        }
+        let _ = AF.request(url, method: .post, encoding: JSONEncoding.default, headers:  hearders).serializingDecodable(requestClubJoinResponse.self)
     }
 
 }

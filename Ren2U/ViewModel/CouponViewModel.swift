@@ -19,21 +19,21 @@ class CouponViewModel: ObservableObject {
     
     @Published var alert = Alert()
     @Published var oneButtonAlert = OneButtonAlert()
-    @Published var callbackButton = CallbackAlert()
+    @Published var callbackButton = TwoButtonsAlert()
     
-    var couponService = CouponeService.shared
+    let couponService: CouponServiceProtocol
     var imageService = ImageService.shared
     
-    init(clubId: Int) {
-        print("Coupon view model init")
+    init(clubId: Int, couponService: CouponServiceProtocol) {
         self.clubId = clubId
+        self.couponService = couponService
         Task { await getClubCouponsAdmin() }
     }
 
     @MainActor
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
-        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
         oneButtonAlert.isPresented = true
     }
     

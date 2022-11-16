@@ -10,8 +10,8 @@ import SwiftUI
 
 struct Login: View {
     
-    @EnvironmentObject var loginManager: MyPageViewModel
-    @StateObject var loginVM = LoginViewModel() 
+    @EnvironmentObject var myPageVM: MyPageViewModel
+    @StateObject var loginVM = LoginViewModel(memberService: MemberService(url: ServerURL.runningServer.url)) 
     @FocusState var focus: Field?
     
     enum Field: Int, CaseIterable {
@@ -87,9 +87,7 @@ struct Login: View {
     @ViewBuilder
     private func LoginButton() -> some View {
         Button {
-            Task {
-                loginManager.isLogined = await loginVM.login()
-            }
+            Task { myPageVM.isLogined = await loginVM.buttonTapped() }
         } label: {
             Image(systemName: "arrow.right.circle.fill")
                 .resizable()

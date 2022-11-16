@@ -13,11 +13,11 @@ class ClubViewModel: ObservableObject {
     @Published var likesGroupId = [LikeGroupInfo]()
     @Published var joinedClubs = [ClubAndRoleData]() // VStack에서 나열될 그룹들
     
-    @Published var notices = [NotificationPreview]() // Vstack 한개 그룹 이동 후 사용될 정보
+    @Published var notices = [NotificationPreviewData]() // Vstack 한개 그룹 이동 후 사용될 정보
     @Published var products = [ProductPreviewData]()
     @Published var rentals = [RentalData]()
     
-    @Published var clubNotice = [NotificationPreview]()
+    @Published var clubNotice = [NotificationPreviewData]()
     
     @Published var oneButtonAlert = OneButtonAlert()
     
@@ -90,12 +90,8 @@ class ClubViewModel: ObservableObject {
 
         switch result {
         case .success(let value):
-            print("[getMyClubRole success]")
-            print(value.responseMessage)
             return value.data.clubRole
-        case .failure(let err):
-            print("[getMyClubs Error]")
-            print(err)
+        case .failure(_):
             return "err"
         }
     }
@@ -109,12 +105,9 @@ class ClubViewModel: ObservableObject {
 //            print(res.debugDescription)
             switch res.result {
             case .success(let value):
-                print("[getMyClubs success]")
                 self.joinedClubs = value.data
-                print(value.responseMessage)
-            case .failure(let err):
-                print("[getMyClubs Error]")
-                print(err)
+            case .failure(_):
+                break
             }
         }
     }
@@ -129,12 +122,9 @@ class ClubViewModel: ObservableObject {
         
         switch response {
         case .success(let value):
-            print("[getMyClubs success]")
             self.joinedClubs = value.data
-            print(value.responseMessage)
-        case .failure(let err):
-            print("[getMyClubs Error]")
-            print(err)
+        case .failure(_):
+            break
         }
     }
 
@@ -146,12 +136,9 @@ class ClubViewModel: ObservableObject {
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyNotificationsResponse.self) { res in
             switch res.result {
             case .success(let value):
-                print("[getMyNotificationsSuccess]")
-                print(value.responseMessage)
                 self.notices = value.data
-            case .failure(let err):
-                print("[getMyNotificationsErr")
-                print(err)
+            case .failure(_):
+                break
             }
         }
     }

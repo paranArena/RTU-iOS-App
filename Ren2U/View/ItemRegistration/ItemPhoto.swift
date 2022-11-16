@@ -10,7 +10,7 @@ import SwiftUI
 struct ItemPhoto: View {
     
     
-    @StateObject var itemVM: ItemViewModel
+    @StateObject var itemVM: CreateProductViewModel
     @ObservedObject var managementVM: ManagementViewModel
     @Binding var isActive: Bool
     

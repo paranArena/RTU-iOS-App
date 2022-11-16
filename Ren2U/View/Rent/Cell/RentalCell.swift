@@ -73,23 +73,20 @@ struct RentalCell: View {
                     .background(Capsule().stroke(Color.navy_1E2F97, lineWidth: 1))
                 } else {
                     Button {
-                        if locationManager.isAuthorized {
-                            let coreLocatino = CLLocationCoordinate2D(latitude: rentalItemInfo.location.latitude, longitude: rentalItemInfo.location.longitude)
-                            
-                            if locationManager.region.center.distance(from: coreLocatino) > 30 {
-                                locationManager.isPresentedDistanceAlert = true
-                            } else {
-                                alert.isPresented = true
-                                alert.message = Text(rentalItemInfo.rentalInfo.alertMeesage) 
-                                alert.callback = {
-                                    Task {
-                                        await clubVM.returnRent(clubId: rentalItemInfo.clubId, itemId: rentalItemInfo.id)
-                                        await clubVM.getMyRentals()
-                                    }
+                        if let latitude = rentalItemInfo.location.latitude, let longitude = rentalItemInfo.location.longitude {
+                            if locationManager.isAuthorized {
+                                let coreLocatino = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                                
+                                if locationManager.region.center.distance(from: coreLocatino) > 50 {
+                                    locationManager.isPresentedDistanceAlert = true
+                                } else {
+                                    showReturnRental()
                                 }
+                            } else {
+                                locationManager.isPresentedAlert = true
                             }
                         } else {
-                            locationManager.isPresentedAlert = true
+                            showReturnRental()
                         }
                     } label: {
                         Text("반납하기")
@@ -107,6 +104,16 @@ struct RentalCell: View {
         }
     }
     
+    private func showReturnRental() {
+        alert.isPresented = true
+        alert.message = Text(rentalItemInfo.rentalInfo.alertMeesage)
+        alert.callback = {
+            Task {
+                await clubVM.returnRent(clubId: rentalItemInfo.clubId, itemId: rentalItemInfo.id)
+                await clubVM.getMyRentals()
+            }
+        }
+    }
     
     
     @ViewBuilder

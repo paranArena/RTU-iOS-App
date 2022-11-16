@@ -24,11 +24,8 @@ struct RentalComplete: View {
             
             Text("물품이름 : \(itemInfo.name) - \(itemNumber)")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-//
-//            Text("대여기간 : \(itemInfo. )")
-//                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
-//                .padding(.bottom, 30)
-            let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+
+            let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude!, longitude: itemInfo.location.longitude!)
             let region = MKCoordinateRegion(center: itemLocation, span: DEFAULT_SPAN)
             let anonotaions: [Annotation] = [Annotation(coordinate: itemLocation)]
             

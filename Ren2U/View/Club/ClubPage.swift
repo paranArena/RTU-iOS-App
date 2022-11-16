@@ -46,7 +46,7 @@ struct ClubPage: View {
         .overlay(ShadowRectangle())
         .background(
             NavigationLink(isActive: $isActive, destination: {
-                ClubManagementView(managementVM: ManagementViewModel(clubData: clubData.extractClubData()), couponVM: CouponViewModel(clubId: clubData.id), clubActive: $clubActive)
+                ClubManagementView(managementVM: ManagementViewModel(clubData: clubData.extractClubData()), couponVM: CouponViewModel(clubId: clubData.id, couponService: CouponService(url: ServerURL.runningServer.url)), clubActive: $clubActive)
             }, label: {}) 
         )
         .basicNavigationTitle(title: "")

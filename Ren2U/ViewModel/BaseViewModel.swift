@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol BaseViewModel {
-    var callbackAlert: CallbackAlert { get set }
+protocol BaseViewModel: ObservableObject {
+    var twoButtonsAlert: TwoButtonsAlert { get set }
     var oneButtonAlert: OneButtonAlert { get set }
     @MainActor func showAlert(with error: NetworkError)
 }

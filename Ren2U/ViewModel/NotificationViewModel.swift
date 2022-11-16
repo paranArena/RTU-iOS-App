@@ -16,7 +16,7 @@ class NotificationViewModel: ObservableObject {
     @Published var isLoading = true
     
     @Published var oneButtonAlert = OneButtonAlert()
-    @Published var callbackAlert = CallbackAlert()
+    @Published var callbackAlert = TwoButtonsAlert()
     
     var notificationService = NotificationService.shared
     
@@ -31,7 +31,7 @@ class NotificationViewModel: ObservableObject {
     @MainActor
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
-        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
         oneButtonAlert.isPresented = true
     }
     

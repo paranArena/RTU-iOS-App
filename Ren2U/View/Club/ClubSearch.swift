@@ -10,18 +10,22 @@ import CoreAudio
 
 struct ClubSearch: View {
     
-    @StateObject private var clubSearchVM = ClubSearchViewModel()
+    @StateObject private var clubSearchVM: ClubSearchViewModel
     @Binding var search: String
     @Binding var tabSelection: Int
     
     
     @State private var isActive = false
     @State private var offset: CGFloat = .zero
-    @State private var searchDelay = 0
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     @State private var selectedClubData = ClubAndRoleData.dummyClubAndRoleData()
     @State private var alert = Alert()
+    
+    init(search: Binding<String>, tabSelection: Binding<Int>) {
+        self._clubSearchVM = StateObject(wrappedValue: ClubSearchViewModel(clubService: ClubService(url: ServerURL.runningServer.url)))
+        self._search = search
+        self._tabSelection = tabSelection
+    }
     
     var body: some View {
         
@@ -53,30 +57,20 @@ struct ClubSearch: View {
             Button("예") { Task { await alert.callback() }}
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .onAppear {
-            Task {
-                if search.isEmpty {
-                    await clubSearchVM.searchClubsAll()
-                }
-            }
+        .task {
+            await clubSearchVM.searchBarTapped(text: search)
         }
-        .onChange(of: search) { newValue in
-            self.searchDelay = 0
+        .onChange(of: search) { _ in
+            self.clubSearchVM.isSearchDelayComplted = false
         }
-        .onReceive(timer) { _ in
-            searchDelay += 1
-            if searchDelay == 10 && !search.isEmpty {
-                Task {
-                    clubSearchVM.searchWithText(text: search)
-                }
-            }
+        .onReceive(self.clubSearchVM.timer) { _ in
+            Task { await clubSearchVM.searchWithDelay(text: search) }
         }
         
     }
     
     @ViewBuilder
     private func OverlayFinder(index: Int) -> some View {
-        
         switch clubSearchVM.clubData[index].clubRole {
         case ClubRole.admin.rawValue, ClubRole.owner.rawValue, ClubRole.user.rawValue:
             JoindeClubOverlay()

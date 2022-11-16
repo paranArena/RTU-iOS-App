@@ -19,8 +19,7 @@ struct ProductDetailView: View {
     @Environment(\.isPresented) var isPresented
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var clubVM: ClubViewModel
-    @StateObject private var rentVM: RentalViewModel
-//    @StateObject private var viewModel = ViewModel()
+    @StateObject private var rentVM: RentViewModel
     
     @State private var rentalButtonHeight: CGFloat = .zero
     @State private var offset: CGFloat = .zero
@@ -28,7 +27,9 @@ struct ProductDetailView: View {
     init(clubId: Int, productId: Int) {
         self.clubId = clubId
         self.productId = productId
-        _rentVM = StateObject(wrappedValue: RentalViewModel(clubId: clubId, productId: productId))
+        _rentVM = StateObject(wrappedValue: RentViewModel(clubId: clubId, productId: productId,
+                                                            rentService: RentService(url: ServerURL.runningServer.url),
+                                                            clubProductService: ClubProductService(url: ServerURL.runningServer.url)))
     }
     
     
@@ -65,10 +66,10 @@ struct ProductDetailView: View {
                 .padding(.horizontal, 10)
                 
                 ItemList()
-
-                NavigationLink("", isActive: $rentVM.isRentalTerminal) {
+                
+                NavigationLink(isActive: $rentVM.isRentalTerminal) {
                     RentalComplete(itemInfo: rentVM.productDetail, itemNumber: rentVM.selectedItem?.numbering ?? 0)
-                }
+                } label: { }
             }
         }
         .padding(.bottom, rentalButtonHeight)
@@ -82,25 +83,24 @@ struct ProductDetailView: View {
         .onAppear {
             rentVM.selectedItem = nil
         }
-        .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
-            OneButtonAlert.noActionButton
-        } message: { rentVM.oneButtonAlert.message }
-        .alert("", isPresented: $rentVM.alert.isPresented) {
+        .alert(rentVM.twoButtonsAlert.title, isPresented: $rentVM.twoButtonsAlert.isPresented) {
             Button("취소", role: .cancel) {}
-            Button("확인")  {
+            Button("확인") {
                 Task {
-                    await rentVM.alert.callback()
+                    await rentVM.twoButtonsAlert.callback()
                     await clubVM.getMyRentals()
                 }
             }
-        } message: {
-            rentVM.alert.message
-        }
+        } message: { rentVM.twoButtonsAlert.message }
+        .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
+            Button("확인") { Task { await self.rentVM.oneButtonAlert.callback() }}
+        } message: { rentVM.oneButtonAlert.message }
     }
     
     @ViewBuilder
     private func ShowMapButton() -> some View {
         Button {
+            rentVM.setLocation()
             rentVM.isPresentedMap = true
         } label: {
             Text("위치보기")
@@ -119,6 +119,7 @@ struct ProductDetailView: View {
                 }
             }
         }
+        .isHidden(hidden: !rentVM.productDetail.isThereLocationRestriction)
     }
     
     @ViewBuilder
@@ -178,7 +179,7 @@ struct ProductDetailView: View {
                     let id = rentVM.productDetail.items[i].id
                     HStack {
                         Button {
-                            rentVM.selectedItem = rentVM.productDetail.items[i]
+                            rentVM.itemCellTapped(item: rentVM.productDetail.items[i])
                         } label: {
                             Text("\(rentVM.productDetail.name) - \(rentVM.productDetail.items[i].numbering)")
                                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
@@ -229,9 +230,9 @@ struct ProductDetailView: View {
         HeightSetterView(viewHeight: $rentalButtonHeight) {
             Button {
                 if rentVM.selectedItem?.rentalInfo == nil {
-                    rentVM.setAlert()
+                    rentVM.rentButtonTapped()
                 } else if locationManager.checkDistance(productRegion: rentVM.productLocation) {
-                    rentVM.setAlert()
+                    rentVM.rentButtonTapped()
                 }
             } label: {
                 Capsule()
@@ -253,143 +254,6 @@ struct ProductDetailView: View {
             .disabled(rentVM.selectedItem?.mainButtonDisable ?? true)
         }
     }
-
-//    @ViewBuilder
-//    private func CarouselImage() -> some View {
-//        TabView(selection: $viewModel.imageSelection) {
-//            ForEach(0..<5, id:\.self) { i in
-//                KFImage(URL(string: rentVM.productDetail.imagePath ?? ""))
-//                    .onFailure { err in
-//                        print(err.errorDescription ?? "KFImage Optional err")
-//                    }
-//                    .resizable()
-//                    .frame(width: SCREEN_WIDTH, height: 300)
-//                    .tag(i)
-//
-//            }
-//        }
-//        .animation(viewModel.imageSelection == 0 ? nil : .spring(), value: viewModel.imageSelection)
-//        .frame(height: 300)
-//        .tabViewStyle(PageTabViewStyle())
-//    }
-            
-
-    //  MARK: 삭제 예정
-    
-//    @ViewBuilder
-//    private func ReturnOverlayButton() -> some View {
-//        HStack(alignment: .center, spacing: 20) {
-//            VStack(alignment: .center, spacing: 5) {
-//                Text("반납 예정일")
-//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-//
-//                Text(viewModel.formatReturnDate(Date.now))
-//                    .font(.custom(CustomFont.RobotoMedium.rawValue, size: 22))
-//            }
-//
-//            Button {
-//
-//            } label: {
-//                Text("반납하기")
-//                    .frame(maxWidth: .infinity, minHeight: 50)
-//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
-//                    .foregroundColor(Color.white)
-//                    .background(Capsule().fill(Color.navy_1E2F97))
-//            }
-//        }
-//        .padding([.horizontal, .bottom], 20)
-//        .padding(.top, 10)
-//        .background(Color.BackgroundColor)
-//        .frame(maxWidth: .infinity)
-//        .clipped()
-//        .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
-//    }
-    
-    
-//    @ViewBuilder
-//    private func DatePickerOverlay() -> some View {
-//        VStack {
-//            Spacer()
-//            DatePicker("데이트 피커", selection: $viewModel.date)
-//        }
-//        .edgesIgnoringSafeArea(.bottom)
-//    }
-    
-    
-//    @ViewBuilder
-//    private func RentalCompleteOverlayButton() -> some View {
-//        HStack(alignment: .center, spacing: 20) {
-//            VStack(alignment: .center, spacing: 5) {
-//                Text("픽업일정")
-//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-//
-//                Text(viewModel.formatPickUpDate(Date.now))
-//                    .font(.custom(CustomFont.RobotoMedium.rawValue, size: 22))
-//            }
-//
-//            Button {
-//
-//            } label: {
-//                Text("대여 확정")
-//                    .frame(maxWidth: .infinity, minHeight: 50)
-//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
-//                    .foregroundColor(Color.white)
-//                    .background(Capsule().fill(Color.navy_1E2F97))
-//            }
-//        }
-//        .padding([.horizontal, .bottom], 20)
-//        .padding(.top, 10)
-//        .background(Color.BackgroundColor)
-//        .frame(maxWidth: .infinity)
-//        .clipped()
-//        .shadow(color: Color.gray_495057, radius: 10, x: 0, y: 10)
-//    }
-//
-    
-//    @ViewBuilder
-//    private func QueueSelectButton() -> some View {
-//        Button  {
-//            if viewModel.selection != .queue {
-//                viewModel.selection = .queue
-//            } else {
-//                viewModel.selection = .none
-//            }
-//
-//        } label: {
-//            VStack(alignment: .center) {
-//                Text("선착순")
-//                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-//
-//                Text("바로 대여가 가능합니다.")
-//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-//            }
-//            .foregroundColor(viewModel.selection == .queue ? Color.BackgroundColor : Color.LabelColor)
-//        }
-//        .frame(maxWidth: SCREEN_WIDTH, minHeight: 120)
-//        .background(viewModel.selection == .queue ? Color.navy_1E2F97 : Color.gray_F8F9FA)
-//    }
-    
-//    @ViewBuilder
-//    private func TermSelectButton() -> some View {
-//        Button {
-//            if viewModel.selection != .term {
-//                viewModel.selection = .term
-//            } else {
-//                viewModel.selection = .none
-//            }
-//        } label: {
-//            VStack {
-//                Text("기간제")
-//                    .font(.custom(CustomFont.NSKRMedium.rawValue, size: 20))
-//
-//                Text("일정기간 대여가 가능합니다.")
-//                    .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
-//            }
-//            .foregroundColor(viewModel.selection == .term ? Color.BackgroundColor : Color.LabelColor)
-//        }
-//        .frame(maxWidth: SCREEN_WIDTH, minHeight: 120)
-//        .background(viewModel.selection == .term ? Color.navy_1E2F97 : Color.gray_F8F9FA)
-//    }
 }
 
 //struct Item_Previews: PreviewProvider {

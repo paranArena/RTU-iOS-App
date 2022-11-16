@@ -74,10 +74,6 @@ extension ClubProfile {
             
             self.tagsText = ""
         }
-        
-        func printUTF8Length(tag: String) {
-            print("\(tag.utf8.count)")
-        }
     }
 
 }

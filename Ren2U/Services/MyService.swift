@@ -17,7 +17,6 @@ class MyService {
         let url = "\(BASE_URL)/members/my/coupons/all"
         let hearders: HTTPHeaders = ["Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")"]
         let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetMyCouponsAllResponse.self).response
-        
 
         return response.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }

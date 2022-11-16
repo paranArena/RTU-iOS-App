@@ -44,9 +44,11 @@ extension SignUp {
 
 struct SignUp: View {
     
-    @StateObject var signUpVM = SignUpViewModel()
+    @StateObject var signUpVM = SignUpViewModel(memberSevice: MemberService(url: ServerURL.runningServer.url))
     @FocusState private var focusedField: SignUp.Field?
     @Binding var isActive: Bool
+    
+    
 
     var body: some View {
         
@@ -84,7 +86,7 @@ struct SignUp: View {
         } message: {
             Text("이미 가입된 휴대폰 번호입니다. 본인의 번호라면 개발자에게 문의해주세요.")
         }
-        .alert("회원가입 실패", isPresented: $signUpVM.isDulpicatedStudentId) {
+        .alert("회원가입 실패", isPresented: $signUpVM.isDuplicatedStudentId) {
             Button("확인", role: .cancel) {}
         } message: {
             Text("이미 가입된 학번입니다. 본인의 번호라면 개발자에게 문의해주세요.")
@@ -116,38 +118,36 @@ struct SignUp: View {
         
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                TextField("", text: $signUpVM.authField.email)
+                TextField("", text: $signUpVM.param.email)
                     .frame(maxWidth: .infinity)
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 18))
                     .overlay(alignment: .bottom)  {
                         Rectangle()
                             .frame(maxWidth: .infinity, maxHeight: 1)
-                            .foregroundColor(signUpVM.authField.emailBottomLineColor)
+                            .foregroundColor(signUpVM.param.emailBottomLineColor)
                     }
-                    .onChange(of: signUpVM.authField.email) { _ in
-                        signUpVM.authField.emailDuplication = .none
+                    .onChange(of: signUpVM.param.email) { _ in
+                        signUpVM.emailTextChanged()
                     }
 
                 Text("@ajou.ac.kr")
                     .font(.custom(CustomFont.RobotoRegular.rawValue, size: 16))
                 
                 Button {
-                    Task {
-                        await signUpVM.checkEmailDuplicate()
-                    }
+                    Task { await signUpVM.checkDulicateButtonTapped() } 
                 } label: {
                     Text("중복확인")
                         .padding(5)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
-                        .overlay(Capsule().stroke(signUpVM.authField.emailButtonColor, lineWidth: 1))
-                        .foregroundColor(signUpVM.authField.emailButtonColor)
+                        .overlay(Capsule().stroke(signUpVM.param.emailButtonColor, lineWidth: 1))
+                        .foregroundColor(signUpVM.param.emailButtonColor)
                         .padding(.leading, 19)
                 }
-                .disabled(signUpVM.authField.isDisabledButton)
+                .disabled(signUpVM.param.isDisabledButton)
             }
             
-            Text(signUpVM.authField.wrongEmail)
-                .foregroundColor(signUpVM.authField.wrongEmailColor)
+            Text(signUpVM.param.wrongEmail)
+                .foregroundColor(signUpVM.param.wrongEmailColor)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .padding(.bottom, -10)
                 .padding(.bottom, -10)
@@ -159,16 +159,16 @@ struct SignUp: View {
         
         VStack(alignment: .leading, spacing: 0) {
             Group {
-                TextField("", text: $signUpVM.authField.password)
-                    .isHidden(hidden: !signUpVM.authField.isShowingPassword)
+                TextField("", text: $signUpVM.param.password)
+                    .isHidden(hidden: !signUpVM.param.isShowingPassword)
                 
-                SecureField("", text: $signUpVM.authField.password)
-                    .isHidden(hidden: signUpVM.authField.isShowingPassword)
+                SecureField("", text: $signUpVM.param.password)
+                    .isHidden(hidden: signUpVM.param.isShowingPassword)
             }
             .font(.custom(CustomFont.RobotoRegular.rawValue, size: 18))
             .overlay(alignment: .trailing) {
                 Button {
-                    signUpVM.authField.isShowingPassword.toggle()
+                    signUpVM.param.isShowingPassword.toggle()
                 } label: {
                     Text("보기")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
@@ -179,11 +179,11 @@ struct SignUp: View {
             .overlay(alignment: .bottom) {
                 Rectangle()
                     .frame(maxWidth: .infinity, maxHeight: 1)
-                    .foregroundColor(signUpVM.authField.passwordBottomeLineColor)
+                    .foregroundColor(signUpVM.param.passwordBottomeLineColor)
             }
             
-            Text(signUpVM.authField.wrongPassword)
-                .foregroundColor(signUpVM.authField.wrongPasswordColor)
+            Text(signUpVM.param.wrongPassword)
+                .foregroundColor(signUpVM.param.wrongPasswordColor)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .padding(.bottom, -10)
         }
@@ -194,16 +194,16 @@ struct SignUp: View {
         
         VStack(alignment: .leading, spacing: 0) {
             Group {
-                TextField("", text: $signUpVM.authField.passwordCheck)
-                    .isHidden(hidden: !signUpVM.authField.isShowingPasswordCheck)
+                TextField("", text: $signUpVM.param.passwordCheck)
+                    .isHidden(hidden: !signUpVM.param.isShowingPasswordCheck)
                 
-                SecureField("", text: $signUpVM.authField.passwordCheck)
-                    .isHidden(hidden: signUpVM.authField.isShowingPasswordCheck)
+                SecureField("", text: $signUpVM.param.passwordCheck)
+                    .isHidden(hidden: signUpVM.param.isShowingPasswordCheck)
             }
             .font(.custom(CustomFont.RobotoRegular.rawValue, size: 18))
             .overlay(alignment: .trailing) {
                 Button {
-                    signUpVM.authField.isShowingPasswordCheck.toggle()
+                    signUpVM.param.isShowingPasswordCheck.toggle()
                 } label: {
                     Text("보기")
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 12))
@@ -214,11 +214,11 @@ struct SignUp: View {
             .overlay(alignment: .bottom) {
                 Rectangle()
                     .frame(maxWidth: .infinity, maxHeight: 1)
-                    .foregroundColor(signUpVM.authField.passwordCheckBottomeLineColor)
+                    .foregroundColor(signUpVM.param.passwordCheckBottomeLineColor)
             }
             
-            Text(signUpVM.authField.wrongPasswordCheck)
-                .foregroundColor(signUpVM.authField.wrongPasswordCheckColor)
+            Text(signUpVM.param.wrongPasswordCheck)
+                .foregroundColor(signUpVM.param.wrongPasswordCheckColor)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .padding(.bottom, -10)
         }
@@ -227,15 +227,15 @@ struct SignUp: View {
     @ViewBuilder
     private func Name() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            TextField("", text: $signUpVM.authField.name)
+            TextField("", text: $signUpVM.param.name)
                 .overlay(alignment: .bottom) {
                     Rectangle()
                         .frame(maxWidth: .infinity, maxHeight: 1)
-                        .foregroundColor(signUpVM.authField.nameBottomLineColor)
+                        .foregroundColor(signUpVM.param.nameBottomLineColor)
                 }
             
-            Text(signUpVM.authField.wrongName)
-                .foregroundColor(signUpVM.authField.wrongNameColor)
+            Text(signUpVM.param.wrongName)
+                .foregroundColor(signUpVM.param.wrongNameColor)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .padding(.bottom, -10)
         }
@@ -243,28 +243,28 @@ struct SignUp: View {
     
     @ViewBuilder
     private func Major() -> some View {
-        TextField("", text: $signUpVM.authField.major)
+        TextField("", text: $signUpVM.param.major)
             .overlay(alignment: .bottom) {
                 Rectangle()
                     .frame(maxWidth: .infinity, maxHeight: 1)
-                    .foregroundColor(signUpVM.authField.majorBottomLineColor)
+                    .foregroundColor(signUpVM.param.majorBottomLineColor)
             }
     }
     
     @ViewBuilder
     private func StudentId() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            TextField("", text: $signUpVM.authField.studentId)
+            TextField("", text: $signUpVM.param.studentId)
                 .keyboardType(.numberPad)
                 .overlay(alignment: .bottom) {
                     Rectangle()
                         .frame(maxWidth: .infinity, maxHeight: 1)
-                        .foregroundColor(signUpVM.authField.studentIdLineColor)
+                        .foregroundColor(signUpVM.param.studentIdLineColor)
                 }
             
             
-            Text(signUpVM.authField.wrongStudentId)
-                .foregroundColor(signUpVM.authField.wrongStudentIdColor)
+            Text(signUpVM.param.wrongStudentId)
+                .foregroundColor(signUpVM.param.wrongStudentIdColor)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 10))
                 .padding(.bottom, -10)
         }
@@ -276,13 +276,13 @@ struct SignUp: View {
             Text("010)")
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
             
-            TextField("'-'를 제외한 숫자로 된 8자리 전화번호를 입력하세요.", text: $signUpVM.authField.phoneNumber)
+            TextField("'-'를 제외한 숫자로 된 8자리 전화번호를 입력하세요.", text: $signUpVM.param.phoneNumber)
                 .keyboardType(.numberPad)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
         }
         .overlay(alignment: .bottom) {
             Rectangle()
-                .fill(signUpVM.authField.phoneNumberColor)
+                .fill(signUpVM.param.phoneNumberColor)
                 .frame(maxHeight: 1)
         }
     }
@@ -298,10 +298,10 @@ struct SignUp: View {
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable() .frame(width: 86, height: 86)
                     .padding(.top, 49)
-                    .foregroundColor(signUpVM.authField.checkAll ? .navy_1E2F97 : .gray_E9ECEF)
+                    .foregroundColor(signUpVM.param.checkAll ? .navy_1E2F97 : .gray_E9ECEF)
                     .padding(.top, 20)
             }
-            .disabled(!signUpVM.authField.checkAll)
+            .disabled(!signUpVM.param.checkAll)
         }
         .frame(maxWidth: .infinity, alignment: .center)
     }

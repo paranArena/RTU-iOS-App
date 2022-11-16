@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct NotificationParam {
+struct NotificationParam: Codable{
     var title: String = ""
     var content: String = ""
     var imagePath: String = ""

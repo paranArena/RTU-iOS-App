@@ -37,7 +37,7 @@ class UpdateClubInfoViewModel: ObservableObject {
     
     @MainActor
     private func getClubInfo() async {
-        let url = "\(BASE_URL)/clubs/\(clubId)/info"
+        let url = "\(BASE_URL)/clubs/\(clubId!)/info"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY)!)]
         
         let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).serializingDecodable(GetClubInfoResponse.self)

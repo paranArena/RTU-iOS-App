@@ -41,7 +41,7 @@ struct NotificationDetailData: Codable {
     }
 }
 
-struct NotificationPreview: Codable, Equatable, Identifiable {
+struct NotificationPreviewData: Codable, Equatable, Identifiable {
     let id: Int
     let clubId: Int
     let title: String
@@ -73,4 +73,19 @@ struct NotificationPreview: Codable, Equatable, Identifiable {
     }
     
     static let reportTitle = "공지사항 신고를 접수하시겠습니까?"
+    
+    static func dummyNotification() -> NotificationPreviewData {
+        return NotificationPreviewData(id: Int.random(in: 0..<Int.max), clubId: Int.random(in: 0..<Int.max),
+                                       title: SING_TITLES.randomElement()!, isPublic: false,
+                                       imagePath: "", createdAtDto: DATES_YMD.randomElement()!, updatedAtDto: DATES_YMD.randomElement()!)
+    }
+    
+    static func dummyNotifications() -> [NotificationPreviewData] {
+        var datas = [NotificationPreviewData]()
+        for _ in 0..<10 {
+            datas.append(dummyNotification())
+        }
+        
+        return datas
+    }
 }

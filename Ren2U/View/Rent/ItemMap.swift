@@ -16,7 +16,8 @@ struct ItemMap: View {
     
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var clubVM: ClubViewModel
-    @StateObject var rentVM = RentalViewModel()
+    @StateObject var rentVM = RentViewModel(rentService: RentService(url: ServerURL.runningServer.url),
+                                              clubProductService: ClubProductService(url: ServerURL.runningServer.url))
     @Environment(\.dismiss) var dismiss
     @Environment(\.isPresented) var isPresented
     
@@ -27,7 +28,7 @@ struct ItemMap: View {
     
     init(itemInfo: RentalData) {
         self.itemInfo = itemInfo
-        self.itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+        self.itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude ?? 0, longitude: itemInfo.location.longitude ?? 0)
         self._region = State<MKCoordinateRegion>(initialValue: MKCoordinateRegion(center: itemLocation, span: DEFAULT_SPAN))
         remainTime = itemInfo.rentalInfo.time
     }
@@ -66,20 +67,17 @@ struct ItemMap: View {
         .basicNavigationTitle(title: itemInfo.name)
         .controllTabbar(isPresented)
         .avoidSafeArea()
-        .alert("", isPresented: $rentVM.alert.isPresented) {
+        .alert(rentVM.twoButtonsAlert.title, isPresented: $rentVM.twoButtonsAlert.isPresented) {
             Button("취소", role: .cancel) {}
-            Button("확인") {
-                Task { await rentVM.alert.callback() }} 
-        } message: {
-            rentVM.alert.message
-        }
+            Button("확인") { Task {
+                await rentVM.twoButtonsAlert.callback()
+                await clubVM.getMyRentals()
+            }}
+        } message: { rentVM.twoButtonsAlert.message }
         .alert(rentVM.oneButtonAlert.title, isPresented: $rentVM.oneButtonAlert.isPresented) {
             Button("확인") {
-                Task {
-                    clubVM.getMyRentals
-                }
-                dismiss()
-            }
+                Task { clubVM.getMyRentals }
+                dismiss() }
         } message: {
             rentVM.oneButtonAlert.message
         }
@@ -100,10 +98,10 @@ struct ItemMap: View {
     
     @ViewBuilder
     private func ReturnButton() -> some View {
-        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude ?? 0, longitude: itemInfo.location.longitude ?? 0)
         Button {
             if locationManager.checkDistance(productRegion: itemLocation) {
-                rentVM.setAlert(rentalData: itemInfo)
+                rentVM.rentButtonTapped(rentalData: itemInfo)
             }
         } label: {
             NavyCapsule(text: "반납하기")
@@ -113,11 +111,11 @@ struct ItemMap: View {
     
     @ViewBuilder
     private func RentButton() -> some View {
-        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude, longitude: itemInfo.location.longitude)
+        let itemLocation = CLLocationCoordinate2D(latitude: itemInfo.location.latitude ?? 0, longitude: itemInfo.location.longitude ?? 0)
         
         Button {
             if locationManager.checkDistance(productRegion: itemLocation) {
-                rentVM.setAlert(rentalData: itemInfo)
+                rentVM.rentButtonTapped(rentalData: itemInfo)
             }
         } label: {
             NavyCapsule(text: "대여확정")

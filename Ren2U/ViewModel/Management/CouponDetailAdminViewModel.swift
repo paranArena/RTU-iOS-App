@@ -22,21 +22,23 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     
     @Published var selectedUnsedCouponId = -1 
     
-    @Published var callbackAlert: CallbackAlert = CallbackAlert()
+    @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
-    var couponService = CouponeService.shared
+    let couponService: CouponServiceProtocol
     
     // CreatCouponView 문제 해결용. 나중에 삭제 필요 
-    init() {
+    init(couponService: CouponServiceProtocol) {
         self.clubId = -1
         self.couponId = -1
+        self.couponService = couponService
     }
     
-    init(clubId: Int, couponId: Int) {
+    init(clubId: Int, couponId: Int, couponService: CouponServiceProtocol) {
         self.clubId = clubId
         self.couponId = couponId
         self.selectedTitle = couponTitle.title[0]
+        self.couponService = couponService
         Task {
             await getCouponAdmin()
             await getCouponMembersAdmin()
@@ -47,16 +49,16 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
     @MainActor
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
-        oneButtonAlert.messageText = error.serverError == nil ? error.initialError.localizedDescription : error.serverError!.message
+        oneButtonAlert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
         oneButtonAlert.isPresented = true
     }
     
     @MainActor
     func showDeleteCouponAdminAlert(couponMemberId: Int) {
-        callbackAlert.messageText = "쿠폰을 삭제하시겠습니까?"
-        callbackAlert.isPresented = true
-        callbackAlert.title = ""
-        callbackAlert.callback = { await self.deleteCouponMemberAdmin(couponMemberId: couponMemberId) }
+        twoButtonsAlert.messageText = "쿠폰을 삭제하시겠습니까?"
+        twoButtonsAlert.isPresented = true
+        twoButtonsAlert.title = ""
+        twoButtonsAlert.callback = { await self.deleteCouponMemberAdmin(couponMemberId: couponMemberId) }
     }
     
     //  MARK: GET
@@ -124,10 +126,10 @@ class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
             print(response.debugDescription)
             self.showAlert(with: error)
         } else {
-            self.callbackAlert.title = "성공"
-            self.callbackAlert.isPresented = true
-            self.callbackAlert.messageText = "쿠폰을 발급했습니다."
-            self.callbackAlert.callback = dismiss
+            self.twoButtonsAlert.title = "성공"
+            self.twoButtonsAlert.isPresented = true
+            self.twoButtonsAlert.messageText = "쿠폰을 발급했습니다."
+            self.twoButtonsAlert.callback = dismiss
             await self.getCouponMembersAdmin()
             await self.getCouponAdmin()
         }
