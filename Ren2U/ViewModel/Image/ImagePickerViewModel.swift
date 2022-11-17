@@ -11,7 +11,6 @@ import AVFoundation
 class ImagePickerViewModel: BaseViewModel {
     
     @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
-    
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     
     func showAlert(with error: NetworkError) {

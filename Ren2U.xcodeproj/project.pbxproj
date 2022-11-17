@@ -403,6 +403,7 @@
 		15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentativeImage.swift; sourceTree = "<group>"; };
 		15BBBA0028CF059C00DCEF92 /* ClubNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubNotifications.swift; sourceTree = "<group>"; };
 		15BDC4212881218500514EF1 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		15C3919E2926357200E9B462 /* Ren2U.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ren2U.entitlements; sourceTree = "<group>"; };
 		15CFAD2928B7456E0004CDF7 /* ItemInformation2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInformation2.swift; sourceTree = "<group>"; };
 		15D4C580287FF15A008BB89B /* NavigationBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColor.swift; sourceTree = "<group>"; };
 		15D4C58428800AB4008BB89B /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
@@ -996,6 +997,7 @@
 		15FAF132287D5DFF00B35570 /* Ren2U */ = {
 			isa = PBXGroup;
 			children = (
+				15C3919E2926357200E9B462 /* Ren2U.entitlements */,
 				159F1B24288BA0C200012113 /* Info.plist */,
 				15FAF160287D5EC100B35570 /* Global */,
 				1554576F28DA061300DDAD9B /* Services */,
@@ -1556,6 +1558,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ren2U/Ren2U.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Ren2U/\"";
@@ -1590,6 +1593,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ren2U/Ren2U.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Ren2U/\"";
