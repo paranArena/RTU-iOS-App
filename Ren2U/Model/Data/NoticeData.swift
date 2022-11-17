@@ -25,7 +25,7 @@ struct NotificationDetailData: Codable {
     }
     
     static func dummyNotificationDetailData() -> NotificationDetailData {
-        return NotificationDetailData(id: 1, title: "", content: "", imagePath: "", createdAtDto: "", updatedAtDto: "", clubName: "")
+        return NotificationDetailData(id: 1, title: SING_TITLES.randomElement()!, content: LYRICS.randomElement()!, imagePath: "", createdAtDto: DATES_YMD.randomElement()!, updatedAtDto: DATES_YMD.randomElement()!, clubName: CLUB_NAMES.randomElement()!)
     }
     
     var createdAt: Date {

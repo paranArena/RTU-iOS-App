@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @EnvironmentObject var myPageVM: MyPageViewModel
     @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var imagePickerVM: ImagePickerViewModel
     
     var body: some View {
         Group {
@@ -26,6 +27,16 @@ struct ContentView: View {
             Button("확인", role: .cancel) {}
         } message: {
             Text("위치서비스를 사용할 수 없습니다.\n기기의 '설정 > Ren2U > 위치'에서 위치 서비스를 켜주세요.")
+        }
+        .confirmationDialog("Select", isPresented: $imagePickerVM.isShowingDialog) {
+            Button("카메라") { imagePickerVM.showCamera() }
+            Button("앨범") { imagePickerVM.showAlbum()}
+            Button("취소", role: .cancel) { }
+        }
+        .alert("카메라 권한", isPresented: $imagePickerVM.isShowingAlert) {
+            Button("확인", role: .cancel) {}
+        } message: {
+            Text(imagePickerVM.cameraError?.message ?? "")
         }
     }
 }

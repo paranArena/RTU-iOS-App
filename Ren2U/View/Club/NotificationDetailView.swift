@@ -15,8 +15,9 @@ struct NotificationDetailView: View {
     @Environment(\.isPresented) var isPresented
     
     // user mode
-    init(clubId: Int, notificationId: Int) {
-        self._notificationVM = StateObject(wrappedValue: NotificationViewModel(clubId: clubId, notificationId: notificationId))
+    init(clubId: Int, notificationId: Int, clubNotificaitonService: ClubNotificationServiceEnable) {
+        self._notificationVM = StateObject(wrappedValue: NotificationViewModel(clubId: clubId, notificationId: notificationId,
+            clubNotificationService: clubNotificaitonService))
     }
     
     
@@ -46,6 +47,12 @@ struct NotificationDetailView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.horizontal, 20)
         .basicNavigationTitle(title: "공지사항")
+        .alert(notificationVM.oneButtonAlert.title, isPresented: $notificationVM.oneButtonAlert.isPresented) {
+            OneButtonAlert.noActionButton
+        } message: {
+            notificationVM.oneButtonAlert.message
+        }
+
     }
     
     @ViewBuilder
@@ -69,8 +76,8 @@ struct NotificationDetailView: View {
     }
 }
 
-//struct NotificationDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NotificationDetailView()
-//    }
-//}
+struct NotificationDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NotificationDetailView(clubId: -1, notificationId: -1, clubNotificaitonService: MockupClubNotificationService())
+    }
+}

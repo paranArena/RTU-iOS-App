@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		150072F4289A2042005B6A93 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150072F3289A2042005B6A93 /* ProductCell.swift */; };
 		150072F9289A3DFD005B6A93 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150072F8289A3DFD005B6A93 /* ProductDetailView.swift */; };
+		1507B62B2924FCE00099E2DC /* ImagePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1507B62A2924FCE00099E2DC /* ImagePickerViewModel.swift */; };
+		1507B62D2924FD650099E2DC /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1507B62C2924FD650099E2DC /* ImagePickerView.swift */; };
 		1509797928CAE5180074307F /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1509797828CAE5180074307F /* Errors.swift */; };
 		1514A0FC28B7510C0040F681 /* PickUpLocation .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FB28B7510C0040F681 /* PickUpLocation .swift */; };
 		1514A0FE28B753BB0040F681 /* PickUpLocationMap .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */; };
@@ -35,7 +37,7 @@
 		1523D5E828BE2C8D009EB733 /* NoticeManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */; };
 		1523D5EA28BE2CE7009EB733 /* CreateNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */; };
 		1523D5EF28BE33C4009EB733 /* EditorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */; };
-		1525F5FC28B731A600C7CA51 /* ImagesPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */; };
+		1525B9DE2925F91200883EC5 /* ClubNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525B9DD2925F91200883EC5 /* ClubNotificationService.swift */; };
 		1525F5FE28B7362C00C7CA51 /* ItemInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F5FD28B7362C00C7CA51 /* ItemInformation.swift */; };
 		1525F60128B7366B00C7CA51 /* CreateProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F60028B7366B00C7CA51 /* CreateProductViewModel.swift */; };
 		1525F60428B739EF00C7CA51 /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525F60328B739EF00C7CA51 /* enums.swift */; };
@@ -82,6 +84,7 @@
 		153C1A7B288CF7D600F89B2E /* ClubProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7A288CF7D600F89B2E /* ClubProfile.swift */; };
 		153C1A7D288D0A1F00F89B2E /* ClubProfileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7C288D0A1F00F89B2E /* ClubProfileExtension.swift */; };
 		153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */; };
+		153CAA352925BDF50035027B /* UpdatedImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CAA342925BDF50035027B /* UpdatedImagePickerView.swift */; };
 		154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553CC28A34B25005E7FDB /* RentalSheet.swift */; };
 		154553CF28A34DB3005E7FDB /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553CE28A34DB3005E7FDB /* NotoSansKR-Light.otf */; };
 		154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D028A351AA005E7FDB /* RentalComplete.swift */; };
@@ -130,7 +133,7 @@
 		157190ED28B7023600880F98 /* RentalManagementSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190EC28B7023600880F98 /* RentalManagementSelected.swift */; };
 		157190EF28B7024D00880F98 /* ProductManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190EE28B7024D00880F98 /* ProductManageView.swift */; };
 		157190F128B7043100880F98 /* PlusCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F028B7043100880F98 /* PlusCircleImage.swift */; };
-		157190F328B7053200880F98 /* ItemPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F228B7053200880F98 /* ItemPhoto.swift */; };
+		157190F328B7053200880F98 /* ProductCreateView_Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F228B7053200880F98 /* ProductCreateView_Photo.swift */; };
 		157190F628B7072200880F98 /* RightArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157190F528B7072200880F98 /* RightArrow.swift */; };
 		15759AC7291B533200EA59C5 /* ClubProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15759AC6291B533200EA59C5 /* ClubProductService.swift */; };
 		15799D4028C789A70032D884 /* ManageProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15799D3F28C789A70032D884 /* ManageProductCell.swift */; };
@@ -149,7 +152,6 @@
 		157C269428CFBB6C009115D8 /* ResetPassWordWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */; };
 		157EBB1628E9321000A5CF75 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157EBB1528E9321000A5CF75 /* NotificationService.swift */; };
 		157F53A728D844030087F8A3 /* SwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F53A628D844030087F8A3 /* SwipeCell.swift */; };
-		158011792893992A006016AD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158011782893992A006016AD /* ImagePicker.swift */; };
 		1586640E28D95F1C00E4E902 /* UpdateProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */; };
 		1586641128D9629C00E4E902 /* UpdateProductView .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586641028D9629C00E4E902 /* UpdateProductView .swift */; };
 		1589C16D28C8914700D83FCC /* HidableTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 1589C16C28C8914700D83FCC /* HidableTabView */; };
@@ -232,6 +234,8 @@
 /* Begin PBXFileReference section */
 		150072F3289A2042005B6A93 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		150072F8289A3DFD005B6A93 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		1507B62A2924FCE00099E2DC /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
+		1507B62C2924FD650099E2DC /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		1509797828CAE5180074307F /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		1514A0FB28B7510C0040F681 /* PickUpLocation .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickUpLocation .swift"; sourceTree = "<group>"; };
 		1514A0FD28B753BB0040F681 /* PickUpLocationMap .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickUpLocationMap .swift"; sourceTree = "<group>"; };
@@ -257,7 +261,7 @@
 		1523D5E728BE2C8D009EB733 /* NoticeManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManagementView.swift; sourceTree = "<group>"; };
 		1523D5E928BE2CE7009EB733 /* CreateNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoticeView.swift; sourceTree = "<group>"; };
 		1523D5EE28BE33C4009EB733 /* EditorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorPlaceholder.swift; sourceTree = "<group>"; };
-		1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPicker.swift; sourceTree = "<group>"; };
+		1525B9DD2925F91200883EC5 /* ClubNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubNotificationService.swift; sourceTree = "<group>"; };
 		1525F5FD28B7362C00C7CA51 /* ItemInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInformation.swift; sourceTree = "<group>"; };
 		1525F60028B7366B00C7CA51 /* CreateProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductViewModel.swift; sourceTree = "<group>"; };
 		1525F60328B739EF00C7CA51 /* enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 		153C1A7A288CF7D600F89B2E /* ClubProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubProfile.swift; sourceTree = "<group>"; };
 		153C1A7C288D0A1F00F89B2E /* ClubProfileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubProfileExtension.swift; sourceTree = "<group>"; };
 		153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SimpleBottomLine .swift"; sourceTree = "<group>"; };
+		153CAA342925BDF50035027B /* UpdatedImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedImagePickerView.swift; sourceTree = "<group>"; };
 		154553CC28A34B25005E7FDB /* RentalSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalSheet.swift; sourceTree = "<group>"; };
 		154553CE28A34DB3005E7FDB /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
 		154553D028A351AA005E7FDB /* RentalComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalComplete.swift; sourceTree = "<group>"; };
@@ -352,7 +357,7 @@
 		157190EC28B7023600880F98 /* RentalManagementSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalManagementSelected.swift; sourceTree = "<group>"; };
 		157190EE28B7024D00880F98 /* ProductManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManageView.swift; sourceTree = "<group>"; };
 		157190F028B7043100880F98 /* PlusCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCircleImage.swift; sourceTree = "<group>"; };
-		157190F228B7053200880F98 /* ItemPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPhoto.swift; sourceTree = "<group>"; };
+		157190F228B7053200880F98 /* ProductCreateView_Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCreateView_Photo.swift; sourceTree = "<group>"; };
 		157190F528B7072200880F98 /* RightArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightArrow.swift; sourceTree = "<group>"; };
 		15759AC6291B533200EA59C5 /* ClubProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubProductService.swift; sourceTree = "<group>"; };
 		15799D3F28C789A70032D884 /* ManageProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProductCell.swift; sourceTree = "<group>"; };
@@ -371,7 +376,6 @@
 		157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWordWithCode.swift; sourceTree = "<group>"; };
 		157EBB1528E9321000A5CF75 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		157F53A628D844030087F8A3 /* SwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCell.swift; sourceTree = "<group>"; };
-		158011782893992A006016AD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductViewModel.swift; sourceTree = "<group>"; };
 		1586641028D9629C00E4E902 /* UpdateProductView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdateProductView .swift"; sourceTree = "<group>"; };
 		158D1B5D2903B6B2006D370D /* MyPageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTests.swift; sourceTree = "<group>"; };
@@ -504,6 +508,9 @@
 		151B556C28BC9DAC0090A5E8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				153687AC28DAC1DD00E0D554 /* UpdatedImagePicker.swift */,
+				153CAA342925BDF50035027B /* UpdatedImagePickerView.swift */,
+				1507B62C2924FD650099E2DC /* ImagePickerView.swift */,
 				15FAF166287D606700B35570 /* Components */,
 				1530D55E28DCE2FD004BFB39 /* Cell */,
 				15D4C57F287FD4CF008BB89B /* Auth */,
@@ -598,7 +605,7 @@
 		1525F60728B73DA800C7CA51 /* ItemRegistration */ = {
 			isa = PBXGroup;
 			children = (
-				157190F228B7053200880F98 /* ItemPhoto.swift */,
+				157190F228B7053200880F98 /* ProductCreateView_Photo.swift */,
 				1525F5FD28B7362C00C7CA51 /* ItemInformation.swift */,
 				15CFAD2928B7456E0004CDF7 /* ItemInformation2.swift */,
 				1525F60528B73B4700C7CA51 /* ItemCategory.swift */,
@@ -732,6 +739,7 @@
 			isa = PBXGroup;
 			children = (
 				1554576728D9B3C600DDAD9B /* ImageViewModel.swift */,
+				1507B62A2924FCE00099E2DC /* ImagePickerViewModel.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -744,12 +752,13 @@
 				15FEDABA28FE4A9E00849311 /* ClubSearchService.swift */,
 				159333002908FB3D007E2BFD /* ClubProfileService.swift */,
 				15759AC6291B533200EA59C5 /* ClubProductService.swift */,
+				1525B9DD2925F91200883EC5 /* ClubNotificationService.swift */,
 				153687A328DAB0CF00E0D554 /* CouponService.swift */,
+				153687A828DABCBE00E0D554 /* ImageService.swift */,
 				15AFFAF5291A03EA00EC5513 /* RentService .swift */,
 				1530D55728DCDEDF004BFB39 /* MyService.swift */,
 				152D462F28C606E5008F26E0 /* LocationManager.swift */,
 				1509797828CAE5180074307F /* Errors.swift */,
-				153687A828DABCBE00E0D554 /* ImageService.swift */,
 				157EBB1528E9321000A5CF75 /* NotificationService.swift */,
 			);
 			path = Services;
@@ -1047,10 +1056,7 @@
 				15FAF162287D5F0300B35570 /* CapsulePlaceholder.swift */,
 				15F3672E289261300073E094 /* ShadowRectangle.swift */,
 				15F3673628927E770073E094 /* TransparentDivider.swift */,
-				158011782893992A006016AD /* ImagePicker.swift */,
-				1525F5FB28B731A600C7CA51 /* ImagesPicker.swift */,
 				154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */,
-				153687AC28DAC1DD00E0D554 /* UpdatedImagePicker.swift */,
 				1530D55328DCB409004BFB39 /* TitleSelector.swift */,
 			);
 			path = Components;
@@ -1217,6 +1223,7 @@
 				15667BCB28CC8A2800AE9A2D /* NoticeCell.swift in Sources */,
 				157190EF28B7024D00880F98 /* ProductManageView.swift in Sources */,
 				1563FE9728ADF6EE00F46CC7 /* RentViewModel.swift in Sources */,
+				1507B62D2924FD650099E2DC /* ImagePickerView.swift in Sources */,
 				15667BCD28CC98D500AE9A2D /* Alert.swift in Sources */,
 				15206E4328DB3CF50091DA74 /* CouponData.swift in Sources */,
 				157190ED28B7023600880F98 /* RentalManagementSelected.swift in Sources */,
@@ -1258,7 +1265,6 @@
 				1530D55428DCB409004BFB39 /* TitleSelector.swift in Sources */,
 				156386C2288A5252006653E8 /* ClubTab.swift in Sources */,
 				15A84D5F28CE12A500B3EB84 /* SimpleLine.swift in Sources */,
-				158011792893992A006016AD /* ImagePicker.swift in Sources */,
 				152D463028C606E5008F26E0 /* LocationManager.swift in Sources */,
 				1586641128D9629C00E4E902 /* UpdateProductView .swift in Sources */,
 				1525F60428B739EF00C7CA51 /* enums.swift in Sources */,
@@ -1273,6 +1279,7 @@
 				1554576528D9A80000DDAD9B /* UpdateClubView.swift in Sources */,
 				15BBB9FC28CEF58D00DCEF92 /* PrivacyPolicy.swift in Sources */,
 				157190EA28B6FE0F00880F98 /* WidthSetterView .swift in Sources */,
+				1525B9DE2925F91200883EC5 /* ClubNotificationService.swift in Sources */,
 				15323BAF28DEDB3E00A89CB1 /* CreateCouponViewModel.swift in Sources */,
 				157190F628B7072200880F98 /* RightArrow.swift in Sources */,
 				156386D2288A5D1A006653E8 /* ClubViewModel.swift in Sources */,
@@ -1296,6 +1303,7 @@
 				15667BCF28CCDA5F00AE9A2D /* ToS.swift in Sources */,
 				157C267F28CF3E60009115D8 /* SignUpViewModel.swift in Sources */,
 				155004BB28E045BA006B89B4 /* CouponDetailAdminViewModel.swift in Sources */,
+				153CAA352925BDF50035027B /* UpdatedImagePickerView.swift in Sources */,
 				155A36B728D18DD900848592 /* SignUpParam.swift in Sources */,
 				15FAF165287D5FFD00B35570 /* CapsuleSecurePlaceholder.swift in Sources */,
 				15759AC7291B533200EA59C5 /* ClubProductService.swift in Sources */,
@@ -1337,7 +1345,6 @@
 				152C3E83287E63D0000BFC97 /* BottomLineTextField.swift in Sources */,
 				157B8D5328F9917C00B9A924 /* BaseService .swift in Sources */,
 				15AFFAF6291A03EB00EC5513 /* RentService .swift in Sources */,
-				1525F5FC28B731A600C7CA51 /* ImagesPicker.swift in Sources */,
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
 				1525F5FE28B7362C00C7CA51 /* ItemInformation.swift in Sources */,
@@ -1356,7 +1363,7 @@
 				152C7086290F5C67008AB522 /* ClubProfileViewModel.swift in Sources */,
 				1563FE9028ADEE0E00F46CC7 /* ManageRentalCell.swift in Sources */,
 				15AC7E3A28BF2ECE00879106 /* ManageSignUpCell.swift in Sources */,
-				157190F328B7053200880F98 /* ItemPhoto.swift in Sources */,
+				157190F328B7053200880F98 /* ProductCreateView_Photo.swift in Sources */,
 				157C269228CFB2BE009115D8 /* NavyCapsule.swift in Sources */,
 				1554576228D9A3EA00DDAD9B /* UpdateClubInfoViewModel.swift in Sources */,
 				1530D55828DCDEDF004BFB39 /* MyService.swift in Sources */,
@@ -1367,6 +1374,7 @@
 				1554576828D9B3C600DDAD9B /* ImageViewModel.swift in Sources */,
 				157C268128CF3E6A009115D8 /* LoginViewModel.swift in Sources */,
 				159DB00828DECE4F00FCE98D /* MyCouponDetailViewModel.swift in Sources */,
+				1507B62B2924FCE00099E2DC /* ImagePickerViewModel.swift in Sources */,
 				152D462E28C5DF3A008F26E0 /* AmongTabsViewModel.swift in Sources */,
 				156386C4288A525C006653E8 /* RentalTab.swift in Sources */,
 				15228ABF28C8A06300A0B3C5 /* NoticeData.swift in Sources */,

@@ -19,6 +19,7 @@ extension ClubProfile {
 struct ClubProfile: View {
     
     @EnvironmentObject var clubVM: ClubViewModel
+    @EnvironmentObject var imagePickerVM: ImagePickerViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.isPresented) var isPresented
     @StateObject var viewModel: ViewModel
@@ -201,7 +202,7 @@ struct ClubProfile: View {
             HStack {
                 Spacer()
                 Button {
-                    viewModel.showImagePicker.toggle()
+                    imagePickerVM.showDialog()
                 } label: {
                     Text("사진 변경")
                         .font(.custom(CustomFont.NSKRMedium.rawValue, size: 14))
@@ -211,9 +212,10 @@ struct ClubProfile: View {
                 }
             }
         }
-        .sheet(isPresented: $viewModel.showImagePicker) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.selectedUIImage)
-        }
+        .sheet(isPresented: $imagePickerVM.isShowingPicker, content: {
+            ImagePickerView(sourceType: imagePickerVM.source == .library ? .photoLibrary : .camera, selectedImage: $viewModel.selectedUIImage)
+                .ignoresSafeArea()
+        })
     }
     
     @ViewBuilder

@@ -8,16 +8,26 @@
 import Alamofire
 import SwiftUI
 
-class CreateNotificationViewModel: ObservableObject, BaseViewModel {
+class CreateNotificationViewModel: BaseViewModel {
     
     let clubId: Int
     var notificationId: Int?
     let method: Method
-    var notificationDetailData: NotificationDetailData? 
+    var notificationDetailData: NotificationDetailData?
+    
+    var isPostMode: Bool {
+        return self.method == .post
+    }
+    var isPutMode: Bool {
+        return self.method == .put
+    }
     
     @Published var notificationParam = NotificationParam()
+    @Published var uiImage: UIImage?
+    
     @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
+    var alertCase: AlertCase?
     
     var notificationService = NotificationService.shared
     
@@ -116,4 +126,49 @@ class CreateNotificationViewModel: ObservableObject, BaseViewModel {
             self.notificationDetailData = response.value!.data
         }
     }
+}
+
+extension CreateNotificationViewModel {
+    
+    enum AlertCase {
+        case postNotification
+        case putNotification
+    }
+    
+    var title: String {
+        switch self.alertCase {
+            
+        case .none:
+            return ""
+        case .postNotification:
+            return "공지사항 생성"
+        case .putNotification:
+            return "공지사항 수정"
+        }
+    }
+    
+    var message: String {
+        switch self.alertCase {
+            
+        case .none:
+            return ""
+        case .postNotification:
+            return "공지사항을 생성하시겠습니까?"
+            
+        case .putNotification:
+            return "공지사항을 수정하시겠습니까?"
+        }
+    }
+    
+    var callback: () async -> () {
+        switch self.alertCase {
+        case .none:
+            return { }
+        case .postNotification:
+            return { }
+        case .putNotification:
+            return { } 
+        }
+    }
+    
 }

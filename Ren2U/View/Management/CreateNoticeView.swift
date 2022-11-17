@@ -17,6 +17,7 @@ struct CreateNoticeView: View {
     @ObservedObject var managementVM: ManagementViewModel
     @StateObject var notificationVM: CreateNotificationViewModel
     @EnvironmentObject var groupVM: ClubViewModel
+    @EnvironmentObject var imagePickerVM: ImagePickerViewModel
     @Environment(\.dismiss) var dismiss
     
     // post
@@ -42,12 +43,7 @@ struct CreateNoticeView: View {
             
             HStack {
                 ImagePickerButton()
-                KFImage(URL(string: notificationVM.notificationParam.imagePath))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 80, height: 80)
-                    .cornerRadius(15)
-                    .isHidden(hidden: notificationVM.notificationParam.imagePath.isEmpty)
+                NotificationImage()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 10)
@@ -62,27 +58,7 @@ struct CreateNoticeView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    if notificationVM.notificationParam.title.isEmpty || notificationVM.notificationParam.content.isEmpty {
-                        isShowingAlert = true
-                    } else {
-                        
-                        if notificationVM.method == .post {
-                            Task {
-                                await notificationVM.createNotification()
-                                managementVM.searchNotificationsAll()
-                                groupVM.getMyNotifications()
-                                dismiss()
-                            }
-                        } else {
-                            notificationVM.showUpdateNoficiationAlert()
-                        }
-
-                    }
-                } label: {
-                    Text("완료")
-                        .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
-                }
+                TrailingButton()
             }
         }
         .sheet(isPresented: $isShowingImagePicker) {
@@ -109,8 +85,9 @@ struct CreateNoticeView: View {
     
     @ViewBuilder
     private func ImagePickerButton() -> some View{
+        
         Button {
-            isShowingImagePicker = true
+            imagePickerVM.showDialog()
         } label: {
             Image(systemName: "camera")
                 .resizable()
@@ -121,6 +98,56 @@ struct CreateNoticeView: View {
         .padding(.horizontal, 20)
         .frame(width: 80, height: 80)
         .background(RoundedRectangle(cornerRadius: 15).stroke(Color.gray_ADB5BD, lineWidth: 2))
+        .sheet(isPresented: $imagePickerVM.isShowingPicker) {
+            UpdatedImagePickerView(sourceType: imagePickerVM.source == .library ? .photoLibrary : .camera, selectedImage: $notificationVM.uiImage, imagePath: $notificationVM.notificationParam.imagePath)
+                .ignoresSafeArea()
+        }
+    }
+    
+    @ViewBuilder
+    private func TrailingButton() -> some View {
+        Button {
+            if notificationVM.notificationParam.title.isEmpty || notificationVM.notificationParam.content.isEmpty {
+                isShowingAlert = true
+            } else {
+                
+                if notificationVM.method == .post {
+                    Task {
+                        await notificationVM.createNotification()
+                        managementVM.searchNotificationsAll()
+                        groupVM.getMyNotifications()
+                        dismiss()
+                    }
+                } else {
+                    notificationVM.showUpdateNoficiationAlert()
+                }
+
+            }
+        } label: {
+            Text("완료")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
+        }
+    }
+    
+    @ViewBuilder
+    private func NotificationImage() -> some View {
+        Group {
+            if let image = notificationVM.uiImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(15)
+                    .isHidden(hidden: notificationVM.isPutMode)
+            }
+            
+            KFImage(URL(string: notificationVM.notificationParam.imagePath))
+                .resizable()
+                .scaledToFill()
+                .frame(width: 80, height: 80)
+                .cornerRadius(15)
+                .isHidden(hidden: notificationVM.notificationParam.imagePath.isEmpty || notificationVM.isPostMode)
+        }
     }
 }
 

@@ -22,7 +22,7 @@ class CouponViewModel: ObservableObject {
     @Published var callbackButton = TwoButtonsAlert()
     
     let couponService: CouponServiceProtocol
-    var imageService = ImageService.shared
+    var imageService = DeprecatedImageService.shared
     
     init(clubId: Int, couponService: CouponServiceProtocol) {
         self.clubId = clubId

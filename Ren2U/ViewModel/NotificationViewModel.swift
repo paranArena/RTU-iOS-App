@@ -8,20 +8,23 @@
 import SwiftUI
 import Alamofire
 
-class NotificationViewModel: ObservableObject {
+class NotificationViewModel: BaseViewModel {
+    
+    @Published var twoButtonsAlert = TwoButtonsAlert()
+    @Published var oneButtonAlert = OneButtonAlert()
     
     var clubId: Int?
     
     @Published var notificationDetailData = NotificationDetailData.dummyNotificationDetailData()
     @Published var isLoading = true
     
-    @Published var oneButtonAlert = OneButtonAlert()
     @Published var callbackAlert = TwoButtonsAlert()
     
-    var notificationService = NotificationService.shared
+    let clubNotificationService: ClubNotificationServiceEnable
     
     // For Detail & Update
-    init(clubId: Int, notificationId: Int)  {
+    init(clubId: Int, notificationId: Int, clubNotificationService: ClubNotificationServiceEnable)  {
+        self.clubNotificationService = clubNotificationService
         Task {
             await self.getNotification(clubId: clubId, notificationId: notificationId)
         }
@@ -44,13 +47,12 @@ class NotificationViewModel: ObservableObject {
     
     @MainActor
     func getNotification(clubId: Int, notificationId: Int) async {
-        let response = await notificationService.getNotification(clubId: clubId, notificationId: notificationId)
+        
+        let response = await clubNotificationService.getNotification(clubId: clubId, notificationId: notificationId)
         if let error = response.error {
-            print(response.debugDescription)
             self.showAlert(with: error)
-        } else {
-            print("getNotification success")
-            self.notificationDetailData = response.value!.data
+        } else if let value = response.value {
+            self.notificationDetailData = value.data
         }
         
         isLoading = false

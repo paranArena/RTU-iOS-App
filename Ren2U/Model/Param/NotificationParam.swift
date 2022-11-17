@@ -14,9 +14,9 @@ struct NotificationParam: Codable{
     var imagePath: String = ""
 }
 
-struct UpdateNotificationParam {
+struct UpdateNotificationParam: Codable {
     let title: String
     let content: String
-    let image: UIImage?
+    let imagePaths: String
     let isPublic: Bool
 }

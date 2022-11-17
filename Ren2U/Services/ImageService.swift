@@ -10,9 +10,45 @@ import Combine
 import Alamofire
 import SwiftUI
 
-class ImageService {
+protocol ImageServiceEnable: BaseServiceEnable {
+    func upload(image: UIImage) async -> DataResponse<DefaultPostResponse, NetworkError>
+}
+
+class ImageService: ImageServiceEnable {
     
-    static let shared = ImageService()
+    func upload(image: UIImage) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+        
+        let url = "\(self.url!)/image/upload" 
+        let hearders: HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.string(forKey: JWT_KEY) ?? "")",
+            "Content-type": "multipart/form-data"
+        ]
+        
+        
+        
+        let response = await AF.upload(multipartFormData: { multipart in
+           multipart.append(image.jpegData(compressionQuality: 1)!, withName: "image", fileName: "image", mimeType: "image/jpeg")
+        }, to: url, usingThreshold: UInt64.init(), method: .post, headers: hearders).serializingDecodable(DefaultPostResponse.self).response
+        
+        return response.mapError { err in
+            let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
+            return NetworkError(initialError: err, serverError: serverError)
+        }
+   
+    }
+    
+    var url: String?
+    var bearerToken: String?
+    
+    init(url: String) {
+        self.url = url
+        self.bearerToken = UserDefaults.standard.string(forKey: JWT_KEY)
+    }
+}
+
+class DeprecatedImageService {
+    
+    static let shared = DeprecatedImageService()
     private init() { }
     
     func post(image: UIImage) -> AnyPublisher<DataResponse<DefaultPostResponse, NetworkError>, Never> {

@@ -59,7 +59,7 @@ struct ClubTab: View {
         .background(
             NavigationLink(isActive: $isActiveNotificationDetail, destination: {
                 if let selectedNotificationLinkIndex = selectedNotificationLinkIndex {
-                    NotificationDetailView(clubId: clubVM.notices[selectedNotificationLinkIndex].clubId, notificationId: clubVM.notices[selectedNotificationLinkIndex].id)
+                    NotificationDetailView(clubId: clubVM.notices[selectedNotificationLinkIndex].clubId, notificationId: clubVM.notices[selectedNotificationLinkIndex].id, clubNotificaitonService: ClubNotificationService(url: ServerURL.runningServer.url))
                 }
             }, label: {})
         )

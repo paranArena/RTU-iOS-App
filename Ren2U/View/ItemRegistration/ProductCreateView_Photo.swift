@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct ItemPhoto: View {
+struct ProductCreateView_Photo: View {
     
     
-    @StateObject var itemVM: CreateProductViewModel
+    @StateObject var createProductVM: CreateProductViewModel
     @ObservedObject var managementVM: ManagementViewModel
+    @EnvironmentObject var imagePickerVM: ImagePickerViewModel
     @Binding var isActive: Bool
     
     @State private var isPhotoNotSelected = true
@@ -27,33 +28,34 @@ struct ItemPhoto: View {
             ItemImages()
             
             Button {
-                itemVM.showImagePicker()
+                imagePickerVM.showDialog()
             } label: {
                 Text("사진 등록하기")
                     .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                     .foregroundColor(.navy_1E2F97)
             }
+            .sheet(isPresented: $imagePickerVM.isShowingPicker) {
+                ImagePickerView(sourceType: imagePickerVM.source == .library ? .photoLibrary : .camera, selectedImage: $createProductVM.image)
+                    .ignoresSafeArea()
+            }
+
             
             NavigationLink {
-                ItemInformation(itemVM: itemVM, managementVM: managementVM, isActive: $isActive)
+                ItemInformation(itemVM: createProductVM, managementVM: managementVM, isActive: $isActive)
             } label: {
-                RightArrow(isDisabled: !itemVM.isImageSelected)
+                RightArrow(isDisabled: !createProductVM.isImageSelected)
             }
-            .disabled(!itemVM.isImageSelected)
+            .disabled(!createProductVM.isImageSelected)
             
         }
         .basicNavigationTitle(title: "물품 등록")
-        
-        .sheet(isPresented: $itemVM.showPicker, content: {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: $itemVM.image)
-        })
         .avoidSafeArea()
     }
     
     @ViewBuilder
     private func ItemImages() -> some View {
         ZoomableScrollView {
-            if let image = itemVM.image {
+            if let image = createProductVM.image {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
@@ -63,17 +65,6 @@ struct ItemPhoto: View {
             }
         }
         .frame(maxWidth: 300, maxHeight: 300)
-        //  이미지 여러장 등록할 때 이용
-        //        let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 4)
-//        LazyVGrid(columns: columns, spacing: 10) {
-//            ForEach(itemVM.image.indices, id: \.self) { i in
-//                Image(uiImage: itemVM.image[i])
-//                    .resizable()
-//                    .scaledToFill()
-//                    .frame(width: photoLength, height: photoLength)
-//                    .cornerRadius(15)
-//            }
-//        }
     }
 }
 

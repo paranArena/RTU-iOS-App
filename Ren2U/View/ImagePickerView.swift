@@ -1,21 +1,19 @@
 //
-//  ImagePicker.swift
+//  ImagePickerView.swift
 //  Ren2U
 //
-//  Created by 노우영 on 2022/07/29.
+//  Created by 노우영 on 2022/11/16.
 //
 
-import SwiftUI
 import UIKit
+import SwiftUI
 
-
-struct ImagePicker: UIViewControllerRepresentable {
-    
+struct ImagePickerView: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var selectedImage: UIImage?
     @Environment(\.presentationMode) private var presentationMode
     
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerView>) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType
@@ -23,7 +21,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         return imagePicker
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePickerView>) {
     }
     
     func makeCoordinator() -> Coordinator {
@@ -31,8 +29,8 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
     
     final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        var parent: ImagePicker
-        init(_ parent: ImagePicker) {
+        var parent: ImagePickerView
+        init(_ parent: ImagePickerView) {
             self.parent = parent
         }
         
@@ -40,9 +38,9 @@ struct ImagePicker: UIViewControllerRepresentable {
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 parent.selectedImage = image
             }
-            
             parent.presentationMode.wrappedValue.dismiss()
         }
     }
 }
+
 

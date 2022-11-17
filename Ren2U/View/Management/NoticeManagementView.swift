@@ -32,7 +32,7 @@ struct NoticeManagementView: View {
                             let clubName = managementVM.clubData.name
                             
                             NavigationLink {
-                                NotificationDetailView(clubId: noticeInfo.clubId, notificationId: noticeInfo.id)
+                                NotificationDetailView(clubId: noticeInfo.clubId, notificationId: noticeInfo.id, clubNotificaitonService: ClubNotificationService(url: ServerURL.runningServer.url))
                             } label: {
                                 ManageNoticeCell(noticeInfo: noticeInfo, groupName: clubName, selectedCellID: $selectedCellId, isShowingAlert: $isShowingAlert, managementVM: managementVM)
                             }

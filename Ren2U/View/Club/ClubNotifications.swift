@@ -22,7 +22,7 @@ struct ClubNotifications: View {
                         ForEach(clubVM.clubNotice.indices, id: \.self) { i in
                             let groupName = clubVM.getGroupNameByGroupId(groupId: clubVM.clubNotice[i].clubId)
                             NavigationLink {
-                                NotificationDetailView(clubId: clubVM.clubNotice[i].clubId, notificationId: clubVM.clubNotice[i].id)
+                                NotificationDetailView(clubId: clubVM.clubNotice[i].clubId, notificationId: clubVM.clubNotice[i].id, clubNotificaitonService: ClubNotificationService(url: ServerURL.runningServer.url))
                             } label: {
                                 ReportableNoticeHCell(noticeInfo: clubVM.clubNotice[i], groupName: groupName, selectedId: $selectedCellId, isShowingAlert: $alert.isPresented, message: $alert.message, callback: $alert.callback)
                             }

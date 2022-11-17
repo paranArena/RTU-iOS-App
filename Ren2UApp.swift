@@ -14,6 +14,7 @@ struct Ren2UApp: App {
     @StateObject var groupModel = ClubViewModel()
     @StateObject var tabVM = AmongTabsViewModel()
     @StateObject var locationManager = LocationManager()
+    @StateObject var imagePickerVM = ImagePickerViewModel(imageService: ImageService(url: ServerURL.runningServer.url))
     
     init() {
         // 네비게이션 바 틴트 컬러 변경 
@@ -30,6 +31,7 @@ struct Ren2UApp: App {
                 .environmentObject(groupModel)
                 .environmentObject(tabVM)
                 .environmentObject(locationManager)
+                .environmentObject(imagePickerVM)
         }
     }
 }

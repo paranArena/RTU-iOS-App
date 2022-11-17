@@ -14,7 +14,7 @@ struct UpdatedImagePicker: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var imagePath: String
     @Environment(\.presentationMode) private var presentationMode
-    var imageService = ImageService.shared
+    var imageService = DeprecatedImageService.shared
     var cancellableSet: Set<AnyCancellable> = []
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<UpdatedImagePicker>) -> UIImagePickerController {
