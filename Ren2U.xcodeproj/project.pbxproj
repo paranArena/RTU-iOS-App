@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		150072F4289A2042005B6A93 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150072F3289A2042005B6A93 /* ProductCell.swift */; };
 		150072F9289A3DFD005B6A93 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150072F8289A3DFD005B6A93 /* ProductDetailView.swift */; };
+		1502034D292CFD4700C2D652 /* FCMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1502034C292CFD4700C2D652 /* FCMService.swift */; };
 		1507B62B2924FCE00099E2DC /* ImagePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1507B62A2924FCE00099E2DC /* ImagePickerViewModel.swift */; };
 		1507B62D2924FD650099E2DC /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1507B62C2924FD650099E2DC /* ImagePickerView.swift */; };
 		1509797928CAE5180074307F /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1509797828CAE5180074307F /* Errors.swift */; };
@@ -150,6 +151,7 @@
 		157C268E28CF8F47009115D8 /* ItemMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C268D28CF8F47009115D8 /* ItemMap.swift */; };
 		157C269228CFB2BE009115D8 /* NavyCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269128CFB2BE009115D8 /* NavyCapsule.swift */; };
 		157C269428CFBB6C009115D8 /* ResetPassWordWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */; };
+		157D3B0D29264B910025F4AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 157D3B0C29264B910025F4AD /* GoogleService-Info.plist */; };
 		157EBB1628E9321000A5CF75 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157EBB1528E9321000A5CF75 /* NotificationService.swift */; };
 		157F53A728D844030087F8A3 /* SwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F53A628D844030087F8A3 /* SwipeCell.swift */; };
 		1586640E28D95F1C00E4E902 /* UpdateProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */; };
@@ -181,6 +183,7 @@
 		15BBB9FF28CF028300DCEF92 /* RepresentativeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBB9FE28CF028300DCEF92 /* RepresentativeImage.swift */; };
 		15BBBA0128CF059C00DCEF92 /* ClubNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBBA0028CF059C00DCEF92 /* ClubNotifications.swift */; };
 		15BDC4222881218500514EF1 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BDC4212881218500514EF1 /* MyPageViewModel.swift */; };
+		15C391A12926409000E9B462 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 15C391A02926409000E9B462 /* FirebaseMessaging */; };
 		15CFAD2A28B7456E0004CDF7 /* ItemInformation2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFAD2928B7456E0004CDF7 /* ItemInformation2.swift */; };
 		15D4C581287FF15A008BB89B /* NavigationBarColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C580287FF15A008BB89B /* NavigationBarColor.swift */; };
 		15D4C58528800AB4008BB89B /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4C58428800AB4008BB89B /* PasswordTextField.swift */; };
@@ -234,6 +237,7 @@
 /* Begin PBXFileReference section */
 		150072F3289A2042005B6A93 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		150072F8289A3DFD005B6A93 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		1502034C292CFD4700C2D652 /* FCMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMService.swift; sourceTree = "<group>"; };
 		1507B62A2924FCE00099E2DC /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
 		1507B62C2924FD650099E2DC /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		1509797828CAE5180074307F /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -374,6 +378,7 @@
 		157C268D28CF8F47009115D8 /* ItemMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMap.swift; sourceTree = "<group>"; };
 		157C269128CFB2BE009115D8 /* NavyCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavyCapsule.swift; sourceTree = "<group>"; };
 		157C269328CFBB6C009115D8 /* ResetPassWordWithCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWordWithCode.swift; sourceTree = "<group>"; };
+		157D3B0C29264B910025F4AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		157EBB1528E9321000A5CF75 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		157F53A628D844030087F8A3 /* SwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCell.swift; sourceTree = "<group>"; };
 		1586640D28D95F1C00E4E902 /* UpdateProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductViewModel.swift; sourceTree = "<group>"; };
@@ -444,6 +449,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15C391A12926409000E9B462 /* FirebaseMessaging in Frameworks */,
 				15FD086A28E7350B009E2275 /* ComposableArchitecture in Frameworks */,
 				1589C17328C8917C00D83FCC /* Kingfisher in Frameworks */,
 				15228AB928C891A600A0B3C5 /* Alamofire in Frameworks */,
@@ -754,6 +760,7 @@
 				159333002908FB3D007E2BFD /* ClubProfileService.swift */,
 				15759AC6291B533200EA59C5 /* ClubProductService.swift */,
 				1525B9DD2925F91200883EC5 /* ClubNotificationService.swift */,
+				1502034C292CFD4700C2D652 /* FCMService.swift */,
 				153687A328DAB0CF00E0D554 /* CouponService.swift */,
 				153687A828DABCBE00E0D554 /* ImageService.swift */,
 				15AFFAF5291A03EA00EC5513 /* RentService .swift */,
@@ -997,6 +1004,7 @@
 		15FAF132287D5DFF00B35570 /* Ren2U */ = {
 			isa = PBXGroup;
 			children = (
+				157D3B0C29264B910025F4AD /* GoogleService-Info.plist */,
 				15C3919E2926357200E9B462 /* Ren2U.entitlements */,
 				159F1B24288BA0C200012113 /* Info.plist */,
 				15FAF160287D5EC100B35570 /* Global */,
@@ -1086,6 +1094,7 @@
 				1589C17228C8917C00D83FCC /* Kingfisher */,
 				15228AB828C891A600A0B3C5 /* Alamofire */,
 				15FD086928E7350B009E2275 /* ComposableArchitecture */,
+				15C391A02926409000E9B462 /* FirebaseMessaging */,
 			);
 			productName = Ren2U;
 			productReference = 15FAF130287D5DFF00B35570 /* Ren2U.app */;
@@ -1165,6 +1174,7 @@
 				1589C16E28C8915300D83FCC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				1589C17128C8917C00D83FCC /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				15FD086828E7350B009E2275 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				15C3919F2926409000E9B462 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 15FAF131287D5DFF00B35570 /* Products */;
 			projectDirPath = "";
@@ -1187,6 +1197,7 @@
 				159F1B27288BA6B100012113 /* NotoSansKR-Medium.otf in Resources */,
 				15FAF13B287D5E0000B35570 /* Preview Assets.xcassets in Resources */,
 				154553D328A35412005E7FDB /* NotoSansKR-Black.otf in Resources */,
+				157D3B0D29264B910025F4AD /* GoogleService-Info.plist in Resources */,
 				153C1A74288CEB7800F89B2E /* Roboto-Medium.ttf in Resources */,
 				153C1A70288CE3A900F89B2E /* Roboto-Black.ttf in Resources */,
 				153C1A6E288CDED600F89B2E /* NotoSansKR-Regular.otf in Resources */,
@@ -1245,6 +1256,7 @@
 				152C6F5428C842E600AA420A /* StringExtension.swift in Sources */,
 				153687A628DAB1EB00E0D554 /* CouponParam.swift in Sources */,
 				157190F128B7043100880F98 /* PlusCircleImage.swift in Sources */,
+				1502034D292CFD4700C2D652 /* FCMService.swift in Sources */,
 				156673DC28C1B6660011535D /* CellWithTwoSlideButton.swift in Sources */,
 				15FEDABB28FE4A9E00849311 /* ClubSearchService.swift in Sources */,
 				154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */,
@@ -1765,6 +1777,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		15C3919F2926409000E9B462 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		15E49BCE28C8906400AC4257 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1803,6 +1823,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1589C17128C8917C00D83FCC /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		15C391A02926409000E9B462 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15C3919F2926409000E9B462 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		15FD086928E7350B009E2275 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;

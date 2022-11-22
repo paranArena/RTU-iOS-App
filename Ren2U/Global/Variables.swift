@@ -15,6 +15,7 @@ let SAFE_AREA_TOP_HEIGHT: CGFloat = 44
 let SAFE_AREA_BOTTOM_HEIGHT: CGFloat = 34
 
 let JWT_KEY = "jwt"
+let FCM_TOKEN = "FCM_TOKEN"
 
 let DEFAULT_REGION = CLLocationCoordinate2D(latitude: 37.28, longitude: 127.0489)
 let DEFAULT_SPAN = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)

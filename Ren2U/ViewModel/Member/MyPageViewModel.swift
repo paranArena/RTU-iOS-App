@@ -14,12 +14,20 @@ class MyPageViewModel: ObservableObject {
     @Published var userData: UserData?
     @Published var isLogined = false
     
-    init() {
+    let fcmSerivce: FCMServiceEnable
+    
+    init(fcmService: FCMServiceEnable) {
         if UserDefaults.standard.string(forKey: JWT_KEY) == nil {
             isLogined = false
         } else {
             isLogined = true
         }
+        
+        self.fcmSerivce = fcmService
+    }
+    
+    private func sendFCMToken() async {
+        let _ = await fcmSerivce.registerFCMToken(memberId: self.userData!.id, fcmToken: UserDefaults.standard.string(forKey: FCM_TOKEN) ?? "")
     }
     
     func logout() {
@@ -34,13 +42,16 @@ class MyPageViewModel: ObservableObject {
     func getMyInfo() {
         let url = "\(BASE_URL)/members/my/info"
         let hearders: HTTPHeaders = [.authorization(bearerToken: UserDefaults.standard.string(forKey: JWT_KEY) ?? "")]
-        
+
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: hearders).responseDecodable(of: GetMyInfoResponse.self) { res in
             switch res.result {
             case .success(let value):
                 print("[getMyInfo success]")
                 print(value.responseMessage)
                 self.userData = value.data
+                Task {
+                    await self.sendFCMToken()
+                }
             case .failure(let err):
                 print("[getMyInfo err]")
                 print(err)

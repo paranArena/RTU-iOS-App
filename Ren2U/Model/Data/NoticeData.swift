@@ -14,6 +14,7 @@ struct NotificationDetailData: Codable {
     let createdAtDto, updatedAtDto: String
     let clubName: String
     
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title

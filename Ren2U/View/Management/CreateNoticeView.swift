@@ -12,7 +12,6 @@ struct CreateNoticeView: View {
     
     
     @State private var isShowingImagePicker = false
-    @State private var isShowingAlert = false
     
     @ObservedObject var managementVM: ManagementViewModel
     @StateObject var notificationVM: CreateNotificationViewModel
@@ -22,7 +21,7 @@ struct CreateNoticeView: View {
     
     // post
     init(method: Method, clubId: Int, managementVM: ManagementViewModel) {
-        self._notificationVM = StateObject(wrappedValue: CreateNotificationViewModel(clubId: clubId, method: method))
+        self._notificationVM = StateObject(wrappedValue: CreateNotificationViewModel(clubId: clubId, method: method, clubNotificationService: ClubNotificationService(url: ServerURL.runningServer.url)))
         self.managementVM = managementVM
     }
     
@@ -30,7 +29,7 @@ struct CreateNoticeView: View {
     init(method: Method, clubId: Int, notificationId: Int, managementVM: ManagementViewModel) {
         self._notificationVM = StateObject(wrappedValue:
                                             CreateNotificationViewModel(clubId: clubId, notificationId: notificationId,
-                                                                        method: method))
+                                                                        method: method, clubNotificationService: ClubNotificationService(url: ServerURL.runningServer.url)))
         self.managementVM = managementVM
     }
     
@@ -53,30 +52,29 @@ struct CreateNoticeView: View {
         }
         .padding(.horizontal, 10)
         .basicNavigationTitle(title: "공지사항 등록")
-        .alert("제목과 내용은 필수입니다.", isPresented: $isShowingAlert) {
-            Button("확인", role: .cancel) {}
-        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                TrailingButton()
+                TmpButton()
+//                TrailingButton()
             }
         }
         .sheet(isPresented: $isShowingImagePicker) {
             UpdatedImagePicker(imagePath: $notificationVM.notificationParam.imagePath)
         }
         .avoidSafeArea()
+        .alert(notificationVM.oneButtonAlert.title, isPresented: $notificationVM.oneButtonAlert.isPresented) {
+            OneButtonAlert.noActionButton
+        } message: {
+            notificationVM.oneButtonAlert.message
+        }
         .alert(notificationVM.twoButtonsAlert.title, isPresented: $notificationVM.twoButtonsAlert.isPresented) {
-            Button(role: .cancel) {
-                
-            } label: {
-                Text("취소")
-            }
-            
-            Button("확인") { Task{
+            Button("취소", role: .cancel) { } 
+            Button("확인") { Task {
                 await notificationVM.twoButtonsAlert.callback()
                 managementVM.searchNotificationsAll()
                 groupVM.getMyNotifications()
                 dismiss()
+                print("???")
             }}
         } message: {
             notificationVM.twoButtonsAlert.message
@@ -84,8 +82,7 @@ struct CreateNoticeView: View {
     }
     
     @ViewBuilder
-    private func ImagePickerButton() -> some View{
-        
+    private func ImagePickerButton() -> some View {
         Button {
             imagePickerVM.showDialog()
         } label: {
@@ -105,23 +102,27 @@ struct CreateNoticeView: View {
     }
     
     @ViewBuilder
+    private func TmpButton() -> some View {
+        Button {
+            notificationVM.completeButtonTapped()
+        } label: {
+            Text("완료")
+                .font(.custom(CustomFont.NSKRRegular.rawValue, size: 18))
+        }
+    }
+    
+    @ViewBuilder
     private func TrailingButton() -> some View {
         Button {
-            if notificationVM.notificationParam.title.isEmpty || notificationVM.notificationParam.content.isEmpty {
-                isShowingAlert = true
-            } else {
-                
-                if notificationVM.method == .post {
-                    Task {
-                        await notificationVM.createNotification()
-                        managementVM.searchNotificationsAll()
-                        groupVM.getMyNotifications()
-                        dismiss()
-                    }
-                } else {
-                    notificationVM.showUpdateNoficiationAlert()
+            if notificationVM.method == .post {
+                Task {
+                    await notificationVM.createNotification()
+                    managementVM.searchNotificationsAll()
+                    groupVM.getMyNotifications()
+                    dismiss()
                 }
-
+            } else {
+                notificationVM.showUpdateNoficiationAlert()
             }
         } label: {
             Text("완료")

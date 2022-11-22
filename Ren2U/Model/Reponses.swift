@@ -20,7 +20,12 @@ class CustomDecoder: JSONDecoder {
 
 //  MARK: GET
 
-
+//  MARK: CLUB_NOTIFICATION
+struct CreateNofiticationResponse: Codable {
+    let statusCode: Int
+    let responseMessage: String
+    let data: NotificationDetailData
+}
 
 struct DefaultPostResponse: Codable {
     let statusCode: Int

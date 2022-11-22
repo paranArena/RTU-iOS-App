@@ -12,6 +12,10 @@ struct NotificationParam: Codable{
     var title: String = ""
     var content: String = ""
     var imagePath: String = ""
+    
+    var isCreatable: Bool {
+        return !(title.isEmpty || content.isEmpty)
+    }
 }
 
 struct UpdateNotificationParam: Codable {
