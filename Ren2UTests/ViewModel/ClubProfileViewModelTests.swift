@@ -67,7 +67,7 @@ final class ClubProfileViewModelTests: XCTestCase {
     @MainActor
     func testCompleteButtonTappedWhenClubNameIsEmpty() async {
         vm.clubProfileParam.introduction = "그룹 소개"
-        await vm.completeButtonTapped { }
+        await vm.completeButtonTapped()
         
         let actual: ClubProfileViewModel.AlertCase? = vm.alertCase
         let expected = ClubProfileViewModel.AlertCase.lackOfInformation
@@ -78,7 +78,7 @@ final class ClubProfileViewModelTests: XCTestCase {
     func testCompleteButtonTappedWhenCreatable() async {
         vm.clubProfileParam.name = "그룹명"
         vm.clubProfileParam.introduction = "그룹 소개"
-        await vm.completeButtonTapped { }
+        await vm.completeButtonTapped() 
         
         let actual: ClubProfileViewModel.AlertCase? = vm.alertCase
         XCTAssertNil(actual)

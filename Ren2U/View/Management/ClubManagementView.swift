@@ -18,7 +18,6 @@ struct ClubManagementView: View {
     @StateObject var managementVM: ManagementViewModel
     @StateObject var couponVM: CouponViewModel
     @EnvironmentObject var clubVM: ClubViewModel
-    @State private var tmp = false
     
     @Binding var clubActive: Bool
     
@@ -41,25 +40,6 @@ struct ClubManagementView: View {
                         .background(Color.gray_DEE2E6)
                         .cornerRadius(15)
                 }
-
-                
-                //  MARK: 알림 기능 추가 후 주석 제거
-//                VStack(alignment: .center, spacing: 10) {
-//                    Text("알림")
-//                        .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-//
-//                    ScrollView {
-//                        VStack {
-//
-//                        }
-//                        .padding(.leading, 10)
-//                        .frame(maxWidth: .infinity)
-//                        .background(Color.white)
-//                    }
-//                    .frame(height: 400)
-//                }
-//                .background(Color.gray_F1F2F3)
-//                .cornerRadius(15)
             }
             .padding(.horizontal, 10)
         }

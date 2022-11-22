@@ -13,15 +13,15 @@ class ClubProfileViewModel: BaseViewModel {
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
     @Published var clubProfileParam = ClubProfileParam()
     @Published var isShowingTagPlaceholder = true
-    
+
     var alertCase: AlertCase?
-    
+
     private let clubProfileService: ClubProfileServiceEnable
 
     init(clubService: ClubProfileServiceEnable) {
         self.clubProfileService = clubService
     }
-    
+
     func focusFieldChanged(focusedField: Field) {
         if focusedField == .tag {
             self.isShowingTagPlaceholder = false
@@ -30,7 +30,7 @@ class ClubProfileViewModel: BaseViewModel {
             isShowingTagPlaceholder = true
         }
     }
-    
+
     func xmarkTapped(index: Int) {
         clubProfileParam.hashtags.remove(at: index)
     }
@@ -43,34 +43,41 @@ class ClubProfileViewModel: BaseViewModel {
     }
     
     @MainActor
+    private func showTwoButtonsAlert(alertCase: AlertCase) {
+        self.alertCase = alertCase
+        twoButtonsAlert.title = self.title
+        twoButtonsAlert.messageText = self.message
+        twoButtonsAlert.callback = {
+            await self.callback()
+            self.alertCase = nil
+        }
+        twoButtonsAlert.isPresented = true
+    }
+
+    @MainActor
     private func showAlert(selectedCase: AlertCase) {
         alertCase = selectedCase
-        if let alertCase = self.alertCase {
-            oneButtonAlert.title = alertCase.title
-            oneButtonAlert.messageText = alertCase.message
-            oneButtonAlert.isPresented = true
-            oneButtonAlert.callback = { self.alertCase = nil }
+        oneButtonAlert.title = self.title
+        oneButtonAlert.messageText = self.message
+        oneButtonAlert.isPresented = true
+        oneButtonAlert.callback = {
+            self.alertCase = nil
         }
     }
-    
+
     @MainActor
-    func completeButtonTapped(closure: @escaping () -> ()) async {
+    func completeButtonTapped() async {
         if self.clubProfileParam.isCreatable {
-            let response = await clubProfileService.createClub(data: self.clubProfileParam)
-            if let error = response.error {
-                self.showAlert(with: error)
-            } else {
-                closure()
-            }
+            showTwoButtonsAlert(alertCase: .postClub)
         } else {
             showAlert(selectedCase: .lackOfInformation)
         }
     }
-    
+
     func hashtagEditEnded() {
-        
+
         let splited = clubProfileParam.hashtagText.split(separator: " ")
-        
+
         for element in splited {
             var hashtag = element
             if hashtag.first == "#" {
@@ -80,34 +87,59 @@ class ClubProfileViewModel: BaseViewModel {
                 }
             }
         }
-        
+
         self.clubProfileParam.hashtagText = ""
     }
-    
+
     private func createClub() async {
         let response = await clubProfileService.createClub(data: clubProfileParam)
         if let error = response.error {
             await self.showAlert(with: error)
-        } 
+        }
     }
 }
 
 extension ClubProfileViewModel {
     enum AlertCase {
         case lackOfInformation
-
-        var title: String {
-            switch self {
-            case .lackOfInformation:
-                return "그룹 생성 불가"
-            }
+        case postClub
+    }
+    
+    var title: String {
+        switch self.alertCase {
+        case .lackOfInformation:
+            return "그룹 생성 불가"
+        case .postClub:
+            return "그룹 생성"
+        case .none:
+            return ""
         }
-        
-        var message: String {
-            switch self {
-                
-            case .lackOfInformation:
-                return "그룹명과 소개는 필수입니다."
+    }
+
+    var message: String {
+        switch self.alertCase {
+        case .lackOfInformation:
+            return "그룹명과 소개는 필수입니다."
+        case .postClub:
+            return "그룹을 생성하시겠습니까?"
+        case .none:
+            return ""
+        }
+    }
+    
+    var callback: () async -> () {
+        switch self.alertCase {
+            
+        case .none:
+            return { }
+        case .lackOfInformation:
+            return { }
+        case .postClub:
+            return {
+                let response = await self.clubProfileService.createClub(data: self.clubProfileParam)
+                if let error = response.error {
+                    await self.showAlert(with: error)
+                }
             }
         }
     }
@@ -117,7 +149,7 @@ extension ClubProfileViewModel {
     enum Field: CaseIterable {
         case name
         case tag
-        case introduction 
+        case introduction
     }
 }
 

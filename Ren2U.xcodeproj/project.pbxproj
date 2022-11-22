@@ -162,6 +162,7 @@
 		158D1B5E2903B6B2006D370D /* MyPageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158D1B5D2903B6B2006D370D /* MyPageTests.swift */; };
 		158D1B602903B740006D370D /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158D1B5F2903B740006D370D /* PasswordTests.swift */; };
 		159333012908FB3D007E2BFD /* ClubProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159333002908FB3D007E2BFD /* ClubProfileService.swift */; };
+		159CB15D292D1BAF00FAE8D2 /* CreateNotificationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159CB15C292D1BAF00FAE8D2 /* CreateNotificationViewModelTests.swift */; };
 		159DB00828DECE4F00FCE98D /* MyCouponDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB00728DECE4F00FCE98D /* MyCouponDetailViewModel.swift */; };
 		159F086828AC72170008EC16 /* RentalDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086728AC72170008EC16 /* RentalDatePicker.swift */; };
 		159F086C28ACAFBC0008EC16 /* RentalDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */; };
@@ -386,6 +387,7 @@
 		158D1B5D2903B6B2006D370D /* MyPageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTests.swift; sourceTree = "<group>"; };
 		158D1B5F2903B740006D370D /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
 		159333002908FB3D007E2BFD /* ClubProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubProfileService.swift; sourceTree = "<group>"; };
+		159CB15C292D1BAF00FAE8D2 /* CreateNotificationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotificationViewModelTests.swift; sourceTree = "<group>"; };
 		159DB00728DECE4F00FCE98D /* MyCouponDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponDetailViewModel.swift; sourceTree = "<group>"; };
 		159F086728AC72170008EC16 /* RentalDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDatePicker.swift; sourceTree = "<group>"; };
 		159F086B28ACAFBC0008EC16 /* RentalDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalDetailVM.swift; sourceTree = "<group>"; };
@@ -689,6 +691,7 @@
 				152E6C46290F6A7400CF5846 /* ClubProfileViewModelTests.swift */,
 				153459B72900E98300CEA4B2 /* LoginTests.swift */,
 				153459BB2901128200CEA4B2 /* SignUpTests.swift */,
+				159CB15C292D1BAF00FAE8D2 /* CreateNotificationViewModelTests.swift */,
 				158D1B5D2903B6B2006D370D /* MyPageTests.swift */,
 				158D1B5F2903B740006D370D /* PasswordTests.swift */,
 			);
@@ -1419,6 +1422,7 @@
 				157B8D5528F9934600B9A924 /* MemberServiceTests.swift in Sources */,
 				158D1B602903B740006D370D /* PasswordTests.swift in Sources */,
 				157B8D4F28F98A7500B9A924 /* CouponServiceTests.swift in Sources */,
+				159CB15D292D1BAF00FAE8D2 /* CreateNotificationViewModelTests.swift in Sources */,
 				153459BC2901128200CEA4B2 /* SignUpTests.swift in Sources */,
 				15FEDABD28FE4C3A00849311 /* ClubServiceTests.swift in Sources */,
 				15AFFAF8291A140300EC5513 /* RentServiceTests.swift in Sources */,
