@@ -214,7 +214,10 @@ extension CreateNotificationViewModel {
         case .putNotification:
             return {
                 let response = await self.clubNotificationService.updateNotification(clubId: self.clubId, notificationId: self.notificationId ?? -1, data: self.notificationParam)
-                if let error = response.error { await self.showAlert(with: error) }
+                if let error = response.error {
+                    print(response.debugDescription)
+                    await self.showAlert(with: error)
+                }
             }
 
         case .lackOfInformation:

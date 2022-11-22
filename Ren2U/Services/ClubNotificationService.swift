@@ -11,7 +11,7 @@ import Alamofire
 protocol ClubNotificationServiceEnable: BaseServiceEnable {
     func createNotification(clubId: Int, data: NotificationParam) async -> DataResponse<String, NetworkError>
     func getNotification(clubId: Int, notificationId: Int) async -> DataResponse<GetNotificationResponse, NetworkError>
-    func updateNotification(clubId: Int, notificationId: Int, data: NotificationParam) async -> DataResponse<DefaultPostResponse, NetworkError>
+    func updateNotification(clubId: Int, notificationId: Int, data: NotificationParam) async -> DataResponse<String, NetworkError>
 }
 
 class MockupClubNotificationService: ClubNotificationServiceEnable {
@@ -35,9 +35,9 @@ class MockupClubNotificationService: ClubNotificationServiceEnable {
         return DataResponse(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: result)
     }
     
-    func updateNotification(clubId: Int, notificationId: Int, data: NotificationParam) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+    func updateNotification(clubId: Int, notificationId: Int, data: NotificationParam) async -> Alamofire.DataResponse<String, NetworkError> {
         let result = Result {
-            return DefaultPostResponse(statusCode: 200, responseMessage: "", data: nil)
+            return "" 
         } .mapError { _ in
             NetworkError(initialError: nil, serverError: nil)
         }
@@ -91,21 +91,26 @@ class ClubNotificationService: ClubNotificationServiceEnable {
         }
     }
     
-    func updateNotification(clubId: Int, notificationId: Int, data: NotificationParam) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
+    func updateNotification(clubId: Int, notificationId: Int, data: NotificationParam) async -> Alamofire.DataResponse<String, NetworkError> {
         
-        let url = "\(self.url!)/clubs/\(clubId)/notifications/\(notificationId)"
+        let url = "\(self.url!)/api/v1/clubs/\(clubId)/notifications/\(notificationId)"
         let headers: HTTPHeaders = [
             .authorization(bearerToken: self.bearerToken!)
         ]
         
+        var imagePaths = [String]()
+        if !data.imagePath.isEmpty {
+            imagePaths.append(data.imagePath)
+        }
+        
         let param: [String : Any] = [
             "title" : data.title,
             "content" : data.content,
-            "imagePaths" : data.imagePath,
+            "imagePaths" : imagePaths,
             "isPublic" : true
         ]
         
-        let response = await AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default, headers: headers).serializingDecodable(DefaultPostResponse.self).response
+        let response = await AF.request(url, method: .put, parameters: param, encoding: JSONEncoding.default, headers: headers).serializingString().response
         
         return response.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }

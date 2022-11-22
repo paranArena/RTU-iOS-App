@@ -10,7 +10,7 @@ import SwiftUI
 struct NotificationDetailData: Codable {
     let id: Int
     let title, content: String
-    let imagePath: String
+    let imagePath: String?
     let createdAtDto, updatedAtDto: String
     let clubName: String
     
@@ -38,7 +38,10 @@ struct NotificationDetailData: Codable {
     }
     
     func toParam() -> NotificationParam {
-        return NotificationParam(title: self.title, content: self.content, imagePath: self.imagePath)
+        if let imagePath = self.imagePath {
+            return NotificationParam(title: self.title, content: self.content, imagePath: imagePath)
+        }
+        return NotificationParam(title: self.title, content: self.content, imagePath: "")
     }
 }
 
