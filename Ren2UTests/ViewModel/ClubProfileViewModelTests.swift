@@ -81,7 +81,8 @@ final class ClubProfileViewModelTests: XCTestCase {
         await vm.completeButtonTapped() 
         
         let actual: ClubProfileViewModel.AlertCase? = vm.alertCase
-        XCTAssertNil(actual)
+        let expected = ClubProfileViewModel.AlertCase.postClub
+        XCTAssertEqual(actual, expected)
     }
     
     func testFocusFieldChangedWhenNameFieldFocused() {
