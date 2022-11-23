@@ -12,6 +12,10 @@ class ImagePickerViewModel: BaseViewModel {
     
     @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()
     @Published var oneButtonAlert: OneButtonAlert = OneButtonAlert()
+    @Published var uiImage: UIImage?
+    @Published var uiImages = [UIImage]()
+    
+    var viewCase: ViewCase?
     
     func showAlert(with error: NetworkError) {
         oneButtonAlert.title = "에러"
@@ -31,6 +35,15 @@ class ImagePickerViewModel: BaseViewModel {
     
     init(imageService: ImageServiceEnable) {
         self.imageService = imageService
+    }
+    
+    func clearImagesIfNeeded(viewCase: ViewCase) {
+        if self.viewCase != viewCase {
+            self.uiImage = nil
+            self.uiImages.removeAll()
+        }
+        
+        self.viewCase = viewCase
     }
     
     func showDialog() {
@@ -111,6 +124,13 @@ class ImagePickerViewModel: BaseViewModel {
             let button = Button("OK", role: .cancel) {}
         }
     }
+}
 
+extension ImagePickerViewModel {
+    enum ViewCase {
+        case Product
+        case Club
+        case Notification
+    }
 }
 
