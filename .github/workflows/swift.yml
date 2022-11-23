@@ -17,4 +17,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build
-      run: xcodebuild clean test -workspace Ren2u.xcodeproj -scheme Ren2u -destination 'platform = iOS Simulator, name = iPhone 14, OS = latest'
+      run: xcodebuild clean test -project Ren2UTests/LoginTests.swift -scheme Ren2U -destination 'platform = iOS Simulator, name = iPhone 14, OS = latest'
