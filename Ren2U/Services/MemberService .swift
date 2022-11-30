@@ -12,7 +12,7 @@ protocol MemberServiceEnable: BaseServiceEnable {
     
     //  MARK: Deprecated
     func login(param: [String: Any]) async -> DataResponse<LoginResponse, NetworkError>
-    func login(data: LoginParam) async -> DataResponse<LoginResponse, NetworkError>
+    @discardableResult func login(data: LoginParam) async -> DataResponse<LoginResponse, NetworkError>
     func checkEmailDuplicate(email: String) async -> DataResponse<Bool, NetworkError>
     func getMyInfo() async -> DataResponse<GetMyInfoResponse, NetworkError>
     func getMyClubs() async -> DataResponse<GetMyClubsResponse, NetworkError>
