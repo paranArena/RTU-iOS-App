@@ -8,7 +8,27 @@
 import Foundation
 import SwiftUI
 
-// legacy 
+protocol BaseAlert: Equatable {
+    var title: String { get }
+    var message: String { get }
+    var callback: () async -> () { get }
+}
+
+struct CustomAlert {
+    var titleText: String = ""
+    var messageText: String = ""
+    var callback: () async -> () = { }
+    var isPresentedAlert = false
+    var isPresentedCancelButton = false
+    
+    var message: Text {
+        Text(messageText)
+    }
+    
+    static let CancelButton = Button("취소", role: .cancel) { }
+}
+
+// MARK: Deprecated
 struct Alert {
     var message = Text("")
     var isPresented = false

@@ -91,7 +91,7 @@
 		154553D128A351AA005E7FDB /* RentalComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553D028A351AA005E7FDB /* RentalComplete.swift */; };
 		154553D328A35412005E7FDB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 154553D228A35412005E7FDB /* NotoSansKR-Black.otf */; };
 		154B6B4428C31215004962B9 /* DoubleWheelPicker .swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */; };
-		155004B928E037D9006B89B4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155004B828E037D9006B89B4 /* BaseViewModel.swift */; };
+		155004B928E037D9006B89B4 /* AlertDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155004B828E037D9006B89B4 /* AlertDelegate.swift */; };
 		155004BB28E045BA006B89B4 /* CouponDetailAdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155004BA28E045BA006B89B4 /* CouponDetailAdminViewModel.swift */; };
 		155004BD28E070A8006B89B4 /* UnusedCouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155004BC28E070A8006B89B4 /* UnusedCouponCell.swift */; };
 		155004BF28E0859F006B89B4 /* MyCouponHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155004BE28E0859F006B89B4 /* MyCouponHistoryCell.swift */; };
@@ -319,7 +319,7 @@
 		154553D028A351AA005E7FDB /* RentalComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalComplete.swift; sourceTree = "<group>"; };
 		154553D228A35412005E7FDB /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		154B6B4328C31215004962B9 /* DoubleWheelPicker .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoubleWheelPicker .swift"; sourceTree = "<group>"; };
-		155004B828E037D9006B89B4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		155004B828E037D9006B89B4 /* AlertDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDelegate.swift; sourceTree = "<group>"; };
 		155004BA28E045BA006B89B4 /* CouponDetailAdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponDetailAdminViewModel.swift; sourceTree = "<group>"; };
 		155004BC28E070A8006B89B4 /* UnusedCouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnusedCouponCell.swift; sourceTree = "<group>"; };
 		155004BE28E0859F006B89B4 /* MyCouponHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponHistoryCell.swift; sourceTree = "<group>"; };
@@ -538,7 +538,7 @@
 		151B556D28BC9EBC0090A5E8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				155004B828E037D9006B89B4 /* BaseViewModel.swift */,
+				155004B828E037D9006B89B4 /* AlertDelegate.swift */,
 				152E6C48290F9F5700CF5846 /* Auth */,
 				15F937C728D58D5F00D41F0C /* Club */,
 				159DB00628DECD5100FCE98D /* Member */,
@@ -1365,7 +1365,7 @@
 				152C3E85287E6D6C000BFC97 /* BottomLinePlaceholder.swift in Sources */,
 				15F3672D289252B70073E094 /* SearchBar.swift in Sources */,
 				1525F5FE28B7362C00C7CA51 /* ItemInformation.swift in Sources */,
-				155004B928E037D9006B89B4 /* BaseViewModel.swift in Sources */,
+				155004B928E037D9006B89B4 /* AlertDelegate.swift in Sources */,
 				15206E4C28DB66E10091DA74 /* GrantCouponView.swift in Sources */,
 				15A84D5D28CE120D00B3EB84 /* NotificationDetailView.swift in Sources */,
 				153687AD28DAC1DD00E0D554 /* UpdatedImagePicker.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CouponDetailAdminViewModel: ObservableObject, BaseViewModel {
+class CouponDetailAdminViewModel: BaseViewModel {
     
     let clubId: Int
     let couponId: Int

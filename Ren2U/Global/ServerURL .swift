@@ -8,7 +8,7 @@
 import SwiftUI
 
 //  MARK: Deprecated
-let BASE_URL = "https://ren2u.shop"
+let BASE_URL = "http://15.165.38.225:8080"
 
 enum ServerURL {
     case runningServer
@@ -18,7 +18,7 @@ enum ServerURL {
     var url: String {
         switch self {
         case .runningServer:
-            return "https://ren2u.shop"
+            return "http://15.165.38.225:8080"
         case .prodServer:
             return "https://ren2u.shop"
         case .devServer:

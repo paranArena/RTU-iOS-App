@@ -8,7 +8,7 @@
 import SwiftUI
 import Alamofire
 
-class ClubSearchViewModel: ObservableObject, BaseViewModel {
+class ClubSearchViewModel: BaseViewModel {
     
     @Published var clubData = [ClubAndRoleData]()
     @Published var twoButtonsAlert: TwoButtonsAlert = TwoButtonsAlert()

@@ -69,20 +69,26 @@ final class ClubProfileViewModelTests: XCTestCase {
         vm.clubProfileParam.introduction = "그룹 소개"
         await vm.completeButtonTapped()
         
-        let actual: ClubProfileViewModel.AlertCase? = vm.alertCase
-        let expected = ClubProfileViewModel.AlertCase.lackOfInformation
-        XCTAssertEqual(actual, expected)
+        if let actual = vm.alertCase {
+            let expected = ClubProfileViewModel.AlertCase.lackOfInformation
+            XCTAssertEqual(actual as! ClubProfileViewModel.AlertCase, expected)
+        } else {
+            XCTAssert(true)
+        }
     }
     
     @MainActor
     func testCompleteButtonTappedWhenCreatable() async {
         vm.clubProfileParam.name = "그룹명"
         vm.clubProfileParam.introduction = "그룹 소개"
-        await vm.completeButtonTapped() 
+        await vm.completeButtonTapped()
         
-        let actual: ClubProfileViewModel.AlertCase? = vm.alertCase
-        let expected = ClubProfileViewModel.AlertCase.postClub
-        XCTAssertEqual(actual, expected)
+        if let actual = vm.alertCase {
+            let expected = ClubProfileViewModel.AlertCase.postClub(MockupClubProfileService(), ClubProfileParam()) { _ in }
+            XCTAssertEqual(actual as! ClubProfileViewModel.AlertCase, expected)
+        } else {
+            XCTAssert(true)
+        }
     }
     
     func testFocusFieldChangedWhenNameFieldFocused() {
