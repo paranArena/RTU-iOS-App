@@ -8,10 +8,11 @@
 import Foundation
 import SwiftUI
 
-protocol BaseAlert: Equatable {
+protocol BaseAlert {
     var title: String { get }
     var message: String { get }
     var callback: () async -> () { get }
+    var alertID: Int { get } 
 }
 
 struct CustomAlert {

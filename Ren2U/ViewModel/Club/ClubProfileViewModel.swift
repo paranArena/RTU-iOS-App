@@ -8,6 +8,7 @@
 import Foundation
 
 class ClubProfileViewModel: AlertDelegate {
+    
     @Published var alert: CustomAlert = CustomAlert()
     var alertCase: (any BaseAlert)?
     @Published var clubProfileParam = ClubProfileParam()
@@ -61,20 +62,19 @@ class ClubProfileViewModel: AlertDelegate {
 
 extension ClubProfileViewModel {
     enum AlertCase: BaseAlert {
-        static func == (lhs: ClubProfileViewModel.AlertCase, rhs: ClubProfileViewModel.AlertCase) -> Bool {
-            switch (lhs, rhs) {
-            case (.lackOfInformation, .lackOfInformation):
-                return true
-            case (.postClub(_, _, _), .postClub(_, _, _)):
-                return true
-            default:
-                return false
-            }
-        }
-        
    
         case lackOfInformation
         case postClub(ClubProfileServiceEnable, ClubProfileParam, (NetworkError) -> Void)
+        
+        var alertID: Int {
+            switch self {
+                
+            case .lackOfInformation:
+                return 1
+            case .postClub(_, _, _):
+                return 2 
+            }
+        }
         
         var title: String {
             switch self {

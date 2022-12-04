@@ -69,9 +69,9 @@ final class ClubProfileViewModelTests: XCTestCase {
         vm.clubProfileParam.introduction = "그룹 소개"
         await vm.completeButtonTapped()
         
-        if let actual = vm.alertCase {
-            let expected = ClubProfileViewModel.AlertCase.lackOfInformation
-            XCTAssertEqual(actual as! ClubProfileViewModel.AlertCase, expected)
+        if let actual = vm.alertCase?.alertID {
+            let expected = ClubProfileViewModel.AlertCase.lackOfInformation.alertID
+            XCTAssertEqual(actual, expected)
         } else {
             XCTAssert(true)
         }
@@ -83,9 +83,9 @@ final class ClubProfileViewModelTests: XCTestCase {
         vm.clubProfileParam.introduction = "그룹 소개"
         await vm.completeButtonTapped()
         
-        if let actual = vm.alertCase {
-            let expected = ClubProfileViewModel.AlertCase.postClub(MockupClubProfileService(), ClubProfileParam()) { _ in }
-            XCTAssertEqual(actual as! ClubProfileViewModel.AlertCase, expected)
+        if let actual = vm.alertCase?.alertID {
+            let expected = ClubProfileViewModel.AlertCase.postClub(MockupClubProfileService(), ClubProfileParam()) { _ in }.alertID
+            XCTAssertEqual(actual , expected)
         } else {
             XCTAssert(true)
         }

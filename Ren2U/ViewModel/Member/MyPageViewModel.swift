@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import FirebaseMessaging
 
 class MyPageViewModel: ObservableObject {
     
@@ -15,6 +16,7 @@ class MyPageViewModel: ObservableObject {
     @Published var isLogined = false
     
     let fcmSerivce: FCMServiceEnable
+    @Published var timer = Timer()
     
     init(fcmService: FCMServiceEnable) {
         if UserDefaults.standard.string(forKey: JWT_KEY) == nil {
@@ -26,8 +28,18 @@ class MyPageViewModel: ObservableObject {
         self.fcmSerivce = fcmService
     }
     
+    @MainActor
     private func sendFCMToken() async {
-        let _ = await fcmSerivce.registerFCMToken(memberId: self.userData!.id, fcmToken: UserDefaults.standard.string(forKey: FCM_TOKEN) ?? "")
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+            if let token = UserDefaults.standard.string(forKey: FCM_TOKEN) {
+                Task {
+                    await self.fcmSerivce.registerFCMToken(memberId: self.userData!.id, fcmToken: token)
+                    self.timer.invalidate()
+                }
+            }
+            
+        }
     }
     
     func logout() {
@@ -48,8 +60,8 @@ class MyPageViewModel: ObservableObject {
             case .success(let value):
                 print("[getMyInfo success]")
                 print(value.responseMessage)
-                self.userData = value.data
                 Task {
+                    self.userData = value.data
                     await self.sendFCMToken()
                 }
             case .failure(let err):

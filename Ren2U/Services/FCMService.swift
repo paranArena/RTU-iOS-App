@@ -13,6 +13,8 @@ protocol FCMServiceEnable: BaseServiceEnable {
 }
 
 class FCMService: FCMServiceEnable {
+    
+    @discardableResult
     func registerFCMToken(memberId: Int, fcmToken: String) async -> Alamofire.DataResponse<DefaultPostResponse, NetworkError> {
         
         let url = "\(self.url!)/api/fcm/register"
@@ -25,8 +27,6 @@ class FCMService: FCMServiceEnable {
         ]
         
         let response = await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers).serializingDecodable(DefaultPostResponse.self).response
-        
-        print("FCM : \(response.debugDescription)")
         
         return response.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
