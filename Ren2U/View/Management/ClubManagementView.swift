@@ -136,25 +136,15 @@ struct ClubManagementView: View {
         VStack(alignment: .center, spacing: 0) {
             ForEach(ManageSelection.allCases, id : \.rawValue) { selection in
                 HStack {
-                    if selection != .profileEdit {
-                        NavigationLink {
-                            Navigation(selection: selection)
-                        } label: {
-                            Text(selection.title)
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 20)
-                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-                                .foregroundColor(Color.primary)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-//                    } else if selection == .rentalActive     {
-//                        Toggle(isOn: $rentalToggle) {
-//                            Text(selection.title)
-//                                .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
-//                        }
-//                        .padding(.vertical, 8)
-//                        .padding(.leading, 20)
-//                        .toggleStyle(CustomToggleStyle())
+                    NavigationLink {
+                        Navigation(selection: selection)
+                    } label: {
+                        Text(selection.title)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 20)
+                            .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
+                            .foregroundColor(Color.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     
                     Spacer()
@@ -171,15 +161,14 @@ struct ClubManagementView: View {
     private func Navigation(selection: ManageSelection) -> some View {
         switch selection {
         case .profileEdit:
-            ClubProfile(viewModel: ClubProfile.ViewModel(putModeData: managementVM.clubData, mode: .put))
+            ClubProfile(clubProfileService: ClubProfileViewModel(clubService: ClubProfileService(url: ServerURL.runningServer.url), clubId: managementVM.clubData.id))
+//            ClubProfile(viewModel: ClubProfile.ViewModel(putModeData: managementVM.clubData, mode: .put))
         case .rentalManagement:
             RentalAndItemManagement(managementVM: managementVM)
         case .notice:
             NoticeManagementView(managementVM: managementVM)
         case .memberManagement:
             MemberManagementView(managementVM: managementVM)
-//        case .rentalActive:
-//            Text("Empty View")
         case .coupon:
             CouponManagementView(couponVM: couponVM, managementVM: managementVM)
         }

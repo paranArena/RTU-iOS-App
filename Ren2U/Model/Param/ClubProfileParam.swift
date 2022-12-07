@@ -8,10 +8,10 @@
 import Foundation
 import SwiftUI 
 
-struct ClubProfileParam {
+struct ClubProfileParam: Codable {
     var name: String = ""
     var introduction: String = ""
-    var thumbnail: UIImage = UIImage(imageLiteralResourceName: "DefaultGroupImage")
+    var imagePath: String = "" 
     var hashtagText: String = "" 
     var hashtags: [String] = [String]()
     

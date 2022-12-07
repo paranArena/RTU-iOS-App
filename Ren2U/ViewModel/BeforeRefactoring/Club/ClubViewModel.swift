@@ -21,18 +21,6 @@ class ClubViewModel: ObservableObject {
     
     @Published var oneButtonAlert = OneButtonAlert()
     
-    //  MARK: LOCAL
-    
-    func checkClubRequiredInformation(clubData: CreateClubFormdata) -> Bool {
-        if clubData.name.isEmpty || clubData.introduction.isEmpty {
-            oneButtonAlert.title = "그룹 생성 불가"
-            oneButtonAlert.messageText = "그룹 이름, 소개글은 필수입니다."
-            oneButtonAlert.isPresented = true
-            return false
-        } else {
-            return true
-        }
-    }
     
     func getGroupNameByGroupId(groupId: Int) -> String {
         if let fooOffset = joinedClubs.firstIndex(where: {$0.id == groupId }) {

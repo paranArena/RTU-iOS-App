@@ -26,6 +26,7 @@
 		15206E4A28DB5E6E0091DA74 /* CouponDetailAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4928DB5E6E0091DA74 /* CouponDetailAdminView.swift */; };
 		15206E4C28DB66E10091DA74 /* GrantCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4B28DB66E10091DA74 /* GrantCouponView.swift */; };
 		15206E4E28DB687C0091DA74 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15206E4D28DB687C0091DA74 /* MemberCell.swift */; };
+		1521B1B2293F1EE4002D14CA /* ObservedOptionalObject in Frameworks */ = {isa = PBXBuildFile; productRef = 1521B1B1293F1EE4002D14CA /* ObservedOptionalObject */; };
 		15228AB928C891A600A0B3C5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15228AB828C891A600A0B3C5 /* Alamofire */; };
 		15228ABB28C8970A00A0B3C5 /* RentalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228ABA28C8970A00A0B3C5 /* RentalCell.swift */; };
 		15228ABD28C89FA200A0B3C5 /* ProductData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15228ABC28C89FA200A0B3C5 /* ProductData.swift */; };
@@ -83,7 +84,6 @@
 		153C1A74288CEB7800F89B2E /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A73288CEB7800F89B2E /* Roboto-Medium.ttf */; };
 		153C1A76288CEB9300F89B2E /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 153C1A75288CEB9300F89B2E /* Roboto-Bold.ttf */; };
 		153C1A7B288CF7D600F89B2E /* ClubProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7A288CF7D600F89B2E /* ClubProfile.swift */; };
-		153C1A7D288D0A1F00F89B2E /* ClubProfileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7C288D0A1F00F89B2E /* ClubProfileExtension.swift */; };
 		153C1A80288D113F00F89B2E /* SimpleBottomLine .swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */; };
 		153CAA352925BDF50035027B /* UpdatedImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CAA342925BDF50035027B /* UpdatedImagePickerView.swift */; };
 		154553CD28A34B25005E7FDB /* RentalSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154553CC28A34B25005E7FDB /* RentalSheet.swift */; };
@@ -311,7 +311,6 @@
 		153C1A73288CEB7800F89B2E /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		153C1A75288CEB9300F89B2E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		153C1A7A288CF7D600F89B2E /* ClubProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubProfile.swift; sourceTree = "<group>"; };
-		153C1A7C288D0A1F00F89B2E /* ClubProfileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubProfileExtension.swift; sourceTree = "<group>"; };
 		153C1A7F288D113F00F89B2E /* SimpleBottomLine .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SimpleBottomLine .swift"; sourceTree = "<group>"; };
 		153CAA342925BDF50035027B /* UpdatedImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedImagePickerView.swift; sourceTree = "<group>"; };
 		154553CC28A34B25005E7FDB /* RentalSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalSheet.swift; sourceTree = "<group>"; };
@@ -452,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15C391A12926409000E9B462 /* FirebaseMessaging in Frameworks */,
+				1521B1B2293F1EE4002D14CA /* ObservedOptionalObject in Frameworks */,
 				15FD086A28E7350B009E2275 /* ComposableArchitecture in Frameworks */,
 				1589C17328C8917C00D83FCC /* Kingfisher in Frameworks */,
 				15228AB928C891A600A0B3C5 /* Alamofire in Frameworks */,
@@ -800,7 +800,6 @@
 			children = (
 				156386D1288A5D1A006653E8 /* ClubViewModel.swift */,
 				155CED5E28A0EA380032C1BA /* GroupTabVM.swift */,
-				153C1A7C288D0A1F00F89B2E /* ClubProfileExtension.swift */,
 			);
 			path = Club;
 			sourceTree = "<group>";
@@ -1098,6 +1097,7 @@
 				15228AB828C891A600A0B3C5 /* Alamofire */,
 				15FD086928E7350B009E2275 /* ComposableArchitecture */,
 				15C391A02926409000E9B462 /* FirebaseMessaging */,
+				1521B1B1293F1EE4002D14CA /* ObservedOptionalObject */,
 			);
 			productName = Ren2U;
 			productReference = 15FAF130287D5DFF00B35570 /* Ren2U.app */;
@@ -1178,6 +1178,7 @@
 				1589C17128C8917C00D83FCC /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				15FD086828E7350B009E2275 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				15C3919F2926409000E9B462 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1521B1B0293F1EE4002D14CA /* XCRemoteSwiftPackageReference "observed-optional-object" */,
 			);
 			productRefGroup = 15FAF131287D5DFF00B35570 /* Products */;
 			projectDirPath = "";
@@ -1235,7 +1236,6 @@
 				152C3E81287E5E84000BFC97 /* SignUp.swift in Sources */,
 				15FAF163287D5F0300B35570 /* CapsulePlaceholder.swift in Sources */,
 				152C6F5728C8551500AA420A /* RentalData.swift in Sources */,
-				153C1A7D288D0A1F00F89B2E /* ClubProfileExtension.swift in Sources */,
 				15667BCB28CC8A2800AE9A2D /* NoticeCell.swift in Sources */,
 				157190EF28B7024D00880F98 /* ProductManageView.swift in Sources */,
 				1563FE9728ADF6EE00F46CC7 /* RentViewModel.swift in Sources */,
@@ -1757,6 +1757,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1521B1B0293F1EE4002D14CA /* XCRemoteSwiftPackageReference "observed-optional-object" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fourplusone/observed-optional-object.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		1589C16B28C8914700D83FCC /* XCRemoteSwiftPackageReference "HidableTabView-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliMert/HidableTabView-SwiftUI.git";
@@ -1808,6 +1816,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1521B1B1293F1EE4002D14CA /* ObservedOptionalObject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1521B1B0293F1EE4002D14CA /* XCRemoteSwiftPackageReference "observed-optional-object" */;
+			productName = ObservedOptionalObject;
+		};
 		15228AB828C891A600A0B3C5 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 15E49BCE28C8906400AC4257 /* XCRemoteSwiftPackageReference "Alamofire" */;

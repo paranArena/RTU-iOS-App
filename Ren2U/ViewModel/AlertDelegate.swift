@@ -12,11 +12,13 @@ protocol AlertDelegate: ObservableObject {
     var alertCase: (any BaseAlert)? { get set }
     
     func showAlert(with error: NetworkError)
-    func showAlert(alertCase: any BaseAlert)
-    func showAlertWithCancelButton(alertCase: any BaseAlert)
+    func showAlert(alertCase: any BaseAlert, closure: @escaping () -> ())
+    func showAlertWithCancelButton(alertCase: any BaseAlert, closure: @escaping () -> ())
 }
 
 extension AlertDelegate {
+    
+    @MainActor
     func showAlert(with error: NetworkError) {
         self.alert.titleText = "에러"
         self.alert.messageText = error.serverError == nil ? error.initialError!.localizedDescription : error.serverError!.message
@@ -29,13 +31,14 @@ extension AlertDelegate {
     }
     
     @MainActor
-    func showAlert(alertCase: any BaseAlert) {
+    func showAlert(alertCase: any BaseAlert, closure: @escaping () -> () = {} ) {
         self.alertCase = alertCase
         if let ac = self.alertCase {
             self.alert.titleText = ac.title
             self.alert.messageText = ac.message
             self.alert.callback = {
                 await ac.callback()
+                closure() 
                 self.alertCase = nil
             }
             self.alert.isPresentedCancelButton = false
@@ -44,7 +47,7 @@ extension AlertDelegate {
     }
     
     @MainActor
-    func showAlertWithCancelButton(alertCase: any BaseAlert) {
+    func showAlertWithCancelButton(alertCase: any BaseAlert, closure: @escaping () -> () = {} ) {
         self.alertCase = alertCase
         if let ac = self.alertCase {
             alert.titleText = ac.title
@@ -53,6 +56,7 @@ extension AlertDelegate {
             alert.isPresentedAlert = true
             alert.callback = {
                 await ac.callback()
+                closure()
                 self.alertCase = nil
             }
         }

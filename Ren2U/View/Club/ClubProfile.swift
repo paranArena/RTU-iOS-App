@@ -8,25 +8,25 @@
 import SwiftUI
 import HidableTabView
 import Kingfisher
-
-extension ClubProfile {
-    enum Mode {
-        case post
-        case put
-    }
-}
+import ObservedOptionalObject
 
 struct ClubProfile: View {
     
     @EnvironmentObject var clubVM: ClubViewModel
     @EnvironmentObject var imagePickerVM: ImagePickerViewModel
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @Environment(\.isPresented) var isPresented
-    @StateObject var viewModel: ViewModel
+    @StateObject private var clubProfileVM: ClubProfileViewModel
     @FocusState var focusField: ClubField?
+    
+    
+    init(clubProfileService: ClubProfileViewModel) {
+        self._clubProfileVM = StateObject(wrappedValue: clubProfileService)
+    }
+    
 
     var body: some View {
-        BounceControllScrollView(baseOffset: 80, offset: $viewModel.offset) {
+        BounceControllScrollView(baseOffset: 80, offset: $clubProfileVM.offset) {
             VStack(alignment: .center, spacing: 10) {
                 GroupImage()
                     .overlay(ChangeImageButton())
@@ -41,11 +41,16 @@ struct ClubProfile: View {
             }
             .animation(.spring(), value: focusField)
         }
-        .alert(clubVM.oneButtonAlert.title, isPresented: $clubVM.oneButtonAlert.isPresented) {
-            OneButtonAlert.noActionButton
-        } message: {
-            clubVM.oneButtonAlert.message
-        }
+        .alert(clubProfileVM.alert.titleText, isPresented: $clubProfileVM.alert.isPresentedAlert, actions: {
+            if clubProfileVM.alert.isPresentedCancelButton {
+                CustomAlert.CancelButton
+            }
+            Button("확인") { Task {
+                await clubProfileVM.alert.callback()
+            }}
+        }, message: {
+            clubProfileVM.alert.message
+        })
         .controllTabbar(isPresented)
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear(perform: {
@@ -65,8 +70,8 @@ struct ClubProfile: View {
     
     @ViewBuilder
     private func GroupImage() -> some View {
-        if viewModel.mode == .post {
-            if let uiImage = viewModel.selectedUIImage {
+        if clubProfileVM.mode == .post {
+            if let uiImage = clubProfileVM.selectedUIImage {
                 Image(uiImage: uiImage)
                     .resizable()
                     .frame(width: SCREEN_WIDTH, height: 215)
@@ -76,7 +81,7 @@ struct ClubProfile: View {
                     .frame(width: SCREEN_WIDTH, height: 215)
             }
         } else {
-            KFImage(URL(string: viewModel.clubProfileData.thumbnailPath ?? ""))
+            KFImage(URL(string: clubProfileVM.clubProfileParam.imagePath))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 200, height: 200)
@@ -90,13 +95,13 @@ struct ClubProfile: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .foregroundColor(Color.gray_495057)
             
-            TextField("", text: $viewModel.clubProfileData.name)
+            TextField("", text: $clubProfileVM.clubProfileParam.name)
                 .font(.custom(CustomFont.RobotoRegular.rawValue, size: 30))
                 .overlay(SimpleBottomLine(color: Color.gray_DEE2E6))
                 .submitLabel(.next)
                 .focused($focusField, equals: .groupName)
                 .onSubmit {
-                    viewModel.isShowingTagPlaceholder = false
+                    clubProfileVM.isShowingTagPlaceholder = false
                     focusField = .tagsText
                 }
         }
@@ -119,15 +124,15 @@ struct ClubProfile: View {
                     Text("#렌탈 #서비스는 #REN2U")
                         .foregroundColor(.gray_ADB5BD)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
-                        .isHidden(hidden: !viewModel.isShowingTagPlaceholder)
+                        .isHidden(hidden: !clubProfileVM.isShowingTagPlaceholder)
                     
-                    TextField("", text: $viewModel.tagsText)
+                    TextField("", text: $clubProfileVM.clubProfileParam.hashtagText)
                         .font(.custom(CustomFont.NSKRRegular.rawValue, size: 20))
                         .focused($focusField, equals: .tagsText)
                         .submitLabel(.return)
                         .onChange(of: focusField) { newValue in
-                            viewModel.parsingTag()
-                            viewModel.showTagPlaceHolder(newValue: newValue)
+                            clubProfileVM.hashtagEditEnded()
+//                            viewModel.showTagPlaceHolder(newValue: newValue)
                         }
                 }
                 .overlay(alignment: .bottom) { SimpleLine(color: Color.gray_ADB5BD) } 
@@ -139,18 +144,18 @@ struct ClubProfile: View {
             }
             .onTapGesture {
                 focusField = .tagsText
-                viewModel.isShowingTagPlaceholder = false
+                clubProfileVM.isShowingTagPlaceholder = false
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(viewModel.clubProfileData.hashtags.indices, id: \.self) { i in
+                    ForEach(clubProfileVM.clubProfileParam.hashtags.indices, id: \.self) { i in
                         HStack {
-                            Text("#\(viewModel.clubProfileData.hashtags[i])")
+                            Text("#\(clubProfileVM.clubProfileParam.hashtags[i])")
                                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 16))
                             
                             Button {
-                                viewModel.clubProfileData.hashtags.remove(at: i)
+                                clubProfileVM.xmarkTapped(index: i)
                             } label: {
                                 Image(systemName: "xmark")
                                     .resizable()
@@ -175,7 +180,7 @@ struct ClubProfile: View {
                 .font(.custom(CustomFont.NSKRMedium.rawValue, size: 16))
                 .foregroundColor(Color.gray_495057)
             
-            TextEditor(text: $viewModel.clubProfileData.introduction)
+            TextEditor(text: $clubProfileVM.clubProfileParam.introduction)
                 .focused($focusField, equals: .introduction)
                 .font(.custom(CustomFont.NSKRRegular.rawValue, size: 14))
                 .frame(height: 100)
@@ -192,7 +197,7 @@ struct ClubProfile: View {
         .onTapGesture {
             focusField = .introduction
         }
-        .animation(.spring(), value: viewModel.clubProfileData.hashtags)
+        .animation(.spring(), value: clubProfileVM.clubProfileParam.hashtags)
     }
     
     @ViewBuilder
@@ -212,23 +217,19 @@ struct ClubProfile: View {
                 }
             }
         }
-        .sheet(isPresented: $imagePickerVM.isShowingPicker, content: {
-            ImagePickerView(sourceType: imagePickerVM.source == .library ? .photoLibrary : .camera, selectedImage: $viewModel.selectedUIImage)
-                .ignoresSafeArea()
-        })
+        .sheet(isPresented: $imagePickerVM.isShowingPicker) {
+            UpdatedImagePickerView(sourceType: imagePickerVM.source == .library ? .photoLibrary : .camera, selectedImage: $clubProfileVM.selectedUIImage, imagePath: $clubProfileVM.clubProfileParam.imagePath)
+                  .ignoresSafeArea()
+        }
     }
     
     @ViewBuilder
     private func CreateCompleteButton() -> some View {
         Button {
-            if viewModel.mode == .post {
-                let data = CreateClubFormdata(name: viewModel.clubProfileData.name.removeWhiteSpace(), introduction: viewModel.clubProfileData.introduction, thumbnail: viewModel.selectedUIImage ?? UIImage(imageLiteralResourceName: "DefaultGroupImage"), hashtags: viewModel.clubProfileData.hashtags)
-                if clubVM.checkClubRequiredInformation(clubData: data) {
-                    Task {
-                        presentationMode.wrappedValue.dismiss()
-                        await clubVM.createClub(club: data)
-                        clubVM.getMyClubs()
-                    }
+            Task {
+                await clubProfileVM.completeButtonTapped{
+                    dismiss()
+                    clubVM.getMyClubs()
                 }
             }
         } label: {
@@ -239,8 +240,8 @@ struct ClubProfile: View {
     }
 }
 
-struct CreateGroup_Previews: PreviewProvider {
-    static var previews: some View {
-        ClubProfile(viewModel: ClubProfile.ViewModel(mode: ClubProfile.Mode.post))
-    }
-}
+//struct CreateGroup_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ClubProfile(viewModel: ClubProfile.ViewModel(mode: ClubProfile.Mode.post))
+//    }
+//}

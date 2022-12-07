@@ -98,7 +98,7 @@ struct ClubTab: View {
             HStack {
                 Spacer()
                 NavigationLink {
-                    ClubProfile(viewModel: ClubProfile.ViewModel(mode: .post))
+                    ClubProfile(clubProfileService: ClubProfileViewModel(clubService: ClubProfileService(url: ServerURL.runningServer.url)))
                 } label: {
                     PlusCircleImage()
                 }
