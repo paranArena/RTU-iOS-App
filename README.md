@@ -1,9 +1,9 @@
 
-<div align=center>  
+<center>
   <img src="https://img.shields.io/badge/swift-F05138?style=for-the-badge&logo=swift&logoColor=white">
   <img src="https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white">
   <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
-</div>
+</center>
 
 # Content 
 
@@ -15,11 +15,8 @@
 
 # 기능 
 
-<center class="third">
+[<img src="http://img.youtube.com/vi/RzVOqep2neI/0.jpg" width="200" height="200">](https://youtu.be/RzVOqep2neI)
+[<img src="http://img.youtube.com/vi/6jvm6jDYdpM/0.jpg" width="200" height="200">](https://youtube.com/shorts/6jvm6jDYdpM)
 
-[![물품 등록](http://img.youtube.com/vi/RzVOqep2neI/0.jpg)](https://youtu.be/RzVOqep2neI)
-[![물품 대여 반납 과정](http://img.youtube.com/vi/6jvm6jDYdpM/0.jpg)](https://youtube.com/shorts/6jvm6jDYdpM)
-[![물품 등록](http://img.youtube.com/vi/RzVOqep2neI/0.jpg)](https://youtu.be/RzVOqep2neI)
-</center>
 
 
