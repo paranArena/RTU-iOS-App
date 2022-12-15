@@ -15,5 +15,12 @@
 
 # 기능 
 
-[![Video Label](http://img.youtube.com/vi/RzVOqep2neI/0.jpg)](https://youtu.be/RzVOqep2neI)
+<div align=center>
+
+[![물품 등록](http://img.youtube.com/vi/RzVOqep2neI/0.jpg)(https://youtu.be/RzVOqep2neI)
+[![물품 대여 반납 과정](http://img.youtube.com/vi/6jvm6jDYdpM/0.jpg)(https://youtube.com/shorts/6jvm6jDYdpM)
+[![물품 등록](http://img.youtube.com/vi/RzVOqep2neI/0.jpg)(https://youtu.be/RzVOqep2neI)
+
+</div>
+
 
