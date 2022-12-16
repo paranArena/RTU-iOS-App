@@ -81,7 +81,7 @@ final class ClubProfileViewModelTests: XCTestCase {
     func testCompleteButtonTappedWhenCreatable() async {
         vm.clubProfileParam.name = "그룹명"
         vm.clubProfileParam.introduction = "그룹 소개"
-        await vm.completeButtonTapped { }
+        await vm.completeButtonTapped { }3
         
         if let actual = vm.alertCase?.alertID {
             let expected = ClubProfileViewModel.AlertCase.postClub(MockupClubProfileService(), ClubProfileParam()) { _ in }.alertID
