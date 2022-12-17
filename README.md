@@ -15,13 +15,23 @@
 
 # 기능 
 
+전체 기능은 [여기](https://www.youtube.com/playlist?list=PLow6eB4W8f0cmzmzXgbtc66lzB6FPgA4Q)에서 확인하 수 있다. 
 
-[<img src="http://img.youtube.com/vi/RzVOqep2neI/0.jpg" width="180" height="180">](https://youtu.be/RzVOqep2neI)
-[<img src="http://img.youtube.com/vi/6jvm6jDYdpM/0.jpg" width="180" height="180">](https://youtube.com/shorts/6jvm6jDYdpM)
-[<img src="http://img.youtube.com/vi/uZ12_SbJtPY/0.jpg" width="180" height="180">](https://youtu.be/uZ12_SbJtPY)
-[<img src="http://img.youtube.com/vi/INGuIv30emU/0.jpg" width="180" height="180">](https://youtu.be/shorts/INGuIv30emU)
-[<img src="http://img.youtube.com/vi/JFWDJZjOTDM/0.jpg" width="180" height="180">](https://youtu.be/JFWDJZjOTDM)
-
-
-
+<p align="center">
+  <a href="https://youtu.be/RzVOqep2neI">
+    <img src="http://img.youtube.com/vi/RzVOqep2neI/0.jpg" width="180" height="180"/>
+  </a>
+  <a href="https://youtube.com/shorts/6jvm6jDYdpM">
+    <img src="http://img.youtube.com/vi/6jvm6jDYdpM/0.jpg" width="180" height="180"/>
+  </a>
+   <a href="https://youtu.be/uZ12_SbJtPY">
+    <img src="http://img.youtube.com/vi/uZ12_SbJtPY/0.jpg" width="180" height="180"/>
+  </a>
+  <a href="https://youtu.be/shorts/INGuIv30emU">
+    <img src="http://img.youtube.com/vi/INGuIv30emU/0.jpg" width="180" height="180"/>
+  </a>
+  <a href="https://youtu.be/JFWDJZjOTDM">
+    <img src="http://img.youtube.com/vi/JFWDJZjOTDM/0.jpg" width="180" height="180"/>
+  </a>
+</p>
 
